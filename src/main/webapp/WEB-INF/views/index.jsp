@@ -15,6 +15,7 @@
  
  
  
+ 
 <h1>PCLASS TOY PROJECT</h1> 
 
 <c:if test="${not empty message}">
