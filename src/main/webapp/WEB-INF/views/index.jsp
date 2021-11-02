@@ -13,10 +13,11 @@
 </head>
 <body>
  
+ 
 <h1>PCLASS TOY PROJECT</h1> 
 
 <c:if test="${not empty message}">
-		<span class='valid-msg'>${message }</span>
+		<span class='valid-msg'>${message}</span>
 	</c:if>
 
 
