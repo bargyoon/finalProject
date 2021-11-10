@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-
+<!-- 상세페이지  -->
 </body>
 </html>

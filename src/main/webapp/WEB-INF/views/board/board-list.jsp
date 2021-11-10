@@ -7,6 +7,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-
+<!-- 게시판 목록 -->
+<h1>이창준 짱
+</h1>
 </body>
 </html>

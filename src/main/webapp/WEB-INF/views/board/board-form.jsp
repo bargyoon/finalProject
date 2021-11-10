@@ -7,6 +7,8 @@
 <title>Insert title here</title>
 </head>
 <body>
+<!-- 작성폼 적는곳 -->
+
 
 </body>
 </html>
