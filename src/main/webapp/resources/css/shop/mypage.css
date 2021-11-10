@@ -1,0 +1,142 @@
+.aside-nav{
+    display: flex;
+    flex-direction: column;
+    max-width: 15rem;
+    min-width: 15rem;
+    justify-content: space-around;
+}
+
+.aside-ul{
+    list-style: none;
+}
+
+.aside-ul>* {
+    text-decoration: none;
+    padding-top: 1.2rem;
+    padding-bottom: 1.2rem; 
+}
+
+.aside-ul a {
+    text-decoration: none;
+    color: gray;
+}
+
+.aside-ul a:hover {
+    color: dodgerblue;
+}
+
+.sub-ul{
+    padding-left: 0.3rem;
+    list-style: none;
+    margin-bottom: 0.5rem;
+}
+
+.sub-ul > *{
+    float: left;
+    padding-right: 2rem;
+    color: gray;
+}
+
+.sub-ul a {
+    text-decoration: none;
+    color: gray;
+}
+
+.sub-ul a:hover {
+    color: dodgerblue;
+}
+
+.product-index{
+    text-align: center;
+    display: flex;
+    justify-content: space-around;
+}
+
+.product-index-2{
+    display: flex;
+    justify-content: space-between;
+}
+
+.product-info{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: left;
+    padding-left: 1rem;
+}
+
+.n-table {
+    width: 100%;
+    line-height: 1.5;
+    border-collapse: collapse;
+    table-layout: fixed;
+}
+
+.n-table.table-col {
+    border-top: 1px solid #000000;
+}
+
+.n-table.table-col th {
+    height: 52px;
+    border-bottom: 1px solid #000000;
+    vertical-align: middle;
+    font-weight: normal;
+    text-align: center;
+}
+
+.n-table.table-col .n-prd-row {
+    margin: 10px 0;
+}
+
+.n-prd-row {
+    display: table;
+    table-layout: fixed;
+    min-height: 96px;
+    line-height: 1.5;
+    text-align: left;
+    position: relative;
+}
+
+.n-prd-row .info {
+    list-style: none;
+    display: table-cell;
+    padding-left: 10px;
+    vertical-align: middle;
+}
+
+.n-table.table-col td {
+    height: 70px;
+    padding: 10px;
+    box-sizing: border-box;
+    border-bottom: 1px solid gray;
+    text-align: center;
+    vertical-align: middle;
+    word-break: break-all;
+}
+
+.n-table-filter {
+    margin-bottom: 20px;
+}
+
+.n-table-filter .n-radio-tab, .n-table-filter .n-datepicker{
+    float: left;
+    margin-right: 20px;
+}
+
+.period-label{
+    padding: 2px;
+    margin: -1.9px;
+}
+
+input[type=radio]{
+    display: none;
+}
+
+input[type=radio] + label{
+    background-color: transparent;
+    border: 1px solid lightgray;
+}
+
+input[type=radio]:checked + label{
+    border: 1px solid black;
+}
