@@ -1,0 +1,89 @@
+@charset "UTF-8";
+
+.agree {width:100%; border: 1px solid #e6e6e6;}
+.agree > div {font-weight: 300; overflow: auto; height: 124px; padding: 24px 19px; font-size: 13px; color: #555; line-height: 16px;}
+.agree > p { height: 43px; background:#f8f8f8; border-top: 1px solid #e6e6e6; line-height: 43px; font-size: 13px; color: #222; text-indent: 19px;}
+
+
+body {
+    font-family: "Lato", sans-serif;
+}
+
+.main-head{
+    height: 150px;
+    background: #FFF;
+   
+}
+
+.sidenav {
+    height: 100%;
+    background-color: #e5d6a0d1;
+    overflow-x: hidden;
+    padding-top: 20px;
+    background-image: url('resoures/img/member');
+}
+
+
+.main {
+    padding: 0px 10px;
+}
+
+@media screen and (max-height: 450px) {
+    .sidenav {padding-top: 15px;}
+}
+
+@media screen and (max-width: 450px) {
+    .login-form{
+        margin-top: 10%;
+    }
+
+    .register-form{
+        margin-top: 10%;
+    }
+}
+
+@media screen and (min-width: 768px){
+    .main{
+        margin-left: 40%; 
+    }
+
+    .sidenav{
+        width: 30%;
+        position: fixed;
+        z-index: 1;
+        top: 0;
+        left: 0;
+    }
+
+    .login-form{
+        margin-top: 80%;
+    }
+
+    .register-form{
+        margin-top: 20%;
+    }
+}
+
+
+.login-main-text{
+    margin-top: 20%;
+    padding: 60px;
+    color: black;
+}
+
+.login-main-text h2{
+    font-weight: 300;
+}
+
+.btn-black{
+    background-color: #ffbf00;
+    color: #fff;
+}
+.btn-secondary{
+	background-color: #6c757d;
+    color: #fff;
+}
+
+.valid-msg{
+	color:red;	font-size:0.5vw;
+}

@@ -1,5 +1,24 @@
 package com.kh.spring.member.controller;
 
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+@Controller
+@RequestMapping("member")
 public class MemberController {
-//커밋용
+	
+	@GetMapping("join")
+	public void joinForm(){}
+	
+	@GetMapping("login")
+	public void login() {}
+	
+	@GetMapping("check-id")
+	public void checkId() {}
+	
+	@GetMapping("check-password")
+	public void checkPassword() {}
+	
+
 }
