@@ -18,15 +18,25 @@ ul li{
 	
 }
 
+h5{
+	display: flex;
+	justify-content: flex-end;
+	color: rgb(51, 51, 51);
+	padding-right: 10em;
+	padding-top: 5em;
+	text-decoration: none;
+}
 
 .petcare-back h2{
-	padding-top:50px;
+	display: flex;
+	justify-content: flex-start;
+	padding-top:30px;
 	padding-bottom:20px;
 	font-size:2.3em;
 	text-align:center;
-}
+} 
 
-.petcare-back h2 i{
+.petcare-title h2 i{
 	color:#483D8B;
 	font-size:0.9em;
 }
@@ -48,7 +58,7 @@ ul li{
 
 .search {
 	display: flex;
-	justify-content: center;
+	justify-content: flex-end;
 	margin-bottom: 20px;
 	
 }

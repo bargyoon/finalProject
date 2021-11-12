@@ -22,8 +22,8 @@
 				
 				<div class="petcare-wrap">
 						<ul class="petcare-tab-wrap">
-							<li><a class="selected" href="/petcare/food">과일/야채</a></li>
-							<li><a href="/petcare/beef">육류/해산물</a></li>
+							<li><a class="selected" href="/petcare/food/fruit">과일/야채</a></li>
+							<li><a href="/petcare/food/beef">육류/해산물</a></li>
 							<li><a href="/petcare/food">유제품</a></li>
 							<li><a href="/petcare/food">기타</a></li>
 						</ul>
