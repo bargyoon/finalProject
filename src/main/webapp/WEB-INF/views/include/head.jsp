@@ -39,12 +39,28 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
-                        <li class="nav-item"><a class="nav-link" href="#services">병원/편의시설</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#services">병원/시설</a>
+                        	<ul class="navbar-detail"><hr>
+	                        	<li><a href=#>동물병원</a>
+                        		<li><a href=#>편의시설검색</a>
+                        	</ul>
+                        </li>	
                         <li class="nav-item"><a class="nav-link" href="#portfolio">정보/칼럼</a></li>
                         <li class="nav-item"><a class="nav-link" href="#about">수술비용</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#team">펫케어</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#team">펫케어</a>
+                       		<ul class="navbar-detail"><hr>
+	                        	<li><a href=#>예방접종</a>
+                        		<li><a href=#>금지음식</a>
+                        		<li><a href=#>행동의미</a>
+                        	</ul>
+                        </li>
                         <li class="nav-item"><a class="nav-link" href="#contact">게시판</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#contact">이벤트/체험단</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#contact">이벤트</a>
+                      	  	<ul class="navbar-detail"><hr>
+	                        	<li><a href=#>이벤트</a>
+                        		<li><a href=#>체험단</a>
+                        	</ul>
+                        </li> 
                         <li class="nav-item"><a class="nav-link" href="#contact">마켓</a></li>
                         <li class="nav-item"><a class="nav-link" href="/member/login">로그인</a></li>
                     </ul>
