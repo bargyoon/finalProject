@@ -1,0 +1,113 @@
+@charset "UTF-8";
+
+
+ul li{
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+	list-style: none;
+}
+
+.petcare-back{
+	max-width: 1200px;
+	margin: 0 auto;
+	padding: 10px 30px 70px;
+	
+}
+
+
+.petcare-back h2{
+	padding-top:50px;
+	padding-bottom:20px;
+	font-size:2.3em;
+	text-align:center;
+}
+
+.petcare-back h2 i{
+	color:#483D8B;
+	font-size:0.9em;
+}
+
+.petcare-wrap{
+	background-color:#ffffff;
+	padding: 50px;
+	box-shadow:0px 5px 15px #ccc;
+	border-radius:15px;
+}
+
+
+.petcare-con{
+	background-color:rgb(248, 246, 238);
+	padding: 50px;
+	box-shadow:0px 5px 15px #ccc;
+	border-radius:15px;
+}
+
+.search {
+	display: flex;
+	justify-content: center;
+	margin-bottom: 20px;
+	
+}
+
+.search-inner {
+	display: flex;
+	justify-content: center;
+	width: 300px;
+	border-bottom: 1px solid rgb(243, 224, 149);
+	padding-bottom: 7px;
+}
+
+
+.search-input input {
+	width: 260px;
+	text-align: center;
+	border: none;
+	font-size: 16px;
+}
+
+.search-button button {
+	border: none;
+	outline: none;
+	background: none;
+}
+
+.search-button button i {
+	color: rgb(243, 224, 149);
+	font-size: 16px;
+}
+
+
+/* tab */
+.petcare-tab-wrap{
+	display:flex;
+	margin-bottom:40px;
+}
+
+.petcare-tab-wrap > li{
+	width:25%;
+}
+.petcare-tab-wrap > li a{
+	width:100%;
+	display:block;
+	text-align:center;
+	background-color:white;
+	padding:20px 0;
+	text-decoration-line: none;
+	
+}
+
+.petcare-tab-wrap > li a.selected{
+	
+	color:black;
+	font-weight:bold;
+	background-color:rgb(243, 224, 149);
+}
+
+
+
+
+
