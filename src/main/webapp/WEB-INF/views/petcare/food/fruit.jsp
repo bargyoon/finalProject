@@ -9,6 +9,7 @@
 <body>
 
 <section>
+	<h5><a href="/petcare/food/fruit"><i class="fas fa-angle-double-right"></i> 강아지 금지음식 보러가기</a></h5>
 		<div class="petcare-back">						
 				<form action="/petcare/food" >
 				
@@ -28,12 +29,12 @@
 							<li><a href="/petcare/food">기타</a></li>
 						</ul>
 					
-					<div class="petcare-con">
-					<%-- <%@ include file="/WEB-INF/views/petcare/petcare_tab.jsp" %> --%>
+					<%-- <div class="petcare-con">
+					<%@ include file="/WEB-INF/views/petcare/petcare_tab.jsp" %>
 					
 					
 
-					</div>
+					</div> --%>
 				</div>
 					
 			</form>

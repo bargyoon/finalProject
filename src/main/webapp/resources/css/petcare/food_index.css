@@ -34,29 +34,54 @@ ul li{
 
 .top-food{
 	display: flex;
-	justify-content: center;
+	justify-content: space-around;
 }
 
 .third-title{
 	padding-top:50px;
-	padding-bottom:20px;
+	padding-bottom:50px;
 	font-size:1.5em;
 	text-align:center;
 	text-decoration: none;
 }
 
+.coffee{
+	width: 300px;
+    height: 400px;
+    margin: 40px;
+}
+
+.coffee p{
+	font-size: 1.5em;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+}
+
+.coffee img {
+	display: flex;
+    align-content: center;
+}
+
 .petcare-wrap{
-	background-color:#ffffff;
-	padding: 50px;
-	border-radius:15px;
+	display: flex;
+    justify-content: space-around;
 }
 
 
 .petcare-con{
-	background-color:rgb(248, 246, 238);
-	padding: 50px;
+	flex-direction:column;
+    background-color:rgb(248, 246, 238);
 	box-shadow:0px 5px 15px #ccc;
-	border-radius:15px;
+	border-radius: 50%;
+    width: 300px;
+    height: 300px;
+ 
+}
+
+.petcare-con a{
+	color: black;
+    text-decoration: none;
 }
 
 .search {
