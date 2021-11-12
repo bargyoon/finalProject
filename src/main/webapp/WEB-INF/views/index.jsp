@@ -37,7 +37,7 @@
                         	</ul>	 -->                       		
                         <li class="nav-item"><a class="nav-link" href="#portfolio">정보/칼럼</a></li>
                         <li class="nav-item"><a class="nav-link" href="#about">수술비용</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#team">펫케어</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/petcare/action">펫케어</a></li>
                        		<!-- <ul class="navbar-detail">
                         		<li><a href=#>예방접종</a>
                         		<li><a href=#>금지음식</a>
