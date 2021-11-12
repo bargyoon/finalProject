@@ -11422,7 +11422,7 @@ p {
   #mainNav.navbar-shrink {
     padding-top: 1rem;
     padding-bottom: 1rem;
-    background-color: #212529;
+    background-color: rgb(240, 234, 213);
   }
   #mainNav.navbar-shrink .navbar-brand {
     font-size: 1.25em;
@@ -11443,7 +11443,7 @@ header.masthead {
   padding-bottom: 6rem;
   color: #625c46;
   background-image: url("../assets/img/header-bg.png");
-  background-color: #e5d6a0d1;
+  background-color: rgb(240, 234, 213);
   background-repeat: no-repeat;
   background-attachment: scroll;
   background-position: center center;
