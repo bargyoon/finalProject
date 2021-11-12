@@ -4,30 +4,24 @@
 <html>
 <head>
 <%@ include file="/WEB-INF/views/include/head.jsp" %>
-<link rel="stylesheet" href="/resources/css/petcare/food.css">
+<link rel="stylesheet" href="/resources/css/petcare/food_index.css">
 </head>
 <body>
 
 <section>
-		<div class="petcare-back">						
-				<form action="/petcare/food" >
+		<div class="petcare-back">					
 				
-					<h2> 고양이 금지음식 </h2>
-					<div class="search">
-							<div class="search-inner">
-								<div class="search-input"><input type="text" name ="searchFood" value="${searchContent }" ></div>
-								<div class="search-button"><button><i class="fas fa-search"></i></button></div>
-							</div>
-					</div>
+				
+					<h1> 금지음식 </h1>
+					<h5 class="second-title">반려동물이 꼭 피해야하는 음식은?</h5>
+					<h3 class="third-title">대표 금지 음식</h3>
+					<div class="top-food">	
+						 <img src="/resources/assets/img/food/초콜렛.png" style="width: 200px; margin: 10px;">
+						 <img src="/resources/assets/img/food/우유.png" style="width: 200px; margin: 10px;">
+						 <img src="/resources/assets/img/food/생선.png" style="width: 200px; margin: 10px 10px 10px 30px;">				
+					</div>	
 				
 				<div class="petcare-wrap">
-						<ul class="petcare-tab-wrap">
-							<li><a class="selected" href="/petcare/food">과일/야채</a></li>
-							<li><a href="/petcare/beef">육류/해산물</a></li>
-							<li><a href="/petcare/food">유제품</a></li>
-							<li><a href="/petcare/food">기타</a></li>
-						</ul>
-					
 					<div class="petcare-con">
 					<%-- <%@ include file="/WEB-INF/views/petcare/petcare_tab.jsp" %> --%>
 					
@@ -36,7 +30,7 @@
 					</div>
 				</div>
 					
-			</form>
+		
 		</div>
 	</section>
 
