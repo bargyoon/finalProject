@@ -11,16 +11,31 @@ ul li{
 	list-style: none;
 }
 
+.petcare-back{
+	max-width: 1200px;
+	margin: 0 auto;
+	padding: 10px 30px 70px;
+	
+}
 
-.petcare-wrap h2{
+
+.petcare-back h2{
 	padding-top:50px;
 	padding-bottom:20px;
 	font-size:2.3em;
 	text-align:center;
 }
-.petcare-wrap h2 i{
+
+.petcare-back h2 i{
 	color:#483D8B;
 	font-size:0.9em;
+}
+
+.petcare-wrap{
+	background-color:#ffffff;
+	padding: 50px;
+	box-shadow:0px 5px 15px #ccc;
+	border-radius:15px;
 }
 
 
@@ -42,7 +57,7 @@ ul li{
 	display: flex;
 	justify-content: center;
 	width: 300px;
-	border-bottom: 1px solid #837ab9;
+	border-bottom: 1px solid rgb(243, 224, 149);
 	padding-bottom: 7px;
 }
 
@@ -61,7 +76,7 @@ ul li{
 }
 
 .search-button button i {
-	color: #837ab9;
+	color: rgb(243, 224, 149);
 	font-size: 16px;
 }
 
@@ -79,58 +94,20 @@ ul li{
 	width:100%;
 	display:block;
 	text-align:center;
-	background-color:#eee;
+	background-color:white;
 	padding:20px 0;
-	border-top:2px solid #eee;
-	border-bottom:2px solid #483D8B;
+	text-decoration-line: none;
+	
 }
 
 .petcare-tab-wrap > li a.selected{
-	border-top:2px solid #483D8B;
-	border-right:2px solid #483D8B;
-	border-left:2px solid #483D8B;
-	border-bottom:2px solid #fff;
-	color:#483d8b;
+	
+	color:black;
 	font-weight:bold;
-	background-color:#fff;
+	background-color:rgb(243, 224, 149);
 }
 
 
 
-/* pagenation */
-.pagenation{
-	margin-top:20px;
-	display:flex;
-	justify-content:center;
-}
-.page-num *{ 
-	font-size:1.2em;
-	padding:8px;
-	cursor:pointer;
-	color:#aaa;
-}
 
-.pagenation li i {
-	font-size:1.2em;
-	color:#888;
-	padding:6px;
-	align-content: center;	
-}
-
-.page-num>a:hover, .pagenation i:hover, .active{ 
-	color:#483D8B;
-	font-weight: bold;
-}
-
-/* inq */
-.btn-inq button{
-	width:50px;
-	padding: 10px;
-	border:none;
-	background-color:#837ab9;
-	cursor:pointer;
-	border-radius:5px;
-	color:#fff;
-	margin-left:5px;
-}
 
