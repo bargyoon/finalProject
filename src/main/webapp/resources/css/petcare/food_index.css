@@ -1,5 +1,65 @@
 @charset "UTF-8";
 
+/* 폰트 어그로 */
+@font-face {
+    font-family: 'SBAggroB';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/SBAggroB.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'SBAggroL';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/SBAggroL.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'SBAggroM';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/SBAggroM.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* google noto sans */
+
+@font-face {
+font-family: 'NotoKrL';
+font-style: normal;
+font-weight: 100;
+src: local('Noto Sans Light'), local('NotoSans-Light'), url(/fonts/NotoSans-Light.eot);
+src: url(/fonts/NotoSans-Light.eot?#iefix) format('embedded-opentype'),
+url(/fonts/NotoSans-Light.woff2) format('woff2'),
+url(/fonts/NotoSans-Light.woff) format('woff');;
+}
+@font-face {
+font-family: 'NotoKrR';
+font-style: normal;
+font-weight: 300;
+src: local('Noto Sans Regular'), local('NotoSans-Regular'), url(/fonts/NotoSans-Regular.eot);
+src: url(/fonts/NotoSans-Regular.eot?#iefix) format('embedded-opentype'),
+url(/fonts/NotoSans-Regular.woff2) format('woff2'),
+url(/fonts/NotoSans-Regular.woff) format('woff');
+}
+@font-face {
+font-family: 'NotoKrM';
+font-style: normal;
+font-weight: 500;
+src: local('Noto Sans Medium'), local('NotoSans-Medium'), url(/fonts/NotoSans-Medium.eot);
+src: url(/fonts/NotoSans-Medium.eot?#iefix) format('embedded-opentype'),
+url(/fonts/NotoSans-Medium.woff2) format('woff2'),
+url(/fonts/NotoSans-Medium.woff) format('woff');
+}
+@font-face {
+font-family: 'NotoKrB';
+font-style: normal;
+font-weight: 700;
+src: local('Noto Sans Bold'), local('NotoSans-Bold'), url(/fonts/NotoSans-Bold.eot);
+src: url(/fonts/NotoSans-Bold.eot?#iefix) format('embedded-opentype'),
+url(/fonts/NotoSans-Bold.woff2) format('woff2'),
+url(/fonts/NotoSans-Bold.woff) format('woff');
+}
 
 ul li{
 	margin: 0;
@@ -23,6 +83,7 @@ ul li{
 	padding-bottom:20px;
 	font-size:2.3em;
 	text-align:center;
+	font-family: 'SBAggroL';
 } 
 
 .second-title{
@@ -30,6 +91,7 @@ ul li{
 	font-size:1em;
 	text-align:center;
 	text-decoration: none;
+	font-family: 'SBAggroL';
 }
 
 .top-food{
@@ -43,6 +105,7 @@ ul li{
 	font-size:1.5em;
 	text-align:center;
 	text-decoration: none;
+	font-family: 'SBAggroL';
 }
 
 .coffee{
@@ -56,6 +119,7 @@ ul li{
     font-weight: bold;
     display: flex;
     justify-content: center;
+    font-family: 'SBAggroL';
 }
 
 .coffee img {

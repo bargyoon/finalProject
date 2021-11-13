@@ -38,13 +38,11 @@
 				
 		<div class="petcare-wrap">
 			<div class="petcare-con">
-					<img src="/resources/assets/img/food/dog.png" style="width: 150px; margin: 55px 20px 10px 70px;">
-			<a href="/petcare/food/fruit" style="margin-left: 50px"><i class="fas fa-chevron-right"></i>강아지 금지음식 더 알아보기</a>
+				<a href="/petcare/food/fruit"><img src="/resources/assets/img/food/dog1.png"></a>	
 			</div>
 			
-			<div class="petcare-con">
-					<img src="/resources/assets/img/food/cat.png" style="width: 150px; margin: 55px 20px 10px 70px;">
-			<a href="/petcare/food/fruit" style="margin-left: 50px"><i class="fas fa-chevron-right"></i>고양이 금지음식 더 알아보기</a>			
+			<div class="petcare-con">		
+				<a href="/petcare/food/fruit"><img src="/resources/assets/img/food/cat1.png"></a>			
 			</div>
 		</div>
 					

@@ -1,5 +1,65 @@
 @charset "UTF-8";
 
+/* 폰트 어그로 */
+@font-face {
+    font-family: 'SBAggroB';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/SBAggroB.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'SBAggroL';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/SBAggroL.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'SBAggroM';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/SBAggroM.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* google noto sans */
+
+@font-face {
+font-family: 'NotoKrL';
+font-style: normal;
+font-weight: 100;
+src: local('Noto Sans Light'), local('NotoSans-Light'), url(/fonts/NotoSans-Light.eot);
+src: url(/fonts/NotoSans-Light.eot?#iefix) format('embedded-opentype'),
+url(/fonts/NotoSans-Light.woff2) format('woff2'),
+url(/fonts/NotoSans-Light.woff) format('woff');;
+}
+@font-face {
+font-family: 'NotoKrR';
+font-style: normal;
+font-weight: 300;
+src: local('Noto Sans Regular'), local('NotoSans-Regular'), url(/fonts/NotoSans-Regular.eot);
+src: url(/fonts/NotoSans-Regular.eot?#iefix) format('embedded-opentype'),
+url(/fonts/NotoSans-Regular.woff2) format('woff2'),
+url(/fonts/NotoSans-Regular.woff) format('woff');
+}
+@font-face {
+font-family: 'NotoKrM';
+font-style: normal;
+font-weight: 500;
+src: local('Noto Sans Medium'), local('NotoSans-Medium'), url(/fonts/NotoSans-Medium.eot);
+src: url(/fonts/NotoSans-Medium.eot?#iefix) format('embedded-opentype'),
+url(/fonts/NotoSans-Medium.woff2) format('woff2'),
+url(/fonts/NotoSans-Medium.woff) format('woff');
+}
+@font-face {
+font-family: 'NotoKrB';
+font-style: normal;
+font-weight: 700;
+src: local('Noto Sans Bold'), local('NotoSans-Bold'), url(/fonts/NotoSans-Bold.eot);
+src: url(/fonts/NotoSans-Bold.eot?#iefix) format('embedded-opentype'),
+url(/fonts/NotoSans-Bold.woff2) format('woff2'),
+url(/fonts/NotoSans-Bold.woff) format('woff');
+}
 
 ul li{
 	margin: 0;
@@ -15,16 +75,18 @@ ul li{
 	max-width: 1200px;
 	margin: 0 auto;
 	padding: 10px 30px 70px;
-	
+
 }
 
-h5{
+.petcare-back a{
 	display: flex;
-	justify-content: flex-end;
-	color: rgb(51, 51, 51);
-	padding-right: 10em;
-	padding-top: 5em;
-	text-decoration: none;
+    justify-content: flex-end;
+    color: black;
+    text-decoration: none;
+    padding-top: 5em;    
+    align-items: center;
+    font-size: 1.2em;
+    font-family: 'SBAggroL';
 }
 
 .petcare-back h2{
@@ -34,6 +96,7 @@ h5{
 	padding-bottom:20px;
 	font-size:2.3em;
 	text-align:center;
+	font-family: 'SBAggroL';
 } 
 
 .petcare-title h2 i{
@@ -42,18 +105,32 @@ h5{
 }
 
 .petcare-wrap{
-	background-color:#ffffff;
-	padding: 50px;
-	box-shadow:0px 5px 15px #ccc;
-	border-radius:15px;
-}
-
-
-.petcare-con{
 	background-color:rgb(248, 246, 238);
 	padding: 50px;
 	box-shadow:0px 5px 15px #ccc;
 	border-radius:15px;
+}
+.petcare-wrap a{
+	font-family: 'SBAggroL';
+}
+
+.petcare-con{
+	background-color:#ffffff;
+	padding: 50px;
+	border-radius:15px;
+	
+}
+
+.petcare-con div{
+	margin: 10px;
+	
+}
+
+.petcare-con p{
+	margin-top: 20px;
+    margin-bottom: 1rem;
+    font-size: 1.5em;
+    font-family: 'SBAggroL';
 }
 
 .search {
