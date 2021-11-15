@@ -20,6 +20,7 @@
       <div class="main">
          <div class="col-md-6 col-sm-12">
             <div class="login-form">
+              <div id=page-logo><img src="/resources/assets/img/dog-and-cat-yellow.png" alt="..." /></div><br><br>
               <h3>아이디 찾기</h3><br><hr>
                <form>
                   <div class="form-group">

@@ -19,8 +19,10 @@
         <!-- Font Awesome icons (free version)-->
         <script src="https://use.fontawesome.com/releases/v5.15.4/js/all.js" crossorigin="anonymous"></script>
         <!-- Google fonts-->
+        <!--  
         <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
-        <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css" />
+        <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css" /> 
+        -->
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="/resources/css/styles.css" rel="stylesheet" />
 <link rel="stylesheet"  href="${contextPath}/resources/css/all.css">
@@ -39,29 +41,29 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
-                        <li class="nav-item"><a class="nav-link" href="#services">병원/시설</a>
+                        <li class="nav-item"><a class="nav-link" href="#">병원/시설</a>
                         	<ul class="navbar-detail"><hr>
 	                        	<li><a href=#>동물병원</a>
                         		<li><a href=#>편의시설검색</a>
                         	</ul>
                         </li>	
-                        <li class="nav-item"><a class="nav-link" href="#portfolio">정보/칼럼</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#about">수술비용</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#team">펫케어</a>
+                        <li class="nav-item"><a class="nav-link" href="#">정보/칼럼</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#">수술비용</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#">펫케어</a>
                        		<ul class="navbar-detail"><hr>
 	                        	<li><a href=#>예방접종</a>
                         		<li><a href=#>금지음식</a>
                         		<li><a href=#>행동의미</a>
                         	</ul>
                         </li>
-                        <li class="nav-item"><a class="nav-link" href="#contact">게시판</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#contact">이벤트</a>
+                        <li class="nav-item"><a class="nav-link" href="#">게시판</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#">이벤트</a>
                       	  	<ul class="navbar-detail"><hr>
 	                        	<li><a href=#>이벤트</a>
                         		<li><a href=#>체험단</a>
                         	</ul>
                         </li> 
-                        <li class="nav-item"><a class="nav-link" href="#contact">마켓</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#">마켓</a></li>
                         <li class="nav-item"><a class="nav-link" href="/member/login">로그인</a></li>
                     </ul>
                 </div>

@@ -8,7 +8,14 @@
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 <link rel="stylesheet" href="/resources/css/member/login.css">
-
+<style type="text/css">
+@media screen and (min-width: 768px){   
+    .login-form{
+        margin-top: 30%;
+        margin-bottom: 10%
+    }
+}
+</style>
 </head>
 <body>
 
@@ -24,8 +31,7 @@
          <div class="col-md-6 col-sm-12">
             <div class="login-form">
                <form>
-               
-               
+                <div id=page-logo><img src="/resources/assets/img/dog-and-cat-yellow.png" alt="..." /></div><br><hr>
                <h4>서비스 이용약관</h4>
     <div class="agree">
         <div tabindex="0"> 
@@ -194,39 +200,36 @@
         </p>
     </div><br><br><hr>
     
-    
-    
-    
-    
-    
-    
-    
+
                   <div class="form-group">
-                     <label>아이디: </label>
+                     <label>아이디 </label>
                      <input type="text" class="form-control" placeholder="아이디를 입력하세요">
-                     <button type="button" class="btn-secondary">check</button>
-                     <!-- 체크박스 디자인 알아보기 -->
+                     <a class="btn btn-gray">check</a>
                   </div>
                   
                   <div class="form-group">
-                     <label>닉네임: </label>
+                     <label>닉네임 </label>
                      <input type="text" class="form-control" placeholder="닉네임을 입력하세요">
-                     <button type="button" class="btn-secondary">check</button>
-                     <!-- 체크박스 디자인 알아보기 -->
+                     <a class="btn btn-gray">check</a>
                   </div>                 
                   
                   <div class="form-group">
-                     <label>비밀번호: </label>
+                     <label>비밀번호 </label>
                      <input type="password" class="form-control" placeholder="영어,숫자,특수문자 조합의 8글자 이상의 문자열입니다.">
                   </div>
                   
                   <div class="form-group">
-                     <label>비밀번호 확인: </label>
+                     <label>비밀번호 확인 </label>
                      <input type="password" class="form-control" placeholder="비밀번호를 다시 한번 입력하세요">
                   </div>
                   
                   <div class="form-group">
-                     <label>이메일: </label>
+                     <label>이름 </label>
+                     <input type="email" class="form-control" placeholder="이름을 입력하세요">
+                  </div>
+                  
+                  <div class="form-group">
+                     <label>이메일 </label>
                      <input type="email" class="form-control" placeholder="이메일을 입력하세요">
                   </div>
                   
@@ -236,12 +239,76 @@
                      <!-- 이거 주소 api? 라이브러리? 이런거 있었던듯 찾아보고 하기! -> 카카오api있는듯 -->
                   </div><br><hr>
                   
-                  <button type="submit" class="btn btn-black">가입하기</button>
+                  <a class="btn btn-black" style="width: 100%">가입하기</a>
                </form>
             </div>
          </div>
       </div>
 </form:form>
 
+
+
+<%-- <h1>회원 가입 양식</h1>
+    <form:form modelAttribute="joinForm"
+   				   action="/member/join" method="post" id="frm_join" >
+     <table border="1">
+        <tr>
+           <td>ID : </td>
+           <td >
+              <input type="text" name="userId" id="userId" size="10"  
+				<c:if test="${empty error.userId }">
+						value="${joinForm.userId}"
+				</c:if>
+           	  required/>
+           	  <button type="button" id="btnIdCheck">check</button>
+           	  <c:if test="${empty error.userId }">
+           	  		<span id="idCheck" class="valid-msg"></span>
+           	  </c:if>
+           	  <form:errors path="userId" cssClass="valid-msg" id="idCheck"/>
+           </td>
+        </tr>
+        <tr>
+           <td>PASSWORD : </td>
+           <td>
+           	  <input type="password" name="password" id="password"
+           	  		placeholder="영어,숫자,특수문자 조합의 8글자 이상의 문자열입니다." 
+           	  	<c:if test="${empty error.password }">
+						value="${joinForm.password}"
+				</c:if>	
+           	   required/>
+           	 <form:errors path="password" cssClass="valid-msg"/>
+           </td>
+        </tr>
+        <tr>
+           <td>휴대폰번호 : </td>
+           <td>
+           	  <input id="tell" type="tel" name="tell" placeholder="숫자만 입력하세요"  
+           	  		<c:if test="${empty error.tell }">
+						value="${joinForm.tell}"
+					</c:if>	
+           	  required/>
+           	  <form:errors path="tell" cssClass="valid-msg"/>
+           </td>
+        </tr>
+        <tr>
+           <td>EMAIL : </td>
+           <td>
+           	  <input type="email" name="email"  
+           	  		<c:if test="${empty error.email }">
+						value="${joinForm.email}"
+					</c:if>	
+           	  required/>
+           </td>
+        </tr>
+        <tr>
+           <td colspan="2">
+              <input type="submit" value="가입" />
+           </td>
+       </tr>
+   </table>
+   </form:form> --%>
+   
+   <script type="text/javascript" src="/resources/js/member/joinForm.js"></script>
+   
 </body>
 </html>

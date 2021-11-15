@@ -24,6 +24,7 @@
 				<span class='valid-msg'>${message}</span>
 			</c:if>
                <form>
+               	  <div id=page-logo><img src="/resources/assets/img/dog-and-cat-yellow.png" alt="..." /></div><br><hr>
                   <div class="form-group">
                      <label>아이디</label>
                      <input type="text" class="form-control" placeholder="ID">
