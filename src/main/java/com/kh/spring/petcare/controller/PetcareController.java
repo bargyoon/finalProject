@@ -8,8 +8,24 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("petcare")
 public class PetcareController {
 
-	@GetMapping("action")
-	public void actionForm(){}
+	//행동의미
+	@GetMapping("action/dog/eyes")
+	public void actionDogEyes(){}
+	
+	@GetMapping("action/dog/mouse")
+	public void actionDogMouse(){}
+	
+	@GetMapping("action/dog/ears")
+	public void actionDogEars(){}
+	
+	@GetMapping("action/dog/tail")
+	public void actionDogTail(){}
+	
+	@GetMapping("action/dog/body")
+	public void actionDogBody(){}
+	
+	@GetMapping("action/cat/eyes")
+	public void actionCatEyes(){}
 	
 	@GetMapping("food")
 	public void foodForm(){}
