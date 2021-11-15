@@ -11,10 +11,12 @@
         <!-- Favicon-->
         <link rel="icon" type="image/x-icon" href="/resources/assets/favicon.ico" />
         <!-- Font Awesome icons (free version)-->
-        <script src="https://use.fontawesome.com/releases/v5.15.4/js/all.js" crossorigin="anonymous"></script>
+        <script src="https://use.fontawesome.com/releases/v5.15.4/js/all.js"></script>
         <!-- Google fonts-->
+        <!--
         <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
-        <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css" />
+        <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css" /> 
+        -->
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="/resources/css/styles.css" rel="stylesheet" />
         
@@ -22,50 +24,49 @@
     <body id="page-top">
         <!-- Navigation-->
         <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
-            <div class="container">
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-                    Menu
-                    <i class="fas fa-bars ms-1"></i>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarResponsive">
-                    <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
-                        <li class="nav-item"><a class="nav-link" href="#">병원/시설</a>
-                        	<ul class="navbar-detail"><hr>
-	                        	<li><a href=#>동물병원</a>
-                        		<li><a href=#>편의시설검색</a>
-                        	</ul>
-                        </li>	
-                        <li class="nav-item"><a class="nav-link" href="#">정보/칼럼</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#">수술비용</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/petcare/action">펫케어</a>
-                       		<ul class="navbar-detail"><hr>
-	                        	<li><a href=#>예방접종</a>
-                        		<li><a href=#>금지음식</a>
-                        		<li><a href=#>행동의미</a>
-                        	</ul>
-                        </li>
-                        <li class="nav-item"><a class="nav-link" href="#">게시판</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#">이벤트</a>
-                      	  	<ul class="navbar-detail"><hr>
-	                        	<li><a href=#>이벤트</a>
-                        		<li><a href=#>체험단</a>
-                        	</ul>
-                        </li> 
-                        <li class="nav-item"><a class="nav-link" href="#">마켓</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/member/login">로그인</a></li>
-                    </ul>
+	         <div class="container">
+	         	<a class="navbar-brand" href="/"><img src="/resources/assets/img/site-logo-and-name.png" alt="..." /></a>      
+               	    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+	                    Menu <i class="fas fa-bars ms-1"></i>
+	                </button>
+	                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0"><hr>
+                       <li class="nav-item"><a class="nav-link" href="#">병원/시설</a>
+	                        	<ul class="navbar-detail"><hr>
+		                        	<li><a href=#>동물병원</a>
+	                        		<li><a href=#>편의시설검색</a>
+	                        	</ul>
+	                        </li>	
+	                        <li class="nav-item"><a class="nav-link" href="#">정보/칼럼</a></li>
+	                        <li class="nav-item"><a class="nav-link" href="#">수술비용</a></li>
+	                        <li class="nav-item"><a class="nav-link" href="#">펫케어</a>
+	                       		<ul class="navbar-detail"><hr>
+		                        	<li><a href=#>예방접종</a>
+	                        		<li><a href=#>금지음식</a>
+	                        		<li><a href=#>행동의미</a>
+	                        	</ul>
+	                        </li>
+	                        <li class="nav-item"><a class="nav-link" href="#">게시판</a></li>
+	                        <li class="nav-item"><a class="nav-link" href="#">이벤트</a>
+	                      	  	<ul class="navbar-detail"><hr>
+		                        	<li><a href=#>이벤트</a>
+	                        		<li><a href=#>체험단</a>
+	                        	</ul>
+	                        </li> 
+	                        <li class="nav-item"><a class="nav-link" href="#">마켓</a></li>
+	                        <li class="nav-item"><a class="nav-link" href="/member/login">로그인</a></li><hr>                     
+                       </ul>
                 </div>
             </div>
-        </nav>
-        <!-- Masthead-->
-        <header class="masthead">
-            <div class="container">
-                <div class="masthead-subheading">똑dog한 집사들 홈페이지에 오신걸</div>
-                <div class="masthead-heading text-uppercase"> 환영합니다.</div>
-                <a class="btn btn-primary btn-xl text-uppercase" href="#services">Tell Me More</a>
-            </div>
-        </header>
-        
+        </nav>   	
+	        <!-- Masthead-->
+	        <header class="masthead">
+	            <div class="container">	            	
+	                <div class="masthead-subheading">똑dog한 집사들 홈페이지에 오신걸</div>
+	                <div class="masthead-heading text-uppercase"> 환영합니다.</div>
+	                <a class="btn btn-primary btn-xl text-uppercase" href="#services">Tell Me More</a>
+	            </div>
+	        </header>
         <!-- Services-->
         <section class="page-section" id="services">
             <div class="container">
@@ -85,18 +86,18 @@
                     <div class="col-md-4">
                         <span class="fa-stack fa-4x">
                             <i class="fas fa-circle fa-stack-2x text-primary"></i>
-                            <i class="fas fa-laptop fa-stack-1x fa-inverse"></i>
+                            <i class="fas fa-hand-holding-heart fa-stack-1x fa-inverse"></i>
                         </span>
                         <h4 class="my-3">Pet Care</h4>
-                        <p class="text-muted">이미지 바꾸기 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore harum ex magni, dicta impedit.</p>
+                        <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore harum ex magni, dicta impedit.</p>
                     </div>
                     <div class="col-md-4">
                         <span class="fa-stack fa-4x">
                             <i class="fas fa-circle fa-stack-2x text-primary"></i>
-                            <i class="fas fa-lock fa-stack-1x fa-inverse"></i>
+                            <i class="fas fa-comments fa-stack-1x fa-inverse"></i>
                         </span>
                         <h4 class="my-3">Community</h4>
-                        <p class="text-muted">이미지 바꾸기 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore harum ex magni, dicta impedit.</p>
+                        <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore harum ex magni, dicta impedit.</p>
                     </div>
                 </div>
             </div>
