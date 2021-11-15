@@ -11,8 +11,10 @@
 <section>
 	
 		<div class="petcare-back">						
-				<a href="/petcare/action/action-cat"><i class="fas fa-angle-double-right"></i>  고양이 행동 의미 보러가기</a>
+				<a href="/petcare/action/cat/eyes"><i class="fas fa-angle-double-right"></i>  고양이 행동 의미 보러가기</a>
 				<h1> 강아지 행동 의미 </h1>
+				<h3>카밍시그널 (Calming Signals)</h3>
+				<h4> : 개들만의 소통방법. 상대 또는 자신의 공격성이나 다른 위협을 예방하고 진정시키기 위해 사용되는 바디랭귀지.</h4>
 				
 				<div class="petcare-wrap">
 					<ul class="petcare-tab-wrap">

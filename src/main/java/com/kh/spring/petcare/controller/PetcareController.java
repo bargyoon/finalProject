@@ -27,6 +27,18 @@ public class PetcareController {
 	@GetMapping("action/cat/eyes")
 	public void actionCatEyes(){}
 	
+	@GetMapping("action/cat/mouse")
+	public void actionCatMouse(){}
+	
+	@GetMapping("action/cat/ears")
+	public void actionCatEars(){}
+	
+	@GetMapping("action/cat/tail")
+	public void actionCatTail(){}
+	
+	@GetMapping("action/cat/body")
+	public void actionCatBody(){}
+	
 	@GetMapping("food")
 	public void foodForm(){}
 	
