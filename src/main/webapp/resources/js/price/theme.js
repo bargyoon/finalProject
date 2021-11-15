@@ -347,9 +347,12 @@ docReady(navbarInit);
 docReady(detectorInit);
 
 document.querySelector(".btn_dog").addEventListener('click', e =>{
+
   document.querySelector("#reg-log").checked = false
 })
 document.querySelector(".btn_cat").addEventListener('click', e =>{
+ 
   document.querySelector("#reg-log").checked= true
+  
 })
 //# sourceMappingURL=theme.js.map

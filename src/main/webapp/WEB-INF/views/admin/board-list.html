@@ -11,10 +11,11 @@
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon.png">
     <title>Matrix Template - The Ultimate Multipurpose admin template</title>
+
     <!-- Custom CSS -->
-   
-    <!-- Custom CSS -->
+    <link href="/src/main/webapp/resources/css/admin/dataTables.bootstrap4.css" rel="stylesheet">
     <link href="/src/main/webapp/resources/css/admin/style.min.css" rel="stylesheet">
+
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -206,8 +207,6 @@
                             <ul aria-expanded="false" class="collapse  first-level">
                                 <li class="sidebar-item"><a href="form-basic.html" class="sidebar-link"><i class="mdi mdi-note-outline"></i><span class="hide-menu">상품관리 </span></a></li>
                                 <li class="sidebar-item"><a href="form-wizard.html" class="sidebar-link"><i class="mdi mdi-note-plus"></i><span class="hide-menu">주문관리</span></a></li>
-                                <li class="sidebar-item"><a href="form-wizard.html" class="sidebar-link"><i class="mdi mdi-note-plus"></i><span class="hide-menu">리뷰관리</span></a></li>
-                                <li class="sidebar-item"><a href="form-wizard.html" class="sidebar-link"><i class="mdi mdi-note-plus"></i><span class="hide-menu">QnA</span></a></li>
                             </ul>
                         </li>
                         <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-border-inside"></i><span class="hide-menu">컨텐츠 관리</span></a>
@@ -218,9 +217,8 @@
                         </li>
                         <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-blur-linear"></i><span class="hide-menu">통계</span></a>
                             <ul aria-expanded="false" class="collapse  first-level">
-                                <li class="sidebar-item"><a href="form-wizard.html" class="sidebar-link"><i class="mdi mdi-note-plus"></i><span class="hide-menu"> 방문자 통계 </span></a></li>
                                 <li class="sidebar-item"><a href="form-basic.html" class="sidebar-link"><i class="mdi mdi-note-outline"></i><span class="hide-menu"> 매출 </span></a></li>
-                                
+                                <li class="sidebar-item"><a href="form-wizard.html" class="sidebar-link"><i class="mdi mdi-note-plus"></i><span class="hide-menu"> 방문자 통계 </span></a></li>
                             </ul>
                         </li>
                         
@@ -240,11 +238,18 @@
             <!-- ============================================================== -->
             <!-- Bread crumb and right sidebar toggle -->
             <!-- ============================================================== -->
-             <div class="page-breadcrumb">
+            <div class="page-breadcrumb">
                 <div class="row">
                     <div class="col-12 d-flex no-block align-items-center">
-                        <h4 class="page-title">Dashboard</h4>
-                        
+                        <h4 class="page-title">Tables</h4>
+                        <div class="ml-auto text-right">
+                            <nav aria-label="breadcrumb">
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">사용자 리스트</li>
+                                </ol>
+                            </nav>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -256,280 +261,283 @@
             <!-- ============================================================== -->
             <div class="container-fluid">
                 <!-- ============================================================== -->
-                <!-- Sales Cards  -->
-                <!-- ============================================================== -->
-              
-                <!-- ============================================================== -->
-                <!-- Sales chart -->
+                <!-- Start Page Content -->
                 <!-- ============================================================== -->
                 <div class="row">
                     <div class="col-md-12">
                         <div class="card">
-                            <div class="card-body">
-                                <div class="d-md-flex align-items-center">
-                                    <div>
-                                        <h4 class="card-title">Site Analysis</h4>
-                                        <h5 class="card-subtitle">Overview of Latest Month</h5>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <!-- column -->
-                                    <div class="col-lg-9">
-                                        <div class="flot-chart">
-                                            <div class="flot-chart-content" id="flot-line-chart"></div>
+                            <div class="card-body no-padding">
+                                <form>
+                                    <div class="form-group row">
+                                        <label for="postSearch"><i style="position: absolute; top: 28px;" class="fas fa-search"></i></label>
+                                        <label><a><i style="position: absolute; top: 28px; right: 26%; z-index: 999;"class="fas fa-times"></i></a></label>
+                                        <div class="col-sm-9">
+                                            <input type="text" class="form-control ml-3" placeholder="작성자 내용 검색" name="keyword">
                                         </div>
                                     </div>
-                                    <div class="col-lg-3">
-                                        <div class="row">
-                                            <div class="col-6">
-                                                <div class="bg-dark p-10 text-white text-center">
-                                                   <i class="fa fa-user m-b-5 font-16"></i>
-                                                   <h5 class="m-b-0 m-t-5">2540</h5>
-                                                   <small class="font-light">Total Users</small>
-                                                </div>
-                                            </div>
-                                             <div class="col-6">
-                                                <div class="bg-dark p-10 text-white text-center">
-                                                   <i class="fa fa-plus m-b-5 font-16"></i>
-                                                   <h5 class="m-b-0 m-t-5">120</h5>
-                                                   <small class="font-light">New Users</small>
-                                                </div>
-                                            </div>
-                                            <div class="col-6 m-t-15">
-                                                <div class="bg-dark p-10 text-white text-center">
-                                                   <i class="fa fa-cart-plus m-b-5 font-16"></i>
-                                                   <h5 class="m-b-0 m-t-5">656</h5>
-                                                   <small class="font-light">Total Shop</small>
-                                                </div>
-                                            </div>
-                                             <div class="col-6 m-t-15">
-                                                <div class="bg-dark p-10 text-white text-center">
-                                                   <i class="fa fa-tag m-b-5 font-16"></i>
-                                                   <h5 class="m-b-0 m-t-5">9540</h5>
-                                                   <small class="font-light">Total Orders</small>
-                                                </div>
-                                            </div>
-                                            <div class="col-6 m-t-15">
-                                                <div class="bg-dark p-10 text-white text-center">
-                                                   <i class="fa fa-table m-b-5 font-16"></i>
-                                                   <h5 class="m-b-0 m-t-5">100</h5>
-                                                   <small class="font-light">Pending Orders</small>
-                                                </div>
-                                            </div>
-                                            <div class="col-6 m-t-15">
-                                                <div class="bg-dark p-10 text-white text-center">
-                                                   <i class="fa fa-globe m-b-5 font-16"></i>
-                                                   <h5 class="m-b-0 m-t-5">8540</h5>
-                                                   <small class="font-light">Online Orders</small>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- column -->
-                                </div>
+                                </form>
                             </div>
                         </div>
-                    </div>
-                </div>
-                <!-- ============================================================== -->
-                <!-- Sales chart -->
-                <!-- ============================================================== -->
-                <!-- ============================================================== -->
-                <!-- Recent comment and chats -->
-                <!-- ============================================================== -->
-                <div class="row">
-                    <!-- column -->
-                    <div class="col-lg-6">
-                        <div class="card">
-                            <div class="card-body">
-                                <h5 class="card-title m-b-0">일자별 요약</h5>
-                            </div>
-                            <table class="table">
-                                  <thead>
-                                    <tr class="text-center">
-                                      <th scope="col">일자</th>
-                                      <th scope="col">주문수</th>
-                                      <th scope="col">매출액</th>
-                                      <th scope="col">방문자</th>
-                                      <th scope="col">가입</th>
-                                      <th scope="col">글작성</th>
-                                      <th scope="col">댓글작성</th>
-                                    </tr>
-                                  </thead>
-                                  <tbody>
-                                    <tr>
-                                      <th scope="row">2021-11-09</th>
-                                      <td>Mark</td>
-                                      <td>Otto</td>
-                                      <td>@mdo</td>
-                                      <td>Mark</td>
-                                      <td>Otto</td>
-                                      <td>@mdo</td>
-                                    </tr>
-                                    <tr>
-                                      <th scope="row">2</th>
-                                      <td>Jacob</td>
-                                      <td>Thornton</td>
-                                      <td>@fat</td>
-                                      <td>Mark</td>
-                                      <td>Otto</td>
-                                      <td>@mdo</td>
-                                    </tr>
-                                    <tr>
-                                      <th scope="row">3</th>
-                                      <td>Larry</td>
-                                      <td>the Bird</td>
-                                      <td>@twitter</td>
-                                      <td>Mark</td>
-                                      <td>Otto</td>
-                                      <td>@mdo</td>
-                                    </tr>
-                                  </tbody>
-                            </table>
-                        </div>
-                      
-                        <!-- Card -->
-                        <div class="card">
-                            <div class="card-body">
-                                <h4 class="card-title">Latest Posts</h4>
-                            </div>
-                            <div class="comment-widgets scrollable">
-                                <!-- Comment Row -->
-                                <div class="d-flex flex-row comment-row m-t-0">
-                                    <div class="p-2"><img src="assets/images/users/1.jpg" alt="user" width="50" class="rounded-circle"></div>
-                                    <div class="comment-text w-100">
-                                        <h6 class="font-medium">James Anderson</h6>
-                                        <span class="m-b-15 d-block">Lorem Ipsum is simply dummy text of the printing and type setting industry. </span>
-                                        <div class="comment-footer">
-                                            <span class="text-muted float-right">April 14, 2016</span> 
-                                            <button type="button" class="btn btn-cyan btn-sm">Edit</button>
-                                            <button type="button" class="btn btn-success btn-sm">Publish</button>
-                                            <button type="button" class="btn btn-danger btn-sm">Delete</button>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- Comment Row -->
-                                <div class="d-flex flex-row comment-row">
-                                    <div class="p-2"><img src="assets/images/users/4.jpg" alt="user" width="50" class="rounded-circle"></div>
-                                    <div class="comment-text active w-100">
-                                        <h6 class="font-medium">Michael Jorden</h6>
-                                        <span class="m-b-15 d-block">Lorem Ipsum is simply dummy text of the printing and type setting industry. </span>
-                                        <div class="comment-footer">
-                                            <span class="text-muted float-right">May 10, 2016</span> 
-                                            <button type="button" class="btn btn-cyan btn-sm">Edit</button>
-                                            <button type="button" class="btn btn-success btn-sm">Publish</button>
-                                            <button type="button" class="btn btn-danger btn-sm">Delete</button>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- Comment Row -->
-                                <div class="d-flex flex-row comment-row">
-                                    <div class="p-2"><img src="assets/images/users/5.jpg" alt="user" width="50" class="rounded-circle"></div>
-                                    <div class="comment-text w-100">
-                                        <h6 class="font-medium">Johnathan Doeting</h6>
-                                        <span class="m-b-15 d-block">Lorem Ipsum is simply dummy text of the printing and type setting industry. </span>
-                                        <div class="comment-footer">
-                                            <span class="text-muted float-right">August 1, 2016</span> 
-                                            <button type="button" class="btn btn-cyan btn-sm">Edit</button>
-                                            <button type="button" class="btn btn-success btn-sm">Publish</button>
-                                            <button type="button" class="btn btn-danger btn-sm">Delete</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <!-- card new -->
-                        
-                    </div>
-                    <!-- column -->
 
-                    <div class="col-lg-6">
+                    </div>
+
+                </div>
+                <div class="row">
+                    
+                    <div class="col-12">
+                   
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="card-title m-b-0">News Updates</h4>
+                                <h5 class="card-title m-b-0">게시글 관리</h5>
                             </div>
-                            <ul class="list-style-none">
-                                <li class="d-flex no-block card-body">
-                                    <i class="fa fa-check-circle w-30px m-t-5"></i>
-                                    <div>
-                                        <a href="#" class="m-b-0 font-medium p-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</a>
-                                        <span class="text-muted">dolor sit amet, consectetur adipiscing</span>
-                                    </div>
-                                    <div class="ml-auto">
-                                        <div class="tetx-right">
-                                            <h5 class="text-muted m-b-0">20</h5>
-                                            <span class="text-muted font-16">Jan</span>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="d-flex no-block card-body border-top">
-                                    <i class="fa fa-gift w-30px m-t-5"></i>
-                                    <div>
-                                        <a href="#" class="m-b-0 font-medium p-0">Congratulation Maruti, Happy Birthday</a>
-                                        <span class="text-muted">many many happy returns of the day</span>
-                                    </div>
-                                    <div class="ml-auto">
-                                        <div class="tetx-right">
-                                            <h5 class="text-muted m-b-0">11</h5>
-                                            <span class="text-muted font-16">Jan</span>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="d-flex no-block card-body border-top">
-                                    <i class="fa fa-plus w-30px m-t-5"></i>
-                                    <div>
-                                        <a href="#" class="m-b-0 font-medium p-0">Maruti is a Responsive Admin theme</a>
-                                        <span class="text-muted">But already everything was solved. It will ...</span>
-                                    </div>
-                                    <div class="ml-auto">
-                                        <div class="tetx-right">
-                                            <h5 class="text-muted m-b-0">19</h5>
-                                            <span class="text-muted font-16">Jan</span>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="d-flex no-block card-body border-top">
-                                    <i class="fa fa-leaf w-30px m-t-5"></i>
-                                    <div>
-                                        <a href="#" class="m-b-0 font-medium p-0">Envato approved Maruti Admin template</a>
-                                        <span class="text-muted">i am very happy to approved by TF</span>
-                                    </div>
-                                    <div class="ml-auto">
-                                        <div class="tetx-right">
-                                            <h5 class="text-muted m-b-0">20</h5>
-                                            <span class="text-muted font-16">Jan</span>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="d-flex no-block card-body border-top">
-                                    <i class="fa fa-question-circle w-30px m-t-5"></i>
-                                    <div>
-                                        <a href="#" class="m-b-0 font-medium p-0"> I am alwayse here if you have any question</a>
-                                        <span class="text-muted">we glad that you choose our template</span>
-                                    </div>
-                                    <div class="ml-auto">
-                                        <div class="tetx-right">
-                                            <h5 class="text-muted m-b-0">15</h5>
-                                            <span class="text-muted font-16">Jan</span>
-                                        </div>
-                                    </div>
-                                </li>
-                            </ul>
+                            <div class="col-md-9" data-select2-id="11">
+                                <select  style="width: 100%; height:36px;" aria-hidden="true" onchange="location.href=this.value">
+                                    <option data-select2-id="3">Select</option>
+                                    <optgroup label="Alaskan/Hawaiian Time Zone" data-select2-id="16">
+                                        <option value="AK" data-select2-id="17">Alaska</option>
+                                        <option value="HI" data-select2-id="18">Hawaii</option>
+                                    </optgroup>
+                                    <optgroup label="Pacific Time Zone" data-select2-id="19">
+                                        <option value="CA" data-select2-id="20">California</option>
+                                        <option value="NV" data-select2-id="21">Nevada</option>
+                                        <option value="OR" data-select2-id="22">Oregon</option>
+                                        <option value="WA" data-select2-id="23">Washington</option>
+                                    </optgroup>
+                                    <optgroup label="Mountain Time Zone" data-select2-id="24">
+                                        <option value="AZ" data-select2-id="25">Arizona</option>
+                                        <option value="CO" data-select2-id="26">Colorado</option>
+                                        <option value="ID" data-select2-id="27">Idaho</option>
+                                        <option value="MT" data-select2-id="28">Montana</option>
+                                        <option value="NE" data-select2-id="29">Nebraska</option>
+                                        <option value="NM" data-select2-id="30">New Mexico</option>
+                                        <option value="ND" data-select2-id="31">North Dakota</option>
+                                        <option value="UT" data-select2-id="32">Utah</option>
+                                        <option value="WY" data-select2-id="33">Wyoming</option>
+                                    </optgroup>
+                                    <optgroup label="Central Time Zone" data-select2-id="34">
+                                        <option value="AL" data-select2-id="35">Alabama</option>
+                                        <option value="AR" data-select2-id="36">Arkansas</option>
+                                        <option value="IL" data-select2-id="37">Illinois</option>
+                                        <option value="IA" data-select2-id="38">Iowa</option>
+                                        <option value="KS" data-select2-id="39">Kansas</option>
+                                        <option value="KY" data-select2-id="40">Kentucky</option>
+                                        <option value="LA" data-select2-id="41">Louisiana</option>
+                                        <option value="MN" data-select2-id="42">Minnesota</option>
+                                        <option value="MS" data-select2-id="43">Mississippi</option>
+                                        <option value="MO" data-select2-id="44">Missouri</option>
+                                        <option value="OK" data-select2-id="45">Oklahoma</option>
+                                        <option value="SD" data-select2-id="46">South Dakota</option>
+                                        <option value="TX" data-select2-id="47">Texas</option>
+                                        <option value="TN" data-select2-id="48">Tennessee</option>
+                                        <option value="WI" data-select2-id="49">Wisconsin</option>
+                                    </optgroup>
+                                    <optgroup label="Eastern Time Zone" data-select2-id="50">
+                                        <option value="CT" data-select2-id="51">Connecticut</option>
+                                        <option value="DE" data-select2-id="52">Delaware</option>
+                                        <option value="FL" data-select2-id="53">Florida</option>
+                                        <option value="GA" data-select2-id="54">Georgia</option>
+                                        <option value="IN" data-select2-id="55">Indiana</option>
+                                        <option value="ME" data-select2-id="56">Maine</option>
+                                        <option value="MD" data-select2-id="57">Maryland</option>
+                                        <option value="MA" data-select2-id="58">Massachusetts</option>
+                                        <option value="MI" data-select2-id="59">Michigan</option>
+                                        <option value="NH" data-select2-id="60">New Hampshire</option>
+                                        <option value="NJ" data-select2-id="61">New Jersey</option>
+                                        <option value="NY" data-select2-id="62">New York</option>
+                                        <option value="NC" data-select2-id="63">North Carolina</option>
+                                        <option value="OH" data-select2-id="64">Ohio</option>
+                                        <option value="PA" data-select2-id="65">Pennsylvania</option>
+                                        <option value="RI" data-select2-id="66">Rhode Island</option>
+                                        <option value="SC" data-select2-id="67">South Carolina</option>
+                                        <option value="VT" data-select2-id="68">Vermont</option>
+                                        <option value="VA" data-select2-id="69">Virginia</option>
+                                        <option value="WV" data-select2-id="70">West Virginia</option>
+                                    </optgroup>
+                                </select>
+                            </div>
+                            <br>
+                                <div class="table-responsive">
+                                    <form method="post">
+                                    <table class="table mb-0">
+                                        <thead class="thead-dark">
+                                            <tr>
+                                                <th>
+                                                  
+                                                        <input type="checkbox" id="mainCheckbox" />
+                                                    
+                                                </th>
+                                                <th scope="col">제목</th>
+                                                <th scope="col">작성자</th>
+                                                <th scope="col">위치</th>
+                                                <th scope="col">작성일</th>
+                                                <th scope="col">좋아요 수</th>
+                                                <th scope="col">조회 수</th>
+                                                <th scope="col"></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="customtable">
+                                            <tr>
+                                                <th>
+                                                    <label class="customcheckbox">
+                                                        <input type="checkbox" class="listCheckbox" />
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </th>
+                                                <td>Trident</td>
+                                                <td>Internet Explorer 4.0</td>
+                                                <td>Win 95+</td>
+                                                <td>4</td>
+                                                <td>4</td>
+                                                <td>4</td>
+                                                <td class="nav-item dropdown"  href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                    <i class="m-r-10 mdi mdi-menu "> </i>
+                                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                                        <a class="dropdown-item" href="#">Action</a>
+                                                        <a class="dropdown-item" href="#">Another action</a>
+                                                        <div class="dropdown-divider"></div>
+                                                        <a class="dropdown-item" href="#">Something else here</a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th>
+                                                    <label class="customcheckbox">
+                                                        <input type="checkbox" class="listCheckbox" id="check" value="뭐야"  />
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </th>
+                                                <td>Trident</td>
+                                                <td>Internet Explorer 5.0</td>
+                                                <td>Win 95+</td>
+                                                <td>5</td>
+                                                <td>4</td>
+                                                <td>4</td>
+                                                <td class="nav-item dropdown"  href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                <i class="m-r-10 mdi mdi-menu "> </i>
+                                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                                    <a class="dropdown-item" href="#">Action</a>
+                                                    <a class="dropdown-item" href="#">Another action</a>
+                                                    <div class="dropdown-divider"></div>
+                                                    <a class="dropdown-item" href="#">Something else here</a>
+                                                </div>
+                                            </td>
+                                            </tr>
+                                            <tr>
+                                                <th>
+                                                    <label class="customcheckbox">
+                                                        <input type="checkbox" class="listCheckbox" />
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </th>
+                                                <td>Trident</td>
+                                                <td>Internet Explorer 4.0</td>
+                                                <td>Win 95+</td>
+                                                <td>4</td>
+                                                <td>4</td>
+                                                <td>4</td>
+                                                <td class="nav-item dropdown"  href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                    <i class="m-r-10 mdi mdi-menu "> </i>
+                                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                                        <a class="dropdown-item" href="#">Action</a>
+                                                        <a class="dropdown-item" href="#">Another action</a>
+                                                        <div class="dropdown-divider"></div>
+                                                        <a class="dropdown-item" href="#">Something else here</a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th>
+                                                    <label class="customcheckbox">
+                                                        <input type="checkbox" class="listCheckbox" />
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </th>
+                                                <td>Trident</td>
+                                                <td>Internet Explorer 5.0</td>
+                                                <td>Win 95+</td>
+                                                <td>5</td>
+                                                <td>4</td>
+                                                <td>4</td>
+                                                <td class="nav-item dropdown"  href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                    <i class="m-r-10 mdi mdi-menu "> </i>
+                                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                                        <a class="dropdown-item" href="#">Action</a>
+                                                        <a class="dropdown-item" href="#">Another action</a>
+                                                        <div class="dropdown-divider"></div>
+                                                        <a class="dropdown-item" href="#">Something else here</a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th>
+                                                    <label class="customcheckbox">
+                                                        <input type="checkbox" class="listCheckbox" />
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </th>
+                                                <td>Trident</td>
+                                                <td>Internet Explorer 5.5</td>
+                                                <td>Win 95+</td>
+                                                <td>5.5</td>
+                                                <td>4</td>
+                                                <td>4</td>
+                                                <td class="nav-item dropdown"  href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                    <i class="m-r-10 mdi mdi-menu "> </i>
+                                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                                        <a class="dropdown-item" href="#">Action</a>
+                                                        <a class="dropdown-item" href="#">Another action</a>
+                                                        <div class="dropdown-divider"></div>
+                                                        <a class="dropdown-item" href="#">Something else here</a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th>
+                                                    <label class="customcheckbox">
+                                                        <input type="checkbox" class="listCheckbox" />
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </th>
+                                                <td>Trident</td>
+                                                <td>Internet Explorer 6</td>
+                                                <td>Win 98+</td>
+                                                <td>6</td>
+                                                <td>4</td>
+                                                <td>4</td>
+                                                <td class="nav-item dropdown"  href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                    <i class="m-r-10 mdi mdi-menu "> </i>
+                                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                                        <a class="dropdown-item" href="#">Action</a>
+                                                        <a class="dropdown-item" href="#">Another action</a>
+                                                        <div class="dropdown-divider"></div>
+                                                        <a class="dropdown-item" href="#">Something else here</a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody> 
+                                    </table>
+                                   <div class="border-top">
+                                        <div class="card-body">
+                                    <button class="btn-secondary " >submit</button>
+                                </div></div>
+                                </form>
+                                </div>
                         </div>
                     </div>
                 </div>
                 <!-- ============================================================== -->
-                <!-- Recent comment and chats -->
+                <!-- End PAge Content -->
+                <!-- ============================================================== -->
+                <!-- ============================================================== -->
+                <!-- Right sidebar -->
+                <!-- ============================================================== -->
+                <!-- .right-sidebar -->
+                <!-- ============================================================== -->
+                <!-- End Right sidebar -->
                 <!-- ============================================================== -->
             </div>
-            <!-- ============================================================== -->
-            <!-- End Container fluid  -->
-            <!-- ============================================================== -->
-            <!-- ============================================================== -->
-            <!-- footer -->
-            <!-- ============================================================== -->
-            <footer class="footer text-center">
+            
+           <footer class="footer text-center">
                 All Rights Reserved by Matrix-admin. Designed and Developed by <a href="https://wrappixel.com">WrapPixel</a>.
             </footer>
             <!-- ============================================================== -->
@@ -551,7 +559,7 @@
     <script src="/src/main/webapp/resources/js/admin/popper.min.js"></script>
     <script src="/src/main/webapp/resources/js/admin/bootstrap.min.js"></script>
     <script src="/src/main/webapp/resources/js/admin/perfect-scrollbar.jquery.min.js"></script>
-    <script src="assets/extra-libs/sparkline/sparkline.js"></script>
+    <script src="/src/main/webapp/resources/js/admin/sparkline.js"></script>
     <!--Wave Effects -->
     <script src="/src/main/webapp/resources/js/admin/waves.js"></script>
     <!--Menu sidebar -->
@@ -559,17 +567,10 @@
     <!--Custom JavaScript -->
     <script src="/src/main/webapp/resources/js/admin/custom.min.js"></script>
     <!--This page JavaScript -->
-    <!-- <script src="dist/js/pages/dashboards/dashboard1.js"></script> -->
-    <!-- Charts js Files -->
-    <script src="assets/libs/flot/excanvas.js"></script>
-    <script src="assets/libs/flot/jquery.flot.js"></script>
-    <script src="assets/libs/flot/jquery.flot.pie.js"></script>
-    <script src="assets/libs/flot/jquery.flot.time.js"></script>
-    <script src="assets/libs/flot/jquery.flot.stack.js"></script>
-    <script src="assets/libs/flot/jquery.flot.crosshair.js"></script>
-    <script src="assets/libs/flot.tooltip/js/jquery.flot.tooltip.min.js"></script>
-    <script src="dist/js/pages/chart/chart-page-init.js"></script>
-
+   
+    <script src="/src/main/webapp/resources/js/admin/datatables.min.js"></script>
+    
+   
 </body>
 
 </html>

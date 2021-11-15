@@ -18318,4 +18318,8 @@ ul {
   display: block;
 }
 
+.btn_cat, .btn_dog{
+  cursor: default;
+}
+
 /*# sourceMappingURL=theme.css.map */
