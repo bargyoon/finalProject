@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,18 +9,15 @@
 <link rel="stylesheet" href="file:///C:/CODE/F_SPRING/spring06_toyProject/src/main/webapp/resources/css/reset.css">
 <link rel="stylesheet" href="file:///C:/CODE/F_SPRING/spring06_toyProject/src/main/webapp/resources/css/all.css">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-<style type="text/css">
-	
-</style>
 </head>
 <body>
 	<div class="container">
-		<header class="d-flex justify-content-center py-3" style="min-width: 500px;">
+		<header class="d-flex justify-content-center py-3"style="min-width: 500px;">
 			<ul class="nav nav-pills">
-			  <li class="nav-item"><a href="#" class="nav-link active" aria-current="page">회원정보</a></li>
-			  <li class="nav-item"><a href="#" class="nav-link">마이펫</a></li>
-			  <li class="nav-item"><a href="#" class="nav-link">예방접종</a></li>
-			  <li class="nav-item"><a href="#" class="nav-link">작성글</a></li>
+				<li class="nav-item"><a href="/mypage/my-info" class="nav-link">회원정보</a></li>
+				<li class="nav-item"><a href="/mypage/pet-info" class="nav-link">마이펫</a></li>
+				<li class="nav-item"><a href="/mypage/vaccination" class="nav-link">예방접종</a></li>
+				<li class="nav-item"><a href="/mypage/managing-board" class="nav-link">작성글</a></li>
 			</ul>
 		</header>
 		<h4 class="mb-3">마이페이지</h4>
