@@ -287,7 +287,7 @@
             <div class="page-breadcrumb">
                 <div class="row">
                     <div class="col-12 d-flex no-block align-items-center">
-                        <h4 class="page-title">Tables</h4>
+                        <h4 class="page-title">상품 등록</h4>
                         <div class="ml-auto text-right">
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb">
@@ -318,90 +318,63 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="row ">
-                                            <div class="col-md-12" >
-                                                <div class="card" >
+                                            <div class="col-md-12">
+                                                <div class="card">
                                                     <div class="card-header">
-                                                        <h6 class="card-title m-b-0 d-inline-block">이미지</h6>
-                                                        
-                                                           
-                                                                <span class="btn btn-flat btn-primary float-right"
-                                                                    id="" data-toggle="tooltip"
+                                                        <h6 class="card-title m-b-0 d-inline-block">상품이미지</h6>
 
-                                                                    data-original-title="권장 해상도: 750 x 750px / JPG 권장">Image
-                                                                    추가</span>
-                                                               
-                                                        
+
+                                                        <span class="btn btn-flat btn-primary float-right" id="reset-img">reset</span>
+
+
                                                     </div>
                                                     <div id="prod_image_dropzone2" style="height: calc(100% - 50px);">
                                                         <div class="card-body">
-                                                            <div id="prod_image_dropzone">
-                                                                <div
-                                                                    class="text-center text-xl text-default-light empty-img-box">
-                                                                    <div id="" class="prod_image_upload inline-blocked">
-                                                                        <i class="btl bt-photo bt-3x"></i>
-                                                                        <input type="file" id="prod_image_upload"
-                                                                            name="files[]" accept="image/*"
-                                                                            class="shop-img-up ico_active" multiple="">
-                                                                    </div>
-                                                                </div>
-                                                                <p class="text-center text-default-light"
-                                                                    style="margin-top: 15px">이미지를 여기로 드래그<br>750 x 750px
-                                                                    / JPG 권장</p>
+                                                            <div class="drop-zone drop-img">
+                                                                <span class="drop-zone__prompt">이미지를 드래그 하거나 클릭해서 추가하세요</span>
+                                                            <input type="file" name="myFile" class="drop-zone__input img-1" multiple>
                                                             </div>
                                                             <div id="prod_image_list" class="ui-sortable"></div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-md-12" >
-                                                <div class="card" >
+                                            <div class="col-md-12">
+                                                <div class="card">
                                                     <div class="card-header">
-                                                        <h6 class="card-title m-b-0 d-inline-block">이미지</h6>
-                                                        
-                                                           
-                                                                <span class="btn btn-flat btn-primary float-right"
-                                                                    id="" data-toggle="tooltip"
+                                                        <h6 class="card-title m-b-0 d-inline-block">제품상세이미지</h6>
 
-                                                                    data-original-title="권장 해상도: 750 x 750px / JPG 권장">Image
-                                                                    추가</span>
-                                                               
-                                                        
+
+                                                        <span class="btn btn-flat btn-primary float-right" id="reset-spec-img"
+                                                           >reset</span>
+
+
                                                     </div>
-                                                    <div id="prod_image_dropzone2" style="height: calc(100% - 50px);">
+                                                    <div id="prod_image_dropzone2" >
                                                         <div class="card-body">
-                                                            <div id="prod_image_dropzone">
-                                                                <div
-                                                                    class="text-center text-xl text-default-light empty-img-box">
-                                                                    <div id="" class="prod_image_upload inline-blocked">
-                                                                        <i class="btl bt-photo bt-3x"></i>
-                                                                        <input type="file" id="prod_image_upload"
-                                                                            name="files[]" accept="image/*"
-                                                                            class="shop-img-up ico_active" multiple="">
-                                                                    </div>
-                                                                </div>
-                                                                <p class="text-center text-default-light"
-                                                                    style="margin-top: 15px">이미지를 여기로 드래그<br>750 x 750px
-                                                                    / JPG 권장</p>
+                                                            <div class="drop-zone drop-spec-img">
+                                                                <span class="drop-zone__prompt">이미지를 드래그 하거나 클릭해서 추가하세요</span>
+                                                             <input type="file" name="myFile" class="drop-zone__input img-2">
                                                             </div>
                                                             <div id="prod_image_list" class="ui-sortable"></div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                           
+
                                         </div>
-                                       
-                                      
-                                       
-                                       
-                                       
+
+
+
+
+
 
                                     </div>
                                     <div class="col-md-6">
                                         <div class="row ">
-                                          
+
                                             <div class="col-md-12">
-                                                <div class="card">
+                                                <div class="card" style="min-height: 580px;">
                                                     <div class="card-header">
                                                         <h6 class="card-title m-b-0">상품 정보</h6>
                                                     </div>
@@ -415,197 +388,136 @@
                                                                     maxlength="200" autocomplete="off">
                                                             </div>
                                                         </div>
-                                                       
-                                                            <div class="form-group">
-                                                                <div class="row">
-                                                                    <div class="col-md-3 m-margin-bottom-xl">
-                                                                        <label class="control-label">재고</label>
-                                                                        <input type="text" class="form-control"
-                                                                            name="sku_no_option" value="">
-                                                                    </div>
-                                                                    <div class="col-md-9 m-margin-bottom-xl">
-                                                                        <label for="shop_prod_price"
-                                                                            class="control-label">판매가 (KRW)</label>
-                                                                        <div class="no-margin">
-                                                                            <input type="text"
-                                                                                class="form-control _prod_price"
-                                                                                id="shop_prod_price" name="price" value="">
-                                                                            <span class="form-control-krw ">KRW</span>
-                                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <div class="row">
+                                                                <div class="col-md-3 m-margin-bottom-xl">
+                                                                    <label class="control-label">재고</label>
+                                                                    <input type="text" class="form-control"
+                                                                        name="sku_no_option" value="">
+                                                                </div>
+                                                                <div class="col-md-9 m-margin-bottom-xl">
+                                                                    <label for="shop_prod_price"
+                                                                        class="control-label">판매가 (KRW)</label>
+                                                                    <div class="no-margin">
+                                                                        <input type="text"
+                                                                            class="form-control _prod_price"
+                                                                            id="shop_prod_price" name="price" value="">
+                                                                        <span class="form-control-krw ">KRW</span>
                                                                     </div>
                                                                 </div>
-                                                            </div>
-
-
-                                                       
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row ">
-                                            <div class="col-md-6">
-                                                <div class="card">
-                                                    <div class="card-header">
-                                                        <h6 class="card-title m-b-0">상품 정보</h6>
-                                                    </div>
-                                                    <div class="card-body">
-                                                        <div class="form-group">
-                                                            <label for="" class="control-label">상품명</label>
-                                                            <div class="">
-                                                                <input type="text"
-                                                                    class="form-control prod-title-fixed-top inline-blocked"
-                                                                    name="name_u202110276178c0948c8dd" value=""
-                                                                    maxlength="200" autocomplete="off">
                                                             </div>
                                                         </div>
-                                                       
-                                                            <div class="form-group">
-                                                                <div class="row">
-                                                                    <div class="col-md-3 m-margin-bottom-xl">
-                                                                        <label class="control-label">재고</label>
-                                                                        <input type="text" class="form-control"
-                                                                            name="sku_no_option" value="">
-                                                                    </div>
-                                                                    <div class="col-md-9 m-margin-bottom-xl">
-                                                                        <label for="shop_prod_price"
-                                                                            class="control-label">판매가 (KRW)</label>
-                                                                        <div class="no-margin">
-                                                                            <input type="text"
-                                                                                class="form-control _prod_price"
-                                                                                id="shop_prod_price" name="price" value="">
-                                                                            <span class="form-control-krw ">KRW</span>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-
-
-                                                       
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6 table-cell-left" >
-                                                <div class="card">
-                                                    <div class="card-header">
-                                                        <h6 class="card-title m-b-0">할인 관리</h6>
-                                                    </div>
-                                                    
-                                                    <div class="card-body no-padding-y">
-                                                        <div class="form-group _discount_wrap">
-                                                            <div>
-                                                                <div class="form-group">
-                                                                    <div class="row">
-                                                                        <div class="col-md-12">
-                                                                            <label class="control-label">
-                                                                                적용 가능 할인 <a href="javascript:;"
-                                                                                    class="text-gray" role="button"
-                                                                                    data-toggle="popover" data-placement="top"
-                                                                                    title=""
-                                                                                    data-content="결제 시 해당 상품에 사용 가능한 할인항목을 설정합니다.<br>할인혜택은 모두 적용시 <strong>즉시/기간 할인 > 쇼핑등급 할인 > 쿠폰 > 적립금 </strong> 순으로 계산합니다.<br><br>할인 사용설정을 해제하는 경우 할인대상 뿐만 아니라 할인조건에서도 제외됩니다. 예를 들어, 쿠폰을 사용하지 못할 경우, 쿠폰의 사용조건이 2만원 이상 구매시 10% 할인인 경우 2만원의 구매조건에 포함하지 않고, 10% 할인도 받을 수 없습니다."
-                                                                                    data-html="true"
-                                                                                    data-original-title="적용 가능 할인"><i
-                                                                                        class="btm bt-question-circle"></i></a>
-                                                                            </label>
-                                                                            <div class="margin-top-10">
-                                                                                <input type="hidden" name="use_apply_coupon"
-                                                                                    value="1">
-        
-                                                                                <label
-                                                                                    class="checkbox checkbox-inline checkbox-styled">
-                                                                                    <input type="checkbox"
-                                                                                        name="product_discount_options_u202110276178c0948c8dd[coupon]"
-                                                                                        value="ok" checked="">
-                                                                                    <span>쿠폰</span>
-                                                                                </label>
-                                                                                <label
-                                                                                    class="checkbox checkbox-inline checkbox-styled">
-                                                                                    <input type="checkbox"
-                                                                                        name="product_discount_options_u202110276178c0948c8dd[point]"
-                                                                                        value="ok" checked="">
-                                                                                    <span>적립금</span>
-                                                                                </label>
-                                                                                <label
-                                                                                    class="checkbox checkbox-inline checkbox-styled">
-                                                                                    <input type="checkbox"
-                                                                                        name="product_discount_options_u202110276178c0948c8dd[shopping_group_dc]"
-                                                                                        value="ok" checked="">
-                                                                                    <span>쇼핑등급 할인</span>
-                                                                                </label>
-                                                                                <label
-                                                                                    class="checkbox checkbox-inline checkbox-styled">
-                                                                                    <input type="checkbox"
-                                                                                        name="product_discount_options_u202110276178c0948c8dd[period]"
-                                                                                        value="ok">
-                                                                                    <span>할인률</span>
-                                                                                </label>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            
-                                                                <div class="form-group _discount_instant_group"
-                                                                    style="">
-                                                                    <div class="row">
-                                                                        <div class="col-md-12">
-                                                                            <label for="discount_instant_u202110276178c0948c8dd"
-                                                                                class="control-label">즉시/기간할인 <a
-                                                                                    href="javascript:;" style="width: 100px;"
-                                                                                    class="text-gray" role="button"
-                                                                                    data-toggle="popover" data-placement="top"
-                                                                                    data-html="true" title=""
-                                                                                    data-content="상품마다 판매가 할인을 다르게 설정할 수 있습니다. <br>* 할인이 적용되면 정가는 숨김 처리됩니다.<br>* 판매가와 필수옵션의 수량을 1개씩 구매할 때마다 설정한 할인이 적용됩니다. (선택옵션은 할인되지 않습니다.)<br>예시) 10,000원 상품 2개 구매 시 20% 할인이라면 4,000원의 할인이 적용됩니다.<br>* 할인이 적용되면 상품가격에 할인율과 할인가가 함께 표시됩니다. 화폐 단위로 할인 적용 시 할인율은 소수점이 나오지 않고 반올림하여 자동 계산되오니 설정 시 유의바랍니다.<br>예시) 10,000원 상품 3,990원 할인 적용시 40% 할인율 책정<br>* 계정에 따라 할인 조건이 중복되는 경우 가장 높은 할인혜택으로 적용됩니다.<br><br><strong>네이버페이 구매</strong><br>- [비로그인] : 로그인 없이 네이버계정을 통해 구매하는 경우 ‘회원+비회원’ 할인이 우선 적용됩니다.<br>- [로그인] : '회원+비회원'에 설정된 할인 외에도 계정에 따라 '회원' 혹은 '그룹'에 설정된 할인이 네이버페이 구매 시에도 적용됩니다.<br><br><strong>네이버쇼핑/카카오쇼핑하우</strong><br>- ‘회원+비회원‘에 설정된 금액으로 상품금액이 반영됩니다. ‘회원+비회원’에 설정된 금액이 없을 경우 본래의 판매가/옵션가로 반영됩니다.  "
-                                                                                    data-original-title="즉시/기간할인"><i
-                                                                                        class="btm bt-question-circle"></i></a></label>
-                                                                            <div class="margin-top-10" style="background: #f9f9f9; padding: 16px;">
-                                                                                <div>
-                                                                                    
-                                                                                    <div class="row">
-                                                                                        
-                                                                                        <div class="">
-                                                                                            <input type="text"
-                                                                                                class="form-control no-padding"
                                                         
-                                                                                                value="0" 
-                                                                                                >
-                                                                                        </div>
-                                                                                        <div class="">
-                                                                                            <select
-                                                                                                name=""
-                                                                                                class="form-control"
-                                                                                              >
-                                                                                                <option value="percent"
-                                                                                                    selected="">%</option>
-                                                                                                <option value="price">KRW
-                                                                                                </option>
-                                                                                            </select>
-                                                                                        </div>
-                                                                                        <div style="margin-block: auto; margin-left: 7px;"><span>할인 적용 </span></div>
-                                                                                    </div>
-                                                                                </div>
-                                                                                
-                                                                              
-                                                                            </div>
-                                                                        </div>
+                                                        <div class="form-group">
+                                                            <div class="row">
+                                                                <div class="col-md-12 m-margin-bottom-xl">
+                                                                    <label class="control-label">카테고리</label>
+                                                                    <input type="text" class="form-control"
+                                                                        name="sku_no_option" value="">
+                                                                </div>
+                                                                
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <div class="row">
+                                                                <div class="col-md-12">
+                                                                    <label class="control-label">
+                                                                        적용 가능 할인
+                                                                    </label>
+                                                                    <div class="margin-top-10">
+                                                                        <input type="hidden" name="use_apply_coupon"
+                                                                            value="1">
+
+                                                                        <label
+                                                                            class="checkbox checkbox-inline checkbox-styled">
+                                                                            <input type="checkbox"
+                                                                                name="product_discount_options_u202110276178c0948c8dd[coupon]"
+                                                                                value="ok" checked="">
+                                                                            <span>쿠폰</span>
+                                                                        </label>
+                                                                        <label
+                                                                            class="checkbox checkbox-inline checkbox-styled">
+                                                                            <input type="checkbox"
+                                                                                name="product_discount_options_u202110276178c0948c8dd[point]"
+                                                                                value="ok" checked="">
+                                                                            <span>적립금</span>
+                                                                        </label>
+                                                                        <label
+                                                                            class="checkbox checkbox-inline checkbox-styled">
+                                                                            <input type="checkbox"
+                                                                                name="product_discount_options_u202110276178c0948c8dd[shopping_group_dc]"
+                                                                                value="ok" checked="">
+                                                                            <span>쇼핑등급 할인</span>
+                                                                        </label>
+                                                                        <label
+                                                                            class="checkbox checkbox-inline checkbox-styled">
+                                                                            <input type="checkbox"
+                                                                                name="product_discount_options_u202110276178c0948c8dd[period]"
+                                                                                value="ok">
+                                                                            <span>할인률</span>
+                                                                        </label>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
+
+                                                        <div class="form-group _discount_instant_group" style="">
+                                                            <div class="row">
+                                                                <div class="col-md-12">
+                                                                    <label for="discount_instant_u202110276178c0948c8dd"
+                                                                        class="control-label">할인률</label>
+                                                                    <div class="margin-top-10"
+                                                                        style="background: #f9f9f9; padding: 16px;">
+                                                                        <div>
+
+                                                                            <div class="row">
+
+                                                                                <div class="">
+                                                                                    <input type="text"
+                                                                                        class="form-control no-padding"
+                                                                                        value="0">
+                                                                                </div>
+                                                                                <div class="">
+                                                                                    <select name=""
+                                                                                        class="form-control">
+                                                                                        <option value="percent"
+                                                                                            selected="">%</option>
+                                                                                        <option value="price">KRW
+                                                                                        </option>
+                                                                                    </select>
+                                                                                </div>
+                                                                                <div
+                                                                                    style="margin-block: auto; margin-left: 7px;">
+                                                                                    <span>할인 적용 </span></div>
+                                                                            </div>
+                                                                        </div>
+
+
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+
+
+
                                                     </div>
                                                 </div>
                                             </div>
-                                            
                                         </div>
 
-                                      
-                                       
-                                       
-                                       
+
+
+
+
 
                                     </div>
-                                   
-                                   
+
+
                                 </div>
-                               
+
                             </form>
                         </div>
                         <!--섹션 끝 -->
