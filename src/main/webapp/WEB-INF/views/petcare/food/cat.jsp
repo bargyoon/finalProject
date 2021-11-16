@@ -68,7 +68,7 @@
 						  </div>
 						  <div class="col">
 						    <div class="card h-100">
-						      <img src="/resources/assets/img/food/문어.jpg" class="card-img-top" alt="...">
+						      <img src="/resources/assets/img/food/문어.png" class="card-img-top" alt="...">
 						      <div class="card-body">
 						        <h5 class="card-title">일부 수산물</h5>
 						        <p class="card-text">연체동물, 민물고기, 조개류 그리고 갑각류에는 '티아미나아제'효소가 들어있습니다. 이 효소는 비타민 B1을 분해하기 때문에 비타민 B1 결핍증을 일으키고 부작용으로는 식욕저하, 구토, 심한 경우 동공이 열리고 걸음걸이가 불안정해지기도 합니다.</p>

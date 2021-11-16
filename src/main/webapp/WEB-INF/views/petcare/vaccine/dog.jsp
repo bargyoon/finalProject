@@ -11,7 +11,6 @@
 <section>
 	
 		<div class="petcare-back">						
-				<form action="/petcare/food" >
 					<h2>  예방접종 </h2>
 				
 				<div class="petcare-wrap">
@@ -28,19 +27,19 @@
 						          <td ></td><td><strong>접종시기</strong></td><td><strong>접종항목</strong></td>
 						        </tr>
 						        <tr>
-						          <td rowspan="5"><strong>기초접종(필수)</strong><td>1차(6주)</td><td>종합 1차 + 코로나 1차</td>
+						          <td rowspan="5"><strong>기초접종(필수)</strong><td>1차(6주)</td><td>종합 백신(DHPP)1차 + 코로나 1차</td>
 						        </tr>
 						        <tr>
-						          <td>2차(8주)</td><td>종합 2차 + 코로나 2차</td>
+						          <td>2차(8주)</td><td>종합 백신(DHPP) 2차 + 코로나 2차</td>
 						        </tr>
 						        <tr>
-								  <td>3차(10주)</td><td>종합 3차 + 켄넬코프 1차</td>
+								  <td>3차(10주)</td><td>종합 백신(DHPP) 3차 + 켄넬코프 1차</td>
 								 </tr>
 						        <tr>
-								   <td>4차(12주)</td><td>종합 4차 + 켄넬코프 2차</td>
+								   <td>4차(12주)</td><td>종합 백신(DHPP) 4차 + 켄넬코프 2차</td>
 								</tr>
 						        <tr>
-								   <td>5차(14주)</td><td>종합 5차 + 광견병(처방)</td>
+								   <td>5차(14주)</td><td>종합 백신(DHPP) 5차 + 광견병(처방)</td>
 								</tr>
 						        <tr>
 						          <td>선택접종</td><td></td><td>개 인플루엔자</td>
@@ -50,6 +49,12 @@
 						        </tr>
 						      </tbody>
 			    	</table>
+			    	
+			    	<pre><i class="fas fa-check"></i> <strong> 종합백신 DHPP</strong>
+- 홍역(디스템퍼), 전염성 간염, 파보바이러스 장염, 파라 인플루엔자</pre>
+					<pre><i class="fas fa-check"></i> <strong> 코로나 장염 </strong> : 구토, 설사를 일으키는 위장염</pre>
+					<pre><i class="fas fa-check"></i> <strong> 켄넬코프(브론카이신) </strong> : 복합 호흡기 질환</pre>
+					<pre><i class="fas fa-check"></i> <strong> 인플루엔자 </strong> : 독감</pre>
 			    			
 				<p>복용 약</p>
 					<table border="1" >
@@ -76,7 +81,6 @@
 								
 				</div>
 					
-			</form>
 		</div>
 	</section>
 

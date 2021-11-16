@@ -142,6 +142,11 @@ ul li{
 	text-align: center;
 }
 
+.petcare-tab-wrap>li:hover{
+	background-color: rgb(243, 224, 149);
+}
+
+
 .petcare-tab-wrap > li{
 	width:25%;
 }

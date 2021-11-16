@@ -65,7 +65,7 @@ url(/fonts/NotoSans-Bold.woff) format('woff');
         width: 100%;
         border-top: 1px solid;
         border-collapse: collapse;
-        
+        margin-bottom: 3em;
         
       }
       
@@ -154,19 +154,27 @@ ul li{
 }
 
 .petcare-con pre{
+	font-family: 'NotoKrL';
 	margin-top: 20px;
-	font-weight: bold;
+}
+
+svg:not(:root).svg-inline--fa {
+    overflow: visible;
+    color: rgb(243, 224, 149);
 }
 
 
 /* tab */
 .petcare-tab-wrap{
 	font-family: 'NotoKrL';
-	
 	display:flex;
 	margin-bottom:40px;
-	justify-content: space-around;
+	justify-content: center;
 	color: rgb(243, 224, 149);
+}
+
+.petcare-tab-wrap>li:hover{
+	background-color: rgb(243, 224, 149);
 }
 
 .petcare-tab-wrap > li{
@@ -176,7 +184,6 @@ ul li{
 	width:100%;
 	display:block;
 	text-align:center;
-	background-color:white;
 	padding:20px 0;
 	text-decoration-line: none;
 	
