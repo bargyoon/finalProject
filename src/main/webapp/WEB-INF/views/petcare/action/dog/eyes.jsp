@@ -32,7 +32,7 @@
 					        고정된 시선으로 응시
 					      </button>
 					    </h2>
-					    <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+					    <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
 					      <div class="accordion-body">
 					        타인과 다른 동물들에게는 <strong>도전, 위협, 긴장</strong>의 의미를 가지지만 주인에게는 <strong>애정의 표현</strong> 입니다.
 					      </div>

@@ -32,7 +32,7 @@
 					        쫑긋 세우고 상대편을 향함
 					      </button>
 					    </h2>
-					    <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+					    <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
 					      <div class="accordion-body">
 					        <strong>경계, 관심, 공격 대기</strong>상태입니다.
 					      </div>

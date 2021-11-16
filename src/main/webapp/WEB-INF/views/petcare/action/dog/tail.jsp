@@ -32,7 +32,7 @@
 					        바짝 세움
 					      </button>
 					    </h2>
-					    <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+					    <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
 					      <div class="accordion-body">
 					        <strong>경계, 주시, 집중</strong> 또는 <strong>자신감</strong>을 의미합니다.
 					      </div>

@@ -32,7 +32,7 @@
 					        긴장 없이 축 늘어진 상태
 					      </button>
 					    </h2>
-					    <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+					    <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
 					      <div class="accordion-body">
 					        <strong>편안한 일상</strong>을 의미합니다.
 					      </div>

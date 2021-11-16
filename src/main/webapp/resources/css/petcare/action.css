@@ -166,6 +166,10 @@ ul li{
 	font-weight: bold;
 }
 
-
+.accordion-button:not(.collapsed) {
+    color: #e6b400;
+    background-color: #fffae6;
+    box-shadow: inset 0 0px 0 rgb(0 0 0 / 13%);
+}
 
 

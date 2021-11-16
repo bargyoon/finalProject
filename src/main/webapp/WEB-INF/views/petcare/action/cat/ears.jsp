@@ -30,7 +30,7 @@
 					        쫑긋 세우고 상대편을 향함
 					      </button>
 					    </h2>
-					    <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+					    <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
 					      <div class="accordion-body">
 					       놀고싶어하는 상태입니다.
 					      </div>

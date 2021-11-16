@@ -95,12 +95,11 @@ ul li{
 }
 
 .top-food{
-	display: flex;
-	justify-content: space-around;
+	
 }
 
 .third-title{
-	padding-top:50px;
+	padding-top:5em;
 	padding-bottom:50px;
 	font-size:1.5em;
 	text-align:center;
@@ -108,13 +107,20 @@ ul li{
 	font-family: 'SBAggroL';
 }
 
-.coffee{
-	width: 300px;
-    height: 400px;
+.food-one{
+	
     margin: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
 }
 
-.coffee p{
+.food-one>div{
+	margin: 40px;
+}
+
+.food-one p{
 	font-size: 1.5em;
     font-weight: bold;
     display: flex;
@@ -122,14 +128,48 @@ ul li{
     font-family: 'SBAggroL';
 }
 
-.coffee img {
+.food-one img {
 	display: flex;
     align-content: center;
 }
 
+.food-two{
+	
+    margin: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+.food-two>div{
+	margin-left: 100px;
+    margin-right: 100px;
+}
+
+.food-two p{
+	font-size: 1.5em;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    font-family: 'SBAggroL';
+}
+
+.avocado img {
+	display: flex;
+	margin-left: 80px;
+    margin-bottom: 10px;
+}
+
+.avocado{
+	width: 70%;
+}
+
+
 .petcare-wrap{
 	display: flex;
     justify-content: space-around;
+    margin-top: 10em;
 }
 
 

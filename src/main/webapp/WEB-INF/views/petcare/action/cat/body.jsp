@@ -30,7 +30,7 @@
 					        배를 보이고 눕는다
 					      </button>
 					    </h2>
-					    <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+					    <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
 					      <div class="accordion-body">
 					        <strong>신뢰, 믿음, 편안함</strong>을 의미합니다. 단, 고양이는 배를 만지는 걸 좋아하지 않으니 목덜미를 쓰다듬어줍시다.
 					      </div>

@@ -32,7 +32,7 @@
 					        혀를 내밀고 헐떡거림
 					      </button>
 					    </h2>
-					    <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+					    <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
 					      <div class="accordion-body">
 					        <strong>불안, 긴장, 흥분</strong>을 의미합니다.
 					      </div>

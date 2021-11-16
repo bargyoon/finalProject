@@ -42,15 +42,15 @@ public class PetcareController {
 	@GetMapping("food")
 	public void foodForm(){}
 	
-	@GetMapping("food/fruit")
-	public void fruitForm(){}
+	@GetMapping("food/cat")
+	public void foodCat(){}
 	
-	@GetMapping("food/beef")
-	public void beefForm(){}
+	@GetMapping("food/dog")
+	public void foodDog(){}
 	
 	@GetMapping("vaccine/cat")
-	public void vaccineCatForm(){}
+	public void vaccineCat(){}
 	
 	@GetMapping("vaccine/dog")
-	public void vaccineDogForm(){}
+	public void vaccineDog(){}
 }
