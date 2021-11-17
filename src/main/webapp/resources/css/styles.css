@@ -10,6 +10,68 @@
  * Copyright 2011-2021 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
  */
+ 
+ /* 폰트 어그로 */
+@font-face {
+    font-family: 'SBAggroB';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/SBAggroB.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'SBAggroL';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/SBAggroL.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'SBAggroM';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/SBAggroM.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* google noto sans */
+
+@font-face {
+font-family: 'NotoKrL';
+font-style: normal;
+font-weight: 100;
+src: local('Noto Sans Light'), local('NotoSans-Light'), url(/fonts/NotoSans-Light.eot);
+src: url(/fonts/NotoSans-Light.eot?#iefix) format('embedded-opentype'),
+url(/fonts/NotoSans-Light.woff2) format('woff2'),
+url(/fonts/NotoSans-Light.woff) format('woff');;
+}
+@font-face {
+font-family: 'NotoKrR';
+font-style: normal;
+font-weight: 300;
+src: local('Noto Sans Regular'), local('NotoSans-Regular'), url(/fonts/NotoSans-Regular.eot);
+src: url(/fonts/NotoSans-Regular.eot?#iefix) format('embedded-opentype'),
+url(/fonts/NotoSans-Regular.woff2) format('woff2'),
+url(/fonts/NotoSans-Regular.woff) format('woff');
+}
+@font-face {
+font-family: 'NotoKrM';
+font-style: normal;
+font-weight: 500;
+src: local('Noto Sans Medium'), local('NotoSans-Medium'), url(/fonts/NotoSans-Medium.eot);
+src: url(/fonts/NotoSans-Medium.eot?#iefix) format('embedded-opentype'),
+url(/fonts/NotoSans-Medium.woff2) format('woff2'),
+url(/fonts/NotoSans-Medium.woff) format('woff');
+}
+@font-face {
+font-family: 'NotoKrB';
+font-style: normal;
+font-weight: 700;
+src: local('Noto Sans Bold'), local('NotoSans-Bold'), url(/fonts/NotoSans-Bold.eot);
+src: url(/fonts/NotoSans-Bold.eot?#iefix) format('embedded-opentype'),
+url(/fonts/NotoSans-Bold.woff2) format('woff2'),
+url(/fonts/NotoSans-Bold.woff) format('woff');
+}
+
 :root {
   --bs-blue: #0d6efd;
   --bs-indigo: #6610f2;
@@ -76,9 +138,11 @@
   }
 }
 
+
+
 body {
   margin: 0;
-  font-family: var(--bs-body-font-family);
+  font-family: 'SBAggroL';
   font-size: var(--bs-body-font-size);
   font-weight: var(--bs-body-font-weight);
   line-height: var(--bs-body-line-height);
@@ -3948,9 +4012,13 @@ textarea.form-control-lg {
 	text-align: center;
 }
 
+/* 메뉴 하단바 색깔 */
 .navbar-detail > li{
 	list-style: none;
+	background-color: silver;
+	padding: 10px 0px 5px 0px;
 }
+
 .navbar-detail > li > a{
 	text-decoration: none;
 	color:#333; /* 글씨색 맞추기 */
@@ -3959,11 +4027,15 @@ textarea.form-control-lg {
 		float:left;
 		position:relative;
 } 
+
+/* 메뉴 하단바 설정 변경  */
 #navbarResponsive > ul > li > ul {
 		display:none;
 		position: absolute;
 		line-height: 30px;
 		color: #21252961;
+		width: 10em;
+    margin-left: -45px;
 }
 #navbarResponsive > ul > li:hover > ul {
 	display:block;
@@ -4101,6 +4173,12 @@ textarea.form-control-lg {
   margin-bottom: 0;
   list-style: none;
 }
+
+/* 메뉴폰트 */
+.nav-link .navbar-detail *{
+	font-family: 'SBAggroL';
+}
+
 .navbar-nav .nav-link {
   padding-right: 0;
   padding-left: 0;
@@ -11340,6 +11418,7 @@ p {
 
 .page-section {
   padding: 6rem 0;
+ 
 }
 .page-section h2.section-heading, .page-section .section-heading.h2 {
   font-size: 2.5rem;
@@ -11350,7 +11429,7 @@ p {
   font-size: 1rem;
   font-weight: 400;
   font-style: italic;
-  font-family: "Roboto Slab", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    font-family: 'SBAggroL';
   margin-bottom: 4rem;
 }
 
@@ -11399,7 +11478,7 @@ p {
   height: 1.5rem;
 }
 #mainNav .navbar-nav .nav-item .nav-link {
-  font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    font-family: 'SBAggroL';
   font-size: 0.95rem;
   color : black;
   letter-spacing: 0.0625em;
@@ -11458,14 +11537,14 @@ header.masthead .masthead-subheading {
   font-style: italic;
   line-height: 1.5rem;
   margin-bottom: 25px;
-  font-family: "Roboto Slab", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+   font-family: 'SBAggroL';
 }
 header.masthead .masthead-heading {
   font-size: 3.25rem;
   font-weight: 700;
   line-height: 3.25rem;
   margin-bottom: 2rem;
-  font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  font-family: 'SBAggroL';
 }
 
 @media (min-width: 768px) {
@@ -11473,17 +11552,21 @@ header.masthead .masthead-heading {
     padding-top: 17rem;
     padding-bottom: 12.5rem;
   }
+  
+  /* header폰트 */
   header.masthead .masthead-subheading {
     font-size: 2.25rem;
     font-style: italic;
     line-height: 2.25rem;
     margin-bottom: 2rem;
+    font-family: 'SBAggroL';
   }
   header.masthead .masthead-heading {
     font-size: 4.5rem;
     font-weight: 700;
     line-height: 4.5rem;
     margin-bottom: 4rem;
+    font-family: 'SBAggroL';
   }
 }
 /* #portfolio .portfolio-item {

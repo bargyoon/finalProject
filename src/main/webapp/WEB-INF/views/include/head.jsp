@@ -51,9 +51,9 @@
                         <li class="nav-item"><a class="nav-link" href="#">수술비용</a></li>
                         <li class="nav-item"><a class="nav-link" href="#">펫케어</a>
                        		<ul class="navbar-detail"><hr>
-	                        	<li><a href=#>예방접종</a>
-                        		<li><a href=#>금지음식</a>
-                        		<li><a href=#>행동의미</a>
+	                        	<li><a href="/petcare/vaccine/dog">예방접종</a>
+                        		<li><a href="/petcare/food">금지음식</a>
+                        		<li><a href="/petcare/action/dog/eyes">행동의미</a>
                         	</ul>
                         </li>
                         <li class="nav-item"><a class="nav-link" href="#">게시판</a></li>
