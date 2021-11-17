@@ -28,7 +28,7 @@
 						          <td ></td><td><strong>접종시기</strong></td><td><strong>접종항목</strong></td>
 						        </tr>
 						        <tr>
-						          <td rowspan="5"><strong>기초접종(필수)</strong><td>1차(8주)</td><td>종합 백신(FVRCP) 1차</td>
+						          <td rowspan="5" class="l-yellow"><strong>기초접종(필수)</strong><td>1차(8주)</td><td>종합 백신(FVRCP) 1차</td>
 						        </tr>
 						        <tr>
 						          <td>2차(11주)</td><td>종합 백신(FVRCP) 2차</td>
@@ -43,10 +43,10 @@
 								   <td>5차(14주)</td><td>종합 5차 + 광견병(처방)</td>
 								</tr>
 						        <tr>
-						          <td>선택접종</td><td></td><td>백혈병, 클라미디아</td>
+						          <td class="l-yellow">선택접종</td><td></td><td>백혈병, 클라미디아</td>
 						        </tr>
 						        <tr>
-						          <td>추가접종</td><td>매년 1회</td><td>종합, 광견병, 심장사상충</td>
+						          <td class="l-yellow">추가접종</td><td>매년 1회</td><td>종합, 광견병, 심장사상충</td>
 						        </tr>
 						      </tbody>
 			    	</table>
@@ -54,11 +54,26 @@
 - 허피스바이러스 : 바이러스성 비기관염, 헤르페스 = 고양이감기
 - 칼리시바이러스 : 고양이독감, 폐렴
 - 파보바이러스 : 범백혈구 감소증</pre>
-					<pre><i class="fas fa-check"></i> <strong> 클라미디아(4종) </strong>
- - 호흡기 감염증. '허피스, 칼리시'와 비슷 (단, 사람에게도 전염됨)</pre>
-					<pre><i class="fas fa-check"></i> <strong> 백혈병(5종) </strong>: 악성림프종</pre>
+					<pre><i class="fas fa-check"></i> <strong> 클라미디아(4종) </strong> : 호흡기 감염증. '허피스, 칼리시'와 비슷 (단, 사람에게도 전염됨)</pre>
+					<pre><i class="fas fa-check"></i> <strong> 백혈병(5종) </strong> : 악성림프종</pre>
 			    	
-			    			
+			    	<p>복용 약 / 스케일링</p>
+					<table border="1" >
+							<thead class="yel">
+								<tr>
+									<th>약 이름</th><th>주기</th><th>효과</th>
+								</tr>
+							</thead>
+						      <tbody>
+								<tr>
+						          <td><strong>심장 사상충</strong></td><td>한 달에 한 번</td><td>모기에 의해 감염되는 기생충 예방</td>
+						        </tr>	
+								 <tr>
+								  <td><strong>스케일링</strong> </td><td>1~2년에 한 번</td><td>치주염 예방</td>
+								 </tr>
+						      </tbody>
+			    		</table>		
+			    		<pre><i class="fas fa-check"></i> 체중, 연령, 묘종 또는 임신여부에 따라 기준이 달라질 수 있으므로 수의사와 상담 후 결정해주세요.</pre>		
 			</div> 	
 				
 								
