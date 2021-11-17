@@ -22,6 +22,13 @@
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 <![endif]-->
+    <style>
+        .d-table-cell input {
+            vertical-align: middle;
+        }
+
+       
+    </style>
 </head>
 
 <body>
@@ -287,12 +294,12 @@
             <div class="page-breadcrumb">
                 <div class="row">
                     <div class="col-12 d-flex no-block align-items-center">
-                        <h4 class="page-title">상품 등록</h4>
+                        <h4 class="page-title">구매평관리</h4>
                         <div class="ml-auto text-right">
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">사용자 리스트</li>
+                                    <li class="breadcrumb-item active" aria-current="page">구매평관리</li>
                                 </ol>
                             </nav>
                         </div>
@@ -307,240 +314,182 @@
             <!-- Container fluid  -->
             <!-- ============================================================== -->
             <div class="container-fluid">
-                <div id="content">
-                    <section>
-                        <div class="section-body">
-                            <form id="prod_add" method="post" class="form form-validate" role="form" autocomplete="off"
-                                novalidate="novalidate">
-                                <input type="hidden" name="idx" value="0">
-                                <!-- default_type - js 처리용 -->
-                                <input type="hidden" name="default_type" id="default_type" value="parcel">
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="row ">
-                                            <div class="col-md-12">
-                                                <div class="card">
-                                                    <div class="card-header">
-                                                        <h6 class="card-title m-b-0 d-inline-block">상품이미지</h6>
 
+                <!-- ============================================================== -->
+                <!-- Start Page Content -->
+                <!-- ============================================================== -->
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-body no-padding">
+                                <form>
+                                    <div class="form-group row">
 
-                                                        <span class="btn btn-flat btn-primary float-right" id="reset-img">reset</span>
-
-
-                                                    </div>
-                                                    <div id="prod_image_dropzone2" style="height: calc(100% - 50px);">
-                                                        <div class="card-body">
-                                                            <div class="drop-zone drop-img">
-                                                                <span class="drop-zone__prompt">이미지를 드래그 하거나 클릭해서 추가하세요</span>
-                                                            <input type="file" name="myFile" class="drop-zone__input img-1" multiple>
-                                                            </div>
-                                                            <div id="prod_image_list" class="ui-sortable"></div>
+                                        <div class="col-sm-9">
+                                            <div>
+                                                <div style="display: table; width: 100%; margin-bottom: 5px;">
+                                                    <div style="display: table-row-group; ">
+                                                        <div class='d-table-cell' style="width: 15%;">별점</div>
+                                                        <div class='d-table-cell '>
+                                                            <input type="radio" name="grade" checked><label
+                                                                class="ml-2 mr-2">전체</label>
+                                                            <input type="radio" name="grade"><label
+                                                                class="ml-2 mr-2">1점</label>
+                                                            <input type="radio" name="grade"><label
+                                                                class="ml-2 mr-2">2점</label>
+                                                            <input type="radio" name="grade"><label
+                                                                class="ml-2 mr-2">3점</label>
+                                                            <input type="radio" name="grade"><label
+                                                                class="ml-2 mr-2">4점</label>
+                                                            <input type="radio" name="grade"><label
+                                                                class="ml-2">5점</label>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="col-md-12">
-                                                <div class="card">
-                                                    <div class="card-header">
-                                                        <h6 class="card-title m-b-0 d-inline-block">제품상세이미지</h6>
-
-
-                                                        <span class="btn btn-flat btn-primary float-right" id="reset-spec-img"
-                                                           >reset</span>
-
-
-                                                    </div>
-                                                    <div id="prod_image_dropzone2" >
-                                                        <div class="card-body">
-                                                            <div class="drop-zone drop-spec-img">
-                                                                <span class="drop-zone__prompt">이미지를 드래그 하거나 클릭해서 추가하세요</span>
-                                                             <input type="file" name="myFile" class="drop-zone__input img-2" multiple>
-                                                            </div>
-                                                            <div id="prod_image_list" class="ui-sortable"></div>
+                                                <div style="display: table; width: 100%; margin-bottom: 5px;">
+                                                    <div style="display: table-row-group; ">
+                                                        <div class='d-table-cell' style="width: 15%;">구매평 유형</div>
+                                                        <div class='d-table-cell '>
+                                                            <input type="radio" name="comment-type" checked><label
+                                                                class="ml-2 mr-2">전체</label>
+                                                            <input type="radio" name="comment-type"><label
+                                                                class="ml-2 mr-2">일반구매평</label>
+                                                            <input type="radio" name="comment-type"><label
+                                                                class="ml-2 mr-2">포토구매평</label>
                                                         </div>
                                                     </div>
                                                 </div>
+                                                <div style="display: table; width: 100%; margin-bottom: 5px;">
+                                                    <div style="display: table-row-group; ">
+                                                        <div class='d-table-cell' style="width: 15%;">승인 종류</div>
+                                                        <div class='d-table-cell '>
+                                                            <input type="radio" name="allow-type" checked><label
+                                                                class="ml-2 mr-2">전체</label>
+                                                            <input type="radio" name="allow-type"><label
+                                                                class="ml-2 mr-2">승인대기중</label>
+                                                            <input type="radio" name="allow-type"><label
+                                                                class="ml-2 mr-2">승인</label>
+                                                            <input type="radio" name="allow-type"><label
+                                                                class="ml-2 mr-2">승인거절</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div style="display: table; width: 100%; margin-bottom: 5px;">
+                                                    <div style="display: table-row-group; ">
+                                                        <div class='d-table-cell' style="width: 15%;">키워드 검색</div>
+                                                        <div class='d-table-cell '>
+                                                            <input type="text" class="form-control" style="width:50%"
+                                                                placeholder="작성자 내용 검색" name="keyword">
+                                                        </div>
+                                                    </div>
+                                                </div>
+
                                             </div>
-
-                                        </div>
-
-
-
-
-
-
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="row ">
-
-                                            <div class="col-md-12">
-                                                <div class="card" style="min-height: 580px;">
-                                                    <div class="card-header">
-                                                        <h6 class="card-title m-b-0">상품 정보</h6>
-                                                    </div>
-                                                    <div class="card-body">
-                                                        <div class="form-group">
-                                                            <label for="" class="control-label">상품명</label>
-                                                            <div class="">
-                                                                <input type="text"
-                                                                    class="form-control prod-title-fixed-top inline-blocked"
-                                                                    name="name_u202110276178c0948c8dd" value=""
-                                                                    maxlength="200" autocomplete="off">
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="form-group">
-                                                            <div class="row">
-                                                                <div class="col-md-3 m-margin-bottom-xl">
-                                                                    <label class="control-label">재고</label>
-                                                                    <input type="text" class="form-control"
-                                                                        name="sku_no_option" value="">
-                                                                </div>
-                                                                <div class="col-md-9 m-margin-bottom-xl">
-                                                                    <label for="shop_prod_price"
-                                                                        class="control-label">판매가 (KRW)</label>
-                                                                    <div class="no-margin">
-                                                                        <input type="text"
-                                                                            class="form-control _prod_price"
-                                                                            id="shop_prod_price" name="price" value="">
-                                                                        <span class="form-control-krw ">KRW</span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        
-                                                        <div class="form-group">
-                                                            <div class="row">
-                                                                <div class="col-md-6 m-margin-bottom-xl">
-                                                                    <label class="control-label">카테고리</label>
-                                                                    <select class="form-control">
-                                                                        <option value="" selected disabled>카테고리 선택</option>
-                                                                        <option value="CJ">간식</option>
-                                                                        <option value="EPOST">사료</option>
-                                                                        <option value="REGISTPOST">건강관리</option>
-                                                                        <option value="HANJIN">위생/배변</option>
-                                                                        <option value="LOGEN">미용/목욕</option>
-                                                                        <option value="GTX">급수기/급식기</option>
-                                                                        <option value="LOTTE">하우스/울타리</option>
-                                                                        <option value="FRESHMATES">이동장</option>
-                                                                        <option value="GTSLOGIS">의류/악세사리</option>
-                                                                        <option value="GENIEGO">장난감</option>
-                                                                        
-                                                                    </select>
-                                                                </div>
-                                                                <div class="col-md-6 m-margin-bottom-xl">
-                                                                    <label class="control-label">종류</label>
-                                                                    <input type="text" class="form-control"
-                                                                        name="" value="">
-                                                                </div>
-                                                                
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="form-group">
-                                                            <div class="row">
-                                                                <div class="col-md-12">
-                                                                    <label class="control-label">
-                                                                        적용 가능 할인
-                                                                    </label>
-                                                                    <div class="margin-top-10">
-                                                                        <input type="hidden" name="use_apply_coupon"
-                                                                            value="1">
-
-                                                                        <label
-                                                                            class="checkbox checkbox-inline checkbox-styled">
-                                                                            <input type="checkbox"
-                                                                                name="product_discount_options_u202110276178c0948c8dd[coupon]"
-                                                                                value="ok" checked="">
-                                                                            <span>쿠폰</span>
-                                                                        </label>
-                                                                        <label
-                                                                            class="checkbox checkbox-inline checkbox-styled">
-                                                                            <input type="checkbox"
-                                                                                name="product_discount_options_u202110276178c0948c8dd[point]"
-                                                                                value="ok" checked="">
-                                                                            <span>적립금</span>
-                                                                        </label>
-                                                                        <label
-                                                                            class="checkbox checkbox-inline checkbox-styled">
-                                                                            <input type="checkbox"
-                                                                                name="product_discount_options_u202110276178c0948c8dd[shopping_group_dc]"
-                                                                                value="ok" checked="">
-                                                                            <span>쇼핑등급 할인</span>
-                                                                        </label>
-                                                                        <label
-                                                                            class="checkbox checkbox-inline checkbox-styled">
-                                                                            <input type="checkbox"
-                                                                                name="product_discount_options_u202110276178c0948c8dd[period]"
-                                                                                value="ok">
-                                                                            <span>할인률</span>
-                                                                        </label>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="form-group _discount_instant_group" style="">
-                                                            <div class="row">
-                                                                <div class="col-md-12">
-                                                                    <label for="discount_instant_u202110276178c0948c8dd"
-                                                                        class="control-label">할인률</label>
-                                                                    <div class="margin-top-10"
-                                                                        style="background: #f9f9f9; padding: 16px;">
-                                                                        <div>
-
-                                                                            <div class="row">
-
-                                                                                <div class="">
-                                                                                    <input type="text"
-                                                                                        class="form-control no-padding"
-                                                                                        value="0">
-                                                                                </div>
-                                                                                <div class="">
-                                                                                    <select name=""
-                                                                                        class="form-control">
-                                                                                        <option value="percent"
-                                                                                            selected="">%</option>
-                                                                                        <option value="price">KRW
-                                                                                        </option>
-                                                                                    </select>
-                                                                                </div>
-                                                                                <div
-                                                                                    style="margin-block: auto; margin-left: 7px;">
-                                                                                    <span>할인 적용 </span></div>
-                                                                            </div>
-                                                                        </div>
-
-
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-
-
-
-                                                    </div>
+                                            <div class="border-top">
+                                                <div class="card-body">
+                                                    <button class="btn-secondary float-right ml-2">검색</button>
+                                                    <button class="btn-primary float-right">초기화</button>
                                                 </div>
                                             </div>
                                         </div>
-
-
-
-
-
-
                                     </div>
-
-
-                                </div>
-
-                            </form>
+                                </form>
+                            </div>
                         </div>
-                        <!--섹션 끝 -->
-                        <div><a class="btn btn-primary">저장</a></div>
-                    </section>
+
+                    </div>
+
                 </div>
+                <div class="row">
+
+                    <div class="col-12">
+                        <div class="card-head ">
+                            <header class=" comments-header ml-3">
+                                <div>
+                                    <label class="no-margin">
+                                        <input type="checkbox" class="all-check" style="vertical-align: middle;">
+                                        <span class="ml-2">구매평 <span class="text-primary"
+                                                id="review_total_count">3</span></span>
+                                    </label>
+                                </div>
+                            </header>
+
+
+                        </div>
+                        <div class="card" id="review_list">
+                            <div class="card-body no-padding ">
+                                <div style="">
+                                    <div class="card" style="display: table; border-collapse: collapse; width: 100%;">
+                                        
+                                        <div class="border-bottom" style="display: table-row-group;">
+                                            <div class="d-table-cell" style="width: 2%; vertical-align: top;">
+                                                <label><input type="checkbox"></label>
+                                            </div>
+                                            <div class="d-table-cell" style="vertical-align: top; width: 20%;">
+                                                <div><a href="#">상품이름</a></div>
+                                                <div class="d-inline-block">
+                                                    <div class="d-flex small text-warning justify-content-center">
+                                                        <i class="fas fa-star"></i>
+                                                        <i class="fas fa-star"></i>
+                                                        <i class="fas fa-star"></i>
+                                                        <i class="fas fa-star"></i>
+                                                        <i class="fas fa-star"></i>
+                                                    </div>
+                                                </div>
+                                                <span class="d-inline-block">작성자</span>
+                                                <div class="d-inline-block">
+                                                    <span class="badge badge-danger">N</span>
+                                                    <span class="badge badge-info">BEST</span>
+
+                                                </div>
+                                                <span class="d-inline-block ml-2" style="color: gray;">날짜</span>
+                                                <div class="pt-2" style="cursor: pointer;" onclick="">구매평</div>
+                                                <div class="pt-2" style="cursor: pointer;" onclick="">댓글 1</div>
+                                            </div>
+                                            <div class="d-table-cell board_thumb_wrap"
+                                                style="padding: 10px; cursor:pointer; "
+                                                onclick="">
+                                                <div>
+                                                    <img src="https://cdn.imweb.me/thumbnail/20211117/2fe09638f49bd.png"
+                                                        class="board_thumb">
+                                                        <img src="https://cdn.imweb.me/thumbnail/20211117/2fe09638f49bd.png"
+                                                        class="board_thumb">
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="d-table-cell text-right" style="vertical-align: middle;">
+                                                <div class="nav-item text-center dropdown" href=""
+                                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                    <i class="m-r-10 mdi mdi-menu ml-2"> </i>
+                                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                                        <a class="dropdown-item" href="#">Action</a>
+                                                        <a class="dropdown-item" href="#">Another action</a>
+                                                        <div class="dropdown-divider"></div>
+                                                        <a class="dropdown-item" href="#">Something else here</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                     
+                                    </div>
+                                </div>
+                            </div>
+                            <nav class="text-center">
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+                <!-- ============================================================== -->
+                <!-- End PAge Content -->
+                <!-- ============================================================== -->
+                <!-- ============================================================== -->
+                <!-- Right sidebar -->
+                <!-- ============================================================== -->
+                <!-- .right-sidebar -->
+                <!-- ============================================================== -->
+                <!-- End Right sidebar -->
+                <!-- ============================================================== -->
             </div>
 
             <footer class="footer text-center">
