@@ -1,5 +1,21 @@
 package com.kh.spring.member.model.dto;
 
-public class Member {
+import java.sql.Date;
 
+import lombok.Data;
+
+@Data
+public class Member {
+	
+	   private int userIdx;
+	   private String password;
+	   private String email;
+	   private String nickName;
+	   private String grade;
+	   private String userId;
+	   private String address;
+	   private Date joinDate;
+	   private int isLeave;
+	
+	   
 }

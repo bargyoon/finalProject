@@ -225,7 +225,7 @@
                   
                   <div class="form-group">
                      <label>이름 </label>
-                     <input type="email" class="form-control" placeholder="이름을 입력하세요">
+                     <input type="text" class="form-control" placeholder="이름을 입력하세요">
                   </div>
                   
                   <div class="form-group">
@@ -235,8 +235,8 @@
                   
                    <div class="form-group">
                      <label>주소: </label>
-                     <input type="email" class="form-control" placeholder="주소를 입력하세요">
-                     <!-- 이거 주소 api? 라이브러리? 이런거 있었던듯 찾아보고 하기! -> 카카오api있는듯 -->
+                     <input type="text" class="form-control" id="address" placeholder="주소를 입력하세요">
+                     <input type="text" class="form-control" placeholder="상세주소를 입력하세요">
                   </div><br><hr>
                   
                   <a class="btn btn-black" style="width: 100%">가입하기</a>
@@ -246,69 +246,22 @@
       </div>
 </form:form>
 
+<script type="text/javascript" src="/resources/js/member/joinForm.js"></script>
 
-
-<%-- <h1>회원 가입 양식</h1>
-    <form:form modelAttribute="joinForm"
-   				   action="/member/join" method="post" id="frm_join" >
-     <table border="1">
-        <tr>
-           <td>ID : </td>
-           <td >
-              <input type="text" name="userId" id="userId" size="10"  
-				<c:if test="${empty error.userId }">
-						value="${joinForm.userId}"
-				</c:if>
-           	  required/>
-           	  <button type="button" id="btnIdCheck">check</button>
-           	  <c:if test="${empty error.userId }">
-           	  		<span id="idCheck" class="valid-msg"></span>
-           	  </c:if>
-           	  <form:errors path="userId" cssClass="valid-msg" id="idCheck"/>
-           </td>
-        </tr>
-        <tr>
-           <td>PASSWORD : </td>
-           <td>
-           	  <input type="password" name="password" id="password"
-           	  		placeholder="영어,숫자,특수문자 조합의 8글자 이상의 문자열입니다." 
-           	  	<c:if test="${empty error.password }">
-						value="${joinForm.password}"
-				</c:if>	
-           	   required/>
-           	 <form:errors path="password" cssClass="valid-msg"/>
-           </td>
-        </tr>
-        <tr>
-           <td>휴대폰번호 : </td>
-           <td>
-           	  <input id="tell" type="tel" name="tell" placeholder="숫자만 입력하세요"  
-           	  		<c:if test="${empty error.tell }">
-						value="${joinForm.tell}"
-					</c:if>	
-           	  required/>
-           	  <form:errors path="tell" cssClass="valid-msg"/>
-           </td>
-        </tr>
-        <tr>
-           <td>EMAIL : </td>
-           <td>
-           	  <input type="email" name="email"  
-           	  		<c:if test="${empty error.email }">
-						value="${joinForm.email}"
-					</c:if>	
-           	  required/>
-           </td>
-        </tr>
-        <tr>
-           <td colspan="2">
-              <input type="submit" value="가입" />
-           </td>
-       </tr>
-   </table>
-   </form:form> --%>
-   
-   <script type="text/javascript" src="/resources/js/member/joinForm.js"></script>
+<!-- 주소 api -->
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script>
+window.onload = function(){
+    document.getElementById("address").addEventListener("click", function(){ 
+    	//주소입력칸을 클릭하면 주소 검색창 발생
+        new daum.Postcode({
+            oncomplete: function(data) { //선택시 입력값 세팅
+                document.getElementById("address").value = data.address; // 주소 넣기
+            }
+        }).open();
+    });
+}
+</script>
    
 </body>
 </html>
