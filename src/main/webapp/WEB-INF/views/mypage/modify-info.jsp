@@ -25,18 +25,18 @@
 	
 	<div class="container" style="display: flex;">
 		<div class="d-flex flex-column flex-shrink-0 p-3 bg-light" style="width: 280px;">
-		    <span class="fs-4">내 정보</span>
+		    <span class="fs-4">회원정보</span>
 		    <hr>
 		    <ul class="nav nav-pills flex-column mb-auto">
 		      <li class="nav-item">
-		        <a href="#" class="nav-link link-dark">
-		          <svg class="bi me-2" width="16" height="16"><use xlink:href="#home"></use></svg>
+		        <a href="/mypage/my-info" class="nav-link link-dark">
+		          <svg class="bi me-2" width="16" height="16"><use xlink:href="#"></use></svg>
 		          회원정보 보기
 		        </a>
 		      </li>
 		      <li>
-		        <a href="#" class="nav-link active" aria-current="page">
-		          <svg class="bi me-2" width="16" height="16"><use xlink:href="#speedometer2"></use></svg>
+		        <a href="/mypage/modify-info" class="nav-link active">
+		          <svg class="bi me-2" width="16" height="16"><use xlink:href="#"></use></svg>
 		          회원정보 수정
 		        </a>
 		      </li>
@@ -72,13 +72,12 @@
 			</div>
 			
 			<div class="mb-3">
-				<label for="contract_file" class="form-label">프로필 사진</label>
-				<input class="form-control" type="file" name="file" id="contract_file" placeholder="1"/>
-				<button type="button"></button>
+			  <label for="formFile" class="form-label">프로필 사진</label>
+			  <input class="form-control" type="file" id="formFile">
 			</div>
 			
 			<hr class="my-3">
-
+			
 			<button class="w-100 btn btn-primary btn-lg" type="submit">회원정보 수정</button>
 		</form>
 	</div>

@@ -35,7 +35,7 @@
 					</a>
 				</li>
 				<li>
-					<a href="/mypage/managing-reply" class="nav-link link-dark">
+					<a href="/mypage/managing-reply" class="nav-link active">
 						<svg class="bi me-2" width="16" height="16"><use xlink:href="#"></use></svg>
 						댓글 보기
 					</a>

@@ -25,17 +25,17 @@
 	
 	<div class="container" style="display: flex;">
 		<div class="d-flex flex-column flex-shrink-0 p-3 bg-light" style="width: 280px;">
-		    <span class="fs-4">내 정보</span>
+		    <span class="fs-4">회원정보</span>
 		    <hr>
 		    <ul class="nav nav-pills flex-column mb-auto">
 		      <li class="nav-item">
-		        <a href="#" class="nav-link active" aria-current="page">
+		        <a href="/mypage/my-info" class="nav-link active">
 		          <svg class="bi me-2" width="16" height="16"><use xlink:href="#"></use></svg>
 		          회원정보 보기
 		        </a>
 		      </li>
 		      <li>
-		        <a href="#" class="nav-link link-dark">
+		        <a href="/mypage/modify-info" class="nav-link link-dark">
 		          <svg class="bi me-2" width="16" height="16"><use xlink:href="#"></use></svg>
 		          회원정보 수정
 		        </a>

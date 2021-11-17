@@ -28,4 +28,7 @@ public class MypageController {
 	
 	@GetMapping("modify-info")
 	public void modifyInfo() {}
+	
+	@GetMapping("vaccination")
+	public void vaccination() {}
 }

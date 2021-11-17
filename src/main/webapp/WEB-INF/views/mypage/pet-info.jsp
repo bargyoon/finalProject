@@ -29,13 +29,13 @@
 		    <hr>
 		    <ul class="nav nav-pills flex-column mb-auto">
 		      <li class="nav-item">
-		        <a href="#" class="nav-link active" aria-current="page">
+		        <a href="/mypage/pet-info" class="nav-link active">
 		          <svg class="bi me-2" width="16" height="16"><use xlink:href="#home"></use></svg>
 		          애완동물 목록
 		        </a>
 		      </li>
 		      <li>
-		        <a href="#" class="nav-link link-dark">
+		        <a href="/mypage/registration-pet" class="nav-link link-dark">
 		          <svg class="bi me-2" width="16" height="16"><use xlink:href="#speedometer2"></use></svg>
 		          애완동물 등록
 		        </a>

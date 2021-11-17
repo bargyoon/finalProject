@@ -29,7 +29,7 @@
 			<hr>
 			<ul class="nav nav-pills flex-column mb-auto">
 				<li class="nav-item">
-					<a href="/mypage/managing-board" class="nav-link link-dark">
+					<a href="/mypage/managing-board" class="nav-link active">
 						<svg class="bi me-2" width="16" height="16"><use xlink:href="#"></use></svg>
 						게시글 보기
 					</a>
