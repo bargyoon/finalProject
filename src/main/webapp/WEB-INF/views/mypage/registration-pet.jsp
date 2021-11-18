@@ -88,7 +88,7 @@
 			
 			<hr class="my-3">
 
-			<button class="w-100 btn btn-primary btn-lg" type="submit">애완동물 등록</button>
+			<button class="w-100 btn btn-primary btn-lg" type="submit">펫 등록</button>
 		</form>
 	</div>
 </section>

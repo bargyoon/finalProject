@@ -35,7 +35,7 @@
 			<span class="fs-4">회원정보</span>
 			<hr>
 			<ul class="nav nav-pills flex-column mb-auto">
-				<li><a href="/mypage/my-info" class="nav-link">회원정보</a></li>
+				<li><a href="/mypage/my-info" class="nav-link">내 정보</a></li>
 				<li><a href="/mypage/modify-info" class="nav-link active">회원정보 수정</a></li>
 			</ul>
 		</nav>
