@@ -100,10 +100,18 @@
                     </div>
                 </div>
             </div>
-        </section>
-
-        
-        <!-- Bootstrap core JS-->
+        </section> 
+    </body>
+    <footer>
+	    <a>Creators : 똑Dog한 집사들</a><br>
+		<a>Tel : 070-1111-1111</a><br>
+		<a>Address : kh정보교육원 PClass </a><br>
+	    <a>Partners : 광고 | 마켓 업체 | 동물병원</a><br>
+    	<hr>
+    	COPYRIGHT (C) SMART BUTLERS , ALL RIGHTS RESERVED. SMART BUTLERS.CO.KR    
+    </footer>
+    
+      <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
         <!-- Core theme JS-->
         <script src="/resources/js/scripts.js"></script>
@@ -112,5 +120,4 @@
         <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
         <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
         <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
-    </body>
 </html>

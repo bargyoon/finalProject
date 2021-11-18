@@ -8,8 +8,7 @@
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 <link rel="stylesheet" href="/resources/css/member/login.css">
-<script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
-
+<!-- <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>-->
 </head>
 <body>
 	<div class="sidenav">
@@ -19,9 +18,8 @@
          </div>
       </div>
       <div class="main">
-         <div class="col-md-6 col-sm-12">
-         
-            <div class="join-form">
+         <div class="col-md-6 col-sm-12">         
+            <div class="login-form">
                <form action="/member/login" method="post">
                	  <div id=page-logo><img src="/resources/assets/img/dog-and-cat-yellow.png" alt="..." /></div><br><hr>
                   <div class="form-group">

@@ -10,8 +10,7 @@
 <link rel="stylesheet" href="/resources/css/member/login.css">
 <style type="text/css">
 @media screen and (min-width: 768px){   
-    .login-form{
-        margin-top: 30%;
+    .register-form{
         margin-bottom: 10%
     }
 }
@@ -29,7 +28,7 @@
       </div>
       <div class="main">
          <div class="col-md-6 col-sm-12">
-            <div class="login-form">
+            <div class="register-form">
                <form>
                 <div id=page-logo><img src="/resources/assets/img/dog-and-cat-yellow.png" alt="..." /></div><br><hr>
                <h4>서비스 이용약관</h4>

@@ -6,7 +6,7 @@
 
 
 body {
-    font-family: 'SB Window Font';
+    font-family: 'Noto Sans KR';
 }
 
 .main-head{
@@ -79,7 +79,6 @@ body {
 
 .btn-black{
     background-color: #f0ead5;
-    color: #fff;
 }
 .btn-gray{
     background-color: #21252961;
