@@ -100,6 +100,25 @@
                     </div>
                 </div>
             </div>
+        </section>        
+        <!-- Board -->
+        <section class="page-section" id="board">
+            <div class="container">
+                <div class="row text-center">
+                    <div class="board-in-main">
+                        <h2 class="my-3">강아지 게시판</h2>
+                        <div class=board-list-in-main>
+                        	게시판 코드 따 올 예정
+                        </div>
+                    </div>
+                    <div class="board-in-main">
+                        <h2 class="my-3">고양이 게시판</h2>
+                         <div class=board-list-in-main>
+                        	게시판 코드 따 올 예정
+                        </div>
+                    </div>
+                </div>
+            </div>
         </section> 
     </body>
     <footer>

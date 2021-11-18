@@ -1210,6 +1210,15 @@ progress {
     width: 16.6666666667%;
   }
 
+  .board-in-main {
+  	border: 0.1px solid lightgray;
+    flex: 0 0 auto;
+    width: 50%;
+  }
+  .board-list-in-main{
+  	height: 500px !important;
+  }
+
   .col-md-auto {
     flex: 0 0 auto;
     width: auto;
