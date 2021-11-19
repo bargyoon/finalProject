@@ -21,9 +21,12 @@
     font-style: normal;
 }
 
-body{
-    font-family: 'SBAggroL';
+@import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
+
+.notosanskr * { 
+    font-family: 'Noto Sans KR', sans-serif;
 }
+
 
 .ft-SBAggroM{
     font-family: 'SBAggroM';
@@ -31,4 +34,71 @@ body{
 
 .ft-SBAggroB{
     font-family: 'SBAggroB';
+}
+
+body{
+    font-family: 'Noto Sans KR';
+}
+
+nav{
+    font-family: 'SBAggroL';
+}
+
+header{
+    font-family: 'SBAggroL';
+}
+
+aside{
+    font-family: 'SBAggroL';
+}
+
+ul{
+    font-family: 'SBAggroL';
+}
+
+textarea{
+    font-family: 'Noto Sans KR';
+}
+
+label{
+    font-family: 'SBAggroL';
+}
+
+p{
+    font-family: 'SBAggroL';
+}
+
+.enquiy-answer{
+    font-family: 'Noto Sans KR';
+}
+
+.faq-answer p{
+    font-family: 'Noto Sans KR' !important;
+}
+
+.simple-table *{
+    font-family: 'Noto Sans KR' !important;
+}
+
+.category-title {
+    font-family: 'SBAggroL';
+}
+
+.prd-option{
+    font-family: 'SBAggroL';
+}
+
+#prd-total-price{
+    font-family: 'SBAggroL';
+}
+
+#focus-q{
+    font-family: 'SBAggroL';
+}
+.buy-btns{
+    font-family: 'SBAggroL';
+}
+
+.review-content-text{
+    font-family: 'Noto Sans KR' !important;
 }
