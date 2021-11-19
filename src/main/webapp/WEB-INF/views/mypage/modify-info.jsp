@@ -9,11 +9,7 @@
 	integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" 
 	crossorigin="anonymous">
 <link href="/resources/css/styles.css" rel="stylesheet">
-<style type="text/css">
-	.nav-link{
-		color: black;
-	}
-</style>
+<link href="/resources/css/mypage/font.css" rel="stylesheet">
 </head>
 <body>
 
@@ -40,44 +36,47 @@
 			</ul>
 		</nav>
 		
-		<form class="needs-validation" novalidate="" style="margin: 0 auto; width: 400px;">
-			<div class="form-floating mb-3">
-				<input type="password" class="form-control" id="password" placeholder="1" value="">
-				<label for="password" class="form-label">비밀번호</label>
-				<div class="invalid-feedback">비밀번호 양식에 맞게 입력해주세요</div>
-			</div>
-
-			<div class="form-floating mb-3">
-				<input type="password" class="form-control" id="password2" placeholder="1" value="">
-				<label for="password2" class="form-label">비밀번호 확인</label>
-				<div class="invalid-feedback">비밀번호가 맞지 않습니다</div>
-			</div>
-
-			<div class="form-floating mb-3">
-				<input type="text" class="form-control" id="nickname" placeholder="1" value="">
-				<label for="nickname" class="form-label">닉네임</label>
-			</div>
-
-			<div class="form-floating mb-3">
-				<input type="text" class="form-control" id="address" placeholder="주소를 입력하세요">
-				<input type="text" class="form-control" id="address" placeholder="1" value="">
-				<label for="address" class="form-label">주소</label>
-			</div>
+		<div style="margin: 0 auto;">
+			<form class="needs-validation" novalidate="" style="margin: 0 auto; width: 400px;">
 			
-			<div class="form-floating mb-3">
-				<textarea class="form-control" id="info" placeholder="1"></textarea>
-				<label for="detail" class="form-label">자기소개</label>
-			</div>
-			
-			<div class="mb-3">
-			  <label for="formFile" class="form-label">프로필 사진</label>
-			  <input class="form-control" type="file" id="formFile">
-			</div>
-			
-			<hr class="my-3">
-			
-			<button class="w-100 btn btn-primary btn-lg" type="submit">회원정보 수정</button>
-		</form>
+				<div class="form-floating mb-3">
+					<input type="text" class="form-control" id="nickname" placeholder="1" value="">
+					<label for="nickname" class="form-label">닉네임</label>
+				</div>
+	
+				<div class="form-floating mb-3">
+					<input type="password" class="form-control" id="password" placeholder="1" value="">
+					<label for="password" class="form-label">비밀번호</label>
+					<div class="invalid-feedback">비밀번호 양식에 맞게 입력해주세요</div>
+				</div>
+	
+				<div class="form-floating mb-3">
+					<input type="password" class="form-control" id="password2" placeholder="1" value="">
+					<label for="password2" class="form-label">비밀번호 확인</label>
+					<div class="invalid-feedback">비밀번호가 맞지 않습니다</div>
+				</div>
+	
+				<div class="form-floating mb-3">
+					<input type="text" class="form-control" id="address" placeholder="주소를 입력하세요">
+					<input type="text" class="form-control" id="address" placeholder="1" value="">
+					<label for="address" class="form-label">주소</label>
+				</div>
+				
+				<div class="form-floating mb-3">
+					<textarea class="form-control" id="info" placeholder="1"></textarea>
+					<label for="detail" class="form-label">자기소개</label>
+				</div>
+				
+				<div class="mb-3">
+				  <label for="formFile" class="form-label">프로필 사진</label>
+				  <input class="form-control" type="file" id="formFile">
+				</div>
+				
+				<hr class="my-3">
+				
+				<button class="w-100 btn btn-primary btn-lg" type="submit">회원정보 수정</button>
+			</form>
+		</div>
 	</div>
 </section>
 	

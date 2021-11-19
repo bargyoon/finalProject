@@ -9,11 +9,7 @@
 	integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" 
 	crossorigin="anonymous">
 <link href="/resources/css/styles.css" rel="stylesheet">
-<style type="text/css">
-	.nav-link{
-		color: black;
-	}
-</style>
+<link href="/resources/css/mypage/font.css" rel="stylesheet">
 </head>
 <body>
 
@@ -39,7 +35,8 @@
 		    </ul>
 		</nav>
 		
-		
+		<div style="margin: 0 auto; width: 800px">
+		</div>
 	</div>
 </section>
 
