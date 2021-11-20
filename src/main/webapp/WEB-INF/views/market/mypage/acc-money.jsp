@@ -79,17 +79,15 @@
 			<table class="simple-table">
 				<colgroup>
 					<col style="width: 10%;">
-					<col style="width: 10%;">
+					<col style="width: 17%;">
 					<col style="width: auto;">
-					<col style="width: 20%;">
-					<col style="width: 20%;">
+					<col style="width: 23%;">
 				</colgroup>
 				<thead>
 					<tr>
 						<td>상태</td>
 						<td>적립금</td>
 						<td>적립 내용</td>
-						<td>주문번호</td>
 						<td>적용 일시</td>
 					</tr>
 				</thead>
@@ -103,14 +101,12 @@
 								<li class="acc-prd">상품명</li>
 							</ul>
 						</td>
-						<td class="acc-order-num">202112250935011010</td>
 						<td class="acc-date">2021.12.25</td>
 					</tr>
 					<tr>
 						<td class="acc-state">사용</td>
 						<td class="acc-amount">-2,500</td>
 						<td class="acc-context">적립금 결제</td>
-						<td class="acc-order-num">202112250935011010</td>
 						<td class="acc-date">2021.12.25</td>
 					</tr>
 					<tr>
@@ -122,7 +118,6 @@
 								<li class="acc-prd">상품명</li>
 							</ul>
 						</td>
-						<td class="acc-order-num">202112250935011010</td>
 						<td class="acc-date">2021.12.25</td>
 					</tr>
 					<tr>
@@ -134,7 +129,6 @@
 								<li class="acc-prd">상품명</li>
 							</ul>
 						</td>
-						<td class="acc-order-num">202112250935011010</td>
 						<td class="acc-date">2021.12.25</td>
 					</tr>
 					<tr>
@@ -146,7 +140,6 @@
 								<li class="acc-prd">상품명</li>
 							</ul>
 						</td>
-						<td class="acc-order-num">202112250935011010</td>
 						<td class="acc-date">2021.12.25</td>
 					</tr>
 				</tbody>
