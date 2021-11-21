@@ -1,5 +1,7 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html lang="en-US" dir="ltr">
+<html>
 
   <head>
     <meta charset="utf-8">
@@ -16,12 +18,12 @@
     <!-- ===============================================-->
     <!--    Favicons-->
     <!-- ===============================================-->
-    <link rel="apple-touch-icon" sizes="180x180" href="/src/main/webapp/resources/img/favicons/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/src/main/webapp/resources/img/favicons/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/src/main/webapp/resources/img/favicons/favicon-16x16.png">
-    <link rel="shortcut icon" type="image/x-icon" href="/src/main/webapp/resources/img/favicons/favicon.ico">
-    <link rel="manifest" href="/src/main/webapp/resources/img/favicons/manifest.json">
-    <meta name="msapplication-TileImage" content="/src/main/webapp/resources/img/favicons/mstile-150x150.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/resources/img/favicons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/resources/img/favicons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/resources/img/favicons/favicon-16x16.png">
+    <link rel="shortcut icon" type="image/x-icon" href="/resources/img/favicons/favicon.ico">
+    <link rel="manifest" href="/resources/img/favicons/manifest.json">
+    <meta name="msapplication-TileImage" content="/resources/img/favicons/mstile-150x150.png">
     <meta name="theme-color" content="#ffffff">
 
 
@@ -29,7 +31,7 @@
     <!--    Stylesheets-->
     <!-- ===============================================-->
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v2.1.9/css/unicons.css">
-    <link href="/src/main/webapp/resources/css/price/theme.css" rel="stylesheet" />
+    <link href="/resources/css/price/theme.css" rel="stylesheet" />
 
   </head>
 
@@ -41,7 +43,7 @@
     <!-- ===============================================-->
     <main class="main" id="top">
       <nav class="navbar navbar-expand-lg navbar-light fixed-top py-3 backdrop" data-navbar-on-scroll="data-navbar-on-scroll">
-        <div class="container"><a class="navbar-brand d-flex align-items-center fw-semi-bold fs-3" href="#"> <img class="me-3" src="/src/main/webapp/resources/img/gallery/logo.png" alt="" />
+        <div class="container"><a class="navbar-brand d-flex align-items-center fw-semi-bold fs-3" href="#"> <img class="me-3" src="/resources/img/gallery/logo.png" alt="" />
             <div class="text-primary font-base">똑DOG한 집사들</div>
           </a>
           <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
@@ -65,7 +67,7 @@
       </nav>
      
         <div class="container-fluid mt-7">
-          <div ><img src="/src/main/webapp/resources/img/price/bg.jpg" style="max-height: 450px; width:100%;"></div>
+          <div ><img src="/resources/img/price/bg.jpg" style="max-height: 450px; width:100%;"></div>
         </div>
     
 
@@ -90,88 +92,88 @@
                       </div>
                       <div class="row" >
                         <a class="col-sm-3 col-lg-3 mb-4 mb-lg-0 text-center">
-                          <div class="px-0 px-lg-3"><img class="img-fluid mb-4" src="/src/main/webapp/resources/img/price/강아지비용/건강검진.png" width="100" alt="..." />
+                          <div class="px-0 px-lg-3"><img class="img-fluid mb-4" src="/resources/img/price/강아지비용/건강검진.png" width="100" alt="..." />
                             <h3 class="h5 mb-4 font-base">건강검진</h3>
                           </div>
                         </a>
                         <a class="col-sm-3 col-lg-3 mb-4 mb-lg-0 text-center">
-                          <div class="px-0 px-lg-3"><img class="img-fluid mb-4" src="/src/main/webapp/resources/img/price/강아지비용/경계성종양.png" width="100" alt="..." />
+                          <div class="px-0 px-lg-3"><img class="img-fluid mb-4" src="/resources/img/price/강아지비용/경계성종양.png" width="100" alt="..." />
                             <h3 class="h5 mb-4 font-base">경계성종양</h3>
                           </div>
                         </a>
                         <a class="col-sm-3 col-lg-3 mb-4 mb-lg-0 text-center">
-                          <div class="px-0 px-lg-3"><img class="img-fluid mb-4" src="/src/main/webapp/resources/img/price/강아지비용/골절.png" width="100" alt="..." />
+                          <div class="px-0 px-lg-3"><img class="img-fluid mb-4" src="/resources/img/price/강아지비용/골절.png" width="100" alt="..." />
                             <h3 class="h5 mb-4 font-base">골절</h3>
                           </div>
                         </a>
                         <a class="col-sm-3 col-lg-3 mb-4 mb-lg-0 text-center">
-                          <div class="px-0 px-lg-3"><img class="img-fluid mb-4" src="/src/main/webapp/resources/img/price/강아지비용/디스크.png" width="100" alt="..." />
+                          <div class="px-0 px-lg-3"><img class="img-fluid mb-4" src="/resources/img/price/강아지비용/디스크.png" width="100" alt="..." />
                             <h3 class="h5 mb-4 font-base">디스크</h3>
                           </div>
                         </a>
                       </div>
                       <div class="row">
                         <div class="col-sm-3 col-lg-3 mb-4 mb-lg-0 text-center">
-                          <div class="px-0 px-lg-3"><img class="img-fluid mb-4" src="/src/main/webapp/resources/img/price/강아지비용/슬개골탈구.png" width="100" alt="..." />
+                          <div class="px-0 px-lg-3"><img class="img-fluid mb-4" src="/resources/img/price/강아지비용/슬개골탈구.png" width="100" alt="..." />
                             <h3 class="h5 mb-4 font-base">슬개골탈구</h3>
                           </div>
                         </div>
                         <div class="col-sm-3 col-lg-3 mb-4 mb-lg-0 text-center">
-                          <div class="px-0 px-lg-3"><img class="img-fluid mb-4" src="/src/main/webapp/resources/img/price/강아지비용/요도방광결석.png" width="100" alt="..." />
+                          <div class="px-0 px-lg-3"><img class="img-fluid mb-4" src="/resources/img/price/강아지비용/요도방광결석.png" width="100" alt="..." />
                             <h3 class="h5 mb-4 font-base">요도방광결석</h3>
                           </div>
                         </div>
                         <div class="col-sm-3 col-lg-3 mb-4 mb-lg-0 text-center">
-                          <div class="px-0 px-lg-3"><img class="img-fluid mb-4" src="/src/main/webapp/resources/img/price/강아지비용/유선종양.png" width="100" alt="..." />
+                          <div class="px-0 px-lg-3"><img class="img-fluid mb-4" src="/resources/img/price/강아지비용/유선종양.png" width="100" alt="..." />
                             <h3 class="h5 mb-4 font-base">유선종양</h3>
                           </div>
                         </div>
                         <div class="col-sm-3 col-lg-3 mb-4 mb-lg-0 text-center">
-                          <div class="px-0 px-lg-3"><img class="img-fluid mb-4" src="/src/main/webapp/resources/img/price/강아지비용/자궁축농증.png" width="100" alt="..." />
+                          <div class="px-0 px-lg-3"><img class="img-fluid mb-4" src="/resources/img/price/강아지비용/자궁축농증.png" width="100" alt="..." />
                             <h3 class="h5 mb-4 font-base">자궁축농증</h3>
                           </div>
                         </div>
                       </div>
                       <div class="row">
                         <div class="col-sm-3 col-lg-3 mb-4 mb-lg-0 text-center">
-                          <div class="px-0 px-lg-3"><img class="img-fluid mb-4" src="/src/main/webapp/resources/img/price/강아지비용/종양.png" width="100" alt="..." />
+                          <div class="px-0 px-lg-3"><img class="img-fluid mb-4" src="/resources/img/price/강아지비용/종양.png" width="100" alt="..." />
                             <h3 class="h5 mb-4 font-base">종양</h3>
                           </div>
                         </div>
                         <div class="col-sm-3 col-lg-3 mb-4 mb-lg-0 text-center">
-                          <div class="px-0 px-lg-3"><img class="img-fluid mb-4" src="/src/main/webapp/resources/img/price/강아지비용/중성화.png" width="100" alt="..." />
+                          <div class="px-0 px-lg-3"><img class="img-fluid mb-4" src="/resources/img/price/강아지비용/중성화.png" width="100" alt="..." />
                             <h3 class="h5 mb-4 font-base">중성화</h3>
                           </div>
                         </div>
                         <div class="col-sm-3 col-lg-3 mb-4 mb-lg-0 text-center">
-                          <div class="px-0 px-lg-3"><img class="img-fluid mb-4" src="/src/main/webapp/resources/img/price/강아지비용/체리아이.png" width="100" alt="..." />
+                          <div class="px-0 px-lg-3"><img class="img-fluid mb-4" src="/resources/img/price/강아지비용/체리아이.png" width="100" alt="..." />
                             <h3 class="h5 mb-4 font-base">체리아이</h3>
                           </div>
                         </div>
                         <div class="col-sm-3 col-lg-3 mb-4 mb-lg-0 text-center">
-                          <div class="px-0 px-lg-3"><img class="img-fluid mb-4" src="/src/main/webapp/resources/img/price/강아지비용/탈장.png" width="100" alt="..." />
+                          <div class="px-0 px-lg-3"><img class="img-fluid mb-4" src="/resources/img/price/강아지비용/탈장.png" width="100" alt="..." />
                             <h3 class="h5 mb-4 font-base">탈장</h3>
                           </div>
                         </div>
                       </div>
                       <div class="row">
                         <div class="col-sm-3 col-lg-3 mb-4 mb-lg-0 text-center">
-                          <div class="px-0 px-lg-3"><img class="img-fluid mb-4" src="/src/main/webapp/resources/img/price/강아지비용/항문낭제거.png" width="100" alt="..." />
+                          <div class="px-0 px-lg-3"><img class="img-fluid mb-4" src="/resources/img/price/강아지비용/항문낭제거.png" width="100" alt="..." />
                             <h3 class="h5 mb-4 font-base">항문낭제거</h3>
                           </div>
                         </div>
                         <div class="col-sm-3 col-lg-3 mb-4 mb-lg-0 text-center">
-                          <div class="px-0 px-lg-3"><img class="img-fluid mb-4" src="/src/main/webapp/resources/img/price/강아지비용/CT.png" width="100" alt="..." />
+                          <div class="px-0 px-lg-3"><img class="img-fluid mb-4" src="/resources/img/price/강아지비용/CT.png" width="100" alt="..." />
                             <h3 class="h5 mb-4 font-base">CT</h3>
                           </div>
                         </div>
                         <div class="col-sm-3 col-lg-3 mb-4 mb-lg-0 text-center">
-                          <div class="px-0 px-lg-3"><img class="img-fluid mb-4" src="/src/main/webapp/resources/img/price/강아지비용/MRI.png" width="100" alt="..." />
+                          <div class="px-0 px-lg-3"><img class="img-fluid mb-4" src="/resources/img/price/강아지비용/MRI.png" width="100" alt="..." />
                             <h3 class="h5 mb-4 font-base">MRI</h3>
                           </div>
                         </div>
                         <div class="col-sm-3 col-lg-3 mb-4 mb-lg-0 text-center">
-                          <div class="px-0 px-lg-3"><img class="img-fluid mb-4" src="/src/main/webapp/resources/img/price/강아지비용/XRAY.png" width="100" alt="..." />
+                          <div class="px-0 px-lg-3"><img class="img-fluid mb-4" src="/resources/img/price/강아지비용/XRAY.png" width="100" alt="..." />
                             <h3 class="h5 mb-4 font-base">XRAY</h3>
                           </div>
                         </div>
@@ -191,22 +193,22 @@
                       </div>
                       <div class="row">
                         <div class="col-sm-3 col-lg-3 mb-4 mb-lg-0 text-center">
-                          <div class="px-0 px-lg-3"><img class="img-fluid mb-4" src="/src/main/webapp/resources/img/price/고양이비용/건강검진2.png" width="100" alt="..." />
+                          <div class="px-0 px-lg-3"><img class="img-fluid mb-4" src="/resources/img/price/고양이비용/건강검진2.png" width="100" alt="..." />
                             <h3 class="h5 mb-4 font-base">건강검진</h3>
                           </div>
                         </div>
                         <div class="col-sm-3 col-lg-3 mb-4 mb-lg-0 text-center">
-                          <div class="px-0 px-lg-3"><img class="img-fluid mb-4" src="/src/main/webapp/resources/img/price/고양이비용/경계성종양2.png" width="100" alt="..." />
+                          <div class="px-0 px-lg-3"><img class="img-fluid mb-4" src="/resources/img/price/고양이비용/경계성종양2.png" width="100" alt="..." />
                             <h3 class="h5 mb-4 font-base">경계성종양</h3>
                           </div>
                         </div>
                         <div class="col-sm-3 col-lg-3 mb-4 mb-lg-0 text-center">
-                          <div class="px-0 px-lg-3"><img class="img-fluid mb-4" src="/src/main/webapp/resources/img/price/고양이비용/발치.png" width="100" alt="..." />
+                          <div class="px-0 px-lg-3"><img class="img-fluid mb-4" src="/resources/img/price/고양이비용/발치.png" width="100" alt="..." />
                             <h3 class="h5 mb-4 font-base">고양이전발치</h3>
                           </div>
                         </div>
                         <div class="col-sm-3 col-lg-3 mb-4 mb-lg-0 text-center">
-                          <div class="px-0 px-lg-3"><img class="img-fluid mb-4" src="/src/main/webapp/resources/img/price/고양이비용/골절2.png" width="100" alt="..." />
+                          <div class="px-0 px-lg-3"><img class="img-fluid mb-4" src="/resources/img/price/고양이비용/골절2.png" width="100" alt="..." />
                             <h3 class="h5 mb-4 font-base">골절</h3>
                           </div>
                         </div>
@@ -214,22 +216,22 @@
                       </div>
                       <div class="row">
                         <div class="col-sm-3 col-lg-3 mb-4 mb-lg-0 text-center">
-                          <div class="px-0 px-lg-3"><img class="img-fluid mb-4" src="/src/main/webapp/resources/img/price/고양이비용/스케일링.png" width="100" alt="..." />
+                          <div class="px-0 px-lg-3"><img class="img-fluid mb-4" src="/resources/img/price/고양이비용/스케일링.png" width="100" alt="..." />
                             <h3 class="h5 mb-4 font-base">스케일링</h3>
                           </div>
                         </div>
                         <div class="col-sm-3 col-lg-3 mb-4 mb-lg-0 text-center">
-                          <div class="px-0 px-lg-3"><img class="img-fluid mb-4" src="/src/main/webapp/resources/img/price/고양이비용/심장질환.png" width="100" alt="..." />
+                          <div class="px-0 px-lg-3"><img class="img-fluid mb-4" src="/resources/img/price/고양이비용/심장질환.png" width="100" alt="..." />
                             <h3 class="h5 mb-4 font-base">심장질환</h3>
                           </div>
                         </div>
                         <div class="col-sm-3 col-lg-3 mb-4 mb-lg-0 text-center">
-                          <div class="px-0 px-lg-3"><img class="img-fluid mb-4" src="/src/main/webapp/resources/img/price/고양이비용/안구적출술.png" width="100" alt="..." />
+                          <div class="px-0 px-lg-3"><img class="img-fluid mb-4" src="/resources/img/price/고양이비용/안구적출술.png" width="100" alt="..." />
                             <h3 class="h5 mb-4 font-base">안구적출술</h3>
                           </div>
                         </div>
                         <div class="col-sm-3 col-lg-3 mb-4 mb-lg-0 text-center">
-                          <div class="px-0 px-lg-3"><img class="img-fluid mb-4" src="/src/main/webapp/resources/img/price/고양이비용/외이도염.png" width="100" alt="..." />
+                          <div class="px-0 px-lg-3"><img class="img-fluid mb-4" src="/resources/img/price/고양이비용/외이도염.png" width="100" alt="..." />
                             <h3 class="h5 mb-4 font-base">외이도염</h3>
                           </div>
                         </div>
@@ -237,22 +239,22 @@
                       </div>
                       <div class="row">
                         <div class="col-sm-3 col-lg-3 mb-4 mb-lg-0 text-center">
-                          <div class="px-0 px-lg-3"><img class="img-fluid mb-4" src="/src/main/webapp/resources/img/price/고양이비용/요도방광결석2.png" width="100" alt="..." />
+                          <div class="px-0 px-lg-3"><img class="img-fluid mb-4" src="/resources/img/price/고양이비용/요도방광결석2.png" width="100" alt="..." />
                             <h3 class="h5 mb-4 font-base">요도방광결석</h3>
                           </div>
                         </div>
                         <div class="col-sm-3 col-lg-3 mb-4 mb-lg-0 text-center">
-                          <div class="px-0 px-lg-3"><img class="img-fluid mb-4" src="/src/main/webapp/resources/img/price/고양이비용/유선종양2.png" width="100" alt="..." />
+                          <div class="px-0 px-lg-3"><img class="img-fluid mb-4" src="/resources/img/price/고양이비용/유선종양2.png" width="100" alt="..." />
                             <h3 class="h5 mb-4 font-base">유선종양</h3>
                           </div>
                         </div>
                         <div class="col-sm-3 col-lg-3 mb-4 mb-lg-0 text-center">
-                          <div class="px-0 px-lg-3"><img class="img-fluid mb-4" src="/src/main/webapp/resources/img/price/고양이비용/자궁축농증2.png" width="100" alt="..." />
+                          <div class="px-0 px-lg-3"><img class="img-fluid mb-4" src="/resources/img/price/고양이비용/자궁축농증2.png" width="100" alt="..." />
                             <h3 class="h5 mb-4 font-base">자궁축농증</h3>
                           </div>
                         </div>
                         <div class="col-sm-3 col-lg-3 mb-4 mb-lg-0 text-center">
-                          <div class="px-0 px-lg-3"><img class="img-fluid mb-4" src="/src/main/webapp/resources/img/price/고양이비용/중성화2.png" width="100" alt="..." />
+                          <div class="px-0 px-lg-3"><img class="img-fluid mb-4" src="/resources/img/price/고양이비용/중성화2.png" width="100" alt="..." />
                             <h3 class="h5 mb-4 font-base">중성화</h3>
                           </div>
                         </div>
@@ -260,22 +262,22 @@
                       </div>
                       <div class="row">
                         <div class="col-sm-3 col-lg-3 mb-4 mb-lg-0 text-center">
-                          <div class="px-0 px-lg-3"><img class="img-fluid mb-4" src="/src/main/webapp/resources/img/price/고양이비용/항문낭제거2.png" width="100" alt="..." />
+                          <div class="px-0 px-lg-3"><img class="img-fluid mb-4" src="/resources/img/price/고양이비용/항문낭제거2.png" width="100" alt="..." />
                             <h3 class="h5 mb-4 font-base">항문낭제거</h3>
                           </div>
                         </div>
                         <div class="col-sm-3 col-lg-3 mb-4 mb-lg-0 text-center">
-                          <div class="px-0 px-lg-3"><img class="img-fluid mb-4" src="/src/main/webapp/resources/img/price/고양이비용/CT2.png" width="100" alt="..." />
+                          <div class="px-0 px-lg-3"><img class="img-fluid mb-4" src="/resources/img/price/고양이비용/CT2.png" width="100" alt="..." />
                             <h3 class="h5 mb-4 font-base">CT</h3>
                           </div>
                         </div>
                         <div class="col-sm-3 col-lg-3 mb-4 mb-lg-0 text-center">
-                          <div class="px-0 px-lg-3"><img class="img-fluid mb-4" src="/src/main/webapp/resources/img/price/고양이비용/MRI2.png" width="100" alt="..." />
+                          <div class="px-0 px-lg-3"><img class="img-fluid mb-4" src="/resources/img/price/고양이비용/MRI2.png" width="100" alt="..." />
                             <h3 class="h5 mb-4 font-base">MRI</h3>
                           </div>
                         </div>
                         <div class="col-sm-3 col-lg-3 mb-4 mb-lg-0 text-center">
-                          <div class="px-0 px-lg-3"><img class="img-fluid mb-4" src="/src/main/webapp/resources/img/price/고양이비용/X-RAY2.png" width="100" alt="..." />
+                          <div class="px-0 px-lg-3"><img class="img-fluid mb-4" src="/resources/img/price/고양이비용/X-RAY2.png" width="100" alt="..." />
                             <h3 class="h5 mb-4 font-base">X-RAY2</h3>
                           </div>
                         </div>
@@ -299,11 +301,9 @@
     <!-- ===============================================-->
     <!--    JavaScripts-->
     <!-- ===============================================-->
-    <script src="vendors/@popperjs/popper.min.js"></script>
-    <script src="vendors/bootstrap/bootstrap.min.js"></script>
-    <script src="vendors/is/is.min.js"></script>
+    
     <script src="https://polyfill.io/v3/polyfill.min.js?features=window.scroll"></script>
-    <script src="/src/main/webapp/resources/js/price/theme.js"></script>
+    <script src="/resources/js/price/theme.js"></script>
    
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
   </body>

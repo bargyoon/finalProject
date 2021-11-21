@@ -1,6 +1,7 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html lang="en-US" dir="ltr">
-
+<html>
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -98,7 +99,7 @@
                 <p class="pt-3 lh-lg">Your reading list is a good place to start, but you will be expected to read more widely too. Use Sevi to search for information on your topic, and to find books, journal articles and other materials in the Library.</p>
                 
               </div>
-            <div class="col-md-5 col-lg-5 text-xl-center"><img class="img-fluid mb-5 mb-md-0" src="assets/img/illustrations/our-libraries.png" width="620" alt="" /></div>
+            <div class="col-md-5 col-lg-5 text-xl-center"><img class="img-fluid mb-5 mb-md-0" src="/resources/img/price/강아지비용/건강검진.png" width="620" alt="" /></div>
             
           </div>
         </div>
