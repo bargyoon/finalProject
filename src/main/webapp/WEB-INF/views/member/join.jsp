@@ -202,19 +202,19 @@
 
                   <div class="form-group">
                      <label>아이디 </label>
-                     <input type="text" class="form-control" placeholder="아이디를 입력하세요">
+                     <input type="text" name="userId" id="userId" class="form-control" placeholder="아이디를 입력하세요">
                      <a class="btn btn-gray">check</a>
                   </div>
                   
                   <div class="form-group">
                      <label>닉네임 </label>
-                     <input type="text" class="form-control" placeholder="닉네임을 입력하세요">
+                     <input type="text" type="nickName" name="nickName" class="form-control" placeholder="닉네임을 입력하세요">
                      <a class="btn btn-gray">check</a>
                   </div>                 
                   
                   <div class="form-group">
                      <label>비밀번호 </label>
-                     <input type="password" class="form-control" placeholder="영어,숫자,특수문자 조합의 8글자 이상의 문자열입니다.">
+                     <input type="password" name="password" id="password" class="form-control" placeholder="영어,숫자,특수문자 조합의 8글자 이상의 문자열입니다.">
                   </div>
                   
                   <div class="form-group">
@@ -222,30 +222,29 @@
                      <input type="password" class="form-control" placeholder="비밀번호를 다시 한번 입력하세요">
                   </div>
                   
-                  <div class="form-group">
+                  <!-- <div class="form-group">
                      <label>이름 </label>
                      <input type="text" class="form-control" placeholder="이름을 입력하세요">
-                  </div>
+                  </div> -->
                   
                   <div class="form-group">
                      <label>이메일 </label>
-                     <input type="email" class="form-control" placeholder="이메일을 입력하세요">
+                     <input type="email" type="email" name="email" class="form-control" placeholder="이메일을 입력하세요">
                   </div>
                   
                    <div class="form-group">
                      <label>주소: </label>
-                     <input type="text" class="form-control" id="address" placeholder="주소를 입력하세요">
+                     <input type="text" name="address" id="address" class="form-control" id="address" placeholder="주소를 입력하세요">
                      <input type="text" class="form-control" placeholder="상세주소를 입력하세요">
-                  </div><br><hr>
-                  
-                  <a class="btn btn-black" style="width: 100%">가입하기</a>
+                  </div><br><hr>                  
+                  <input type="submit" class="btn btn-black" style="width: 100%" value="가입하기" />
                </form>
             </div>
          </div>
       </div>
 </form:form>
 
-<script type="text/javascript" src="/resources/js/member/joinForm.js"></script>
+<!-- <script type="text/javascript" src="/resources/js/member/joinForm.js"></script> -->
 
 <!-- 주소 api -->
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>

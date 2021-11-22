@@ -1,20 +1,14 @@
 package com.kh.spring.member.controller;
 
-import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCrypt;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
+
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.spring.member.model.dto.Member;
@@ -34,18 +28,26 @@ public class MemberController {
 	}
 	
 	@GetMapping("join")
-	public void joinForm(){}	
+	public void Join() {}
 	
-
-
+	@PostMapping("join")
+	public String joinImpl(Member member) {
 		
-	
-	@GetMapping("login")
-	public void loginget() {}
+		//System.out.println(member);
+		
+		//member.setPassword(new BCryptPasswordEncoder().encode(member.getPassword()));
+		// -> db에 비밀번호 안뜨게되서 불편하니 시연시에만 키는게 나을듯..?
+		
+		memberService.insertMember(member);
+		return "redirect:/";
+	}
 
+	@GetMapping("login")
+	public void login() {}
+	
 	@PostMapping("login")
-	public String loginpost(Member member, HttpSession session, RedirectAttributes redirectAttr) {
-		Member certifiedUser = memberService.loginUser(member);
+	public String loginImpl(Member member, HttpSession session, RedirectAttributes redirectAttr) {
+		Member certifiedUser = memberService.authenticateUser(member);
 		
 		if(certifiedUser == null) {
 			redirectAttr.addFlashAttribute("message", "아이디나 비밀번호가 틀렸습니다.");

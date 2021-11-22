@@ -31,9 +31,8 @@
                      <input type="password" class="form-control" placeholder="Password" name="password">
                   </div>
                   <c:if test="${not empty message}">
-					<span class='valid-msg' >${message}</span>	<!--  글씨 크기 키우기 -->
+					<span class='valid-msg' >${message}</span>
 				  </c:if><br>
-<!--                   <a class="btn btn-black" type="submit">로그인</a> -->
                   <button class="btn btn-black">로그인</button>
                   <a class="btn btn-secondary"  href='/member/join'>회원가입</a><br><br>
                   <a href='/member/check-id' style="color: gray">아이디 찾기  |  </a>

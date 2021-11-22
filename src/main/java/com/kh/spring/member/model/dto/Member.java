@@ -16,6 +16,7 @@ public class Member {
 	   private String address;
 	   private Date joinDate;
 	   private int isLeave;
+	   private String userName;
 	
 	   
 }

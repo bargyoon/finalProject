@@ -14,14 +14,20 @@ public class MemberServiceImpl implements MemberService{
 	private final MemberRepository memberRepository;
 	
 
-	public Member loginUser(Member member) {
+	public Member authenticateUser(Member member) {
 		
-		Member loginUser = memberRepository.loginUser(member);
-		if(loginUser != null) {
-			return loginUser;
+		Member storedMember = memberRepository.selectMemberByUserId(member);
+		if(storedMember != null) {
+			return storedMember;
 		}
 		
 		return null;
+	}
+	
+
+	public void insertMember(Member member) {
+		memberRepository.insertMember(member);
+		
 	}
 
 	/*

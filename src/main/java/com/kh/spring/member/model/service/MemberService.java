@@ -4,5 +4,7 @@ import com.kh.spring.member.model.dto.Member;
 
 public interface MemberService {
 
-	Member loginUser(Member member);
+	Member authenticateUser(Member member);
+
+	void insertMember (Member member);
 }
