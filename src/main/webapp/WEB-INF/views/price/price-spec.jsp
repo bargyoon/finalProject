@@ -8,15 +8,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
 
-    <!-- ===============================================-->
-    <!--    Document Title-->
-    <!-- ===============================================-->
-    <title>Sevi | Landing, Corporate &amp; Business Templatee</title>
+
+    <title>병원비 상세페이지</title>
 
 
-    <!-- ===============================================-->
-    <!--    Favicons-->
-    <!-- ===============================================-->
+  
     <link rel="apple-touch-icon" sizes="180x180" href="/resources/img/favicons/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/resources/img/favicons/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/resources/img/favicons/favicon-16x16.png">
@@ -115,9 +111,7 @@
 
 
 
-    <script src="vendors/@popperjs/popper.min.js"></script>
-    <script src="vendors/bootstrap/bootstrap.min.js"></script>
-    <script src="vendors/is/is.min.js"></script>
+ 
     <script src="https://polyfill.io/v3/polyfill.min.js?features=window.scroll"></script>
     <script src="/resources/js/theme.js"></script>
 

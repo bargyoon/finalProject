@@ -76,16 +76,16 @@
       <!-- <section> begin ============================-->
       <section>
         <div class="section pb-5 pt-5 pt-sm-2 text-center">
-          <div class="mb-0 pb-3 title"><span class="btn_dog">강아지 </span><span class="btn_cat">고양이</span></div>
+          <div class="mb-0 pb-3 title" style="min-height:60px"><span class="btn_dog">강아지 </span><span class="btn_cat">고양이</span></div>
                 <input class="checkbox" type="checkbox" id="reg-log" name="reg-log">
-                <label for="reg-log"></label>
-          <div class="card-3d-wrap mx-auto">
+                <label for="reg-log" style="padding-bottom:10px"></label>
+          <div class="card-3d-wrap mx-auto" style="margin-top:137px">
             <div class="card-3d-wrapper">
               <div class="card-front">
                 <div class="center-wrap">
                   <div class="section text-center">
                     <div class="container">
-                      <div class="row justify-content-center">
+                      <div class="row justify-content-center" style="min-height:136px">
                         <div class="col-auto mb-5 mb-md-7">
                           <h1 class="fw-semi-bold text-1100">강아지</span></h1>
                         </div>
@@ -186,8 +186,8 @@
                 <div class="center-wrap">
                   <div class="section text-center">
                     <div class="container">
-                      <div class="row justify-content-center">
-                        <div class="col-auto mb-5 mb-md-7">
+                      <div class="row justify-content-center" style="min-height:136px">
+                        <div class="col-auto mb-5 mb-md-7" >
                           <h1 class="fw-semi-bold text-1100">고양이</span></h1>
                         </div>
                       </div>
