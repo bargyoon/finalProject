@@ -332,11 +332,24 @@ input[type=checkbox]:checked + .like-btn{
     text-align: center;
 }
 
+.prd-enquiry-btn{
+    border: 1px solid steelblue;
+    background-color: white;
+    transform: translateY(50%);
+    color: steelblue;
+    font-size: 14px;
+}
+
+.prd-enquiry-btn:hover{
+    transition: 300ms;
+    color: white;
+    background-color: steelblue;
+}
+
 #focus-q{
     border: 0;
     font-size: 25px;
     font-weight: bold;
-    margin-top: 8rem;
     margin-bottom: 0;
 }
 

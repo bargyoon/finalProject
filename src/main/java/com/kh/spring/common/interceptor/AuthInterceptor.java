@@ -8,6 +8,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.web.servlet.HandlerInterceptor;
 
+import com.kh.spring.common.code.ErrorCode;
+import com.kh.spring.common.exception.HandlableException;
+import com.kh.spring.member.model.dto.Member;
+
 public class AuthInterceptor implements HandlerInterceptor {
 	
 	@Override
@@ -28,6 +32,9 @@ public class AuthInterceptor implements HandlerInterceptor {
 			case "board":
 				boardAuthorize(request, response, uriArr);
 				break;
+			case "market":
+				marketAuthorize(request, response, uriArr);
+				break;
 			default:
 				break;
 			}
@@ -38,6 +45,55 @@ public class AuthInterceptor implements HandlerInterceptor {
 		return true;
 	}
 	
+	private void marketAuthorize(HttpServletRequest request, HttpServletResponse response, String[] uriArr) {
+
+		Member member = (Member) request.getSession().getAttribute("authentication");
+		
+		switch (uriArr[2]) {
+		case "mypage":
+			if(member == null) {
+				throw new HandlableException(ErrorCode.UNAUTHORIZED_PAGE);
+			}
+			break;
+		case "shop":
+			shopAuthorize(request, response, uriArr);
+			break;
+		default:
+			break;
+		}
+		
+	}
+
+	private void shopAuthorize(HttpServletRequest request, HttpServletResponse response, String[] uriArr) {
+
+		Member member = (Member) request.getSession().getAttribute("authentication");
+		
+		switch (uriArr[3]) {
+		case "buy":
+			if(member == null) {
+				throw new HandlableException(ErrorCode.UNAUTHORIZED_PAGE);
+			}
+			break;
+		case "cart":
+			if(member == null) {
+				throw new HandlableException(ErrorCode.UNAUTHORIZED_PAGE);
+			}
+			break;
+		case "review":
+			if(member == null) {
+				throw new HandlableException(ErrorCode.UNAUTHORIZED_PAGE);
+			}
+			break;
+		case "qna":
+			if(member == null) {
+				throw new HandlableException(ErrorCode.UNAUTHORIZED_PAGE);
+			}
+			break;
+		default:
+			break;
+		}
+	}
+
 	private void boardAuthorize(HttpServletRequest httpRequest, HttpServletResponse httpResponse, String[] uriArr) throws IOException, ServletException{
 		
 	

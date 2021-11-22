@@ -397,7 +397,7 @@ tbody > tr:hover{
 .cart-del{
     display: flex;
     justify-content: space-between;
-    max-width: 8.2rem;
+    max-width: 9rem;
     font-size: 13px;
 }
 
@@ -443,7 +443,9 @@ tbody > tr:hover{
 .cart-total{
     display: flex;
     justify-content: space-around;
-    max-width: 80%;
+    width: 100%;
+    padding-left: 15rem;
+    padding-right: 15rem;
 }
 
 .cart-total > div {
@@ -460,6 +462,32 @@ tbody > tr:hover{
 .cart-total p{
     font-size: 1.2rem;
 }
+
+.cart-buy-btn{
+    border: 1px solid black;
+    margin-left: 43%;
+    background-color: black;
+    color: white;
+    padding-top: 0.8rem;
+    padding-bottom: 0.8rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    font-size: 20px;
+}
+
+.cart-buy-btn:hover{
+    border: 1px solid steelblue;
+    background-color: steelblue;
+    transition: 300ms;
+}
+
+
+
+
+
+
+
+
 
 
 
