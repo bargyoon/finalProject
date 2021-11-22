@@ -52,10 +52,14 @@
 			  <label for="floatingEmail">이메일</label>
 			</div>
 			
-			<div class="form-floating mb-3">
+			<div class="form-floating">
 			  <text class="form-control" id="floatingAddress">집주소1</text>
-			  <text class="form-control" id="">집주소2</text>
 			  <label for="floatingAddress">주소</label>
+			</div>
+			
+			<div class="form-floating mb-3">
+				<text class="form-control" id="floatingAddress2">집주소2</text>
+				<label for="floatingAddress2">상세주소</label>
 			</div>
 			
 			<div class="form-floating mb-3">

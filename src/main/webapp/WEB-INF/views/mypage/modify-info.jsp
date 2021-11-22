@@ -56,10 +56,14 @@
 					<div class="invalid-feedback">비밀번호가 맞지 않습니다</div>
 				</div>
 	
-				<div class="form-floating mb-3">
+				<div class="form-floating">
 					<input type="text" class="form-control" id="address" placeholder="주소를 입력하세요">
-					<input type="text" class="form-control" id="address" placeholder="1" value="">
 					<label for="address" class="form-label">주소</label>
+				</div>
+				
+				<div class="form-floating mb-3">
+					<input type="text" class="form-control" id="address2" placeholder="1">
+					<label for="address2" class="form-label">상세주소</label>
 				</div>
 				
 				<div class="form-floating mb-3">
