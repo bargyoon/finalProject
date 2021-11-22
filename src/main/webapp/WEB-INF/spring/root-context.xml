@@ -59,7 +59,7 @@
  		<property name="maxInMemorySize" value="5242880"/>
  		<property name="maxUploadSize" value="5242880"/>
  	</bean>
- 	
+ 
  	
  	<mybatis-spring:scan base-package="com.kh.spring" annotation="org.apache.ibatis.annotations.Mapper"/>
 	
