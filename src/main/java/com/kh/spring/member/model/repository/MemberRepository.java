@@ -9,12 +9,16 @@ import com.kh.spring.member.model.dto.Member;
 @Mapper
 public interface MemberRepository {
 
-	@Select("select * from member where user_id =#{userId} and password=#{password}")
+	@Select("select * from \"USER\" where user_id =#{userId} and password=#{password}")
 	Member selectMemberByUserId(Member member);
 
-	@Insert("insert into member(user_idx,user_id,password,nickName,email,address)"
-			+ "values(1000,#{userId},#{password},#{nickName},#{email},#{address})")
+	@Insert("insert all "
+			+ "into \"USER\"(user_id,password,nickName,email,address,user_name,user_idx) "
+			+ "values(#{userId},#{password},#{nickName},#{email},#{address},#{userName},sc_user_idx.nextval) "
+			+ "into \"ADDRESS\"(\"address\",user_idx) "
+			+ "values(#{address},sc_user_idx.nextval) "
+			+ "SELECT * FROM DUAL")
 	void insertMember(Member member);
-	//idx 시퀀스 적용 어케하더라.. 일단 중복 허용으로 둠..
+	
 	
 }

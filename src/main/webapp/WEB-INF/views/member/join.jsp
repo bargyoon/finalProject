@@ -222,10 +222,10 @@
                      <input type="password" class="form-control" placeholder="비밀번호를 다시 한번 입력하세요">
                   </div>
                   
-                  <!-- <div class="form-group">
+                  <div class="form-group">
                      <label>이름 </label>
-                     <input type="text" class="form-control" placeholder="이름을 입력하세요">
-                  </div> -->
+                     <input type="text" name="userName" id="userName" class="form-control" placeholder="이름을 입력하세요">
+                  </div>
                   
                   <div class="form-group">
                      <label>이메일 </label>
