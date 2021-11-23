@@ -26,7 +26,7 @@
     <!--    Stylesheets-->
     <!-- ===============================================-->
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v2.1.9/css/unicons.css">
-    <link href="/resources/css/price/theme.css" rel="stylesheet" />
+    <link href="/resources/css/disease/theme.css" rel="stylesheet" />
 
   </head>
 
@@ -76,7 +76,7 @@
              <div class="text-center">
                <div>여러분의 경험으로 병원비를 책정합니다</div>
                <br>
-                <button class="btn btn-lg rounded-pill" type="submit" style="background-color: black; color: white;">영수증 첨부 </button>
+                <button class="btn btn-lg rounded-pill" onclick="popup()" style="background-color: black; color: white;">영수증 첨부 </button>
               </div>
             </div>
           </div>
@@ -95,7 +95,7 @@
                 <p class="pt-3 lh-lg">Your reading list is a good place to start, but you will be expected to read more widely too. Use Sevi to search for information on your topic, and to find books, journal articles and other materials in the Library.</p>
                 
               </div>
-            <div class="col-md-5 col-lg-5 text-xl-center"><img class="img-fluid mb-5 mb-md-0" src="/resources/img/price/강아지비용/건강검진.png" width="620" alt="" /></div>
+            <div class="col-md-5 col-lg-5 text-xl-center"><img class="img-fluid mb-5 mb-md-0" src="/resources/img/disease/강아지비용/건강검진.png" width="620" alt="" /></div>
             
           </div>
         </div>
@@ -114,7 +114,14 @@
  
     <script src="https://polyfill.io/v3/polyfill.min.js?features=window.scroll"></script>
     <script src="/resources/js/theme.js"></script>
-
+<script>
+        function popup(){
+            var url = "http://localhost:9393/disease/price-popup";
+            var name = "popup test";
+            var option = "width = 500, height = 500, top = 100, left = 200, location = no"
+            window.open(url, name, option);
+        }
+    </script>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
   </body>
 

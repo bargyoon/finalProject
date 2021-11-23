@@ -1,4 +1,4 @@
-package com.kh.spring.price.controller;
+package com.kh.spring.disease.controller;
 
 import java.io.FileInputStream;
 import java.util.ArrayList;
@@ -20,8 +20,8 @@ import com.google.protobuf.ByteString;
 
 
 @Controller
-@RequestMapping("price")
-public class PriceController {
+@RequestMapping("disease")
+public class DiseaseController {
 	  
 
 	
@@ -64,6 +64,12 @@ public class PriceController {
 		
 	}
 	
-	@GetMapping("price-spec")
-	public void priceSpec() {}
+	@GetMapping("disease-spec")
+	public void diseaseSpec() {}
+	
+	@GetMapping("price-popup")
+	public void pricePopup() {}
+	
+	
+	
 }
