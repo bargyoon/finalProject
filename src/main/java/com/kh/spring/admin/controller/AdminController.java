@@ -1,18 +1,18 @@
 package com.kh.spring.admin.controller;
 
-import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.kh.spring.admin.model.service.AdminService;
-import com.kh.spring.board.model.service.BoardService;
 import com.kh.spring.disease.model.dto.Disease;
-import com.kh.spring.member.model.dto.Member;
+import com.kh.spring.market.model.dto.Order;
 
 import lombok.RequiredArgsConstructor;
 
@@ -56,7 +56,10 @@ public class AdminController {
 	public void commentList() {}
 	
 	@GetMapping("disease/disease-list")
-	public void priceList() {}
+	public void priceList(Model model) {
+		List<Map<String, Object>> commandList = adminService.selectDiseaseList();
+		model.addAttribute("datas",commandList);
+	}
 	
 	@GetMapping("disease/add-disease-spec")
 	public void addPriceSpec() {}
@@ -70,7 +73,8 @@ public class AdminController {
 		
 		adminService.insertDisease(disease, diseaseIcon);
 		
-		
+		Order order = new Order();
+		order.setOIdx(0);
 		return "redirect:/admin/disease/disease-list";
 	}
 	

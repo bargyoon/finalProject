@@ -96,40 +96,33 @@
 												<th scope="col">설명</th>
 												<th scope="col">가격</th>
 												<th scope="col">등록개수</th>
-
 												<th scope="col">종류</th>
 
 											</tr>
 										</thead>
 										<tbody class="customtable">
-											<tr>
+											<c:forEach items="${datas}" var="data" varStatus="status">
+												<tr>
 												<td><label class="mt-3"> <input type="checkbox"
-														class="listCheckbox" /> <span class="checkmark"></span>
+														class="listCheckbox" />
 												</label></td>
-												<td>01</td>
-												<td><a><img
-														src="https://cdn.imweb.me/thumbnail/20180305/5a9cea9e49044.png"></a>
+												<td>${status.index}</td>
+												<td><a><img style="height: 60px; widht: 60px;"
+														src="${data.files.downloadURL }"></a>
 
 												</td>
-												<td>10000원</td>
-												<td>4</td>
-												<td class="nav-item dropdown" href="" data-toggle="dropdown"
-													aria-haspopup="true" aria-expanded="false"><span>반품중</span><i
-													class="m-r-10 mdi mdi-chevron-down ml-2"> </i>
-													<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-														<a class="dropdown-item" href="#">Action</a> <a
-															class="dropdown-item" href="#">Another action</a>
-														<div class="dropdown-divider"></div>
-														<a class="dropdown-item" href="#">Something else here</a>
-													</div></td>
-
-												<td>4</td>
-												<td>4</td>
+												<td>${data.disease.name}</td>
+												<td>${data.disease.explain}</td>
+												<td>${data.disease.price}</td>
+												<td>${data.disease.count}</td>
+												<td>${data.disease.category}</td>
 
 											</tr>
+											</c:forEach>
+											
 											<tr>
 												<td><label class="mt-3"> <input type="checkbox"
-														class="listCheckbox" /> <span class="checkmark"></span>
+														class="listCheckbox" />
 												</label></td>
 												<td>02</td>
 												<td><a><img
@@ -154,7 +147,7 @@
 											</tr>
 											<tr>
 												<td><label class="mt-3"> <input type="checkbox"
-														class="listCheckbox" /> <span class="checkmark"></span>
+														class="listCheckbox" />
 												</label></td>
 												<td>03</td>
 												<td><a><img
@@ -180,7 +173,7 @@
 											</tr>
 											<tr>
 												<td><label class="mt-3"> <input type="checkbox"
-														class="listCheckbox" /> <span class="checkmark"></span>
+														class="listCheckbox" />
 												</label></td>
 												<td>04</td>
 												<td><a><img
@@ -249,8 +242,7 @@
 	<!-- Bootstrap tether Core JavaScript -->
 	<script src="/resources/js/admin/popper.min.js"></script>
 	<script src="/resources/js/admin/bootstrap.min.js"></script>
-	<script
-		src="/resources/js/admin/perfect-scrollbar.jquery.min.js"></script>
+	<script src="/resources/js/admin/perfect-scrollbar.jquery.min.js"></script>
 	<script src="/resources/js/admin/sparkline.js"></script>
 	<!--Wave Effects -->
 	<script src="/resources/js/admin/waves.js"></script>
