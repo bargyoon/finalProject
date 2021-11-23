@@ -74,7 +74,7 @@ public class AdminController {
 		adminService.insertDisease(disease, diseaseIcon);
 		
 		Order order = new Order();
-		order.setOIdx(0);
+		order.setOrderIdx(0);
 		return "redirect:/admin/disease/disease-list";
 	}
 	
