@@ -7,7 +7,7 @@ import lombok.Data;
 @Data
 public class Event {
 
-	private int eIdx;
+	private int eventIdx;
 	private String title;
 	private String subTitle;
 	private int contentImg; // 상세이미지 번호

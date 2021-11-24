@@ -3,7 +3,7 @@
 <html>
 <head>
 <%@ include file="/WEB-INF/views/include/market/mypage-head.jsp"%>
-
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 </head>
 <body onscroll="checkHeight()">
 	<%@ include file="/WEB-INF/views/include/market/market-nav.jsp"%>
@@ -79,19 +79,38 @@
 						<td>&nbsp;</td>
 					</tr>
 				</thead>
+				
+				<c:forEach var="couponList" items="${couponList}">
 				<tbody>
+				
 					<tr>
-						<td>50676</td>
-						<td class="cp-name"><span>만료임박</span> 쿠폰이름</td>
-						<td class="cp-percent">10%</td>
+						<td>${couponList.userCoupon.ucIdx} </td>
+						<td class="cp-name">
+						
+						<c:set var="today" value="<%=new java.util.Date()%>" />
+						<%-- <fmt:formatDate value="${today}" pattern="yyyy-MM-dd"/> --%>
+						<fmt:parseDate var="expDate" value="${couponList.userCoupon.regDate}" pattern="yyyy-MM-dd"/>
+						<fmt:parseNumber var="todayTime" value="${today.time / (1000*60*60*24)}" integerOnly="true"/>
+						<fmt:parseNumber var="expDateTime" value="${expDate.time / (1000*60*60*24)}" integerOnly="true"/>
+						
+						<c:choose>
+								<c:when test="${expDateTime - todayTime < 4}">
+									<span>만료임박</span> 
+								</c:when>
+						</c:choose>	
+						
+							${couponList.name} 
+						</td>
+						<td class="cp-percent"><c:out value="${couponList.salePer}%"/></td>
 						<td class="cp-range">일부 대상</td>
 						<td>
 							<ul>
-								<li>21.11.15 ~ 21.11.20</li>
-								<li style="color: gray;">15일 남음</li>
+								<li>${couponList.expDate}</li>
+								<li style="color: gray;">${expDateTime - todayTime}일 남음</li>
 							</ul>
 						</td>
 					</tr>
+				
 					<tr>
 						<td>50676</td>
 						<td class="cp-name"><span>만료임박</span> 쿠폰이름</td>
@@ -117,6 +136,7 @@
 						</td>
 					</tr>
 				</tbody>
+				</c:forEach>
 			</table>
 		</div>
 	</section>

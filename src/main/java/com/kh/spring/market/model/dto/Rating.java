@@ -7,8 +7,8 @@ import lombok.Data;
 @Data
 public class Rating {
 	
-	private int rIdx;
-    private int pIdx;
+	private int rateIdx;
+    private int proIdx;
     private int userIDx;
     private int grade;
     private String content;

@@ -7,8 +7,8 @@ import lombok.Data;
 @Data
 public class Product {
 
-	 private int pIdx;
-     private int eIdx;
+	 private int proIdx;
+     private int eventIdx;
      private int subImgIdx;
      private String name;
      private String brand;
