@@ -12,6 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.kh.spring.admin.model.service.AdminService;
 import com.kh.spring.disease.model.dto.Disease;
+import com.kh.spring.disease.model.service.DiseaseService;
 import com.kh.spring.market.model.dto.Order;
 
 import lombok.RequiredArgsConstructor;
@@ -22,6 +23,7 @@ import lombok.RequiredArgsConstructor;
 public class AdminController {
 	
 	private final AdminService adminService;
+	private final DiseaseService diseaseService;
 	
 	@GetMapping("index")
 	public void index() {};
@@ -57,7 +59,7 @@ public class AdminController {
 	
 	@GetMapping("disease/disease-list")
 	public void priceList(Model model) {
-		List<Map<String, Object>> commandList = adminService.selectDiseaseList();
+		List<Map<String, Object>> commandList = diseaseService.selectDiseaseList();
 		model.addAttribute("datas",commandList);
 	}
 	
@@ -73,8 +75,7 @@ public class AdminController {
 		
 		adminService.insertDisease(disease, diseaseIcon);
 		
-		Order order = new Order();
-		order.setOIdx(0);
+		
 		return "redirect:/admin/disease/disease-list";
 	}
 	

@@ -36,20 +36,7 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	
-	public List<Map<String, Object>> selectDiseaseList() {
-		
-		List<Map<String, Object>> commandList = new ArrayList<Map<String,Object>>();
-		List<Disease> diseaseList = diseaseRepository.selectDiseaseList();
-		for (Disease disease : diseaseList) {
-			FileDTO files = diseaseRepository.selectIconByIdx(disease.getDsIdx());
-			
-			commandList.add(Map.of("disease", disease,"files", files));
-		}
-		
-		return commandList;
-		
-		
-	}
+	
 	
 
 }
