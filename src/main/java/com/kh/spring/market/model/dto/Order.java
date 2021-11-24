@@ -7,10 +7,10 @@ import lombok.Data;
 @Data
 public class Order {
 
-	private int oIdx;
+	private int orderIdx;
 	private int userIdx;
 	private int ucIdx;
-	private int pIdx;
+	private int proIdx;
 	private String paymentMethod;
 	private int paymentAmount;
 	private int state;

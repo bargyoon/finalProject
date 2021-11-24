@@ -18292,28 +18292,13 @@ ul {
   border-radius: 6px;
   left: 0;
   top: 0;
-  -webkit-transform-style: preserve-3d;
-  transform-style: preserve-3d;
-  -webkit-backface-visibility: hidden;
-  -moz-backface-visibility: hidden;
-  -o-backface-visibility: hidden;
-  backface-visibility: hidden;
+
 }
-.card-back {
-  transform: rotateY(180deg);
- 
-}
-.checkbox:checked ~ .card-3d-wrap .card-3d-wrapper {
-  transform: rotateY(180deg);
-}
+
 .center-wrap{
-  position: absolute;
   width: 100%;
   background-color: #fff;
   padding: 0 35px;
-  top: 40%;
-  left: 0;
-  transform: translate3d(0, -50%, 35px) perspective(100px);
   z-index: 20;
   display: block;
 }

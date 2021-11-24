@@ -330,6 +330,7 @@
     <script src="/resources/js/admin/sidebarmenu.js"></script>
     <!--Custom JavaScript -->
     <script src="/resources/js/admin/custom.min.js"></script>
+    <script src="/resources/js/admin/multi-drop.js"></script>
     <!--This page JavaScript -->
 
     <script src="/resources/js/admin/datatables.min.js"></script>

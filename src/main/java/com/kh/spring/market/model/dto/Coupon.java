@@ -9,7 +9,9 @@ public class Coupon {
 
 	  private String couponIdx;
       private String name;
-      private String salePer;
+      private int salePer;
       private String isDel;
       private Date expDate;
+      
+      private UserCoupon userCoupon;
 }

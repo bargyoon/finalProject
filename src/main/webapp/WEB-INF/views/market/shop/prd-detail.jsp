@@ -76,7 +76,7 @@
 					<input class="fw-bolder" type="text" id="prd-total-price" readonly="readonly" value="0 원"></input>
 				</div>
 				<div class="mt-4 d-flex justify-content-between buy-btns">
-					<button class="buy-btn" type="button">구매하기</button>
+					<button class="buy-btn" type="button" onclick="requestPay()">구매하기</button>
 					<button class="cart-btn" type="button">장바구니</button>
 				</div>
 			</div>
@@ -305,6 +305,7 @@
 
 	<%@ include file="/WEB-INF/views/include/market/footer.jsp"%>
 
+        <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.8.js"></script>
 	<script type="text/javascript" src="${contextPath}/resources/js/market/shop/prd-detail.js"></script>
 	<script type="text/javascript" src="${contextPath}/resources/js/market/slick/slick.js"></script>
 	<script type="text/javascript" src="${contextPath}/resources/js/market/slick/main-slick.js"></script>

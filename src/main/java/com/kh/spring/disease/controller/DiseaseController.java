@@ -1,11 +1,12 @@
-package com.kh.spring.price.controller;
+package com.kh.spring.disease.controller;
 
 import java.io.FileInputStream;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -17,16 +18,32 @@ import com.google.cloud.vision.v1.Feature.Type;
 import com.google.cloud.vision.v1.Image;
 import com.google.cloud.vision.v1.ImageAnnotatorClient;
 import com.google.protobuf.ByteString;
+import com.kh.spring.disease.model.service.DiseaseService;
+
+import lombok.RequiredArgsConstructor;
 
 
 @Controller
-@RequestMapping("price")
-public class PriceController {
+@RequiredArgsConstructor
+@RequestMapping("disease")
+public class DiseaseController {
 	  
+	private final DiseaseService diseaseService;
 
 	
 	@GetMapping("index")
-	public void index() {
+	public void index(Model model) {
+		List<Map<String, Object>> commandList = diseaseService.selectDiseaseList();
+		model.addAttribute("datas",commandList);
+	}
+	
+	@GetMapping("disease-spec")
+	public void diseaseSpec() {}
+	
+	@GetMapping("price-popup")
+	public void pricePopup() {}
+	
+	public void temp() {
 		try {
 			String imageFilePath = "C:\\\\Users\\\\윤수환\\\\Desktop\\\\다운로드.png"; //여기에는 자신의 로컬 이미지 명이 들어가야합니다.
 			List<AnnotateImageRequest> requests = new ArrayList<>();
@@ -64,6 +81,4 @@ public class PriceController {
 		
 	}
 	
-	@GetMapping("price-spec")
-	public void priceSpec() {}
 }

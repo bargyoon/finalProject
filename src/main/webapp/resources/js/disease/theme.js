@@ -345,14 +345,30 @@ var navbarInit = function navbarInit() {
 
 docReady(navbarInit);
 docReady(detectorInit);
+var checkBtn = document.querySelector("#reg-log")
+
 
 document.querySelector(".btn_dog").addEventListener('click', e =>{
 
   document.querySelector("#reg-log").checked = false
+  document.querySelector(".card-front").style.display = ""
+	document.querySelector(".card-back").style.display = "none"
 })
 document.querySelector(".btn_cat").addEventListener('click', e =>{
  
   document.querySelector("#reg-log").checked= true
-  
+  document.querySelector(".card-front").style.display = "none"
+	document.querySelector(".card-back").style.display = ""
+})
+
+checkBtn.addEventListener("change", e =>{
+if(e.target.checked == false){
+	document.querySelector(".card-front").style.display = ""
+	document.querySelector(".card-back").style.display = "none"
+	}else{
+	document.querySelector(".card-front").style.display = "none"
+	document.querySelector(".card-back").style.display = ""
+	}
+	
 })
 //# sourceMappingURL=theme.js.map
