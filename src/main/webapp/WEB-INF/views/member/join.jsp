@@ -211,7 +211,7 @@
                   
                   <div class="form-group">
                      <label>닉네임 </label>
-                     <input type="text" type="nickName" name="nickName" id="nickName"class="form-control" placeholder="닉네임을 입력하세요">
+                     <input type="text" name="nickName" id="nickName"class="form-control" placeholder="닉네임을 입력하세요">
                      <div class="check" id="nickName_check"></div>
                      <span class="input_possible" id="nickName_possible">사용 가능한 닉네임 입니다.</span>
                      <span class="input_impossible" id="nickName_impossible">이미 존재하는 닉네임 입니다.</span>
@@ -220,14 +220,19 @@
                   <div class="form-group">
                      <label>비밀번호 </label>
                      <input type="password" name="password" id="password" class="form-control" placeholder="영어,숫자,특수문자 조합의 8글자 이상의 문자열입니다.">
+                  	 <span class="input_possible" id="password_possible">사용 가능한 비밀번호 입니다.</span>
+                     <span class="input_impossible" id="password_impossible">영어,숫자,특수문자 조합의 8자 이상의 문자열 입니다.</span>
+
                   </div>
                   
                   <div class="form-group">
                      <label>비밀번호 확인 </label>
-                     <input type="password" class="form-control" placeholder="비밀번호를 다시 한번 입력하세요">
+                     <input type="password" name="password2" id="password2" class="form-control" placeholder="비밀번호를 다시 한번 입력하세요">
+                  	 <span class="input_possible" id="password_accord" >비밀번호가 일치합니다.</span>
+                     <span class="input_impossible" id="password_discord">비밀번호가 일치하지않습니다.</span>
                   </div>
                   
-                  <div class="form-group">
+                   <div class="form-group">
                      <label>이름 </label>
                      <input type="text" name="userName" id="userName" class="form-control" placeholder="이름을 입력하세요">
                   </div>
@@ -242,17 +247,19 @@
                      <input type="text" name="address" id="address" class="form-control" id="address" placeholder="주소를 입력하세요">
                      <input type="text" class="form-control" placeholder="상세주소를 입력하세요">
                   </div><br><hr>                  
-                  <input type="submit" class="btn btn-black" style="width: 100%" value="가입하기" />
+                  <input type="submit" class="btn btn-black" id="joinBtn" style="width: 100%" value="가입하기" />
                </form>
             </div>
          </div>
       </div>
 </form:form>
 
-<!-- <script type="text/javascript" src="/resources/js/member/joinForm.js"></script> -->
+<!-- 유효성검사 막음
+<script type="text/javascript" src="/resources/js/member/joinForm.js"></script> -->
 
 <!-- 주소 api -->
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script src="http://code.jquery.com/jquery-1.9.1.js"></script> 
 <script>
 window.onload = function(){
     document.getElementById("address").addEventListener("click", function(){ 
@@ -264,55 +271,7 @@ window.onload = function(){
         }).open();
     });
 }
-</script>
 
-<!-- 실시간 아이디/닉네임 중복체크 -->
-<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-<script type="text/javascript">
-	$("#userId").keyup(function() {
-    	let userId = "userId="+$('#userId').val();
-        $.ajax({
-            url:'/member/idCheck',
-            type:'post',
-            data: userId,
-            success:function(cnt){
-                if(cnt != 1){
-                    $('#userId_possible').css("display","inline-block"); 
-                    $('#userId_impossible').css("display", "none");
-                } else {
-                    $('#userId_impossible').css("display","inline-block");
-                    $('#userId_possible').css("display", "none");
-                }
-            },
-            error:function(request,status,error){
-            	alert("오류!") 
-            	//alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-            }
-
-        });
-    });
-	
-	$("#nickName").keyup(function() {
-    	let nickName = "nickName="+$('#nickName').val();
-        $.ajax({
-            url:'/member/nickNameCheck',
-            type:'post',
-            data: nickName,
-            success:function(cnt){
-                if(cnt != 1){
-                    $('#nickName_possible').css("display","inline-block"); 
-                    $('#nickName_impossible').css("display", "none");
-                } else {
-                    $('#nickName_impossible').css("display","inline-block");
-                    $('#nickName_possible').css("display", "none");
-                }
-            },
-            error:function(request,status,error){
-            	alert("오류!")            	
-            }
-
-        });
-    });
 </script>
    
 </body>

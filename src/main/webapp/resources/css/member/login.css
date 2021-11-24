@@ -90,9 +90,9 @@ body {
     border-color: #21252961 !important;
 }
 
-/* .valid-msg{
+.valid-msg{
 	color:red;	font-size:0.5vw;
-} */
+}
 
 #userId_possible{
 		color : green;
@@ -112,4 +112,21 @@ body {
 		color : red;
 		display : none;
 }
+#password_possible{
+		color : green;
+		display : none;
+}
 
+#password_impossible{
+		color : red;
+		display : none;
+}
+#password_accord{
+		color : green;
+		display : none;
+}
+
+#password_discord{
+		color : red;
+		display : none;
+}
