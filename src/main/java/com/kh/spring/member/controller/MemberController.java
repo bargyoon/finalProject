@@ -20,7 +20,7 @@ import com.kh.spring.member.model.service.MemberService;
 @Controller
 @RequestMapping("member")
 public class MemberController {
-	
+	 
 	Logger logger =  LoggerFactory.getLogger(this.getClass());
 	
 	private MemberService memberService;
