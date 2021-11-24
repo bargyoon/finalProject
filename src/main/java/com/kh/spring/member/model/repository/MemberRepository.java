@@ -20,5 +20,9 @@ public interface MemberRepository {
 			+ "SELECT * FROM DUAL")
 	void insertMember(Member member);
 	
+	@Select("select count(*) from \"USER\" where user_id = #{userId}")
+	public int idCheck(String memberId);
 	
+	@Select("select count(*) from \"USER\" where nickName = #{nickName}")
+	public int nickNameCheck(String nickName);
 }

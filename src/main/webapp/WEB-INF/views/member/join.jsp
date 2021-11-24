@@ -203,13 +203,16 @@
                   <div class="form-group">
                      <label>아이디 </label>
                      <input type="text" name="userId" id="userId" class="form-control" placeholder="아이디를 입력하세요">
-                     <a class="btn btn-gray">check</a>
+                     <span class="input_possible" id="userId_possible">사용 가능한 아이디 입니다.</span>
+                     <span class="input_impossible" id="userId_impossible">이미 존재하는 아이디 입니다.</span>
                   </div>
                   
                   <div class="form-group">
                      <label>닉네임 </label>
-                     <input type="text" type="nickName" name="nickName" class="form-control" placeholder="닉네임을 입력하세요">
-                     <a class="btn btn-gray">check</a>
+                     <input type="text" type="nickName" name="nickName" id="nickName"class="form-control" placeholder="닉네임을 입력하세요">
+                     <div class="check" id="nickName_check"></div>
+                     <span class="input_possible" id="nickName_possible">사용 가능한 닉네임 입니다.</span>
+                     <span class="input_impossible" id="nickName_impossible">이미 존재하는 닉네임 입니다.</span>
                   </div>                 
                   
                   <div class="form-group">
@@ -259,6 +262,55 @@ window.onload = function(){
         }).open();
     });
 }
+</script>
+
+<!-- 실시간 아이디/닉네임 중복체크 -->
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script type="text/javascript">
+	$("#userId").keyup(function() {
+    	let userId = "userId="+$('#userId').val();
+        $.ajax({
+            url:'/member/idCheck',
+            type:'post',
+            data: userId,
+            success:function(cnt){
+                if(cnt != 1){
+                    $('#userId_possible').css("display","inline-block"); 
+                    $('#userId_impossible').css("display", "none");
+                } else {
+                    $('#userId_impossible').css("display","inline-block");
+                    $('#userId_possible').css("display", "none");
+                }
+            },
+            error:function(request,status,error){
+            	alert("오류!") 
+            	//alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+            }
+
+        });
+    });
+	
+	$("#nickName").keyup(function() {
+    	let nickName = "nickName="+$('#nickName').val();
+        $.ajax({
+            url:'/member/nickNameCheck',
+            type:'post',
+            data: nickName,
+            success:function(cnt){
+                if(cnt != 1){
+                    $('#nickName_possible').css("display","inline-block"); 
+                    $('#nickName_impossible').css("display", "none");
+                } else {
+                    $('#nickName_impossible').css("display","inline-block");
+                    $('#nickName_possible').css("display", "none");
+                }
+            },
+            error:function(request,status,error){
+            	alert("오류!")            	
+            }
+
+        });
+    });
 </script>
    
 </body>

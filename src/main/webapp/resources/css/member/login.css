@@ -90,6 +90,26 @@ body {
     border-color: #21252961 !important;
 }
 
-.valid-msg{
+/* .valid-msg{
 	color:red;	font-size:0.5vw;
+} */
+
+#userId_possible{
+		color : green;
+		display : none;
 }
+	
+#userId_impossible{
+		color : red;
+		display : none;
+}
+#nickName_possible{
+		color : green;
+		display : none;
+}
+
+#nickName_impossible{
+		color : red;
+		display : none;
+}
+
