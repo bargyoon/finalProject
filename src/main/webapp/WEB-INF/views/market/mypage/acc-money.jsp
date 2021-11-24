@@ -91,58 +91,30 @@
 						<td>적용 일시</td>
 					</tr>
 				</thead>
+				<c:forEach var="reserveList" items="${reserveList}">
 				<tbody>
 					<tr>
-						<td class="acc-state">적립</td>
-						<td class="acc-amount">+2,500</td>
+					<c:choose>
+						<c:when test="${reserveList.state eq '1'}">
+							<td class="acc-state">적립</td>
+						</c:when>
+						<c:when test="${reserveList.state ne '1'}">
+							<td class="acc-state">사용</td>
+						</c:when>
+					</c:choose>
+					
+						<td class="acc-amount">+${reserveList.amount}</td>
 						<td class="acc-context">
 							<ul>
 								<li class="acc-reason">적립금 결제 취소</li>
 								<li class="acc-prd">상품명</li>
 							</ul>
 						</td>
-						<td class="acc-date">2021.12.25</td>
+						<td class="acc-date">${reserveList.regDate}</td>
 					</tr>
-					<tr>
-						<td class="acc-state">사용</td>
-						<td class="acc-amount">-2,500</td>
-						<td class="acc-context">적립금 결제</td>
-						<td class="acc-date">2021.12.25</td>
-					</tr>
-					<tr>
-						<td class="acc-state">적립</td>
-						<td class="acc-amount">+300</td>
-						<td class="acc-context">
-							<ul>
-								<li class="acc-reason">일반 후기 작성 적립금 지급</li>
-								<li class="acc-prd">상품명</li>
-							</ul>
-						</td>
-						<td class="acc-date">2021.12.25</td>
-					</tr>
-					<tr>
-						<td class="acc-state">적립</td>
-						<td class="acc-amount">600</td>
-						<td class="acc-context">
-							<ul>
-								<li class="acc-reason">상품 사진 후기 작성 적립금 지급</li>
-								<li class="acc-prd">상품명</li>
-							</ul>
-						</td>
-						<td class="acc-date">2021.12.25</td>
-					</tr>
-					<tr>
-						<td class="acc-state">적립</td>
-						<td class="acc-amount">+1,350</td>
-						<td class="acc-context">
-							<ul>
-								<li class="acc-reason">주문 적립</li>
-								<li class="acc-prd">상품명</li>
-							</ul>
-						</td>
-						<td class="acc-date">2021.12.25</td>
-					</tr>
+				
 				</tbody>
+				</c:forEach>
 			</table>
 		</div>
 	</section>

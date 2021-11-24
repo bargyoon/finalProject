@@ -9,7 +9,7 @@ public class QNA {
 
 	   private int qnaIdx;
 	   private int userIdx;
-	   private int proIdx;
+	   private int prdIdx;
 	   private int orderIdx;
 	   private String title;
 	   private String context;

@@ -13,6 +13,7 @@ public class Order {
 	private int proIdx;
 	private String paymentMethod;
 	private int paymentAmount;
+	private Date orderDate; //주문날짜
 	private int state;
 	private int orderCnt;
 	private int shippingNum;

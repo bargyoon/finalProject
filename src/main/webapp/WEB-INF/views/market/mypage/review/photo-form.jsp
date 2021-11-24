@@ -80,7 +80,7 @@
 				<ul class="info p-4">
 					<li class="brand">브랜드</li>
 					<li class="name ft-SBAggroM"><a href="#!" style="text-decoration: none; color: black;">제품명</a></li>
-					<li class="option">옵션</li>
+					<li class="option">${reviewList.PO_NAME}</li>
 				</ul>
 			</div>
 			<form action="" method="post" enctype="multipart/form-data">

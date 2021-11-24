@@ -60,14 +60,14 @@
 			</div>
 		</aside>
 		<div class="container2" style="display: flex; flex-direction: column;">
-			<p class="py-3 mb-0" style="font-size: 1.3rem;">쿠폰 <span style="color: steelblue;">3장</span></p>
+			<p class="py-3 mb-0" style="font-size: 1.3rem;">쿠폰 <span style="color: steelblue;">${couponCnt}장</span></p>
 			<table class="simple-table">
 				<colgroup>
 					<col style="width: 15%;">
 					<col style="width: auto;">
 					<col style="width: 10%;">
 					<col style="width: 10%;">
-					<col style="width: 10%;">
+					<col style="width: 0%;">
 				</colgroup>
 				<thead>
 					<tr>
@@ -84,12 +84,12 @@
 				<tbody>
 				
 					<tr>
-						<td>${couponList.userCoupon.ucIdx} </td>
+						<td>${couponList.UC_IDX} </td>
 						<td class="cp-name">
 						
 						<c:set var="today" value="<%=new java.util.Date()%>" />
 						<%-- <fmt:formatDate value="${today}" pattern="yyyy-MM-dd"/> --%>
-						<fmt:parseDate var="expDate" value="${couponList.userCoupon.regDate}" pattern="yyyy-MM-dd"/>
+						<fmt:parseDate var="expDate" value="${couponList.EXP_DATE}" pattern="yyyy-MM-dd"/>
 						<fmt:parseNumber var="todayTime" value="${today.time / (1000*60*60*24)}" integerOnly="true"/>
 						<fmt:parseNumber var="expDateTime" value="${expDate.time / (1000*60*60*24)}" integerOnly="true"/>
 						
@@ -99,42 +99,17 @@
 								</c:when>
 						</c:choose>	
 						
-							${couponList.name} 
+							${couponList.NAME} 
 						</td>
-						<td class="cp-percent"><c:out value="${couponList.salePer}%"/></td>
+						<td class="cp-percent"><c:out value="${couponList.SALE_PER}%"/></td>
 						<td class="cp-range">일부 대상</td>
 						<td>
 							<ul>
-								<li>${couponList.expDate}</li>
-								<li style="color: gray;">${expDateTime - todayTime}일 남음</li>
+								<li><fmt:formatDate value="${couponList.REG_DATE}" pattern="yyyy-MM-dd"/> ~ <fmt:formatDate value="${couponList.EXP_DATE}" pattern="yyyy-MM-dd"/></li>
+								<li style="color: gray;">${expDateTime - todayTime + 1}일 남음</li>
 							</ul>
 						</td>
-					</tr>
-				
-					<tr>
-						<td>50676</td>
-						<td class="cp-name"><span>만료임박</span> 쿠폰이름</td>
-						<td class="cp-percent">10%</td>
-						<td class="cp-range">일부 대상</td>
-						<td>
-							<ul>
-								<li>21.11.15 ~ 21.11.20</li>
-								<li style="color: gray;">15일 남음</li>
-							</ul>
-						</td>
-					</tr>
-					<tr>
-						<td>50676</td>
-						<td class="cp-name"><span>만료임박</span> 쿠폰이름</td>
-						<td class="cp-percent">10%</td>
-						<td class="cp-range">일부 대상</td>
-						<td>
-							<ul>
-								<li>21.11.15 ~ 21.11.20</li>
-								<li style="color: gray;">15일 남음</li>
-							</ul>
-						</td>
-					</tr>
+					</tr>							
 				</tbody>
 				</c:forEach>
 			</table>

@@ -8,7 +8,7 @@ import lombok.Data;
 public class Rating {
 	
 	private int rateIdx;
-    private int proIdx;
+    private int prdIdx;
     private int userIDx;
     private int grade;
     private String content;

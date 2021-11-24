@@ -3,6 +3,7 @@
 <html>
 <head>
 <%@ include file="/WEB-INF/views/include/market/mypage-head.jsp"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 </head>
 <body onscroll="checkHeight()">
@@ -112,32 +113,39 @@
 						<th scope="col">주문 상태</th>
 					</tr>
 				</thead>
+				<c:forEach var="orderList" items="${orderList}">
 				<tbody>
 					<tr>
 						<td>
 							<div class="n-prd-row">
 								<a href="#!"><img src="https://dummyimage.com/100x120/dee2e6/6c757d.jpg"></a>
 								<ul class="info">
-									<li class="brand">브랜드</li>
-									<li class="name ft-SBAggroM"><a href="#!" style="text-decoration: none; color: black;">제품명</a></li>
-									<li class="option">옵션</li>
+									<li class="brand">${orderList.BRAND}</li>
+									<li class="name ft-SBAggroM"><a href="#!" style="text-decoration: none; color: black;">${orderList.NAME}</a></li>
+									<li class="option">${orderList.PO_NAME}</li>
 								</ul>
 							</div>
 						</td>
-						<td>2021.04.26</td>
+						<td><fmt:formatDate value="${orderList.ORDER_DATE}" pattern="yyyy-MM-dd"/></td>
 						<td>202104260954500001</td>
-						<td>50,000원 <br> 1개
+						<td>${orderList.PAYMENT_AMOUNT}<br> ${orderList.ORDER_CNT}개
 						</td>
 						<td>
-							<p class="ft-SBAggroM mb-3" style="font-size: 20px;">구매확정</p>
+						<c:choose>
+							<c:when test="${orderList.STATE eq 1}">
+								<p class="ft-SBAggroM mb-3" style="font-size: 20px;">
+								구매확정
+								</p>
+							</c:when>
+						</c:choose>
 							<p class="mb-2" style="border: 1px solid lightgray;">배송조회</p>
 							<div class="text-white" href="#" role="button" style="background-color: black;">
 								<div class="btn-group">
 									<a class="nav-link link-white" href="#!">후기작성</a>
 									<a class="nav-link dropdown-toggle text-white ps-0" id="navbarDropdown" role="button" data-bs-toggle="dropdown"></a>
 									<ul class="dropdown-menu" style="text-align: center; min-width: 8rem;" aria-labelledby="navbarDropdown">
-										<li><a class="dropdown-item" href="#!">상품 사진 후기</a></li>
-										<li><a class="dropdown-item" href="#!">일반후기</a></li>
+										<li><a class="dropdown-item" href="/market/mypage/review/photo-form">상품 사진 후기</a></li>
+										<li><a class="dropdown-item" href="/market/mypage/review/normal-form">일반후기</a></li>
 									</ul>
 								</div>
 							</div>
@@ -174,6 +182,7 @@
 						</td>
 					</tr>
 				</tbody>
+				</c:forEach>
 			</table>
 		</div>
 	</section>

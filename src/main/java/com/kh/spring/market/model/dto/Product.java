@@ -7,7 +7,7 @@ import lombok.Data;
 @Data
 public class Product {
 
-	 private int proIdx;
+	 private int prdIdx;
      private int eventIdx;
      private int subImgIdx;
      private String name;
@@ -16,9 +16,8 @@ public class Product {
      private int stock;
      private int rating;
      private String category;
-     private String productOption;
+     private String prdOption;
      private int discountPrice;
-     private String isDiscount;
      private String couponAvail;
      private String smAvail;
      private String state;
