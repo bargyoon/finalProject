@@ -10,19 +10,27 @@
 	crossorigin="anonymous">
 <link href="/resources/css/styles.css" rel="stylesheet">
 <link href="/resources/css/mypage/font.css" rel="stylesheet">
-
-<!-- bootStrap -->
+<!-- jQuery -->
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+<!-- bootStrap -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-
 <!-- fullCalendar -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.min.css">
 <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.min.js"></script>
-
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/locales-all.min.js"></script>
+<style type="text/css">
+	.modal{
+		position: absolute;
+		width: 400px; 
+		height: 500px; 
+		background-color: red; 
+		left: 50%; 
+		top: 50%; 
+		transform: translate(-50%, -50%);
+	}
+</style>
 </head>
 <body>
-
-
 
 <section>
 	<div class="container">
@@ -49,37 +57,81 @@
 		<div style="margin: 0 auto; width: 800px">
 			
 			<!-- fullCalendar -->
-			<div id="calendar"></div>
-			<script>
-				document.addEventListener('DOMContentLoaded', function() {
-					var calendarEl = document.getElementById('calendar');
-					var calendar = new FullCalendar.Calendar(calendarEl, {
-						initialView: 'dayGridMonth',
-						dateClick: ()=>{
-							alert('clicked!');
-						},
-						events: [
-							{
-								title: 'title 테스트',
-								start: '2021-11-22',
-								end: '2021-11-24'
-							},
-							{
-								title: 'allDay 테스트',
-								start: '2021-11-25T12:00:00',
-								allDay: false
-							}
-						]
-					});
-					calendar.render();
-				});
-				
-				calendar.on('dateClick', function(info) {
-					console.dir('clicked on ' + info.dateStr);
-				});
-				
-			</script>
+			<div class="modal">
+				<form action="">
+					<label for="pet-select">등록할 펫 선택:</label>
+					<select name="pets" id="pet-select">
+						<!-- foreach문 -->
+						<option value="">--Please choose an option--</option>
+					</select>
+					
+					<label for="vaccination-list">예방접종항목 선택:</label>
+					<select name="vaccination" id="vaccination-list">
+						<!-- foreach문 -->
+						<option value="">--Please choose an option--</option>
+					</select>
+					
+					<label for="last-record">마지막 접종일 선택:</label>
+					<input type="date" name="criterion-date" id="last-record">
+					<button type="button">저장</button>
+					
+					
+				</form>
+			</div>
 			
+			<div class="overlay"></div>
+			
+			<div id="calendar"></div>
+			
+			<script type="text/javascript">
+			function close_modal(){
+				/* document.querySelector('.modal').style.display= 'none'; */
+				document.querySelector('.overlay').style.display= 'none';
+			}
+			
+			document.addEventListener('DOMContentLoaded', function() {
+				var calendarEl = document.getElementById('calendar');
+				var calendar = new FullCalendar.Calendar(calendarEl, {
+					initialView: 'dayGridMonth',
+					headerToolbar: {
+						left: 'title',
+						center: 'addEventButton',
+						right: 'prev next today'
+					},
+					locale: 'ko',
+					eventLimit: true,
+					views: {
+						month: {eventLimit: 4}
+					},
+					customButtons: {
+						addEventButton: {
+							text: "예방접종일정 추가",
+							click: ()=>{
+								document.querySelector('.modal').style.display= 'flex';
+							}
+						}
+					},
+					dateClick: (info)=>{
+						var title = prompt('Event Title:');
+					},
+					
+					/*
+					events: [
+						{
+							title: 'title 테스트',
+							start: '2021-11-22',
+							end: '2021-11-24'
+						},
+						{
+							title: 'allDay 테스트',
+							start: '2021-11-25T12:00:00',
+							allDay: false
+						}
+					] */
+				});
+				calendar.render();
+			});
+			</script>
 			
 		</div>
 	</div>

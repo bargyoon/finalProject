@@ -7,9 +7,9 @@ import lombok.Data;
 @Data
 public class Review {
 
-	private int rIdx;
+	private int reviewIdx;
 	private int userIdx;
-	private	int oIdx;
+	private	int orderIdx;
 	private int state;
 	private int rating;
 	private int type; //리뷰타입

@@ -11,5 +11,6 @@ public class UserCoupon {
      private int userIdx;
      private String couponIdx;
      private Date expDate;
+     private Date regDate;
 
 }

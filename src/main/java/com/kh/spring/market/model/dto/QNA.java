@@ -5,18 +5,18 @@ import java.sql.Date;
 import lombok.Data;
 
 @Data
-public class FAQ {
+public class QNA {
 
-	   private int qIdx;
+	   private int qnaIdx;
 	   private int userIdx;
-	   private int pIdx;
-	   private int olIdx;
+	   private int proIdx;
+	   private int orderIdx;
 	   private String title;
 	   private String context;
 	   private String type;
 	   private Date regDate;
 	   private String isAnswer;
-	   private String aContext;
-	   private Date aRegDate;
+	   private String ansContext;
+	   private Date ansRegDate;
 
 }

@@ -1,12 +1,28 @@
 package com.kh.spring.market.controller;
 
+
+import java.sql.Date;
+import java.time.LocalDate;
+import java.util.List;
+
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.SessionAttribute;
+
+import com.kh.spring.market.model.dto.Coupon;
+import com.kh.spring.market.model.service.MarketMypageService;
+import com.kh.spring.member.model.dto.Member;
+
+import lombok.RequiredArgsConstructor;
 
 @Controller
+@RequiredArgsConstructor
 @RequestMapping("market/mypage")
 public class MarketMypageController {
+	
+	private final MarketMypageService marketMypageService;
 
 	@GetMapping("")
 	public String mypage() {
@@ -14,7 +30,15 @@ public class MarketMypageController {
 	}
 	
 	@GetMapping("coupon-list")
-	public void couponList() {}
+	public void couponList(@SessionAttribute(name="authentication")Member certifiedUser,
+												Model model) {
+		
+		List<Coupon> couponList = marketMypageService.selectCouponByIdx(certifiedUser.getUserIdx());
+		model.addAttribute("couponList", couponList);
+		
+		System.out.println("couponList : " + couponList);
+
+	}
 
 	@GetMapping("cart")
 	public void cart() {}
