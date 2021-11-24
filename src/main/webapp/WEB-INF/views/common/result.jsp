@@ -23,6 +23,13 @@
 			location.href = '${url}';
 		
 		</c:if>
+		
+		<%-- 팝업창 닫기 --%>
+		<c:if test="${not empty close}">
+		
+		self.close();
+	
+	</c:if>
 	</script>
 
 

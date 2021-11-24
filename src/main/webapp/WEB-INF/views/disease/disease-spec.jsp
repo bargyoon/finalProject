@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <html>
   <head>
@@ -68,7 +70,7 @@
           <div class="row g-xl-0 align-items-center pt-5">
             <div class="col-md-5 col-lg-7 text-xl-center mt-3" >
               <div>   <h1 class="fw-semi-bold "  style=" font-family: 'SBAggroL';">평균 진료비</h1></div>
-                <div class="py-3"><h3  style=" font-family: 'SBAggroL';">500000원</h3></div>
+                <div class="py-3"><h3  style=" font-family: 'SBAggroL';">${disease.price}원</h3></div>
              
             </div>
             <div class="col-md-7 col-lg-4  offset-lg-1 offset-xxl-0">
@@ -76,7 +78,7 @@
              <div class="text-center">
                <div>여러분의 경험으로 병원비를 책정합니다</div>
                <br>
-                <button class="btn btn-lg rounded-pill" onclick="popup()" style="background-color: black; color: white;">영수증 첨부 </button>
+                <button class="btn btn-lg rounded-pill" onclick="popup(${disease.dsIdx})" style="background-color: black; color: white;">영수증 첨부 </button>
               </div>
             </div>
           </div>
@@ -87,15 +89,15 @@
         <!--/.bg-holder-->
         <div class="container"><div class="col-md-12 col-lg-12 text-center text-md-start offset-lg-1 offset-xxl-0" style="border-width:0 0 2px 0; border-style: solid;">
             
-            <h1 class="fw-semi-bold ">병명</h1></div></div>
+            <h1 class="fw-semi-bold ">${disease.name}</h1></div></div>
         <div class="container">
           <div class="row g-xl-0 align-items-center">
             <div class="col-md-7 col-lg-7 text-center text-md-start offset-lg-1 offset-xxl-0">
                 
-                <p class="pt-3 lh-lg">Your reading list is a good place to start, but you will be expected to read more widely too. Use Sevi to search for information on your topic, and to find books, journal articles and other materials in the Library.</p>
+                <p class="pt-3 lh-lg">${disease.explain}</p>
                 
               </div>
-            <div class="col-md-5 col-lg-5 text-xl-center"><img class="img-fluid mb-5 mb-md-0" src="/resources/img/disease/강아지비용/건강검진.png" width="620" alt="" /></div>
+           
             
           </div>
         </div>
@@ -115,8 +117,8 @@
     <script src="https://polyfill.io/v3/polyfill.min.js?features=window.scroll"></script>
     <script src="/resources/js/theme.js"></script>
 <script>
-        function popup(){
-            var url = "http://localhost:9393/disease/price-popup";
+        let popup = (dsIdx) =>{
+            var url = "http://localhost:9393/disease/price-popup?dsIdx="+dsIdx;
             var name = "popup test";
             var option = "width = 500, height = 500, top = 100, left = 200, location = no"
             window.open(url, name, option);

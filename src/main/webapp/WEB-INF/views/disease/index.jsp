@@ -125,7 +125,7 @@
 										<div class="row">
 											<c:forEach items="${datas}" var="data" varStatus="status">
 											<c:if test="${data.disease.category eq 'dog'}">
-												<a class="col-sm-3 col-lg-3 mb-4 mb-lg-0 text-center" href="/disease/disease-spec?${data.disease.dsIdx}">
+												<a class="col-sm-3 col-lg-3 mb-4 mb-lg-0 text-center" href="/disease/disease-spec?dsIdx=${data.disease.dsIdx}">
 													<div class="px-0 px-lg-3">
 														<img class="img-fluid mb-4"
 															src="${data.files.downloadURL }" width="100"
@@ -437,6 +437,7 @@
 			src="https://polyfill.io/v3/polyfill.min.js?features=window.scroll"></script>
 		<script src="/resources/js/disease/theme.js"></script>
 
+	
 		<link
 			href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&amp;display=swap"
 			rel="stylesheet">

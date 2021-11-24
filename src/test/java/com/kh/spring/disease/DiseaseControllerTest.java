@@ -1,8 +1,7 @@
-package com.kh.spring.admin;
+package com.kh.spring.disease;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.multipart;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppContextSetup;
@@ -18,13 +17,11 @@ import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.web.context.WebApplicationContext;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.kh.spring.member.model.dto.Member;
-
 @WebAppConfiguration
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"file:src/main/webapp/WEB-INF/spring/**/*-context.xml"})
-public class AdminControllerTest {
+public class DiseaseControllerTest {
+
 
 	@Autowired
 	WebApplicationContext context;
@@ -38,32 +35,30 @@ public class AdminControllerTest {
 	}
 	
 	@Test
-	public void insertDisease() throws Exception{
-		MockMultipartFile file1 = new MockMultipartFile("diseaseIcon","test.png", null,"photo".getBytes()); 
-		
-		mockMvc.perform(multipart("/admin/disease/add-disease-spec")
-				.file(file1)
-				.param("name", "병명입니다")
-				.param("price", "100000")
-				.param("explain", "설명")
-				.param("category", "cat"))
+	public void index() throws Exception{
+		mockMvc.perform(get("/disease/index"))
+		.andExpect(status().isOk())
+		.andDo(print());
+	}
+	
+	@Test
+	public void selectDiseaseByIdx() throws Exception{
+		mockMvc.perform(get("/disease/disease-spec")
+				.param("dsIdx", "50004"))
+		.andExpect(status().isOk())
+		.andDo(print());
+	}
+	
+	@Test
+	public void postImgTest() throws Exception{
+		MockMultipartFile fileTest = new MockMultipartFile("files", "사진.png", null, "사진".getBytes());
+		mockMvc.perform(multipart("/disease/add-price")
+				.file(fileTest)
+				.param("dsIdx", "5004"))
 		.andExpect(status().is3xxRedirection())
 		.andDo(print());
 		
 	}
 	
-	@Test
-	public void selectDiseaseListTest() throws Exception{
-		mockMvc.perform(get("/admin/disease/disease-list"))
-		.andExpect(status().isOk())
-		.andDo(print());
-	}
-	
-	@Test
-	public void selectPriceImgListTest() throws Exception{
-		mockMvc.perform(get("/admin/disease/price-img-list"))
-		.andExpect(status().isOk())
-		.andDo(print());
-	}
 	
 }

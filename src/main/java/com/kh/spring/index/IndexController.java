@@ -17,4 +17,7 @@ public class IndexController {
 		return "/market/market";
 	}
 	
+	@GetMapping("common/result")
+	public void result() {}
+	
 }
