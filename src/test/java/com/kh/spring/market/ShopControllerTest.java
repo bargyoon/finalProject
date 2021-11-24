@@ -1,5 +1,6 @@
-package com.kh.spring.market.controller;
+package com.kh.spring.market;
 
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -55,6 +56,16 @@ public class ShopControllerTest {
 		mockMvc.perform(post("/market/shop/buy-test")
 				.contentType(MediaType.APPLICATION_JSON)
 				.content(orderJson))
+		.andExpect(status().isOk())
+		.andDo(print());
+	}
+	
+	@Test
+	public void prdListTest() throws Exception {
+		String category = "feed";
+		
+		mockMvc.perform(get("/market/shop/prd-list")
+				.param("category", category))
 		.andExpect(status().isOk())
 		.andDo(print());
 	}

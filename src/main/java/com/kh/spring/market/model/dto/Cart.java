@@ -8,7 +8,7 @@ import lombok.Data;
 public class Cart {
 	
 	private int userIdx;
-	private int proIdx;
+	private int prdIdx;
 	private int count; //상품개수
 	private Date regDate;
 	
