@@ -28,6 +28,19 @@
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 <![endif]-->
+<style type="text/css">
+	table *{
+		text-align: center;
+	}
+	
+	.explain{
+		overflow: hidden;
+		max-height: 93px;
+		max-width: 600px;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+	}
+</style>
 </head>
 
 <body>
@@ -80,7 +93,7 @@
 							<div class="card-body">
 								<h5 class="card-title m-b-0 d-inline-block">병명 목록</h5>
 
-								<button class="btn-primary float-right btn-lg">병명 추가</button>
+								<button class="btn-primary float-right btn-lg" onclick="location.reload()">병명 추가</button>
 
 							</div>
 
@@ -89,14 +102,14 @@
 									<table class="table mb-0">
 										<thead class="thead-dark">
 											<tr>
-												<th><input type="checkbox" id="mainCheckbox" /></th>
-												<th scope="col">NO</th>
-												<th scope="col">사진</th>
-												<th scope="col">병명</th>
-												<th scope="col">설명</th>
-												<th scope="col">가격</th>
-												<th scope="col">등록개수</th>
-												<th scope="col">종류</th>
+												<th style="width:5%"><input type="checkbox" id="mainCheckbox" /></th>
+												<th scope="col" style="width:5%">NO</th>
+												<th scope="col" style="width:10%">사진</th>
+												<th scope="col" style="width:10%">병명</th>
+												<th scope="col" style="width:40%">설명</th>
+												<th scope="col" style="width:10%">가격</th>
+												<th scope="col" style="width:10%">등록개수</th>
+												<th scope="col" style="width:10%">종류</th>
 
 											</tr>
 										</thead>
@@ -106,14 +119,14 @@
 												<td><label class="mt-3"> <input type="checkbox"
 														class="listCheckbox" />
 												</label></td>
-												<td>${status.index}</td>
+												<td>${status.index+1}</td>
 												<td><a><img style="height: 60px; widht: 60px;"
 														src="${data.files.downloadURL }"></a>
 
 												</td>
 												<td>${data.disease.name}</td>
-												<td>${data.disease.explain}</td>
-												<td>${data.disease.price}</td>
+												<td><div class="explain">${data.disease.explain}</div></td>
+												<td>${data.disease.price}원</td>
 												<td>${data.disease.count}</td>
 												<td>${data.disease.category}</td>
 
@@ -200,7 +213,7 @@
 									</table>
 									<div class="border-top">
 										<div class="card-body">
-											<button class="btn-secondary ">submit</button>
+											<button class="btn-secondary">submit</button>
 										</div>
 									</div>
 								</form>
@@ -208,36 +221,14 @@
 						</div>
 					</div>
 				</div>
-				<!-- ============================================================== -->
-				<!-- End PAge Content -->
-				<!-- ============================================================== -->
-				<!-- ============================================================== -->
-				<!-- Right sidebar -->
-				<!-- ============================================================== -->
-				<!-- .right-sidebar -->
-				<!-- ============================================================== -->
-				<!-- End Right sidebar -->
-				<!-- ============================================================== -->
 			</div>
 
 			<footer class="footer text-center">
 				All Rights Reserved by Matrix-admin. Designed and Developed by <a
 					href="https://wrappixel.com">WrapPixel</a>.
 			</footer>
-			<!-- ============================================================== -->
-			<!-- End footer -->
-			<!-- ============================================================== -->
 		</div>
-		<!-- ============================================================== -->
-		<!-- End Page wrapper  -->
-		<!-- ============================================================== -->
 	</div>
-	<!-- ============================================================== -->
-	<!-- End Wrapper -->
-	<!-- ============================================================== -->
-	<!-- ============================================================== -->
-	<!-- All Jquery -->
-	<!-- ============================================================== -->
 	<script src="/resources/js/admin/jquery.min.js"></script>
 	<!-- Bootstrap tether Core JavaScript -->
 	<script src="/resources/js/admin/popper.min.js"></script>
@@ -253,7 +244,11 @@
 	<!--This page JavaScript -->
 
 	<script src="/resources/js/admin/datatables.min.js"></script>
-
+	<script type="text/javascript">
+	
+		
+		
+	</script>
 </body>
 
 </html>

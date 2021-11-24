@@ -7,4 +7,8 @@ public interface MemberService {
 	Member authenticateUser(Member member);
 
 	void insertMember (Member member);
+	
+	int idCheck(String userId);
+
+	int nickNameCheck(String nickName);
 }

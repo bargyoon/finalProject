@@ -29,6 +29,16 @@ public class MemberServiceImpl implements MemberService{
 		memberRepository.insertMember(member);
 		
 	}
+	
+	public int idCheck(String userId) {
+		return memberRepository.idCheck(userId);
+	}
+
+
+	public int nickNameCheck(String nickName) {
+		return memberRepository.nickNameCheck(nickName);
+	}
+
 
 	/*
 	 * @Override public void logout(HttpSession session) { session.invalidate();

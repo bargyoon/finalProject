@@ -7,10 +7,10 @@ import lombok.Data;
 @Data
 public class SaveHistory {
 
-	private int shIdx;
+	private String shIdx;
 	private int userIdx;
-	private int state; //적립유형
-	private int type; //적립타입
+	private String state; //적립유형
+	private String type; //적립타입
 	private int amount; //적립금액
 	private Date regDate;
 }

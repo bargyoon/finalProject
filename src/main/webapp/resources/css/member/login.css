@@ -93,3 +93,40 @@ body {
 .valid-msg{
 	color:red;	font-size:0.5vw;
 }
+
+#userId_possible{
+		color : green;
+		display : none;
+}
+	
+#userId_impossible{
+		color : red;
+		display : none;
+}
+#nickName_possible{
+		color : green;
+		display : none;
+}
+
+#nickName_impossible{
+		color : red;
+		display : none;
+}
+#password_possible{
+		color : green;
+		display : none;
+}
+
+#password_impossible{
+		color : red;
+		display : none;
+}
+#password_accord{
+		color : green;
+		display : none;
+}
+
+#password_discord{
+		color : red;
+		display : none;
+}

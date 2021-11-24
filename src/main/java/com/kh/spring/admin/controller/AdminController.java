@@ -12,7 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.kh.spring.admin.model.service.AdminService;
 import com.kh.spring.disease.model.dto.Disease;
-import com.kh.spring.market.model.dto.Order;
+import com.kh.spring.disease.model.service.DiseaseService;
 
 import lombok.RequiredArgsConstructor;
 
@@ -22,6 +22,7 @@ import lombok.RequiredArgsConstructor;
 public class AdminController {
 	
 	private final AdminService adminService;
+	private final DiseaseService diseaseService;
 	
 	@GetMapping("index")
 	public void index() {};
@@ -56,9 +57,14 @@ public class AdminController {
 	public void commentList() {}
 	
 	@GetMapping("disease/disease-list")
-	public void priceList(Model model) {
-		List<Map<String, Object>> commandList = adminService.selectDiseaseList();
+	public void diseaseList(Model model) {
+		List<Map<String, Object>> commandList = diseaseService.selectDiseaseList();
 		model.addAttribute("datas",commandList);
+	}
+	
+	@GetMapping("disease/price-img-list")
+	public void priceList(Model model) {
+		adminService.selectPriceImgList();
 	}
 	
 	@GetMapping("disease/add-disease-spec")
@@ -66,15 +72,10 @@ public class AdminController {
 	
 	@PostMapping("disease/add-disease-spec")
 	public String addPriceImg(Disease disease, List<MultipartFile> diseaseIcon) {
-		System.out.println(disease.toString());
-		System.out.println(diseaseIcon.toString());
-	
 		disease.setExplain("하하");
 		
 		adminService.insertDisease(disease, diseaseIcon);
 		
-		Order order = new Order();
-		order.setOrderIdx(0);
 		return "redirect:/admin/disease/disease-list";
 	}
 	

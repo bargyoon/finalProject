@@ -101,7 +101,7 @@
 								<ul class="info">
 									<li class="brand">브랜드</li>
 									<li class="name ft-SBAggroM"><a href="#!" style="text-decoration: none; color: black;">제품명</a></li>
-									<li class="option">옵션</li>
+									<li class="option">${reviewList.PO_NAME}</li>
 								</ul>
 							</div>
 						</td>

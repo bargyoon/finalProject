@@ -12,7 +12,10 @@ public interface AdminService {
 
 	void insertDisease(Disease disease, List<MultipartFile> mfs);
 
-	List<Map<String, Object>> selectDiseaseList();
+	void selectPriceImgList();
+
+
+	
 
 	
 }

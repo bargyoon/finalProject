@@ -18296,13 +18296,9 @@ ul {
 }
 
 .center-wrap{
-  position: absolute;
   width: 100%;
   background-color: #fff;
   padding: 0 35px;
-  top: 40%;
-  left: 0;
-  transform: translate3d(0, -50%, 35px) perspective(100px);
   z-index: 20;
   display: block;
 }

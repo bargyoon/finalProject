@@ -3,6 +3,8 @@
 <html>
 <head>
 <%@ include file="/WEB-INF/views/include/market/mypage-head.jsp"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
 
 </head>
 <body onscroll="checkHeight()">
@@ -106,24 +108,26 @@
 						<th scope="col">일반 후기</th>
 					</tr>
 				</thead>
+				<c:forEach var="reviewList" items="${reviewList}">
 				<tbody>
 					<tr>
 						<td>
 							<div class="n-prd-row">
 								<a href="#!"><img src="https://dummyimage.com/100x120/dee2e6/6c757d.jpg"></a>
 								<ul class="info">
-									<li class="brand">브랜드</li>
-									<li class="name ft-SBAggroM"><a href="#!" style="text-decoration: none; color: black;">제품명</a></li>
-									<li class="option">옵션</li>
+									<li class="brand">${reviewList.BRAND}</li>
+									<li class="name ft-SBAggroM"><a href="#!" style="text-decoration: none; color: black;">${reviewList.NAME}</a></li>
+									<li class="option">${reviewList.PO_NAME}</li>
 								</ul>
 							</div>
 						</td>
-						<td>2021.04.26<br>구매확정
+						<td><fmt:formatDate value="${reviewList.ORDER_DATE}" pattern="yyyy-MM-dd"/><br>
 						</td>
-						<td><a class="btn-review" href="#!">작성하기</a></td>
-						<td><a class="btn-review" href="#!">작성하기</a></td>
+						<td><a class="btn-review" href="/market/mypage/review/photo-form">작성하기</a></td>
+						<td><a class="btn-review" href="/market/mypage/review/normal-form">작성하기</a></td>
 					</tr>
 				</tbody>
+				</c:forEach>
 			</table>
 		</div>
 	</section>
