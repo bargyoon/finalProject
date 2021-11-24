@@ -20,9 +20,10 @@
 <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/locales-all.min.js"></script>
 <style type="text/css">
 	.modal{
+		display: none;
 		position: absolute;
-		width: 400px; 
-		height: 500px; 
+		width: 300px; 
+		height: 350px; 
 		background-color: red; 
 		left: 50%; 
 		top: 50%; 
@@ -56,37 +57,45 @@
 		
 		<div style="margin: 0 auto; width: 800px">
 			
-			<!-- fullCalendar -->
 			<div class="modal">
-				<form action="">
-					<label for="pet-select">등록할 펫 선택:</label>
-					<select name="pets" id="pet-select">
-						<!-- foreach문 -->
-						<option value="">--Please choose an option--</option>
-					</select>
+				<form action="" style="margin: auto auto;">
+					<div class="mb-3">
+						<label class="form-label" for="pet-select">등록할 펫 선택:</label>
+						<select class="form-select"  name="pet" id="pet-select">
+							<!-- foreach문 -->
+							<option value="">--Please choose an option--</option>
+						</select>
+					</div>
 					
-					<label for="vaccination-list">예방접종항목 선택:</label>
-					<select name="vaccination" id="vaccination-list">
-						<!-- foreach문 -->
-						<option value="">--Please choose an option--</option>
-					</select>
+					<div class="mb-3">
+						<label class="form-label" for="vaccine-list">예방접종항목 선택:</label>
+						<select class="form-select"  name="vaccine" id="vaccine-list">
+							<!-- foreach문 -->
+							<option value="">--Please choose an option--</option>
+						</select>
+					</div>
 					
-					<label for="last-record">마지막 접종일 선택:</label>
-					<input type="date" name="criterion-date" id="last-record">
-					<button type="button">저장</button>
+					<div class="mb-3">
+						<label class="form-label" for="last-record">마지막 접종일 선택:</label><br>
+						<input class="form-date" type="date" name="criterion-date" id="last-record">
+					</div>
 					
+					<hr class="my-3">
+					
+					<div style="display: flex;">
+						<button class="w-50 btn btn-primary" type="submit">등록</button>
+						<button class="w-50 btn btn-primary" type="button" onclick="close_modal()">취소</button>
+					</div>
 					
 				</form>
 			</div>
 			
-			<div class="overlay"></div>
-			
 			<div id="calendar"></div>
 			
+			<!-- fullCalendar -->
 			<script type="text/javascript">
 			function close_modal(){
-				/* document.querySelector('.modal').style.display= 'none'; */
-				document.querySelector('.overlay').style.display= 'none';
+				document.querySelector('.modal').style.display= 'none';
 			}
 			
 			document.addEventListener('DOMContentLoaded', function() {

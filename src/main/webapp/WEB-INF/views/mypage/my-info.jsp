@@ -67,6 +67,11 @@
 			  <label for="floatingInfo">자기소개</label>
 			</div>
 			
+			<div class="mb-3">
+				<label class="label-form" for="profileImg">프로필사진</label>
+				<img alt="" src="" id="profileImg">
+			</div>
+			
 		</div>
 		
 	</div>

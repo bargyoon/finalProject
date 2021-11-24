@@ -37,23 +37,34 @@
 		</nav>
 		
 		<div style="margin: 0 auto;">
-			<form class="needs-validation" novalidate="" style="margin: 0 auto; width: 400px;">
+			<form class="needs-validation" style="margin: 0 auto; width: 400px;"
+				action="/mypage/update-form" method="post" enctype="multipart/form-data" id="frm_update">
 			
-				<div class="form-floating mb-3">
-					<input type="text" class="form-control" id="nickname" placeholder="1" value="">
+				<div class="input-group form-floating mb-3">
+					<input type="text" class="form-control" id="nickname" 
+						name="nickname" placeholder="1" value="" 
+						aria-describedby="btnNicknameCheck">
+					<button class="btn btn-outline-secondary" type="button" id="btnNicknameCheck">중복확인</button>
 					<label for="nickname" class="form-label">닉네임</label>
+					
+					<c:if test="${empty error.userId}">
+						<span id="idCheck" class="valid-msg"></span>
+					</c:if>
+					<form:errors id="nicknameCheck" path="nickname" cssClass="valid-msg"/>
 				</div>
 	
 				<div class="form-floating mb-3">
 					<input type="password" class="form-control" id="password" placeholder="1" value="">
 					<label for="password" class="form-label">비밀번호</label>
-					<div class="invalid-feedback">비밀번호 양식에 맞게 입력해주세요</div>
+					
+					<form:errors path="password" cssClass="valid-msg"/>
 				</div>
 	
 				<div class="form-floating mb-3">
 					<input type="password" class="form-control" id="password2" placeholder="1" value="">
 					<label for="password2" class="form-label">비밀번호 확인</label>
-					<div class="invalid-feedback">비밀번호가 맞지 않습니다</div>
+					
+					<div class="invalid-feedback">비밀번호 확인이 올바르지 않습니다</div>
 				</div>
 	
 				<div class="form-floating">
@@ -67,13 +78,13 @@
 				</div>
 				
 				<div class="form-floating mb-3">
-					<textarea class="form-control" id="info" placeholder="1"></textarea>
-					<label for="detail" class="form-label">자기소개</label>
+					<textarea class="form-control" id="introduce" placeholder="1"></textarea>
+					<label for="introduce" class="form-label">자기소개</label>
 				</div>
 				
 				<div class="mb-3">
-				  <label for="formFile" class="form-label">프로필 사진</label>
-				  <input class="form-control" type="file" id="formFile">
+				  <label for="profilePhoto" class="form-label">프로필 사진</label>
+				  <input class="form-control" type="file" id="profilePhoto">
 				</div>
 				
 				<hr class="my-3">
@@ -104,6 +115,7 @@ window.onload = function(){
 </script>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/resources/js/mypage/updateMemberForm.js"></script>
 
 </body>
 </html>

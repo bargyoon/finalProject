@@ -1,8 +1,10 @@
 package com.kh.spring.mypage.model.service;
 
-import org.springframework.stereotype.Service;
+import com.kh.spring.mypage.validator.UpdateForm;
 
-@Service
-public class MypageService {
-
+public interface MypageService {
+	
+	String selectMemberByNickname(String nickname);
+	
+	void updateMember(UpdateForm form);
 }
