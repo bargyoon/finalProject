@@ -64,7 +64,8 @@ public class AdminController {
 	
 	@GetMapping("disease/price-img-list")
 	public void priceList(Model model) {
-		adminService.selectPriceImgList();
+		List<Map<String, Object>> commandList = adminService.selectPriceImgList();
+		model.addAttribute("datas",commandList);		
 	}
 	
 	@GetMapping("disease/add-disease-spec")

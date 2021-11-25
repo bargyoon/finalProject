@@ -11,8 +11,7 @@ public class PriceImg {
 	private long dsIdx;
 	private long userIdx;
 	private int price;
-	private String allow;
-	private String failReason;
+	private String state;
 	private Date regDate;
 	
 }

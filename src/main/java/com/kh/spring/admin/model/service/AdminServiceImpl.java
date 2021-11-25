@@ -3,6 +3,7 @@ package com.kh.spring.admin.model.service;
 import java.io.FileInputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -37,6 +38,7 @@ public class AdminServiceImpl implements AdminService {
 		for (MultipartFile multipartFile : mfs) {
 			if (!multipartFile.isEmpty()) {
 				diseaseRepository.insertDsFileInfo(fileUtil.fileUpload(multipartFile));
+				
 			}
 
 		}
@@ -44,17 +46,25 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	
-	public void selectPriceImgList() {
+	public List<Map<String, Object>> selectPriceImgList() {
+		List<Map<String, Object>> commandList = new ArrayList<Map<String,Object>>();
 		List<PriceImg> piList = diseaseRepository.selectPriceImgList();
 		for (PriceImg priceImg : piList) {
 			FileDTO fileDTO = diseaseRepository.selectFileByIdx(priceImg.getPiIdx());
-			convertImgToPrice(fileDTO.getSavePath()+fileDTO.getRenameFileName());
+			Disease disease = diseaseRepository.selectDiseaseByIdx(priceImg.getDsIdx());
+			int price = convertImgToPrice(fileDTO.getSavePath()+fileDTO.getRenameFileName());
+			priceImg.setPrice(price);
+			commandList.add(Map.of("priceImg", priceImg, "disease", disease, "files", fileDTO));
 		}
+		return commandList;
+
 		
 	}
 
-	public void convertImgToPrice(String savePath) {
+	public int convertImgToPrice(String savePath) {
+		int price = 0;
 		try {
+			
 			String imageFilePath = "C:\\CODE\\UPLOAD\\"+savePath; // 여기에는 자신의 로컬 이미지 명이 들어가야합니다.
 			List<AnnotateImageRequest> requests = new ArrayList<>();
 			ByteString imgBytes = ByteString.readFrom(new FileInputStream(imageFilePath));
@@ -68,21 +78,20 @@ public class AdminServiceImpl implements AdminService {
 				for (AnnotateImageResponse res : responses) {
 					if (res.hasError()) {
 						System.out.printf("Error: %s\n", res.getError().getMessage());
-						return;
+						return price;
 					}
 
 					String temp = res.getTextAnnotationsList().get(0).getDescription();
 					String[] tempArr = temp.split("청구 금액:");
 					temp = tempArr[1].substring(0, 8);
-					String price = temp.replaceAll("[^\\d]", "");
-					System.out.println(price);
+					price = Integer.parseInt(temp.replaceAll("[^\\d]", ""));
 					
 				}
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-		}
-
+		} 
+		return price;
 	}
 	
 	
