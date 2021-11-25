@@ -127,7 +127,7 @@
 							</div>
 						</td>
 						<td><fmt:formatDate value="${orderList.ORDER_DATE}" pattern="yyyy-MM-dd"/></td>
-						<td>202104260954500001</td>
+						<td>${orderList.ORDER_IDX}</td>
 						<td>${orderList.PAYMENT_AMOUNT}<br> ${orderList.ORDER_CNT}개
 						</td>
 						<td>

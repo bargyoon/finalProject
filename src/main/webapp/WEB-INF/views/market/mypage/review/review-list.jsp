@@ -123,8 +123,9 @@
 						</td>
 						<td><fmt:formatDate value="${reviewList.ORDER_DATE}" pattern="yyyy-MM-dd"/><br>
 						</td>
-						<td><a class="btn-review" href="/market/mypage/review/photo-form">작성하기</a></td>
-						<td><a class="btn-review" href="/market/mypage/review/normal-form">작성하기</a></td>
+						<td><a class="btn-review" href="/market/mypage/review/photo-form?orderIdx=${reviewList.ORDER_IDX}">작성하기</a></td>
+						<td><a class="btn-review" href="/market/mypage/review/normal-form?orderIdx=${reviewList.ORDER_IDX}">작성하기</a></td>
+						
 					</tr>
 				</tbody>
 				</c:forEach>

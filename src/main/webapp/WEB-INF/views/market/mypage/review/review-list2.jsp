@@ -3,6 +3,8 @@
 <html>
 <head>
 <%@ include file="/WEB-INF/views/include/market/mypage-head.jsp"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
 <link rel="stylesheet" href="${contextPath}/resources/css/market/slick/slick.css">
 <link rel="stylesheet" href="${contextPath}/resources/css/market/slick/slick-theme.css">
 
@@ -93,6 +95,7 @@
 						<th scope="col">후기 종류</th>
 					</tr>
 				</thead>
+				<c:forEach var="myReviewList" items="${myReviewList}">
 				<tbody>
 					<tr>
 						<td>
@@ -101,13 +104,13 @@
 								<ul class="info">
 									<li class="brand">브랜드</li>
 									<li class="name ft-SBAggroM"><a href="#!" style="text-decoration: none; color: black;">제품명</a></li>
-									<li class="option">${reviewList.PO_NAME}</li>
+									<li class="option"></li>
 								</ul>
 							</div>
 						</td>
 						<td>
 							<div style="text-align: left; display: flex; float: left; flex-direction: column;">
-								<p>2021.04.26 | <span style="color: royalblue;">승인</span></p>
+								<p><fmt:formatDate value="${myReviewList.regDate}" pattern="yyyy-MM-dd"/> | <span style="color: royalblue;">승인</span></p>
 								<div class="d-flex small text-warning my-2">
 									<div class="bi-star-fill"></div>
 									<div class="bi-star-fill"></div>
@@ -115,7 +118,7 @@
 									<div class="bi-star-fill"></div>
 									<div class="bi-star-fill"></div>
 								</div>
-								<p style="max-width: 90%;">우리 강아지가 너무 좋아해요 우리 강아지가 너무 좋아해요 우리 강아지가 너무 좋아해요 우리 강아지가 너무 좋아해요 우리 강아지가 너무 좋아해요</p>
+								<p style="max-width: 90%;">${myReviewList.rvContent}</p>
 								<div>
 									<input id="likeBtn" type="checkbox" onclick="" style="display: none;">
 									<label class="like-btn px-lg-2" for="likeBtn">
@@ -174,6 +177,7 @@
 						</td>
 					</tr>
 				</tbody>
+				</c:forEach>
 			</table>
 		</div>
 	</section>

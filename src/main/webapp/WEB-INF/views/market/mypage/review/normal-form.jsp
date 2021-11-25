@@ -69,15 +69,16 @@
 				<li>등록하신 후기는 공개되어 회원이 조회 가능하며, 댓글이 등록될 수 있습니다.</li>
 				<li>작성된 후기는 사이트의 홍보 콘텐츠로 사용될 수 있습니다.</li>
 			</ul>
+			<c:forEach var="reviewDetail" items="${reviewDetail}">
 			<div class="d-flex n-prd-row">
 				<a href="#!"><img src="https://dummyimage.com/100x120/dee2e6/6c757d.jpg"></a>
 				<ul class="info p-4">
-					<li class="brand">브랜드</li>
-					<li class="name ft-SBAggroM"><a href="#!" style="text-decoration: none; color: black;">제품명</a></li>
-					<li class="option">옵션</li>
+					<li class="brand">${reviewDetail.BRAND}</li>
+					<li class="name ft-SBAggroM"><a href="#!" style="text-decoration: none; color: black;">${reviewDetail.NAME}</a></li>
+					<li class="option">${reviewDetail.PO_NAME}</li>
 				</ul>
 			</div>
-			<form method="post">
+			<form action="/market/mypage/review/upload/${reviewDetail.ORDER_IDX}" method="post">
 				<div class="d-flex pt-2">
 					<p class="label"> 
 						제품에 대해 나의 별점은 ?<br>
@@ -107,9 +108,10 @@
 					<label class="ad_check_label px-1" for="ad_agree">작성된 후기는 사이트의 홍보 콘텐츠로 사용될 수 있습니다. (필수)</label>
 				</div>
 				<div class="d-flex py-3" style="justify-content: center;">
-					<button type="button" class="py-2 px-lg-5 btn btn-outline-dark" style="font-size: 14px;">등록</button>
+					<button type="submit" class="py-2 px-lg-5 btn btn-outline-dark" style="font-size: 14px;">등록</button>
 				</div>
 			</form>
+			</c:forEach>
 		</div>
 	</section>
 	

@@ -9,12 +9,14 @@ public class Review {
 
 	private int rvIdx;
 	private int userIdx;
+	private int prdIdx; //제품번호
 	private	int orderIdx;
-	private int state;
+	private String state;
 	private int rating;
-	private int type; //리뷰타입
+	private String type; //리뷰타입
 	private int recommand; //추천수
 	private Date regDate;
-	private int isDel;
+	private String isDel;
+	private String rvContent; //리뷰내용
 	
 }

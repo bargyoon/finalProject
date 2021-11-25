@@ -75,15 +75,17 @@
 					</ul>
 				</li>
 			</ul>
+			<c:forEach var="reviewDetail" items="${reviewDetail}">
 			<div class="d-flex n-prd-row pt-4">
 				<a href="#!"><img src="https://dummyimage.com/100x120/dee2e6/6c757d.jpg"></a>
 				<ul class="info p-4">
-					<li class="brand">브랜드</li>
-					<li class="name ft-SBAggroM"><a href="#!" style="text-decoration: none; color: black;">제품명</a></li>
-					<li class="option">${reviewList.PO_NAME}</li>
+					<li class="brand">${reviewDetail.BRAND}</li>
+					<li class="name ft-SBAggroM"><a href="#!" style="text-decoration: none; color: black;">${reviewDetail.NAME}</a></li>
+					<li class="option">${reviewDetail.PO_NAME}</li>
 				</ul>
 			</div>
-			<form action="" method="post" enctype="multipart/form-data">
+			
+			<form action="/market/mypage/review/upload/${reviewDetail.ORDER_IDX}" method="post" enctype="multipart/form-data">
 				<div class="d-flex pt-2">
 					<p class="label">
 						제품에 대해 나의 별점은 ?<br>
@@ -116,27 +118,30 @@
 					</div>
 				</div>
 				<p>업로드 사진 미리보기는 최대 3개만 보여집니다.</p>
-				<div class="pb-3" id="preview_imgs"></div>
+				<div class="pb-3" id="preview_imgs"></div> <!-- 업로드한 사진 -->
 				<hr>
 				<p>상품에 대한 평가를 20자 이상 남겨주세요.</p>
 				<div class="container2" style="padding: 0;">
-					<textarea class="review_text" placeholder="내용" name="review-content" onkeyup=""></textarea>
+					<textarea class="review_text" placeholder="내용" name="rvContent" onkeyup=""></textarea>
 					<p class="limit_text_alert">0 자 / 20자 이상</p>
 				</div>
 				<div>
-					<input type="checkbox" name="ad-check" id="ad_agree">
+					<input type="checkbox" name="ad-check" id="ad_agree" required="required">
 					<label class="ad_check_label px-1" for="ad_agree">작성된 후기는 사이트의 홍보 콘텐츠로 사용될 수 있습니다. (필수)</label>
 				</div>
 				<div class="d-flex py-3" style="justify-content: center;">
-					<button type="button" class="py-2 px-lg-5 btn btn-outline-dark" style="font-size: 14px;" onclick="">등록</button>
+					<button type="submit" class="py-2 px-lg-5 btn btn-outline-dark" style="font-size: 14px;" onclick="">등록</button>
 				</div>
 			</form>
+			</c:forEach>
 		</div>
 	</section>
 	
 	<%@ include file="/WEB-INF/views/include/market/footer.jsp"%>
 	<script type="text/javascript" src="${contextPath}/resources/js/market/mypage/review-photo.js"></script>
-
+	<script type="text/javascript">
+			data = location.href.split("?");		    
+	</script>
 
 
 </body>
