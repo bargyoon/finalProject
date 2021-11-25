@@ -34,7 +34,6 @@ public class MemberServiceImpl implements MemberService{
 		return memberRepository.idCheck(userId);
 	}
 
-
 	public int nickNameCheck(String nickName) {
 		return memberRepository.nickNameCheck(nickName);
 	}

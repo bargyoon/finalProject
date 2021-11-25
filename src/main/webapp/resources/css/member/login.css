@@ -89,6 +89,21 @@ body {
     color: #fff;
     border-color: #21252961 !important;
 }
+#mail_auth_input false{
+    background-color:#ebebe4;
+}
+ 
+#mail_auth_input true{
+    background-color:white;
+}
+
+/* 클래스속성 코드. 인증번호의 일치 여부에 따라 span태그의 색 변경시 사용 */
+.correct{
+    color : green;
+}
+.incorrect{
+    color : red;
+}
 
 .valid-msg{
 	color:red;	font-size:0.5vw;

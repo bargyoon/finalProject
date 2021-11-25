@@ -237,10 +237,23 @@
                      <input type="text" name="userName" id="userName" class="form-control" placeholder="이름을 입력하세요">
                   </div>
                   
-                  <div class="form-group">
-                     <label>이메일 </label>
-                     <input type="email" type="email" name="email" class="form-control" placeholder="이메일을 입력하세요">
+                  <div class="form-group" id="mail_auth_wrap">
+                     	<label>이메일 </label>
+                     	<div class="mail_auth">
+                     		<input type="email" type="email" id="email" name="email" class="form-control" placeholder="이메일을 입력하세요">
+                  		</div>
+                  		<div class="form-group" id="mail_auth_ck_wrap">
+	                  		<div class="mail_auth_ck">
+	                     		<input class="form-control" id="email_ck"disabled="disabled">
+	                  		</div>
+		                  	<div class="btn btn-black" id="mail_auth_bnt">
+		                  	 	<span>인증번호 발송</span>
+		                  	</div>
+		                  	<div class="clearfix"></div>
+		                  	<span id="mail_auth_check_warn"></span>
+                  	    </div>
                   </div>
+                  
                   
                    <div class="form-group">
                      <label>주소: </label>
@@ -254,8 +267,8 @@
       </div>
 </form:form>
 
-<!-- 유효성검사 막음
-<script type="text/javascript" src="/resources/js/member/joinForm.js"></script> -->
+<script type="text/javascript" src="/resources/js/member/joinForm.js"></script>
+<script type="text/javascript" src="/resources/js/member/mail_auth.js"></script>
 
 <!-- 주소 api -->
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>

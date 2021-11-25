@@ -25,21 +25,21 @@
    		<constructor-arg index="0" ref="sqlSessionFactory" />
  	</bean>
  	
- 	<!-- 메일 발송 : JavaMailSenderImpl -->
- 	<bean class="org.springframework.mail.javamail.JavaMailSenderImpl" id="javaMailSenderImpl">
- 		<property name="username" value=""/>
- 		<property name="password" value=""/>
- 		<property name="host" value="smtp.gmail.com"/>
- 		<property name="port" value="587"/>
- 		<property name="javaMailProperties" >
- 			<props>
- 				<prop key="mail.smtp.starttls.enable">true</prop>
- 				<prop key="mail.smtp.ssl.protocols">TLSv1.2</prop>
- 				<prop key="mail.smtp.auth">true</prop>
- 				<prop key="mail.debug">true</prop>
- 			</props>
- 		</property>
- 	</bean>
+   <!-- 메일 발송 : JavaMailSenderImpl -->
+   <bean class="org.springframework.mail.javamail.JavaMailSenderImpl" id="javaMailSenderImpl">
+			<property name="username" value="pclassTeam1@gmail.com"/>
+			<property name="password" value="123asd!@#"/>
+			<property name="host" value="smtp.gmail.com"/>
+			<property name="port" value="587"/>
+			<property name="javaMailProperties">
+				<props>
+					<prop key="mail.smtp.starttls.enable">true</prop>
+					<prop key="mail.smtp.ssl.protocols">TLSv1.2</prop>
+					<prop key="mail.smtp.auth">true</prop>
+					<prop key="mail.debug">true</prop>				
+				</props>
+			</property>
+	</bean>
  	
  	<bean class="org.springframework.http.client.SimpleClientHttpRequestFactory" id="simpleClientHttpRequestFactory">
  		<property name="connectTimeout" value="5000"/>
