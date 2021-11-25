@@ -17,17 +17,38 @@ public class ShopServiceImpl implements ShopService{
 
 	private final ShopRepository shopRepository;
 
-	public List<Product> selectPrdByCategory(String category) {
+	public List<Product> selectPrdByCategory(String category, String option) {
 		
 		List<Product> prdList = new ArrayList<Product>();
 		
+		String optionSql = makeOrderSql(option);
+		
 		if(category.equals("all")) {
-			prdList = shopRepository.selectAllPrd();			
+			prdList = shopRepository.selectAllPrd(optionSql);			
 		} else {
-			prdList = shopRepository.selectPrdByCategory(category);
+			prdList = shopRepository.selectPrdByCategory(category, optionSql);
 		}
 		return prdList;
 	}
+	
+
+	private String makeOrderSql(String option) {
+		String optionSql = "order by ";
+		if(option == null) {
+			return "";
+		} else if(option.equals("pop")) {
+			optionSql += "rating desc";
+		} else if(option.equals("new")) {
+			optionSql += "reg_date desc";
+		} else if(option.equals("high")) {
+			optionSql += "price desc";
+		} else if(option.equals("low")) {
+			optionSql += "price asc";
+		}
+		
+		return optionSql;
+	}
+
 
 	public String categoryToKor(String category) {
 		if(category.equals("feed")) {

@@ -1,7 +1,10 @@
 package com.kh.spring.market.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+
+import javax.annotation.Nullable;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -32,15 +35,18 @@ public class ShopController {
 	private final ShopService shopService;
 	
 	@GetMapping("prd-list")
-	public void prdList(String category, Model model) {
-		List<Product> prdList = shopService.selectPrdByCategory(category);
+	public void prdList(String category, String option, String check, Model model) {
+		List<Product> prdList = shopService.selectPrdByCategory(category, option);
+		
 		String categoryWord = shopService.categoryToKor(category);
 		
 		for (Product product : prdList) {
 			logger.debug("product : {}", product);
 		}
 		
+		model.addAttribute("check", check);
 		model.addAttribute("categoryWord", categoryWord);
+		model.addAttribute("cg", category);
 		model.addAttribute("prdList", prdList);
 	}
 	

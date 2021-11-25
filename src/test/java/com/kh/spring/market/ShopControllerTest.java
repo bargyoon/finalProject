@@ -63,9 +63,11 @@ public class ShopControllerTest {
 	@Test
 	public void prdListTest() throws Exception {
 		String category = "feed";
+		String option = null;
 		
 		mockMvc.perform(get("/market/shop/prd-list")
-				.param("category", category))
+				.param("category", category)
+				.param("option", option))
 		.andExpect(status().isOk())
 		.andDo(print());
 	}

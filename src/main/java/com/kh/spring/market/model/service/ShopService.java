@@ -7,7 +7,7 @@ import com.kh.spring.market.model.dto.Product;
 
 public interface ShopService {
 
-	List<Product> selectPrdByCategory(String category);
+	List<Product> selectPrdByCategory(String category, String option);
 
 	String categoryToKor(String category);
 
