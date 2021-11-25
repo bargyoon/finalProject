@@ -37,8 +37,8 @@
 		</nav>
 		
 		<div style="margin: 0 auto;">
-			<form class="needs-validation" style="margin: 0 auto; width: 400px;"
-				action="/mypage/update-form" method="post" enctype="multipart/form-data" id="frm_update">
+			<form:form style="margin: 0 auto; width: 400px;" id="frm_update"
+				action="/mypage/update-member" method="post" enctype="multipart/form-data" modelAttribute="updateMemberForm">
 			
 				<div class="input-group form-floating mb-3">
 					<input type="text" class="form-control" id="nickname" 
@@ -47,24 +47,23 @@
 					<button class="btn btn-outline-secondary" type="button" id="btnNicknameCheck">중복확인</button>
 					<label for="nickname" class="form-label">닉네임</label>
 					
-					<c:if test="${empty error.userId}">
-						<span id="idCheck" class="valid-msg"></span>
+					<c:if test="${empty error.nickname}">
+						<span id="nicknameCheck" class="valid-msg"></span>
 					</c:if>
 					<form:errors id="nicknameCheck" path="nickname" cssClass="valid-msg"/>
 				</div>
 	
 				<div class="form-floating mb-3">
 					<input type="password" class="form-control" id="password" placeholder="1" value="">
-					<label for="password" class="form-label">비밀번호</label>
-					
-					<form:errors path="password" cssClass="valid-msg"/>
+					<label for="password" class="form-label">변경할 비밀번호</label>
 				</div>
 	
 				<div class="form-floating mb-3">
 					<input type="password" class="form-control" id="password2" placeholder="1" value="">
 					<label for="password2" class="form-label">비밀번호 확인</label>
 					
-					<div class="invalid-feedback">비밀번호 확인이 올바르지 않습니다</div>
+					<span id="passwordCheck" class="valid-msg"></span>
+					<form:errors id="passwordCheck" path="password" cssClass="valid-msg"/>
 				</div>
 	
 				<div class="form-floating">
@@ -90,7 +89,7 @@
 				<hr class="my-3">
 				
 				<button class="w-100 btn btn-primary btn-lg" type="submit">회원정보 수정</button>
-			</form>
+			</form:form>
 		</div>
 	</div>
 </section>

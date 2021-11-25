@@ -40,9 +40,15 @@
 		
 		if(nickname != "" && confirmNickname != nickname){
 			e.preventDefalut(); // 이벤트 전파 차단
-			document.querySelector("#idCheck").innerHTML = "닉네임 중복 검사를 하지 않았습니다.";
-			document.querySelector("#userId").focus();
-		}
+			document.querySelector("#nicknameCheck").innerHTML = "닉네임 중복 검사를 하지 않았습니다.";
+			document.querySelector("#nickname").focus();
+		};
+		
+		if(password != password2){
+			e.preventDefalut();
+			document.querySelector("#passwordCheck").innerHTML = "비밀번호 확인이 다릅니다.";
+			document.querySelector("#password2").focus();
+		};
 	})
 	
 })();
