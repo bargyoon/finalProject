@@ -19,7 +19,6 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.kh.spring.market.model.dto.Order;
 
@@ -62,8 +61,8 @@ public class ShopControllerTest {
 	
 	@Test
 	public void prdListTest() throws Exception {
-		String category = "feed";
-		String option = null;
+		String category = "all";
+		String option = "low";
 		
 		mockMvc.perform(get("/market/shop/prd-list")
 				.param("category", category)

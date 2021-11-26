@@ -31,6 +31,7 @@ public class ExceptionAdvice {
 	@ExceptionHandler(DataAccessException.class)
 	public String dataAccessExceptionProcess(DataAccessException e, Model model) {
 		model.addAttribute("msg", "데이터베이스 접근 중에 예외가 발생하였습니다.");
+		e.printStackTrace();
 		model.addAttribute("url", "/");
 		
 		return "common/result";

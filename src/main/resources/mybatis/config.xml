@@ -9,9 +9,11 @@
 	</settings>
 	<typeAliases>
 		<typeAlias alias="Member" type="com.kh.spring.member.model.dto.Member"/>
+		<typeAlias alias="Product" type="com.kh.spring.market.model.dto.Product"/>
 	</typeAliases>
 	<mappers>
 		<mapper resource="mybatis/mapper/mybatisMapper.xml" />
+		<mapper resource="mybatis/mapper/marketMapper.xml" />
 	</mappers>
 	
 	

@@ -1,10 +1,7 @@
-package com.kh.spring.market.controller;
+	package com.kh.spring.market.controller;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
-import javax.annotation.Nullable;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,13 +11,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonMappingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.kh.spring.board.model.service.BoardService;
+import com.kh.spring.common.util.pagination.Paging;
 import com.kh.spring.market.model.dto.Order;
 import com.kh.spring.market.model.dto.Product;
+import com.kh.spring.market.model.dto.prdListSet;
 import com.kh.spring.market.model.service.ShopService;
 
 import lombok.RequiredArgsConstructor;
@@ -35,18 +31,27 @@ public class ShopController {
 	private final ShopService shopService;
 	
 	@GetMapping("prd-list")
-	public void prdList(String category, String option, String check, Model model) {
-		List<Product> prdList = shopService.selectPrdByCategory(category, option);
+	public void prdList(prdListSet listSet, @RequestParam(required = false, defaultValue = "1") int page, Model model) {
 		
-		String categoryWord = shopService.categoryToKor(category);
+		Paging pageUtil = Paging.builder()
+								.curPage(page)
+								.cntPerPage(16)
+								.blockCnt(10)
+								.total(shopService.prdListCnt(listSet))
+								.build();
+
+		
+		List<Product> prdList = shopService.selectPrdList(listSet, pageUtil);
+		
+		String categoryWord = shopService.categoryToKor(listSet.getCategory());
 		
 		for (Product product : prdList) {
 			logger.debug("product : {}", product);
 		}
 		
-		model.addAttribute("check", check);
+		model.addAttribute("listSet", listSet);
+		model.addAttribute("pageUtil", pageUtil);
 		model.addAttribute("categoryWord", categoryWord);
-		model.addAttribute("cg", category);
 		model.addAttribute("prdList", prdList);
 	}
 	

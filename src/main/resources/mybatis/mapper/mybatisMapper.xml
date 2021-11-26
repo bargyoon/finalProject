@@ -7,40 +7,4 @@
   		select password from member where user_id = #{userId}
   	</select>
   	
-<!--   	<resultMap type="map" id="product">
-		 <result column="prd_idx" javaType="int" property="prdIdx"/>
-		 <result column="event_idx" javaType="int" property="eventIdx"/>
-		 <result column="sub_img_idx" javaType="int" property="subImgIdx"/>
-		 <result column="name" javaType="String" property="name"/>
-		 <result column="brand" javaType="String" property="brand"/>
-		 <result column="price" javaType="int" property="price"/>
-		 <result column="po_stock" javaType="int" property="poStock"/>
-		 <result column="rating" javaType="int" property="rating"/>
-		 <result column="category" javaType="String" property="category"/>
-		 <result column="po_name" javaType="String" property="poName"/>
-		 <result column="sale_per" javaType="int" property="salePer"/>
-		 <result column="coupon_avail" javaType="String" property="couponAvail"/>
-		 <result column="sm_avail" javaType="String" property="smAvail"/>
-		 <result column="state" javaType="String" property="state"/>
-		 <result column="reg_date" javaType="date" property="regDate"/>
-  	</resultMap>
-  	
-  	
-  	<select id="selectAllPrd" resultMap="product">
-			select prd_idx, event_idx, sub_img_idx, name, brand, rating, min(price), sale_per, reg_date
-			from product
-			join prd_detail
-			using (prd_idx)
-			GROUP BY prd_idx, event_idx, sub_img_idx, name, brand, rating, sale_per, reg_date
-	</select>
-  	
-  	  <select id="selectPrdByCategory" resultMap="product">
-			select prd_idx, event_idx, sub_img_idx, name, brand, rating, min(price), sale_per, reg_date
-			from product
-			join prd_detail
-			using (prd_idx)
-			where category = ${category}
-			GROUP BY prd_idx, event_idx, sub_img_idx, name, brand, rating, sale_per, reg_date
-	</select> -->
-  	
   </mapper>

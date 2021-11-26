@@ -35,16 +35,16 @@
 		<div class="category-title px-lg-5">
 			<div style="transform: translateY(30%);">
 				<span class="category-name ps-4 pe-2"><c:out value="${categoryWord}"/></span>
-				<span class="category-prd-cnt"><c:out value="${prdList.size()}"/></span>
+				<span class="category-prd-cnt"><c:out value="${pageUtil.total}"/></span>
 			</div>
-			<input class="checkbox" type="checkbox" id="reg-log" onchange="isChecked()" ${check ? 'checked' : ''}>
+			<input class="checkbox" type="checkbox" id="reg-log" onchange="isChecked('${listSet.category}')" ${listSet.check ? 'checked' : ''}>
 			<label for="reg-log" class="reg-label"></label>
 			<div class="d-flex justify-content-end">
 				<ul class="sort-option">
-					<li><button class="sort-option-btn" onclick="sort('${cg}','pop')">인기순</button></li>
-					<li><button class="sort-option-btn" onclick="sort('${cg}','new')">신상품순</button></li>
-					<li><button class="sort-option-btn" onclick="sort('${cg}','low')">최저가격순</button></li>
-					<li><button class="sort-option-btn" onclick="sort('${cg}','high')">최고가격순</button></li>
+					<li><button class="sort-option-btn" onclick="sort('${listSet.category}','pop')">인기순</button></li>
+					<li><button class="sort-option-btn" onclick="sort('${listSet.category}','new')">신상품순</button></li>
+					<li><button class="sort-option-btn" onclick="sort('${listSet.category}','low')">최저가격순</button></li>
+					<li><button class="sort-option-btn" onclick="sort('${listSet.category}','high')">최고가격순</button></li>
 				</ul>
 			</div>
 		</div>
@@ -54,86 +54,59 @@
 				<p style="font-size: 2rem; margin-top: 2rem;">상품이 없습니다</p>
 			</div>
 		</div>
-		<div class="my-5 prd-list-area" id="dog-list">
+		<div class="my-5 prd-list-area" id="prd-list">
 			<c:if test="${prdList.size()>0}">
-				<c:forEach var="i" begin="0" step="1" end="${prdList.size()}">
-					<c:if test="${prdList[i].type eq 'D' || prdList[i].type eq 'A'}">
-						<div class="mb-4 prd-area mx-lg-4">
-							<a class="btn" href="/market/shop/prd-detail?${prdList[i]}" style="top: ${prdList[i].salePer eq 0 ? '1.5rem' : '0rem'}">
-								<c:if test="${prdList[i].salePer ne 0}">
-									<div class="badge-shop">Sale</div>					
-								</c:if>
-								<img class="prd-img" src="https://dummyimage.com/300x300/dee2e6/6c757d.jpg" alt="..."/>
-								<div class="pt-3" style="padding-bottom: 0rem;">
-									<p class="prd-name mb-1 small"><c:out value="${prdList[i].name}"/></p>
-								</div>
-								<div class="d-flex small text-warning justify-content-center pb-1">
+				<c:forEach var="i" begin="0" step="1" end="${prdList.size()-1}">
+					<div class="mb-4 prd-area mx-lg-4">
+						<a class="btn" href="/market/shop/prd-detail?${prdList[i]}" style="top: ${prdList[i].salePer eq 0 ? '1.5rem' : '0rem'}">
+							<c:if test="${prdList[i].salePer ne 0}">
+								<div class="badge-shop">Sale</div>					
+							</c:if>
+							<img class="prd-img" src="https://dummyimage.com/300x300/dee2e6/6c757d.jpg" alt="..."/>
+							<div class="pt-3" style="padding-bottom: 0rem;">
+								<p class="prd-name mb-1 small"><c:out value="${prdList[i].name}"/></p>
+							</div>
+							<div class="d-flex small text-warning justify-content-center pb-1">
+								<c:if test="${prdList[i].rating>0}">
 									<c:forEach var="j" begin="0" step="1" end="${prdList[i].rating-1}">
 										<i class="fas fa-star"></i>
 									</c:forEach>
-								</div>
-								<div class="text-center">
-									<c:if test="${prdList[i].salePer ne 0}">
-										<span style="color: red;"><c:out value="${prdList[i].salePer}%"/></span>
-										<span class="text-muted text-decoration-line-through" style="font-size: smaller;"><fmt:formatNumber value="${prdList[i].price}"/>원</span>
-									</c:if>
-								</div>
+								</c:if>
+							</div>
+							<div class="text-center">
 								<c:if test="${prdList[i].salePer ne 0}">
-									<div class="text-center"><fmt:formatNumber value="${prdList[i].price * (1-prdList[i].salePer/100)}"/>원</div>
+									<span style="color: red;"><c:out value="${prdList[i].salePer}%"/></span>
+									<span class="text-muted text-decoration-line-through" style="font-size: smaller;"><fmt:formatNumber value="${prdList[i].price}"/>원</span>
 								</c:if>
-								<c:if test="${prdList[i].salePer eq 0}">
-									<div class="text-center"><fmt:formatNumber value="${prdList[i].price}"/>원</div>
-								</c:if>
-							</a>
-						</div>
-					</c:if>
+							</div>
+							<c:if test="${prdList[i].salePer ne 0}">
+								<div class="text-center"><fmt:formatNumber value="${prdList[i].price * (1-prdList[i].salePer/100)}"/>원</div>
+							</c:if>
+							<c:if test="${prdList[i].salePer eq 0}">
+								<div class="text-center"><fmt:formatNumber value="${prdList[i].price}"/>원</div>
+							</c:if>
+						</a>
+					</div>
 				</c:forEach>
 			</c:if>
 		</div>
-		<div class="my-5 prd-list-area" id="cat-list" style="display: none;">
-			<c:if test="${prdList.size()>0}">
-				<c:forEach var="i" begin="0" step="1" end="${prdList.size()}">
-					<c:if test="${prdList[i].type eq 'C' || prdList[i].type eq 'A'}">
-						<div class="mb-4 prd-area mx-lg-4">
-							<a class="btn" href="/market/shop/prd-detail?${prdList[i]}" style="top: ${prdList[i].salePer eq 0 ? '1.5rem' : '0rem'}">
-								<c:if test="${prdList[i].salePer ne 0}">
-									<div class="badge-shop">Sale</div>					
-								</c:if>
-								<img class="prd-img" src="https://dummyimage.com/300x300/dee2e6/6c757d.jpg" alt="..." />
-								<div class="pt-3" style="padding-bottom: 0rem;">
-									<p class="prd-name mb-1 small"><c:out value="${prdList[i].name}"/></p>
-								</div>
-								<div class="d-flex small text-warning justify-content-center pb-1">
-									<c:forEach var="j" begin="0" step="1" end="${prdList[i].rating-1}">
-										<i class="fas fa-star"></i>
-									</c:forEach>
-								</div>
-								<div class="text-center">
-									<c:if test="${prdList[i].salePer ne 0}">
-										<span style="color: red;"><c:out value="${prdList[i].salePer}%"/></span>
-										<span class="text-muted text-decoration-line-through" style="font-size: smaller;"><fmt:formatNumber value="${prdList[i].price}"/>원</span>
-									</c:if>
-								</div>
-								<c:if test="${prdList[i].salePer ne 0}">
-									<div class="text-center"><fmt:formatNumber value="${prdList[i].price * (1-prdList[i].salePer/100)}"/>원</div>
-								</c:if>
-								<c:if test="${prdList[i].salePer eq 0}">
-									<div class="text-center"><fmt:formatNumber value="${prdList[i].price}"/>원</div>
-								</c:if>
-							</a>
-						</div>
-					</c:if>
-				</c:forEach>
-			</c:if>
+
+		<div class="page_wrap" style="margin-left: 2.4rem">
+			<div class="page_nation">
+				<a class="arrow prev" onclick="prevBtn('${listSet.category}', '${pageUtil.curPage}', '${listSet.option}')"><i class="fas fa-angle-left"></i></a>
+				<c:if test="${pageUtil.blockEnd eq 1}">
+					<a href="#" class="active">1</a> 
+				</c:if>
+				
+				<c:if test="${pageUtil.blockEnd > 1}">
+					<c:forEach var="i" begin="0" step="1" end="${pageUtil.blockEnd-1}">
+						<a href="#" class="active"><c:out value="${i}"/></a> 
+					</c:forEach>
+				</c:if>
+				<a class="arrow next" onclick="nextBtn('${listSet.category}', '${pageUtil.curPage}','${pageUtil.blockEnd} ,'${listSet.option}')"href="/market/shop/prd-list?category=${listSet.category}&page=${pageUtil.curPage+1}&option=${listSet.option}&check=${listSet.check}"><i class="fas fa-angle-right"></i></a>
+			</div>
 		</div>
 	</section>
-
-	<!-- pagination -->
-	<div class="page_btn_wrap">
-		<a href="#" class="prev_btn" tabindex="-1" role="button" aria-disabled="true"><i class="fas fa-angle-left"></i></a>
-		<a href="#" class="list_btn" tabindex="-1" role="button" aria-disabled="true">목록</a> <a href="#" class="next_btn" tabindex="-1" role="button" aria-disabled="true">
-		<i class="fas fa-angle-right"></i></a>
-	</div>
 
 	<%@ include file="/WEB-INF/views/include/market/footer.jsp"%>
 	<script type="text/javascript" src="${contextPath}/resources/js/market/shop/prd-list.js"></script>

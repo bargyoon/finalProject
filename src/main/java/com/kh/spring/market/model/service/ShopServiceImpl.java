@@ -6,7 +6,9 @@ import java.util.Map;
 
 import org.springframework.stereotype.Service;
 
+import com.kh.spring.common.util.pagination.Paging;
 import com.kh.spring.market.model.dto.Product;
+import com.kh.spring.market.model.dto.prdListSet;
 import com.kh.spring.market.model.repository.ShopRepository;
 
 import lombok.RequiredArgsConstructor;
@@ -17,17 +19,10 @@ public class ShopServiceImpl implements ShopService{
 
 	private final ShopRepository shopRepository;
 
-	public List<Product> selectPrdByCategory(String category, String option) {
+	public List<Product> selectPrdList(prdListSet listSet, Paging pageUtil) {
 		
-		List<Product> prdList = new ArrayList<Product>();
+		List<Product> prdList = shopRepository.selectPrdList(listSet, pageUtil);
 		
-		String optionSql = makeOrderSql(option);
-		
-		if(category.equals("all")) {
-			prdList = shopRepository.selectAllPrd(optionSql);			
-		} else {
-			prdList = shopRepository.selectPrdByCategory(category, optionSql);
-		}
 		return prdList;
 	}
 	
@@ -73,5 +68,14 @@ public class ShopServiceImpl implements ShopService{
 			return "장난감";
 		}
 		return "전체";
+	}
+
+
+	public int prdListCnt(prdListSet listSet) {
+		int res = 0;
+		res = shopRepository.prdListCnt(listSet);
+		System.out.println("res : " + res);
+		
+		return res;
 	}
 }

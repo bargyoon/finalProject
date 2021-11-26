@@ -1,26 +1,21 @@
 (() => {
 	
-	let catList = document.getElementById("cat-list");
-	let dogList = document.getElementById("dog-list");
+	let prdList = document.getElementById("prd-list");
 	let emptyList = document.getElementById("empty-list");
 	let regLog = document.getElementById("reg-log");
 	
-	checkEmpty = (firstList,secList) => {
-	    if(firstList.childNodes.length < 1){
+	checkEmpty = (prdList) => {
+	    if(prdList.childNodes.length < 1){
 			emptyList.style.display = 'flex';
-			firstList.style.display = 'none';
-		} else {
-			emptyList.style.display = 'none';
-			firstList.style.display = 'flex';
+			prdList.style.display = 'none';
 		}
-		secList.style.display = 'none';
 	}
 	
-	isChecked = () => {
-		if(regLog.checked){
-			checkEmpty(catList, dogList);
+	isChecked = (category) => {
+		if(!regLog.checked){
+			location.href = "/market/shop/prd-list?category="+category;
 		} else {
-			checkEmpty(dogList, catList);
+			location.href = "/market/shop/prd-list?category="+category+"&check=true";
 		}
 	}
 	
@@ -33,6 +28,40 @@
 		}
 	}
 	
-	isChecked();
+	checkEmpty(prdList);
+	
+	
+	prevBtn = (category, curPage, option) => {
+		if(curPage == 1){
+			alert("첫번째 페이지 입니다.")
+			return;
+		}
+		
+		let nextPage = curPage - 1;
+		
+		if(!regLog.checked){
+			location.href = "/market/shop/prd-list?category="+cg+"&option="+option+"&page="+nextPage;
+		} else {
+			location.href = "/market/shop/prd-list?category="+cg+"&option="+option+"&check=true&page="+nextPage;
+		}
+		
+	}
+	
+	nextBtn = (category, curPage, blockEnd, option) => {
+		if(curPage == blockEnd){
+			alert("마지막 페이지 입니다.")
+			return;
+		}
+		
+		let nextPage = curPage + 1;
+		
+		if(!regLog.checked){
+			location.href = "/market/shop/prd-list?category="+cg+"&option="+option+"&page="+nextPage;
+		} else {
+			location.href = "/market/shop/prd-list?category="+cg+"&option="+option+"&check=true&page="+nextPage;
+		}
+		
+	}
+	
 	
 })();
