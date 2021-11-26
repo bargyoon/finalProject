@@ -9,7 +9,7 @@
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-<link rel="stylesheet" href="/resources/css/member/login.css">
+<link rel="stylesheet" href="/resources/css/member/memberCommon.css">
 
 </head>
 <body>
@@ -35,7 +35,7 @@
 					<label>일치하는 정보가 존재하지 않습니다.</label>
 				  </c:if>
 				  <c:if test="${check == 0 }">
-					<label>찾으시는 아이디는 '${member.userId}' 입니다.</label>			
+					<label class="search-id-box">찾으시는 아이디는 <b>'${member.userId}'</b> 입니다.</label>			
 					<div class="form-label-group">
 					</div>
 				  </c:if>

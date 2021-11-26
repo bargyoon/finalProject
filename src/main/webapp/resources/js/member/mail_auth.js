@@ -20,7 +20,7 @@ $("#mail_auth_bnt").click(function(){
 	        }
 	                
 	    });
-    
+    alert('메일을 발송하였습니다.');
 });
 
 

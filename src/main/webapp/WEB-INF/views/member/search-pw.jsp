@@ -9,7 +9,7 @@
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-<link rel="stylesheet" href="/resources/css/member/login.css">
+<link rel="stylesheet" href="/resources/css/member/memberCommon.css">
 
 </head>
 <body>
@@ -33,11 +33,17 @@
                      <label>회원가입 시 작성한 이메일을 입력해주세요</label>
                      <input type="text" class="form-control" name="email" id="email"placeholder="email">
                   </div>
-                  <input class="btn btn-black" type="submit" value="비밀번호 찾기" /><br><br>
+                  <input class="btn btn-black" type="submit" id="search-pw-bnt"value="비밀번호 찾기" /><br><br>
                </form>
             </div>
          </div>
       </div>
+      
+<script>
+	$('#search-pw-bnt').on("click", function() {
+		alert('메일을 발송하였습니다.');
+	});
+</script>      
 	
 </body>
 </html>

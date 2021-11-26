@@ -97,6 +97,12 @@ body {
     background-color:white;
 }
 
+.search-id-box{
+	width: 100%;
+	background-color: #e9ecef;
+    text-align: center;	
+}
+
 /* 클래스속성 코드. 인증번호의 일치 여부에 따라 span태그의 색 변경시 사용 */
 .correct{
     color : green;
@@ -106,7 +112,7 @@ body {
 }
 
 .valid-msg{
-	color:red;	font-size:0.5vw;
+	color:red;	font-size:1vw;
 }
 
 #userId_possible{

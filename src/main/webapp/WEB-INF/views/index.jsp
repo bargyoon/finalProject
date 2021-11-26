@@ -38,7 +38,7 @@
 	                        	</ul>
 	                        </li>	
 	                        <li class="nav-item"><a class="nav-link" href="#">정보/칼럼</a></li>
-	                        <li class="nav-item"><a class="nav-link" href="#">수술비용</a></li>
+	                        <li class="nav-item"><a class="nav-link" href="/disease/index">수술비용</a></li>
 	                        <li class="nav-item"><a class="nav-link" href="#">펫케어</a>
 	                       		<ul class="navbar-detail"><hr>
 		                        	<li><a href="/petcare/vaccine/dog">예방접종</a>
@@ -58,7 +58,7 @@
 								<li class="nav-item"><a class="nav-link" href="/member/login">로그인</a></li><hr>
 							</c:if>
 							<c:if test="${not empty authentication}">
-								<li class="nav-item"><a class="nav-link" href="/member/my-info">마이페이지</a></li><hr>
+								<li class="nav-item"><a class="nav-link" href="/mypage/my-info">마이페이지</a></li><hr>
 							</c:if> 
 					</ul>
                 </div>
