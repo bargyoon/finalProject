@@ -1,5 +1,7 @@
 package com.kh.spring.member.model.repository;
 
+import java.util.Map;
+
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
@@ -25,4 +27,10 @@ public interface MemberRepository {
 	
 	@Select("select count(*) from \"USER\" where nickName = #{nickName}")
 	public int nickNameCheck(String nickName);
+	
+	@Select("select user_id from \"USER\" where email = #{email}")
+	Member searchId(Member member);
+	
+	@Select("select password from \"USER\" where user_id = #{userId} and email = #{email}")
+	String searchPw(Map<String, Object> member);
 }

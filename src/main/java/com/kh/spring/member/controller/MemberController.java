@@ -1,5 +1,6 @@
 package com.kh.spring.member.controller;
 
+import java.util.Map;
 import java.util.Random;
 
 import javax.mail.internet.MimeMessage;
@@ -7,17 +8,23 @@ import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.kh.spring.common.email.Email;
+import com.kh.spring.common.email.EmailSender;
 import com.kh.spring.member.model.dto.Member;
 import com.kh.spring.member.model.service.MemberService;
 
@@ -28,12 +35,17 @@ public class MemberController {
 	Logger logger =  LoggerFactory.getLogger(this.getClass());
 	
 	private MemberService memberService;	
-    private JavaMailSender mailSender;
-	
-	public MemberController(MemberService memberService,JavaMailSender mailSender) {
+    private JavaMailSender mailSender;	//회원가입떄
+    private EmailSender emailSender;	//비번찾기때
+    @Autowired
+    private Email email;
+
+
+	public MemberController(MemberService memberService,JavaMailSender mailSender,EmailSender emailSender) {
 		super();
 		this.memberService = memberService;
 		this.mailSender = mailSender;
+		this.emailSender = emailSender;
 	}
 
 	@GetMapping("login")
@@ -139,11 +151,53 @@ public class MemberController {
 	 * mav.addObject("message","logout"); return mav; }
 	 */
 	
-	@GetMapping("check-id")
-	public void checkId() {}
+	@GetMapping("search-id")
+	public void searchId() {}
+
+	@GetMapping("search-pw")
+	public void searchPw() {}
 	
-	@GetMapping("check-password")
-	public void checkPassword() {}
+	
+	@PostMapping("search-id")
+	public Member searchIdImpl(Member member, Model model) {
+		
+		//System.out.println("아이디찾기 진입 전" + member);
+		Member searchId = memberService.searchId(member);
+		
+		//System.out.println("아이디찾기 진입 후" + member);
+		
+		if(searchId == null) { 
+			model.addAttribute("check", 1);
+		} else { 
+			model.addAttribute("check", 0);
+			model.addAttribute("id", searchId.getUserId());
+		}
+		
+		return searchId;
+
+	}
+
+	@PostMapping("search-pw")
+	public ModelAndView searchPwImpl(@RequestParam Map<String, Object> member, ModelMap model) throws Exception {
+		ModelAndView mav;
+		
+        String id = (String) member.get("userId");
+        String e_mail = (String) member.get("email");
+        String pw = memberService.searchPw(member);
+        System.out.println(pw);
+        
+        if(pw!=null) {
+        	email.setContent(id+"님의 비밀번호는 "+pw+" 입니다.");
+            email.setReceiver(e_mail);
+            email.setSubject("'똑DOG한 집사들' 비밀번호 찾기 메일입니다.");
+            emailSender.SendEmail(email);
+            mav= new ModelAndView("/member/login");
+            return mav;
+        }else {
+        	mav=new ModelAndView("/member/login");
+            return mav;
+        }
+	}
 	
 	
 	

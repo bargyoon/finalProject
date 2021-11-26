@@ -24,16 +24,16 @@
             <div class="login-form">
              <div id=page-logo><img src="/resources/assets/img/dog-and-cat-yellow.png" alt="..." /></div><br><br>  
 			 <h3>비밀번호 찾기</h3><br><hr>
-               <form>
+               <form method="post" class="form-signin" action="/member/search-pw" name="findform">
                   <div class="form-group">
                      <label>아이디를 입력해주세요</label>
-                     <input type="text" class="form-control" placeholder="ID">
+                     <input type="text" class="form-control" name="userId" id="userId" placeholder="ID">
                   </div>
                   <div class="form-group">
                      <label>회원가입 시 작성한 이메일을 입력해주세요</label>
-                     <input type="text" class="form-control" placeholder="email">
+                     <input type="text" class="form-control" name="email" id="email"placeholder="email">
                   </div>
-                  <a class="btn btn-black">비밀번호 찾기</a><br><br>
+                  <input class="btn btn-black" type="submit" value="비밀번호 찾기" /><br><br>
                </form>
             </div>
          </div>

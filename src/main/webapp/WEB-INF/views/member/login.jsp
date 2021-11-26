@@ -37,8 +37,8 @@
 				  </c:if><br>
                   <button class="btn btn-black">로그인</button>
                   <a class="btn btn-secondary"  href='/member/join'>회원가입</a><br><br>
-                  <a href='/member/check-id' style="color: gray">아이디 찾기  |  </a>
-                  <a href='/member/check-password' style="color: gray">비밀번호 찾기</a><br><hr>
+                  <a href='/member/search-id' style="color: gray">아이디 찾기  |  </a>
+                  <a href='/member/search-pw' style="color: gray">비밀번호 찾기</a><br><hr>
                   <button type="submit" class="btn btn-social">소셜로그인</button> 
                </form>
             </div>

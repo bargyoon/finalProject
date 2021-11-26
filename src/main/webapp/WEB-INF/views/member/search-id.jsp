@@ -19,21 +19,29 @@
             <p>Login or register from here to access.</p>
          </div>
       </div>
+      
       <div class="main">
          <div class="col-md-6 col-sm-12">
             <div class="login-form">
               <div id=page-logo><img src="/resources/assets/img/dog-and-cat-yellow.png" alt="..." /></div><br><br>
               <h3>아이디 찾기</h3><br><hr>
-               <form>
+               <form method="post" class="form-signin" action="/member/search-id" name="findform">
                   <div class="form-group">
                      <label>회원가입 시 작성한 이메일을 입력해주세요</label><br>
-                     <input type="text" class="form-control" placeholder="email">
+                     <input type="text" class="form-control" id="email" name="email" placeholder="email" >
                   </div>
-                  <a class="btn btn-black">아이디 찾기</a><br><br>
+                  <input class="btn btn-black" type="submit" value="아이디 찾기" /><br><br>                     
+                  <c:if test="${check == 1}">
+					<label>일치하는 정보가 존재하지 않습니다.</label>
+				  </c:if>
+				  <c:if test="${check == 0 }">
+					<label>찾으시는 아이디는 '${member.userId}' 입니다.</label>			
+					<div class="form-label-group">
+					</div>
+				  </c:if>
                </form>
             </div>
          </div>
       </div>
-	
 </body>
 </html>

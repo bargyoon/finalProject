@@ -40,6 +40,10 @@
 				</props>
 			</property>
 	</bean>
+   	 	<bean id="email" class="com.kh.spring.common.email.Email">
+    </bean>
+   		<bean id="emailSender" class="com.kh.spring.common.email.EmailSender">
+    </bean>
  	
  	<bean class="org.springframework.http.client.SimpleClientHttpRequestFactory" id="simpleClientHttpRequestFactory">
  		<property name="connectTimeout" value="5000"/>

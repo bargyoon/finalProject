@@ -1,5 +1,7 @@
 package com.kh.spring.member.model.service;
 
+import java.util.Map;
+
 import org.springframework.stereotype.Service;
 
 import com.kh.spring.member.model.dto.Member;
@@ -38,7 +40,14 @@ public class MemberServiceImpl implements MemberService{
 		return memberRepository.nickNameCheck(nickName);
 	}
 
+	public Member searchId(Member member) {
+		return memberRepository.searchId(member);
+		
+	}
 
+	public String searchPw(Map<String, Object> member) {
+		return memberRepository.searchPw(member);
+	}
 	/*
 	 * @Override public void logout(HttpSession session) { session.invalidate();
 	 * //세션 초기화

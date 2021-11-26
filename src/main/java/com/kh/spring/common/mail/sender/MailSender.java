@@ -14,6 +14,7 @@ import com.kh.spring.common.code.Config;
 import com.kh.spring.common.code.ErrorCode;
 import com.kh.spring.common.exception.HandlableException;
 
+/*
 @Component
 public class MailSender {
 
@@ -40,3 +41,4 @@ public class MailSender {
 	}
 
 }
+*/
