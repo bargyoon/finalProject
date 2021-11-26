@@ -9,5 +9,4 @@ public class UpdateMemberForm {
 	private String password;
 	private String address;
 	private String address2;
-	private String introduce;
 }

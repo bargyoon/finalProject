@@ -10,10 +10,14 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttribute;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.spring.common.validator.ValidatorResult;
 import com.kh.spring.member.model.dto.Member;
+import com.kh.spring.mypage.model.service.MypageService;
+import com.kh.spring.mypage.model.service.MypageServiceImpl;
 import com.kh.spring.mypage.validator.UpdateMemberForm;
+import com.kh.spring.mypage.validator.UpdateMemberFormValidator;
 
 import lombok.RequiredArgsConstructor;
 
@@ -22,34 +26,40 @@ import lombok.RequiredArgsConstructor;
 @RequestMapping("mypage")
 public class MypageController {
 	
-//	private final MypageServiceImpl mypageService;
-//	private final UpdateMemberFormValidator updateMemberFormValidator;
-//	
-//	@InitBinder("updateMemberForm")
-//	public void initBinder(WebDataBinder webDataBinder) {
-//		webDataBinder.addValidators(updateMemberFormValidator);
-//	}
-//	
-	@PostMapping("update-member")
-	public String updateMember(@Validated UpdateMemberForm form, Errors errors,
-			@SessionAttribute(name = "authentication")Member certifiedUser, Model model) {
+	private final MypageService mypageService;
+	private final UpdateMemberFormValidator updateMemberFormValidator;
+	
+	@InitBinder("updateMemberForm")
+	public void initBinder(WebDataBinder webDataBinder) {
+		webDataBinder.addValidators(updateMemberFormValidator);
+	}
+
+	@GetMapping("update-member-info")
+	public void updateMemberForm(Model model) {
+		model
+		.addAttribute(new UpdateMemberForm())
+		.addAttribute("error", new ValidatorResult().getError());
+	}
+	
+	@PostMapping("update-member-info")
+	public String updateMember(@SessionAttribute(name = "authentication")Member certifiedUser, 
+			@Validated UpdateMemberForm form, Errors errors, Model model, RedirectAttributes redirectAttr) {
+		
+		int userIdx = certifiedUser.getUserIdx();
 		
 		if(errors.hasErrors()) {
 			ValidatorResult validatorResult = new ValidatorResult();
-			model.addAttribute("error", validatorResult.getError());
 			validatorResult.addErrors(errors);
-			return "mypage/update-member";
+			model.addAttribute("error", validatorResult.getError());
+			return "mypage/update-member-info";
 		}
+		
+		redirectAttr.addFlashAttribute("message", "회원정보가 수정되었습니다.");
+		mypageService.updateMember(userIdx, form);
+		
 		
 		
 		return "mypage/my-info";
-	}
-	
-	@GetMapping("update-member")
-	public void updateMemberForm(@SessionAttribute(name = "authentication")Member certifiedUser, Model model) {
-		model.addAttribute("member", certifiedUser)
-		.addAttribute(new UpdateMemberForm())
-		.addAttribute("error", new ValidatorResult().getError());
 	}
 	
 	@GetMapping("managing-board")

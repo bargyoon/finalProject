@@ -37,58 +37,54 @@
 		</nav>
 		
 		<div style="margin: 0 auto;">
-			<form:form style="margin: 0 auto; width: 400px;" id="frm_update"
+			<form:form style="margin: 0 auto; width: 400px;" id="frmUpdateMember"
 				action="/mypage/update-member" method="post" enctype="multipart/form-data" modelAttribute="updateMemberForm">
 			
 				<div class="input-group form-floating mb-3">
-					<input type="text" class="form-control" id="nickname" 
-						name="nickname" placeholder="1" value="" 
-						aria-describedby="btnNicknameCheck">
-					<button class="btn btn-outline-secondary" type="button" id="btnNicknameCheck">중복확인</button>
-					<label for="nickname" class="form-label">닉네임</label>
+					<input type="text" class="form-control" id="nickName" name="nickName" placeholder="1"
+						aria-describedby="btnNickNameCheck">
+					<button class="btn btn-outline-secondary" type="button" id="btnNickNameCheck">중복확인</button>
+					<label for="nickName" class="form-label">닉네임</label>
 					
-					<c:if test="${empty error.nickname}">
-						<span id="nicknameCheck" class="valid-msg"></span>
-					</c:if>
-					<form:errors id="nicknameCheck" path="nickname" cssClass="valid-msg"/>
+					<%-- <c:if test="${empty error.nickName}">
+						<span id="nickNameCheck" class="valid-msg"></span>
+					</c:if> --%>
+					<form:errors id="nickNameCheck" path="nickName" cssClass="valid-msg"/>
 				</div>
 	
 				<div class="form-floating mb-3">
-					<input type="password" class="form-control" id="password" placeholder="1" value="">
+					<input type="password" class="form-control" id="password" name="password" placeholder="1">
 					<label for="password" class="form-label">변경할 비밀번호</label>
 				</div>
 	
 				<div class="form-floating mb-3">
-					<input type="password" class="form-control" id="password2" placeholder="1" value="">
+					<input type="password" class="form-control" id="password2" name="password2" placeholder="1">
 					<label for="password2" class="form-label">비밀번호 확인</label>
 					
-					<span id="passwordCheck" class="valid-msg"></span>
+					<%-- <c:if test="${empty error.password}">
+						<span id="passwordCheck" class="valid-msg"></span>
+					</c:if> --%>
 					<form:errors id="passwordCheck" path="password" cssClass="valid-msg"/>
 				</div>
 	
 				<div class="form-floating">
-					<input type="text" class="form-control" id="address" placeholder="주소를 입력하세요">
+					<input type="text" class="form-control" id="address" name="address" placeholder="주소를 입력하세요">
 					<label for="address" class="form-label">주소</label>
 				</div>
 				
 				<div class="form-floating mb-3">
-					<input type="text" class="form-control" id="address2" placeholder="1">
+					<input type="text" class="form-control" id="address2" name="address2" placeholder="1">
 					<label for="address2" class="form-label">상세주소</label>
 				</div>
 				
-				<div class="form-floating mb-3">
-					<textarea class="form-control" id="introduce" placeholder="1"></textarea>
-					<label for="introduce" class="form-label">자기소개</label>
-				</div>
-				
-				<div class="mb-3">
+				<%-- <div class="mb-3">
 				  <label for="profilePhoto" class="form-label">프로필 사진</label>
-				  <input class="form-control" type="file" id="profilePhoto">
-				</div>
+				  <input class="form-control" type="file" id="profilePhoto" name="profilePhoto" value="${member.profilePhoto}">
+				</div> --%>
 				
 				<hr class="my-3">
 				
-				<button class="w-100 btn btn-primary btn-lg" type="submit">회원정보 수정</button>
+				<button class="w-100 btn btn-primary btn-lg" type="submit" id="btnUpdateMember">회원정보 수정</button>
 			</form:form>
 		</div>
 	</div>
