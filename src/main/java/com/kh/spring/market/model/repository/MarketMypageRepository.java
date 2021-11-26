@@ -5,14 +5,16 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 import com.kh.spring.common.util.FileDTO;
-import com.kh.spring.market.model.dto.Coupon;
 import com.kh.spring.market.model.dto.Order;
+import com.kh.spring.market.model.dto.Product;
 import com.kh.spring.market.model.dto.Review;
 import com.kh.spring.market.model.dto.SaveHistory;
+import com.kh.spring.member.model.dto.Member;
 
 @Mapper
 public interface MarketMypageRepository {
@@ -26,7 +28,7 @@ public interface MarketMypageRepository {
 	
 	@Select("select count(UC_IDX) "
 			+ " from user_coupon"
-			+ " where user_idx = #{userIdx}")
+			+ " where user_idx = #{userIdx} and exp_date > sysdate")
 	int selectCouponCount(int userIdx);
 	
 	//Save Money
@@ -52,6 +54,14 @@ public interface MarketMypageRepository {
 			+ " where user_idx = #{userIdx} and o.state = 1") //구매확정이 1일 때
 	List<Map<String, Object>> selectReviewList(int userIdx);
 	
+	//selectReviewListByState 구매확정 목록(상태별로)
+	@Select("select r.RV_IDX, r.USER_IDX, PRD_IDX, r.ORDER_IDX, r.STATE, r.RATING, r.TYPE, r.RECOMMAND, r.REG_DATE, RV_CONTENT, p.name, p.brand, d.po_name"
+			+ " from REVIEW r"
+			+ " inner join product p USING(PRD_IDX)"
+			+ " inner join prd_detail d USING(PRD_IDX)"
+			+ " where USER_IDX = #{userIdx} and r.STATE = #{state}")
+	List<Review> selectReviewListByState(@Param("state") int state);
+	
 	@Select("select ORDER_IDX, UC_IDX, USER_IDX, o.order_date, PRD_IDX, PAYMENT_AMOUNT, o.state, ORDER_CNT, SAVE_MONEY, p.name, p.brand, po_name"
 			+ " from \"ORDER\" o"
 			+ " inner join product p USING(PRD_IDX)"
@@ -60,8 +70,8 @@ public interface MarketMypageRepository {
 	List<Map<String, Object>> selectReviewDetail(Order order);
 	
 	//review 등록
-	@Insert("insert into review(rv_idx, user_idx, prd_idx, order_idx, rating, rv_content) "
-			+ "values(SC_RV_IDX.NEXTVAL, #{userIdx}, #{prdIdx}, #{orderIdx}, #{rating}, #{rvContent})")
+	@Insert("insert into review(rv_idx, user_idx, prd_idx, order_idx, rating, type, rv_content) "
+			+ "values(SC_RV_IDX.NEXTVAL, #{userIdx}, #{prdIdx}, #{orderIdx}, #{rating}, #{type}, #{rvContent})")
 	void insertReview(Review review);
 	
 	//review 사진 등록
@@ -80,9 +90,22 @@ public interface MarketMypageRepository {
 	void updatePrdIdx(int orderIdx);
 	
 	//reviewList
-	@Select("select RV_IDX, USER_IDX, PRD_IDX, ORDER_IDX, STATE, RATING, TYPE, RECOMMAND, REG_DATE, rv_content"
-			+ " from review"
-			+ " where USER_IDX = #{userIdx}")
-	List<Review> selectMyReviewList(int userIdx);
+	@Select("select r.RV_IDX, r.USER_IDX, PRD_IDX, r.ORDER_IDX, r.STATE, r.RATING, r.TYPE, r.RECOMMAND, r.REG_DATE, RV_CONTENT,p.name, p.brand, d.po_name"
+			+ " from REVIEW r"
+			+ " inner join product p USING(PRD_IDX)"
+			+ " inner join prd_detail d USING(PRD_IDX)"
+			+ " where USER_IDX= #{userIdx} ")
+	List<Map<String, Object>> selectMyReviewList(int userIdx);
 	
+	//reviewFileList
+	@Select("select * "
+			+ " from file_info"
+			+ " where type_idx in(select rv_idx from review where user_idx = #{userIdx})")
+	List<FileDTO> selectFileList(int userIdx);
+	
+	//memberInfo
+	@Select("select nickname, join_date, savemoney, user_idx"
+			+ " from \"USER\" "
+			+ "where user_idx = #{userIdx}")
+	Member selectMemberInfo(int userIdx);
 }

@@ -20,12 +20,10 @@
 				<div class="px-4 px-lg-5 my-3">
 					<div>
 						<div class="mt-4" style="display: flex; flex-direction: column;">
-							<h1 class="display-4 fw-bolder">닉네임</h1>
+							<h1 class="display-4 fw-bolder">${memberInfo.nickName}</h1>
 							<div style="display: flex;">
-								<h1 class="display-7 fw-bolder">회원등급</h1>
-								<p class="px-lg-2 pt-1" style="color: lightgray;">가입일 : 2021.4.26</p>
+								<p class="px-lg-2 pt-1" style="color: lightgray;">가입일 : ${memberInfo.joinDate}</p>
 							</div>
-							<a class="fw-normal btn-" href="#!" style="text-decoration: none;">등급별 혜택 확인 <i class="fas fa-chevron-right"></i></a>
 						</div>
 					</div>
 				</div>
@@ -34,12 +32,12 @@
 				<div class="mt-5" style="display: flex; flex-direction: column;">
 					<i class="fas fa-coins py-2" style="font-size: 1.5rem;"></i>
 					<p class="fw-normal mt-2">적립금</p>
-					<p style="font-size: 1.3rem;">10,000</p>
+					<p style="font-size: 1.3rem;">${memberInfo.saveMoney}</p>
 				</div>
 				<div class="mt-5" style="display: flex; flex-direction: column;">
 					<i class="fas fa-ticket-alt py-2" style="font-size: 1.5rem"></i>
 					<p class="fw-normal mt-2">쿠폰</p>
-					<p style="font-size: 1.3rem;">3장</p>
+					<p style="font-size: 1.3rem;">${couponCnt}장</p>
 				</div>
 			</div>
 		</div>
@@ -78,31 +76,36 @@
 					<li class="option">${reviewDetail.PO_NAME}</li>
 				</ul>
 			</div>
-			<form action="/market/mypage/review/upload/${reviewDetail.ORDER_IDX}" method="post">
+			<form action="/market/mypage/review/upload/${reviewDetail.ORDER_IDX}" method="post"
+				 onsubmit="return minLengthCheck(this);" >
 				<div class="d-flex pt-2">
 					<p class="label"> 
 						제품에 대해 나의 별점은 ?<br>
 						<span style="font-size: 12px;">(선택하지 않을 시 별 5개로 선택됩니다.)</span>
 					</p>
-					<div class="d-flex star_area px-lg-5" style="transform: translateY(20%);">
-						<input type="radio" name="star-rating" value="1" id="star1">
-						<label for="star1" class="bi-star-fill star"></label>
-						<input type="radio" name="star-rating" value="2" id="star2">
-						<label for="star2" class="bi-star-fill star"></label>
-						<input type="radio" name="star-rating" value="3" id="star3">
-						<label for="star3" class="bi-star-fill star"></label>
-						<input type="radio" name="star-rating" value="4" id="star4">
-						<label for="star4" class="bi-star-fill star"></label>
-						<input type="radio" name="star-rating" value="5" id="star5">
-						<label for="star5" class="bi-star-fill star"></label>
-					</div>
+					<div class="star-rating">
+					  <input type="radio" id="5-stars" name="rating" value="5" />
+					  <label for="5-stars" class="star">&#9733;</label>
+					  <input type="radio" id="4-stars" name="rating" value="4" />
+					  <label for="4-stars" class="star">&#9733;</label>
+					  <input type="radio" id="3-stars" name="rating" value="3" />
+					  <label for="3-stars" class="star">&#9733;</label>
+					  <input type="radio" id="2-stars" name="rating" value="2" />
+					  <label for="2-stars" class="star">&#9733;</label>
+					  <input type="radio" id="1-star" name="rating" value="1" />
+					  <label for="1-star" class="star">&#9733;</label>
+					</div>					
 				</div>
+				
 				<hr>
 				<p>상품에 대한 평가를 20자 이상 남겨주세요.</p>
 				<div>
-					<textarea class="review_text" placeholder="내용" name="review-content" onkeyup=""></textarea>
-					<p class="limit_text_alert">0 자 / 20자 이상</p>
+					<textarea class="review_text" placeholder="내용을 입력해주세요." 
+						id="inputContent" name="rvContent" required="required" ></textarea>
+					<p class="limit_text_alert" id="cntLength">(20자 / 0자) </p>
+					<span id="contentCheck" class="valid-msg"></span>
 				</div>
+				
 				<div>
 					<input type="checkbox" name="ad-check" id="ad_agree">
 					<label class="ad_check_label px-1" for="ad_agree">작성된 후기는 사이트의 홍보 콘텐츠로 사용될 수 있습니다. (필수)</label>
@@ -116,6 +119,44 @@
 	</section>
 	
 	<%@ include file="/WEB-INF/views/include/market/footer.jsp"%>
+	
+<script>
+
+	//글자 수 200자 제한
+	$("#inputContent").keyup(function (e){
+	  
+		var content = $(this).val();
+		
+		//실시간 글자수 세기
+		$("#cntLength").html("(20자 / " + content.length +"자)"); 
+		
+		if(content.length > 200){
+			alert("최대 200자까지 입력 가능합니다.");
+			$(this).val(content.substring(0, 200));
+			$('#cntLength').html("(200 / 최대 200자)");
+		}
+	});
+		
+	function minLengthCheck(i) {
+		
+	    var content = document.getElementById("inputContent");
+	    if(content.value.length < 20) {
+	    	content.value =  content.value.substr(0, 20);
+	        document.querySelector('#contentCheck').innerHTML = '최소 20자 이상을 입력해야 합니다.';
+	        return false;
+	    }
+	    
+	    //체크박스 유효성 검사
+	    var check = $("input:checkbox[name='ad-check']:checked");
+	    if(check.length == 0){
+			alert("필수 체크 요소를 확인해주세요.");
+		     return false;
+		  }
+	}
+
+</script>
+
+
 
 
 

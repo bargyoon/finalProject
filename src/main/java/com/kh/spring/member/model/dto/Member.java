@@ -17,6 +17,7 @@ public class Member {
 	   private Date joinDate;
 	   private int isLeave;
 	   private String userName;
+	   private int saveMoney;
 	
 	   
 }

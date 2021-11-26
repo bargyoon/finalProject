@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.kh.spring.common.util.FileDTO;
 import com.kh.spring.market.model.dto.Coupon;
 import com.kh.spring.market.model.dto.Order;
 import com.kh.spring.market.model.dto.Review;
@@ -36,6 +37,11 @@ public class MarketMypageController {
 						Model model) {
 		
 		List<Map<String, Object>> orderList = marketMypageService.selectOrderList(certifiedUser.getUserIdx());
+		Member memberInfo = marketMypageService.selectMemberInfo(certifiedUser.getUserIdx());
+		int couponCnt = marketMypageService.selectCouponCount(certifiedUser.getUserIdx());
+				
+		model.addAttribute("memberInfo", memberInfo);
+		model.addAttribute("couponCnt", couponCnt);
 		model.addAttribute("orderList", orderList);
 		System.out.println("orderList : " + orderList);
 		
@@ -48,13 +54,15 @@ public class MarketMypageController {
 		
 		
 		List<Map<String, Object>> couponList = marketMypageService.selectCouponByIdx(certifiedUser.getUserIdx());
+		Member memberInfo = marketMypageService.selectMemberInfo(certifiedUser.getUserIdx());
+		int couponCnt = marketMypageService.selectCouponCount(certifiedUser.getUserIdx());
 		
 		model.addAttribute("couponList", couponList);
-		System.out.println("couponList : " + couponList);
-		
-		int couponCnt = marketMypageService.selectCouponCount(certifiedUser.getUserIdx());
+		model.addAttribute("memberInfo", memberInfo);
 		model.addAttribute("couponCnt", couponCnt);
+		
 		System.out.println("couponCnt : " + couponCnt);
+		System.out.println("couponList : " + couponList);
 
 	}
 
@@ -69,6 +77,11 @@ public class MarketMypageController {
 								Model model) {
 		
 		List<SaveHistory> reserveList = marketMypageService.selectReserveList(certifiedUser.getUserIdx());
+		Member memberInfo = marketMypageService.selectMemberInfo(certifiedUser.getUserIdx());
+		int couponCnt = marketMypageService.selectCouponCount(certifiedUser.getUserIdx());
+				
+		model.addAttribute("memberInfo", memberInfo);
+		model.addAttribute("couponCnt", couponCnt);
 		model.addAttribute("reserveList", reserveList);
 		System.out.println("reserveList : " + reserveList);
 	}
@@ -91,7 +104,11 @@ public class MarketMypageController {
 		order.setUserIdx(certifiedUser.getUserIdx());
 		order.setOrderIdx(orderIdx);
 		List<Map<String, Object>> reviewDetail = marketMypageService.selectReviewDetail(order);
-		
+		Member memberInfo = marketMypageService.selectMemberInfo(certifiedUser.getUserIdx());
+		int couponCnt = marketMypageService.selectCouponCount(certifiedUser.getUserIdx());
+				
+		model.addAttribute("memberInfo", memberInfo);
+		model.addAttribute("couponCnt", couponCnt);		
 		model.addAttribute("reviewDetail", reviewDetail);
 	}
 
@@ -104,7 +121,11 @@ public class MarketMypageController {
 		order.setUserIdx(certifiedUser.getUserIdx());
 		order.setOrderIdx(orderIdx);
 		List<Map<String, Object>> reviewDetail = marketMypageService.selectReviewDetail(order);
-		
+		Member memberInfo = marketMypageService.selectMemberInfo(certifiedUser.getUserIdx());
+		int couponCnt = marketMypageService.selectCouponCount(certifiedUser.getUserIdx());
+				
+		model.addAttribute("memberInfo", memberInfo);
+		model.addAttribute("couponCnt", couponCnt);	
 		model.addAttribute("reviewDetail", reviewDetail);
 		
 		System.out.println("reviewDetail : " + reviewDetail);
@@ -116,7 +137,13 @@ public class MarketMypageController {
 	public void reviewList(@SessionAttribute(name="authentication")Member certifiedUser,
 						Model model) {
 		List<Map<String, Object>> reviewList = marketMypageService.selectReviewList(certifiedUser.getUserIdx());
+		Member memberInfo = marketMypageService.selectMemberInfo(certifiedUser.getUserIdx());
+		int couponCnt = marketMypageService.selectCouponCount(certifiedUser.getUserIdx());
+		
 		model.addAttribute("reviewList", reviewList);
+		model.addAttribute("memberInfo", memberInfo);
+		model.addAttribute("couponCnt", couponCnt);
+		
 		System.out.println("reviewList : " + reviewList);		
 	}
 	
@@ -129,13 +156,20 @@ public class MarketMypageController {
 		System.out.println("files : " + files);
 		System.out.println("orderIdx : " + orderIdx);
 		
-		review.setOrderIdx(orderIdx);
+		//review.setOrderIdx(orderIdx);
 		review.setUserIdx(certifiedUser.getUserIdx());
-		review.setType("1");
 		
 		System.out.println("review : " + review);
+		
+		if(files == null) {
+			review.setType("0"); //일반
+		}else {
+			review.setType("1");
+		}
+		
 		marketMypageService.insertReview(files, review);
 		marketMypageService.updatePrdIdx(orderIdx);
+		
 		
 		//파일첨부 안했을 때 예외처리 (RedirectAttributes)
 		System.out.println("review : " + review);
@@ -143,14 +177,24 @@ public class MarketMypageController {
 	}
 
 	@GetMapping("review/review-list2")
-	public void reviewList2(@SessionAttribute(name="authentication")Member certifiedUser,
+	public void myReviewList(@SessionAttribute(name="authentication")Member certifiedUser,
 							Model model) {
 		
-		List<Review> myReviewList = marketMypageService.selectMyReviewList(certifiedUser.getUserIdx());
+		List<Map<String, Object>> myReviewList = marketMypageService.selectMyReviewList(certifiedUser.getUserIdx());
+		List<FileDTO> files = marketMypageService.selectFileList(certifiedUser.getUserIdx());
+		Member memberInfo = marketMypageService.selectMemberInfo(certifiedUser.getUserIdx());
+		int couponCnt = marketMypageService.selectCouponCount(certifiedUser.getUserIdx());
+		
 		
 		model.addAttribute("myReviewList", myReviewList);
-		System.out.println("myReviewList : " + myReviewList);
+		model.addAttribute("files", files);
+		model.addAttribute("memberInfo", memberInfo);
+		model.addAttribute("couponCnt", couponCnt);
 		
+		
+		System.out.println("myReviewList : " + myReviewList);
+		System.out.println("files : " + files);
+		System.out.println("memberInfo : " + memberInfo);
 	}
 	
 	

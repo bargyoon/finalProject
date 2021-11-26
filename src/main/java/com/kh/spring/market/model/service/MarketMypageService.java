@@ -5,10 +5,12 @@ import java.util.Map;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import com.kh.spring.common.util.FileDTO;
 import com.kh.spring.market.model.dto.Coupon;
 import com.kh.spring.market.model.dto.Order;
 import com.kh.spring.market.model.dto.Review;
 import com.kh.spring.market.model.dto.SaveHistory;
+import com.kh.spring.member.model.dto.Member;
 
 public interface MarketMypageService {
 	
@@ -25,6 +27,9 @@ public interface MarketMypageService {
 	//reveiwList 구매확정 목록
 	List<Map<String, Object>> selectReviewList(int userIdx);
 	
+	//reveiwListByState 구매확정 목록(상태별)
+	List<Review> selectReviewListByState(String state);
+	
 	//reveiwDetail 구매확정 목록
 	List<Map<String, Object>> selectReviewDetail(Order order);
 	
@@ -35,5 +40,11 @@ public interface MarketMypageService {
 	void updatePrdIdx(int orderIdx);
 	
 	//reviewList 작성한 리뷰 목록
-	List<Review> selectMyReviewList(int userIdx);
+	List<Map<String, Object>> selectMyReviewList(int userIdx);
+	
+	//fileList
+	List<FileDTO> selectFileList(int userIdx);
+	
+	//memberInfo
+	Member selectMemberInfo(int userIdx);
 }

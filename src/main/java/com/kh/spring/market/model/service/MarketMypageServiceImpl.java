@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.kh.spring.common.util.FileDTO;
 import com.kh.spring.common.util.FileUtil;
 import com.kh.spring.market.model.dto.Coupon;
 import com.kh.spring.market.model.dto.Order;
@@ -15,6 +16,7 @@ import com.kh.spring.market.model.dto.Review;
 import com.kh.spring.market.model.dto.SaveHistory;
 import com.kh.spring.market.model.dto.UserCoupon;
 import com.kh.spring.market.model.repository.MarketMypageRepository;
+import com.kh.spring.member.model.dto.Member;
 
 import lombok.RequiredArgsConstructor;
 
@@ -75,24 +77,29 @@ public class MarketMypageServiceImpl implements MarketMypageService{
 		//review 업로드
 		mypageRepository.insertReview(review);
 		
-		logger.debug("mfs크기 : " + mfs.size());
-		logger.debug("mfs 0번 인덱스 : " + mfs.get(0));
-		logger.debug("mfs 0번 인덱스가 비었니? : " + mfs.get(0).isEmpty());
-		
-		//예외처리
-		for (MultipartFile multipartFile : mfs) {
-			if(!multipartFile.isEmpty()) {
-				//파일 업로드
-				mypageRepository.insertFileInfo(fileUtil.fileUpload(multipartFile));
-			}	
+		if(mfs != null) {
+			//예외처리
+			for (MultipartFile multipartFile : mfs) {
+				if(!multipartFile.isEmpty()) {
+					//파일 업로드
+					mypageRepository.insertFileInfo(fileUtil.fileUpload(multipartFile));
+				}
+			}
 		}
+		
 	}
 
 	@Override
-	public List<Review> selectMyReviewList(int userIdx) {
+	public List<Map<String, Object>> selectMyReviewList(int userIdx) {
 		
-		List<Review> myReviewList = mypageRepository.selectMyReviewList(userIdx);
+		List<Map<String, Object>> myReviewList = mypageRepository.selectMyReviewList(userIdx);
 		return myReviewList;
+	}
+	
+	@Override
+	public List<FileDTO> selectFileList(int userIdx) {
+		List<FileDTO> files = mypageRepository.selectFileList(userIdx);
+		return files;
 	}
 
 	@Override
@@ -101,6 +108,21 @@ public class MarketMypageServiceImpl implements MarketMypageService{
 		mypageRepository.updatePrdIdx(orderIdx);
 		
 	}
+
+	@Override
+	public Member selectMemberInfo(int userIdx) {
+		
+		Member selectMemberInfo = mypageRepository.selectMemberInfo(userIdx);
+		return selectMemberInfo;
+	}
+
+	@Override
+	public List<Review> selectReviewListByState(String state) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	
 
 	
 	

@@ -136,22 +136,7 @@
     margin: -1.9px;
 }
 
-input[type=radio]{
-    display: none;
-}
 
-input[type=radio] + .period-label{
-    background-color: transparent;
-    border: 1px solid lightgray;
-}
-
-input[type=radio]:hover + .period-label{
-    border: 1px solid steelblue;
-}
-
-input[type=radio]:checked + .period-label{
-    border: 1px solid black;
-}
 
 .like-btn{
     border: 1px solid black;
@@ -161,7 +146,7 @@ input[type=radio]:checked + .period-label{
 input[type=checkbox]:checked + .like-btn{
     border: 1px solid steelblue;
     color: steelblue;
-}
+} 
 
 .link-white{
     color: white;
@@ -184,29 +169,34 @@ input[type=checkbox]:checked + .like-btn{
     transition: 0.2s;
 }
 
-input[type=radio] + .star{
-    background-color: transparent;
-    border: none;
+/* 별점 */
+
+.star-rating {
+  display:flex;
+  flex-direction: row-reverse;
+  font-size:2em;
+  width:5em;
 }
 
-input[type=radio]:hover + .star{
-    background-color: transparent;
-    border: none;
+.star-rating input {
+  display:none;
 }
 
-.star_area{
-    color: lightgray;
-    direction: rtl;
+.star-rating label {
+  color:#ccc;
 }
 
-.star_area label:hover{
-    color: gold;
+.star-rating :checked ~ label {
+  color:#fc0;
 }
 
-.star_area label:hover ~ label{
-    color: gold;
+.star-rating label:hover,
+.star-rating label:hover ~ label {
+  color:#fc0;
 }
 
+
+/* review */
 .review_text{
     height: 200px;
     width: 100%;
@@ -247,6 +237,15 @@ input[type=radio]:hover + .star{
     overflow: hidden;
     object-fit: cover;
     border-radius: 5px;
+}
+
+#contentCheck{
+	font-family: 'SBAggroL';
+    color: red;
+}
+
+.ad_check_label{
+	padding-top: 10px;
 }
 
 tbody > tr:hover{
