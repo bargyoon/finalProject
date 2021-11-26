@@ -118,19 +118,19 @@
 											style="min-height: 136px">
 											<div class="col-auto mb-5 mb-md-7">
 												<h1 class="fw-semi-bold text-1100">
-													강아지</span>
+													<span>강아지</span>
 												</h1>
 											</div>
 										</div>
 										<div class="row">
 											<c:forEach items="${datas}" var="data" varStatus="status">
-											<c:if test="${data.disease.category eq 'dog'}">
-												<a class="col-sm-3 col-lg-3 mb-4 mb-lg-0 text-center" href="/disease/disease-spec?dsIdx=${data.disease.dsIdx}">
+											<c:if test="${data.CATEGORY eq 'dog'}">
+												<a class="col-sm-3 col-lg-3 mb-4 mb-lg-0 text-center" href="/disease/disease-spec?dsIdx=${data.DS_IDX}">
 													<div class="px-0 px-lg-3">
 														<img class="img-fluid mb-4"
-															src="${data.files.downloadURL }" width="100"
+															src="${data.downloadURL}" width="100"
 															alt="..." />
-														<h3 class="h5 mb-4 font-base">${data.disease.name}</h3>
+														<h3 class="h5 mb-4 font-base">${data.NAME}</h3>
 													</div>
 												</a>
 												</c:if>

@@ -1,11 +1,12 @@
 package com.kh.spring.disease.model.repository;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
-import org.springframework.web.multipart.MultipartFile;
+import org.apache.ibatis.annotations.Update;
 
 import com.kh.spring.common.util.FileDTO;
 import com.kh.spring.disease.model.dto.Disease;
@@ -39,7 +40,23 @@ public interface DiseaseRepository {
 			+ " values(sc_pi_idx.nextval,#{dsIdx},#{userIdx})")
 	void insertPriceImg(PriceImg priceImg);
 
-	@Select("select * from price_img")
-	List<PriceImg> selectPriceImgList();
+	List<Map<String, Object>> selectPriceImgList(String state);
+	
+	@Select("select * from disease d left join file_info f on(d.ds_idx = f.type_idx)")
+	List<Map<String, Object>> selectDiseaseListWithImg();
+
+	@Select("select count(*) from price_img")
+	int selectAllCnt();
+	
+	@Select("select count(*) from price_img where state = #{keyword}")
+	int selectSpecCnt(String keyword);
+
+	@Update("update price_img set price = #{price}, state = 'Y' where pi_idx = #{piIdx}")
+	void updatePrice(Map<String, Object> jsonMap);
+
+	@Update("update disease set count = #{count}, price = round(#{price},-2) where ds_idx = #{dsIdx}")
+	void updateDiseasePriceAndCount(Disease disease);
+	
+	
 
 }

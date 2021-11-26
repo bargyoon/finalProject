@@ -121,14 +121,14 @@
 												</label></td>
 												<td>${status.index+1}</td>
 												<td><a><img style="height: 60px; widht: 60px;"
-														src="${data.files.downloadURL }"></a>
+														src="${data.downloadURL }"></a>
 
 												</td>
 												<td>${data.disease.name}</td>
-												<td><div class="explain">${data.disease.explain}</div></td>
-												<td>${data.disease.price}원</td>
-												<td>${data.disease.count}</td>
-												<td>${data.disease.category}</td>
+												<td><div class="explain">${data.EXPLAIN}</div></td>
+												<td>${data.PRICE}원</td>
+												<td>${data.COUNT}</td>
+												<td>${data.CATEGORY}</td>
 
 											</tr>
 											</c:forEach>

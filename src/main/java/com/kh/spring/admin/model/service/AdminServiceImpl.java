@@ -2,6 +2,7 @@ package com.kh.spring.admin.model.service;
 
 import java.io.FileInputStream;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -46,17 +47,34 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	
-	public List<Map<String, Object>> selectPriceImgList() {
-		List<Map<String, Object>> commandList = new ArrayList<Map<String,Object>>();
-		List<PriceImg> piList = diseaseRepository.selectPriceImgList();
-		for (PriceImg priceImg : piList) {
-			FileDTO fileDTO = diseaseRepository.selectFileByIdx(priceImg.getPiIdx());
-			Disease disease = diseaseRepository.selectDiseaseByIdx(priceImg.getDsIdx());
-			int price = convertImgToPrice(fileDTO.getSavePath()+fileDTO.getRenameFileName());
-			priceImg.setPrice(price);
-			commandList.add(Map.of("priceImg", priceImg, "disease", disease, "files", fileDTO));
+	public Map<String, Object> selectPriceImgList(String state) {
+		Map<String,Object> viewMap = new LinkedHashMap<String, Object>();
+		List<Map<String, Object>> piList = diseaseRepository.selectPriceImgList(state);
+		int totalCnt = diseaseRepository.selectAllCnt();
+		int noCnt = diseaseRepository.selectSpecCnt("N");
+		int yesCnt = diseaseRepository.selectSpecCnt("Y");
+		for (Map<String, Object> map : piList) {
+			int price = Integer.parseInt(map.get("PRICE").toString());
+			if(price == 0) {
+				System.out.println();
+				price = convertImgToPrice((String)map.get("SAVE_PATH")+map.get("RENAME_FILE_NAME"));
+				map.remove("PRICE");
+				map.put("PRICE", price);
+			}
+			
+			System.out.println(map.get("PRICE").toString());
+			FileDTO files = new FileDTO();
+			files.setSavePath((String) map.get("SAVE_PATH"));
+			files.setRenameFileName((String) map.get("RENAME_FILE_NAME"));
+			map.put("downloadURL", files.getDownloadURL());
 		}
-		return commandList;
+		viewMap.put("piList", piList);
+		viewMap.put("totalCnt", totalCnt);
+		viewMap.put("noCnt", noCnt);
+		viewMap.put("yesCnt", yesCnt);
+		
+	
+		return viewMap;
 
 		
 	}
@@ -94,6 +112,22 @@ public class AdminServiceImpl implements AdminService {
 		return price;
 	}
 	
+	public void updatePrice(Map<String, Object> jsonMap) {
+		diseaseRepository.updatePrice(jsonMap);
+		int dsIdx = (int) jsonMap.get("dsIdx");
+		int newPrice = (int) jsonMap.get("price");
+		Disease disease = diseaseRepository.selectDiseaseByIdx(dsIdx);
+		
+		int cnt = disease.getCount();
+		int price = disease.getPrice();
+		price = (int) Math.round((price*cnt+newPrice)/(cnt+1));
+		System.out.println(price);
+		cnt = cnt+1;
+		disease.setCount(cnt);
+		disease.setPrice(price);
+		diseaseRepository.updateDiseasePriceAndCount(disease);
+		
+	}
 	
 
 }

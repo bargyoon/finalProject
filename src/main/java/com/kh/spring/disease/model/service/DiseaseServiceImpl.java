@@ -1,9 +1,10 @@
 package com.kh.spring.disease.model.service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -20,16 +21,18 @@ import lombok.RequiredArgsConstructor;
 public class DiseaseServiceImpl implements DiseaseService{
 
 	private final DiseaseRepository diseaseRepository;
+	Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	public List<Map<String, Object>> selectDiseaseList() {
 		
-		List<Map<String, Object>> commandList = new ArrayList<Map<String,Object>>();
-		List<Disease> diseaseList = diseaseRepository.selectDiseaseList();
-		for (Disease disease : diseaseList) {
-			FileDTO files = diseaseRepository.selectFileByIdx(disease.getDsIdx());
-			
-			commandList.add(Map.of("disease", disease,"files", files));
+		List<Map<String, Object>> commandList = diseaseRepository.selectDiseaseListWithImg();
+		for (Map<String, Object> map : commandList) {
+			FileDTO files = new FileDTO();
+			files.setSavePath((String) map.get("SAVE_PATH"));
+			files.setRenameFileName((String) map.get("RENAME_FILE_NAME"));
+			map.put("downloadURL", files.getDownloadURL());
 		}
+		
 		
 		return commandList;
 		

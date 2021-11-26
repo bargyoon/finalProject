@@ -30,7 +30,17 @@
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 <![endif]-->
+<style type="text/css">
+#clickedTab {
+	border-bottom: 2px solid blue;
+	color: mediumblue;
+	cursor: default;
+}
 
+.tab{
+	cursor: pointer;
+}
+</style>
 </head>
 
 <body>
@@ -83,22 +93,25 @@
 								<div class="ml-3">
 									<div class=" text-center m-10">
 										<h4>
-											<a style="border-bottom: 2px solid blue;">전체<span>
-													4</span></a>
+											<a class="tab_all tab" data-tab="all"
+												onclick="selectTab('state','all')">전체<span> <c:out
+														value="${datas.totalCnt }"></c:out></span></a>
 										</h4>
 									</div>
 								</div>
 								<div class="ml-3">
 									<div class=" text-center m-10">
 										<h4>
-											<a>등록대기중 <span>4</span></a>
+											<a class="tab_n tab" data-tab="N" onclick="selectTab('state','N')">등록대기중 <span><c:out
+														value="${datas.noCnt }"></c:out></span></a>
 										</h4>
 									</div>
 								</div>
 								<div class="ml-3">
 									<div class=" text-center m-10">
 										<h4>
-											<a>등록완료 <span>0</span></a>
+											<a class="tab_y tab" data-tab="Y" onclick="selectTab('state','Y')">등록완료 <span><c:out
+														value="${datas.yesCnt }"></c:out></span></a>
 										</h4>
 									</div>
 								</div>
@@ -126,7 +139,7 @@
 									<table class="table mb-0">
 										<thead class="thead-dark">
 											<tr>
-												<th><input type="checkbox" id="mainCheckbox" /></th>
+												<th><input type="checkbox" id="chk_all"  /></th>
 												<th scope="col">NO</th>
 												<th scope="col">사진</th>
 												<th scope="col">금액</th>
@@ -137,111 +150,40 @@
 											</tr>
 										</thead>
 										<tbody class="customtable">
-											<c:forEach items="${datas}" var="data" varStatus="status">
+											<c:forEach items="${datas.piList}" var="data"
+												varStatus="status">
 												<tr>
 													<td><label class="mt-3"> <input
 															type="checkbox" class="listCheckbox" /> <span
 															class="checkmark"></span>
 													</label></td>
 													<td>${status.index+1}</td>
-													<td><img id="img-r" src="${data.files.downloadURL}" onclick="fnImgPop('${data.files.downloadURL}')"
-													style="width:60px; height:60px">
-													
+													<td><img id="img-r" src="${data.downloadURL}"
+														onclick="fnImgPop('${data.downloadURL}')"
+														style="width: 60px; height: 60px"></td>
+													<td>
+													<c:choose>
+															<c:when test="${data.STATE eq 'N'}">
+																<input type="text" 
+														value="${data.PRICE}" class="input_price"> <span
+														class="btn btn-secondary btn-sm ml-4" id="btn_update" onclick="insertPrice(this,${data.PI_IDX},${data.DS_IDX})">수정</span>
+															</c:when>
+															<c:when test="${data.STATE eq 'Y'}"><input type="text" style="border: none;" 
+														value="${data.PRICE}" readonly class="input_price"></c:when>
+														</c:choose>
 													</td>
-													<td><input type="text" style="border: none;" readonly
-														value="${data.priceImg.price}" class="input_price"></input>
-														<span class="btn btn-secondary btn-sm ml-4"
-														id="btn_update">수정</span></td>
 
-													<td>${data.disease.name}(${data.disease.category})</td>
+													<td>${data.NAME}(${data.CATEGORY})</td>
 													<td><c:choose>
-															<c:when test="${data.priceImg.state eq 'N'}">등록대기중</c:when>
-															<c:when test="${data.priceImg.state eq 'Y'}">등록완료</c:when>
+															<c:when test="${data.STATE eq 'N'}">등록대기중</c:when>
+															<c:when test="${data.STATE eq 'Y'}">등록완료</c:when>
 														</c:choose></td>
-													<td>${data.priceImg.userIdx}</td>
-													<td>${data.priceImg.regDate }</td>
+													<td>${data.USER_IDX}</td>
+													<td>${data.REG_DATE}</td>
 
 												</tr>
 											</c:forEach>
-											<tr>
-												<td><label class="mt-3"> <input type="checkbox"
-														class="listCheckbox" /> <span class="checkmark"></span>
-												</label></td>
-												<td>02</td>
-												<td><a><img
-														src="https://cdn.imweb.me/thumbnail/20180305/5a9cea9e49044.png"></a>
-													<div class="d-inline-block">
-														<a href="#">화장품</a>
-													</div></td>
-												<td><span>10000원</span><span
-													class="btn btn-secondary btn-sm ml-4">수정</span></td>
-												<td>4</td>
-												<td class="nav-item dropdown" href="" data-toggle="dropdown"
-													aria-haspopup="true" aria-expanded="false"><span>반품중</span><i
-													class="m-r-10 mdi mdi-chevron-down ml-2"> </i>
-													<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-														<a class="dropdown-item" href="#">Action</a> <a
-															class="dropdown-item" href="#">Another action</a>
-														<div class="dropdown-divider"></div>
-														<a class="dropdown-item" href="#">Something else here</a>
-													</div></td>
-
-												<td>4</td>
-												<td>4</td>
-
-											</tr>
-											<tr>
-												<td><label class="mt-3"> <input type="checkbox"
-														class="listCheckbox" /> <span class="checkmark"></span>
-												</label></td>
-												<td>03</td>
-												<td><a><img
-														src="https://cdn.imweb.me/thumbnail/20180305/5a9cea9e49044.png"></a>
-													<div class="d-inline-block">
-														<a href="#">화장품</a>
-													</div> <span class="badge badge-danger">SALE</span></td>
-												<td>10000원</td>
-												<td>4</td>
-												<td class="nav-item dropdown" href="" data-toggle="dropdown"
-													aria-haspopup="true" aria-expanded="false"><span>반품중</span><i
-													class="m-r-10 mdi mdi-chevron-down ml-2"> </i>
-													<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-														<a class="dropdown-item" href="#">Action</a> <a
-															class="dropdown-item" href="#">Another action</a>
-														<div class="dropdown-divider"></div>
-														<a class="dropdown-item" href="#">Something else here</a>
-													</div></td>
-
-												<td>4</td>
-												<td>4</td>
-
-											</tr>
-											<tr>
-												<td><label class="mt-3"> <input type="checkbox"
-														class="listCheckbox" /> <span class="checkmark"></span>
-												</label></td>
-												<td>04</td>
-												<td><a><img
-														src="https://cdn.imweb.me/thumbnail/20180305/5a9cea9e49044.png"></a>
-													<div class="d-inline-block">
-														<a href="#">화장품</a>
-													</div></td>
-												<td>10000원</td>
-												<td>4</td>
-												<td class="nav-item dropdown" href="" data-toggle="dropdown"
-													aria-haspopup="true" aria-expanded="false"><span>반품중</span><i
-													class="m-r-10 mdi mdi-chevron-down ml-2"> </i>
-													<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-														<a class="dropdown-item" href="#">Action</a> <a
-															class="dropdown-item" href="#">Another action</a>
-														<div class="dropdown-divider"></div>
-														<a class="dropdown-item" href="#">Something else here</a>
-													</div></td>
-
-												<td>4</td>
-												<td>4</td>
-
-											</tr>
+											
 										</tbody>
 									</table>
 									<div class="border-top">
@@ -296,13 +238,13 @@
 	<script src="/resources/js/admin/sidebarmenu.js"></script>
 	<!--Custom JavaScript -->
 	<script src="/resources/js/admin/custom.min.js"></script>
-	
+
 
 	<!--This page JavaScript -->
 	<script type="text/javascript">
-	let flg=true;
+	
    
-    
+	 const URLSearch = new URLSearchParams(location.search);
      let fnImgPop = (url) =>{
                 var img=new Image();
                 img.src=url;
@@ -311,8 +253,59 @@
                 OpenWindow.document.write("<style>body{margin:0px;}</style><img src='"+url+"' width='"+600+"'  height='"+900+"' onclick='self.close()'>");
         }
             
-
+   
     
+     let selectTab = (state,res) =>{
+    	 if(location.search.includes(state)){
+    		
+    		 URLSearch.set(state, String(res));
+       	 	 const newParam = URLSearch.toString();
+       	 	 location.href = location.pathname + '?' + newParam
+    	 }else{
+    		location.href = location.pathname+'?'+state+'='+res
+    	}
+    	  
+     }
+     
+     let insertPrice = (obj, piIdx, dsIdx) =>{
+ 		
+    	return fetch('/admin/disease/insertPrice',{
+ 			method:"post",
+ 			body: JSON.stringify({price : Number(obj.previousElementSibling.value), piIdx : piIdx, dsIdx: dsIdx}),
+ 			 headers:{
+ 			    'Content-Type': 'application/json'
+ 			  }
+    	}).then(res => {
+    		alert('됐다!');
+    		location.reload();
+    	})
+    		
+ 	
+ 	}
+     $(document).ready(function() {
+    		$("#chk_all").click(function() {
+    			if($("#chk_all").is(":checked")) $("input[class=listCheckbox]").prop("checked", true);
+    			else $("input[class=listCheckbox]").prop("checked", false);
+    		});
+
+    		$("input[class=listCheckbox]").click(function() {
+    			var total = $("input[class=listCheckbox]").length;
+    			var checked = $("input[class=listCheckbox]:checked").length;
+
+    			if(total != checked) $("#chk_all").prop("checked", false);
+    			else $("#chk_all").prop("checked", true); 
+    		});
+    	});
+     (() =>{
+	     let loadState = URLSearch.get('state')
+	     	document.querySelectorAll('.tab').forEach(e =>{
+	     		if(loadState == null) {
+	     			document.querySelector(".tab_all").id = "clickedTab"
+	     		}else if(loadState == e.dataset.tab) e.id = "clickedTab"
+	     	})
+     })();
+	
+	 
 	</script>
 
 

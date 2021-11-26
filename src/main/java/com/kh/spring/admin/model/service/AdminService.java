@@ -12,7 +12,9 @@ public interface AdminService {
 
 	void insertDisease(Disease disease, List<MultipartFile> mfs);
 
-	List<Map<String, Object>> selectPriceImgList();
+	Map<String, Object> selectPriceImgList(String state);
+
+	void updatePrice(Map<String, Object> jsonMap);
 
 
 	

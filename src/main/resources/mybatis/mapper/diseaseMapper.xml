@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="com.kh.spring.disease.model.repository.DiseaseRepository">
+  
+  	
+
+  	
+  	
+  <select id="selectPriceImgList" resultType="map">
+		  select f.save_path, f.rename_file_name, p.price, p.state, p.user_idx, p.reg_date, p.pi_idx, d.name , d.ds_idx, d.category 
+		  from price_img p join file_info f on(p.pi_idx = f.type_idx) join disease d on(d.ds_idx = p.ds_idx) 
+		  <where>
+		  <if test="state != 'all'">
+		  	state = #{state}
+		  </if>
+		  </where>
+  </select>
+  	
+  	
+  	
+  </mapper>
