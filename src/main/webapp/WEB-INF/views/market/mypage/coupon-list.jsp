@@ -92,7 +92,7 @@
 						<fmt:parseNumber var="expDateTime" value="${expDate.time / (1000*60*60*24)}" integerOnly="true"/>
 						
 						<c:choose>
-								<c:when test="${expDateTime - todayTime < 4}">
+								<c:when test="${expDateTime - todayTime < 3}">
 									<span>만료임박</span> 
 								</c:when>
 						</c:choose>	

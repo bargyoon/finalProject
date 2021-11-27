@@ -15,7 +15,7 @@
 		<mapper resource="mybatis/mapper/mybatisMapper.xml" />
 		<mapper resource="mybatis/mapper/marketMapper.xml" />
 		<mapper resource="mybatis/mapper/diseaseMapper.xml" />
-		
+		<mapper resource="mybatis/mapper/marketMypageMapper.xml" />
 	</mappers>
 	
 	

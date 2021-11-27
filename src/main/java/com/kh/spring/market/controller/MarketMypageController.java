@@ -74,15 +74,18 @@ public class MarketMypageController {
 
 	@GetMapping("acc-money")
 	public void accMoney(@SessionAttribute(name="authentication")Member certifiedUser,
-								Model model) {
+								Model model,
+								@RequestParam(value = "state", defaultValue="1")String state) {
 		
-		List<SaveHistory> reserveList = marketMypageService.selectReserveList(certifiedUser.getUserIdx());
+		List<Map<String, Object>> reserveList = marketMypageService.selectReserveList(certifiedUser.getUserIdx(),state);
 		Member memberInfo = marketMypageService.selectMemberInfo(certifiedUser.getUserIdx());
 		int couponCnt = marketMypageService.selectCouponCount(certifiedUser.getUserIdx());
 				
 		model.addAttribute("memberInfo", memberInfo);
 		model.addAttribute("couponCnt", couponCnt);
 		model.addAttribute("reserveList", reserveList);
+		
+		System.out.println("state : " + state);
 		System.out.println("reserveList : " + reserveList);
 	}
 	
@@ -135,16 +138,40 @@ public class MarketMypageController {
 
 	@GetMapping("review/review-list")
 	public void reviewList(@SessionAttribute(name="authentication")Member certifiedUser,
-						Model model) {
+						   Model model) {
 		List<Map<String, Object>> reviewList = marketMypageService.selectReviewList(certifiedUser.getUserIdx());
 		Member memberInfo = marketMypageService.selectMemberInfo(certifiedUser.getUserIdx());
 		int couponCnt = marketMypageService.selectCouponCount(certifiedUser.getUserIdx());
+		marketMypageService.updateDateAndState();
 		
 		model.addAttribute("reviewList", reviewList);
 		model.addAttribute("memberInfo", memberInfo);
 		model.addAttribute("couponCnt", couponCnt);
 		
 		System.out.println("reviewList : " + reviewList);		
+	}
+	
+	@GetMapping("review/review-list2")
+	public void myReviewList(@SessionAttribute(name="authentication")Member certifiedUser,
+							Model model,
+							@RequestParam(value = "state", defaultValue="1")String state) {
+		
+		
+		List<Map<String, Object>> myReviewList = marketMypageService.selectMyReviewList(certifiedUser.getUserIdx(), state);
+		List<FileDTO> files = marketMypageService.selectFileList(certifiedUser.getUserIdx());
+		Member memberInfo = marketMypageService.selectMemberInfo(certifiedUser.getUserIdx());
+		int couponCnt = marketMypageService.selectCouponCount(certifiedUser.getUserIdx());
+		
+		
+		model.addAttribute("myReviewList", myReviewList);
+		model.addAttribute("files", files);
+		model.addAttribute("memberInfo", memberInfo);
+		model.addAttribute("couponCnt", couponCnt);
+		
+		System.out.println("state : " + state);
+		System.out.println("myReviewList : " + myReviewList);
+		System.out.println("files : " + files);
+		System.out.println("memberInfo : " + memberInfo);
 	}
 	
 	@PostMapping("review/upload/{orderIdx}")
@@ -176,26 +203,7 @@ public class MarketMypageController {
 		return "redirect:/market/mypage/review/review-list2"; 
 	}
 
-	@GetMapping("review/review-list2")
-	public void myReviewList(@SessionAttribute(name="authentication")Member certifiedUser,
-							Model model) {
-		
-		List<Map<String, Object>> myReviewList = marketMypageService.selectMyReviewList(certifiedUser.getUserIdx());
-		List<FileDTO> files = marketMypageService.selectFileList(certifiedUser.getUserIdx());
-		Member memberInfo = marketMypageService.selectMemberInfo(certifiedUser.getUserIdx());
-		int couponCnt = marketMypageService.selectCouponCount(certifiedUser.getUserIdx());
-		
-		
-		model.addAttribute("myReviewList", myReviewList);
-		model.addAttribute("files", files);
-		model.addAttribute("memberInfo", memberInfo);
-		model.addAttribute("couponCnt", couponCnt);
-		
-		
-		System.out.println("myReviewList : " + myReviewList);
-		System.out.println("files : " + files);
-		System.out.println("memberInfo : " + memberInfo);
-	}
+	
 	
 	
 	

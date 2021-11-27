@@ -44,9 +44,9 @@ public class MarketMypageServiceImpl implements MarketMypageService{
 	}
 
 	@Override
-	public List<SaveHistory> selectReserveList(int userIdx) {
+	public List<Map<String, Object>> selectReserveList(int userIdx, String state) {
 		
-		List<SaveHistory> reserveList = mypageRepository.selectReserveList(userIdx);
+		List<Map<String, Object>> reserveList = mypageRepository.selectReserveList(userIdx, state);
 		return reserveList;
 	}
 
@@ -90,9 +90,9 @@ public class MarketMypageServiceImpl implements MarketMypageService{
 	}
 
 	@Override
-	public List<Map<String, Object>> selectMyReviewList(int userIdx) {
+	public List<Map<String, Object>> selectMyReviewList(int userIdx, String state) {
 		
-		List<Map<String, Object>> myReviewList = mypageRepository.selectMyReviewList(userIdx);
+		List<Map<String, Object>> myReviewList = mypageRepository.selectMyReviewList(userIdx, state);
 		return myReviewList;
 	}
 	
@@ -120,6 +120,12 @@ public class MarketMypageServiceImpl implements MarketMypageService{
 	public List<Review> selectReviewListByState(String state) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public void updateDateAndState() {
+		mypageRepository.updateDateAndState();
+		
 	}
 
 	

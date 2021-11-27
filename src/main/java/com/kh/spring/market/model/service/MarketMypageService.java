@@ -19,13 +19,16 @@ public interface MarketMypageService {
 	int selectCouponCount(int userIdx);
 	
 	//Reserve
-	List<SaveHistory> selectReserveList(int userIdx);
+	List<Map<String, Object>> selectReserveList(int userIdx, String state);
 	
 	//OrderList
 	List<Map<String, Object>> selectOrderList(int userIdx);
 	
 	//reveiwList 구매확정 목록
 	List<Map<String, Object>> selectReviewList(int userIdx);
+	
+	//updateDate, state
+	void updateDateAndState();
 	
 	//reveiwListByState 구매확정 목록(상태별)
 	List<Review> selectReviewListByState(String state);
@@ -40,7 +43,7 @@ public interface MarketMypageService {
 	void updatePrdIdx(int orderIdx);
 	
 	//reviewList 작성한 리뷰 목록
-	List<Map<String, Object>> selectMyReviewList(int userIdx);
+	List<Map<String, Object>> selectMyReviewList(int userIdx, String state);
 	
 	//fileList
 	List<FileDTO> selectFileList(int userIdx);

@@ -10,20 +10,18 @@ import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 import com.kh.spring.common.util.FileDTO;
+import com.kh.spring.common.util.pagination.Paging;
 import com.kh.spring.market.model.dto.Order;
 import com.kh.spring.market.model.dto.Product;
 import com.kh.spring.market.model.dto.Review;
 import com.kh.spring.market.model.dto.SaveHistory;
+import com.kh.spring.market.model.dto.prdListSet;
 import com.kh.spring.member.model.dto.Member;
 
 @Mapper
 public interface MarketMypageRepository {
 
 	//Coupon
-	@Select("select COUPON_IDX, c.NAME, c.SALE_PER, c.IS_DEL, u.USER_IDX, u.reg_date, u.UC_IDX, u.EXP_DATE"
-			+ " from user_coupon u inner join coupon c"
-			+ " USING(COUPON_IDX)"
-			+ " where u.user_idx = #{userIdx} and u.exp_date>sysdate")
 	List<Map<String, Object>> selectCouponByIdx(int userIdx);	
 	
 	@Select("select count(UC_IDX) "
@@ -32,41 +30,21 @@ public interface MarketMypageRepository {
 	int selectCouponCount(int userIdx);
 	
 	//Save Money
-	@Select("select SH_IDX, USER_IDX, STATE, TYPE, AMOUNT, REG_DATE, SAVEMONEY"
-			+ " from SAVE_HISTORY s inner join \"USER\" u"
-			+ " USING(USER_IDX)"
-			+ " where user_idx = #{userIdx}")
-	List<SaveHistory> selectReserveList(int userIdx);
+	List<Map<String, Object>> selectReserveList(@Param("userIdx")int userIdx, @Param("state")String state);
 	
 	//Order List
-	@Select("select ORDER_IDX, UC_IDX, USER_IDX, o.order_date, PRD_IDX, PAYMENT_AMOUNT, o.state, ORDER_CNT, SAVE_MONEY, p.name, p.brand, po_name"
-			+ " from \"ORDER\" o"
-			+ " inner join product p USING(PRD_IDX)"
-			+ " inner join prd_detail d USING(PRD_IDX)"
-			+ " where user_idx = #{userIdx}")
 	List<Map<String, Object>> selectOrderList(int userIdx);
 	
 	//reveiwList 구매확정 목록
-	@Select("select ORDER_IDX, UC_IDX, USER_IDX, o.order_date, PRD_IDX, PAYMENT_AMOUNT, o.state, ORDER_CNT, SAVE_MONEY, p.name, p.brand, po_name"
-			+ " from \"ORDER\" o"
-			+ " inner join product p USING(PRD_IDX)"
-			+ " inner join prd_detail d USING(PRD_IDX)"
-			+ " where user_idx = #{userIdx} and o.state = 1") //구매확정이 1일 때
 	List<Map<String, Object>> selectReviewList(int userIdx);
 	
-	//selectReviewListByState 구매확정 목록(상태별로)
-	@Select("select r.RV_IDX, r.USER_IDX, PRD_IDX, r.ORDER_IDX, r.STATE, r.RATING, r.TYPE, r.RECOMMAND, r.REG_DATE, RV_CONTENT, p.name, p.brand, d.po_name"
-			+ " from REVIEW r"
-			+ " inner join product p USING(PRD_IDX)"
-			+ " inner join prd_detail d USING(PRD_IDX)"
-			+ " where USER_IDX = #{userIdx} and r.STATE = #{state}")
-	List<Review> selectReviewListByState(@Param("state") int state);
+	//updateDate 
+	@Update("update \"ORDER\""
+			+ " set update_date = sysdate, state = 1" //구매 후 일주일이 지나면 구매확정
+			+ " where order_date+7 <= sysdate")
+	void updateDateAndState();
 	
-	@Select("select ORDER_IDX, UC_IDX, USER_IDX, o.order_date, PRD_IDX, PAYMENT_AMOUNT, o.state, ORDER_CNT, SAVE_MONEY, p.name, p.brand, po_name"
-			+ " from \"ORDER\" o"
-			+ " inner join product p USING(PRD_IDX)"
-			+ " inner join prd_detail d USING(PRD_IDX)"
-			+ " where user_idx = #{userIdx} and o.state = 1 and o.order_idx = #{orderIdx}") //구매확정이 1일 때
+	//review 작성폼
 	List<Map<String, Object>> selectReviewDetail(Order order);
 	
 	//review 등록
@@ -90,12 +68,16 @@ public interface MarketMypageRepository {
 	void updatePrdIdx(int orderIdx);
 	
 	//reviewList
-	@Select("select r.RV_IDX, r.USER_IDX, PRD_IDX, r.ORDER_IDX, r.STATE, r.RATING, r.TYPE, r.RECOMMAND, r.REG_DATE, RV_CONTENT,p.name, p.brand, d.po_name"
-			+ " from REVIEW r"
-			+ " inner join product p USING(PRD_IDX)"
-			+ " inner join prd_detail d USING(PRD_IDX)"
-			+ " where USER_IDX= #{userIdx} ")
-	List<Map<String, Object>> selectMyReviewList(int userIdx);
+	List<Map<String, Object>> selectMyReviewList(@Param("userIdx")int userIdx, @Param("state")String state);
+	
+	
+	//selectReviewListByState 구매확정 목록(상태별로)*********
+		@Select("select r.RV_IDX, r.USER_IDX, PRD_IDX, r.ORDER_IDX, r.STATE, r.RATING, r.TYPE, r.RECOMMAND, r.REG_DATE, RV_CONTENT, p.name, p.brand, d.po_name"
+				+ " from REVIEW r"
+				+ " inner join product p USING(PRD_IDX)"
+				+ " inner join prd_detail d USING(PRD_IDX)"
+				+ " where USER_IDX = #{userIdx} and r.STATE = #{state}")
+		List<Review> selectMyReviewListByState(int state);
 	
 	//reviewFileList
 	@Select("select * "
@@ -104,8 +86,5 @@ public interface MarketMypageRepository {
 	List<FileDTO> selectFileList(int userIdx);
 	
 	//memberInfo
-	@Select("select nickname, join_date, savemoney, user_idx"
-			+ " from \"USER\" "
-			+ "where user_idx = #{userIdx}")
 	Member selectMemberInfo(int userIdx);
 }

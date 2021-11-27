@@ -3,6 +3,8 @@
 <html>
 <head>
 <%@ include file="/WEB-INF/views/include/market/mypage-head.jsp"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
 
 </head>
 <body onscroll="checkHeight()">
@@ -20,12 +22,10 @@
 				<div class="px-4 px-lg-5 my-3">
 					<div>
 						<div class="mt-4" style="display: flex; flex-direction: column;">
-							<h1 class="display-4 fw-bolder">닉네임</h1>
+							<h1 class="display-4 fw-bolder">${memberInfo.nickName}</h1>
 							<div style="display: flex;">
-								<h1 class="display-7 fw-bolder">회원등급</h1>
-								<p class="px-lg-2 pt-1" style="color: lightgray;">가입일 : 2021.4.26</p>
-							</div>
-							<a class="fw-normal btn-" href="#!" style="text-decoration: none;">등급별 혜택 확인 <i class="fas fa-chevron-right"></i></a>
+								<p class="px-lg-2 pt-1" style="color: lightgray;">가입일 : ${memberInfo.joinDate}</p>
+							</div>							
 						</div>
 					</div>
 				</div>
@@ -34,12 +34,12 @@
 				<div class="mt-5" style="display: flex; flex-direction: column;">
 					<i class="fas fa-coins py-2" style="font-size: 1.5rem;"></i>
 					<p class="fw-normal mt-2">적립금</p>
-					<p style="font-size: 1.3rem;">10,000</p>
+					<p style="font-size: 1.3rem;">${memberInfo.saveMoney}</p>
 				</div>
 				<div class="mt-5" style="display: flex; flex-direction: column;">
 					<i class="fas fa-ticket-alt py-2" style="font-size: 1.5rem"></i>
 					<p class="fw-normal mt-2">쿠폰</p>
-					<p style="font-size: 1.3rem;">3장</p>
+					<p style="font-size: 1.3rem;">${couponCnt}장</p>
 				</div>
 			</div>
 		</div>
@@ -51,9 +51,9 @@
 				<ul class="aside-ul">
 					<li class="ft-SBAggroM" style="font-size: 1.3rem;">나의 쇼핑 활동</li>
 					<li><hr class="dropdown-divider" /></li>
-					<li><a href="#!">주문 내역 조회</a></li>
-					<li><a href="#!">구매후기</a></li>
-					<li><a href="#!">장바구니</a></li>
+					<li><a href="/market/mypage">주문 내역 조회</a></li>
+					<li><a href="/market/mypage/review/review-list2">구매후기</a></li>
+					<li><a href="/market/mypage/cart">장바구니</a></li>
 					<li><a href="#!">상품문의</a></li>
 					<li><a href="#!">주소록 관리</a></li>
 				</ul>
@@ -64,7 +64,7 @@
 			<hr class="mt-0" style="height: 3px; opacity: 1;">
 			<ul class="acc-money-ul">
 				<li>현재적립금</li>
-				<li>10,000 원</li>
+				<li>${memberInfo.saveMoney} 원</li>
 			</ul>
 			<ul class="acc-note">
 				<li>적립금은 구매 확정 시 지급됩니다. (별도의 구매 확정이 없더라도 상품 수령 후 7일이 지난 경우에는 자동 구매 확정 됩니다.)</li>
@@ -72,9 +72,9 @@
 				<li>적립금은 상품 금액의 5%까지만 사용 가능합니다.</li>
 			</ul>
 			<ul class="sub-ul pt-4 pb-2">
-				<li><a href="#!">전체</a></li>
-				<li><a href="#experience">적립</a></li>
-				<li><a href="#education">사용</a></li>
+				<li><a href="/market/mypage/acc-money">전체</a></li>
+				<li><a href="/market/mypage/acc-money?state=0">적립</a></li>
+				<li><a href="/market/mypage/acc-money?state=1">사용</a></li>
 			</ul>
 			<table class="simple-table">
 				<colgroup>
@@ -95,22 +95,26 @@
 				<tbody>
 					<tr>
 					<c:choose>
-						<c:when test="${reserveList.state eq '1'}">
+						<c:when test="${reserveList.STATE eq '1'}"> <!-- 1일 때 적립 -->
 							<td class="acc-state">적립</td>
 						</c:when>
-						<c:when test="${reserveList.state ne '1'}">
+						<c:when test="${reserveList.STATE ne '1'}">
 							<td class="acc-state">사용</td>
 						</c:when>
 					</c:choose>
 					
-						<td class="acc-amount">+${reserveList.amount}</td>
+						<td class="acc-amount">+${reserveList.AMOUNT}</td>
 						<td class="acc-context">
 							<ul>
-								<li class="acc-reason">적립금 결제 취소</li>
-								<li class="acc-prd">상품명</li>
+							<c:choose>
+							 <c:when test="${reserveList.TYPE == '1'}"><li class="acc-reason">일반 후기 작성 적립금 지급</li></c:when>
+							 <c:when test="${reserveList.TYPE == '2'}"><li class="acc-reason">상품 사진 후기 작성 적립금 지급</li></c:when>
+							 <c:when test="${reserveList.TYPE == '3'}"><li class="acc-reason">주문 적립</li></c:when>
+							</c:choose>
+								<li class="acc-prd">${reserveList.NAME}</li>
 							</ul>
 						</td>
-						<td class="acc-date">${reserveList.regDate}</td>
+						<td class="acc-date"><fmt:formatDate value="${reserveList.REG_DATE}" pattern="yyyy-MM-dd"/></td>
 					</tr>
 				
 				</tbody>

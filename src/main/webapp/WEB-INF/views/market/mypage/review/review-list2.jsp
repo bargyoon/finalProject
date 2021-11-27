@@ -46,7 +46,7 @@
 			</div>
 		</div>
 	</header>
-<c:forEach var="myReviewList" items="${myReviewList}">
+
 	<section class="py-5 mb-5" style="display: flex; justify-content: space-between; min-height: 50rem;">
 		<aside>
 			<div class="px-lg-4 aside-nav">
@@ -76,9 +76,9 @@
 			</ul>
 			<ul class="sub-ul pb-2">
 				<li><a href="/market/mypage/review/review-list2">전체</a></li>
-				<li><a href="/market/mypage/review/review-list2?state=${myReviewList.STATE}">승인</a></li>
-				<li><a href="/market/mypage/review/review-list2?state=${myReviewList.STATE}">승인 대기</a></li>
-				<li><a href="/market/mypage/review/review-list2?state=${myReviewList.STATE}">조건 미충족</a></li>
+				<li><a href="/market/mypage/review/review-list2?state=1">승인</a></li>
+				<li><a href="/market/mypage/review/review-list2?state=0">승인 대기</a></li>
+				<li><a href="/market/mypage/review/review-list2?state=2">조건 미충족</a></li>
 			</ul>
 			<table class="n-table table-col">
 				<colgroup>
@@ -93,7 +93,7 @@
 						<th scope="col">후기 종류</th>
 					</tr>
 				</thead>
-				
+				<c:forEach var="myReviewList" items="${myReviewList}">
 				<tbody>
 					<tr>
 						<td>
@@ -167,11 +167,11 @@
 						</td>
 					</tr>
 				</tbody>
-				
+				</c:forEach>
 			</table>
 		</div>
 	</section>
-</c:forEach>	
+	
 	<%@ include file="/WEB-INF/views/include/market/footer.jsp"%>
 	<script type="text/javascript" src="${contextPath}/resources/js/market/slick/slick.js"></script>
 	<script type="text/javascript" src="${contextPath}/resources/js/market/slick/main-slick.js"></script>
