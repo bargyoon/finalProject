@@ -70,6 +70,7 @@ public class AdminController {
 		
 		Map<String, Object> commandMap = adminService.selectPriceImgList(state);
 		model.addAttribute("datas",commandMap);		
+		
 	}
 	
 	@GetMapping("disease/add-disease-spec")
@@ -92,6 +93,20 @@ public class AdminController {
 		
 		
 		return "good";
+		
+	}
+	
+	@GetMapping("disease/test")
+	public void testParam(@RequestParam Map<String, Object> test) {
+		System.out.println(test.get("test"));
+		
+	}
+	
+	@PostMapping("shopping/test")
+	public String shoppingTest(@RequestParam(value="option") List<String> test) {
+		System.out.println(test.toString());
+		return "redirect:/admin/shopping/item-list";
+				
 		
 	}
 	

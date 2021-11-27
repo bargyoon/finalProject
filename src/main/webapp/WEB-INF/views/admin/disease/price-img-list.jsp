@@ -296,6 +296,7 @@
     			else $("#chk_all").prop("checked", true); 
     		});
     	});
+     
      (() =>{
 	     let loadState = URLSearch.get('state')
 	     	document.querySelectorAll('.tab').forEach(e =>{

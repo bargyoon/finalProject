@@ -66,4 +66,16 @@ public class AdminControllerTest {
 		.andDo(print());
 	}
 	
+	@Test
+	public void testParam() throws Exception{
+		mockMvc.perform(get("/admin/disease/test")
+				.param("test", "test")
+				.param("price","10000")
+				.param("test", "test122")
+				.param("price", "14444"))
+		.andDo(print());
+	}
+	
+	
+	
 }

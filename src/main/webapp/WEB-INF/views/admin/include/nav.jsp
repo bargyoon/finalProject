@@ -176,10 +176,10 @@
                                 href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-chart-bar"></i><span
                                     class="hide-menu">병명 관리</span></a>
                             <ul aria-expanded="false" class="collapse  first-level">
-                                <li class="sidebar-item"><a href="/admin/member/member-list" class="sidebar-link"><i
+                                <li class="sidebar-item"><a href="/admin/disease/disease-list" class="sidebar-link"><i
                                             class="mdi mdi-note-outline"></i><span class="hide-menu">병명 목록 </span></a>
                                 </li>
-                                <li class="sidebar-item"><a href="/admin/member/member-list" class="sidebar-link"><i
+                                <li class="sidebar-item"><a href="/admin/disease/price-img-list" class="sidebar-link"><i
                                             class="mdi mdi-note-outline"></i><span class="hide-menu">사용자 등록 사진 목록 </span></a>
                                 </li>
                                

@@ -9,7 +9,7 @@
   	
   	
   <select id="selectPriceImgList" resultType="map">
-		  select f.save_path, f.rename_file_name, p.price, p.state, p.user_idx, p.reg_date, p.pi_idx, d.name , d.ds_idx, d.category 
+		  select f.save_path, f.rename_file_name, p.price, p.state, p.user_idx, TO_CHAR(p.reg_date, 'YYYY-MM-DD') REG_DATE, p.pi_idx, d.name , d.ds_idx, d.category 
 		  from price_img p join file_info f on(p.pi_idx = f.type_idx) join disease d on(d.ds_idx = p.ds_idx) 
 		  <where>
 		  <if test="state != 'all'">
