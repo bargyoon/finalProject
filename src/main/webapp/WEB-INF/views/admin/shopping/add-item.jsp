@@ -127,7 +127,7 @@
 
 
                                     </div>
-                                    <div class="col-md-6">
+                                      <div class="col-md-6">
                                         <div class="row ">
 
                                             <div class="col-md-12">
@@ -136,35 +136,30 @@
                                                         <h6 class="card-title m-b-0">상품 정보</h6>
                                                     </div>
                                                     <div class="card-body">
-                                                        <div class="form-group">
-                                                            <label for="" class="control-label">상품명</label>
-                                                            <div class="">
-                                                                <input type="text"
-                                                                    class="form-control prod-title-fixed-top inline-blocked"
-                                                                    name="name_u202110276178c0948c8dd" value=""
-                                                                    maxlength="200" autocomplete="off">
-                                                            </div>
-                                                        </div>
 
                                                         <div class="form-group">
                                                             <div class="row">
-                                                                <div class="col-md-3 m-margin-bottom-xl">
-                                                                    <label class="control-label">재고</label>
+                                                                <div class="col-md-6 m-margin-bottom-xl">
+                                                                    <label class="control-label">상품명</label>
                                                                     <input type="text" class="form-control"
                                                                         name="sku_no_option" value="">
                                                                 </div>
-                                                                <div class="col-md-9 m-margin-bottom-xl">
+                                                                <div class="col-md-6 m-margin-bottom-xl">
                                                                     <label for="shop_prod_price"
-                                                                        class="control-label">판매가 (KRW)</label>
+                                                                        class="control-label">브랜드</label>
                                                                     <div class="no-margin">
                                                                         <input type="text"
                                                                             class="form-control _prod_price"
                                                                             id="shop_prod_price" name="price" value="">
-                                                                        <span class="form-control-krw ">KRW</span>
+                                                                       
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
+
+                                                      
+
+                                                        
                                                         
                                                         <div class="form-group">
                                                             <div class="row">
@@ -187,10 +182,34 @@
                                                                 </div>
                                                                 <div class="col-md-6 m-margin-bottom-xl">
                                                                     <label class="control-label">종류</label>
-                                                                    <input type="text" class="form-control"
-                                                                        name="" value="">
+                                                                    <select class="form-control">
+                                                                        <option value="" selected disabled>종류 선택</option>
+                                                                        <option value="CJ">고양이</option>
+                                                                        <option value="EPOST">강아지</option>
+                                                                        
+                                                                        
+                                                                    </select>
                                                                 </div>
                                                                 
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <div class="row">
+                                                                <div class="col-md-3 m-margin-bottom-xl">
+                                                                    <label class="control-label">재고</label>
+                                                                    <input type="text" class="form-control"
+                                                                        name="sku_no_option" value="">
+                                                                </div>
+                                                                <div class="col-md-9 m-margin-bottom-xl">
+                                                                    <label for="shop_prod_price"
+                                                                        class="control-label">판매가 (KRW)</label>
+                                                                    <div class="no-margin">
+                                                                        <input type="text"
+                                                                            class="form-control _prod_price"
+                                                                            id="shop_prod_price" name="price" value="">
+                                                                        <span class="form-control-krw ">KRW</span>
+                                                                    </div>
+                                                                </div>
                                                             </div>
                                                         </div>
 
