@@ -8,6 +8,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.kh.spring.common.util.FileDTO;
 import com.kh.spring.market.model.dto.Coupon;
 import com.kh.spring.market.model.dto.Order;
+import com.kh.spring.market.model.dto.QNA;
 import com.kh.spring.market.model.dto.Review;
 import com.kh.spring.market.model.dto.SaveHistory;
 import com.kh.spring.member.model.dto.Member;
@@ -50,4 +51,13 @@ public interface MarketMypageService {
 	
 	//memberInfo
 	Member selectMemberInfo(int userIdx);
+	
+	//문의폼 회원정보 ***********필요없을듯
+	List<Map<String, Object>> memberInfoForEnquiry(int userIdx);
+	
+	//문의 리스트
+	List<Map<String, Object>> selectEnquiryList(int userIdx);
+	
+	//문의 등록
+	void insertEnquiry(QNA qna);
 }

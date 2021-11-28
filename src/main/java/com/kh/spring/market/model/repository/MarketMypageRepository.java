@@ -13,6 +13,7 @@ import com.kh.spring.common.util.FileDTO;
 import com.kh.spring.common.util.pagination.Paging;
 import com.kh.spring.market.model.dto.Order;
 import com.kh.spring.market.model.dto.Product;
+import com.kh.spring.market.model.dto.QNA;
 import com.kh.spring.market.model.dto.Review;
 import com.kh.spring.market.model.dto.SaveHistory;
 import com.kh.spring.market.model.dto.prdListSet;
@@ -87,4 +88,16 @@ public interface MarketMypageRepository {
 	
 	//memberInfo
 	Member selectMemberInfo(int userIdx);
+	
+	//문의 등록
+	@Insert("insert into QNA(QNA_IDX, USER_IDX, prd_idx, ORDER_IDX, TITLE, CONTEXT, TYPE)"
+			+ " values(SC_QNA_IDX.NEXTVAL, #{userIdx},"
+			+ " ( SELECT prd_idx FROM \"ORDER\" WHERE order_idx = #{orderIdx}), #{orderIdx}, #{title}, #{context}, #{type})")
+	void insertEnquiry(QNA qna);
+	
+	//문의폼 회원정보 ***********필요없을듯
+	List<Map<String, Object>> memberInfoForEnquiry(int userIdx);
+	
+	//문의 리스트
+	List<Map<String, Object>> selectEnquiryList(@Param("userIdx")int userIdx);
 }

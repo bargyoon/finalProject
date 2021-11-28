@@ -20,12 +20,10 @@
 				<div class="px-4 px-lg-5 my-3">
 					<div>
 						<div class="mt-4" style="display: flex; flex-direction: column;">
-							<h1 class="display-4 fw-bolder">닉네임</h1>
+							<h1 class="display-4 fw-bolder">${memberInfo.nickName}</h1>
 							<div style="display: flex;">
-								<h1 class="display-7 fw-bolder">회원등급</h1>
-								<p class="px-lg-2 pt-1" style="color: lightgray;">가입일 : 2021.4.26</p>
-							</div>
-							<a class="fw-normal btn-" href="#!" style="text-decoration: none;">등급별 혜택 확인 <i class="fas fa-chevron-right"></i></a>
+								<p class="px-lg-2 pt-1" style="color: lightgray;">가입일 : ${memberInfo.joinDate}</p>
+							</div>							
 						</div>
 					</div>
 				</div>
@@ -34,12 +32,12 @@
 				<div class="mt-5" style="display: flex; flex-direction: column;">
 					<i class="fas fa-coins py-2" style="font-size: 1.5rem;"></i>
 					<p class="fw-normal mt-2">적립금</p>
-					<p style="font-size: 1.3rem;">10,000</p>
+					<p style="font-size: 1.3rem;">${memberInfo.saveMoney}</p>
 				</div>
 				<div class="mt-5" style="display: flex; flex-direction: column;">
 					<i class="fas fa-ticket-alt py-2" style="font-size: 1.5rem"></i>
 					<p class="fw-normal mt-2">쿠폰</p>
-					<p style="font-size: 1.3rem;">3장</p>
+					<p style="font-size: 1.3rem;">${couponCnt}장</p>
 				</div>
 			</div>
 		</div>
@@ -51,9 +49,9 @@
 				<ul class="aside-ul">
 					<li class="ft-SBAggroM" style="font-size: 1.3rem;">나의 쇼핑 활동</li>
 					<li><hr class="dropdown-divider" /></li>
-					<li><a href="#!">주문 내역 조회</a></li>
-					<li><a href="#!">구매후기</a></li>
-					<li><a href="#!">장바구니</a></li>
+					<li><a href="/market/mypage">주문 내역 조회</a></li>
+					<li><a href="/market/mypage/review/review-list2">구매후기</a></li>
+					<li><a href="/market/mypage/cart">장바구니</a></li>
 					<li><a href="#!" style="color: black;">상품문의</a></li>
 					<li><a href="#!">주소록 관리</a></li>
 				</ul>
@@ -87,7 +85,8 @@
 				<li>고객님의 주문내역을 선택, 질문이 필요한 상품을 선택하시면 1:1상담이 가능합니다.</li>
 				<li>1:1문의 처리 내역은 <span style="text-decoration: underline;">마이페이지>상품문의</span>를 통해 확인하실 수 있습니다.</li>
 			</ul>
-			<form class="pt-5" method="post">
+			<form action="/market/mypage/enquiry/upload" class="pt-5" 
+				method="post" onsubmit="return minLengthCheck(this);" >
 				<p class="mb-0">문의작성</p>
 				<hr class="mt-0" style="height: 2px; opacity: 1;">
 				<div class="py-2">
@@ -103,32 +102,32 @@
 								<th>문의유형</th>
 								<td>
 									<div class="bg-select">
-										<select name="qa_kind">
-											<option value="">문의유형 선택</option>
-											<option value="8">교환</option>
-											<option value="9">환불</option>
-											<option value="10">취소(출하 전 취소)</option>
-											<option value="11">배송</option>
-											<option value="12">주문/결제</option>
-											<option value="15">회원 관련</option>
-											<option value="16">기타 문의</option>
-											<option value="17">신고</option>
-											<option value="19">기능/작동 오류</option>
+										<select name="type">
+											<option value="0">문의유형 선택</option>
+											<option value="1">교환</option>
+											<option value="2">환불</option>
+											<option value="3">취소(출하 전 취소)</option>
+											<option value="4">배송</option>
+											<option value="5">주문/결제</option>
+											<option value="6">회원 관련</option>
+											<option value="7">기타 문의</option>
+											<option value="8">신고</option>
+											<option value="9">기능/작동 오류</option>
 										</select>
 									</div>
 								</td>
 								<th>주문번호</th>
 								<td>
-									<input type="text" name="order_no" readonly="" value="">
-									<button type="button" class="btn-outline-dark">조회</button>
+									<input type="text" name="orderIdx" id="orderIdx" readonly="readonly" value="">
+									<button type="button" id="pop" class="btn-outline-dark">조회</button>
 									<p class="order-check__txt-type order-check__txt-type--orange" style="display: none;">필수 입력 항목</p>
 								</td>
 							</tr>
 							<tr>
 								<th>작성자</th>
-								<td><input type="text" class="n-input" name="user_name" value="김영범"></td>
+								<td><input type="text" class="n-input" name="user_name" value="${memberInfo.userName}"></td>
 								<th>휴대전화</th>
-								<td><input type="text" class="n-input" name="phone" value="010-4717-8981"></td>
+								<td><input type="text" class="n-input" name="phone" placeholder="010-0000-0000"></td>
 							</tr>
 							<tr style="border-bottom: 1px solid lightgray;">
 								<th style="padding-bottom: 2rem;">이메일</th>
@@ -140,19 +139,63 @@
 							</tr>
 							<tr>
 								<th>문의내용</th>
-								<td colspan="3"><textarea name="qa_msg" cols="160" rows="10" placeholder="내용을 입력해주세요."></textarea></td>
+								<td colspan="3">
+									<textarea id="inputContent" name="context" cols="160" rows="10" placeholder="내용을 입력해주세요."></textarea>
+									<p class="limit_text_alert" id="cntLength">(20자 / 0자) </p>
+									<span id="contentCheck" class="valid-msg"></span>
+								</td>
 							</tr>
 						</tbody>
 					</table>
 				</div>
 				<div class="d-flex py-3" style="justify-content: center;">
-					<button type="button" class="py-2 px-lg-5 btn btn-outline-dark" style="font-size: 14px;">등록</button>
+					<button type="submit" class="py-2 px-lg-5 btn btn-outline-dark" style="font-size: 14px;">등록</button>
 				</div>
 			</form>
 		</div>
 	</section>
 
 	<%@ include file="/WEB-INF/views/include/market/footer.jsp"%>
+	<script>
+
+	//글자 수 200자 제한
+	$("#inputContent").keyup(function (e){
+	  
+		var content = $(this).val();
+		
+		//실시간 글자수 세기
+		$("#cntLength").html("(20자 / " + content.length +"자)"); 
+		
+		if(content.length > 200){
+			alert("최대 200자까지 입력 가능합니다.");
+			$(this).val(content.substring(0, 200));
+			$('#cntLength').html("(200 / 최대 200자)");
+		}
+	});
+		
+	function minLengthCheck(i) {
+		
+	    var content = document.getElementById("inputContent");
+	    if(content.value.length < 20) {
+	    	content.value =  content.value.substr(0, 20);
+	        document.querySelector('#contentCheck').innerHTML = '최소 20자 이상을 입력해야 합니다.';
+	        return false;
+	    }
+	    
+	}
+	
+	window.onload = function(){
+        document.getElementById("pop").onclick = function(){
+            window.open("enquiry-pop","","width=600px,height=400px,top=200px;");
+        }
+
+    };
+	
+
+</script>
+
+
+	
 
 
 

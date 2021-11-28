@@ -3,6 +3,8 @@
 <html>
 <head>
 <%@ include file="/WEB-INF/views/include/market/mypage-head.jsp"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
 
 </head>
 <body onscroll="checkHeight()">
@@ -20,12 +22,10 @@
 				<div class="px-4 px-lg-5 my-3">
 					<div>
 						<div class="mt-4" style="display: flex; flex-direction: column;">
-							<h1 class="display-4 fw-bolder">닉네임</h1>
+							<h1 class="display-4 fw-bolder">${memberInfo.nickName}</h1>
 							<div style="display: flex;">
-								<h1 class="display-7 fw-bolder">회원등급</h1>
-								<p class="px-lg-2 pt-1" style="color: lightgray;">가입일 : 2021.4.26</p>
+								<p class="px-lg-2 pt-1" style="color: lightgray;">가입일 : ${memberInfo.joinDate}</p>
 							</div>
-							<a class="fw-normal btn-" href="#!" style="text-decoration: none;">등급별 혜택 확인 <i class="fas fa-chevron-right"></i></a>
 						</div>
 					</div>
 				</div>
@@ -34,12 +34,12 @@
 				<div class="mt-5" style="display: flex; flex-direction: column;">
 					<i class="fas fa-coins py-2" style="font-size: 1.5rem;"></i>
 					<p class="fw-normal mt-2">적립금</p>
-					<p style="font-size: 1.3rem;">10,000</p>
+					<p style="font-size: 1.3rem;">${memberInfo.saveMoney}</p>
 				</div>
 				<div class="mt-5" style="display: flex; flex-direction: column;">
 					<i class="fas fa-ticket-alt py-2" style="font-size: 1.5rem"></i>
 					<p class="fw-normal mt-2">쿠폰</p>
-					<p style="font-size: 1.3rem;">3장</p>
+					<p style="font-size: 1.3rem;">${couponCnt}장</p>
 				</div>
 			</div>
 		</div>
@@ -51,9 +51,9 @@
 				<ul class="aside-ul">
 					<li class="ft-SBAggroM" style="font-size: 1.3rem;">나의 쇼핑 활동</li>
 					<li><hr class="dropdown-divider" /></li>
-					<li><a href="#!">주문 내역 조회</a></li>
-					<li><a href="#!">구매후기</a></li>
-					<li><a href="#!">장바구니</a></li>
+					<li><a href="/market/mypage">주문 내역 조회</a></li>
+					<li><a href="/market/mypage/review/review-list2">구매후기</a></li>
+					<li><a href="/market/mypage/cart">장바구니</a></li>
 					<li><a href="#!">상품문의</a></li>
 					<li><a href="#!">주소록 관리</a></li>
 				</ul>
@@ -98,43 +98,68 @@
 						<th scope="col">처리 상태</th>
 					</tr>
 				</thead>
-				<tbody>
+				
+				<c:forEach var="enquiryList" items="${enquiryList}">
+				<tbody class="tbody">
 					<tr>
 						<td>
 							<div class="n-prd-row">
 								<a href="#!"><img src="https://dummyimage.com/100x120/dee2e6/6c757d.jpg"></a>
 								<ul class="info">
-									<li class="brand">브랜드</li>
-									<li class="name ft-SBAggroM"><a href="#!" style="text-decoration: none; color: black;">제품명</a></li>
-									<li class="option">옵션</li>
+									<li class="brand">${enquiryList.BRAND}</li>
+									<li class="name ft-SBAggroM"><a href="#!" style="text-decoration: none; color: black;">${enquiryList.BRAND}</a></li>
+									<li class="option">${enquiryList.PO_NAME}</li>
 								</ul>
 							</div>
 						</td>
-						<td class="enquiry_title text-start" onclick="openEnquiry()">배송 언제쯤 도착할까요 ?</td>
+						<td class="enquiry_title text-start" onclick="openEnquiry()">${enquiryList.TITLE}</td>
+						<c:choose>
+							<c:when test="${enquiryList.TYPE eq '1'}"><td>교환문의</td></c:when>
+							<c:when test="${enquiryList.TYPE eq '2'}"><td>환불문의</td></c:when>
+							<c:when test="${enquiryList.TYPE eq '3'}"><td>취소문의</td></c:when>
+							<c:when test="${enquiryList.TYPE eq '4'}"><td>배송문의</td></c:when>
+							<c:when test="${enquiryList.TYPE eq '5'}"><td>주문/결제문의</td></c:when>
+							<c:when test="${enquiryList.TYPE eq '6'}"><td>회원문의</td></c:when>
+							<c:when test="${enquiryList.TYPE eq '7'}"><td>기타문의</td></c:when>
+							<c:when test="${enquiryList.TYPE eq '8'}"><td>신고문의</td></c:when>
+							<c:when test="${enquiryList.TYPE eq '9'}"><td>기능오류</td></c:when>
+						</c:choose>
 						<td>배송문의</td>
-						<td>2021.08.15</td>
-						<td style="color: steelblue;">답변 완료</td>
+						<td><fmt:formatDate value="${enquiryList.REG_DATE}" pattern="yyyy-MM-dd"/></td>
+						<c:if test="${enquiryList.IS_ANSWER eq 1}">
+							<td style="color: steelblue;">답변</td>
+						</c:if>
+						<c:if test="${enquiryList.IS_ANSWER ne 1}">
+							<td style="color: red;">미답변</td>
+						</c:if>
 					</tr>
+					
+					<!-- 문의 내용 -->
 					<tr class="enquiry_context eq-click">
 						<td>&nbsp;</td>
-						<td class="text-start" colspan="3">작년에 시켰는데 택배 언제 도착할까요 ?</td>
+						<td class="text-start" colspan="3">${enquiryList.CONTEXT}</td>
 						<td>&nbsp;</td>
 					</tr>
-					<tr class="eq-click">
-						<td>스토어 담당자<br>윤수환</td>
-						<td colspan="3" class="text-start">
-							<p class="enquiry-answer" style="line-height: 2rem;">
-								안녕하세요 똑Dog한 집사들 장터 고객센터 입니다.<br>
-								먼저, 이용에 불편을 끼쳐 드린 점 진심으로 사과드립니다.<br>
-								확인결과 고객님의 상품은 내년에 도착합니다.<br>
-								다른 도움이 필요하시다면 고객센터(1234-4567)로 문의 부탁드립니다.<br>
-								언제나 고객님의 편안한 쇼핑을 위하여 최선을 다하는 똑Dog한 집사들의 장터가 되겠습니다.<br>
-								감사합니다.
-							</p>
-						</td>
-						<td style="font-size: 14px;">21.08.16<br>15:31</td>
-					</tr>
+					
+					<!-- 답변 -->
+					<c:if test="${enquiryList.IS_ANSWER eq 1}">
+						<tr class="eq-click">
+							<td>스토어 담당자<br>윤수환</td>
+							<td colspan="3" class="text-start">
+								<p class="enquiry-answer" style="line-height: 2rem;">
+									안녕하세요 똑Dog한 집사들 장터 고객센터 입니다.<br>
+									먼저, 이용에 불편을 끼쳐 드린 점 진심으로 사과드립니다.<br>
+									확인결과 고객님의 상품은 내년에 도착합니다.<br>
+									다른 도움이 필요하시다면 고객센터(1234-4567)로 문의 부탁드립니다.<br>
+									언제나 고객님의 편안한 쇼핑을 위하여 최선을 다하는 똑Dog한 집사들의 장터가 되겠습니다.<br>
+									감사합니다.
+								</p>
+							</td>
+							<td style="font-size: 14px;">21.08.16<br>15:31</td>
+						</tr>
+					</c:if>
 				</tbody>
+				</c:forEach>
 			</table>
 		</div>
 	</section>

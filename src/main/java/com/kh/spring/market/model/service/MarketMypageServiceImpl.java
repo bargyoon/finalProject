@@ -12,6 +12,7 @@ import com.kh.spring.common.util.FileDTO;
 import com.kh.spring.common.util.FileUtil;
 import com.kh.spring.market.model.dto.Coupon;
 import com.kh.spring.market.model.dto.Order;
+import com.kh.spring.market.model.dto.QNA;
 import com.kh.spring.market.model.dto.Review;
 import com.kh.spring.market.model.dto.SaveHistory;
 import com.kh.spring.market.model.dto.UserCoupon;
@@ -125,6 +126,24 @@ public class MarketMypageServiceImpl implements MarketMypageService{
 	@Override
 	public void updateDateAndState() {
 		mypageRepository.updateDateAndState();
+		
+	}
+
+	@Override
+	public List<Map<String, Object>> memberInfoForEnquiry(int userIdx) {
+		List<Map<String, Object>> memberEnquiry = mypageRepository.memberInfoForEnquiry(userIdx);
+		return memberEnquiry;
+	}
+
+	@Override
+	public List<Map<String, Object>> selectEnquiryList(int userIdx) {
+		List<Map<String, Object>> selectEnquiryList = mypageRepository.selectEnquiryList(userIdx);
+		return selectEnquiryList;
+	}
+
+	@Override
+	public void insertEnquiry(QNA qna) {
+		mypageRepository.insertEnquiry(qna);
 		
 	}
 

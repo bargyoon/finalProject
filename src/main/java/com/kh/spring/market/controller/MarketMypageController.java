@@ -18,6 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.kh.spring.common.util.FileDTO;
 import com.kh.spring.market.model.dto.Coupon;
 import com.kh.spring.market.model.dto.Order;
+import com.kh.spring.market.model.dto.QNA;
 import com.kh.spring.market.model.dto.Review;
 import com.kh.spring.market.model.dto.SaveHistory;
 import com.kh.spring.market.model.service.MarketMypageService;
@@ -90,10 +91,50 @@ public class MarketMypageController {
 	}
 	
 	@GetMapping("enquiry/enquiry-form")
-	public void enquiryForm() {}
+	public void enquiryForm(@SessionAttribute(name="authentication")Member certifiedUser,
+							Model model) {
+		//List<Map<String, Object>> memberEnquiry = marketMypageService.memberInfoForEnquiry(certifiedUser.getUserIdx());
+		Member memberInfo = marketMypageService.selectMemberInfo(certifiedUser.getUserIdx());
+		
+		model.addAttribute("memberInfo", memberInfo);
+	}
+	
+	@GetMapping("enquiry/enquiry-pop")
+	public void enquiryPop(@SessionAttribute(name="authentication")Member certifiedUser,
+							Model model) {
+		
+		List<Map<String, Object>> orderList = marketMypageService.selectOrderList(certifiedUser.getUserIdx());
+		model.addAttribute("orderList", orderList);
+		
+		System.out.println("orderList : " + orderList);
+	}
+	
+	@PostMapping("enquiry/upload")
+	public String uploadEnquiry(QNA qna
+							,@SessionAttribute("authentication")Member certifiedUser) {
+		
+		qna.setUserIdx(certifiedUser.getUserIdx());		
+		System.out.println("qna : " + qna);
+		
+		marketMypageService.insertEnquiry(qna);
+
+		return "redirect:/market/mypage/enquiry/enquiry-list"; 
+	}
 	
 	@GetMapping("enquiry/enquiry-list")
-	public void enquiryList() {}
+	public void enquiryList(@SessionAttribute(name="authentication")Member certifiedUser,
+							Model model) {
+		
+		List<Map<String, Object>> enquiryList = marketMypageService.selectEnquiryList(certifiedUser.getUserIdx());
+		Member memberInfo = marketMypageService.selectMemberInfo(certifiedUser.getUserIdx());
+		int couponCnt = marketMypageService.selectCouponCount(certifiedUser.getUserIdx());
+		
+		model.addAttribute("enquiryList", enquiryList);
+		model.addAttribute("memberInfo", memberInfo);
+		model.addAttribute("couponCnt", couponCnt);
+		
+		System.out.println("enquiryList : " + enquiryList);
+	}
 
 	@GetMapping("enquiry/faq")
 	public void faq() {}
@@ -135,6 +176,8 @@ public class MarketMypageController {
 		System.out.println("orderIdx : " + orderIdx);
 		
 	}
+	
+	
 
 	@GetMapping("review/review-list")
 	public void reviewList(@SessionAttribute(name="authentication")Member certifiedUser,

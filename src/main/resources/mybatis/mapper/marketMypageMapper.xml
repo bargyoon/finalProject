@@ -58,9 +58,27 @@
 		where u.user_idx = #{userIdx} and u.exp_date > sysdate
 	</select>
 	
+	<!-- enquiry form ***********필요없을듯-->
+	<select id="memberInfoForEnquiry" resultType="map">
+  	 	select USER_IDX, EMAIL, NICKNAME,GRADE, USER_ID, ADDRESS, JOIN_DATE, SAVEMONEY,IS_LEAVE ,USER_NAME, ORDER_IDX
+		from "USER" u
+		inner join "ORDER" o USING(USER_IDX)
+		where USER_IDX = #{userIdx}
+	</select>
+	
+	
+	<!-- enquiry list -->
+	<select id="selectEnquiryList" resultType="map">
+  	 	select QNA_IDX, USER_IDX, PRD_IDX, ORDER_IDX, TITLE, q.CONTEXT, q.TYPE, q.REG_DATE, IS_ANSWER, AW_CONTEXT, AW_REG_DATE, p.name, p.brand, d.po_name
+		from  QNA q
+		inner join product p USING(PRD_IDX)
+		inner join prd_detail d USING(PRD_IDX)
+		where USER_IDX = #{userIdx}
+	</select>
+	
 	<!-- ok -->
 	<select id="selectMemberInfo" resultType="Member">
-  	 	select nickname, join_date, savemoney, user_idx
+  	 	select user_name, nickname, join_date, savemoney, user_idx
 		from "USER"
 		where user_idx = #{userIdx}
 	</select>
