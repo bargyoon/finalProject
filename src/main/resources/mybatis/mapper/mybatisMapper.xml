@@ -7,20 +7,5 @@
   		select password from member where user_id = #{userId}
   	</select>
   	
-  	<update id="dynamicQueryUpdateMember">
-  		update member
-  		<set>
-  			<if test="form.nickName != null">
-  				nickname = #{form.nickName}
-  			</if>
-  			<if test="form.password != null">
-  				,password = #{form.password}
-  			</if>
-  			<if test="form.address != null">
-  				,address = #{form.address}
-  			</if>
-  		</set>
-  		where userIdx = #{userIdx}
-  	</update>
   	
   </mapper>

@@ -7,7 +7,7 @@ import com.kh.spring.mypage.validator.UpdateMemberForm;
 @Mapper
 public interface MypageRepository {
 	
-	void dynamicQueryUpdateMember(int userIdx, UpdateMemberForm form);
+	int dynamicQueryUpdateMember(int userIdx, UpdateMemberForm form);
 	
 		
 

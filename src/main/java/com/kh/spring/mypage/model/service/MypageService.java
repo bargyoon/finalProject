@@ -4,6 +4,6 @@ import com.kh.spring.mypage.validator.UpdateMemberForm;
 
 public interface MypageService {
 	
-	void updateMember(int userIdx, UpdateMemberForm form);
+	int updateMember(int userIdx, UpdateMemberForm form);
 
 }

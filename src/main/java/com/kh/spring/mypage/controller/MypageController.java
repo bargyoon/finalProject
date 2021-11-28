@@ -1,5 +1,7 @@
 package com.kh.spring.mypage.controller;
 
+import java.util.List;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -14,6 +16,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.spring.common.validator.ValidatorResult;
 import com.kh.spring.member.model.dto.Member;
+import com.kh.spring.member.model.service.MemberService;
 import com.kh.spring.mypage.model.service.MypageService;
 import com.kh.spring.mypage.model.service.MypageServiceImpl;
 import com.kh.spring.mypage.validator.UpdateMemberForm;
@@ -54,10 +57,8 @@ public class MypageController {
 			return "mypage/update-member-info";
 		}
 		
-		redirectAttr.addFlashAttribute("message", "회원정보가 수정되었습니다.");
 		mypageService.updateMember(userIdx, form);
-		
-		
+		redirectAttr.addFlashAttribute("message", "회원정보가 수정되었습니다.");
 		
 		return "mypage/my-info";
 	}
@@ -72,7 +73,12 @@ public class MypageController {
 	public void managingCounseling() {}
 	
 	@GetMapping("pet-info")
-	public void petInfo() {}
+	public void petInfo(@SessionAttribute(name = "authentication")Member certifiedUser, Model model) {
+		int userIdx = certifiedUser.getUserIdx();
+		
+//		List<Pet> pets = MemberService.selectPets(userIdx);
+//		model.addAttribute("Pets", pets);
+	}
 	
 	@GetMapping("my-info")
 	public void myInfo() {}

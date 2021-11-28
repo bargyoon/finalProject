@@ -13,8 +13,8 @@ public class MypageServiceImpl implements MypageService {
 	
 	private final MypageRepository mypageRepository;
 	
-	public void updateMember(int userIdx, UpdateMemberForm form) {
-		mypageRepository.dynamicQueryUpdateMember(userIdx, form);
+	public int updateMember(int userIdx, UpdateMemberForm form) {
+		return mypageRepository.dynamicQueryUpdateMember(userIdx, form);
 	}
 	
 	

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="com.kh.spring.mypage.model.repository.MypageRepository">
+
+  	<update id="dynamicQueryUpdateMember">
+  		update member
+  		<set>
+  			<if test="form.nickName != null">
+  				nickname = #{form.nickName}
+  			</if>
+  			<if test="form.password != null">
+  				,password = #{form.password}
+  			</if>
+  			<if test="form.address != null">
+  				,address = #{form.address}
+  			</if>
+  		</set>
+  		where userIdx = #{userIdx}
+  	</update>
+  	
+  </mapper>
