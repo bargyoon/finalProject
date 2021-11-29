@@ -4,6 +4,7 @@
 <html lang="en">
 <head>
 <%@ include file="/WEB-INF/views/include/head.jsp" %>
+<%@ include file="/WEB-INF/views/include/navBar.jsp" %>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" 
 	rel="stylesheet" 
 	integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" 
@@ -49,7 +50,7 @@
 					<%-- <c:if test="${empty error.nickName}">
 						<span id="nickNameCheck" class="valid-msg"></span>
 					</c:if> --%>
-					<form:errors id="nickNameCheck" path="nickName" cssClass="valid-msg"/>
+					<%-- <form:errors id="nickNameCheck" path="nickName" cssClass="valid-msg"/> --%>
 				</div>
 	
 				<div class="form-floating mb-3">
@@ -64,7 +65,7 @@
 					<%-- <c:if test="${empty error.password}">
 						<span id="passwordCheck" class="valid-msg"></span>
 					</c:if> --%>
-					<form:errors id="passwordCheck" path="password" cssClass="valid-msg"/>
+					<%-- <form:errors id="passwordCheck" path="password" cssClass="valid-msg"/> --%>
 				</div>
 	
 				<div class="form-floating">
