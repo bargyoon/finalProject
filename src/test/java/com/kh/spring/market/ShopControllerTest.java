@@ -71,6 +71,15 @@ public class ShopControllerTest {
 		.andDo(print());
 	}
 	
+	@Test
+	public void prdDetailTest() throws Exception {
+		String prdIdx = "100002";
+		mockMvc.perform(get("/market/shop/prd-detail")
+				.param("pn", prdIdx))
+		.andExpect(status().isOk())
+		.andDo(print());
+	}
+	
 	
 	
 	

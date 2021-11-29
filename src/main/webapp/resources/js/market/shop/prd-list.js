@@ -3,11 +3,13 @@
 	let prdList = document.getElementById("prd-list");
 	let emptyList = document.getElementById("empty-list");
 	let regLog = document.getElementById("reg-log");
+	let pagination = document.getElementById("pagination");
 	
 	checkEmpty = (prdList) => {
-	    if(prdList.childNodes.length < 1){
+	    if(prdList.childNodes.length < 2){
 			emptyList.style.display = 'flex';
 			prdList.style.display = 'none';
+			pagination.style.display = 'none';
 		}
 	}
 	
@@ -37,13 +39,9 @@
 			return;
 		}
 		
-		let nextPage = curPage - 1;
-		
-		if(!regLog.checked){
-			location.href = "/market/shop/prd-list?category="+cg+"&option="+option+"&page="+nextPage;
-		} else {
-			location.href = "/market/shop/prd-list?category="+cg+"&option="+option+"&check=true&page="+nextPage;
-		}
+		let prevPage = curPage - 1;
+
+		pageBtn(category, option, prevPage);
 		
 	}
 	
@@ -55,13 +53,17 @@
 		
 		let nextPage = curPage + 1;
 		
-		if(!regLog.checked){
-			location.href = "/market/shop/prd-list?category="+cg+"&option="+option+"&page="+nextPage;
-		} else {
-			location.href = "/market/shop/prd-list?category="+cg+"&option="+option+"&check=true&page="+nextPage;
-		}
+		pageBtn(category, option, nextPage);
 		
 	}
 	
+	
+	pageBtn = (category, option, page) => {
+		if(!regLog.checked){
+			location.href = "/market/shop/prd-list?category="+category+"&option="+option+"&page="+page;
+		} else {
+			location.href = "/market/shop/prd-list?category="+category+"&option="+option+"&check=true&page="+page;
+		}
+	}
 	
 })();

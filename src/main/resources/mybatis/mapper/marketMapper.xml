@@ -13,11 +13,12 @@
   	
    -->
   	
-  	 <select id="selectPrdList" resultType="Product">
-  	 	select rownum, prd_idx, event_idx, sub_img_idx, name, brand, rating, price, sale_per, reg_date, type
-		from (select prd_idx, event_idx, sub_img_idx, name, brand, rating, min(price) price, sale_per, reg_date, type
-        		from product
-        		join prd_detail using (prd_idx)
+  	 <select id="selectPrdListBySet" resultType="Product">
+  	 	select *
+  	 	from (select rownum rnum, prd_idx, event_idx, sub_img_idx, name, brand, rating, price, sale_per, reg_date, type
+				from (select prd_idx, event_idx, sub_img_idx, name, brand, rating, min(price) price, sale_per, reg_date, type
+        				from product
+        				join prd_detail using (prd_idx)
         		<choose>
 	        		<when test="listSet.category != 'all'">
 	        		where category = #{listSet.category} and type in ('A',
@@ -65,15 +66,8 @@
 						</otherwise>
 					</choose>    		
         		</if>
-        		)
-		<choose>
-			<when test="pageUtil.curPage == 1">
-			where rownum between #{pageUtil.curPage} and #{pageUtil.cntPerPage}   
-			</when>
-			<otherwise>
-			where rownum between #{pageUtil.curPage + pageUtil.cntPerPage} and #{pageUtil.curPage * pageUtil.cntPerPage}   
-			</otherwise>
-		</choose>
+        		))
+		where rnum between ${((pageUtil.curPage-1) * pageUtil.cntPerPage) + 1} and ${pageUtil.curPage * pageUtil.cntPerPage} 
 	</select>
 	
 	<select id="prdListCnt" resultType="java.lang.Integer">

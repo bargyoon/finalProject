@@ -58,7 +58,7 @@
 			<c:if test="${prdList.size()>0}">
 				<c:forEach var="i" begin="0" step="1" end="${prdList.size()-1}">
 					<div class="mb-4 prd-area mx-lg-4">
-						<a class="btn" href="/market/shop/prd-detail?${prdList[i]}" style="top: ${prdList[i].salePer eq 0 ? '1.5rem' : '0rem'}">
+						<a class="btn" href="/market/shop/prd-detail?pn=${prdList[i].prdIdx}" style="top: ${prdList[i].salePer eq 0 ? '1.5rem' : '0rem'}">
 							<c:if test="${prdList[i].salePer ne 0}">
 								<div class="badge-shop">Sale</div>					
 							</c:if>
@@ -91,19 +91,19 @@
 			</c:if>
 		</div>
 
-		<div class="page_wrap" style="margin-left: 2.4rem">
+		<div class="page_wrap" style="margin-left: 2.4rem" id="pagination">
 			<div class="page_nation">
-				<a class="arrow prev" onclick="prevBtn('${listSet.category}', '${pageUtil.curPage}', '${listSet.option}')"><i class="fas fa-angle-left"></i></a>
+				<a class="arrow prev" onclick="prevBtn('${listSet.category}', ${pageUtil.curPage}, '${listSet.option}')"><i class="fas fa-angle-left"></i></a>
 				<c:if test="${pageUtil.blockEnd eq 1}">
-					<a href="#" class="active">1</a> 
+					<a class="active">1</a> 
 				</c:if>
 				
 				<c:if test="${pageUtil.blockEnd > 1}">
-					<c:forEach var="i" begin="0" step="1" end="${pageUtil.blockEnd-1}">
-						<a href="#" class="active"><c:out value="${i}"/></a> 
+					<c:forEach var="i" begin="1" step="1" end="${pageUtil.blockEnd}">
+						<a onclick="pageBtn('${listSet.category}','${listSet.option}', this.text)" class="active"><c:out value="${i}"/></a> 
 					</c:forEach>
 				</c:if>
-				<a class="arrow next" onclick="nextBtn('${listSet.category}', '${pageUtil.curPage}','${pageUtil.blockEnd} ,'${listSet.option}')"href="/market/shop/prd-list?category=${listSet.category}&page=${pageUtil.curPage+1}&option=${listSet.option}&check=${listSet.check}"><i class="fas fa-angle-right"></i></a>
+				<a class="arrow next" onclick="nextBtn('${listSet.category}', ${pageUtil.curPage}, ${pageUtil.blockEnd} ,'${listSet.option}')"><i class="fas fa-angle-right"></i></a>
 			</div>
 		</div>
 	</section>

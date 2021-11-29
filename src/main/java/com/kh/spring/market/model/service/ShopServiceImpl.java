@@ -19,9 +19,9 @@ public class ShopServiceImpl implements ShopService{
 
 	private final ShopRepository shopRepository;
 
-	public List<Product> selectPrdList(prdListSet listSet, Paging pageUtil) {
+	public List<Product> selectPrdListBySet(prdListSet listSet, Paging pageUtil) {
 		
-		List<Product> prdList = shopRepository.selectPrdList(listSet, pageUtil);
+		List<Product> prdList = shopRepository.selectPrdListBySet(listSet, pageUtil);
 		
 		return prdList;
 	}
@@ -77,5 +77,12 @@ public class ShopServiceImpl implements ShopService{
 		System.out.println("res : " + res);
 		
 		return res;
+	}
+
+
+	public List<Product> selectPrdListByIdx(int prdIdx) {
+		
+		List<Product> prdList = shopRepository.selectPrdListByIdx(prdIdx);
+		return prdList;
 	}
 }

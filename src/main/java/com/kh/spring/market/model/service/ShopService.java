@@ -9,10 +9,11 @@ import com.kh.spring.market.model.dto.prdListSet;
 
 public interface ShopService {
 
-	List<Product> selectPrdList(prdListSet listSet, Paging pageUtil);
+	List<Product> selectPrdListBySet(prdListSet listSet, Paging pageUtil);
 
 	String categoryToKor(String category);
 
 	int prdListCnt(prdListSet listSet);
 
+	List<Product> selectPrdListByIdx(int prdIdx);
 }

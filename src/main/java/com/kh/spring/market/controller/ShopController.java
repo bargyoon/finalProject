@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.spring.common.util.pagination.Paging;
 import com.kh.spring.market.model.dto.Order;
@@ -35,19 +36,14 @@ public class ShopController {
 		
 		Paging pageUtil = Paging.builder()
 								.curPage(page)
-								.cntPerPage(16)
+								.cntPerPage(8)
 								.blockCnt(10)
 								.total(shopService.prdListCnt(listSet))
 								.build();
-
 		
-		List<Product> prdList = shopService.selectPrdList(listSet, pageUtil);
+		List<Product> prdList = shopService.selectPrdListBySet(listSet, pageUtil);
 		
 		String categoryWord = shopService.categoryToKor(listSet.getCategory());
-		
-		for (Product product : prdList) {
-			logger.debug("product : {}", product);
-		}
 		
 		model.addAttribute("listSet", listSet);
 		model.addAttribute("pageUtil", pageUtil);
@@ -62,7 +58,21 @@ public class ShopController {
 	public void eventDetail() {}
 
 	@GetMapping("prd-detail")
-	public void prdDetail() {}
+	public String prdDetail(@RequestParam(defaultValue = "0")int pn, RedirectAttributes redirectAttr) {
+		List<Product> prdList = shopService.selectPrdListByIdx(pn);
+		
+		//prd_idx 유효성 검사
+		if(pn == 0 || prdList.size() == 0) {
+			redirectAttr.addFlashAttribute("msg", "해당 상품은 존재하지 않습니다.");
+			redirectAttr.addFlashAttribute("url", "/market/market");
+			return "redirect:/common/result";
+		}
+		
+		
+		
+		
+		return "market/shop/prd-detail";
+	}
 
 	@PostMapping("buy-test")
 	public void buyTest(@RequestBody Order order){

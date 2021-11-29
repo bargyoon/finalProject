@@ -13,8 +13,11 @@ import com.kh.spring.market.model.dto.prdListSet;
 @Mapper
 public interface ShopRepository {
 	
-	List<Product> selectPrdList(@Param("listSet") prdListSet listSet, @Param("pageUtil") Paging pageUtil);
+	List<Product> selectPrdListBySet(@Param("listSet") prdListSet listSet, @Param("pageUtil") Paging pageUtil);
 
 	int prdListCnt(@Param("listSet") prdListSet listSet);
+
+	@Select("select * from product join prd_detail using (prd_idx) where prd_idx = #{prdIdx}")
+	List<Product> selectPrdListByIdx(int prdIdx);
 
 }

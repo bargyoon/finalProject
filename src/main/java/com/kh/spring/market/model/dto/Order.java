@@ -11,6 +11,7 @@ public class Order {
 	private int userIdx;
 	private int ucIdx;
 	private int proIdx;
+	private int dtIdx;
 	private String paymentMethod;
 	private int paymentAmount;
 	private Date orderDate; //주문날짜
