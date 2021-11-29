@@ -4,7 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   <mapper namespace="com.kh.spring.mypage.model.repository.MypageRepository">
 
-  	<update id="dynamicQueryUpdateMember">
+  	<update id="updateMemberDynamicQuery">
   		update member
   		<set>
   			<if test="form.nickName != null">
@@ -17,7 +17,7 @@
   				,address = #{form.address}
   			</if>
   		</set>
-  		where userIdx = #{userIdx}
+  		where user_idx = #{userIdx}
   	</update>
   	
   </mapper>

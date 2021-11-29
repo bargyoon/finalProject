@@ -36,6 +36,9 @@ public class UpdateMemberFormValidator implements Validator {
 			errors.rejectValue("password", "err-password", "비밀번호는 8글자 이상의 숫자 영문자 특수문자 조합이어야 합니다.");
 		}
 		
+		if(form.getPassword() != form.getPassword2()) {
+			errors.rejectValue("password2", "err-password2", "비밀번호 확인이 올바르지 않습니다.");
+		}
+
 	}
-	
 }

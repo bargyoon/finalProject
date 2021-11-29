@@ -63,10 +63,10 @@
 				<label for="floatingAddress2">상세주소</label>
 			</div>
 			
-			<div class="mb-3">
+			<!-- <div class="mb-3">
 				<label class="label-form" for="profileImg">프로필사진</label>
 				<img alt="" src="" id="profileImg">
-			</div>
+			</div> -->
 			
 		</div>
 		
