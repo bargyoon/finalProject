@@ -101,5 +101,7 @@
         		</choose>
         		GROUP BY prd_idx, event_idx, sub_img_idx, name, brand, rating, sale_per, reg_date, type)
 	</select>
+	
+	
   	
   </mapper>

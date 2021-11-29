@@ -5,7 +5,9 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.kh.spring.common.util.FileUtil;
 import com.kh.spring.common.util.pagination.Paging;
 import com.kh.spring.market.model.dto.Product;
 import com.kh.spring.market.model.dto.prdListSet;
@@ -84,5 +86,28 @@ public class ShopServiceImpl implements ShopService{
 		
 		List<Product> prdList = shopRepository.selectPrdListByIdx(prdIdx);
 		return prdList;
+	}
+	
+	public void insertProduct(List<MultipartFile> mainImg, List<MultipartFile> specImg,
+			List<Map<String, Object>> commandList, Product product) {
+		shopRepository.insertProduct(product);
+		FileUtil fileUtil = new FileUtil();
+		for (MultipartFile multipartFile : mainImg) {
+			if (!multipartFile.isEmpty()) {
+				shopRepository.insertPrdFileInfo(fileUtil.fileUpload(multipartFile));
+			}
+
+		}
+		for (MultipartFile multipartFile : specImg) {
+			if (!multipartFile.isEmpty()) {
+				shopRepository.insertSubImgFileInfo(fileUtil.fileUpload(multipartFile));
+			}
+
+		}
+		for (Map<String, Object> map : commandList) {
+			shopRepository.insertPrdDetail(map);
+		}
+		
+		
 	}
 }

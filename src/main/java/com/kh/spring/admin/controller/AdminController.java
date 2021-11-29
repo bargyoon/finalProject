@@ -1,5 +1,7 @@
 package com.kh.spring.admin.controller;
 
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -13,9 +15,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.google.api.services.analyticsreporting.v4.model.ReportRequest;
 import com.kh.spring.admin.model.service.AdminService;
 import com.kh.spring.disease.model.dto.Disease;
 import com.kh.spring.disease.model.service.DiseaseService;
+import com.kh.spring.market.model.dto.Product;
+import com.kh.spring.market.model.service.ShopService;
 
 import lombok.RequiredArgsConstructor;
 
@@ -26,6 +31,7 @@ public class AdminController {
 	
 	private final AdminService adminService;
 	private final DiseaseService diseaseService;
+	private final ShopService shopService;
 	
 	@GetMapping("index")
 	public void index() {};
@@ -103,8 +109,23 @@ public class AdminController {
 	}
 	
 	@PostMapping("shopping/test")
-	public String shoppingTest(@RequestParam(value="option") List<String> test) {
-		System.out.println(test.toString());
+	public String shoppingTest(@RequestParam(value="main_img") List<MultipartFile> mainImg
+								,@RequestParam(value="spec_img") List<MultipartFile> specImg
+								,@RequestParam(value="option", required = false, defaultValue = "none") List<String> option
+								,@RequestParam(value="stock") List<String> stock
+								,@RequestParam(value="price") List<String> price
+								, Product product) {
+		List<Map<String, Object>> commandList = new ArrayList<Map<String,Object>>();
+		for (int i = 0; i < option.size(); i++) {
+			String optionTemp = option.get(i);
+			int stockTemp = Integer.parseInt(stock.get(i));
+			int priceTemp = Integer.parseInt(price.get(i));
+			commandList.add(Map.of("option", optionTemp,"stock", stockTemp,"price", priceTemp));
+			
+		}
+		
+		shopService.insertProduct(mainImg, specImg, commandList, product);
+		
 		return "redirect:/admin/shopping/item-list";
 				
 		
