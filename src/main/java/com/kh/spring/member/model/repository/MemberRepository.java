@@ -33,4 +33,6 @@ public interface MemberRepository {
 	
 	@Select("select password from \"USER\" where user_id = #{userId} and email = #{email}")
 	String searchPw(Map<String, Object> member);
+
+
 }

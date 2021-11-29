@@ -4,6 +4,7 @@ import java.util.Map;
 import java.util.Random;
 
 import javax.mail.internet.MimeMessage;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
@@ -37,15 +39,15 @@ public class MemberController {
 	private MemberService memberService;	
     private JavaMailSender mailSender;	//회원가입떄
     private EmailSender emailSender;	//비번찾기때
-    @Autowired
     private Email email;
 
 
-	public MemberController(MemberService memberService,JavaMailSender mailSender,EmailSender emailSender) {
+	public MemberController(MemberService memberService,JavaMailSender mailSender,EmailSender emailSender,Email email) {
 		super();
 		this.memberService = memberService;
 		this.mailSender = mailSender;
 		this.emailSender = emailSender;
+		this.email = email;
 	}
 
 	@GetMapping("login")
@@ -199,7 +201,4 @@ public class MemberController {
         }
 	}
 	
-	
-	
-
 }

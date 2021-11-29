@@ -38,25 +38,12 @@
                   <a class="btn btn-secondary"  href='/member/join'>회원가입</a><br><br>
                   <a href='/member/search-id' style="color: gray">아이디 찾기  |  </a>
                   <a href='/member/search-pw' style="color: gray">비밀번호 찾기</a><br><hr>
-                  <button type="submit" class="btn btn-social">소셜로그인</button> 
+                  <a href="javascript:kakaoLogin()"><img src="/resources/img/kakao_login.png" width="100%"></a>
                </form>
             </div>
          </div>
-      </div>
-	
-	
-	
-	
-	
-<!-- <script>
-$(document).ready(function(){
-	//회원가입 버튼(회원가입 기능 작동)
-	$(".btn btn-black").click(function(){
-		$("#join_form").attr("action", "/member/join");
-		$("#join_form").submit();
-	});
-});
-</script> -->
-
+      </div>	
+	<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+	<script src="/resources/js/member/kakaoLogin.js"></script>
 </body>
 </html>
