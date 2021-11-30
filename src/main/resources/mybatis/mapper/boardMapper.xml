@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="com.kh.spring.board.model.repository.BoardRepository">
+  
+  	
+
+  	<select id="selectBoard" resultType="map">
+  		select m.nickname, b.bd_idx, b.bd_title, b.reg_date, b.view_count, b.rec_count, b.content 
+  		from board b join "USER" m on(b.user_idx = m.user_idx)
+  		<where>
+  			<if test="category != null">category = #{category}</if>
+  		</where>
+  	</select>
+  	
+  
+  	
+  	
+  </mapper>
