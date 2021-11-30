@@ -7,14 +7,14 @@
   	<update id="updateMemberDynamicQuery">
   		update member
   		<set>
-  			<if test="form.nickName != null">
-  				nickname = #{form.nickName}
+  			<if test="nickName != null">
+  				nickname = #{nickName}
   			</if>
-  			<if test="form.password != null">
-  				,password = #{form.password}
+  			<if test="password != null">
+  				,password = #{password}
   			</if>
-  			<if test="form.address != null">
-  				,address = #{form.address}
+  			<if test="address != null">
+  				,address = #{address}
   			</if>
   		</set>
   		where user_idx = #{userIdx}

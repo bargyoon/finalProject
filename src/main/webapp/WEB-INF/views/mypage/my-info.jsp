@@ -39,6 +39,11 @@
 		
 		<div style="margin: 0 auto; width: 400px">
 			<div class="form-floating mb-3">
+			  <text class="form-control" id="floatingUserId" value="${authentication.userId}">honggildong1234</text>
+			  <label for="floatingUserId">아이디</label>
+			</div>
+			
+			<div class="form-floating mb-3">
 			  <text class="form-control" id="floatingUserName" value="${authentication.userName}">홍길동</text>
 			  <label for="floatingUserName">이름</label>
 			</div>

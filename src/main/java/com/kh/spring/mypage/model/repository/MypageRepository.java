@@ -7,19 +7,29 @@ import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
+import com.kh.spring.common.util.FileDTO;
 import com.kh.spring.mypage.model.dto.Pet;
+import com.kh.spring.mypage.model.dto.VaccineInfo;
+import com.kh.spring.mypage.validator.UpdateMemberForm;
 
 @Mapper
 public interface MypageRepository {
 	
-	void updateMemberDynamicQuery(Map<String, Object> commandMap);
+	void updateMemberDynamicQuery(UpdateMemberForm form);
 	
 	@Select("select * from pet where user_idx = #{userIdx} order by pet_idx desc")
 	List<Pet> selectPetByUserIdx(int userIdx);
 	
 	@Insert("insert into pet(pet_idx, name, specify, gender, age, user_idx)"
-			+ " values(sc_pet_idx.nextval, #{pet.name}, #{pet.specify}, #{pet.gender}, #{pet.age}, #{userIdx})")
-	void insertPetByUserIdx(Map<String, Object> commandMap);
+			+ " values(sc_pet_idx.nextval, #{name}, #{specify}, #{gender}, #{age}, #{userIdx})")
+	void insertPet(Pet pet);
+	
+	@Insert("insert into file_info(fl_idx, type_idx, origin_file_name, rename_file_name, save_path)"
+			+ " values(sc_file_idx.nextval, sc_pet_idx.currval, #{originFileName}, #{renameFileName}, #{savePath})")
+	void insertFile(FileDTO file);
+	
+	@Select("select * from vaccine_info order by vaccine_idx")
+	List<VaccineInfo> selectAllVaccineInfo();
 	
 //	@Select("select * from board where user_idx = #{userIdx} order by board_idx desc")
 //	List<Board> selectBoardByUserIdx(int userIdx);
@@ -28,5 +38,5 @@ public interface MypageRepository {
 //	List<Reply> selectReplyByUserIdx(int userIdx);
 	
 //	@Select("select * from counseling where user_idx = #{userIdx} order by counseling_idx desc")
-//	List<Reply> selectCounselingByUserIdx(int userIdx);
+//	List<Counseling> selectCounselingByUserIdx(int userIdx);
 }

@@ -10,4 +10,5 @@ public class Pet {
 	private String gender;
 	private String specify;
 	private int age;
+	private int userIdx;
 }
