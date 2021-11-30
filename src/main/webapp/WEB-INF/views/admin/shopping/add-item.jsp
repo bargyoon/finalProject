@@ -72,7 +72,7 @@
 					<section>
 						<div class="section-body">
 							<form id="prod_add" method="post" enctype="multipart/form-data" class="form form-validate"
-								role="form" autocomplete="off" action="/admin/shopping/test">
+								role="form" autocomplete="off" action="/admin/shopping/add-product">
 								<input type="hidden" name="idx" value="0">
 								<!-- default_type - js 처리용 -->
 								

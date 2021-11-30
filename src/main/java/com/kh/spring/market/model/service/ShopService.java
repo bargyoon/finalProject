@@ -21,4 +21,6 @@ public interface ShopService {
 	void insertProduct(List<MultipartFile> mainImg, List<MultipartFile> specImg, List<Map<String, Object>> commandList,
 			Product product);
 
+	Map<String, Object> selectPrdList(Map<String, Object> commandmap);
+
 }

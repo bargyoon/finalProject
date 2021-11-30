@@ -38,4 +38,12 @@ public interface ShopRepository {
 	@Select("select * from product join prd_detail using (prd_idx) where prd_idx = #{prdIdx}")
 	List<Product> selectPrdListByIdx(int prdIdx);
 
+	@Select("select count(*) from prd_detail")
+	int selectAllCnt();
+	
+	@Select("select count(*) from prd_detail where state = #{state}")
+	int selectSpecCnt(String state);
+
+	List<Map<String, Object>> selectPrdList(Map<String, Object> commandmap);
+
 }

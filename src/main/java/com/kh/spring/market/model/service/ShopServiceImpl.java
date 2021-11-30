@@ -1,12 +1,14 @@
 package com.kh.spring.market.model.service;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.kh.spring.common.util.FileDTO;
 import com.kh.spring.common.util.FileUtil;
 import com.kh.spring.common.util.pagination.Paging;
 import com.kh.spring.market.model.dto.Product;
@@ -107,6 +109,31 @@ public class ShopServiceImpl implements ShopService{
 		for (Map<String, Object> map : commandList) {
 			shopRepository.insertPrdDetail(map);
 		}
+		
+		
+	}
+	
+	public Map<String,Object> selectPrdList(Map<String, Object> commandmap) {
+		Map<String,Object> viewMap = new LinkedHashMap<String, Object>();
+		List<Map<String, Object>> prdList = shopRepository.selectPrdList(commandmap);
+		int totalCnt = shopRepository.selectAllCnt();
+		int saleCnt = shopRepository.selectSpecCnt("sale");
+		int soldoutCnt = shopRepository.selectSpecCnt("soldout");
+		int hiddenCnt = shopRepository.selectSpecCnt("hidden");
+		for (Map<String, Object> map : prdList) {
+			FileDTO files = new FileDTO();
+			files.setSavePath((String) map.get("SAVE_PATH"));
+			files.setRenameFileName((String) map.get("RENAME_FILE_NAME"));
+			map.put("downloadURL", files.getDownloadURL());
+		}
+		
+		viewMap.put("prdList", prdList);
+		viewMap.put("totalCnt", totalCnt);
+		viewMap.put("saleCnt", saleCnt);
+		viewMap.put("soldoutCnt", soldoutCnt);
+		viewMap.put("hiddenCnt", hiddenCnt);
+		return viewMap;
+		
 		
 		
 	}

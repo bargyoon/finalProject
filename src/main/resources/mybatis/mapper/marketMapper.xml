@@ -102,6 +102,22 @@
         		GROUP BY prd_idx, event_idx, sub_img_idx, name, brand, rating, sale_per, reg_date, type)
 	</select>
 	
+	<select id="selectPrdList" resultType="map">
+		select p.prd_idx, p.name, p.brand, p.category, p.reg_date,d.po_name, d.po_stock, d.price, d.state, d.dt_idx
+		,f.save_path, max(f.rename_file_name) RENAME_FILE_NAME from product p join prd_detail d on(p.prd_idx = d.prd_idx) 
+		join file_info f on (f.type_idx = p.prd_idx) 
+		
+		<where>
+			<if test="state != 'all'">
+				pd.state = #{state}
+			</if>
+			<if test="keyword != null">
+				p.name = #{keyword} or pd.po_name = #{keyword}
+			</if>
+		</where>
+		group by  p.prd_idx, p.name, p.brand, p.category, p.reg_date,d.po_name, d.po_stock, d.price, d.state, d.dt_idx
+		,f.save_path
+	</select>
 	
   	
   </mapper>

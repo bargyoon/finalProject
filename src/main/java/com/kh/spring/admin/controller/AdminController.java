@@ -20,6 +20,7 @@ import com.kh.spring.admin.model.service.AdminService;
 import com.kh.spring.disease.model.dto.Disease;
 import com.kh.spring.disease.model.service.DiseaseService;
 import com.kh.spring.market.model.dto.Product;
+import com.kh.spring.market.model.repository.ShopRepository;
 import com.kh.spring.market.model.service.ShopService;
 
 import lombok.RequiredArgsConstructor;
@@ -28,107 +29,122 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 @RequestMapping("admin")
 public class AdminController {
-	
+
 	private final AdminService adminService;
 	private final DiseaseService diseaseService;
 	private final ShopService shopService;
-	
+
 	@GetMapping("index")
-	public void index() {};
-	
+	public void index() {
+	};
+
 	@GetMapping("/")
 	public String redIndex() {
 		return "redirect:/admin/index";
 	}
-	
+
 	@GetMapping("shopping/add-item")
-	public void addItem() {}
-	
+	public void addItem() {
+	}
+
 	@GetMapping("shopping/item-list")
-	public void itemList() {}
-	
+	public void itemList(@RequestParam(value = "keyword", required = false) String keyword,
+			@RequestParam(value = "state", required = false, defaultValue = "all") String state, Model model) {
+		Map<String, Object> commandmap = new LinkedHashMap<String, Object>();
+		commandmap.put("keyword", keyword);
+		commandmap.put("state", state);
+
+		Map<String, Object> commandMap = shopService.selectPrdList(commandmap);
+		model.addAttribute("datas", commandMap);
+
+	}
+
 	@GetMapping("shopping/item-comment")
-	public void itemComment() {}
-	
+	public void itemComment() {
+	}
+
 	@GetMapping("shopping/order-list")
-	public void orderList() {}
-	
+	public void orderList() {
+	}
+
 	@GetMapping("shopping/QnA")
-	public void qna() {}
-	
+	public void qna() {
+	}
+
 	@GetMapping("member/member-list")
-	public void memberList() {}
-	
+	public void memberList() {
+	}
+
 	@GetMapping("contents/board-list")
-	public void boardList() {}
-	
+	public void boardList() {
+	}
+
 	@GetMapping("contents/comment-list")
-	public void commentList() {}
-	
+	public void commentList() {
+	}
+
 	@GetMapping("disease/disease-list")
 	public void diseaseList(Model model) {
 		List<Map<String, Object>> commandList = diseaseService.selectDiseaseList();
-		model.addAttribute("datas",commandList);
+		model.addAttribute("datas", commandList);
 	}
-	
+
 	@GetMapping("disease/price-img-list")
-	public void priceList(Model model,@RequestParam(value = "state" ,required = false, defaultValue = "all") String state) {
-		
+	public void priceList(Model model,
+			@RequestParam(value = "state", required = false, defaultValue = "all") String state) {
+
 		Map<String, Object> commandMap = adminService.selectPriceImgList(state);
-		model.addAttribute("datas",commandMap);		
-		
+		model.addAttribute("datas", commandMap);
+
 	}
-	
+
 	@GetMapping("disease/add-disease-spec")
-	public void addPriceSpec() {}
-	
+	public void addPriceSpec() {
+	}
+
 	@PostMapping("disease/add-disease-spec")
 	public String addPriceImg(Disease disease, List<MultipartFile> diseaseIcon) {
 		disease.setExplain("하하");
-		
+
 		adminService.insertDisease(disease, diseaseIcon);
-		
+
 		return "redirect:/admin/disease/disease-list";
 	}
-	
+
 	@PostMapping("disease/insertPrice")
 	@ResponseBody
 	public String insertPrice(@RequestBody Map<String, Object> jsonMap) {
 		adminService.updatePrice(jsonMap);
-		
-		
-		
+
 		return "good";
-		
+
 	}
-	
+
 	@GetMapping("disease/test")
 	public void testParam(@RequestParam Map<String, Object> test) {
 		System.out.println(test.get("test"));
-		
+
 	}
-	
-	@PostMapping("shopping/test")
-	public String shoppingTest(@RequestParam(value="main_img") List<MultipartFile> mainImg
-								,@RequestParam(value="spec_img") List<MultipartFile> specImg
-								,@RequestParam(value="option", required = false, defaultValue = "none") List<String> option
-								,@RequestParam(value="stock") List<String> stock
-								,@RequestParam(value="price") List<String> price
-								, Product product) {
-		List<Map<String, Object>> commandList = new ArrayList<Map<String,Object>>();
+
+	@PostMapping("shopping/add-product")
+	public String shoppingTest(@RequestParam(value = "main_img") List<MultipartFile> mainImg,
+			@RequestParam(value = "spec_img") List<MultipartFile> specImg,
+			@RequestParam(value = "option", required = false, defaultValue = "none") List<String> option,
+			@RequestParam(value = "stock") List<String> stock, @RequestParam(value = "price") List<String> price,
+			Product product) {
+		List<Map<String, Object>> commandList = new ArrayList<Map<String, Object>>();
 		for (int i = 0; i < option.size(); i++) {
 			String optionTemp = option.get(i);
 			int stockTemp = Integer.parseInt(stock.get(i));
 			int priceTemp = Integer.parseInt(price.get(i));
-			commandList.add(Map.of("option", optionTemp,"stock", stockTemp,"price", priceTemp));
-			
+			commandList.add(Map.of("option", optionTemp, "stock", stockTemp, "price", priceTemp));
+
 		}
-		
+
 		shopService.insertProduct(mainImg, specImg, commandList, product);
-		
+
 		return "redirect:/admin/shopping/item-list";
-				
-		
+
 	}
-	
+
 }
