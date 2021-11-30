@@ -10,7 +10,8 @@
 </head>
 <body onscroll="checkHeight()">
 	<%@ include file="/WEB-INF/views/include/market/market-nav.jsp"%>
-
+	<c:set var="optionInfos" value="${prdInfoMap.optionList}"/>
+	<c:set var="prdInfo" value="${prdInfoMap.prdInfo}"/>
 	<section class="pt-5 pb-3" style="margin-top: 8rem;">
 		<div class="container text-center mt-5 prd-category">
 			<p class="display-7 fw-bolder">상품 카테고리</p>
@@ -38,35 +39,42 @@
 			<img class="prd-detail-img"
 				src="https://dummyimage.com/500x500/dee2e6/6c757d.jpg" alt="..." />
 			<div class="prd-detail-info">
-				<p class="prd-name mb-2" style="font-size: 23px; font-weight: bold;">더독 닥터소프트 야채&식이섬유 1.2kg</p>
+				<p class="prd-name mb-2" style="font-size: 23px; font-weight: bold;"><c:out value="${prdInfo.name}"/></p>
 				<div class="d-flex small text-warning pb-1">
 					<i class="fas fa-star"></i>
 					<i class="fas fa-star"></i>
 					<i class="fas fa-star"></i>
 					<i class="fas fa-star"></i>
 					<i class="fas fa-star"></i>
-					<button class="review-btn" type="button" onclick="focusReview()">(40)</button>
+					<button class="review-btn" type="button" onclick="focusReview()"><c:out value="(${reviews.size()})"/></button>
 				</div>
 				<div class="d-flex justify-content-between mt-2">
-					<p style="font-size: 18px;">65,000 원</p>
+					<p style="font-size: 18px;"><c:out value="${prdInfo.price}"/></p>
 					<button class="review-btn" type="button">
 						<i class="fas fa-share-alt"></i>
 					</button>
 				</div>
 				<hr class="mt-0">
 				<ul class="prd-detail-sub">
-					<li class="pb-1">구매혜택 <span class="fw-normal" style="padding-left: 0.8rem;">3,350원 적립예정</span></li>
+					<li id="sm-amount" class="pb-1">구매혜택 <span class="fw-normal" style="padding-left: 0.8rem;">3,350원 적립예정</span></li>
 					<li class="pb-1">배송방법 <span class="fw-normal" style="padding-left: 0.8rem;">택배</span></li>
-					<li class="pb-1">배송비 <span class="fw-normal" style="padding-left: 1.55rem;">무료</span></li>
+					<li class="pb-1">배송비 <span class="fw-normal" style="padding-left: 1.55rem;">50,000원 이상 구매시 무료</span></li>
 				</ul>
 				<div class="prd-option p-3">
 					<p>옵션선택</p>
 					<hr>
 					<select class="prd-option-select" onchange="addOption(this.value)">
 						<option value="">상품 옵션 선택</option>
-						<option value="option1">옵션 1</option>
-						<option value="option2">옵션 2</option>
-						<option value="option3">옵션 3</option>
+							<c:forEach var="i" begin="0" step="1" end="${optionInfos.size()-1}">
+								<option value="${optionInfos[i].dtIdx}">
+									<c:if test="${optionInfos[i].poStock eq 0}">
+										<c:out value="${optionInfos[i].poName} (품절)"/>
+									</c:if>
+									<c:if test="${optionInfos[i].poStock ne 0}">
+										<c:out value="${optionInfos[i].poName}"/>
+									</c:if>
+								</option>
+							</c:forEach>
 					</select>
 				</div>
 				<div class="option-form"></div>
@@ -76,7 +84,7 @@
 					<input class="fw-bolder" type="text" id="prd-total-price" readonly="readonly" value="0 원"></input>
 				</div>
 				<div class="mt-4 d-flex justify-content-between buy-btns">
-					<button class="buy-btn" type="button" onclick="requestPay()">구매하기</button>
+					<button class="buy-btn" type="button" onclick="requestPay('${prdInfo.prdIdx}')">구매하기</button>
 					<button class="cart-btn" type="button">장바구니</button>
 				</div>
 			</div>
@@ -108,7 +116,7 @@
 			<p id="prd-review-tit">구매평</p>
 			<hr style="margin-top: 0;">
 			<ul class="review-nav mt-3">
-				<li><button id="focus-r" type="button"> 전체 <span style="font-size: 13px;">(40건)</span></button></li>
+				<li><button id="focus-r" type="button"> 전체 <span style="font-size: 13px;">(${reviews.size()} 건)</span></button></li>
 				<li><button type="button">사진후기 <span style="font-size: 13px;">(10건)</span></button></li>
 				<li><button type="button">일반후기 <span style="font-size: 13px;">(30건)</span></button></li>
 			</ul>

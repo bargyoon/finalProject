@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.kh.spring.common.util.pagination.Paging;
 import com.kh.spring.market.model.dto.Product;
+import com.kh.spring.market.model.dto.Review;
 import com.kh.spring.market.model.dto.prdListSet;
 import com.kh.spring.market.model.repository.ShopRepository;
 
@@ -74,7 +75,6 @@ public class ShopServiceImpl implements ShopService{
 	public int prdListCnt(prdListSet listSet) {
 		int res = 0;
 		res = shopRepository.prdListCnt(listSet);
-		System.out.println("res : " + res);
 		
 		return res;
 	}
@@ -84,5 +84,22 @@ public class ShopServiceImpl implements ShopService{
 		
 		List<Product> prdList = shopRepository.selectPrdListByIdx(prdIdx);
 		return prdList;
+	}
+
+
+	public Product selectPrdByIdx(int prdIdx) {
+		Product prd = shopRepository.selectPrdByIdx(prdIdx);
+		return prd;
+	}
+
+
+	public List<Review> selectReviewByPrdIdx(int prdIdx) {
+		List<Review> reviews = shopRepository.selectReviewByPrdIdx(prdIdx);
+		return reviews;
+	}
+
+	public Product selectPrdByDtIdx(int dtIdx) {
+		Product prdOption = shopRepository.selectPrdByDtIdx(dtIdx);
+		return prdOption;
 	}
 }

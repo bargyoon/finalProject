@@ -10,6 +10,7 @@ public class Product {
 	 private int prdIdx;
      private int eventIdx;
      private int subImgIdx;
+     private int dtIdx;
      private String name;
      private String brand;
      private int price;

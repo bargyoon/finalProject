@@ -81,6 +81,16 @@ public class ShopControllerTest {
 	}
 	
 	
+	@Test
+	public void prdOptionTest() throws Exception {
+		String dtIdx = "100000";
+		mockMvc.perform(get("/market/shop/prd-option")
+				.param("dt_idx", dtIdx))
+		.andExpect(status().isOk())
+		.andDo(print());
+	}
+	
+	
 	
 	
 	

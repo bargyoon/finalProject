@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Select;
 
 import com.kh.spring.common.util.pagination.Paging;
 import com.kh.spring.market.model.dto.Product;
+import com.kh.spring.market.model.dto.Review;
 import com.kh.spring.market.model.dto.prdListSet;
 
 @Mapper
@@ -19,5 +20,12 @@ public interface ShopRepository {
 
 	@Select("select * from product join prd_detail using (prd_idx) where prd_idx = #{prdIdx}")
 	List<Product> selectPrdListByIdx(int prdIdx);
+
+	Product selectPrdByIdx(int prdIdx);
+
+	List<Review> selectReviewByPrdIdx(int prdIdx);
+
+	@Select("select * from prd_detail where dt_idx = #{dtIdx}")
+	Product selectPrdByDtIdx(int dtIdx);
 
 }
