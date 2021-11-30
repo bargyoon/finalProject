@@ -17,4 +17,8 @@ public interface MemberService {
 	Member searchId(Member member);
 	
 	String searchPw(Map<String, Object> member);
+
+	Member selectMemberById(String userId);
+
+	void insertKakaoMember(Member member);
 }
