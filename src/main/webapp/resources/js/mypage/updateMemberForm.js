@@ -34,8 +34,8 @@
 	
 	document.querySelector("#frmUpdateMember").addEventListener("submit", e =>{
 		let nickName = document.querySelector("#nickName").value;
-		let password = document.querySelector("#password").value;
-		let password2 = document.querySelector("#password2").value;
+/*		let password = document.querySelector("#password").value;
+		let password2 = document.querySelector("#password2").value;*/
 		/*let pwReg = /(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[^a-zA-Zㄱ-힣0-9])(?=.{8,})/;*/
 		
 		if(nickName != confirmNickName){
@@ -44,11 +44,11 @@
 			document.querySelector("#nickName").focus();
 		};
 		
-		if(password != password2){
+/*		if(password != password2){
 			e.preventDefalut();
 			document.querySelector("#passwordCheck").innerHTML = "비밀번호 확인이 틀렸습니다.";
 			document.querySelector("#password2").focus();
-		};
+		};*/
 	})
 	
 })();

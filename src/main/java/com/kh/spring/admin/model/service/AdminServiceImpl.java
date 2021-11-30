@@ -53,6 +53,7 @@ public class AdminServiceImpl implements AdminService {
 		int totalCnt = diseaseRepository.selectAllCnt();
 		int noCnt = diseaseRepository.selectSpecCnt("N");
 		int yesCnt = diseaseRepository.selectSpecCnt("Y");
+		
 		for (Map<String, Object> map : piList) {
 			int price = Integer.parseInt(map.get("PRICE").toString());
 			if(price == 0) {

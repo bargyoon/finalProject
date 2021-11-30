@@ -48,6 +48,15 @@ public class MemberServiceImpl implements MemberService{
 	public String searchPw(Map<String, Object> member) {
 		return memberRepository.searchPw(member);
 	}
+
+	public Member selectMemberById(String userId) {
+		return memberRepository.selectMemberById(userId);
+	}
+
+	public void insertKakaoMember(Member member) {
+		memberRepository.insertKakaoMember(member);
+		
+	}
 	/*
 	 * @Override public void logout(HttpSession session) { session.invalidate();
 	 * //세션 초기화

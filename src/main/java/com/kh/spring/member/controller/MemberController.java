@@ -1,10 +1,13 @@
 package com.kh.spring.member.controller;
 
+import java.io.IOException;
 import java.util.Map;
 import java.util.Random;
 
 import javax.mail.internet.MimeMessage;
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -199,6 +202,46 @@ public class MemberController {
         	mav=new ModelAndView("/member/login");
             return mav;
         }
+	}
+	
+	@GetMapping("kakaoLogin")
+	public void kakaoLogin(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String userId = request.getParameter("userId");
+		
+		System.out.println(userId);
+
+		//존재하면 로그인 성공
+		Member member = memberService.selectMemberById(userId);
+		if(member == null || member.getUserId().equals("")) {
+			//멤버테이블에서 아이디를 조회해서 존재하지 않으면 계속 진행
+			request.setAttribute("kakaoId", userId);
+			response.getWriter().print("kakaoJoin");
+			return;
+			
+		}
+		request.getSession().setAttribute("authentication", member);
+		response.getWriter().print("kakaoLogin");
+	}
+	
+	@GetMapping("kakaoJoin")
+	public void kakaoJoin(HttpServletRequest request) {
+		request.setAttribute("kakaoId", request.getParameter("userId"));
+	}
+	
+	@PostMapping("kakaoJoin")
+	public String kakaoJoin(Member member,HttpServletRequest request) {
+		String userId = request.getParameter("kakaoId");
+		System.out.println("post" + userId);		
+		
+		member.setUserId(userId);
+
+		System.out.println("회원가입 진입" + member);
+		
+		memberService.insertKakaoMember(member);
+		
+		System.out.println("회원가입 완료" + member);
+		
+		return "redirect:/";
 	}
 	
 }

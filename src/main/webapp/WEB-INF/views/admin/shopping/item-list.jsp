@@ -28,17 +28,6 @@
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 <![endif]-->
-<style type="text/css">
-#clickedTab {
-	border-bottom: 2px solid blue;
-	color: mediumblue;
-	cursor: default;
-}
-
-.tab {
-	cursor: pointer;
-}
-</style>
 </head>
 
 <body>
@@ -92,31 +81,35 @@
 									<div class=" text-center m-10">
 										<h4>
 											<a class="tab_all tab" data-tab="all"
-												onclick="selectTab('state','all')">전체<span> 4</span></a>
+												onclick="selectTab('state','all')">전체<span><c:out
+														value="${datas.totalCnt }"></c:out></span></a>
 										</h4>
 									</div>
 								</div>
 								<div class="ml-3">
 									<div class=" text-center m-10">
 										<h4>
-											<a class="tab_n tab" data-tab="N"
-												onclick="selectTab('state','N')">판매중 <span>4</span></a>
+											<a class="tab_n tab" data-tab="sale"
+												onclick="selectTab('state','sale')">판매중 <span><c:out
+														value="${datas.saleCnt }"></c:out></span></a>
 										</h4>
 									</div>
 								</div>
 								<div class="ml-3">
 									<div class=" text-center m-10">
 										<h4>
-											<a class="tab_n tab" data-tab="N"
-												onclick="selectTab('state','N')">품절 <span>0</span></a>
+											<a class="tab_n tab" data-tab="soldout"
+												onclick="selectTab('state','soldout')">품절 <span><c:out
+														value="${datas.soldoutCnt }"></c:out></span></a>
 										</h4>
 									</div>
 								</div>
 								<div class="ml-3">
 									<div class=" text-center m-10">
 										<h4>
-											<a class="tab_n tab" data-tab="N"
-												onclick="selectTab('state','N')">숨김 <span>0</span></a>
+											<a class="tab_n tab" data-tab="hidden"
+												onclick="selectTab('state','hidden')">숨김 <span><c:out
+														value="${datas.hiddenCnt }"></c:out></span></a>
 										</h4>
 									</div>
 								</div>
@@ -140,7 +133,7 @@
 												class="fas fa-times"></i></a></label>
 										<div class="col-sm-9">
 											<input type="text" class="form-control ml-3"
-												placeholder="작성자 내용 검색" name="keyword">
+												placeholder="작성자 내용 검색" name="keyword" onsubmit="selectTab('keyword','this.value')">
 										</div>
 									</div>
 								</form>
@@ -158,7 +151,7 @@
 							<div class="card-body">
 								<h5 class="card-title m-b-0 d-inline-block">상품목록</h5>
 
-								<button class="btn-primary float-right btn-lg">상품추가</button>
+								<span class="btn-primary float-right btn-lg" onclick="location.href('/admin/shopping/add-item')">상품추가</span>
 
 							</div>
 
@@ -178,20 +171,44 @@
 											</tr>
 										</thead>
 										<tbody class="customtable">
+										<c:forEach items="${datas.prdList}" var="data"
+												varStatus="status">
 											<tr>
 												<td><label class="mt-3"> <input type="checkbox"
 														class="listCheckbox" /> <span class="checkmark"></span>
 												</label></td>
 												<td>01</td>
 												<td><a><img
-														src="https://cdn.imweb.me/thumbnail/20180305/5a9cea9e49044.png"></a>
+														src="${data.downloadURL}"></a>
 													<div class="d-inline-block">
-														<a href="#">화장품</a>
+														<a href="#">(${data.BRAND})${data.NAME} - ${data.PO_NAME}</a>
 													</div></td>
-												<td>10000원</td>
-												<td>4</td>
+												<td>${data.PRICE}원</td>
+												<td>
+												<c:choose>
+														<c:when test="${data.CATEGORY eq 'feed'}">사료</c:when>
+														<c:when test="${data.CATEGORY eq 'snack'}">간식</c:when>
+														<c:when test="${data.CATEGORY eq 'health'}">건강관리</c:when>
+														<c:when test="${data.CATEGORY eq 'potty'}">위생/배변</c:when>
+														<c:when test="${data.CATEGORY eq 'beauty'}">미용/목욕</c:when>
+														<c:when test="${data.CATEGORY eq 'feeder'}">급수기/급식기</c:when>
+														<c:when test="${data.CATEGORY eq 'kennel'}">하우스/울타리</c:when>
+														<c:when test="${data.CATEGORY eq 'vari-kennel'}">이동장</c:when>
+														<c:when test="${data.CATEGORY eq 'clothes'}">의류/악세서리</c:when>
+														<c:when test="${data.CATEGORY eq 'toy'}">장난감</c:when>
+														
+													</c:choose>
+												
+												
+												</td>
 												<td class="nav-item dropdown" href="" data-toggle="dropdown"
-													aria-haspopup="true" aria-expanded="false"><span>반품중</span><i
+													aria-haspopup="true" aria-expanded="false"><span>
+													<c:choose>
+														<c:when test="${data.STATE eq 'sale'}">판매중</c:when>
+														<c:when test="${data.STATE eq 'soldout'}">품절</c:when>
+														<c:when test="${data.STATE eq 'hidden'}">숨김</c:when>
+													</c:choose>
+													</span><i
 													class="m-r-10 mdi mdi-chevron-down ml-2"> </i>
 													<div class="dropdown-menu" aria-labelledby="navbarDropdown">
 														<a class="dropdown-item" href="#">Action</a> <a
@@ -200,10 +217,11 @@
 														<a class="dropdown-item" href="#">Something else here</a>
 													</div></td>
 
-												<td>4</td>
-												<td>4</td>
+												<td>${data.PO_STOCK }</td>
+												<td>${data.REG_DATE}</td>
 
 											</tr>
+											</c:forEach>
 											<tr>
 												<td><label class="mt-3"> <input type="checkbox"
 														class="listCheckbox" /> <span class="checkmark"></span>

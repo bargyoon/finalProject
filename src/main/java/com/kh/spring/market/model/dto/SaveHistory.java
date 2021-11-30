@@ -13,4 +13,5 @@ public class SaveHistory {
 	private String type; //적립타입
 	private int amount; //적립금액
 	private Date regDate;
+	private int orderIdx;
 }

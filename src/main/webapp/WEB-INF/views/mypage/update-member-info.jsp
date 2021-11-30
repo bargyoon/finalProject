@@ -39,7 +39,7 @@
 		
 		<div style="margin: 0 auto;">
 			<form:form style="margin: 0 auto; width: 400px;" id="frmUpdateMember"
-				action="/mypage/update-member" method="post" enctype="multipart/form-data" modelAttribute="updateMemberForm">
+				action="/mypage/update-member-info" method="post" enctype="multipart/form-data" modelAttribute="updateMemberForm">
 			
 				<div class="input-group form-floating mb-3">
 					<input type="text" class="form-control" id="nickName" name="nickName" placeholder="1"
@@ -56,16 +56,18 @@
 				<div class="form-floating mb-3">
 					<input type="password" class="form-control" id="password" name="password" placeholder="1">
 					<label for="password" class="form-label">변경할 비밀번호</label>
+					
+					<%-- <c:if test="${empty error.password}">
+						<span id="passwordCheck" class="valid-msg">사용 가능한 비밀번호 입니다.</span>
+					</c:if> --%>
+					<%-- <form:errors id="passwordCheck" path="password" cssClass="valid-msg"/> --%>
 				</div>
-	
+				
 				<div class="form-floating mb-3">
 					<input type="password" class="form-control" id="password2" name="password2" placeholder="1">
 					<label for="password2" class="form-label">비밀번호 확인</label>
 					
-					<%-- <c:if test="${empty error.password}">
-						<span id="passwordCheck" class="valid-msg"></span>
-					</c:if> --%>
-					<%-- <form:errors id="passwordCheck" path="password" cssClass="valid-msg"/> --%>
+					<%-- <form:errors id="passwordCheck" path="password2" cssClass="valid-msg"/> --%>
 				</div>
 	
 				<div class="form-floating">

@@ -1,9 +1,21 @@
 package com.kh.spring.mypage.model.service;
 
-import com.kh.spring.mypage.validator.UpdateMemberForm;
+import java.util.List;
+import java.util.Map;
+
+import com.kh.spring.mypage.model.dto.Pet;
 
 public interface MypageService {
 	
-	int updateMember(int userIdx, UpdateMemberForm form);
+	void updateMemberDynamicQuery(Map<String, Object> commandMap);
+	
+	List<Pet> selectPetByUserIdx(int userIdx);
 
+	void insertPetByUserIdx(Map<String, Object> commandMap);
+	
+//	List<Board> selectBoardByUserIdx(int userIdx);
+	
+//	List<Reply> selectReplyByUserIdx(int userIdx);
+	
+//	List<counseling> selectCounselingByUserIdx(int userIdx);
 }

@@ -50,9 +50,9 @@
 				<ul class="aside-ul">
 					<li class="ft-SBAggroM" style="font-size: 1.3rem;">나의 쇼핑 활동</li>
 					<li><hr class="dropdown-divider" /></li>
-					<li><a href="#!">주문 내역 조회</a></li>
-					<li><a href="#!">구매후기</a></li>
-					<li><a href="#!">장바구니</a></li>
+					<li><a href="/market/mypage">주문 내역 조회</a></li>
+					<li><a href="/market/mypage/review/review-list2">구매후기</a></li>
+					<li><a href="/market/mypage/cart">장바구니</a></li>
 					<li><a href="#!">상품문의</a></li>
 					<li><a href="#!" style="color: black;">주소록 관리</a></li>
 				</ul>
@@ -61,12 +61,12 @@
 		<div class="container2" style="display: flex; flex-direction: column;">
 			<p class="py-3 mb-0" style="font-size: 1.3rem;">주문 내역 조회</p>
 			<ul class="sub-ul pb-2">
-				<li><a href="#!">입금/결제</a></li>
-				<li><a href="#!">배송중</a></li>
-				<li><a href="#!">배송완료</a></li>
-				<li><a href="#!">구매확정</a></li>
-				<li><a href="#!">교환</a></li>
-				<li><a href="#!">환불</a></li>
+				<li><a href="/market/mypage/order-list?state=0">입금/결제</a></li>
+				<li><a href="/market/mypage/order-list?state=1">배송중</a></li>
+				<li><a href="/market/mypage/order-list?state=2">배송완료</a></li>
+				<li><a href="/market/mypage/order-list?state=3">구매확정</a></li>
+				<li><a href="/market/mypage/order-list?state=4">교환</a></li>
+				<li><a href="/market/mypage/order-list?state=5">환불</a></li>
 			</ul>
 			<hr class="mt-0" style="height: 3px; opacity: 1;">
 			<ul>
@@ -74,26 +74,30 @@
 				<li>교환, 환불, 배송 등 문의사항은 문의하기를 눌러주세요.</li>
 				<li>주문번호가 동일하더라도 다른 브랜드에서 주문하신 경우 출고지 주소가 달라 각각 출고됩니다.</li>
 			</ul>
+			
+			<!-- 날짜검색 -->
 			<div class="mt-5 n-table-filter">
 				<div class="n-radio-tab">
-					<input type="radio" id="radioOfPeriod0" name="radioOfPeriod">
-					<label class="period-label" for="radioOfPeriod0">1주일</label>
-					<input type="radio" id="radioOfPeriod1" name="radioOfPeriod">
-					<label class="period-label" for="radioOfPeriod1">1개월</label>
-					<input type="radio" id="radioOfPeriod2" name="radioOfPeriod">
-					<label class="period-label" for="radioOfPeriod2">3개월</label>
-					<input type="radio" id="radioOfPeriod3" name="radioOfPeriod">
-					<label class="period-label" for="radioOfPeriod3">전체 시기</label>
-				</div>
-				<div class="n-datepicker">
-					<input type="date">
-					<span>~</span>
-				</div>
-				<div class="n-datepicker">
-					<input type="date">
-				</div>
-				<button type="button" onclick="search();">조회</button>
+						<input type="radio" id="radioOfPeriod0" name="period" value="1" onclick="setDate()">
+						<label class="period-label" for="radioOfPeriod0">1주일</label>
+						<input type="radio" id="radioOfPeriod1" name="period" value="2" onclick="setDate()">
+						<label class="period-label" for="radioOfPeriod1">1개월</label>
+						<input type="radio" id="radioOfPeriod2" name="period" value="3" onclick="setDate()">
+						<label class="period-label" for="radioOfPeriod2">3개월</label>
+						<input type="radio" id="radioOfPeriod3" name="period" value="4" onclick="setDate()">
+						<label class="period-label" for="radioOfPeriod3">전체 시기</label>
+					</div>
+				<form action="enquiry-list" id="dateForm" onsubmit="return resetDate();">
+						<div class="n-datepicker">
+							<input type="date" id="fromDate" name="fromDate"><span> ~</span>
+						</div>
+						<div class="n-datepicker">
+							<input type="date" id="endDate" name="endDate">
+						</div>
+						<button type="submit" onclick="search();">조회</button>
+				</form>
 			</div>
+			
 			<table class="n-table table-col">
 				<colgroup>
 					<col style="width: auto">
@@ -130,55 +134,31 @@
 						</td>
 						<td>
 						<c:choose>
-							<c:when test="${orderList.STATE eq 1}">
-								<p class="ft-SBAggroM mb-3" style="font-size: 20px;">
-								구매확정
-								</p>
-							</c:when>
+							<c:when test="${orderList.STATE eq 0}"><p class="ft-SBAggroM mb-3" style="font-size: 20px;">입금/결제</p></c:when>
+							<c:when test="${orderList.STATE eq 1}"><p class="ft-SBAggroM mb-3" style="font-size: 20px;">배송중</p></c:when>
+							<c:when test="${orderList.STATE eq 2}"><p class="ft-SBAggroM mb-3" style="font-size: 20px;">배송완료</p></c:when>
+							<c:when test="${orderList.STATE eq 3}"><p class="ft-SBAggroM mb-3" style="font-size: 20px;">구매확정</p></c:when>
+							<c:when test="${orderList.STATE eq 4}"><p class="ft-SBAggroM mb-3" style="font-size: 20px;">교환</p></c:when>
+							<c:when test="${orderList.STATE eq 5}"><p class="ft-SBAggroM mb-3" style="font-size: 20px;">환불</p></c:when>
 						</c:choose>
 							<p class="mb-2" style="border: 1px solid lightgray;">배송조회</p>
+							
+							<c:if test="${orderList.STATE eq 3}">
 							<div class="text-white" href="#" role="button" style="background-color: black;">
 								<div class="btn-group">
 									<a class="nav-link link-white" href="#!">후기작성</a>
 									<a class="nav-link dropdown-toggle text-white ps-0" id="navbarDropdown" role="button" data-bs-toggle="dropdown"></a>
 									<ul class="dropdown-menu" style="text-align: center; min-width: 8rem;" aria-labelledby="navbarDropdown">
-										<li><a class="dropdown-item" href="/market/mypage/review/photo-form">상품 사진 후기</a></li>
-										<li><a class="dropdown-item" href="/market/mypage/review/normal-form">일반후기</a></li>
+										<li><a class="dropdown-item" href="/market/mypage/review/photo-form?orderIdx=${orderList.ORDER_IDX}">상품 사진 후기</a></li>
+										<li><a class="dropdown-item" href="/market/mypage/review/normal-form?orderIdx=${orderList.ORDER_IDX}">일반후기</a></li>
 									</ul>
 								</div>
 							</div>
+							</c:if>
 						</td>
 					</tr>
-					<tr>
-						<td>
-							<div class="n-prd-row">
-								<a href="#!"><img src="https://dummyimage.com/100x120/dee2e6/6c757d.jpg"></a>
-								<ul class="info">
-									<li class="brand">브랜드</li>
-									<li class="name ft-SBAggroM"><a href="#!" style="text-decoration: none; color: black;">제품명</a></li>
-									<li class="option">옵션</li>
-								</ul>
-							</div>
-						</td>
-						<td>2021.04.26</td>
-						<td>202104260954500001</td>
-						<td>30,000원 <br> 1개
-						</td>
-						<td>
-							<p class="ft-SBAggroM mb-3" style="font-size: 20px;">배송완료</p>
-							<p class="mb-2" style="border: 1px solid lightgray;">구매확정</p>
-							<div class="text-white" href="#" role="button" style="background-color: black;">
-								<div class="btn-group">
-									<a class="nav-link link-white" href="#!">문의하기</a>
-									<a class="nav-link dropdown-toggle text-white ps-0" id="navbarDropdown" role="button" data-bs-toggle="dropdown"></a>
-									<ul class="dropdown-menu" style="text-align: center; min-width: 8rem;" aria-labelledby="navbarDropdown">
-										<li><a class="dropdown-item" href="#!">환불신청</a></li>
-										<li><a class="dropdown-item" href="#!">교환신청</a></li>
-									</ul>
-								</div>
-							</div>
-						</td>
-					</tr>
+					
+					
 				</tbody>
 				</c:forEach>
 			</table>
@@ -186,7 +166,93 @@
 	</section>
 
 	<%@ include file="/WEB-INF/views/include/market/footer.jsp"%>
-
+	<script type="text/javascript">
+	
+	//현재시간으로 설정
+	document.getElementById('fromDate').valueAsDate = new Date();
+	document.getElementById('endDate').valueAsDate = new Date();
+	
+	console.dir(document.getElementById('fromDate').valueAsDate);
+	
+	//최대, 최소 날짜 설정
+	var today = new Date();
+	var dd = today.getDate();
+	var mm = today.getMonth()+1; // 1월은 0
+	var yyyy = today.getFullYear();
+	
+	 if(dd<10){
+	     dd='0'+dd
+	  } 
+	if(mm<10){
+		 mm='0'+mm
+	} 
+	
+	today = yyyy+'-'+mm+'-'+dd; // yyyy-mm-dd
+	
+	document.getElementById("fromDate").setAttribute("max", today);
+	document.getElementById("endDate").setAttribute("max", today);
+	
+	function resetDate() {
+		
+		var fromDate = document.getElementById('fromDate').value;
+		var endDate = document.getElementById('endDate').value;
+		 var fromArray = fromDate.split('-');
+         var endArray = endDate.split('-');   
+         
+         var start_date = new Date(fromArray[0], fromArray[1], fromArray[2]);
+         var end_date = new Date(endArray[0], endArray[1], endArray[2]);
+              //날짜를 숫자형태로 바꿔서 비교
+         if(start_date.getTime() > end_date.getTime()) {
+             alert("종료날짜보다 시작날짜가 작아야합니다.");
+             return false;
+		}
+	
+	}
+	
+	//radio button으로 기간 설정
+	function setDate() {
+		
+		//라디오버튼
+		var radioLength = document.getElementsByName('period').length;
+		for (var i = 0; i < radioLength; i++) {
+            if (document.getElementsByName("period")[i].checked == true) {
+            	var radioBnt = document.getElementsByName("period")[i].value;
+            	console.dir(radioBnt);
+            }
+        }
+		
+		var date = new Date();
+		var dd = date.getDate();
+		var mm = date.getMonth()+1; // 1월은 0
+		var yyyy = date.getFullYear();
+		
+		if(radioBnt=="1"){ //일주일 
+			 dd=dd-7;
+			 if(dd<10){dd='0'+dd} 
+			 if(mm<10){mm='0'+mm} 
+			 date = yyyy+'-'+mm+'-'+dd; // yyyy-mm-dd
+			 document.getElementById('fromDate').value = date;
+			 document.getElementById('endDate').valueAsDate = new Date();
+		}else if(radioBnt=="2"){ //한달
+			 mm=mm-1;
+			 if(dd<10){dd='0'+dd} 
+			 if(mm<10){mm='0'+mm} 
+			 date = yyyy+'-'+mm+'-'+dd; 
+			 document.getElementById('fromDate').value = date;
+			 document.getElementById('endDate').valueAsDate = new Date();
+		}else if(radioBnt=="3"){ //3개월
+			 mm=mm-3;
+			 if(dd<10){dd='0'+dd} 
+			 if(mm<10){mm='0'+mm} 
+			 date = yyyy+'-'+mm+'-'+dd;
+			 document.getElementById('fromDate').value = date;
+			 document.getElementById('endDate').valueAsDate = new Date();
+		}
+	}
+		
+		
+		
+	</script>
 
 
 </body>

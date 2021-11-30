@@ -71,12 +71,11 @@
 				<div id="content">
 					<section>
 						<div class="section-body">
-							<form id="prod_add" method="post" class="form form-validate"
-								role="form" autocomplete="off" action="/admin/shopping/test">
+							<form id="prod_add" method="post" enctype="multipart/form-data" class="form form-validate"
+								role="form" autocomplete="off" action="/admin/shopping/add-product">
 								<input type="hidden" name="idx" value="0">
 								<!-- default_type - js 처리용 -->
-								<input type="hidden" name="default_type" id="default_type"
-									value="parcel">
+								
 								<div class="row">
 									<div class="col-md-6">
 										<div class="row ">
@@ -137,14 +136,14 @@
 															<div class="row">
 																<div class="col-md-6 m-margin-bottom-xl">
 																	<label class="control-label">상품명</label> <input
-																		type="text" class="form-control" name="sku_no_option"
+																		type="text" class="form-control" name="name"
 																		value="">
 																</div>
 																<div class="col-md-6 m-margin-bottom-xl">
 																	<label for="shop_prod_price" class="control-label">브랜드</label>
 																	<div class="no-margin">
 																		<input type="text" class="form-control _prod_price"
-																			id="shop_prod_price" name="price" value="">
+																			id="shop_prod_price" name="brand" value="">
 																	</div>
 																</div>
 															</div>
@@ -152,27 +151,27 @@
 														<div class="form-group">
 															<div class="row">
 																<div class="col-md-6 m-margin-bottom-xl">
-																	<label class="control-label">카테고리</label> <select
+																	<label class="control-label">카테고리</label> <select name="category"
 																		class="form-control">
 																		<option value="" selected disabled>카테고리 선택</option>
-																		<option value="CJ">간식</option>
-																		<option value="EPOST">사료</option>
-																		<option value="REGISTPOST">건강관리</option>
-																		<option value="HANJIN">위생/배변</option>
-																		<option value="LOGEN">미용/목욕</option>
-																		<option value="GTX">급수기/급식기</option>
-																		<option value="LOTTE">하우스/울타리</option>
-																		<option value="FRESHMATES">이동장</option>
-																		<option value="GTSLOGIS">의류/악세사리</option>
-																		<option value="GENIEGO">장난감</option>
+																		<option value="snack">간식</option>
+																		<option value="feed">사료</option>
+																		<option value="health">건강관리</option>
+																		<option value="potty">위생/배변</option>
+																		<option value="beauty">미용/목욕</option>
+																		<option value="feeder">급수기/급식기</option>
+																		<option value="kennel">하우스/울타리</option>
+																		<option value="vari-kennel">이동장</option>
+																		<option value="clothes">의류/악세사리</option>
+																		<option value="toy">장난감</option>
 																	</select>
 																</div>
 																<div class="col-md-6 m-margin-bottom-xl">
-																	<label class="control-label">애완동물 종류</label> <select
+																	<label class="control-label">애완동물 종류</label> <select name="type"
 																		class="form-control">
 																		<option value="" selected disabled>종류 선택</option>
-																		<option value="CJ">고양이</option>
-																		<option value="EPOST">강아지</option>
+																		<option value="C">고양이</option>
+																		<option value="D">강아지</option>
 																	</select>
 																</div>
 
@@ -182,12 +181,12 @@
 															<div class="row">
 																<div class="col-md-3 m-margin-bottom-xl">
 																	<label class="control-label">옵션</label> <input
-																		type="text" class="form-control" name="sku_no_option"
+																		type="text" class="form-control" placeholder="없을 시 빈칸" name="option"
 																		value="">
 																</div>
 																<div class="col-md-3 m-margin-bottom-xl">
 																	<label class="control-label">재고</label> <input
-																		type="text" class="form-control" name="sku_no_option"
+																		type="text" class="form-control" name="stock"
 																		value="">
 																</div>
 																<div class="col-md-6 m-margin-bottom-xl">
@@ -211,20 +210,20 @@
 																		<div class="col-md-4">
 																			<label
 																				class="checkbox checkbox-inline checkbox-styled">
-																				<input type="checkbox" name="" value=""> <span>쿠폰</span>
+																				<input type="checkbox" name="couponAvail" value="y"> <span>쿠폰</span>
 																			</label> <label
 																				class="checkbox checkbox-inline checkbox-styled">
-																				<input type="checkbox" name="" value=""4> <span>적립금</span>
+																				<input type="checkbox" name="smAvail" value="y" > <span>적립금</span>
 																			</label> <label
 																				class="checkbox checkbox-inline checkbox-styled">
-																				<input type="checkbox" name="" value=""
+																				<input type="checkbox" name=""
 																				id="sale_btn"> <span>할인률</span>
 																			</label>
 																		</div>
 																		<div class="col-md-8 sale_div" style="display: none">
 																			<div class="d-inline-flex">
 
-																				<input type="text" class="form-control"> <span
+																				<input type="text" class="form-control" name="salePer" value=0> <span
 																					class="ml-3">할인 적용(%) </span>
 																			</div>
 																		</div>
@@ -305,6 +304,7 @@
         secondCol.classList.add("m-margin-bottom-xl")
         let secondTextInput = document.createElement("input")
         secondTextInput.type = "text"
+        secondTextInput.name = "stock"
         secondTextInput.classList.add("form-control")
         secondCol.append(secondTextInput)
         bigCol.append(secondCol)
@@ -313,6 +313,7 @@
         mdCol.classList.add("m-margin-bottom-xl")
         let mdTextInput = document.createElement("input")
         mdTextInput.type = "text"
+        mdTextInput.name = "price"
         mdTextInput.classList.add("form-control")
         mdCol.append(mdTextInput)
         bigCol.append(mdCol)

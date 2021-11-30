@@ -3,6 +3,8 @@ package com.kh.spring.market.model.service;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import com.kh.spring.common.util.pagination.Paging;
 import com.kh.spring.market.model.dto.Product;
 import com.kh.spring.market.model.dto.Review;
@@ -23,4 +25,10 @@ public interface ShopService {
 	List<Review> selectReviewByPrdIdx(int pn);
 
 	Product selectPrdByDtIdx(int dtIdx);
+
+	void insertProduct(List<MultipartFile> mainImg, List<MultipartFile> specImg, List<Map<String, Object>> commandList,
+			Product product);
+
+	Map<String, Object> selectPrdList(Map<String, Object> commandmap);
+
 }

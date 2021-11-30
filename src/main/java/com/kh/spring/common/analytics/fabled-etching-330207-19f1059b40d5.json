@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "fabled-etching-330207",
+  "private_key_id": "19f1059b40d5facb37d146877d483d213bbaa111",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEugIBADANBgkqhkiG9w0BAQEFAASCBKQwggSgAgEAAoIBAQDE2UldwpviC1Oe\nJunOqj7+9UM7uSZzh9SPoLUIIm8LUi8pgHCZ1EP2CtkvpP10RegHOtCKmeMC5RRv\nhS6p0iQ5RUwCxj0ebKKMmYI0lJregRPZsraBrDoHpzcoUnfnept89JGSEJBzuJt0\nOzy2v/Dp/nBxJOAyQhWxJIo5B4zh1vJfIzpDHnzoXuYXP4IsoKZVP2DfKEBF1SMb\nP8HBvEv8qjpsR8cM1tKQ1kbeQuKLq3xGbAAJLpcHt3DIpyt/x/Xqi4DaVH1fB++8\nQHhoPFmD+TzE+EaSn7ODta9IcjyCPoI1JiEwmR7OtAGdBscmx3oHwP9/3yKmwLb7\n9RHBZ2iLAgMBAAECgf9J54DY4NZagK+GOztnOAVn5qmxznO61GgdYkt9YRCXchIP\nozvq5LB2UZ/Ezb4B1pyrFssPRS7EIzM/jJ00FzFPMHKbxGs4KDhdOGO5cdrcGJMm\nZ6+6o2Rm6GXY67pnLBo0YLymG9LKnCNT1xltfG9o9nh+JErASKIdG2X2Br87xgqX\n+zb6aYOuwf8hQqYE7qPPCTH1uB8vhFHIqLnu77dIy25LC2z3FBOIsfkaXRaw7UXN\nIIGyNqQ6M48LJIDnNikM1jiBpXX7Cn8BAoWO0iKXxlP/4MlSLClCCM6vM3lVtupk\nCQ/tHiQycKbFo1LXD5CKmxS6ikZ63lUQ0d2H5AkCgYEA5jwgDlgVR7Nc77L+1ddo\n/Bcshk5/KPmUE87aQB5MqncQUjG/ylFhoeOMC8NTnkLcDwDND3+06STeT63ZtgS7\naWmqzJb6ahw9++emIR4LHbzCgS4KMWLxSZjAKZrC98TC1USwiFCUVIVGIQJ9qUod\nt99eAXLQ3Uh1wvGz8tFLytkCgYEA2uCzhwwm2JVlDCidmUfl4SBXmQk1b7tPCeF4\nBH2kc1EQ6IuV28j6Rgp2/q7/8egi7VSJnEE9iwuOiM8jHeOB9xxdL5xvztNJ88gj\ntdwX4Kq9vDVpLMmeNruK3FEz09pwjL/4xIji2rVDM/CT6B4Dpg9/28uMQ0FJKanS\nCk/PSAMCgYAUb3fE7iqNX607FV8rKeCGp6PrE+KTh3uOOokCse3KH6FSOlo0of6R\nePoAPUkZvgN8TWzmGEa9fulAl0TAtDDSTW+8kxYM/w69YjVLsTf5XrzA7I45Dfgu\nuSEtUDBH/63vchZdMxHHYsDzwx3WPd7faDMW29MQIRNax0tanRsmGQKBgCfeupUl\nD4ZwYEHAvESJpkRGAe7skIFT22fvXE9lG6mt4KiblKa+i2hqy5ZFBnZoVMRqm86M\ny8siRcqCAOGW6bu7vPXJR0yjjFsN4ANmnircr0cza38vEtThgL/1Qr2aktnwtj4G\nuVwhnKY/cpHbtcpwFFhTUa+Gmu8t8gbS1u1FAoGAeTJ2kyNui5GojFtS+x8BM2gu\ndWojkFT8A20llr5xzdKHUmvR6Xgi5DwLySNZcVnhOhMuOBvbcEE0LgHB4KFQHt8E\n6kzRWMTK1M5KhW/3XXfjtS82QbcCrs3Xd94DGRGm9cTovyOsn7ZEklxBZZquZSn/\nF6hrkyZgOnLQq9y21uU=\n-----END PRIVATE KEY-----\n",
+  "client_email": "smartpet@fabled-etching-330207.iam.gserviceaccount.com",
+  "client_id": "101284092703991037013",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/smartpet%40fabled-etching-330207.iam.gserviceaccount.com"
+}

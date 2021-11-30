@@ -168,3 +168,13 @@ body{
   font-size: 14px;
   text-align: center;
 }
+
+#clickedTab {
+	border-bottom: 2px solid blue;
+	color: mediumblue;
+	cursor: default;
+}
+
+.tab {
+	cursor: pointer;
+}

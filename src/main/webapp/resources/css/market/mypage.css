@@ -252,8 +252,19 @@ tbody > tr:hover{
     background-color:rgba(198, 201, 207, 0.3);
 }
 
+
+/* enquiry */
 .enquiry_title:hover{
     text-decoration: underline;
+}
+
+.fromDate input {
+	margin-right:10px;
+	width:6em;
+}
+
+.fromDate button {
+	margin-left: 10px;
 }
 
 .eq-click{

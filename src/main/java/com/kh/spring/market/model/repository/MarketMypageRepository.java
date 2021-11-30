@@ -1,5 +1,6 @@
 package com.kh.spring.market.model.repository;
 
+import java.sql.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -30,11 +31,17 @@ public interface MarketMypageRepository {
 			+ " where user_idx = #{userIdx} and exp_date > sysdate")
 	int selectCouponCount(int userIdx);
 	
-	//Save Money
+	//Save Money 목록
 	List<Map<String, Object>> selectReserveList(@Param("userIdx")int userIdx, @Param("state")String state);
 	
+	//Save Money 등록 - 구입시
+	@Insert("INSERT INTO SAVE_HISTORY(SH_IDX, USER_IDX, STATE, TYPE, AMOUNT, order_idx) "
+			+ " VALUES(SC_SH_IDX.NEXTVAL, #{userIdx}, #{state}, #{type}, #{amount}, #{orderIdx})")
+	void insertSaveMoney(SaveHistory saveHistory);
+	//적립금 유형 : 주문(0), 일반후기(2), 사진후기(3), 적립금결제(4), 결제취소(5)
+	
 	//Order List
-	List<Map<String, Object>> selectOrderList(int userIdx);
+	List<Map<String, Object>> selectOrderList(@Param("userIdx")int userIdx, @Param("state")String state);
 	
 	//reveiwList 구매확정 목록
 	List<Map<String, Object>> selectReviewList(int userIdx);
@@ -99,5 +106,5 @@ public interface MarketMypageRepository {
 	List<Map<String, Object>> memberInfoForEnquiry(int userIdx);
 	
 	//문의 리스트
-	List<Map<String, Object>> selectEnquiryList(@Param("userIdx")int userIdx);
+	List<Map<String, Object>> selectEnquiryList(@Param("userIdx")int userIdx, @Param("fromDate")String fromDate, @Param("endDate")String endDate);
 }
