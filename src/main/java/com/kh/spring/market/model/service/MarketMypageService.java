@@ -6,7 +6,6 @@ import java.util.Map;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.kh.spring.common.util.FileDTO;
-import com.kh.spring.market.model.dto.Coupon;
 import com.kh.spring.market.model.dto.Order;
 import com.kh.spring.market.model.dto.QNA;
 import com.kh.spring.market.model.dto.Review;
@@ -19,14 +18,15 @@ public interface MarketMypageService {
 	
 	int selectCouponCount(int userIdx);
 	
-	//Reserve
+	//Reserve SaveHistory
 	List<Map<String, Object>> selectReserveList(int userIdx, String state);
+	void insertSaveMoney(SaveHistory saveHistory);
 	
 	//OrderList
-	List<Map<String, Object>> selectOrderList(int userIdx);
+	List<Map<String, Object>> selectOrderList(int userIdx, String state);
 	
 	//reveiwList 구매확정 목록
-	List<Map<String, Object>> selectReviewList(int userIdx);
+	List<Map<String, Object>> selectReviewList(int userIdx, String state);
 	
 	//updateDate, state
 	void updateDateAndState();
@@ -56,7 +56,7 @@ public interface MarketMypageService {
 	List<Map<String, Object>> memberInfoForEnquiry(int userIdx);
 	
 	//문의 리스트
-	List<Map<String, Object>> selectEnquiryList(int userIdx);
+	List<Map<String, Object>> selectEnquiryList(int userIdx, String fromDate, String endDate);
 	
 	//문의 등록
 	void insertEnquiry(QNA qna);

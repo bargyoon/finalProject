@@ -6,12 +6,12 @@
   
  	 <!-- 구매내역 orderList -->
 	<select id="selectOrderList" resultType="map">
-  	 	select ORDER_IDX, UC_IDX, USER_IDX, o.order_date, PRD_IDX, PAYMENT_AMOUNT, o.state, ORDER_CNT, SAVE_MONEY, p.name, p.brand, po_name
+  	 	select ORDER_IDX, UC_IDX, USER_IDX, o.order_date, PRD_IDX, PAYMENT_AMOUNT, o.state, ORDER_CNT, SAVE_MONEY, p.name, p.brand, po_name, d.dt_idx
 		from "ORDER" o
 		inner join product p USING(PRD_IDX)
 		inner join prd_detail d USING(PRD_IDX)
-		where user_idx = #{userIdx}
-		order by reg_date desc
+		where user_idx = #{userIdx} and o.dt_idx=d.dt_idx and o.state = #{state}
+		order by o.order_date desc
 	</select>
   
   	<select id="selectReviewList" resultType="map">
@@ -19,35 +19,37 @@
 		from "ORDER" o
 		inner join product p USING(PRD_IDX)
 		inner join prd_detail d USING(PRD_IDX)
-		where USER_IDX = #{userIdx} and o.STATE = 1  <!-- state가 1일 때 구매 확정이라면 -->
+		where USER_IDX = #{userIdx} and o.STATE = 3  <!-- state가 3일 때 구매 확정이라면 -->
 		order by UPDATE_DATE desc
 	</select>
   	
   	 <select id="selectMyReviewList" resultType="map">
-  	 	select r.RV_IDX, r.USER_IDX, PRD_IDX, r.ORDER_IDX, r.STATE, r.RATING, r.TYPE, r.RECOMMAND, r.REG_DATE, RV_CONTENT, p.name, p.brand, d.po_name
+  	 	select r.RV_IDX, r.USER_IDX, PRD_IDX, r.ORDER_IDX, r.STATE, r.RATING, r.TYPE, r.RECOMMAND, r.REG_DATE, RV_CONTENT, p.name, p.brand, d.po_name, d.dt_idx
 		from REVIEW r
 		inner join product p USING(PRD_IDX)
 		inner join prd_detail d USING(PRD_IDX)
-		where USER_IDX = #{userIdx} and r.STATE = #{state}
-        order by reg_date desc
+		inner join "ORDER" o USING(PRD_IDX)
+		where r.USER_IDX = #{userIdx} and o.dt_idx = d.dt_idx
+		 order by reg_date desc
 	</select>
 	
 	<select id="selectReviewDetail" resultType="map">
-  	 	select ORDER_IDX, USER_IDX, PRD_IDX, o.state, ORDER_CNT, p.name, p.brand, po_name
+  	 	select ORDER_IDX, USER_IDX, PRD_IDX, o.state, ORDER_CNT, p.name, p.brand, po_name,d.dt_idx
 		from "ORDER" o
 		inner join product p USING(PRD_IDX)
 		inner join prd_detail d USING(PRD_IDX)
-		where user_idx = #{userIdx} and o.state = 1 and o.order_idx = #{orderIdx} <!-- 구매확정이 1 -->
+		where user_idx = #{userIdx} and o.state = 3 and o.order_idx = #{orderIdx} and o.dt_idx=d.dt_idx
 	</select>
 	
 	<!-- acc-money / save history -->
 	<select id="selectReserveList" resultType="map">
-  	 	select SH_IDX, USER_IDX, s.STATE, s.TYPE, s.AMOUNT, s.REG_DATE, PRD_IDX, p.NAME
+  	 	select SH_IDX, USER_IDX, s.STATE, s.TYPE, s.AMOUNT, s.REG_DATE, PRD_IDX, p.NAME,o.dt_idx, o.order_idx
 		from SAVE_HISTORY s
-		join "ORDER" o using(user_idx)
-		join product p using(prd_idx)
-		where user_idx = #{userIdx}
-		order by reg_date desc
+		inner join "ORDER" o USING(USER_IDX)
+		inner join product p using(PRD_IDX)
+		inner join prd_detail d USING(PRD_IDX)
+		where user_idx = #{userIdx} and o.dt_idx=d.dt_idx and o.order_idx=s.order_idx
+		order by s.reg_date desc
 	</select>
 	
 	<!-- coupon list -->
@@ -69,11 +71,19 @@
 	
 	<!-- enquiry list -->
 	<select id="selectEnquiryList" resultType="map">
-  	 	select QNA_IDX, USER_IDX, PRD_IDX, ORDER_IDX, TITLE, q.CONTEXT, q.TYPE, q.REG_DATE, IS_ANSWER, AW_CONTEXT, AW_REG_DATE, p.name, p.brand, d.po_name
+  	 	select QNA_IDX, q.USER_IDX, PRD_IDX, q.ORDER_IDX, q.TITLE, q.CONTEXT, q.TYPE, q.REG_DATE, IS_ANSWER, AW_CONTEXT, AW_REG_DATE, p.name, p.brand, d.po_name,o.dt_idx
 		from  QNA q
 		inner join product p USING(PRD_IDX)
 		inner join prd_detail d USING(PRD_IDX)
-		where USER_IDX = #{userIdx}
+		inner join "ORDER" o using(PRD_IDX)
+		<where>
+		 q.USER_IDX = #{userIdx} and o.dt_idx=d.dt_idx
+			<if test="fromDate != null and endDate != null">
+				and q.REG_DATE between TO_DATE(#{fromDate},'YYYY-MM-DD') and TO_DATE(#{endDate},'YYYY-MM-DD')+1
+			</if>
+			
+		</where>
+		order by q.reg_date desc
 	</select>
 	
 	<!-- ok -->

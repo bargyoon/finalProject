@@ -1,9 +1,12 @@
 package com.kh.spring.market.controller;
 
 
+import java.sql.Date;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat.ISO;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -35,9 +38,10 @@ public class MarketMypageController {
 
 	@GetMapping("")
 	public String mypage(@SessionAttribute(name="authentication")Member certifiedUser,
-						Model model) {
+						Model model,
+						@RequestParam(value = "state", defaultValue = "1")String state) {
 		
-		List<Map<String, Object>> orderList = marketMypageService.selectOrderList(certifiedUser.getUserIdx());
+		List<Map<String, Object>> orderList = marketMypageService.selectOrderList(certifiedUser.getUserIdx(),state);
 		Member memberInfo = marketMypageService.selectMemberInfo(certifiedUser.getUserIdx());
 		int couponCnt = marketMypageService.selectCouponCount(certifiedUser.getUserIdx());
 				
@@ -101,9 +105,10 @@ public class MarketMypageController {
 	
 	@GetMapping("enquiry/enquiry-pop")
 	public void enquiryPop(@SessionAttribute(name="authentication")Member certifiedUser,
-							Model model) {
+							Model model,
+							@RequestParam(value = "state", required = false)String state) {
 		
-		List<Map<String, Object>> orderList = marketMypageService.selectOrderList(certifiedUser.getUserIdx());
+		List<Map<String, Object>> orderList = marketMypageService.selectOrderList(certifiedUser.getUserIdx(), state);
 		model.addAttribute("orderList", orderList);
 		
 		System.out.println("orderList : " + orderList);
@@ -123,9 +128,17 @@ public class MarketMypageController {
 	
 	@GetMapping("enquiry/enquiry-list")
 	public void enquiryList(@SessionAttribute(name="authentication")Member certifiedUser,
-							Model model) {
+							Model model,
+							@RequestParam(value = "fromDate", required = false)String fromDate,
+							@RequestParam(value = "endDate", required = false)String endDate) {
 		
-		List<Map<String, Object>> enquiryList = marketMypageService.selectEnquiryList(certifiedUser.getUserIdx());
+		System.out.println("fromDate : " + fromDate);
+		System.out.println("endDate : " + endDate);
+		
+		//Date fDate = Date.valueOf(fromDate);
+		//Date eDate = Date.valueOf(endDate);
+	
+		List<Map<String, Object>> enquiryList = marketMypageService.selectEnquiryList(certifiedUser.getUserIdx(),fromDate, endDate);
 		Member memberInfo = marketMypageService.selectMemberInfo(certifiedUser.getUserIdx());
 		int couponCnt = marketMypageService.selectCouponCount(certifiedUser.getUserIdx());
 		
@@ -181,8 +194,9 @@ public class MarketMypageController {
 
 	@GetMapping("review/review-list")
 	public void reviewList(@SessionAttribute(name="authentication")Member certifiedUser,
-						   Model model) {
-		List<Map<String, Object>> reviewList = marketMypageService.selectReviewList(certifiedUser.getUserIdx());
+						   Model model,
+						@RequestParam(value = "state", defaultValue="1")String state) {
+		List<Map<String, Object>> reviewList = marketMypageService.selectReviewList(certifiedUser.getUserIdx(),state);
 		Member memberInfo = marketMypageService.selectMemberInfo(certifiedUser.getUserIdx());
 		int couponCnt = marketMypageService.selectCouponCount(certifiedUser.getUserIdx());
 		marketMypageService.updateDateAndState();
@@ -219,6 +233,7 @@ public class MarketMypageController {
 	
 	@PostMapping("review/upload/{orderIdx}")
 	public String uploadBoard(Review review
+							,SaveHistory saveHistory
 							, List<MultipartFile> files 
 							,@SessionAttribute("authentication")Member certifiedUser
 							,@PathVariable int orderIdx) {
@@ -233,12 +248,22 @@ public class MarketMypageController {
 		
 		if(files == null) {
 			review.setType("0"); //일반
+			saveHistory.setState("0");
+			saveHistory.setType("1");
 		}else {
 			review.setType("1");
+			saveHistory.setState("1");
+			saveHistory.setType("2");
 		}
 		
 		marketMypageService.insertReview(files, review);
 		marketMypageService.updatePrdIdx(orderIdx);
+		
+		if(review.getType().equals("0")) { //일반후기라면 적립금 300
+			saveHistory.setAmount(300);
+			System.out.println("saveHistory : " + saveHistory);
+			marketMypageService.insertSaveMoney(saveHistory);
+		}
 		
 		
 		//파일첨부 안했을 때 예외처리 (RedirectAttributes)

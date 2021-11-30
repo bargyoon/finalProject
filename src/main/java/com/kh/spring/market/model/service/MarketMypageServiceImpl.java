@@ -1,5 +1,6 @@
 package com.kh.spring.market.model.service;
 
+import java.sql.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -52,14 +53,14 @@ public class MarketMypageServiceImpl implements MarketMypageService{
 	}
 
 	@Override
-	public List<Map<String, Object>> selectOrderList(int userIdx) {
-		List<Map<String, Object>> orderList = mypageRepository.selectOrderList(userIdx);
+	public List<Map<String, Object>> selectOrderList(int userIdx, String state) {
+		List<Map<String, Object>> orderList = mypageRepository.selectOrderList(userIdx,state);
 		return orderList;
 	}
 
 	@Override
-	public List<Map<String, Object>> selectReviewList(int userIdx) {
-		List<Map<String, Object>> reviewList = mypageRepository.selectOrderList(userIdx);		
+	public List<Map<String, Object>> selectReviewList(int userIdx,String state) {
+		List<Map<String, Object>> reviewList = mypageRepository.selectOrderList(userIdx,state);		
 		return reviewList;
 	}
 
@@ -136,14 +137,20 @@ public class MarketMypageServiceImpl implements MarketMypageService{
 	}
 
 	@Override
-	public List<Map<String, Object>> selectEnquiryList(int userIdx) {
-		List<Map<String, Object>> selectEnquiryList = mypageRepository.selectEnquiryList(userIdx);
+	public List<Map<String, Object>> selectEnquiryList(int userIdx, String fromDate, String endDate) {
+		List<Map<String, Object>> selectEnquiryList = mypageRepository.selectEnquiryList(userIdx, fromDate, endDate);
 		return selectEnquiryList;
 	}
 
 	@Override
 	public void insertEnquiry(QNA qna) {
 		mypageRepository.insertEnquiry(qna);
+		
+	}
+
+	@Override
+	public void insertSaveMoney(SaveHistory saveHistory) {
+		mypageRepository.insertSaveMoney(saveHistory);
 		
 	}
 
