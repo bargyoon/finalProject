@@ -104,7 +104,7 @@ public class AdminController {
 
 	@PostMapping("disease/add-disease-spec")
 	public String addPriceImg(Disease disease, List<MultipartFile> diseaseIcon) {
-		disease.setExplain("하하");
+		
 
 		adminService.insertDisease(disease, diseaseIcon);
 

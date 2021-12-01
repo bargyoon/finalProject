@@ -10,7 +10,8 @@
 <link rel="stylesheet" href="/resources/css/board/board-form.css">
 </head>
 <body>
-<form action="/board/<c:out value="${category}"></c:out>" method="post" enctype="multipart/form-data" >
+<form action="/board/board-form" method="post" enctype="multipart/form-data" >
+<input name="category" value="${category}" style="display:none">
 <div class="board_wrap">
         <div class="board_title">
             <strong><c:out value="${title}"></c:out>게시판</strong>

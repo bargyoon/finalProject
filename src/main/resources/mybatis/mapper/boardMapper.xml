@@ -7,11 +7,16 @@
   	
 
   	<select id="selectBoard" resultType="map">
-  		select m.nickname, b.bd_idx, b.bd_title, b.reg_date, b.view_count, b.rec_count, b.content 
+  	
+  	select  rnum, nickname, bd_idx, bd_title, reg_date, view_count, rec_count, content ,category from(
+  		select rownum rnum, m.nickname, b.bd_idx, b.bd_title, b.reg_date, b.view_count, b.rec_count, b.content ,b.category
   		from board b join "USER" m on(b.user_idx = m.user_idx)
   		<where>
-  			<if test="category != null">category = #{category}</if>
+  			category = #{commandMap.category}
+  			<if test="commandMap.option != null">and ${commandMap.option} like '%'||#{commandMap.keyword}||'%'</if>
+  			
   		</where>
+  		)where rnum between ${((pageUtil.curPage-1) * pageUtil.cntPerPage) + 1} and ${pageUtil.curPage * pageUtil.cntPerPage} 
   	</select>
   	
   
