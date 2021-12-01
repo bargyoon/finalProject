@@ -114,8 +114,11 @@
 									<c:when test="${myReviewList.STATE eq '0'}">
 										<span style="color: royalblue;">미승인</span>
 									</c:when>
-									<c:when test="${myReviewList.STATE ne '0'}">
+									<c:when test="${myReviewList.STATE eq '1'}">
 										<span style="color: royalblue;">승인</span>
+									</c:when>
+									<c:when test="${myReviewList.STATE eq '2'}">
+										<span style="color: royalblue;">조건 미충족</span>
 									</c:when>
 								</c:choose>							
 								</p>

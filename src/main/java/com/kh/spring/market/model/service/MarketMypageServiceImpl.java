@@ -1,6 +1,5 @@
 package com.kh.spring.market.model.service;
 
-import java.sql.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -11,12 +10,11 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.kh.spring.common.util.FileDTO;
 import com.kh.spring.common.util.FileUtil;
-import com.kh.spring.market.model.dto.Coupon;
+import com.kh.spring.market.model.dto.Address;
 import com.kh.spring.market.model.dto.Order;
 import com.kh.spring.market.model.dto.QNA;
 import com.kh.spring.market.model.dto.Review;
 import com.kh.spring.market.model.dto.SaveHistory;
-import com.kh.spring.market.model.dto.UserCoupon;
 import com.kh.spring.market.model.repository.MarketMypageRepository;
 import com.kh.spring.member.model.dto.Member;
 
@@ -53,13 +51,13 @@ public class MarketMypageServiceImpl implements MarketMypageService{
 	}
 
 	@Override
-	public List<Map<String, Object>> selectOrderList(int userIdx, String state) {
+	public List<Map<String, Object>> selectOrderList(int userIdx, int state) {
 		List<Map<String, Object>> orderList = mypageRepository.selectOrderList(userIdx,state);
 		return orderList;
 	}
 
 	@Override
-	public List<Map<String, Object>> selectReviewList(int userIdx,String state) {
+	public List<Map<String, Object>> selectReviewList(int userIdx,int state) {
 		List<Map<String, Object>> reviewList = mypageRepository.selectOrderList(userIdx,state);		
 		return reviewList;
 	}
@@ -119,7 +117,7 @@ public class MarketMypageServiceImpl implements MarketMypageService{
 	}
 
 	@Override
-	public List<Review> selectReviewListByState(String state) {
+	public List<Review> selectReviewListByState(int state) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -154,8 +152,24 @@ public class MarketMypageServiceImpl implements MarketMypageService{
 		
 	}
 
-	
+	@Override
+	public void insertAddress(Address address) {
+		mypageRepository.insertAddress(address);
+	}
 
-	
+	@Override
+	public void updateAddress(int addressIdx) {
+		mypageRepository.updateAddress(addressIdx);
+	}
+
+	@Override
+	public void deleteAddress(int addressIdx) {
+		mypageRepository.deleteAddress(addressIdx);
+	}
+
+	@Override
+	public List<Address> selectAddressList(int userIdx) {
+		return mypageRepository.selectAddressList(userIdx);
+	}
 	
 }

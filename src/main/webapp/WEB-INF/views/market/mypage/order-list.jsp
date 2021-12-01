@@ -61,12 +61,13 @@
 		<div class="container2" style="display: flex; flex-direction: column;">
 			<p class="py-3 mb-0" style="font-size: 1.3rem;">주문 내역 조회</p>
 			<ul class="sub-ul pb-2">
-				<li><a href="/market/mypage/order-list?state=0">입금/결제</a></li>
-				<li><a href="/market/mypage/order-list?state=1">배송중</a></li>
-				<li><a href="/market/mypage/order-list?state=2">배송완료</a></li>
-				<li><a href="/market/mypage/order-list?state=3">구매확정</a></li>
-				<li><a href="/market/mypage/order-list?state=4">교환</a></li>
-				<li><a href="/market/mypage/order-list?state=5">환불</a></li>
+				<li><a href="/market/mypage">전체 조회</a></li>
+				<li><a href="/market/mypage?state=1">입금/결제</a></li>
+				<li><a href="/market/mypage?state=2">배송중</a></li>
+				<li><a href="/market/mypage?state=3">배송완료</a></li>
+				<li><a href="/market/mypage?state=4">구매확정</a></li>
+				<li><a href="/market/mypage?state=5">교환</a></li>
+				<li><a href="/market/mypage?state=6">환불</a></li>
 			</ul>
 			<hr class="mt-0" style="height: 3px; opacity: 1;">
 			<ul>

@@ -6,6 +6,7 @@ import java.util.Map;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.kh.spring.common.util.FileDTO;
+import com.kh.spring.market.model.dto.Address;
 import com.kh.spring.market.model.dto.Order;
 import com.kh.spring.market.model.dto.QNA;
 import com.kh.spring.market.model.dto.Review;
@@ -23,16 +24,16 @@ public interface MarketMypageService {
 	void insertSaveMoney(SaveHistory saveHistory);
 	
 	//OrderList
-	List<Map<String, Object>> selectOrderList(int userIdx, String state);
+	List<Map<String, Object>> selectOrderList(int userIdx, int state);
 	
 	//reveiwList 구매확정 목록
-	List<Map<String, Object>> selectReviewList(int userIdx, String state);
+	List<Map<String, Object>> selectReviewList(int userIdx, int state);
 	
 	//updateDate, state
 	void updateDateAndState();
 	
 	//reveiwListByState 구매확정 목록(상태별)
-	List<Review> selectReviewListByState(String state);
+	List<Review> selectReviewListByState(int state);
 	
 	//reveiwDetail 구매확정 목록
 	List<Map<String, Object>> selectReviewDetail(Order order);
@@ -60,4 +61,10 @@ public interface MarketMypageService {
 	
 	//문의 등록
 	void insertEnquiry(QNA qna);
+	
+	//address
+	void insertAddress(Address address);
+	void updateAddress(int addressIdx);
+	void deleteAddress(int addressIdx);
+	List<Address> selectAddressList(int userIdx);
 }

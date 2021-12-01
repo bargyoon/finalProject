@@ -558,11 +558,80 @@ tbody > tr:hover{
     color: white;
 }
 
+/* address-pop  */
+#pop_wrap{
+	margin:1em;
+}
 
+.pop_title{
+	display:flex;
+	justify-content:stretch;
+	padding:15px;
+	margin-bottom:1.5em;
+}
+.pop_title h2{
+	margin : 10px;
+	font-family: 'SBAggroL';
+}
+.address_name_td{
+	height: 50px;
+}
 
+.zip_span label{
+	margin-right: 30px;
+}
+
+.address_content{
+	margin-right: 12px;
+}
+
+.address_name_td label{
+	margin-right: 30px;
+}
+
+.address_info label{
+	padding-left: 1em;
+}
+
+.address_info td{
+	/* pointer-events: none; */
+}
+
+.cell_title{
+	width: 50px;
+	padding-left: 1em;
+}
+
+.address_detail{
+	margin-top:24px;
+}
+
+.add_detail{
+	margin-right: 12px;	
+}
+
+.address_notice{
+	margin-left: 15px;
+}
+
+.address_pop_btn{
+	display: flex;
+	justify-content: center;
+}
+
+.address_pop_btn input{
+	margin:5px;
+}
+
+/* acc-money 적립금 */
 .acc-money-ul{
     list-style: none;
     padding: 0;
+}
+
+#sample6_address{
+	width: 20.1em;
+	margin-left: 1em;
 }
 
 .acc-money-ul li:first-child{

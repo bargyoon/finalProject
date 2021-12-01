@@ -1,12 +1,9 @@
 package com.kh.spring.market.controller;
 
 
-import java.sql.Date;
 import java.util.List;
 import java.util.Map;
 
-import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.format.annotation.DateTimeFormat.ISO;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,12 +11,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.kh.spring.common.util.FileDTO;
-import com.kh.spring.market.model.dto.Coupon;
+import com.kh.spring.market.model.dto.Address;
 import com.kh.spring.market.model.dto.Order;
 import com.kh.spring.market.model.dto.QNA;
 import com.kh.spring.market.model.dto.Review;
@@ -35,19 +31,22 @@ import lombok.RequiredArgsConstructor;
 public class MarketMypageController {
 	
 	private final MarketMypageService marketMypageService;
+	
 
 	@GetMapping("")
 	public String mypage(@SessionAttribute(name="authentication")Member certifiedUser,
 						Model model,
-						@RequestParam(value = "state", defaultValue = "1")String state) {
-		
-		List<Map<String, Object>> orderList = marketMypageService.selectOrderList(certifiedUser.getUserIdx(),state);
-		Member memberInfo = marketMypageService.selectMemberInfo(certifiedUser.getUserIdx());
-		int couponCnt = marketMypageService.selectCouponCount(certifiedUser.getUserIdx());
+						Order order) {
+		int member = certifiedUser.getUserIdx();
+		List<Map<String, Object>> orderList = marketMypageService.selectOrderList(member,order.getState());
+		System.out.println("state : " + order.getState());
+		Member memberInfo = marketMypageService.selectMemberInfo(member);
+		int couponCnt = marketMypageService.selectCouponCount(member);
 				
 		model.addAttribute("memberInfo", memberInfo);
 		model.addAttribute("couponCnt", couponCnt);
 		model.addAttribute("orderList", orderList);
+		
 		System.out.println("orderList : " + orderList);
 		
 		return "/market/mypage/order-list";
@@ -56,7 +55,6 @@ public class MarketMypageController {
 	@GetMapping("coupon-list")
 	public void couponList(@SessionAttribute(name="authentication")Member certifiedUser,
 												Model model) {
-		
 		
 		List<Map<String, Object>> couponList = marketMypageService.selectCouponByIdx(certifiedUser.getUserIdx());
 		Member memberInfo = marketMypageService.selectMemberInfo(certifiedUser.getUserIdx());
@@ -75,7 +73,42 @@ public class MarketMypageController {
 	public void cart() {}
 
 	@GetMapping("address-list")
-	public void addressList() {}
+	public void addressList(@SessionAttribute(name="authentication")Member certifiedUser,
+							Model model,
+							Address address) {
+		
+		int member = certifiedUser.getUserIdx();
+		Member memberInfo = marketMypageService.selectMemberInfo(member);
+		List<Address> addressList = marketMypageService.selectAddressList(member);
+		
+		model.addAttribute("addressList", addressList);
+		model.addAttribute("memberInfo", memberInfo);
+		
+	}
+	
+	@GetMapping("address-pop")
+	public void addressPop(@SessionAttribute(name="authentication")Member certifiedUser,
+							Model model,
+							Address address) {
+		
+		List<Address> addressList = marketMypageService.selectAddressList(certifiedUser.getUserIdx());
+		model.addAttribute("addressList", addressList);
+		
+		System.out.println("addressList : " + addressList);
+	}
+	
+	@PostMapping("address-pop/upload")
+	public String updateAddress(@SessionAttribute("authentication")Member certifiedUser,
+							Address address,
+							@RequestParam("addressIdx")int addressIdx) {
+		
+		
+		System.out.println("address : " + address);
+		
+		marketMypageService.updateAddress(addressIdx);
+
+		return "redirect:/market/mypage/address-list"; 
+	}
 
 	@GetMapping("acc-money")
 	public void accMoney(@SessionAttribute(name="authentication")Member certifiedUser,
@@ -106,9 +139,9 @@ public class MarketMypageController {
 	@GetMapping("enquiry/enquiry-pop")
 	public void enquiryPop(@SessionAttribute(name="authentication")Member certifiedUser,
 							Model model,
-							@RequestParam(value = "state", required = false)String state) {
+							Order order) {
 		
-		List<Map<String, Object>> orderList = marketMypageService.selectOrderList(certifiedUser.getUserIdx(), state);
+		List<Map<String, Object>> orderList = marketMypageService.selectOrderList(certifiedUser.getUserIdx(), order.getState());
 		model.addAttribute("orderList", orderList);
 		
 		System.out.println("orderList : " + orderList);
@@ -135,9 +168,6 @@ public class MarketMypageController {
 		System.out.println("fromDate : " + fromDate);
 		System.out.println("endDate : " + endDate);
 		
-		//Date fDate = Date.valueOf(fromDate);
-		//Date eDate = Date.valueOf(endDate);
-	
 		List<Map<String, Object>> enquiryList = marketMypageService.selectEnquiryList(certifiedUser.getUserIdx(),fromDate, endDate);
 		Member memberInfo = marketMypageService.selectMemberInfo(certifiedUser.getUserIdx());
 		int couponCnt = marketMypageService.selectCouponCount(certifiedUser.getUserIdx());
@@ -195,11 +225,11 @@ public class MarketMypageController {
 	@GetMapping("review/review-list")
 	public void reviewList(@SessionAttribute(name="authentication")Member certifiedUser,
 						   Model model,
-						@RequestParam(value = "state", defaultValue="1")String state) {
+						@RequestParam(value = "state", defaultValue="1")int state) {
 		List<Map<String, Object>> reviewList = marketMypageService.selectReviewList(certifiedUser.getUserIdx(),state);
 		Member memberInfo = marketMypageService.selectMemberInfo(certifiedUser.getUserIdx());
 		int couponCnt = marketMypageService.selectCouponCount(certifiedUser.getUserIdx());
-		marketMypageService.updateDateAndState();
+		marketMypageService.updateDateAndState(); //구매 후 일주일 지나면 구매확정 state 변경
 		
 		model.addAttribute("reviewList", reviewList);
 		model.addAttribute("memberInfo", memberInfo);
@@ -211,21 +241,22 @@ public class MarketMypageController {
 	@GetMapping("review/review-list2")
 	public void myReviewList(@SessionAttribute(name="authentication")Member certifiedUser,
 							Model model,
-							@RequestParam(value = "state", defaultValue="1")String state) {
+							Review review) {
 		
+		int member = certifiedUser.getUserIdx();
 		
-		List<Map<String, Object>> myReviewList = marketMypageService.selectMyReviewList(certifiedUser.getUserIdx(), state);
-		List<FileDTO> files = marketMypageService.selectFileList(certifiedUser.getUserIdx());
-		Member memberInfo = marketMypageService.selectMemberInfo(certifiedUser.getUserIdx());
-		int couponCnt = marketMypageService.selectCouponCount(certifiedUser.getUserIdx());
-		
+		System.out.println("state : " +  review.getState());
+		List<Map<String, Object>> myReviewList = marketMypageService.selectMyReviewList(member, review.getState());
+		List<FileDTO> files = marketMypageService.selectFileList(member);
+		Member memberInfo = marketMypageService.selectMemberInfo(member);
+		int couponCnt = marketMypageService.selectCouponCount(member);
 		
 		model.addAttribute("myReviewList", myReviewList);
 		model.addAttribute("files", files);
 		model.addAttribute("memberInfo", memberInfo);
 		model.addAttribute("couponCnt", couponCnt);
 		
-		System.out.println("state : " + state);
+		
 		System.out.println("myReviewList : " + myReviewList);
 		System.out.println("files : " + files);
 		System.out.println("memberInfo : " + memberInfo);
@@ -261,6 +292,10 @@ public class MarketMypageController {
 		
 		if(review.getType().equals("0")) { //일반후기라면 적립금 300
 			saveHistory.setAmount(300);
+			System.out.println("saveHistory : " + saveHistory);
+			marketMypageService.insertSaveMoney(saveHistory);
+		}else {
+			saveHistory.setAmount(600);
 			System.out.println("saveHistory : " + saveHistory);
 			marketMypageService.insertSaveMoney(saveHistory);
 		}

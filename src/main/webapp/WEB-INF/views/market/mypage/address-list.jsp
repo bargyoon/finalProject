@@ -20,12 +20,10 @@
 				<div class="px-4 px-lg-5 my-3">
 					<div>
 						<div class="mt-4" style="display: flex; flex-direction: column;">
-							<h1 class="display-4 fw-bolder">닉네임</h1>
+							<h1 class="display-4 fw-bolder">${memberInfo.nickName}</h1>
 							<div style="display: flex;">
-								<h1 class="display-7 fw-bolder">회원등급</h1>
-								<p class="px-lg-2 pt-1" style="color: lightgray;">가입일 : 2021.4.26</p>
+								<p class="px-lg-2 pt-1" style="color: lightgray;">가입일 : ${memberInfo.joinDate}</p>
 							</div>
-							<a class="fw-normal btn-" href="#!" style="text-decoration: none;">등급별 혜택 확인 <i class="fas fa-chevron-right"></i></a>
 						</div>
 					</div>
 				</div>
@@ -34,12 +32,12 @@
 				<div class="mt-5" style="display: flex; flex-direction: column;">
 					<i class="fas fa-coins py-2" style="font-size: 1.5rem;"></i>
 					<p class="fw-normal mt-2">적립금</p>
-					<p style="font-size: 1.3rem;">10,000</p>
+					<p style="font-size: 1.3rem;">${memberInfo.saveMoney}</p>
 				</div>
 				<div class="mt-5" style="display: flex; flex-direction: column;">
 					<i class="fas fa-ticket-alt py-2" style="font-size: 1.5rem"></i>
 					<p class="fw-normal mt-2">쿠폰</p>
-					<p style="font-size: 1.3rem;">3장</p>
+					<p style="font-size: 1.3rem;">${couponCnt}장</p>
 				</div>
 			</div>
 		</div>
@@ -76,15 +74,23 @@
 						<td>&nbsp;</td>
 					</tr>
 				</thead>
+				<c:forEach var="addressList" items="${addressList}">
 				<tbody>
 					<tr>
 						<td class="name">
 							<ul>
-								<li>이름</li>
-								<li style="color: gray;">배송지 이름</li>
+								<li id="addressName">${addressList.addressName}</li>
 							</ul>
 						</td>
-						<td class="address"><span>기본배송지</span> 경기도 화성시 동탄</td>
+						<td class="address" >
+						<c:if test="${addressList.isDefault eq 'Y'}">
+							<span>기본배송지</span>
+						</c:if>
+							<ul>
+								<li id="address">${addressList.address}</li>
+								<li style="color: gray;" id="address2">${addressList.address2}</li>
+							</ul>
+						</td>
 						<td class="address-tell">
 							<ul>
 								<li>휴대폰 연락처</li>
@@ -93,7 +99,10 @@
 						</td>
 						<td class="address-btn">
 							<ul>
-								<li><button type="button">수정</button></li>
+								<li><button type="button" id="pop">수정</button></li>
+								<c:if test="${addressList.isDefault eq 'N'}">
+									<li><button type="button">삭제</button></li>
+								</c:if>
 							</ul>
 						</td>
 					</tr>
@@ -119,6 +128,7 @@
 						</td>
 					</tr>
 				</tbody>
+				</c:forEach>
 			</table>
 			<div class="address-btn my-3">
 				<button>배송지 등록</button>
@@ -128,7 +138,20 @@
 
 	<%@ include file="/WEB-INF/views/include/market/footer.jsp"%>
 
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script>
+	window.onload = function(){
+	    document.getElementById("pop").onclick = function(){
+	        window.open("address-pop","","width=600px,height=400px,top=200px;");
 
+	    }
+	    
+		openWin.document.getElementById("addressName").value=document.getElementById("addressName").value;
+
+	}; 
+	
+	
+</script>
 
 </body>
 </html>

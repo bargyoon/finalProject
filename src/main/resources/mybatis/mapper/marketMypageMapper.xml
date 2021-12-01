@@ -10,7 +10,16 @@
 		from "ORDER" o
 		inner join product p USING(PRD_IDX)
 		inner join prd_detail d USING(PRD_IDX)
-		where user_idx = #{userIdx} and o.dt_idx=d.dt_idx and o.state = #{state}
+		<where>
+		user_idx = #{userIdx} and o.dt_idx=d.dt_idx
+		
+			<if test="state == 0">
+				and o.state is not null
+			</if>	
+			<if test="state != 0">
+				 and o.STATE = #{state}
+			</if>
+		</where>
 		order by o.order_date desc
 	</select>
   
@@ -19,7 +28,7 @@
 		from "ORDER" o
 		inner join product p USING(PRD_IDX)
 		inner join prd_detail d USING(PRD_IDX)
-		where USER_IDX = #{userIdx} and o.STATE = 3  <!-- state가 3일 때 구매 확정이라면 -->
+		where USER_IDX = #{userIdx} and o.STATE = 4  <!-- state가 4일 때 구매 확정이라면 -->
 		order by UPDATE_DATE desc
 	</select>
   	
@@ -29,8 +38,17 @@
 		inner join product p USING(PRD_IDX)
 		inner join prd_detail d USING(PRD_IDX)
 		inner join "ORDER" o USING(PRD_IDX)
-		where r.USER_IDX = #{userIdx} and o.dt_idx = d.dt_idx
-		 order by reg_date desc
+		<where>
+		r.USER_IDX = #{userIdx} and o.dt_idx = d.dt_idx 
+		
+			<if test="state == null">
+				and r.state is not null
+			</if>	
+			<if test="state != null">
+				 and r.STATE = #{state}
+			</if>
+		</where>
+		order by reg_date desc
 	</select>
 	
 	<select id="selectReviewDetail" resultType="map">
@@ -60,7 +78,7 @@
 		where u.user_idx = #{userIdx} and u.exp_date > sysdate
 	</select>
 	
-	<!-- enquiry form ***********필요없을듯-->
+	<!-- enquiry form -->
 	<select id="memberInfoForEnquiry" resultType="map">
   	 	select USER_IDX, EMAIL, NICKNAME,GRADE, USER_ID, ADDRESS, JOIN_DATE, SAVEMONEY,IS_LEAVE ,USER_NAME, ORDER_IDX
 		from "USER" u
@@ -77,7 +95,7 @@
 		inner join prd_detail d USING(PRD_IDX)
 		inner join "ORDER" o using(PRD_IDX)
 		<where>
-		 q.USER_IDX = #{userIdx} and o.dt_idx=d.dt_idx
+		 q.USER_IDX = #{userIdx} and o.dt_idx=d.dt_idx 
 			<if test="fromDate != null and endDate != null">
 				and q.REG_DATE between TO_DATE(#{fromDate},'YYYY-MM-DD') and TO_DATE(#{endDate},'YYYY-MM-DD')+1
 			</if>
