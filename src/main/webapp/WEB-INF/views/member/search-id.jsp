@@ -32,7 +32,7 @@
                   </div>
                   <input class="btn btn-black" type="submit" value="아이디 찾기" /><br><br>                     
                   <c:if test="${check == 1}">
-					<label>일치하는 정보가 존재하지 않습니다.</label>
+					<label class="search-id-box"><b>일치하는 정보가 존재하지 않습니다.</b></label>
 				  </c:if>
 				  <c:if test="${check == 0 }">
 					<label class="search-id-box">찾으시는 아이디는 <b>'${member.userId}'</b> 입니다.</label>			

@@ -75,14 +75,14 @@ public class MemberController {
 	@PostMapping("join")
 	public String joinImpl(Member member) {
 		
-		System.out.println("회원가입 진입" + member);
+		//System.out.println("회원가입 진입" + member);
 		
 		//member.setPassword(new BCryptPasswordEncoder().encode(member.getPassword()));
 		// -> db에 비밀번호 안뜨게돼서 불편하니 시연시에만 키는게 나을듯..?
 		
 		memberService.insertMember(member);
 		
-		System.out.println("회원가입 완료" + member);
+		//System.out.println("회원가입 완료" + member);
 		
 		return "redirect:/";
 	}
@@ -149,12 +149,14 @@ public class MemberController {
         return num;
     }
 	
-	/*
-	 * @PostMapping("logout") public
-	 * ModelAndView logout(HttpSession session, ModelAndView mav) {
-	 * memberService.logout(session); mav.setViewName("/");
-	 * mav.addObject("message","logout"); return mav; }
-	 */
+	@GetMapping("logout")
+	public String logout(HttpServletRequest request) {
+		
+		 HttpSession session = request.getSession();
+		 session.invalidate();
+	        
+	     return "redirect:/";      		
+	}
 	
 	@GetMapping("search-id")
 	public void searchId() {}
@@ -208,12 +210,10 @@ public class MemberController {
 	public void kakaoLogin(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String userId = request.getParameter("userId");
 		
-		System.out.println(userId);
+		//System.out.println(userId);
 
-		//존재하면 로그인 성공
 		Member member = memberService.selectMemberById(userId);
 		if(member == null || member.getUserId().equals("")) {
-			//멤버테이블에서 아이디를 조회해서 존재하지 않으면 계속 진행
 			request.setAttribute("kakaoId", userId);
 			response.getWriter().print("kakaoJoin");
 			return;
@@ -235,11 +235,11 @@ public class MemberController {
 		
 		member.setUserId(userId);
 
-		System.out.println("회원가입 진입" + member);
+		//System.out.println("회원가입 진입" + member);
 		
 		memberService.insertKakaoMember(member);
 		
-		System.out.println("회원가입 완료" + member);
+		//System.out.println("회원가입 완료" + member);
 		
 		return "redirect:/";
 	}

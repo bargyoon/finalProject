@@ -58,7 +58,12 @@
 								<li class="nav-item"><a class="nav-link" href="/member/login">로그인</a></li><hr>
 							</c:if>
 							<c:if test="${not empty authentication}">
-								<li class="nav-item"><a class="nav-link" href="/mypage/my-info">마이페이지</a></li><hr>
+								<li class="nav-item"><a class="nav-link" href="/mypage/my-info">마이페이지</a>
+									<ul class="navbar-detail"><hr>
+									<li><a href="/mypage/my-info">마이페이지</a>
+		                        	<li><a href="/member/logout">로그아웃</a>
+		                        	</ul>
+								</li><hr>
 							</c:if> 
 					</ul>
                 </div>

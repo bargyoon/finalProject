@@ -222,7 +222,7 @@
                    <div class="form-group">
                      <label>주소: </label>
                      <input type="text" name="address" id="address" class="form-control" id="address" placeholder="주소를 입력하세요">
-                     <input type="text" class="form-control" placeholder="상세주소를 입력하세요">
+                     <input type="text" name="address2" id="address2" class="form-control" placeholder="상세주소를 입력하세요">
                   </div><br><hr>         
                   <input type="hidden" name="kakaoId" value="${kakaoId}">         
                   <input type="submit" class="btn btn-black" id="joinBtn" style="width: 100%" value="가입하기" />

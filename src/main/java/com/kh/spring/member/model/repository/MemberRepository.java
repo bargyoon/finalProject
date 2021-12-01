@@ -15,10 +15,10 @@ public interface MemberRepository {
 	Member selectMemberByUserId(Member member);
 
 	@Insert("insert all "
-			+ "into \"USER\"(user_id,password,nickName,email,address,user_name,user_idx) "
-			+ "values(#{userId},#{password},#{nickName},#{email},#{address},#{userName},sc_user_idx.nextval) "
-			+ "into \"ADDRESS\"(address,user_idx) "
-			+ "values(#{address},sc_user_idx.nextval) "
+			+ "into \"USER\"(user_id,password,nickName,email,address,address2,user_name,user_idx) "
+			+ "values(#{userId},#{password},#{nickName},#{email},#{address},#{address2},#{userName},sc_user_idx.nextval) "
+			+ "into \"ADDRESS\"(address,address2,user_idx,address_idx) "
+			+ "values(#{address},#{address2},sc_user_idx.nextval,sc_address_idx.nextval) "
 			+ "SELECT * FROM DUAL")
 	void insertMember(Member member);
 	
@@ -38,12 +38,12 @@ public interface MemberRepository {
 	Member selectMemberById(String userId);
 
 	@Insert("insert all "
-			+ "into \"USER\"(user_id,password,nickName,email,address,user_name,user_idx) "
-			+ "values(#{userId},'12345',#{nickName},'#{address}',#{address},#{userName},sc_user_idx.nextval) "
-			+ "into \"ADDRESS\"(address,user_idx) "
-			+ "values(#{address},sc_user_idx.nextval) "
-			+ "into \"KAKAO_LOGIN\"(kakao_id,user_idx) "
-			+ "values(#{userId},sc_user_idx.nextval) "
+			+ "into \"USER\"(user_id,password,nickName,email,address,address2,user_name,user_idx) "
+			+ "values(#{userId},'12345',#{nickName},'#{email}',#{address},#{address2},#{userName},sc_user_idx.nextval) "
+			+ "into \"ADDRESS\"(address,address2,user_idx) "
+			+ "values(#{address},#{address2},sc_user_idx.nextval) "
+			+ "into \"KAKAO_LOGIN\"(kakao_id,user_idx,address_idx) "
+			+ "values(#{userId},sc_user_idx.nextval,sc_address_idx.nextval) "
 			+ "SELECT * FROM DUAL")
 	void insertKakaoMember(Member member);
 
