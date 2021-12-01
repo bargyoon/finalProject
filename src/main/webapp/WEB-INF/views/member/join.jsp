@@ -267,7 +267,7 @@
       </div>
 </form:form>
 
-<script type="text/javascript" src="/resources/js/member/joinForm.js"></script>
+<!-- <script type="text/javascript" src="/resources/js/member/joinForm.js"></script> -->
 <script type="text/javascript" src="/resources/js/member/mail_auth.js"></script>
 
 <!-- 주소 api -->

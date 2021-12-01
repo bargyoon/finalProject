@@ -3,10 +3,10 @@ package com.kh.spring.common.code;
 public enum Config {
 
 	//DOMAIN("http://www.pclass.com")
-	DOMAIN("http://localhost:9393"),
-	SMTP_AUTHENTIFICATION_ID(""),
-	SMTP_AUTHENTIFICATION_PASSWORD(""),
-	COMPANY_EMAIL(""),
+	DOMAIN("http://localhost:9090"),
+	SMTP_AUTHENTIFICATION_ID("pclassteam1@gmail.com"),
+	SMTP_AUTHENTIFICATION_PASSWORD("1234"),
+	COMPANY_EMAIL("pclassteam1@gmail.com"),						//임의 생성 
 	//UPLOAD_PATH("C:\\CODE\\upload\\"); //운영서버
 	UPLOAD_PATH("C:\\CODE\\upload\\"); //개발서버
 	
