@@ -1,5 +1,6 @@
 package com.kh.spring.mypage.controller;
 
+import java.sql.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -21,6 +22,7 @@ import com.kh.spring.board.model.dto.Board;
 import com.kh.spring.common.validator.ValidatorResult;
 import com.kh.spring.member.model.dto.Member;
 import com.kh.spring.mypage.model.dto.Pet;
+import com.kh.spring.mypage.model.dto.Vaccination;
 import com.kh.spring.mypage.model.dto.VaccineInfo;
 import com.kh.spring.mypage.model.service.MypageService;
 import com.kh.spring.mypage.validator.UpdateMemberForm;
@@ -70,42 +72,42 @@ public class MypageController {
 	
 	@GetMapping("managing-board")
 	public void managingBoard(
-//			@SessionAttribute(name = "authentication")Member certifiedUser, Model model
+			@SessionAttribute(name = "authentication")Member certifiedUser, Model model
 			) {
 		
-//		int userIdx = certifiedUser.getUserIdx();
-//		List<Board> boardList = mypageService.selectBoardByUserIdx(userIdx);
-//		model.addAttribute("boardList", boardList);
+		int userIdx = certifiedUser.getUserIdx();
+		List<Board> boardList = mypageService.selectBoardByUserIdx(userIdx);
+		model.addAttribute("boardList", boardList);
 	}
 	
-	@GetMapping("managing-reply")
-	public void managingReply(
-//			@SessionAttribute(name = "authentication")Member certifiedUser, Model model
-			) {
-		
+//	@GetMapping("managing-reply")
+//	public void managingReply(
+//		@SessionAttribute(name = "authentication")Member certifiedUser, Model model
+//			) {
+//		
 //		int userIdx = certifiedUser.getUserIdx();
 //		List<Reply> replyList = mypageService.selectReplyByUserIdx(userIdx);
 //		model.addAttribute("replyList", replyList);
-	}
-	
-	@GetMapping("managing-counseling")
-	public void managingCounseling(
+//	}
+//	
+//	@GetMapping("managing-counseling")
+//	public void managingCounseling(
 //			@SessionAttribute(name = "authentication")Member certifiedUser, Model model
-			) {
-		
+//			) {
+//		
 //		int userIdx = certifiedUser.getUserIdx();
 //		List<Counseling> counselingList = mypageService.selectCounselingByUserIdx(userIdx);
 //		model.addAttribute("counselingList", counselingList);
-	}
+//	}
 	
 	@GetMapping("pet-info")
 	public void petInfo(
-//			@SessionAttribute(name = "authentication")Member certifiedUser, Model model
+			@SessionAttribute(name = "authentication")Member certifiedUser, Model model
 			) {
 		
-//		int userIdx = certifiedUser.getUserIdx();
-//		List<Pet> petList = mypageService.selectPetByUserIdx(userIdx);
-//		model.addAttribute("petList", petList);
+		int userIdx = certifiedUser.getUserIdx();
+		List<Pet> petList = mypageService.selectPetByUserIdx(userIdx);
+		model.addAttribute("petList", petList);
 	}
 	
 	@GetMapping("my-info")
@@ -134,8 +136,23 @@ public class MypageController {
 		List<Pet> petList = mypageService.selectPetByUserIdx(certifiedUser.getUserIdx());
 		List<VaccineInfo> vaccineList = mypageService.selectAllVaccine();
 		
+		
 		model.addAttribute("petList", petList);
 		model.addAttribute("vaccineList", vaccineList);
+	}
+	
+	@PostMapping("vaccination")
+	public void vaccination(
+			@SessionAttribute(name = "authentication")Member certifiedUser, int petIdx, int viIdx, Date date
+			) {
+		
+		Vaccination vaccination = new Vaccination();
+		vaccination.setUserIdx(certifiedUser.getUserIdx());
+		vaccination.setPetIdx(petIdx);
+		vaccination.setViIdx(viIdx);
+		vaccination.setDate(date);
+		
+		mypageService.insertVaccination(vaccination);
 	}
 	
 }

@@ -6,8 +6,10 @@ import java.util.Map;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.kh.spring.board.model.dto.Board;
 import com.kh.spring.common.util.FileUtil;
 import com.kh.spring.mypage.model.dto.Pet;
+import com.kh.spring.mypage.model.dto.Vaccination;
 import com.kh.spring.mypage.model.dto.VaccineInfo;
 import com.kh.spring.mypage.model.repository.MypageRepository;
 import com.kh.spring.mypage.validator.UpdateMemberForm;
@@ -39,9 +41,13 @@ public class MypageServiceImpl implements MypageService {
 		return mypageRepository.selectAllVaccineInfo();
 	}
 	
-//	public List<Board> selectBoardByUserIdx(int userIdx){
-//		return mypageRepository.selectBoardByUserIdx(userIdx);
-//	}
+	public List<Board> selectBoardByUserIdx(int userIdx){
+		return mypageRepository.selectBoardByUserIdx(userIdx);
+	}
+
+	public void insertVaccination(Vaccination vaccination) {
+		mypageRepository.insertVaccination(vaccination);
+	}
 	
 //	public List<Reply> selectReplyByUserIdx(int userIdx){
 //		return mypageRepository.selectReplyByUserIdx(userIdx);
