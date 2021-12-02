@@ -48,15 +48,17 @@ public interface BoardRepository {
 	@Update("update board set bd_title = #{bdTitle},content = #{content} where bd_idx = #{bdIdx} ")
 	void updateBoard(Board board);
 
-	@Insert("insert into board_comment(cm_idx, bd_idx, cm_content, user_idx, nickname) values"
-			+ "(sc_cm_idx.nextval, #{bdIdx}, #{cmContent}, #{userIdx}, #{nickname})")
-	void insertComment(Map<String, Object> jsonMap);
+	
+	void insertComment(BoardComment boardComment);
 	
 	@Select("select * from board_comment where bd_idx = ${bdIdx}")
 	List<BoardComment> selectCommentByIdx(int bdIdx);
 
 	@Select("select count(*) from board_comment where bd_idx = ${bdIdx}")
 	int selectCommentCntByIdx(int bdIdx);
+
+	@Update("update board_comment set pr_idx = cm_idx where cm_type = 0 and pr_idx = 0 ")
+	void updatePrIdx();
 
 	
 

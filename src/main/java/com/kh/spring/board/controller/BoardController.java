@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.kh.spring.board.model.dto.Board;
+import com.kh.spring.board.model.dto.BoardComment;
 import com.kh.spring.board.model.service.BoardService;
 import com.kh.spring.common.util.pagination.Paging;
 
@@ -193,9 +194,10 @@ public class BoardController {
 	
 	@PostMapping("comment-form")
 	@ResponseBody
-	public String insertPrice(@RequestBody Map<String, Object> jsonMap) {
-		boardService.insertComment(jsonMap);
+	public String insertComment(@RequestBody BoardComment boardComment) {
+		boardService.insertComment(boardComment);
 
+		
 		return "good";
 
 	}

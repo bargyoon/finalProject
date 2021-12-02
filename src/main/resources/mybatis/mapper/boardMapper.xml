@@ -32,6 +32,18 @@
   		</where>
   		)
   	</select>
-  	
+  	<insert id="insertComment">
+  	<choose>
+  		<when test="cmType == 0">
+  		insert into board_comment(cm_idx, bd_idx, cm_content, user_idx, nickname, pr_idx) values(sc_cm_idx.nextval, #{bdIdx}, #{cmContent}, #{userIdx}, #{nickname}, sc_cm_idx.nextval)
+  		</when>
+  		<otherwise>
+  		insert into board_comment(cm_idx, bd_idx, cm_content, user_idx, nickname, pr_idx, cm_type) values(sc_cm_idx.nextval, #{bdIdx}, #{cmContent}, #{userIdx}, #{nickname}, #{cmIdx}, #{cmType})
+  		</otherwise>
+  	</choose>
+  
+  		
+  	</insert>
+  
   	
   </mapper>

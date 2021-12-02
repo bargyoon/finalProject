@@ -13,4 +13,6 @@ public class BoardComment {
 	private int cmRecCount;
 	private int userIdx;
 	private String nickname;
+	private int cmType;
+	private int prIdx;
 }

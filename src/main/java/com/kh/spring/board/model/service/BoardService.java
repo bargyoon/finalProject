@@ -6,6 +6,7 @@ import java.util.Map;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.kh.spring.board.model.dto.Board;
+import com.kh.spring.board.model.dto.BoardComment;
 import com.kh.spring.common.util.pagination.Paging;
 
 public interface BoardService {
@@ -20,6 +21,6 @@ public interface BoardService {
 
 	void updateBoard(List<MultipartFile> files, Board board, List<Integer> flIdxs);
 
-	void insertComment(Map<String, Object> jsonMap);
+	void insertComment(BoardComment boardComment);
 
 }

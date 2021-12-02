@@ -117,7 +117,7 @@
 									<div>
 										<c:forEach items="${comment}" var="comment">
 											<div class="media-block">
-												
+
 												<div class="media-body">
 
 													<div class="mar-btm">
@@ -129,7 +129,7 @@
 													<div class="pad-ver">
 														<span class="text-muted text-sm"><fmt:formatDate
 																pattern="yyyy-MM-dd hh:mm:ss" value="${comment.regDate}" /></span>
-														<button type="button" class="newBtn">댓글달기</button>
+														<button type="button" class="newBtn" onclick="addCommentBtn(${comment.cmIdx})">댓글달기</button>
 
 														<button class="btn btn-default btn-hover-success active"
 															style="float: right">
@@ -144,14 +144,13 @@
 												</div>
 											</div>
 											<hr>
-										</c:forEach>
-										<div class="media-block" style="position:relative;">
-												<span style="position:absolute; top:34px">ㄴ</span>
-												<div class="media-body" style="padding:30px;">
+											<div id="input${comment.cmIdx}">
+											<div class="media-block" style="position: relative;" >
+											<span style="position: absolute; top: 32px">ㄴ</span>
+											<div class="media-body" style="padding: 30px;">
 
 												<div class="mar-btm">
-													<span
-														class="text-semibold">닉넴</span>
+													<span class="text-semibold">닉넴</span>
 
 												</div>
 
@@ -159,7 +158,7 @@
 													<input type="text" placeholder="댓글을 남겨주세요" name="cmContent"
 														id="cmContent"
 														style="width: 85%; height: 50px; font-size: 16px;">
-													<a class="on" onclick="insertComment(this,${board.bdIdx})">등록</a>
+													<a class="on" onclick="insertReComment(this,${board.bdIdx},${comment.cmIdx})">등록</a>
 												</div>
 
 
@@ -167,6 +166,9 @@
 											</div>
 										</div>
 										<hr>
+										</div>
+										</c:forEach>
+										
 
 									</div>
 								</div>
@@ -203,6 +205,34 @@
 		    		
 		 	
 		 	}
+		 
+		 let addCommentBtn = (idx) =>{
+			 var temp = document.querySelector('#input'+idx);
+			 if(temp.style.display == "none"){
+				 temp.style.display = ""
+			 }else{
+				 temp.style.display = "none"
+			 }
+		 }
+		 
+		 let insertReComment = (obj, bdIdx, cmIdx) =>{
+		 		
+		    	return fetch('/board/comment-form',{
+		 			method:"post",
+		 			body: JSON.stringify({cmContent : obj.previousElementSibling.value, bdIdx : bdIdx, cmIdx : cmIdx, cmType: 1}),
+		 			 headers:{
+		 			    'Content-Type': 'application/json'
+		 			  }
+		    	}).then(res => {
+		    		alert('댓글 등록이 완료되었습니다.');
+		    		location.reload();
+		    	})
+		    		
+		 	
+		 	}
+		 
+		 
+		 
 		</script>
 </body>
 </html>

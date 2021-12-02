@@ -82,10 +82,13 @@ public class BoardServiceImpl implements BoardService {
 
 	}
 
-	public void insertComment(Map<String, Object> jsonMap) {
-		jsonMap.put("userIdx", 10);
-		jsonMap.put("nickname", "mynick");
-		boardRepository.insertComment(jsonMap);
+	public void insertComment(BoardComment boardComment) {
+		boardComment.setUserIdx(10);
+		boardComment.setNickname("mynick");
+		boardRepository.insertComment(boardComment);
+		if(boardComment.getPrIdx() == 0) {
+			boardRepository.updatePrIdx();
+		}
 
 	}
 
