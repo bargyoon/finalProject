@@ -89,24 +89,61 @@ public class MarketMypageController {
 	@GetMapping("address-pop")
 	public void addressPop(@SessionAttribute(name="authentication")Member certifiedUser,
 							Model model,
+							//@RequestParam("addressIdx")int addressIdx,
 							Address address) {
 		
 		List<Address> addressList = marketMypageService.selectAddressList(certifiedUser.getUserIdx());
 		model.addAttribute("addressList", addressList);
 		
-		System.out.println("addressList : " + addressList);
+		//Address addressPop = marketMypageService.selectAddressDetail(addressIdx);
+		Address addressPop = marketMypageService.selectAddressDetail(address.getAddressIdx());
+		model.addAttribute("addressPop", addressPop);
+		
+		//System.out.println("addressIdx : " + addressIdx);
+		System.out.println("addressIdx : " + address.getAddressIdx());
+		System.out.println("addressPop : " + addressPop);
 	}
 	
-	@PostMapping("address-pop/upload")
+	@PostMapping("address-pop/upload/{addressIdx}")
 	public String updateAddress(@SessionAttribute("authentication")Member certifiedUser,
-							Address address,
-							@RequestParam("addressIdx")int addressIdx) {
+							@PathVariable int addressIdx,
+							Address address
+							) {	
+		System.out.println("pop address : " + address);
+		System.out.println("addressIdx : " + addressIdx);
+		System.out.println("isDefault? : " + address.getIsDefault());
 		
+		marketMypageService.updateAddress(address);
+		if(address.getIsDefault() != null) {
+			marketMypageService.updateIsDefault(address);
+			System.out.println("isDefault 변경");
+		}
+	    System.out.println("address update 완료");
+		return "redirect:/market/mypage/address-list"; 
+	}
+	
+	@GetMapping("address-pop2")
+	public void addressPop2(Address address) {}
+	
+	@PostMapping("address-list/insert")
+	public String insertAddress(@SessionAttribute("authentication")Member certifiedUser,
+								Address address) {
 		
-		System.out.println("address : " + address);
+		address.setUserIdx(certifiedUser.getUserIdx());
+		System.out.println("insert userIdx : " + address);
+		marketMypageService.insertAddress(address);
+		System.out.println("insert address 성공");
 		
-		marketMypageService.updateAddress(addressIdx);
-
+		return "redirect:/market/mypage/address-list"; 
+	}
+	
+	
+	
+	@GetMapping("address-list/delete")
+	public String deleteAddress(@RequestParam("addressIdx")int addressIdx) {
+		
+		System.out.println("delete addressIdx : " + addressIdx);
+		marketMypageService.deleteAddress(addressIdx);
 		return "redirect:/market/mypage/address-list"; 
 	}
 
@@ -158,6 +195,8 @@ public class MarketMypageController {
 
 		return "redirect:/market/mypage/enquiry/enquiry-list"; 
 	}
+	
+	
 	
 	@GetMapping("enquiry/enquiry-list")
 	public void enquiryList(@SessionAttribute(name="authentication")Member certifiedUser,

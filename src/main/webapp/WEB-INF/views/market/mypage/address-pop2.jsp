@@ -19,12 +19,8 @@
 			<div id="pop_header">
 				
 			</div>	
-		
-		<c:if test="">
-		
-		</c:if>
-		<form action="/market/mypage/address-pop/upload/${addressPop.addressIdx}" method="post" id="form">
-		<input type="hidden" name="userIdx" value="${addressPop.userIdx}">
+
+		<form action="/market/mypage/address-list/insert" method="post" id="form">
 		<div id="addressList-wrapper">
 			<div id="pop_content">
 				<div class="pop_title">
@@ -38,7 +34,7 @@
 					<td class="address_name_td">
 						<span>
 							<label for="addressName">배송지명</label>
-							<input type="text" name="addressName" id="addressName" class="ip_text" maxlength="20" placeholder="${addressPop.addressName}">
+							<input type="text" name="addressName" id="addressName" class="ip_text" maxlength="20"">
 						</span>
 					</td>
 				</tr>
@@ -52,13 +48,13 @@
 						<p class="address_detail">
 							<span class="address_info">
 								<label for="sample6_address" class="address_content">배송지 주소</label>
-								<input type="text" name="address" id="address" placeholder="${addressPop.address}" class="ip_text" readonly="readonly">
+								<input type="text" name="address" id="address" class="ip_text" readonly="readonly">
 							</span>
 						</p>
 						<p class="address_detail">
 							<span style="width: 338px">
 									<label for="addressDetail" class="add_detail">상세 주소</label>
-									<input type="text" name="addressDetail" id="addressDetail" placeholder="${addressPop.addressDetail}" class="ip_text" maxlength="100">
+									<input type="text" name="addressDetail" id="addressDetail" class="ip_text" maxlength="100">
 							</span>
 						</p>
 					</td>
@@ -69,11 +65,7 @@
 			<div class="address_notice">
 				<p><i class="fas fa-check"></i> 입력/수정하신 배송지는 배송지 목록에 저장됩니다.</p>
 			</div>
-			<div>
-				<c:if test="${addressPop.isDefault eq 'N'}">
-				<input type="checkbox" name="isDefault" id="isDefault" value="Y">
-				<label class="default_address px-1" for="isDefault">기본 배송지로 등록합니다.</label>
-				</c:if>
+			<div>			
 			</div>
 			<div class="address_pop_btn">
 				<input type="button" onclick="window.close();" value="닫기">

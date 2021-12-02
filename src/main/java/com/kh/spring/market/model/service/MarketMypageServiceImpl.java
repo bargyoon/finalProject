@@ -158,8 +158,8 @@ public class MarketMypageServiceImpl implements MarketMypageService{
 	}
 
 	@Override
-	public void updateAddress(int addressIdx) {
-		mypageRepository.updateAddress(addressIdx);
+	public void updateAddress(Address address) {
+		mypageRepository.updateAddress(address);
 	}
 
 	@Override
@@ -170,6 +170,16 @@ public class MarketMypageServiceImpl implements MarketMypageService{
 	@Override
 	public List<Address> selectAddressList(int userIdx) {
 		return mypageRepository.selectAddressList(userIdx);
+	}
+
+	@Override
+	public void updateIsDefault(Address address) {
+		mypageRepository.updateIsDefault(address);
+	}
+
+	@Override
+	public Address selectAddressDetail(int addressIdx) {
+		return mypageRepository.selectAddressDetail(addressIdx);
 	}
 	
 }

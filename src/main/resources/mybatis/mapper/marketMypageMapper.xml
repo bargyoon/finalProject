@@ -59,7 +59,7 @@
 		where user_idx = #{userIdx} and o.state = 3 and o.order_idx = #{orderIdx} and o.dt_idx=d.dt_idx
 	</select>
 	
-	<!-- acc-money / save history -->
+	<!-- acc-money / save history ********주문,리뷰로 받았을 경우 -->
 	<select id="selectReserveList" resultType="map">
   	 	select SH_IDX, USER_IDX, s.STATE, s.TYPE, s.AMOUNT, s.REG_DATE, PRD_IDX, p.NAME,o.dt_idx, o.order_idx
 		from SAVE_HISTORY s
@@ -106,10 +106,19 @@
 	
 	<!-- ok -->
 	<select id="selectMemberInfo" resultType="Member">
-  	 	select user_name, nickname, join_date, savemoney, user_idx
+  	 	select *
 		from "USER"
 		where user_idx = #{userIdx}
 	</select>
+	
+	<update id="updateAddress">
+		update "ADDRESS"
+		set address = #{address}, address_name = #{addressName}, address_detail = #{addressDetail}
+		<if test="isDefault != null">
+		, is_default = #{isDefault}
+		</if>
+		where address_idx = #{addressIdx}
+	</update>
 	
 	
 	

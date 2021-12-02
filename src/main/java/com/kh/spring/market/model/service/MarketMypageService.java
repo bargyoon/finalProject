@@ -64,7 +64,9 @@ public interface MarketMypageService {
 	
 	//address
 	void insertAddress(Address address);
-	void updateAddress(int addressIdx);
+	void updateAddress(Address address);
+	void updateIsDefault(Address address);
 	void deleteAddress(int addressIdx);
 	List<Address> selectAddressList(int userIdx);
+	Address selectAddressDetail(int addressIdx);
 }

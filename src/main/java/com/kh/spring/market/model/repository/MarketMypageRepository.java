@@ -104,18 +104,24 @@ public interface MarketMypageRepository {
 	List<Map<String, Object>> selectEnquiryList(@Param("userIdx")int userIdx, @Param("fromDate")String fromDate, @Param("endDate")String endDate);
 	
 	//address
-	@Insert("insert into \"ADDRESS\"(address,user_idx, is_default, address_name, address_idx)"
-			+ " values(#{address},#{userIdx},#{isDefault},#{addressName},#{addressIdx})")
+	@Insert("insert into \"ADDRESS\"(address_idx,address,user_idx, address_name, address_detail)"
+			+ "values(SC_ADDRESS_IDX.NEXTVAL,#{address},#{userIdx},#{addressName},#{addressDetail})")
 	void insertAddress(Address address);
 	
-	@Update("update \"ADDRESS\" set address = #{address}"
-			+ " where address_idx = #{addressIdx}")
-	void updateAddress(int addressIdx);
+	void updateAddress(Address address);
 	
-	@Delete("DELETE \"ADDRESS\" where  address_idx=#{addressIdx}")
+	@Update("update \"ADDRESS\" "
+			+ " set is_default = 'N'"
+			+ " where address_idx != #{addressIdx} and user_idx = #{userIdx}") //나머지 배송지 is_default를 N으로
+	void updateIsDefault(Address address);
+	
+	@Delete("DELETE \"ADDRESS\" where  address_idx = #{addressIdx}")
 	void deleteAddress(int addressIdx);
 	
-	@Select("select * from \"ADDRESS\" where user_idx=#{userIdx}")
+	@Select("select * from \"ADDRESS\" where user_idx=#{userIdx} order by is_default desc")
 	List<Address> selectAddressList(int userIdx);
+	
+	@Select("select * from \"ADDRESS\" where address_idx=${addressIdx}")
+	Address selectAddressDetail(int addressIdx);
 	
 }
