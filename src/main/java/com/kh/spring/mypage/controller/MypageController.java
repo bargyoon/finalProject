@@ -49,17 +49,18 @@ public class MypageController {
 	}
 	
 	@GetMapping("update-member-info")
-	public void updateMemberForm(Model model) {
-		model
-		.addAttribute(new UpdateMemberForm())
+	public void updateMemberForm(
+			@SessionAttribute(name = "authentication")Member certifiedUser, Model model
+			) {
+		model.addAttribute(new UpdateMemberForm())
 		.addAttribute("error", new ValidatorResult().getError());
 	}
 	
 	@PostMapping("update-member-info")
 	public String updateMember(
 			@SessionAttribute(name = "authentication")Member certifiedUser, Model model, 
-			@Validated UpdateMemberForm form, Errors errors, RedirectAttributes redirectAttr) {
-		
+			@Validated UpdateMemberForm form, Errors errors, RedirectAttributes redirectAttr
+			) {
 		if(errors.hasErrors()) {
 			ValidatorResult validatorResult = new ValidatorResult();
 			validatorResult.addErrors(errors);
@@ -80,7 +81,6 @@ public class MypageController {
 	public void managingBoard(
 			@SessionAttribute(name = "authentication")Member certifiedUser, Model model
 			) {
-		
 		int userIdx = certifiedUser.getUserIdx();
 		
 	}
@@ -91,7 +91,6 @@ public class MypageController {
 		@RequestParam(required = false, defaultValue = "1") int page,
 		@RequestParam(required = false, defaultValue = "all") String keyword
 			) {
-
 		int userIdx = certifiedUser.getUserIdx();
 		
 		MypageSearchSet searchSet = new MypageSearchSet();
@@ -111,9 +110,9 @@ public class MypageController {
 		
 		List<BoardComment> commentList = mypageService.selectBoardComment(map);
 		
-		model.addAttribute("commentList", commentList);
-		model.addAttribute("pageUtil", pageUtil);
-		model.addAttribute("searchSet", searchSet);
+		model.addAttribute("commentList", commentList)
+		.addAttribute("pageUtil", pageUtil)
+		.addAttribute("searchSet", searchSet);
 	}
 	
 //	@GetMapping("managing-counseling")
@@ -130,7 +129,6 @@ public class MypageController {
 	public void petInfo(
 			@SessionAttribute(name = "authentication")Member certifiedUser, Model model
 			) {
-		
 		int userIdx = certifiedUser.getUserIdx();
 		List<Pet> petList = mypageService.selectPetByUserIdx(userIdx);
 		model.addAttribute("petList", petList);
@@ -142,13 +140,18 @@ public class MypageController {
 	}
 	
 	@GetMapping("registration-pet")
-	public void registrationPetForm() {}
+	public void registrationPetForm(
+			@SessionAttribute(name = "authentication")Member certifiedUser, Model model
+			) {
+		int userIdx = certifiedUser.getUserIdx();
+//		List<Pet> petList = mypageService.selectPet(userIdx);
+//		model.addAttribute("petList", petList);
+	}
 	
 	@PostMapping("registration-pet")
 	public String registrationPet(
-		@SessionAttribute(name = "authentication")Member certifiedUser, Model model, Pet pet, MultipartFile file
+		@SessionAttribute(name = "authentication")Member certifiedUser, Pet pet, MultipartFile file
 			) {
-		
 		int userIdx = certifiedUser.getUserIdx();
 		pet.setUserIdx(userIdx);
 		
@@ -161,24 +164,22 @@ public class MypageController {
 	public void vaccination(
 			@SessionAttribute(name = "authentication")Member certifiedUser, Model model
 			) {
-		List<Pet> petList = mypageService.selectPetByUserIdx(certifiedUser.getUserIdx());
+		int userIdx = certifiedUser.getUserIdx();
+		List<Pet> petList = mypageService.selectPetByUserIdx(userIdx);
 		List<VaccineInfo> vaccineList = mypageService.selectAllVaccine();
+//		백신 cycle을 계산해서 뿌려줘야함 도움필요
+//		List<Vaccination> vaccinationList = mypageService.selectVaccination(userIdx);
 		
-		
-		model.addAttribute("petList", petList);
-		model.addAttribute("vaccineList", vaccineList);
+		model.addAttribute("petList", petList)
+		.addAttribute("vaccineList", vaccineList);
 	}
 	
 	@PostMapping("vaccination")
 	public void vaccination(
-			@SessionAttribute(name = "authentication")Member certifiedUser, int petIdx, int viIdx, Date date
+			@SessionAttribute(name = "authentication")Member certifiedUser, Vaccination vaccination
 			) {
-		
-		Vaccination vaccination = new Vaccination();
-		vaccination.setUserIdx(certifiedUser.getUserIdx());
-		vaccination.setPetIdx(petIdx);
-		vaccination.setViIdx(viIdx);
-		vaccination.setDate(date);
+		int userIdx = certifiedUser.getUserIdx();
+		vaccination.setUserIdx(userIdx);
 		
 		mypageService.insertVaccination(vaccination);
 	}
