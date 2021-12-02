@@ -5,9 +5,12 @@ import java.sql.Date;
 import lombok.Data;
 
 @Data
-public class VaccineInfo {
+public class Vaccination {
 	
+	private int vcIdx;
+	private int userIdx;
+	private int petIdx;
 	private int viIdx;
-	private String name;
-	private Date cycle;
+	private Date date;
+
 }

@@ -6,7 +6,10 @@ import java.util.Map;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.kh.spring.board.model.dto.Board;
+import com.kh.spring.board.model.dto.BoardComment;
+import com.kh.spring.mypage.model.dto.MypageSearchSet;
 import com.kh.spring.mypage.model.dto.Pet;
+import com.kh.spring.mypage.model.dto.Vaccination;
 import com.kh.spring.mypage.model.dto.VaccineInfo;
 import com.kh.spring.mypage.validator.UpdateMemberForm;
 
@@ -20,9 +23,10 @@ public interface MypageService {
 
 	List<VaccineInfo> selectAllVaccine();
 	
-//	List<Board> selectBoardByUserIdx(int userIdx);
+	void insertVaccination(Vaccination vaccination);
+
+	int selectBoardCommentCnt(MypageSearchSet searchSet);
+
+	List<BoardComment> selectBoardComment(Map<String, Object> map);
 	
-//	List<Reply> selectReplyByUserIdx(int userIdx);
-	
-//	List<counseling> selectCounselingByUserIdx(int userIdx);
 }

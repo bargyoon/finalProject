@@ -76,15 +76,15 @@
 						<select class="form-select"  name="vaccine" id="vaccine-list" required="required">
 							<!-- foreach문 -->
 							<option value="">--Please choose an option--</option>
-							<c:forEach var="vaccine" items="${vaccineList}">
-								<option value="${vaccine.viIdx}">${vaccine.name}</option>
+							<c:forEach var="vaccineInfo" items="${vaccineList}">
+								<option value="${vaccineInfo.viIdx}">${vaccineInfo.name}</option>
 							</c:forEach>
 						</select>
 					</div>
 					
 					<div class="mb-3">
 						<label class="form-label" for="last-record">마지막 접종일 선택:</label><br>
-						<input type="date" name="criterionDate" id="last-record" required="required"
+						<input type="date" name="date" id="last-record" required="required"
 							style="width: 400px;">
 					</div>
 					

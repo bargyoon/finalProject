@@ -33,36 +33,40 @@
 			<hr>
 			<ul class="nav nav-pills flex-column mb-auto">
 				<li><a href="/mypage/managing-board" class="nav-link active">게시글</a></li>
-				<li><a href="/mypage/managing-reply" class="nav-link">댓글</a></li>
+				<li><a href="/mypage/managing-board-comment" class="nav-link">댓글</a></li>
 				<li><a href="/mypage/managing-counseling" class="nav-link">상담내역</a></li>
 			</ul>
 		</nav>
 		
 		<div style="margin: 0 auto; width: 800px">
-			<form action="">
+			<form action="/mypage/delete?table=board">
 				<table class="table table-hover" style="text-align: center;">
 				  <thead>
 				    <tr>
 				      <th style="width: 5%"><input type="checkbox"></th>
-				       <th scope="col" style="width: 15%">글번호</th>
-				      <th scope="col" style="width: 70%">제목[댓글 수]</th>
+				       <th scope="col" style="width: 15%">글 번호</th>
+				      <th scope="col" style="width: 70%">제목</th>
 				      <th scope="col" style="width: 10%">작성일</th>
 				    </tr>
 				  </thead>
 				  <tbody>
-				  <!-- 반복문 -->
-				    <tr>
-				      <td><input type="checkbox"></td>
-				      <td>1</td>
-				      <td>제목입니다</td>
-				      <td>sysdate</td>
-				    </tr>
+					  <!-- 반복문 -->
+					  <c:forEach var="board" items="${boardList}">
+					  <tr>
+					  	<td><input type="checkbox" name="index" value="${board.bdIdx}"></td>
+					  	<!-- href 수정 도움필요 -->
+				  		<td><a href="/board/#">${board.bdIdx}</a></td>
+				  		<td><a href="/board/#">${board.content}</a></td>
+				  		<td>${board.regDate}</td>
+					  </tr>
+					  </c:forEach>
 				  </tbody>
 				</table>
 				
 				<button type="button" class="btn btn-primary">삭제</button>
 			</form>
 			
+			<!-- 페이징처리 도움필요 -->
 			<div style="display:flex; justify-content:center;">
 				<nav aria-label="Page navigation example">
 				  <ul class="pagination">
@@ -82,14 +86,15 @@
 				  </ul>
 				</nav>
 			</div>
-			<form action="">
+			<!-- 검색창 수정 도움필요 -->
+			<form>
 				<div style="display:flex; justify-content:center;">
 					<select id="select" style="text-align: center;">
 						<option value="title" selected="selected">제목</option>
 						<option value="content">내용</option>
 						<option value="">제목+내용</option>
 					</select>
-					<input style="width: 300px;" type="search" class="form-control" placeholder="Search..." aria-label="Search">
+					<input  style="width: 300px;" type="search" class="form-control" placeholder="Search..." aria-label="Search">
 					<button type="button" class="btn btn-primary">검색</button>
 				</div>
 			</form>
