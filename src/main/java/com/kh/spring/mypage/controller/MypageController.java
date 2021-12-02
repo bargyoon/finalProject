@@ -126,13 +126,6 @@ public class MypageController {
 //		model.addAttribute("counselingList", counselingList);
 //	}
 	
-	@PostMapping("delete-board")
-	public void deleteBoard(
-			int index
-			) {
-		//table값에 따라 from절 테이블 바꿔서 호출해야함
-	}
-	
 	@GetMapping("pet-info")
 	public void petInfo(
 			@SessionAttribute(name = "authentication")Member certifiedUser, Model model
