@@ -46,14 +46,14 @@
 	                        		<li><a href="/petcare/action/dog/eyes">행동의미</a>
 	                        	</ul>
 	                        </li>
-	                        <li class="nav-item"><a class="nav-link" href="#">게시판</a></li>
+	                        <li class="nav-item"><a class="nav-link" href="/board/info">게시판</a></li>
 	                        <li class="nav-item"><a class="nav-link" href="#">이벤트</a>
 	                      	  	<ul class="navbar-detail"><hr>
 		                        	<li><a href=#>이벤트</a>
 	                        		<li><a href=#>체험단</a>
 	                        	</ul>
 	                        </li> 
-	                        <li class="nav-item"><a class="nav-link" href="#">마켓</a></li>
+	                        <li class="nav-item"><a class="nav-link" href="/market">마켓</a></li>
 	                        <c:if test="${empty authentication}">
 								<li class="nav-item"><a class="nav-link" href="/member/login">로그인</a></li><hr>
 							</c:if>

@@ -193,11 +193,11 @@ public class MemberController {
 		String userId = request.getParameter("kakaoId");			
 		member.setUserId(userId);
 
-		//System.out.println("회원가입 진입" + member);
+		System.out.println("회원가입 진입" + member);
 		
 		memberService.insertKakaoMember(member);
 		
-		//System.out.println("회원가입 완료" + member);
+		System.out.println("회원가입 완료" + member);
 		
 		return "redirect:/";
 	}
