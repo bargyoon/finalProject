@@ -7,17 +7,37 @@
   	<update id="updateMemberDynamicQuery">
   		update member
   		<set>
-  			<if test="nickName != null">
-  				nickname = #{nickName}
-  			</if>
-  			<if test="password != null">
-  				,password = #{password}
-  			</if>
-  			<if test="address != null">
-  				,address = #{address}
-  			</if>
+			<if test="nickName != null">
+				nickname = #{nickName}
+			</if>
+			<if test="password != null">
+				,password = #{password}
+			</if>
+			<if test="address != null">
+				,address = #{address}
+			</if>
   		</set>
   		where user_idx = #{userIdx}
   	</update>
+  	
+  	<select id="selectBoardCommentCnt" resultType="int">
+  		select count(*) from board_comment
+  		where user_idx = #{userIdx}
+  		<if test="keyword != 'all'">
+			and cm_content like '%'||#{keyword}||'%'
+		</if>
+  	</select>
+  	
+  	<select id="selectBoardComment">
+  		select * 
+  		from (select *, rownum 
+  		from (select * from board_comment where user_idx = #{searchSet.userIdx} 
+		<if test="searchSet.keyword != 'all'">
+			and cm_content like '%'||#{searchSet.keyword}||'%' 
+		</if>
+  		order by cm_idx desc)) 
+  		where rownum between ${((pageUtil.curPage-1) * pageUtil.cntPerPage) + 1} 
+  		and ${pageUtil.curPage * pageUtil.cntPerPage}
+  	</select>
   	
   </mapper>

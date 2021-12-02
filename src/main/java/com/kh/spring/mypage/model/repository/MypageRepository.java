@@ -8,7 +8,9 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
 import com.kh.spring.board.model.dto.Board;
+import com.kh.spring.board.model.dto.BoardComment;
 import com.kh.spring.common.util.FileDTO;
+import com.kh.spring.mypage.model.dto.MypageSearchSet;
 import com.kh.spring.mypage.model.dto.Pet;
 import com.kh.spring.mypage.model.dto.Vaccination;
 import com.kh.spring.mypage.model.dto.VaccineInfo;
@@ -33,19 +35,15 @@ public interface MypageRepository {
 	@Select("select * from vaccine_info order by vaccine_idx")
 	List<VaccineInfo> selectAllVaccineInfo();
 	
-	@Select("select * from board where user_idx = #{userIdx} order by board_idx desc")
-	List<Board> selectBoardByUserIdx(int userIdx);
-	
 	@Select("select cycle from vaccineInfo where vi_idx = #{viIdx}")
 	int selectCycle(int viIdx);
 	
 	@Insert("insert into vaccination(vc_idx, pet_idx, vi_idx, date, user_idx)"
 			+ " values(sc_vc_idx.nextval, #{petIdx}, #{viIdx}, #{date}, #{userIdx})") 
 	void insertVaccination(Vaccination vaccination);
+
+	int selectBoardCommentCnt(MypageSearchSet searchSet);
+
+	List<BoardComment> selectBoardComment(Map<String, Object> map);
 	
-//	@Select("select * from reply where user_idx = #{userIdx} order by reply_idx desc")
-//	List<Reply> selectReplyByUserIdx(int userIdx);
-	
-//	@Select("select * from counseling where user_idx = #{userIdx} order by counseling_idx desc")
-//	List<Counseling> selectCounselingByUserIdx(int userIdx);
 }
