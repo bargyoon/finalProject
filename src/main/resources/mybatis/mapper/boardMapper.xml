@@ -7,14 +7,31 @@
   	
 
   	<select id="selectBoard" resultType="map">
-  		select m.nickname, b.bd_idx, b.bd_title, b.reg_date, b.view_count, b.rec_count, b.content 
+  	select * from(
+  	select  rownum rnum, nickname, user_idx, bd_idx, bd_title, reg_date, view_count, rec_count, content ,category from(
+  		select m.nickname, m.user_idx, b.bd_idx, b.bd_title, b.reg_date, b.view_count, b.rec_count, b.content ,b.category
   		from board b join "USER" m on(b.user_idx = m.user_idx)
   		<where>
-  			<if test="category != null">category = #{category}</if>
+  			<if test="commandMap.category != null">category = #{commandMap.category}</if>
+  			<if test="commandMap.option != null and commandMap.keyword != null">and ${commandMap.option} like '%'||#{commandMap.keyword}||'%'</if>
+  			
   		</where>
+  		<if test="commandMap.sort != null">order by ${commandMap.sort} desc</if>
+  		))where rnum between ${((pageUtil.curPage-1) * pageUtil.cntPerPage) + 1} and ${pageUtil.curPage * pageUtil.cntPerPage} 
   	</select>
   	
-  
+  <select id="selectBoardCnt" resultType="java.lang.Integer">
+  	select count(*) from(
+  	
+  		select m.nickname, b.bd_idx, b.bd_title, b.reg_date, b.view_count, b.rec_count, b.content ,b.category
+  		from board b join "USER" m on(b.user_idx = m.user_idx)
+  		<where>
+  			<if test="commandMap.category != null">category = #{commandMap.category}</if>
+  			<if test="commandMap.option != null and commandMap.keyword != null">and ${commandMap.option} like '%'||#{commandMap.keyword}||'%'</if>
+  			
+  		</where>
+  		)
+  	</select>
   	
   	
   </mapper>

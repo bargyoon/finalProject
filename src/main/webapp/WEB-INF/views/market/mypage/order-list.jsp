@@ -54,7 +54,7 @@
 					<li><a href="/market/mypage/review/review-list2">구매후기</a></li>
 					<li><a href="/market/mypage/cart">장바구니</a></li>
 					<li><a href="#!">상품문의</a></li>
-					<li><a href="#!" style="color: black;">주소록 관리</a></li>
+					<li><a href="/market/mypage/address-list" style="color: black;">주소록 관리</a></li>
 				</ul>
 			</div>
 		</aside>

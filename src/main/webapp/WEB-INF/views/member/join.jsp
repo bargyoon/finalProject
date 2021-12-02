@@ -258,7 +258,7 @@
                    <div class="form-group">
                      <label>주소: </label>
                      <input type="text" name="address" id="address" class="form-control" id="address" placeholder="주소를 입력하세요">
-                     <input type="text" name="address2" id="address2" class="form-control" placeholder="상세주소를 입력하세요">
+                     <input type="text" name="addressDetail" id="addressDetail" class="form-control" placeholder="상세주소를 입력하세요">
                   </div><br><hr>                  
                   <input type="submit" class="btn btn-black" id="joinBtn" style="width: 100%" value="가입하기" />
                </form>
@@ -267,8 +267,8 @@
       </div>
 </form:form>
 
-<!-- <script type="text/javascript" src="/resources/js/member/joinForm.js"></script> -->
-<script type="text/javascript" src="/resources/js/member/mail_auth.js"></script>
+<!-- <script type="text/javascript" src="/resources/js/member/joinForm.js"></script>
+<script type="text/javascript" src="/resources/js/member/mail_auth.js"></script> -->
 
 <!-- 주소 api -->
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>

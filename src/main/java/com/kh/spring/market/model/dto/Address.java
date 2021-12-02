@@ -10,5 +10,5 @@ public class Address {
 	private String isDefault;
 	private String addressName;
 	private int addressIdx;
-	private String address2;
+	private String addressDetail;
 }

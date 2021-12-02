@@ -1,87 +1,175 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-        <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
- <link rel="stylesheet" href="/resources/css/board/board-list.css">
-        </head>
-        <body>
-            <div class="board_list_wrap">
-                <table class="board_list">
-                    <caption>게시판 목록</caption>
-                    <div class="paging">
-                        <a href="/board/info" class="bt">정보게시판</a>
-                        <a href="/board/dog" class="bt">강아지</a>
-                        <a href="/board/cat" class="bt">고양이</a>
-                        <a href="/board/review" class="bt">후기</a>
-                        <a href="/board/meet" class="bt">모임게시판</a>
-                        <a href="/board/consulting" class="bt">상담게시판</a>
-                    </div>
-                    <br>
-                    <br>
-
-                    <thead>
-                        <tr>
-                            <th>번호</th>
-                            <th>제목</th>
-                            <th>글쓴이</th>
-                            <th>작성일</th>
-                            <th>추천수</th>
-                            <th>조회수</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    <c:forEach items="${bList}" var="bList" varStatus="status">
-                        <tr>
-                            <td>${length - status.index}</td>
-                            <td class="tit">
-                                <a href="#">${bList.BD_TITLE}</a>
-                            </td>
-                            <td>${bList.NICKNAME}</td>
-                            <td><fmt:formatDate value="${bList.REG_DATE}" pattern="yyyy-MM-dd"/></td>
-                            <td>${bList.REC_COUNT}</td>
-                            <td>${bList.VIEW_COUNT}</td>
-                        </tr>
-                        </c:forEach>
-                        
-                    </tbody>
-                </table>
-                <br>
-                <div style="float: right;" class="btn">
-                <a onclick="javascript:location.href=location.pathname+'/form'">글쓰기</a>
-                </div>
-                <br>
-                <div class="paging">
-                    <a href="#" class="bt">첫 페이지</a>
-                    <a href="#" class="bt">이전 페이지</a>
-                    <a href="#" class="num on">1</a>
-                    <a href="#" class="num">2</a>
-                    <a href="#" class="num">3</a>
-                    <a href="#" class="bt">다음 페이지</a>
-                    <a href="#" class="bt">마지막 페이지</a>
-                </div>
-                <br>
-                <div class="seach">
+<link rel="stylesheet" href="/resources/css/board/board-list.css">
+</head>
+<body>
+	<div class="board_list_wrap">
+	<div class="paging">
+				<a href="/board/info" class="bt">정보게시판</a> <a href="/board/dog"
+					class="bt">강아지</a> <a href="/board/cat" class="bt">고양이</a> <a
+					href="/board/review" class="bt">후기</a> <a href="/board/meet"
+					class="bt">모임게시판</a> <a href="/board/consulting" class="bt">상담게시판</a>
+			</div>
+			<br>
+			<br>
+			<select name="category" id="sortSelect" onchange="sortList()"
+                    class="form-control">
+                    <option value="reg_date">등록일순</option>
+                    <option value="view_count">조회순</option>
+                    <option value="rec_count">추천순</option>
                     
-                    <select name="job">
-                        <option value="">작성자</option>
-                        <option value="학생">아이디</option>
-                        <option value="회사원">닉네임</option>
-                        <option value="기타">글 제목</option>
-                    </select>
-                    <td><input type="text" class="inp"></td>
-                <button>조회하기</button>
-           
-            </td>    
-            </div>
+                </select>
+		<table class="board_list">
+			<caption>게시판 목록</caption>
+			
+			<thead>
+				<tr>
+					<th>번호</th>
+					<th>제목</th>
+					<th>글쓴이</th>
+					<th>작성일</th>
+					<th>추천수</th>
+					<th>조회수</th>
+				</tr>
+			</thead>
+			<tbody>
+				<c:forEach items="${bList}" var="bList" varStatus="status">
+					<tr>
+						<td>${bList.RNUM}</td>
+						<td class="tit"><a
+							href="/board/${dataMap.category}/detail?bdIdx=${bList.BD_IDX}">${bList.BD_TITLE}</a><span><i
+								class="fas fa-comment" style="margin-right: 5px"></i></span>${bList.commentCnt }
+						</td>
+						<td>${bList.NICKNAME}</td>
+						<td><fmt:formatDate value="${bList.REG_DATE}"
+								pattern="yyyy-MM-dd" /></td>
+						<td>${bList.REC_COUNT}</td>
+						<td>${bList.VIEW_COUNT}</td>
+					</tr>
+				</c:forEach>
+
+			</tbody>
+		</table>
+		<br>
+		<div style="float: right;" class="btn">
+			<button onclick="javascript:location.href='/board/${dataMap.category}/form'">글쓰기</button>
+		</div>
+		<br>
+		<div class="paging">
+			<a class="bt" onclick="changePage(1)">첫 페이지</a> <a
+				onclick="prevBtn(${pageUtil.curPage})" class="bt">이전 페이지</a>
+			<c:if test="${pageUtil.blockEnd eq 1}">
+				<a href="#" class="num on">1</a>
+			</c:if>
+			<c:if test="${pageUtil.blockEnd > 1}">
+				<c:forEach var="i" begin="1" step="1" end="${pageUtil.blockEnd}">
+					<a onclick="changePage(${i})" class="num">${i}</a>
+				</c:forEach>
+			</c:if>
+
+			<a onclick="nextBtn( ${pageUtil.curPage}, ${pageUtil.blockEnd} )"
+				class="bt">다음 페이지</a> 
+				<a onclick="changePage(${pageUtil.blockEnd})" class="bt">마지막 페이지</a>
+		</div>
+		<br>
+
+		<div class="seach">
+			<select id="search_option">
+				<option value="nickname">작성자</option>
+				<option value="content">게시글</option>
+				<option value="bd_title">제목</option>
+			</select>
+			<td><input type="text" class="inp" value="${dataMap.keyword}"></td>
+			<button type="button" onclick="searchKeyword()">조회하기</button>
+
+			</td>
+		</div>
 
 
-            </div>
-        </body>
+	</div>
+</body>
+<script type="text/javascript">
+
+	(() =>{
+		Array.prototype.forEach.call(document.querySelector("#search_option").options, e =>{
+			if(e.value == "${dataMap.option}") e.selected = true;
+		})
+		Array.prototype.forEach.call(document.querySelector("#sortSelect").options, e =>{
+			if(e.value == "${dataMap.sort}") e.selected = true;
+		})
+	})();
+
+
+        const URLSearch = new URLSearchParams(location.search);
+        
+        let sortList = () =>{
+        	var sortSelect = document.getElementById("sortSelect");  
+        	var selectValue = sortSelect.options[sortSelect.selectedIndex].value; 
+     		 URLSearch.set('sort', String(selectValue));
+     		 URLSearch.set('page', String("1"));
+        	 const newParam = URLSearch.toString();
+        	 location.href = location.pathname + '?' + newParam
+     	 
+   		}
+        
+        let searchKeyword = () =>{
+        	var option = document.querySelector("#search_option").selectedOptions[0].value
+        	var keyword = document.querySelector(".inp").value
+        	if(keyword == ''){
+        		alert("검색어를 입력해주세요.")
+        		return
+        	}
+        	 URLSearch.set("option", String(option));
+      		 URLSearch.set("keyword", String(keyword));
+         	 const newParam = URLSearch.toString();
+         	 location.href = location.pathname + '?' + newParam
+      	
+            		
+           		
+        	
+        }
+        
+       	let prevBtn = (page) => {
+    		if(page == 1){
+    			alert("첫번째 페이지 입니다.")
+    			return;
+    		}
+    		
+    		page--;
+
+    		changePage(page);
+    		
+    	}
+    	
+    	let nextBtn = (page, blockEnd) => {
+    		if(page == blockEnd){
+    			alert("마지막 페이지 입니다.")
+    			return;
+    		}
+    		
+    		page++;
+    		
+    		changePage(page);
+    		
+    	}
+        let changePage = (page) =>{
+        	
+          		 URLSearch.set('page', String(page));
+             	 const newParam = URLSearch.toString();
+             	 location.href = location.pathname + '?' + newParam
+          	 
+        }
+        
+        
+        
+        </script>
 </html>

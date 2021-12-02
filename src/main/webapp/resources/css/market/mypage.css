@@ -542,9 +542,23 @@ tbody > tr:hover{
     color: steelblue;
 }
 
+.address{
+	display: flex;
+	align-items: center;
+}
+
+.address span{
+	margin-right: 20px;
+}
+
 .address-btn > ul{
     display: flex;
     justify-content: space-around;
+}
+
+.address-btn a:focus{
+	outline:none; 
+	text-decoration: none;
 }
 
 .address-btn button {
@@ -556,6 +570,18 @@ tbody > tr:hover{
     background-color: black;
     border-color: lightgray;
     color: white;
+}
+
+.address-insert-btn{
+	display: flex;
+    width: 80px;
+    display: inline-block;
+    background: ButtonFace;  
+    font-size: 13px;
+    border-width: 2px;
+    padding: px;
+    margin-bottom: 1px;
+    border-color: ButtonHighlight ButtonShadow ButtonShadow ButtonHighlight;
 }
 
 /* address-pop  */

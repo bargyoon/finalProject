@@ -66,6 +66,7 @@ public class MemberServiceImpl implements MemberService{
 
 	public void insertKakaoMember(Member member) {
 		memberRepository.insertKakaoMember(member);
+		System.out.println("service : " + member);
 		
 	}
 

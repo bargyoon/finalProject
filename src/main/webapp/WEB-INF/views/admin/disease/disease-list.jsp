@@ -124,7 +124,7 @@
 														src="${data.downloadURL }"></a>
 
 												</td>
-												<td>${data.disease.name}</td>
+												<td>${data.NAME}</td>
 												<td><div class="explain">${data.EXPLAIN}</div></td>
 												<td>${data.PRICE}원</td>
 												<td>${data.COUNT}</td>
