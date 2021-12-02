@@ -13,9 +13,7 @@
 </head>
 <body>
 	<div class="board_list_wrap">
-		<table class="board_list">
-			<caption>게시판 목록</caption>
-			<div class="paging">
+	<div class="paging">
 				<a href="/board/info" class="bt">정보게시판</a> <a href="/board/dog"
 					class="bt">강아지</a> <a href="/board/cat" class="bt">고양이</a> <a
 					href="/board/review" class="bt">후기</a> <a href="/board/meet"
@@ -23,7 +21,16 @@
 			</div>
 			<br>
 			<br>
-
+			<select name="category" id="sortSelect" onchange="sortList()"
+                    class="form-control">
+                    <option value="reg_date">등록일순</option>
+                    <option value="view_count">조회순</option>
+                    <option value="rec_count">추천순</option>
+                    
+                </select>
+		<table class="board_list">
+			<caption>게시판 목록</caption>
+			
 			<thead>
 				<tr>
 					<th>번호</th>
@@ -39,7 +46,8 @@
 					<tr>
 						<td>${bList.RNUM}</td>
 						<td class="tit"><a
-							href="/board/${category}/detail?bdIdx=${bList.BD_IDX}">${bList.BD_TITLE}</a>
+							href="/board/${dataMap.category}/detail?bdIdx=${bList.BD_IDX}">${bList.BD_TITLE}</a><span><i
+								class="fas fa-comment" style="margin-right: 5px"></i></span>${bList.commentCnt }
 						</td>
 						<td>${bList.NICKNAME}</td>
 						<td><fmt:formatDate value="${bList.REG_DATE}"
@@ -53,7 +61,7 @@
 		</table>
 		<br>
 		<div style="float: right;" class="btn">
-			<button onclick="javascript:location.href='/board/${category}/form'">글쓰기</button>
+			<button onclick="javascript:location.href='/board/${dataMap.category}/form'">글쓰기</button>
 		</div>
 		<br>
 		<div class="paging">
@@ -80,7 +88,7 @@
 				<option value="content">게시글</option>
 				<option value="bd_title">제목</option>
 			</select>
-			<td><input type="text" class="inp" value="${keyword}"></td>
+			<td><input type="text" class="inp" value="${dataMap.keyword}"></td>
 			<button type="button" onclick="searchKeyword()">조회하기</button>
 
 			</td>
@@ -93,13 +101,25 @@
 
 	(() =>{
 		Array.prototype.forEach.call(document.querySelector("#search_option").options, e =>{
-			if(e.value == "${option}") e.selected = true;
+			if(e.value == "${dataMap.option}") e.selected = true;
+		})
+		Array.prototype.forEach.call(document.querySelector("#sortSelect").options, e =>{
+			if(e.value == "${dataMap.sort}") e.selected = true;
 		})
 	})();
 
 
         const URLSearch = new URLSearchParams(location.search);
         
+        let sortList = () =>{
+        	var sortSelect = document.getElementById("sortSelect");  
+        	var selectValue = sortSelect.options[sortSelect.selectedIndex].value; 
+     		 URLSearch.set('sort', String(selectValue));
+     		 URLSearch.set('page', String("1"));
+        	 const newParam = URLSearch.toString();
+        	 location.href = location.pathname + '?' + newParam
+     	 
+   		}
         
         let searchKeyword = () =>{
         	var option = document.querySelector("#search_option").selectedOptions[0].value

@@ -37,16 +37,18 @@ public class BoardContollerTest {
 		MockMultipartFile file1 = new MockMultipartFile("files","test.png", null,"photo".getBytes()); 		
 		MockMultipartFile file2 = new MockMultipartFile("files","test1.png", null,"photo".getBytes()); 		
 		
+			for (int i = 0; i < 30; i++) {
+				
 			
 			mockMvc.perform(multipart("/board/board-form")
 					.file(file1)
 					.file(file2)
-					.param("bdTitle", "제목")
+					.param("bdTitle", "제목"+i)
 					.param("content", "내용")
 					.param("category", "info"))
 			.andDo(print());
 			
-		
+			}
 		
 	
 	}

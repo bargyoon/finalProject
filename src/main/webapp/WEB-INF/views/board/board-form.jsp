@@ -11,7 +11,7 @@
 </head>
 <body>
 <form action="/board/board-form" method="post" enctype="multipart/form-data" >
-<input name="category" value="${category}" style="display:none">
+<input name="category" value="${category}" type="hidden">
 <div class="board_wrap">
         <div class="board_title">
             <strong><c:out value="${title}"></c:out>게시판</strong>

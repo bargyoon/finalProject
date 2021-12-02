@@ -15,12 +15,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.google.api.services.analyticsreporting.v4.model.ReportRequest;
 import com.kh.spring.admin.model.service.AdminService;
+import com.kh.spring.board.model.service.BoardService;
+import com.kh.spring.common.util.pagination.Paging;
 import com.kh.spring.disease.model.dto.Disease;
 import com.kh.spring.disease.model.service.DiseaseService;
 import com.kh.spring.market.model.dto.Product;
-import com.kh.spring.market.model.repository.ShopRepository;
 import com.kh.spring.market.model.service.ShopService;
 
 import lombok.RequiredArgsConstructor;
@@ -33,7 +33,8 @@ public class AdminController {
 	private final AdminService adminService;
 	private final DiseaseService diseaseService;
 	private final ShopService shopService;
-
+	private final BoardService boardService;
+	
 	@GetMapping("index")
 	public void index() {
 	};
@@ -76,7 +77,28 @@ public class AdminController {
 	}
 
 	@GetMapping("contents/board-list")
-	public void boardList() {
+	public void boardList(Model model
+						,@RequestParam(required = false, defaultValue = "1") int page
+						,@RequestParam(required = false) String option
+						,@RequestParam(required = false) String keyword
+						,@RequestParam(required = false) String category
+						,@RequestParam(required = false, defaultValue = "reg_date") String sort) {
+		Map<String,Object> commandMap = new LinkedHashMap<String,Object>();
+		
+		commandMap.put("category", category);
+		commandMap.put("option", option);
+		commandMap.put("keyword", keyword);
+		commandMap.put("sort", sort);
+		Paging pageUtil = Paging.builder()
+				.curPage(page)
+				.cntPerPage(15)
+				.blockCnt(10)
+				.total(boardService.selectBoardListCnt(commandMap))
+				.build();
+		List<Map<String,Object>> bList = boardService.selectBoard(commandMap,pageUtil);
+		model.addAttribute("pageUtil",pageUtil);
+		model.addAttribute("bList",bList);
+		model.addAttribute("dataMap",commandMap);
 	}
 
 	@GetMapping("contents/comment-list")

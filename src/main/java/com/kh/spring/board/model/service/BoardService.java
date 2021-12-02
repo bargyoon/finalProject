@@ -16,6 +16,10 @@ public interface BoardService {
 
 	Map<String,Object> selectBoardByIdx(int bdIdx);
 
-	int selectBoardListCntByCate(String category);
+	int selectBoardListCnt(Map<String, Object> commandMap);
+
+	void updateBoard(List<MultipartFile> files, Board board, List<Integer> flIdxs);
+
+	void insertComment(Map<String, Object> jsonMap);
 
 }

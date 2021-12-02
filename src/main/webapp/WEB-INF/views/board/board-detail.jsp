@@ -26,28 +26,42 @@
 
 		<br> <br>
 		<div class="board_title">
-			<strong>정보게시판</strong>
+			<strong>${title}게시판</strong>
 
+		</div>
+		<div class="row">
+			<div class="col-md-12">
+				<a class="btn btn-danger btn-lg float-end">삭제</a> <a
+					href="/board/${category}/modify?bdIdx=${board.bdIdx}"
+					class="btn btn-warning btn-lg float-end" style="margin-right: 4px;">수정</a>
+			</div>
 		</div>
 		<div class="board_write_wrap">
 			<div class="board_write">
 				<div class="title">
 					<dl>
 
-						<dd style="font-size: 17pt" class="text-bold">
-							${board.bdTitle}</dd>
+						<dd style="font-size: 17pt">
+							<strong>${board.bdTitle}</strong>
+						</dd>
+						<a class="btn btn-default btn-lg btn-hover-success active"
+							style="float: right" onclick=""> <i
+							class="fa fa-thumbs-up mr-1"></i>추천
+						</a>
 					</dl>
 				</div>
-				<div class="title" style="border-top: 2px solid #F0EAD5">
+				<div class="title"
+					style="border-top: 2px solid #F0EAD5; height: 48px;">
 					<dl>
-						<dt>작성자</dt>
+						<dt>${board.nickname}</dt>
 						<dd>
 							<span>|</span><span style="margin-left: 10px"><i
-								class="fas fa-comment" style="margin-right: 5px"></i>댓글수</span><span
+								class="fas fa-comment" style="margin-right: 5px"></i>${commentCnt}</span><span
 								style="margin-left: 10px"><i class="fas fa-eye"
 								style="margin-right: 5px"></i>${board.viewCount } </span> <span
 								style="float: right;"> <i class="fas fa-clock"
-								style="margin-right: 5px"></i>${board.regDate}
+								style="margin-right: 5px"></i> <fmt:formatDate
+									pattern="yyyy-MM-dd hh:mm:ss" value="${board.regDate}" />
 							</span>
 						</dd>
 
@@ -71,10 +85,19 @@
                          </textarea>
 				</div>
 			</div>
+
+			<br>
+			<div class="row">
+				<div class="col-md-12 justify-content-center" style="display: flex;">
+					<button class="btn btn-success btn-lg"
+						onclick="javascript:location.href='/board/${category}'">목록으로</button>
+				</div>
+			</div>
+
 			<div class="bt_wrap">
-				<input type="text" placeholder="댓글을 남겨주세요"
-					style="width: 850px; height: 50px; font-size: 16px;"> <a
-					href="view.html" class="on">등록</a>
+				<input type="text" placeholder="댓글을 남겨주세요" name="cmContent"
+					id="cmContent" style="width: 85%; height: 50px; font-size: 16px;">
+				<a class="on" onclick="insertComment(this,${board.bdIdx})">등록</a>
 			</div>
 
 			<div class="container bootdey" style="font-size: 1.4rem">
@@ -92,30 +115,54 @@
 
 									<!-- Comments -->
 									<div>
-										<div class="media-block">
+										<c:forEach items="${comment}" var="comment">
+											<div class="media-block">
+												
+												<div class="media-body">
 
-											<div class="media-body">
+													<div class="mar-btm">
+														<span
+															class="text-semibold text-success media-heading box-inline">${comment.nickname}</span>
+
+													</div>
+													<p>${comment.cmContent}</p>
+													<div class="pad-ver">
+														<span class="text-muted text-sm"><fmt:formatDate
+																pattern="yyyy-MM-dd hh:mm:ss" value="${comment.regDate}" /></span>
+														<button type="button" class="newBtn">댓글달기</button>
+
+														<button class="btn btn-default btn-hover-success active"
+															style="float: right">
+															<i class="fa fa-thumbs-up"></i>
+														</button>
+
+
+
+													</div>
+
+
+												</div>
+											</div>
+											<hr>
+										</c:forEach>
+										<div class="media-block" style="position:relative;">
+												<span style="position:absolute; top:34px">ㄴ</span>
+												<div class="media-body" style="padding:30px;">
+
 												<div class="mar-btm">
-													<a href="#"
-														class="btn-link text-semibold media-heading box-inline">Bobby
-														Marz</a>
+													<span
+														class="text-semibold">닉넴</span>
 
 												</div>
-												<p>Sed diam nonummy nibh euismod tincidunt ut laoreet
-													dolore magna aliquam erat volutpat. Ut wisi enim ad minim
-													veniam, quis nostrud exerci tation ullamcorper suscipit
-													lobortis nisl ut aliquip ex ea commodo consequat.</p>
-												<div class="pad-ver">
-													<span class="text-muted text-sm">7 min ago</span>
 
-													<button class="btn btn-default btn-hover-success active"
-														style="float: right">
-														<i class="fa fa-thumbs-up"></i>
-													</button>
-
-
-
+												<div class="bt_wrap mt-1">
+													<input type="text" placeholder="댓글을 남겨주세요" name="cmContent"
+														id="cmContent"
+														style="width: 85%; height: 50px; font-size: 16px;">
+													<a class="on" onclick="insertComment(this,${board.bdIdx})">등록</a>
 												</div>
+
+
 
 											</div>
 										</div>
@@ -140,5 +187,22 @@
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
 		integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
 		crossorigin="anonymous"></script>
+	<script type="text/javascript">
+		 let insertComment = (obj, bdIdx) =>{
+		 		
+		    	return fetch('/board/comment-form',{
+		 			method:"post",
+		 			body: JSON.stringify({cmContent : obj.previousElementSibling.value, bdIdx : bdIdx}),
+		 			 headers:{
+		 			    'Content-Type': 'application/json'
+		 			  }
+		    	}).then(res => {
+		    		alert('댓글 등록이 완료되었습니다.');
+		    		location.reload();
+		    	})
+		    		
+		 	
+		 	}
+		</script>
 </body>
 </html>

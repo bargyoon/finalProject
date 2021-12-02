@@ -47,4 +47,7 @@ public interface MemberRepository {
 			+ "SELECT * FROM DUAL")
 	void insertKakaoMember(Member member);
 
+	@Select("select * from \"USER\" where user_idx = ${userIdx}")
+	Member selectMemberByIdx(int userIdx);
+
 }

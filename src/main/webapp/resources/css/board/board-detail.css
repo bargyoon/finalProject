@@ -319,5 +319,6 @@ a {
     box-sizing: border-box;
     border: 0;
     resize: vertical;
+    font-size: 10pt;
 }
 
