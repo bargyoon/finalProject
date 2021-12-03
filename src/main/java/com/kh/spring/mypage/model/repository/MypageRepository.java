@@ -32,7 +32,7 @@ public interface MypageRepository {
 			+ " values(sc_file_idx.nextval, sc_pet_idx.currval, #{originFileName}, #{renameFileName}, #{savePath})")
 	void insertFile(FileDTO file);
 	
-	@Select("select * from vaccine_info order by vaccine_idx")
+	@Select("select * from vaccine_info order by vi_idx")
 	List<VaccineInfo> selectAllVaccineInfo();
 	
 	@Select("select cycle from vaccineInfo where vi_idx = #{viIdx}")
@@ -45,5 +45,10 @@ public interface MypageRepository {
 	int selectBoardCommentCnt(MypageSearchSet searchSet);
 
 	List<BoardComment> selectBoardComment(Map<String, Object> map);
+
+	int selectBoardCnt(MypageSearchSet searchSet);
+	
+	List<Board> selectBoard(Map<String, Object> map);
+
 	
 }

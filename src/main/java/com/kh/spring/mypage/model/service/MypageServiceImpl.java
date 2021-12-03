@@ -55,4 +55,13 @@ public class MypageServiceImpl implements MypageService {
 		return mypageRepository.selectBoardComment(map);
 	};
 	
+	public int selectBoardCnt(MypageSearchSet searchSet) {
+		return mypageRepository.selectBoardCnt(searchSet);
+	}
+
+	public List<Board> selectBoard(Map<String, Object> map){
+		return mypageRepository.selectBoard(map);
+	};
+	
+	
 }

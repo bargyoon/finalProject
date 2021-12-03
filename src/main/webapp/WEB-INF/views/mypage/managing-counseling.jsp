@@ -89,18 +89,57 @@
 			</div>
 			<form action="">
 				<div style="display:flex; justify-content:center;">
-					<select id="select" style="text-align: center;">
-						<option value="title" selected="selected">제목</option>
-						<option value="content">내용</option>
-						<option value="">제목+내용</option>
-					</select>
-					<input style="width: 300px;" type="search" class="form-control" placeholder="Search..." aria-label="Search">
-					<button type="button" class="btn btn-primary">검색</button>
+					<input name="keyword" id="keyword" style="width: 300px;" type="search" class="form-control" placeholder="Search..." aria-label="Search">
+					<button type="button" class="btn btn-primary" onclick="searchKeyword()">검색</button>
 				</div>
 			</form>
 		</div>
 	</div>
 </section>
+
+<script type="text/javascript">
+	/* 페이징 기능 */
+	let prevBtn = (curPage, keyword) => {
+		if(curPage == 1){
+			alert("첫번째 페이지 입니다.")
+			return;
+		}
+		
+		let prevPage = curPage - 1;
+
+		pageBtn(keyword, prevPage);
+	}
+	
+	let nextBtn = (curPage, keyword, blockEnd) => {
+		if(curPage == blockEnd){
+			alert("마지막 페이지 입니다.")
+			return;
+		}
+		
+		let nextPage = curPage + 1;
+		
+		pageBtn(keyword, nextPage);
+	}
+	
+	let pageBtn = (keyword, page) => {
+		location.href = "/mypage/managing-counseling?keyword=" + keyword + "&page=" + page;
+	}
+	/* 검색기능 */
+	const URLSearch = new URLSearchParams(location.search);
+	
+	let searchKeyword = () =>{
+    	var keyword = document.querySelector("#keyword").value
+    	if(keyword == ''){
+    		alert("검색어를 입력해주세요.")
+    		return
+    	}
+  		 URLSearch.set("keyword", String(keyword));
+     	 const newParam = URLSearch.toString();
+     	 location.href = location.pathname + '?' + newParam
+    }
+	
+</script>
+
 	
 <aside class="fixed-up-btn btn badge-rank" id="up_btn" type="button" onclick="window.scrollTo(0,0)" style="float: right;">
     <i class="fas fa-arrow-alt-circle-up"></i>

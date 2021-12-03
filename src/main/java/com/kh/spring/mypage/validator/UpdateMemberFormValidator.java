@@ -28,15 +28,15 @@ public class UpdateMemberFormValidator implements Validator {
 		
 		UpdateMemberForm form = (UpdateMemberForm) target;
 		
-		if(memberRepository.nickNameCheck(form.getNickname()) != 0) {
-			errors.rejectValue("nickname", "err-nickname", "이미 존재하는 닉네임입니다.");
+		if(!form.getNickName().isEmpty() && memberRepository.nickNameCheck(form.getNickName()) != 0) {
+			errors.rejectValue("nickName", "err-nickname", "이미 존재하는 닉네임입니다.");
 		}
 		
-		if(!Pattern.matches("(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[^a-zA-Zㄱ-힣0-9]).{8,}", form.getPassword())) {
+		if(!form.getPassword().isEmpty() && !Pattern.matches("(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[^a-zA-Zㄱ-힣0-9]).{8,}", form.getPassword())) {
 			errors.rejectValue("password", "err-password", "비밀번호는 8글자 이상의 숫자 영문자 특수문자 조합이어야 합니다.");
 		}
 		
-		if(form.getPassword() != form.getPassword2()) {
+		if(!form.getPassword2().isEmpty() && !form.getPassword().equals(form.getPassword2()) ) {
 			errors.rejectValue("password2", "err-password2", "비밀번호 확인이 올바르지 않습니다.");
 		}
 

@@ -28,5 +28,9 @@ public interface MypageService {
 	int selectBoardCommentCnt(MypageSearchSet searchSet);
 
 	List<BoardComment> selectBoardComment(Map<String, Object> map);
+
+	int selectBoardCnt(MypageSearchSet searchSet);
+
+	List<Board> selectBoard(Map<String, Object> map);
 	
 }

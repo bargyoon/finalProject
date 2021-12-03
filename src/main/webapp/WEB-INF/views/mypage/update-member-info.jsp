@@ -41,33 +41,37 @@
 			<form:form style="margin: 0 auto; width: 400px;" id="frmUpdateMember"
 				action="/mypage/update-member-info" method="post" enctype="multipart/form-data" modelAttribute="updateMemberForm">
 			
-				<div class="input-group form-floating mb-3">
+				<div class="input-group form-floating">
 					<input type="text" class="form-control" id="nickName" name="nickName" placeholder="1"
 						aria-describedby="btnNickNameCheck">
 					<button class="btn btn-outline-secondary" type="button" id="btnNickNameCheck">중복확인</button>
 					<label for="nickName" class="form-label">닉네임</label>
 					
-					<%-- <c:if test="${empty error.nickName}">
-						<span id="nickNameCheck" class="valid-msg"></span>
-					</c:if> --%>
-					<%-- <form:errors id="nickNameCheck" path="nickName" cssClass="valid-msg"/> --%>
+					
+					<form:errors id="nickNameCheck" path="nickName" cssClass="valid-msg"/>
 				</div>
+				<div class="mb-3">
+					<c:if test="${empty error.nickName}">
+						<span id="nickNameCheck" class="valid-msg"></span>
+					</c:if>
+				</div>
+				
 	
 				<div class="form-floating mb-3">
 					<input type="password" class="form-control" id="password" name="password" placeholder="1">
 					<label for="password" class="form-label">변경할 비밀번호</label>
 					
-					<%-- <c:if test="${empty error.password}">
-						<span id="passwordCheck" class="valid-msg">사용 가능한 비밀번호 입니다.</span>
-					</c:if> --%>
-					<%-- <form:errors id="passwordCheck" path="password" cssClass="valid-msg"/> --%>
+					<c:if test="${empty error.password}">
+						<span id="passwordCheck" class="valid-msg"></span>
+					</c:if>
+					<form:errors id="passwordCheck" path="password" cssClass="valid-msg"/>
 				</div>
 				
 				<div class="form-floating mb-3">
 					<input type="password" class="form-control" id="password2" name="password2" placeholder="1">
 					<label for="password2" class="form-label">비밀번호 확인</label>
 					
-					<%-- <form:errors id="passwordCheck" path="password2" cssClass="valid-msg"/> --%>
+					<form:errors id="passwordCheck" path="password2" cssClass="valid-msg"/>
 				</div>
 	
 				<div class="form-floating">
@@ -76,8 +80,8 @@
 				</div>
 				
 				<div class="form-floating mb-3">
-					<input type="text" class="form-control" id="address2" name="address2" placeholder="1">
-					<label for="address2" class="form-label">상세주소</label>
+					<input type="text" class="form-control" id="addressDetail" name="addressDetail" placeholder="1">
+					<label for="addressDetail" class="form-label">상세주소</label>
 				</div>
 				
 				<%-- <div class="mb-3">

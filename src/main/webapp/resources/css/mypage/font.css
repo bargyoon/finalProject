@@ -1,17 +1,9 @@
 @charset "UTF-8";
 
-@font-face {
-	font-family: "NotoSansKrL";
-	src: local("NotoSansKR-Light"), url(C:/CODE/FINAL/fonts/NotoSansKR-Light.otf);
-}
-
-@font-face {
-	font-family: "NotoSansKrR";
-	src: local("NotoSansKR-Regular"), url(C:/CODE/FINAL/fonts/NotoSansKR-Regular.otf);
-}
+@import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
 
 body{
-	font-family: "NotoSansKrL";
+	font-family: "Noto Sans KR";
 }
 
 .nav-link{

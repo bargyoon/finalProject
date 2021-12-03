@@ -64,7 +64,7 @@
 			</div>
 			
 			<div class="form-floating mb-3">
-				<text class="form-control" id="floatingAddress2">${authentication.address2}</text>
+				<text class="form-control" id="floatingAddress2">${authentication.addressDetail}</text>
 				<label for="floatingAddress2">상세주소</label>
 			</div>
 			

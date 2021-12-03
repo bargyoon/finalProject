@@ -40,22 +40,24 @@
 		</nav>
 		
 		<div style="margin: 0 auto; width: 800px">
-			<form action="/mypage/delete?table=boardComment">
+			<form action="/mypage/delete-board-comment">
 				<table class="table table-hover" style="text-align: center;">
 				  <thead>
 				    <tr>
 				      <th style="width: 5%"><input type="checkbox"></th>
-				      <th scope="col" style="width: 15%">댓글 번호</th>
-				      <th scope="col" style="width: 70%">댓글 내용</th>
-				      <th scope="col" style="width: 10%">작성일</th>
+				      <th scope="col" style="width: 10%">댓글번호</th>
+				      <th scope="col" style="width: 60%">내용</th>
+				      <th scope="col" style="width: 10%">추천수</th>
+				      <th scope="col" style="width: 20%">작성일</th>
 				    </tr>
 				  </thead>
 				  <tbody>
 				  	<c:forEach var="comment" items="${commentList}">
 				  	<tr>
-				  		<td><input type="checkbox" name="index" value="${comment.cmIdx}"></td>
-				  		<td><a href="/board/#">${comment.cmidx}</a></td>
-				  		<td><a href="/board/#">${comment.cmContent}</a></td>
+				  		<td><input type="checkbox" name="cmIdx" value="${comment.cmIdx}"></td>
+				  		<td>${comment.cmIdx}</td>
+				  		<td><a href="/board/${category}/detail?bdIdx=${comment.bdIdx}">${comment.cmContent}</a></td>
+				  		<td>${comment.cmRecCount}</td>
 				  		<td>${comment.regDate}</td>
 				  	</tr>
 				  	</c:forEach>
@@ -95,18 +97,19 @@
 				</nav>
 			</div>
 			
-			<form action="/mypage/managing-board?">
+			<form>
 				<div style="display:flex; justify-content:center;">
-					<input name="keyword" style="width: 300px;" type="search" class="form-control" placeholder="Search..." aria-label="Search">
-					<button type="button" class="btn btn-primary"
-						onclick="">검색</button>
+					<input name="keyword" id="keyword" value="${searchSet.keyword}" style="width: 300px;" type="search" class="form-control" placeholder="Search..." aria-label="Search" required="required">
+					<button type="button" class="btn btn-primary" onclick="searchKeyword()">검색</button>
 				</div>
 			</form>
+			
 		</div>
 	</div>
 </section>
 
 <script type="text/javascript">
+	/* 페이징 기능 */
 	let prevBtn = (curPage, keyword) => {
 		if(curPage == 1){
 			alert("첫번째 페이지 입니다.")
@@ -114,7 +117,6 @@
 		}
 		
 		let prevPage = curPage - 1;
-
 		pageBtn(keyword, prevPage);
 	}
 	
@@ -125,13 +127,26 @@
 		}
 		
 		let nextPage = curPage + 1;
-		
 		pageBtn(keyword, nextPage);
 	}
 	
 	let pageBtn = (keyword, page) => {
 		location.href = "/mypage/managing-board-comment?keyword=" + keyword + "&page=" + page;
 	}
+	/* 검색기능 */
+	const URLSearch = new URLSearchParams(location.search);
+	
+	let searchKeyword = () =>{
+    	var keyword = document.querySelector("#keyword").value
+    	if(keyword == ''){
+    		alert("검색어를 입력해주세요.")
+    		return
+    	}
+  		 URLSearch.set("keyword", String(keyword));
+     	 const newParam = URLSearch.toString();
+     	 location.href = location.pathname + '?' + newParam
+    }
+	
 </script>
 
 <aside class="fixed-up-btn btn badge-rank" id="up_btn" type="button" onclick="window.scrollTo(0,0)" style="float: right;">
