@@ -8,7 +8,7 @@
 </head>
 <body>
 
-<section>
+<section style="background-color: rgb(240, 234, 213);">
 	
 		<div class="petcare-back">						
 				<a href="/petcare/food/cat"><i class="fas fa-angle-double-right"></i> 고양이 금지음식 보러가기</a>

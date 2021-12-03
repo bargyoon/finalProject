@@ -27,7 +27,7 @@ public interface MarketMypageService {
 	List<Map<String, Object>> selectOrderList(int userIdx, int state,String fromDate, String endDate);
 	
 	//reveiwList 구매확정 목록
-	List<Map<String, Object>> selectReviewList(int userIdx, int state,String fromDate, String endDate);
+	List<Map<String, Object>> selectReviewList(int userIdx, String fromDate, String endDate);
 	
 	//updateDate, state
 	void updateDateAndState();
@@ -40,6 +40,7 @@ public interface MarketMypageService {
 	
 	//review 등록
 	void insertReview(List<MultipartFile> mfs, Review review);
+	void updateIsReview(int orderIdx);
 	
 	//prdIdx 업데이트
 	void updatePrdIdx(int orderIdx);
@@ -58,6 +59,7 @@ public interface MarketMypageService {
 	
 	//문의 리스트
 	List<Map<String, Object>> selectEnquiryList(int userIdx, String fromDate, String endDate);
+	List<QNA> selectFAQList(String type);
 	
 	//문의 등록
 	void insertEnquiry(QNA qna);

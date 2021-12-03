@@ -16,7 +16,7 @@ public class QNA {
 	   private String type;
 	   private Date regDate;
 	   private String isAnswer;
-	   private String ansContext;
-	   private Date ansRegDate;
+	   private String awContext;
+	   private Date awRegDate;
 
 }

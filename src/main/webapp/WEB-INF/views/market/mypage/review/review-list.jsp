@@ -137,7 +137,8 @@
 	</section>
 	
 	<%@ include file="/WEB-INF/views/include/market/footer.jsp"%>
-
+	<script type="text/javascript" src="${contextPath}/resources/js/market/mypage/date-search.js"></script>
+	
 
 
 </body>

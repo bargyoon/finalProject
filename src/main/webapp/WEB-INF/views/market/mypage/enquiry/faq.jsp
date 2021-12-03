@@ -81,14 +81,14 @@
 				<input type="text" name="faq_search_value"><a class="btn btn-outline-dark" type="submit" href="#!">검색</a>
 			</form>
 			<ul class="faq-nav">
-				<li><a href="faq-type-1">주문/결제</a></li>
-				<li><a href="faq-type-2">배송</a></li>
-				<li><a href="faq-type-3">교환/환불</a></li>
-				<li><a href="faq-type-4">회원관련</a></li>
-				<li><a href="faq-type-5">신고</a></li>
-				<li><a href="faq-type-6">상품 문의</a></li>
-				<li><a class="faq-type-7" href="faq-type-7">적립금</a></li>
-				<li><a href="faq-type-8">기타 문의</a></li>
+				<li><a href="/market/mypage/enquiry/faq?type=1">주문/결제</a></li>
+				<li><a href="/market/mypage/enquiry/faq?type=2">배송</a></li>
+				<li><a href="/market/mypage/enquiry/faq?type=3">교환/환불</a></li>
+				<li><a href="/market/mypage/enquiry/faq?type=4">회원관련</a></li>
+				<li><a href="/market/mypage/enquiry/faq?type=5">신고</a></li>
+				<li><a href="/market/mypage/enquiry/faq?type=6">상품 문의</a></li>
+				<li><a href="/market/mypage/enquiry/faq?type=7">적립금</a></li>
+				<li><a href="/market/mypage/enquiry/faq?type=8">기타 문의</a></li>
 			</ul>
 			<table class="n-table table-col faq-table">
 				<colgroup>
@@ -101,30 +101,21 @@
 						<th scope="col">내용</th>
 					</tr>
 				</thead>
+				
+				<c:forEach var="faqList" items="${faqList}">
 				<tbody>
 					<tr>
 						<td>1</td>
-						<td onclick="openFaq(1)">재고가 없어요. 언제쯤 구입할 수 있을까요?</td>
+						<td onclick="openFaq(1)">${faqList.TITLE}</td>
 					</tr>
 					<tr class="faq-answer" id="faq-answer-1">
 						<td>답변</td>
 						<td>
-							<p>일반적으로 입점 업체의 품절 상품 재입고 여부 및 일정은 무신사 스토어에서는 정확히 알기 어렵습니다.
-							재입고 여부는 상품 상세 페이지의 상품문의 게시판을 통하여 문의하시는 것이 가장 정확합니다. 재입고 알림을
-							등록하시면 재입고 알림 문자를 받아보실 수 있습니다.</p>
-						</td>
-					</tr>
-					<tr>
-						<td>2</td>
-						<td onclick="openFaq(2)">가격이 떨어져 예전에 구매했을 때 보다 싸게 팔고 있는 경우 차액 환불이 되나요?</td>
-					</tr>
-					<tr class="faq-answer" id="faq-answer-2">
-						<td>답변</td>
-						<td>
-							<p>판매 가격의 변동에 따른 차액을 보상해드리지 않습니다.</p>
+							<p>${faqList.AW_CONTEXT}</p>
 						</td>
 					</tr>
 				</tbody>
+				</c:forEach>
 			</table>
 		</div>
 	</section>

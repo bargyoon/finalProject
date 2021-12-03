@@ -22,7 +22,6 @@ import com.kh.spring.market.model.dto.SaveHistory;
 import com.kh.spring.market.model.dto.prdListSet;
 import com.kh.spring.member.model.dto.Member;
 
-import lombok.Delegate;
 
 @Mapper
 public interface MarketMypageRepository {
@@ -48,7 +47,7 @@ public interface MarketMypageRepository {
 	List<Map<String, Object>> selectOrderList(@Param("userIdx")int userIdx, @Param("state")int state, @Param("fromDate")String fromDate, @Param("endDate")String endDate);
 	
 	//reveiwList 구매확정 목록
-	List<Map<String, Object>> selectReviewList(int userIdx);
+	List<Map<String, Object>> selectReviewList(@Param("userIdx")int userIdx, @Param("fromDate")String fromDate, @Param("endDate")String endDate);
 	
 	//update state of ORDER
 	@Update("update \"ORDER\""
@@ -60,9 +59,9 @@ public interface MarketMypageRepository {
 	List<Map<String, Object>> selectReviewDetail(Order order);
 	
 	//review 등록
-	@Insert("insert into review(rv_idx, user_idx, prd_idx, order_idx, rating, type, rv_content) "
-			+ "values(SC_RV_IDX.NEXTVAL, #{userIdx}, #{prdIdx}, #{orderIdx}, #{rating}, #{type}, #{rvContent})")
 	void insertReview(Review review);
+	@Update("update \"ORDER\" set is_review =1 where order_idx=#{orderIdx}")
+	void updateIsReview(int orderIdx);
 	
 	//review 사진 등록
 	@Insert("insert into file_info(fl_idx, type_idx, origin_file_name, rename_file_name, save_path)"
@@ -102,6 +101,10 @@ public interface MarketMypageRepository {
 	
 	//문의 리스트
 	List<Map<String, Object>> selectEnquiryList(@Param("userIdx")int userIdx, @Param("fromDate")String fromDate, @Param("endDate")String endDate);
+	
+	//FAQ 리스트
+	//@Select("select * from qna where user_idx=9 and type=#{type}") //관리자가 등록한 FAQ 리스트
+	List<QNA> selectFAQList(@Param("type")String type);
 	
 	//address
 	void insertAddress(Address address);

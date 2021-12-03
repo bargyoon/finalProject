@@ -57,8 +57,8 @@ public class MarketMypageServiceImpl implements MarketMypageService{
 	}
 
 	@Override
-	public List<Map<String, Object>> selectReviewList(int userIdx,int state, String fromDate, String endDate) {
-		List<Map<String, Object>> reviewList = mypageRepository.selectOrderList(userIdx,state,fromDate, endDate);		
+	public List<Map<String, Object>> selectReviewList(int userIdx, String fromDate, String endDate) {
+		List<Map<String, Object>> reviewList = mypageRepository.selectReviewList(userIdx, fromDate, endDate);
 		return reviewList;
 	}
 
@@ -85,8 +85,12 @@ public class MarketMypageServiceImpl implements MarketMypageService{
 					mypageRepository.insertFileInfo(fileUtil.fileUpload(multipartFile));
 				}
 			}
-		}
-		
+		}		
+	}
+	
+	@Override
+	public void updateIsReview(int orderIdx) {
+		mypageRepository.updateIsReview(orderIdx);		
 	}
 
 	@Override
@@ -145,6 +149,13 @@ public class MarketMypageServiceImpl implements MarketMypageService{
 		mypageRepository.insertEnquiry(qna);
 		
 	}
+	
+	@Override
+	public List<QNA> selectFAQList(String type) {
+		List<QNA> faqList = mypageRepository.selectFAQList(type);
+		 return faqList;
+	}
+
 
 	@Override
 	public void insertSaveMoney(SaveHistory saveHistory) {
@@ -181,5 +192,8 @@ public class MarketMypageServiceImpl implements MarketMypageService{
 	public Address selectAddressDetail(int addressIdx) {
 		return mypageRepository.selectAddressDetail(addressIdx);
 	}
+
+	
+	
 	
 }

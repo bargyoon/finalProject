@@ -72,7 +72,6 @@
 				<li>적립금은 상품 금액의 5%까지만 사용 가능합니다.</li>
 			</ul>
 			<ul class="sub-ul pt-4 pb-2">
-				<li><a href="/market/mypage/acc-money">전체</a></li>
 				<li><a href="/market/mypage/acc-money?state=0">적립</a></li>
 				<li><a href="/market/mypage/acc-money?state=1">사용</a></li>
 			</ul>

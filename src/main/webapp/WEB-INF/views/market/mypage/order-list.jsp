@@ -144,7 +144,7 @@
 						</c:choose>
 							<p class="mb-2" style="border: 1px solid lightgray;">배송조회</p>
 							
-							<c:if test="${orderList.STATE eq 3}">
+							<c:if test="${orderList.STATE eq 4 || orderList.STATE eq 3}">
 							<div class="text-white" href="#" role="button" style="background-color: black;">
 								<div class="btn-group">
 									<a class="nav-link link-white" href="#!">후기작성</a>
@@ -167,93 +167,7 @@
 	</section>
 
 	<%@ include file="/WEB-INF/views/include/market/footer.jsp"%>
-	<script type="text/javascript">
-	
-	//현재시간으로 설정
-	document.getElementById('fromDate').valueAsDate = new Date();
-	document.getElementById('endDate').valueAsDate = new Date();
-	
-	console.dir(document.getElementById('fromDate').valueAsDate);
-	
-	//최대, 최소 날짜 설정
-	var today = new Date();
-	var dd = today.getDate();
-	var mm = today.getMonth()+1; // 1월은 0
-	var yyyy = today.getFullYear();
-	
-	 if(dd<10){
-	     dd='0'+dd
-	  } 
-	if(mm<10){
-		 mm='0'+mm
-	} 
-	
-	today = yyyy+'-'+mm+'-'+dd; // yyyy-mm-dd
-	
-	document.getElementById("fromDate").setAttribute("max", today);
-	document.getElementById("endDate").setAttribute("max", today);
-	
-	function resetDate() {
-		
-		var fromDate = document.getElementById('fromDate').value;
-		var endDate = document.getElementById('endDate').value;
-		 var fromArray = fromDate.split('-');
-         var endArray = endDate.split('-');   
-         
-         var start_date = new Date(fromArray[0], fromArray[1], fromArray[2]);
-         var end_date = new Date(endArray[0], endArray[1], endArray[2]);
-              //날짜를 숫자형태로 바꿔서 비교
-         if(start_date.getTime() > end_date.getTime()) {
-             alert("종료날짜보다 시작날짜가 작아야합니다.");
-             return false;
-		}
-	
-	}
-	
-	//radio button으로 기간 설정
-	function setDate() {
-		
-		//라디오버튼
-		var radioLength = document.getElementsByName('period').length;
-		for (var i = 0; i < radioLength; i++) {
-            if (document.getElementsByName("period")[i].checked == true) {
-            	var radioBnt = document.getElementsByName("period")[i].value;
-            	console.dir(radioBnt);
-            }
-        }
-		
-		var date = new Date();
-		var dd = date.getDate();
-		var mm = date.getMonth()+1; // 1월은 0
-		var yyyy = date.getFullYear();
-		
-		if(radioBnt=="1"){ //일주일 
-			 dd=dd-7;
-			 if(dd<10){dd='0'+dd} 
-			 if(mm<10){mm='0'+mm} 
-			 date = yyyy+'-'+mm+'-'+dd; // yyyy-mm-dd
-			 document.getElementById('fromDate').value = date;
-			 document.getElementById('endDate').valueAsDate = new Date();
-		}else if(radioBnt=="2"){ //한달
-			 mm=mm-1;
-			 if(dd<10){dd='0'+dd} 
-			 if(mm<10){mm='0'+mm} 
-			 date = yyyy+'-'+mm+'-'+dd; 
-			 document.getElementById('fromDate').value = date;
-			 document.getElementById('endDate').valueAsDate = new Date();
-		}else if(radioBnt=="3"){ //3개월
-			 mm=mm-3;
-			 if(dd<10){dd='0'+dd} 
-			 if(mm<10){mm='0'+mm} 
-			 date = yyyy+'-'+mm+'-'+dd;
-			 document.getElementById('fromDate').value = date;
-			 document.getElementById('endDate').valueAsDate = new Date();
-		}
-	}
-		
-		
-		
-	</script>
+	<script type="text/javascript" src="${contextPath}/resources/js/market/mypage/date-search.js"></script>
 
 
 </body>

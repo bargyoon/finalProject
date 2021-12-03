@@ -21,5 +21,6 @@ public class Order {
 	private String shippingCompany;
 	private int saveMoney;
 	private Date updateDate;
+	private int isReview;
 	
 }

@@ -101,7 +101,7 @@
 								<a href="#!"><img src="https://dummyimage.com/100x120/dee2e6/6c757d.jpg"></a>
 								<ul class="info">
 									<li class="brand">${myReviewList.BRAND}</li>
-									<li class="name ft-SBAggroM"><a href="#!" style="text-decoration: none; color: black;">${datas.myReviewList.NAME}</a></li>
+									<li class="name ft-SBAggroM"><a href="#!" style="text-decoration: none; color: black;">${myReviewList.NAME}</a></li>
 									<li class="option">${myReviewList.PO_NAME}</li>
 								</ul>
 							</div>

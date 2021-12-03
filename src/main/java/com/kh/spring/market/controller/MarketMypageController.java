@@ -42,8 +42,8 @@ public class MarketMypageController {
 		
 		int member = certifiedUser.getUserIdx();
 		int state = order.getState();
+		
 		List<Map<String, Object>> orderList = marketMypageService.selectOrderList(member,state,fromDate, endDate);
-		System.out.println("state : " + order.getState());
 		Member memberInfo = marketMypageService.selectMemberInfo(member);
 		int couponCnt = marketMypageService.selectCouponCount(member);
 				
@@ -93,7 +93,6 @@ public class MarketMypageController {
 	@GetMapping("address-pop")
 	public void addressPop(@SessionAttribute(name="authentication")Member certifiedUser,
 							Model model,
-							//@RequestParam("addressIdx")int addressIdx,
 							Address address) {
 		
 		List<Address> addressList = marketMypageService.selectAddressList(certifiedUser.getUserIdx());
@@ -143,7 +142,7 @@ public class MarketMypageController {
 	@GetMapping("acc-money")
 	public void accMoney(@SessionAttribute(name="authentication")Member certifiedUser,
 								Model model,
-								@RequestParam(value = "state", defaultValue="1")String state) {
+								@RequestParam(value = "state", defaultValue="0")String state) {
 		
 		List<Map<String, Object>> reserveList = marketMypageService.selectReserveList(certifiedUser.getUserIdx(),state);
 		Member memberInfo = marketMypageService.selectMemberInfo(certifiedUser.getUserIdx());
@@ -152,17 +151,12 @@ public class MarketMypageController {
 		model.addAttribute("memberInfo", memberInfo);
 		model.addAttribute("couponCnt", couponCnt);
 		model.addAttribute("reserveList", reserveList);
-		
-		System.out.println("state : " + state);
-		System.out.println("reserveList : " + reserveList);
 	}
 	
 	@GetMapping("enquiry/enquiry-form")
 	public void enquiryForm(@SessionAttribute(name="authentication")Member certifiedUser,
 							Model model) {
-		//List<Map<String, Object>> memberEnquiry = marketMypageService.memberInfoForEnquiry(certifiedUser.getUserIdx());
 		Member memberInfo = marketMypageService.selectMemberInfo(certifiedUser.getUserIdx());
-		
 		model.addAttribute("memberInfo", memberInfo);
 	}
 	
@@ -175,8 +169,6 @@ public class MarketMypageController {
 		
 		List<Map<String, Object>> orderList = marketMypageService.selectOrderList(certifiedUser.getUserIdx(), order.getState(),fromDate, endDate);
 		model.addAttribute("orderList", orderList);
-		
-		System.out.println("orderList : " + orderList);
 	}
 	
 	@PostMapping("enquiry/upload")
@@ -184,10 +176,7 @@ public class MarketMypageController {
 							,@SessionAttribute("authentication")Member certifiedUser) {
 		
 		qna.setUserIdx(certifiedUser.getUserIdx());		
-		System.out.println("qna : " + qna);
-		
 		marketMypageService.insertEnquiry(qna);
-
 		return "redirect:/market/mypage/enquiry/enquiry-list"; 
 	}
 	
@@ -199,9 +188,6 @@ public class MarketMypageController {
 							@RequestParam(value = "fromDate", required = false)String fromDate,
 							@RequestParam(value = "endDate", required = false)String endDate) {
 		
-		System.out.println("fromDate : " + fromDate);
-		System.out.println("endDate : " + endDate);
-		
 		List<Map<String, Object>> enquiryList = marketMypageService.selectEnquiryList(certifiedUser.getUserIdx(),fromDate, endDate);
 		Member memberInfo = marketMypageService.selectMemberInfo(certifiedUser.getUserIdx());
 		int couponCnt = marketMypageService.selectCouponCount(certifiedUser.getUserIdx());
@@ -209,22 +195,31 @@ public class MarketMypageController {
 		model.addAttribute("enquiryList", enquiryList);
 		model.addAttribute("memberInfo", memberInfo);
 		model.addAttribute("couponCnt", couponCnt);
-		
-		System.out.println("enquiryList : " + enquiryList);
 	}
 
 	@GetMapping("enquiry/faq")
-	public void faq() {}
+	public void faq(@SessionAttribute(name="authentication")Member certifiedUser,
+					Model model,
+					QNA qna) {
+		Member memberInfo = marketMypageService.selectMemberInfo(certifiedUser.getUserIdx());
+		int couponCnt = marketMypageService.selectCouponCount(certifiedUser.getUserIdx());
+		List<QNA> faqList = marketMypageService.selectFAQList(qna.getType());
+		
+		model.addAttribute("memberInfo", memberInfo);
+		model.addAttribute("couponCnt", couponCnt);	
+		model.addAttribute("faqList", faqList);
+
+	}
 
 	@GetMapping("review/normal-form")
 	public void normalForm(@SessionAttribute(name="authentication")Member certifiedUser,
 							@RequestParam("orderIdx")int orderIdx,
 							Model model,
 							Order order) {
-		
 		order.setUserIdx(certifiedUser.getUserIdx());
 		order.setOrderIdx(orderIdx);
-		List<Map<String, Object>> reviewDetail = marketMypageService.selectReviewDetail(order);
+		
+		List<Map<String, Object>> reviewDetail = marketMypageService.selectReviewDetail(order);		
 		Member memberInfo = marketMypageService.selectMemberInfo(certifiedUser.getUserIdx());
 		int couponCnt = marketMypageService.selectCouponCount(certifiedUser.getUserIdx());
 				
@@ -249,9 +244,6 @@ public class MarketMypageController {
 		model.addAttribute("couponCnt", couponCnt);	
 		model.addAttribute("reviewDetail", reviewDetail);
 		
-		System.out.println("reviewDetail : " + reviewDetail);
-		System.out.println("orderIdx : " + orderIdx);
-		
 	}
 	
 	
@@ -259,11 +251,11 @@ public class MarketMypageController {
 	@GetMapping("review/review-list")
 	public void reviewList(@SessionAttribute(name="authentication")Member certifiedUser,
 						   Model model,
-						@RequestParam(value = "state", defaultValue="1")int state,
+						Review review,
 						@RequestParam(value = "fromDate", required = false)String fromDate,
 						@RequestParam(value = "endDate", required = false)String endDate) {
 		
-		List<Map<String, Object>> reviewList = marketMypageService.selectReviewList(certifiedUser.getUserIdx(),state,fromDate, endDate);
+		List<Map<String, Object>> reviewList = marketMypageService.selectReviewList(certifiedUser.getUserIdx(),fromDate, endDate);
 		Member memberInfo = marketMypageService.selectMemberInfo(certifiedUser.getUserIdx());
 		int couponCnt = marketMypageService.selectCouponCount(certifiedUser.getUserIdx());
 		marketMypageService.updateDateAndState(); //구매 후 일주일 지나면 구매확정 state 변경
@@ -271,8 +263,6 @@ public class MarketMypageController {
 		model.addAttribute("reviewList", reviewList);
 		model.addAttribute("memberInfo", memberInfo);
 		model.addAttribute("couponCnt", couponCnt);
-		
-		System.out.println("reviewList : " + reviewList);		
 	}
 	
 	@GetMapping("review/review-list2")
@@ -292,11 +282,6 @@ public class MarketMypageController {
 		model.addAttribute("files", files);
 		model.addAttribute("memberInfo", memberInfo);
 		model.addAttribute("couponCnt", couponCnt);
-		
-		
-		System.out.println("myReviewList : " + myReviewList);
-		System.out.println("files : " + files);
-		System.out.println("memberInfo : " + memberInfo);
 	}
 	
 	@PostMapping("review/upload/{orderIdx}")
@@ -309,24 +294,21 @@ public class MarketMypageController {
 		System.out.println("files : " + files);
 		System.out.println("orderIdx : " + orderIdx);
 		
-		//review.setOrderIdx(orderIdx);
 		review.setUserIdx(certifiedUser.getUserIdx());
+		saveHistory.setUserIdx(certifiedUser.getUserIdx());
 		
-		System.out.println("review : " + review);
-		
-		if(files == null) {
-			review.setType("0"); //일반
+		if(files == null) { //일반후기
+			review.setType("0"); 
 			saveHistory.setState("0");
 			saveHistory.setType("1");
-		}else {
-			review.setType("1");
-			saveHistory.setState("1");
+		}else {				 //사진후기
+			review.setType("1"); 
+			saveHistory.setState("0");
 			saveHistory.setType("2");
 		}
 		
 		marketMypageService.insertReview(files, review);
-		marketMypageService.updatePrdIdx(orderIdx);
-		
+		marketMypageService.updateIsReview(orderIdx);
 		if(review.getType().equals("0")) { //일반후기라면 적립금 300
 			saveHistory.setAmount(300);
 			System.out.println("saveHistory : " + saveHistory);
@@ -336,10 +318,9 @@ public class MarketMypageController {
 			System.out.println("saveHistory : " + saveHistory);
 			marketMypageService.insertSaveMoney(saveHistory);
 		}
-		
-		
+			
 		//파일첨부 안했을 때 예외처리 (RedirectAttributes)
-		System.out.println("review : " + review);
+		System.out.println("upload review : " + review);
 		return "redirect:/market/mypage/review/review-list2"; 
 	}
 
