@@ -37,7 +37,7 @@ public class MemberServiceImpl implements MemberService{
 	
 
 	public void insertMember(Member member) {
-		//member.setPassword(new BCryptPasswordEncoder().encode(member.getPassword()));
+		member.setPassword(new BCryptPasswordEncoder().encode(member.getPassword()));
 		// -> db에 비밀번호 안뜨게돼서 불편하니 시연시에만 키는게 나을듯..?
 		memberRepository.insertMember(member);
 		

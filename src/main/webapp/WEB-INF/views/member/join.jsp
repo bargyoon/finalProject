@@ -5,7 +5,6 @@
 <head>
 <%@ include file="/WEB-INF/views/include/head.jsp" %>
 <%@ include file="/WEB-INF/views/include/navBar.jsp" %>
-<%@ include file="/WEB-INF/views/include/mainJs.jsp" %>
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
@@ -267,8 +266,8 @@
       </div>
 </form:form>
 
-<!-- <script type="text/javascript" src="/resources/js/member/joinForm.js"></script>
-<script type="text/javascript" src="/resources/js/member/mail_auth.js"></script> -->
+<script type="text/javascript" src="/resources/js/member/joinForm.js"></script>
+<script type="text/javascript" src="/resources/js/member/mail_auth.js"></script>
 
 <!-- 주소 api -->
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
@@ -286,6 +285,6 @@ window.onload = function(){
 }
 
 </script>
-   
 </body>
+<%@ include file="/WEB-INF/views/include/footer.jsp" %>
 </html>
