@@ -51,14 +51,21 @@ public interface BoardRepository {
 	
 	void insertComment(BoardComment boardComment);
 	
-	@Select("select * from board_comment where bd_idx = ${bdIdx}")
-	List<BoardComment> selectCommentByIdx(int bdIdx);
+	@Select("select * from board_comment where bd_idx = ${bdIdx} and cm_type = 1 order by reg_date desc")
+	List<BoardComment> selectChildCommentByIdx(int bdIdx);
+	
+	@Select("select * from board_comment where bd_idx = ${bdIdx} and cm_type = 0")
+	List<BoardComment> selectParentCommentByIdx(int bdIdx);
 
-	@Select("select count(*) from board_comment where bd_idx = ${bdIdx}")
+	@Select("select count(*) from board_comment where bd_idx = ${bdIdx} and cm_type = 0")
 	int selectCommentCntByIdx(int bdIdx);
 
 	@Update("update board_comment set pr_idx = cm_idx where cm_type = 0 and pr_idx = 0 ")
 	void updatePrIdx();
+
+	int selectCommentCnt(@Param("commandMap") Map<String, Object> commandMap);
+
+	List<Map<String, Object>> selectCommentList(@Param("commandMap") Map<String, Object> commandMap, @Param("pageUtil")Paging pageUtil);
 
 	
 

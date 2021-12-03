@@ -96,17 +96,17 @@
 													<div class='d-table-cell' style="width: 15%;">카테고리</div>
 													<div class='d-table-cell '>
 														<select style="width: 50%;" class="form-control"
-															aria-hidden="true" onchange="location.href=this.value">
-															<option data-select2-id="3">Select</option>
+															aria-hidden="true" name="category" id="category">
+															<option data-select2-id="3">전체</option>
 
 
-															<option value="AK" data-select2-id="17">Alaska</option>
-															<option value="HI" data-select2-id="18">Hawaii</option>
+															<option value="info" data-select2-id="17">정보게시판</option>
+															<option value="dog" data-select2-id="18">강아지게시판</option>
 
-															<option value="CA" data-select2-id="20">California</option>
-															<option value="NV" data-select2-id="21">Nevada</option>
-															<option value="OR" data-select2-id="22">Oregon</option>
-															<option value="WA" data-select2-id="23">Washington</option>
+															<option value="cat" data-select2-id="20">고양이게시판</option>
+															<option value="review" data-select2-id="21">후기게시판</option>
+															<option value="meet" data-select2-id="22">모임게시판</option>
+															<option value="consulting" data-select2-id="23">상담게시판</option>
 
 
 														</select>
@@ -118,10 +118,10 @@
 												<div style="display: table-row-group;">
 													<div class='d-table-cell' style="width: 15%;">검색 종류</div>
 													<div class='d-table-cell '>
-														<input type="radio" name="allow-type" checked><label
-															class="ml-2 mr-2">작성자</label> <input type="radio"
-															name="allow-type"><label class="ml-2 mr-2">게시글</label>
-														<input type="radio" name="allow-type"><label
+														<input type="radio" name="sort" id="search_option" value="nickname" checked><label
+															class="ml-2 mr-2">작성자</label> <input type="radio" value="content"
+															 name="sort" id="search_option"><label class="ml-2 mr-2">게시글</label>
+														<input type="radio" name="sort" id="search_option" value="bd_title"><label
 															class="ml-2 mr-2">제목</label>
 													</div>
 												</div>
@@ -131,7 +131,7 @@
 													<div class='d-table-cell' style="width: 15%;">키워드 검색</div>
 													<div class='d-table-cell '>
 														<input type="text" class="form-control" style="width: 50%"
-															placeholder="작성자 내용 검색" name="keyword">
+															placeholder="작성자 내용 검색" name="keyword" id="inp">
 													</div>
 												</div>
 											</div>
@@ -139,7 +139,7 @@
 										</div>
 										<div class="border-top">
 											<div class="card-body">
-												<button class="btn-secondary float-right ml-2">검색</button>
+												<button class="btn-secondary float-right ml-2" onclick="searchKeyword()">검색</button>
 												<button class="btn-primary float-right" type="button"
 													onclick="javascript:location.href=location.pathname">초기화</button>
 											</div>
@@ -325,14 +325,18 @@
 		}
     
     let searchKeyword = () =>{
-    	var option = document.querySelector("#search_option").selectedOptions[0].value
-    	var keyword = document.querySelector(".inp").value
+    	var option = document.querySelector("#search_option").value
+    	var keyword = document.querySelector("#inp").value
+    	var category = document.querySelector("#category").value
+    	keyword = keyword.trim()
     	if(keyword == ''){
     		alert("검색어를 입력해주세요.")
     		return
     	}
     	 URLSearch.set("option", String(option));
   		 URLSearch.set("keyword", String(keyword));
+  		 URLSearch.set("category", String(category));
+  		 
      	 const newParam = URLSearch.toString();
      	 location.href = location.pathname + '?' + newParam
   	

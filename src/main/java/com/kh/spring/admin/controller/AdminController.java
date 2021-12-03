@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.kh.spring.admin.model.service.AdminService;
+import com.kh.spring.board.model.dto.BoardComment;
 import com.kh.spring.board.model.service.BoardService;
 import com.kh.spring.common.util.pagination.Paging;
 import com.kh.spring.disease.model.dto.Disease;
@@ -72,6 +73,7 @@ public class AdminController {
 	public void qna() {
 	}
 
+	
 	@GetMapping("member/member-list")
 	public void memberList() {
 	}
@@ -102,7 +104,30 @@ public class AdminController {
 	}
 
 	@GetMapping("contents/comment-list")
-	public void commentList() {
+	public void commentList(Model model
+			,@RequestParam(required = false, defaultValue = "1") int page
+			,@RequestParam(required = false) String option
+			,@RequestParam(required = false) String keyword
+			,@RequestParam(required = false) String category
+			,@RequestParam(required = false, defaultValue = "reg_date") String sort) {
+		Map<String,Object> commandMap = new LinkedHashMap<String,Object>();
+		
+		commandMap.put("category", category);
+		commandMap.put("option", option);
+		commandMap.put("keyword", keyword);
+		commandMap.put("sort", sort);
+		Paging pageUtil = Paging.builder()
+				.curPage(page)
+				.cntPerPage(10)
+				.blockCnt(10)
+				.total(boardService.selectCommentListCnt(commandMap))
+				.build();
+		
+		List<Map<String,Object>> cmList = boardService.selectCommentList(commandMap,pageUtil);
+		
+		model.addAttribute("pageUtil",pageUtil);
+		model.addAttribute("cmList",cmList);
+		model.addAttribute("dataMap",commandMap);
 	}
 
 	@GetMapping("disease/disease-list")

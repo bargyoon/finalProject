@@ -23,4 +23,8 @@ public interface BoardService {
 
 	void insertComment(BoardComment boardComment);
 
+	int selectCommentListCnt(Map<String, Object> commandMap);
+
+	List<Map<String, Object>> selectCommentList(Map<String, Object> commandMap, Paging pageUtil);
+
 }

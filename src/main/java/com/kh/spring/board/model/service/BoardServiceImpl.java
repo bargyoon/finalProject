@@ -53,9 +53,11 @@ public class BoardServiceImpl implements BoardService {
 		board = boardRepository.selectBoardByIdx(bdIdx);
 		boardRepository.updateBoardViewCnt(bdIdx);
 		List<FileDTO> files = boardRepository.selectFileInfoByIdx(bdIdx);
-		List<BoardComment> comment = boardRepository.selectCommentByIdx(bdIdx);
+		List<BoardComment> childComment = boardRepository.selectChildCommentByIdx(bdIdx);
+		List<BoardComment> parentComment = boardRepository.selectParentCommentByIdx(bdIdx);
+		
 		int commentCnt = boardRepository.selectCommentCntByIdx(bdIdx);
-		return Map.of("board", board, "files", files, "comment", comment, "commentCnt", commentCnt);
+		return Map.of("board", board, "files", files, "pcomment", parentComment,"chcomment",childComment, "commentCnt", commentCnt);
 	}
 
 	public int selectBoardListCnt(Map<String, Object> commandMap) {
@@ -91,5 +93,15 @@ public class BoardServiceImpl implements BoardService {
 		}
 
 	}
-
+	
+	public int selectCommentListCnt(Map<String, Object> commandMap) {
+		
+		return boardRepository.selectCommentCnt(commandMap);
+	}
+	
+	@Override
+	public List<Map<String, Object>> selectCommentList(Map<String, Object> commandMap, Paging pageUtil) {
+		
+		return boardRepository.selectCommentList(commandMap, pageUtil);
+	}
 }

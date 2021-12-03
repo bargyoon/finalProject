@@ -115,7 +115,7 @@
 
 									<!-- Comments -->
 									<div>
-										<c:forEach items="${comment}" var="comment">
+										<c:forEach items="${pcomment}" var="comment">
 											<div class="media-block">
 
 												<div class="media-body">
@@ -129,7 +129,8 @@
 													<div class="pad-ver">
 														<span class="text-muted text-sm"><fmt:formatDate
 																pattern="yyyy-MM-dd hh:mm:ss" value="${comment.regDate}" /></span>
-														<button type="button" class="newBtn" onclick="addCommentBtn(${comment.cmIdx})">댓글달기</button>
+														<button type="button" class="newBtn"
+															onclick="addCommentBtn(${comment.cmIdx})">댓글달기</button>
 
 														<button class="btn btn-default btn-hover-success active"
 															style="float: right">
@@ -144,31 +145,69 @@
 												</div>
 											</div>
 											<hr>
-											<div id="input${comment.cmIdx}">
-											<div class="media-block" style="position: relative;" >
-											<span style="position: absolute; top: 32px">ㄴ</span>
-											<div class="media-body" style="padding: 30px;">
 
-												<div class="mar-btm">
-													<span class="text-semibold">닉넴</span>
+											<div id="input${comment.cmIdx}" style="display: none">
+												<div class="media-block" style="position: relative;">
+													<span style="position: absolute; top: 32px">ㄴ</span>
+													<div class="media-body" style="padding: 30px;">
 
+														<div class="mar-btm">
+															<span class="text-semibold">닉넴</span>
+
+														</div>
+
+														<div class="bt_wrap mt-1">
+															<input type="text" placeholder="댓글을 남겨주세요"
+																name="cmContent" id="cmContent"
+																style="width: 85%; height: 50px; font-size: 16px;">
+															<a class="on"
+																onclick="insertReComment(this,${board.bdIdx},${comment.cmIdx})">등록</a>
+														</div>
+
+
+
+													</div>
 												</div>
-
-												<div class="bt_wrap mt-1">
-													<input type="text" placeholder="댓글을 남겨주세요" name="cmContent"
-														id="cmContent"
-														style="width: 85%; height: 50px; font-size: 16px;">
-													<a class="on" onclick="insertReComment(this,${board.bdIdx},${comment.cmIdx})">등록</a>
-												</div>
-
-
-
+												<hr>
 											</div>
-										</div>
-										<hr>
-										</div>
+											<c:forEach items="${chcomment}" var="chcomment">
+												<c:if test="${chcomment.prIdx == comment.cmIdx}">
+													<div class="media-block" style="position: relative;">
+														<span style="position: absolute;">ㄴ</span>
+														<div class="media-body" style="padding:0 30px;">
+
+															<div class="mar-btm">
+																<span
+																	class="text-semibold text-success media-heading box-inline">${chcomment.nickname}</span>
+
+															</div>
+															<p>${chcomment.cmContent}</p>
+															<div class="pad-ver">
+																<span class="text-muted text-sm"><fmt:formatDate
+																		pattern="yyyy-MM-dd hh:mm:ss"
+																		value="${chcomment.regDate}" /></span>
+
+
+																<button class="btn btn-default btn-hover-success active"
+																	style="float: right">
+																	<i class="fa fa-thumbs-up"></i>
+																</button>
+
+
+
+															</div>
+
+
+
+														</div>
+													</div>
+													<hr>
+
+												</c:if>
+											</c:forEach>
+
 										</c:forEach>
-										
+
 
 									</div>
 								</div>
