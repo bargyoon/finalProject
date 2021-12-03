@@ -32,6 +32,7 @@
 			<tbody>
 				<tr>
 					<td class="address_name_td">
+					<div id="contentCheck" class="valid-msg"></div>
 						<span>
 							<label for="addressName">배송지명</label>
 							<input type="text" name="addressName" id="addressName" class="ip_text" maxlength="20"">
@@ -42,7 +43,7 @@
 					<td>
 						<span class="zip_span" style="width: 64px">
 							<label for="zipCode" class="">우편번호</label>
-							<input type="text" id="zipCode" class="ip_text">							
+							<input type="text" id="zipCode" class="ip_text" readonly="readonly">							
 						</span>
 						<input type="button" onclick="execPostcode()" value="우편번호 찾기"><br>
 						<p class="address_detail">
@@ -66,13 +67,15 @@
 				<p><i class="fas fa-check"></i> 입력/수정하신 배송지는 배송지 목록에 저장됩니다.</p>
 			</div>
 			<div>			
+				<input type="checkbox" name="isDefault" id="isDefault" value="Y">
+				<label class="default_address px-1" for="isDefault">기본 배송지로 등록합니다.</label>
+			</div>
+						
 			</div>
 			<div class="address_pop_btn">
 				<input type="button" onclick="window.close();" value="닫기">
 				<input type="button" onclick="addressSubmit()" id="saveBtn" value="저장"> 
-			</div>
-			
-			</div>
+			</div>	
 		</div>
 		</form>
 	
@@ -115,6 +118,14 @@
 		 
 		 
 		 function addressSubmit() {
+			 
+			 	var name = document.getElementById("addressName").value.length;
+				var detail = document.getElementById("addressDetail").value.length;
+				if(name==0 || detail==0){
+					document.querySelector('#contentCheck').innerHTML = '모든 정보를 입력해야합니다.';
+			        return false;
+				}
+				
 			    var form = document.forms.form;
 			    document.domain = "localhost";
 			    opener.name = "openerNames";

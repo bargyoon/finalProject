@@ -45,7 +45,7 @@ public interface MarketMypageRepository {
 	//적립금 유형 : 주문(0), 일반후기(2), 사진후기(3), 적립금결제(4), 결제취소(5)
 	
 	//Order List
-	List<Map<String, Object>> selectOrderList(@Param("userIdx")int userIdx, @Param("state")int state);
+	List<Map<String, Object>> selectOrderList(@Param("userIdx")int userIdx, @Param("state")int state, @Param("fromDate")String fromDate, @Param("endDate")String endDate);
 	
 	//reveiwList 구매확정 목록
 	List<Map<String, Object>> selectReviewList(int userIdx);
@@ -104,16 +104,11 @@ public interface MarketMypageRepository {
 	List<Map<String, Object>> selectEnquiryList(@Param("userIdx")int userIdx, @Param("fromDate")String fromDate, @Param("endDate")String endDate);
 	
 	//address
-	@Insert("insert into \"ADDRESS\"(address_idx,address,user_idx, address_name, address_detail)"
-			+ "values(SC_ADDRESS_IDX.NEXTVAL,#{address},#{userIdx},#{addressName},#{addressDetail})")
 	void insertAddress(Address address);
 	
 	void updateAddress(Address address);
 	
-	@Update("update \"ADDRESS\" "
-			+ " set is_default = 'N'"
-			+ " where address_idx != #{addressIdx} and user_idx = #{userIdx}") //나머지 배송지 is_default를 N으로
-	void updateIsDefault(Address address);
+	void updateAddressIsDefault(Address address);
 	
 	@Delete("DELETE \"ADDRESS\" where  address_idx = #{addressIdx}")
 	void deleteAddress(int addressIdx);

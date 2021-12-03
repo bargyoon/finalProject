@@ -24,10 +24,10 @@ public interface MarketMypageService {
 	void insertSaveMoney(SaveHistory saveHistory);
 	
 	//OrderList
-	List<Map<String, Object>> selectOrderList(int userIdx, int state);
+	List<Map<String, Object>> selectOrderList(int userIdx, int state,String fromDate, String endDate);
 	
 	//reveiwList 구매확정 목록
-	List<Map<String, Object>> selectReviewList(int userIdx, int state);
+	List<Map<String, Object>> selectReviewList(int userIdx, int state,String fromDate, String endDate);
 	
 	//updateDate, state
 	void updateDateAndState();
@@ -65,7 +65,7 @@ public interface MarketMypageService {
 	//address
 	void insertAddress(Address address);
 	void updateAddress(Address address);
-	void updateIsDefault(Address address);
+	void updateAddressIsDefault(Address address);
 	void deleteAddress(int addressIdx);
 	List<Address> selectAddressList(int userIdx);
 	Address selectAddressDetail(int addressIdx);

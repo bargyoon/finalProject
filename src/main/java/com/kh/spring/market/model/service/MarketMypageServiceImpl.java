@@ -51,14 +51,14 @@ public class MarketMypageServiceImpl implements MarketMypageService{
 	}
 
 	@Override
-	public List<Map<String, Object>> selectOrderList(int userIdx, int state) {
-		List<Map<String, Object>> orderList = mypageRepository.selectOrderList(userIdx,state);
+	public List<Map<String, Object>> selectOrderList(int userIdx, int state, String fromDate, String endDate) {
+		List<Map<String, Object>> orderList = mypageRepository.selectOrderList(userIdx,state,fromDate, endDate);
 		return orderList;
 	}
 
 	@Override
-	public List<Map<String, Object>> selectReviewList(int userIdx,int state) {
-		List<Map<String, Object>> reviewList = mypageRepository.selectOrderList(userIdx,state);		
+	public List<Map<String, Object>> selectReviewList(int userIdx,int state, String fromDate, String endDate) {
+		List<Map<String, Object>> reviewList = mypageRepository.selectOrderList(userIdx,state,fromDate, endDate);		
 		return reviewList;
 	}
 
@@ -173,8 +173,8 @@ public class MarketMypageServiceImpl implements MarketMypageService{
 	}
 
 	@Override
-	public void updateIsDefault(Address address) {
-		mypageRepository.updateIsDefault(address);
+	public void updateAddressIsDefault(Address address) {
+		mypageRepository.updateAddressIsDefault(address);
 	}
 
 	@Override

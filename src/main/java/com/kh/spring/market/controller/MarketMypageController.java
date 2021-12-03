@@ -36,9 +36,13 @@ public class MarketMypageController {
 	@GetMapping("")
 	public String mypage(@SessionAttribute(name="authentication")Member certifiedUser,
 						Model model,
-						Order order) {
+						Order order,
+						@RequestParam(value = "fromDate", required = false)String fromDate,
+						@RequestParam(value = "endDate", required = false)String endDate) {
+		
 		int member = certifiedUser.getUserIdx();
-		List<Map<String, Object>> orderList = marketMypageService.selectOrderList(member,order.getState());
+		int state = order.getState();
+		List<Map<String, Object>> orderList = marketMypageService.selectOrderList(member,state,fromDate, endDate);
 		System.out.println("state : " + order.getState());
 		Member memberInfo = marketMypageService.selectMemberInfo(member);
 		int couponCnt = marketMypageService.selectCouponCount(member);
@@ -95,13 +99,9 @@ public class MarketMypageController {
 		List<Address> addressList = marketMypageService.selectAddressList(certifiedUser.getUserIdx());
 		model.addAttribute("addressList", addressList);
 		
-		//Address addressPop = marketMypageService.selectAddressDetail(addressIdx);
 		Address addressPop = marketMypageService.selectAddressDetail(address.getAddressIdx());
 		model.addAttribute("addressPop", addressPop);
 		
-		//System.out.println("addressIdx : " + addressIdx);
-		System.out.println("addressIdx : " + address.getAddressIdx());
-		System.out.println("addressPop : " + addressPop);
 	}
 	
 	@PostMapping("address-pop/upload/{addressIdx}")
@@ -109,16 +109,11 @@ public class MarketMypageController {
 							@PathVariable int addressIdx,
 							Address address
 							) {	
-		System.out.println("pop address : " + address);
-		System.out.println("addressIdx : " + addressIdx);
-		System.out.println("isDefault? : " + address.getIsDefault());
-		
+			
 		marketMypageService.updateAddress(address);
 		if(address.getIsDefault() != null) {
-			marketMypageService.updateIsDefault(address);
-			System.out.println("isDefault 변경");
+			marketMypageService.updateAddressIsDefault(address);
 		}
-	    System.out.println("address update 완료");
 		return "redirect:/market/mypage/address-list"; 
 	}
 	
@@ -130,19 +125,17 @@ public class MarketMypageController {
 								Address address) {
 		
 		address.setUserIdx(certifiedUser.getUserIdx());
-		System.out.println("insert userIdx : " + address);
+		if(address.getIsDefault() != null) {
+			marketMypageService.updateAddressIsDefault(address);
+		}
 		marketMypageService.insertAddress(address);
-		System.out.println("insert address 성공");
-		
 		return "redirect:/market/mypage/address-list"; 
 	}
-	
-	
+		
 	
 	@GetMapping("address-list/delete")
 	public String deleteAddress(@RequestParam("addressIdx")int addressIdx) {
 		
-		System.out.println("delete addressIdx : " + addressIdx);
 		marketMypageService.deleteAddress(addressIdx);
 		return "redirect:/market/mypage/address-list"; 
 	}
@@ -176,9 +169,11 @@ public class MarketMypageController {
 	@GetMapping("enquiry/enquiry-pop")
 	public void enquiryPop(@SessionAttribute(name="authentication")Member certifiedUser,
 							Model model,
-							Order order) {
+							Order order,
+							@RequestParam(value = "fromDate", required = false)String fromDate,
+							@RequestParam(value = "endDate", required = false)String endDate) {
 		
-		List<Map<String, Object>> orderList = marketMypageService.selectOrderList(certifiedUser.getUserIdx(), order.getState());
+		List<Map<String, Object>> orderList = marketMypageService.selectOrderList(certifiedUser.getUserIdx(), order.getState(),fromDate, endDate);
 		model.addAttribute("orderList", orderList);
 		
 		System.out.println("orderList : " + orderList);
@@ -264,8 +259,11 @@ public class MarketMypageController {
 	@GetMapping("review/review-list")
 	public void reviewList(@SessionAttribute(name="authentication")Member certifiedUser,
 						   Model model,
-						@RequestParam(value = "state", defaultValue="1")int state) {
-		List<Map<String, Object>> reviewList = marketMypageService.selectReviewList(certifiedUser.getUserIdx(),state);
+						@RequestParam(value = "state", defaultValue="1")int state,
+						@RequestParam(value = "fromDate", required = false)String fromDate,
+						@RequestParam(value = "endDate", required = false)String endDate) {
+		
+		List<Map<String, Object>> reviewList = marketMypageService.selectReviewList(certifiedUser.getUserIdx(),state,fromDate, endDate);
 		Member memberInfo = marketMypageService.selectMemberInfo(certifiedUser.getUserIdx());
 		int couponCnt = marketMypageService.selectCouponCount(certifiedUser.getUserIdx());
 		marketMypageService.updateDateAndState(); //구매 후 일주일 지나면 구매확정 state 변경
@@ -283,9 +281,9 @@ public class MarketMypageController {
 							Review review) {
 		
 		int member = certifiedUser.getUserIdx();
-		
+		String state = review.getState();
 		System.out.println("state : " +  review.getState());
-		List<Map<String, Object>> myReviewList = marketMypageService.selectMyReviewList(member, review.getState());
+		List<Map<String, Object>> myReviewList = marketMypageService.selectMyReviewList(member, state);
 		List<FileDTO> files = marketMypageService.selectFileList(member);
 		Member memberInfo = marketMypageService.selectMemberInfo(member);
 		int couponCnt = marketMypageService.selectCouponCount(member);

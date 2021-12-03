@@ -11,14 +11,16 @@
 		inner join product p USING(PRD_IDX)
 		inner join prd_detail d USING(PRD_IDX)
 		<where>
-		user_idx = #{userIdx} and o.dt_idx=d.dt_idx
-		
+		user_idx = #{userIdx} and o.dt_idx=d.dt_idx		
 			<if test="state == 0">
 				and o.state is not null
 			</if>	
 			<if test="state != 0">
 				 and o.STATE = #{state}
 			</if>
+			<if test="fromDate != null and endDate != null">
+			and o.order_date between TO_DATE(#{fromDate},'YYYY-MM-DD') and TO_DATE(#{endDate},'YYYY-MM-DD')+1
+		</if>
 		</where>
 		order by o.order_date desc
 	</select>
@@ -28,7 +30,13 @@
 		from "ORDER" o
 		inner join product p USING(PRD_IDX)
 		inner join prd_detail d USING(PRD_IDX)
-		where USER_IDX = #{userIdx} and o.STATE = 4  <!-- state가 4일 때 구매 확정이라면 -->
+		
+		<where>
+			USER_IDX = #{userIdx} and o.STATE = 4  <!-- state가 4일 때 구매 확정이라면 -->
+		<if test="fromDate != null and endDate != null">
+			and ORDER_DATE between TO_DATE(#{fromDate},'YYYY-MM-DD') and TO_DATE(#{endDate},'YYYY-MM-DD')+1
+		</if>
+		</where>
 		order by UPDATE_DATE desc
 	</select>
   	
@@ -40,13 +48,12 @@
 		inner join "ORDER" o USING(PRD_IDX)
 		<where>
 		r.USER_IDX = #{userIdx} and o.dt_idx = d.dt_idx 
-		
 			<if test="state == null">
 				and r.state is not null
 			</if>	
 			<if test="state != null">
 				 and r.STATE = #{state}
-			</if>
+			</if>			
 		</where>
 		order by reg_date desc
 	</select>
@@ -111,15 +118,47 @@
 		where user_idx = #{userIdx}
 	</select>
 	
+	<!-- address -->
+	<insert id="insertAddress">
+		insert into "ADDRESS"(address_idx,address,user_idx, address_name, address_detail
+		<if test="isDefault != null">
+		, is_default
+		</if>
+		)
+		values(SC_ADDRESS_IDX.NEXTVAL,#{address},#{userIdx},#{addressName},#{addressDetail}
+		<if test="isDefault != null">
+		,#{isDefault}
+		</if>
+		)
+	</insert>
 	<update id="updateAddress">
 		update "ADDRESS"
 		set address = #{address}, address_name = #{addressName}, address_detail = #{addressDetail}
-		<if test="isDefault != null">
+		<if test="isDefault != null"> <!-- 기본배송지 선택했으면 -->
 		, is_default = #{isDefault}
 		</if>
 		where address_idx = #{addressIdx}
 	</update>
 	
+	<!-- 기본배송지 등록-->
+	<update id="updateAddressIsDefault">
+		update "ADDRESS"
+		set is_default = 'N'
+		<where>
+			<if test="addressIdx != null"> <!-- 배송지 수정일 때 -->
+				<if test="isDefault != null"> <!-- 기본배송지 선택했으면 -->
+					address_idx != #{addressIdx} and user_idx = #{userIdx}
+				</if>
+			</if>
+			<if test="addressIdx == null"><!-- 배송지 새로 등록일 때 -->
+				<if test="isDefault != null"> <!-- 기본배송지 선택했으면 -->
+					address_idx != SC_ADDRESS_IDX.currval and user_idx = #{userIdx}
+				</if>
+			</if>
+			
+		</where>
+		
+	</update>
 	
 	
   	

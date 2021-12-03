@@ -16,13 +16,6 @@
 </head>
 <body style="background-color: floralwhite;">
 	<div id="pop_wrap">
-			<div id="pop_header">
-				
-			</div>	
-		
-		<c:if test="">
-		
-		</c:if>
 		<form action="/market/mypage/address-pop/upload/${addressPop.addressIdx}" method="post" id="form">
 		<input type="hidden" name="userIdx" value="${addressPop.userIdx}">
 		<div id="addressList-wrapper">
@@ -36,6 +29,7 @@
 			<tbody>
 				<tr>
 					<td class="address_name_td">
+					<div id="contentCheck" class="valid-msg"></div>
 						<span>
 							<label for="addressName">배송지명</label>
 							<input type="text" name="addressName" id="addressName" class="ip_text" maxlength="20" placeholder="${addressPop.addressName}">
@@ -46,7 +40,7 @@
 					<td>
 						<span class="zip_span" style="width: 64px">
 							<label for="zipCode" class="">우편번호</label>
-							<input type="text" id="zipCode" class="ip_text">							
+							<input type="text" id="zipCode" class="ip_text" readonly="readonly">							
 						</span>
 						<input type="button" onclick="execPostcode()" value="우편번호 찾기"><br>
 						<p class="address_detail">
@@ -123,6 +117,15 @@
 		 
 		 
 		 function addressSubmit() {
+			 
+				var name = document.getElementById("addressName").value.length;
+				var detail = document.getElementById("addressDetail").value.length;
+				if(name==0 || detail==0){
+					document.querySelector('#contentCheck').innerHTML = '모든 정보를 입력해야합니다.';
+			        return false;
+				}
+			 
+			 
 			    var form = document.forms.form;
 			    document.domain = "localhost";
 			    opener.name = "openerNames";

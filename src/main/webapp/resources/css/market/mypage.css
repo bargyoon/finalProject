@@ -561,9 +561,12 @@ tbody > tr:hover{
 	text-decoration: none;
 }
 
-.address-btn button {
-    background-color: transparent;
-    border-color: lightgray;
+.address-btn a {
+    background-color: lightgray;
+    padding-bottom: 0;
+    padding-top: 0;
+    margin-top: 5px;
+    margin-bottom: 5px;
 }
 
 .address-btn button:hover{
@@ -573,20 +576,18 @@ tbody > tr:hover{
 }
 
 .address-insert-btn{
-	display: flex;
-    width: 80px;
-    display: inline-block;
+	width: 9em;
     background: ButtonFace;  
     font-size: 13px;
-    border-width: 2px;
-    padding: px;
-    margin-bottom: 1px;
-    border-color: ButtonHighlight ButtonShadow ButtonShadow ButtonHighlight;
 }
 
 /* address-pop  */
 #pop_wrap{
 	margin:1em;
+}
+
+#pop_wrap *:hover{
+	none;
 }
 
 .pop_title{

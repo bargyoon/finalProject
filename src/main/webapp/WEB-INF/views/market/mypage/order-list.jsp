@@ -88,7 +88,7 @@
 						<input type="radio" id="radioOfPeriod3" name="period" value="4" onclick="setDate()">
 						<label class="period-label" for="radioOfPeriod3">전체 시기</label>
 					</div>
-				<form action="enquiry-list" id="dateForm" onsubmit="return resetDate();">
+				<form action="" id="dateForm" onsubmit="return resetDate();">
 						<div class="n-datepicker">
 							<input type="date" id="fromDate" name="fromDate"><span> ~</span>
 						</div>
@@ -135,12 +135,12 @@
 						</td>
 						<td>
 						<c:choose>
-							<c:when test="${orderList.STATE eq 0}"><p class="ft-SBAggroM mb-3" style="font-size: 20px;">입금/결제</p></c:when>
-							<c:when test="${orderList.STATE eq 1}"><p class="ft-SBAggroM mb-3" style="font-size: 20px;">배송중</p></c:when>
-							<c:when test="${orderList.STATE eq 2}"><p class="ft-SBAggroM mb-3" style="font-size: 20px;">배송완료</p></c:when>
-							<c:when test="${orderList.STATE eq 3}"><p class="ft-SBAggroM mb-3" style="font-size: 20px;">구매확정</p></c:when>
-							<c:when test="${orderList.STATE eq 4}"><p class="ft-SBAggroM mb-3" style="font-size: 20px;">교환</p></c:when>
-							<c:when test="${orderList.STATE eq 5}"><p class="ft-SBAggroM mb-3" style="font-size: 20px;">환불</p></c:when>
+							<c:when test="${orderList.STATE eq 1}"><p class="ft-SBAggroM mb-3" style="font-size: 20px;">입금/결제</p></c:when>
+							<c:when test="${orderList.STATE eq 2}"><p class="ft-SBAggroM mb-3" style="font-size: 20px;">배송중</p></c:when>
+							<c:when test="${orderList.STATE eq 3}"><p class="ft-SBAggroM mb-3" style="font-size: 20px;">배송완료</p></c:when>
+							<c:when test="${orderList.STATE eq 4}"><p class="ft-SBAggroM mb-3" style="font-size: 20px;">구매확정</p></c:when>
+							<c:when test="${orderList.STATE eq 5}"><p class="ft-SBAggroM mb-3" style="font-size: 20px;">교환</p></c:when>
+							<c:when test="${orderList.STATE eq 6}"><p class="ft-SBAggroM mb-3" style="font-size: 20px;">환불</p></c:when>
 						</c:choose>
 							<p class="mb-2" style="border: 1px solid lightgray;">배송조회</p>
 							
