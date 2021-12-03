@@ -21,13 +21,14 @@
 			</div>
 			<br>
 			<br>
+			<span style="float:right">
 			<select name="category" id="sortSelect" onchange="sortList()"
                     class="form-control">
                     <option value="reg_date">등록일순</option>
                     <option value="view_count">조회순</option>
                     <option value="rec_count">추천순</option>
                     
-                </select>
+                </select></span>
 		<table class="board_list">
 			<caption>게시판 목록</caption>
 			
