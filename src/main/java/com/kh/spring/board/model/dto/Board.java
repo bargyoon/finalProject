@@ -8,6 +8,7 @@ import lombok.Data;
 public class Board {
 	private int bdIdx;
 	private int userIdx;
+	private String nickname;
 	private String bdTitle;
 	private Date regDate;
 	private int viewCount;

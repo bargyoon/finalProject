@@ -5,7 +5,6 @@
 <head>
 <%@ include file="/WEB-INF/views/include/head.jsp" %>
 <%@ include file="/WEB-INF/views/include/navBar.jsp" %>
-<%@ include file="/WEB-INF/views/include/mainJs.jsp" %>
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
@@ -42,8 +41,10 @@
                </form>
             </div>
          </div>
-      </div>	
+         <div class="empty"></div>
+      </div>
 	<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 	<script src="/resources/js/member/kakaoLogin.js"></script>
 </body>
+<%@ include file="/WEB-INF/views/include/footer.jsp" %>	
 </html>

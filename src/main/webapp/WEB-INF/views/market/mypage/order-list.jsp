@@ -54,19 +54,20 @@
 					<li><a href="/market/mypage/review/review-list2">구매후기</a></li>
 					<li><a href="/market/mypage/cart">장바구니</a></li>
 					<li><a href="#!">상품문의</a></li>
-					<li><a href="#!" style="color: black;">주소록 관리</a></li>
+					<li><a href="/market/mypage/address-list" style="color: black;">주소록 관리</a></li>
 				</ul>
 			</div>
 		</aside>
 		<div class="container2" style="display: flex; flex-direction: column;">
 			<p class="py-3 mb-0" style="font-size: 1.3rem;">주문 내역 조회</p>
 			<ul class="sub-ul pb-2">
-				<li><a href="/market/mypage/order-list?state=0">입금/결제</a></li>
-				<li><a href="/market/mypage/order-list?state=1">배송중</a></li>
-				<li><a href="/market/mypage/order-list?state=2">배송완료</a></li>
-				<li><a href="/market/mypage/order-list?state=3">구매확정</a></li>
-				<li><a href="/market/mypage/order-list?state=4">교환</a></li>
-				<li><a href="/market/mypage/order-list?state=5">환불</a></li>
+				<li><a href="/market/mypage">전체 조회</a></li>
+				<li><a href="/market/mypage?state=1">입금/결제</a></li>
+				<li><a href="/market/mypage?state=2">배송중</a></li>
+				<li><a href="/market/mypage?state=3">배송완료</a></li>
+				<li><a href="/market/mypage?state=4">구매확정</a></li>
+				<li><a href="/market/mypage?state=5">교환</a></li>
+				<li><a href="/market/mypage?state=6">환불</a></li>
 			</ul>
 			<hr class="mt-0" style="height: 3px; opacity: 1;">
 			<ul>
@@ -87,7 +88,7 @@
 						<input type="radio" id="radioOfPeriod3" name="period" value="4" onclick="setDate()">
 						<label class="period-label" for="radioOfPeriod3">전체 시기</label>
 					</div>
-				<form action="enquiry-list" id="dateForm" onsubmit="return resetDate();">
+				<form action="" id="dateForm" onsubmit="return resetDate();">
 						<div class="n-datepicker">
 							<input type="date" id="fromDate" name="fromDate"><span> ~</span>
 						</div>
@@ -134,16 +135,16 @@
 						</td>
 						<td>
 						<c:choose>
-							<c:when test="${orderList.STATE eq 0}"><p class="ft-SBAggroM mb-3" style="font-size: 20px;">입금/결제</p></c:when>
-							<c:when test="${orderList.STATE eq 1}"><p class="ft-SBAggroM mb-3" style="font-size: 20px;">배송중</p></c:when>
-							<c:when test="${orderList.STATE eq 2}"><p class="ft-SBAggroM mb-3" style="font-size: 20px;">배송완료</p></c:when>
-							<c:when test="${orderList.STATE eq 3}"><p class="ft-SBAggroM mb-3" style="font-size: 20px;">구매확정</p></c:when>
-							<c:when test="${orderList.STATE eq 4}"><p class="ft-SBAggroM mb-3" style="font-size: 20px;">교환</p></c:when>
-							<c:when test="${orderList.STATE eq 5}"><p class="ft-SBAggroM mb-3" style="font-size: 20px;">환불</p></c:when>
+							<c:when test="${orderList.STATE eq 1}"><p class="ft-SBAggroM mb-3" style="font-size: 20px;">입금/결제</p></c:when>
+							<c:when test="${orderList.STATE eq 2}"><p class="ft-SBAggroM mb-3" style="font-size: 20px;">배송중</p></c:when>
+							<c:when test="${orderList.STATE eq 3}"><p class="ft-SBAggroM mb-3" style="font-size: 20px;">배송완료</p></c:when>
+							<c:when test="${orderList.STATE eq 4}"><p class="ft-SBAggroM mb-3" style="font-size: 20px;">구매확정</p></c:when>
+							<c:when test="${orderList.STATE eq 5}"><p class="ft-SBAggroM mb-3" style="font-size: 20px;">교환</p></c:when>
+							<c:when test="${orderList.STATE eq 6}"><p class="ft-SBAggroM mb-3" style="font-size: 20px;">환불</p></c:when>
 						</c:choose>
 							<p class="mb-2" style="border: 1px solid lightgray;">배송조회</p>
 							
-							<c:if test="${orderList.STATE eq 3}">
+							<c:if test="${orderList.STATE eq 4 || orderList.STATE eq 3}">
 							<div class="text-white" href="#" role="button" style="background-color: black;">
 								<div class="btn-group">
 									<a class="nav-link link-white" href="#!">후기작성</a>
@@ -166,93 +167,7 @@
 	</section>
 
 	<%@ include file="/WEB-INF/views/include/market/footer.jsp"%>
-	<script type="text/javascript">
-	
-	//현재시간으로 설정
-	document.getElementById('fromDate').valueAsDate = new Date();
-	document.getElementById('endDate').valueAsDate = new Date();
-	
-	console.dir(document.getElementById('fromDate').valueAsDate);
-	
-	//최대, 최소 날짜 설정
-	var today = new Date();
-	var dd = today.getDate();
-	var mm = today.getMonth()+1; // 1월은 0
-	var yyyy = today.getFullYear();
-	
-	 if(dd<10){
-	     dd='0'+dd
-	  } 
-	if(mm<10){
-		 mm='0'+mm
-	} 
-	
-	today = yyyy+'-'+mm+'-'+dd; // yyyy-mm-dd
-	
-	document.getElementById("fromDate").setAttribute("max", today);
-	document.getElementById("endDate").setAttribute("max", today);
-	
-	function resetDate() {
-		
-		var fromDate = document.getElementById('fromDate').value;
-		var endDate = document.getElementById('endDate').value;
-		 var fromArray = fromDate.split('-');
-         var endArray = endDate.split('-');   
-         
-         var start_date = new Date(fromArray[0], fromArray[1], fromArray[2]);
-         var end_date = new Date(endArray[0], endArray[1], endArray[2]);
-              //날짜를 숫자형태로 바꿔서 비교
-         if(start_date.getTime() > end_date.getTime()) {
-             alert("종료날짜보다 시작날짜가 작아야합니다.");
-             return false;
-		}
-	
-	}
-	
-	//radio button으로 기간 설정
-	function setDate() {
-		
-		//라디오버튼
-		var radioLength = document.getElementsByName('period').length;
-		for (var i = 0; i < radioLength; i++) {
-            if (document.getElementsByName("period")[i].checked == true) {
-            	var radioBnt = document.getElementsByName("period")[i].value;
-            	console.dir(radioBnt);
-            }
-        }
-		
-		var date = new Date();
-		var dd = date.getDate();
-		var mm = date.getMonth()+1; // 1월은 0
-		var yyyy = date.getFullYear();
-		
-		if(radioBnt=="1"){ //일주일 
-			 dd=dd-7;
-			 if(dd<10){dd='0'+dd} 
-			 if(mm<10){mm='0'+mm} 
-			 date = yyyy+'-'+mm+'-'+dd; // yyyy-mm-dd
-			 document.getElementById('fromDate').value = date;
-			 document.getElementById('endDate').valueAsDate = new Date();
-		}else if(radioBnt=="2"){ //한달
-			 mm=mm-1;
-			 if(dd<10){dd='0'+dd} 
-			 if(mm<10){mm='0'+mm} 
-			 date = yyyy+'-'+mm+'-'+dd; 
-			 document.getElementById('fromDate').value = date;
-			 document.getElementById('endDate').valueAsDate = new Date();
-		}else if(radioBnt=="3"){ //3개월
-			 mm=mm-3;
-			 if(dd<10){dd='0'+dd} 
-			 if(mm<10){mm='0'+mm} 
-			 date = yyyy+'-'+mm+'-'+dd;
-			 document.getElementById('fromDate').value = date;
-			 document.getElementById('endDate').valueAsDate = new Date();
-		}
-	}
-		
-		
-		
-	</script>
+	<script type="text/javascript" src="${contextPath}/resources/js/market/mypage/date-search.js"></script>
 
 
 </body>

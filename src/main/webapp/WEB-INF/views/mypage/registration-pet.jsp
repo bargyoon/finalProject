@@ -38,7 +38,8 @@
 		</nav>
 		
 		<div style="margin: 0 auto; width: 800px">
-			<form class="needs-validation" novalidate="" style="margin: 0 auto; width: 400px;">
+			<form action="/mypage/vaccination" method="post" style="margin: 0 auto; width: 400px;">
+			
 				<div class="mb-3">
 					<label for="name" class="form-label">이름</label>
 					<input type="text" class="form-control" id="name" required="required">
@@ -47,13 +48,11 @@
 				<div class="mb-3">
 					<label for="species" class="form-label">종류</label>
 					<div style="display: flex;">
-						<select name="species" id="species" style="width: 200px; text-align: center;">
+						<select class="form-select" name="species" id="species" required="required" style="text-align: center;">
 							<option value="" disabled="disabled" selected="selected">--선택--</option>
 							<option value="dog">강아지</option>
 							<option value="cat">고양이</option>
-							<option value="ect">기타</option>
 						</select>
-						<input type="text" class="form-control" name="species_detail">
 					</div>
 				</div>
 				
@@ -65,7 +64,7 @@
 				<div class="mb-3">
 					<label for="gender" class="form-label">성별</label>
 					<div class="form-check form-check-inline ms-5">
-					  <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" checked>
+					  <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" checked required="required">
 					  <label class="form-check-label" for="flexRadioDefault1">남</label>
 					</div>
 					<div class="form-check form-check-inline">
@@ -75,13 +74,8 @@
 				</div>
 				
 				<div class="mb-3">
-					<label for="detail" class="form-label">상세정보</label>
-					<textarea class="form-control" id="detail"></textarea>
-				</div>
-				
-				<div class="mb-3">
 					<label for="contract_file" class="form-label">프로필 사진</label>
-					<input class="form-control" type="file" name="file" id="contract_file"/>
+					<input class="form-control" type="file" name="file" id="contract_file" required="required"/>
 				</div>
 				
 				<hr class="my-3">

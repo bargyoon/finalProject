@@ -57,7 +57,7 @@
 					<li><a href="/market/mypage/review/review-list2" style="color: black">구매후기</a></li>
 					<li><a href="/market/mypage/cart">장바구니</a></li>
 					<li><a href="#!">상품문의</a></li>
-					<li><a href="#!">주소록 관리</a></li>
+					<li><a href="/market/mypage/address-list">주소록 관리</a></li>
 				</ul>
 			</div>
 		</aside>
@@ -101,7 +101,7 @@
 								<a href="#!"><img src="https://dummyimage.com/100x120/dee2e6/6c757d.jpg"></a>
 								<ul class="info">
 									<li class="brand">${myReviewList.BRAND}</li>
-									<li class="name ft-SBAggroM"><a href="#!" style="text-decoration: none; color: black;">${datas.myReviewList.NAME}</a></li>
+									<li class="name ft-SBAggroM"><a href="#!" style="text-decoration: none; color: black;">${myReviewList.NAME}</a></li>
 									<li class="option">${myReviewList.PO_NAME}</li>
 								</ul>
 							</div>
@@ -114,8 +114,11 @@
 									<c:when test="${myReviewList.STATE eq '0'}">
 										<span style="color: royalblue;">미승인</span>
 									</c:when>
-									<c:when test="${myReviewList.STATE ne '0'}">
+									<c:when test="${myReviewList.STATE eq '1'}">
 										<span style="color: royalblue;">승인</span>
+									</c:when>
+									<c:when test="${myReviewList.STATE eq '2'}">
+										<span style="color: royalblue;">조건 미충족</span>
 									</c:when>
 								</c:choose>							
 								</p>

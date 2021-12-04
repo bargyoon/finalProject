@@ -542,10 +542,20 @@ tbody > tr:hover{
     color: steelblue;
 }
 
+<<<<<<< HEAD
 .simple-table input {
     border: none;
     text-align: center;
     background-color: transparent;
+=======
+.address{
+	display: flex;
+	align-items: center;
+}
+
+.address span{
+	margin-right: 20px;
+>>>>>>> branch 'main' of https://github.com/bargyoon/finalProject.git
 }
 
 .address-btn > ul{
@@ -553,9 +563,17 @@ tbody > tr:hover{
     justify-content: space-around;
 }
 
-.address-btn button {
-    background-color: transparent;
-    border-color: lightgray;
+.address-btn a:focus{
+	outline:none; 
+	text-decoration: none;
+}
+
+.address-btn a {
+    background-color: lightgray;
+    padding-bottom: 0;
+    padding-top: 0;
+    margin-top: 5px;
+    margin-bottom: 5px;
 }
 
 .address-btn button:hover{
@@ -564,11 +582,90 @@ tbody > tr:hover{
     color: white;
 }
 
+.address-insert-btn{
+	width: 9em;
+    background: ButtonFace;  
+    font-size: 13px;
+}
 
+/* address-pop  */
+#pop_wrap{
+	margin:1em;
+}
 
+#pop_wrap *:hover{
+	none;
+}
+
+.pop_title{
+	display:flex;
+	justify-content:stretch;
+	padding:15px;
+	margin-bottom:1.5em;
+}
+.pop_title h2{
+	margin : 10px;
+	font-family: 'SBAggroL';
+}
+.address_name_td{
+	height: 50px;
+}
+
+.zip_span label{
+	margin-right: 30px;
+}
+
+.address_content{
+	margin-right: 12px;
+}
+
+.address_name_td label{
+	margin-right: 30px;
+}
+
+.address_info label{
+	padding-left: 1em;
+}
+
+.address_info td{
+	/* pointer-events: none; */
+}
+
+.cell_title{
+	width: 50px;
+	padding-left: 1em;
+}
+
+.address_detail{
+	margin-top:24px;
+}
+
+.add_detail{
+	margin-right: 12px;	
+}
+
+.address_notice{
+	margin-left: 15px;
+}
+
+.address_pop_btn{
+	display: flex;
+	justify-content: center;
+}
+
+.address_pop_btn input{
+	margin:5px;
+}
+
+/* acc-money 적립금 */
 .acc-money-ul{
     list-style: none;
     padding: 0;
+}
+
+#sample6_address{
+	width: 20.1em;
+	margin-left: 1em;
 }
 
 .acc-money-ul li:first-child{

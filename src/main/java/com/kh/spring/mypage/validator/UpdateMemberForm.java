@@ -5,9 +5,10 @@ import lombok.Data;
 @Data
 public class UpdateMemberForm {
 	
-	private String nickname;
+	private int userIdx;
+	private String nickName;
 	private String password;
 	private String password2;
 	private String address;
-	private String address2;
+	private String addressDetail;
 }

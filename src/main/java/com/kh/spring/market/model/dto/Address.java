@@ -7,5 +7,8 @@ public class Address {
 
 	private int userIdx;
 	private String address;
-	private int isDefault;	
+	private String isDefault;
+	private String addressName;
+	private int addressIdx;
+	private String addressDetail;
 }

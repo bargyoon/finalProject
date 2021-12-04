@@ -15,12 +15,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.google.api.services.analyticsreporting.v4.model.ReportRequest;
 import com.kh.spring.admin.model.service.AdminService;
+import com.kh.spring.board.model.dto.BoardComment;
+import com.kh.spring.board.model.service.BoardService;
+import com.kh.spring.common.util.pagination.Paging;
 import com.kh.spring.disease.model.dto.Disease;
 import com.kh.spring.disease.model.service.DiseaseService;
 import com.kh.spring.market.model.dto.Product;
-import com.kh.spring.market.model.repository.ShopRepository;
 import com.kh.spring.market.model.service.ShopService;
 
 import lombok.RequiredArgsConstructor;
@@ -33,7 +34,8 @@ public class AdminController {
 	private final AdminService adminService;
 	private final DiseaseService diseaseService;
 	private final ShopService shopService;
-
+	private final BoardService boardService;
+	
 	@GetMapping("index")
 	public void index() {
 	};
@@ -48,14 +50,21 @@ public class AdminController {
 	}
 
 	@GetMapping("shopping/item-list")
-	public void itemList(@RequestParam(value = "keyword", required = false) String keyword,
+	public void itemList(@RequestParam(value = "keyword", required = false) String keyword,@RequestParam(required = false, defaultValue = "1") int page,
 			@RequestParam(value = "state", required = false, defaultValue = "all") String state, Model model) {
-		Map<String, Object> commandmap = new LinkedHashMap<String, Object>();
-		commandmap.put("keyword", keyword);
-		commandmap.put("state", state);
+		Map<String, Object> commandMap = new LinkedHashMap<String, Object>();
+		commandMap.put("keyword", keyword);
+		commandMap.put("state", state);
+		Paging pageUtil = Paging.builder()
+				.curPage(page)
+				.cntPerPage(15)
+				.blockCnt(10)
+				.total(shopService.selectPrdListCnt(commandMap))
+				.build();
 
-		Map<String, Object> commandMap = shopService.selectPrdList(commandmap);
-		model.addAttribute("datas", commandMap);
+		Map<String, Object> dataMap = shopService.selectPrdList(commandMap,pageUtil);
+		model.addAttribute("pageUtil", pageUtil);
+		model.addAttribute("datas", dataMap);
 
 	}
 
@@ -64,23 +73,70 @@ public class AdminController {
 	}
 
 	@GetMapping("shopping/order-list")
-	public void orderList() {
+	public void orderList(Model model) {
+		List<Map<String,Object>> orderList = shopService.selectOrderList();
+		model.addAttribute("orderList", orderList);
 	}
 
 	@GetMapping("shopping/QnA")
 	public void qna() {
 	}
 
+	
 	@GetMapping("member/member-list")
 	public void memberList() {
 	}
 
 	@GetMapping("contents/board-list")
-	public void boardList() {
+	public void boardList(Model model
+						,@RequestParam(required = false, defaultValue = "1") int page
+						,@RequestParam(required = false) String option
+						,@RequestParam(required = false) String keyword
+						,@RequestParam(required = false) String category
+						,@RequestParam(required = false, defaultValue = "reg_date") String sort) {
+		Map<String,Object> commandMap = new LinkedHashMap<String,Object>();
+		
+		commandMap.put("category", category);
+		commandMap.put("option", option);
+		commandMap.put("keyword", keyword);
+		commandMap.put("sort", sort);
+		Paging pageUtil = Paging.builder()
+				.curPage(page)
+				.cntPerPage(15)
+				.blockCnt(10)
+				.total(boardService.selectBoardListCnt(commandMap))
+				.build();
+		List<Map<String,Object>> bList = boardService.selectBoard(commandMap,pageUtil);
+		model.addAttribute("pageUtil",pageUtil);
+		model.addAttribute("bList",bList);
+		model.addAttribute("dataMap",commandMap);
 	}
 
 	@GetMapping("contents/comment-list")
-	public void commentList() {
+	public void commentList(Model model
+			,@RequestParam(required = false, defaultValue = "1") int page
+			,@RequestParam(required = false) String option
+			,@RequestParam(required = false) String keyword
+			,@RequestParam(required = false) String category
+			,@RequestParam(required = false, defaultValue = "reg_date") String sort) {
+		Map<String,Object> commandMap = new LinkedHashMap<String,Object>();
+		
+		commandMap.put("category", category);
+		commandMap.put("option", option);
+		commandMap.put("keyword", keyword);
+		commandMap.put("sort", sort);
+		Paging pageUtil = Paging.builder()
+				.curPage(page)
+				.cntPerPage(10)
+				.blockCnt(10)
+				.total(boardService.selectCommentListCnt(commandMap))
+				.build();
+		
+		List<Map<String,Object>> cmList = boardService.selectCommentList(commandMap,pageUtil);
+		
+		model.addAttribute("pageUtil",pageUtil);
+		model.addAttribute("cmList",cmList);
+		model.addAttribute("dataMap",commandMap);
 	}
 
 	@GetMapping("disease/disease-list")
@@ -104,7 +160,7 @@ public class AdminController {
 
 	@PostMapping("disease/add-disease-spec")
 	public String addPriceImg(Disease disease, List<MultipartFile> diseaseIcon) {
-		disease.setExplain("하하");
+		
 
 		adminService.insertDisease(disease, diseaseIcon);
 
@@ -129,7 +185,7 @@ public class AdminController {
 	@PostMapping("shopping/add-product")
 	public String shoppingTest(@RequestParam(value = "main_img") List<MultipartFile> mainImg,
 			@RequestParam(value = "spec_img") List<MultipartFile> specImg,
-			@RequestParam(value = "option", required = false, defaultValue = "none") List<String> option,
+			@RequestParam(value = "option", required = false, defaultValue = "기본") List<String> option,
 			@RequestParam(value = "stock") List<String> stock, @RequestParam(value = "price") List<String> price,
 			Product product) {
 		List<Map<String, Object>> commandList = new ArrayList<Map<String, Object>>();

@@ -8,7 +8,7 @@
 </head>
 <body>
 
-<section>
+<section style="background-color: rgb(240, 234, 213);">
 	
 		<div class="petcare-back">						
 				

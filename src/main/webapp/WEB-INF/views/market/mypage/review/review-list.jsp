@@ -55,7 +55,7 @@
 					<li><a href="/market/mypage/review/review-list2" style="color: black">구매후기</a></li>
 					<li><a href="/market/mypage/cart">장바구니</a></li>
 					<li><a href="#!">상품문의</a></li>
-					<li><a href="#!">주소록 관리</a></li>
+					<li><a href="/market/mypage/address-list">주소록 관리</a></li>
 				</ul>
 			</div>
 		</aside>
@@ -72,25 +72,30 @@
 				<li>모든 후기 작성은 구매확정일로부터 60일 내에 가능합니다.</li>
 				<li>등록된 후기는 삭제/수정이 불가능 합니다.</li>
 			</ul>
-			<div class="mt-5 n-table-filter">
-				<div class="n-radio-tab">
-					<input type="radio" id="radioOfPeriod0" name="radioOfPeriod">
-					<label class="period-label" for="radioOfPeriod0">1주일</label>
-					<input type="radio" id="radioOfPeriod1" name="radioOfPeriod">
-					<label class="period-label" for="radioOfPeriod1">1개월</label>
-					<input type="radio" id="radioOfPeriod2" name="radioOfPeriod">
-					<label class="period-label" for="radioOfPeriod2">3개월</label>
-					<input type="radio" id="radioOfPeriod3" name="radioOfPeriod">
-					<label class="period-label" for="radioOfPeriod3">전체 시기</label>
+			
+			<!-- 날짜검색 -->
+				<div class="mt-5 n-table-filter">
+					<div class="n-radio-tab">
+						<input type="radio" id="radioOfPeriod0" name="period" value="1" onclick="setDate()">
+						<label class="period-label" for="radioOfPeriod0">1주일</label>
+						<input type="radio" id="radioOfPeriod1" name="period" value="2" onclick="setDate()">
+						<label class="period-label" for="radioOfPeriod1">1개월</label>
+						<input type="radio" id="radioOfPeriod2" name="period" value="3" onclick="setDate()">
+						<label class="period-label" for="radioOfPeriod2">3개월</label>
+						<input type="radio" id="radioOfPeriod3" name="period" value="4" onclick="setDate()">
+						<label class="period-label" for="radioOfPeriod3">전체 시기</label>
+					</div>
+					<form action="review-list" id="dateForm" onsubmit="return resetDate();">
+							<div class="n-datepicker">
+								<input type="date" id="fromDate" name="fromDate"><span> ~</span>
+							</div>
+							<div class="n-datepicker">
+								<input type="date" id="endDate" name="endDate">
+							</div>
+							<button type="submit" onclick="search();">조회</button>
+					</form>
 				</div>
-				<div class="n-datepicker">
-					<input type="date"><span>~</span>
-				</div>
-				<div class="n-datepicker">
-					<input type="date">
-				</div>
-				<button type="button" onclick="search();">조회</button>
-			</div>
+			
 			<table class="n-table table-col">
 				<colgroup>
 					<col style="width: auto">
@@ -132,7 +137,8 @@
 	</section>
 	
 	<%@ include file="/WEB-INF/views/include/market/footer.jsp"%>
-
+	<script type="text/javascript" src="${contextPath}/resources/js/market/mypage/date-search.js"></script>
+	
 
 
 </body>

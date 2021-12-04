@@ -6,6 +6,7 @@ import java.util.Map;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.kh.spring.common.util.FileDTO;
+import com.kh.spring.market.model.dto.Address;
 import com.kh.spring.market.model.dto.Order;
 import com.kh.spring.market.model.dto.QNA;
 import com.kh.spring.market.model.dto.Review;
@@ -23,22 +24,23 @@ public interface MarketMypageService {
 	void insertSaveMoney(SaveHistory saveHistory);
 	
 	//OrderList
-	List<Map<String, Object>> selectOrderList(int userIdx, String state);
+	List<Map<String, Object>> selectOrderList(int userIdx, int state,String fromDate, String endDate);
 	
 	//reveiwList 구매확정 목록
-	List<Map<String, Object>> selectReviewList(int userIdx, String state);
+	List<Map<String, Object>> selectReviewList(int userIdx, String fromDate, String endDate);
 	
 	//updateDate, state
 	void updateDateAndState();
 	
 	//reveiwListByState 구매확정 목록(상태별)
-	List<Review> selectReviewListByState(String state);
+	List<Review> selectReviewListByState(int state);
 	
 	//reveiwDetail 구매확정 목록
 	List<Map<String, Object>> selectReviewDetail(Order order);
 	
 	//review 등록
 	void insertReview(List<MultipartFile> mfs, Review review);
+	void updateIsReview(int orderIdx);
 	
 	//prdIdx 업데이트
 	void updatePrdIdx(int orderIdx);
@@ -57,7 +59,16 @@ public interface MarketMypageService {
 	
 	//문의 리스트
 	List<Map<String, Object>> selectEnquiryList(int userIdx, String fromDate, String endDate);
+	List<QNA> selectFAQList(String type);
 	
 	//문의 등록
 	void insertEnquiry(QNA qna);
+	
+	//address
+	void insertAddress(Address address);
+	void updateAddress(Address address);
+	void updateAddressIsDefault(Address address);
+	void deleteAddress(int addressIdx);
+	List<Address> selectAddressList(int userIdx);
+	Address selectAddressDetail(int addressIdx);
 }

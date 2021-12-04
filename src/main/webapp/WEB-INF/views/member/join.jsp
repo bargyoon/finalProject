@@ -5,7 +5,6 @@
 <head>
 <%@ include file="/WEB-INF/views/include/head.jsp" %>
 <%@ include file="/WEB-INF/views/include/navBar.jsp" %>
-<%@ include file="/WEB-INF/views/include/mainJs.jsp" %>
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
@@ -258,7 +257,7 @@
                    <div class="form-group">
                      <label>주소: </label>
                      <input type="text" name="address" id="address" class="form-control" id="address" placeholder="주소를 입력하세요">
-                     <input type="text" class="form-control" placeholder="상세주소를 입력하세요">
+                     <input type="text" name="addressDetail" id="addressDetail" class="form-control" placeholder="상세주소를 입력하세요">
                   </div><br><hr>                  
                   <input type="submit" class="btn btn-black" id="joinBtn" style="width: 100%" value="가입하기" />
                </form>
@@ -286,6 +285,6 @@ window.onload = function(){
 }
 
 </script>
-   
 </body>
+<%@ include file="/WEB-INF/views/include/footer.jsp" %>
 </html>

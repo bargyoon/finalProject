@@ -4,6 +4,7 @@ import java.sql.Date;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -12,6 +13,7 @@ import org.apache.ibatis.annotations.Update;
 
 import com.kh.spring.common.util.FileDTO;
 import com.kh.spring.common.util.pagination.Paging;
+import com.kh.spring.market.model.dto.Address;
 import com.kh.spring.market.model.dto.Order;
 import com.kh.spring.market.model.dto.Product;
 import com.kh.spring.market.model.dto.QNA;
@@ -19,6 +21,7 @@ import com.kh.spring.market.model.dto.Review;
 import com.kh.spring.market.model.dto.SaveHistory;
 import com.kh.spring.market.model.dto.prdListSet;
 import com.kh.spring.member.model.dto.Member;
+
 
 @Mapper
 public interface MarketMypageRepository {
@@ -41,14 +44,14 @@ public interface MarketMypageRepository {
 	//적립금 유형 : 주문(0), 일반후기(2), 사진후기(3), 적립금결제(4), 결제취소(5)
 	
 	//Order List
-	List<Map<String, Object>> selectOrderList(@Param("userIdx")int userIdx, @Param("state")String state);
+	List<Map<String, Object>> selectOrderList(@Param("userIdx")int userIdx, @Param("state")int state, @Param("fromDate")String fromDate, @Param("endDate")String endDate);
 	
 	//reveiwList 구매확정 목록
-	List<Map<String, Object>> selectReviewList(int userIdx);
+	List<Map<String, Object>> selectReviewList(@Param("userIdx")int userIdx, @Param("fromDate")String fromDate, @Param("endDate")String endDate);
 	
-	//updateDate 
+	//update state of ORDER
 	@Update("update \"ORDER\""
-			+ " set update_date = sysdate, state = 1" //구매 후 일주일이 지나면 구매확정
+			+ " set update_date = sysdate, state = 4" //구매 후 일주일이 지나면 구매확정(state=4)
 			+ " where order_date+7 <= sysdate")
 	void updateDateAndState();
 	
@@ -56,9 +59,9 @@ public interface MarketMypageRepository {
 	List<Map<String, Object>> selectReviewDetail(Order order);
 	
 	//review 등록
-	@Insert("insert into review(rv_idx, user_idx, prd_idx, order_idx, rating, type, rv_content) "
-			+ "values(SC_RV_IDX.NEXTVAL, #{userIdx}, #{prdIdx}, #{orderIdx}, #{rating}, #{type}, #{rvContent})")
 	void insertReview(Review review);
+	@Update("update \"ORDER\" set is_review =1 where order_idx=#{orderIdx}")
+	void updateIsReview(int orderIdx);
 	
 	//review 사진 등록
 	@Insert("insert into file_info(fl_idx, type_idx, origin_file_name, rename_file_name, save_path)"
@@ -75,17 +78,8 @@ public interface MarketMypageRepository {
 			+ " where order_idx=#{orderIdx}")
 	void updatePrdIdx(int orderIdx);
 	
-	//reviewList
+	//myReviewList
 	List<Map<String, Object>> selectMyReviewList(@Param("userIdx")int userIdx, @Param("state")String state);
-	
-	
-	//selectReviewListByState 구매확정 목록(상태별로)*********
-		@Select("select r.RV_IDX, r.USER_IDX, PRD_IDX, r.ORDER_IDX, r.STATE, r.RATING, r.TYPE, r.RECOMMAND, r.REG_DATE, RV_CONTENT, p.name, p.brand, d.po_name"
-				+ " from REVIEW r"
-				+ " inner join product p USING(PRD_IDX)"
-				+ " inner join prd_detail d USING(PRD_IDX)"
-				+ " where USER_IDX = #{userIdx} and r.STATE = #{state}")
-		List<Review> selectMyReviewListByState(int state);
 	
 	//reviewFileList
 	@Select("select * "
@@ -102,9 +96,30 @@ public interface MarketMypageRepository {
 			+ " ( SELECT prd_idx FROM \"ORDER\" WHERE order_idx = #{orderIdx}), #{orderIdx}, #{title}, #{context}, #{type})")
 	void insertEnquiry(QNA qna);
 	
-	//문의폼 회원정보 ***********필요없을듯
+	//문의폼 회원정보 
 	List<Map<String, Object>> memberInfoForEnquiry(int userIdx);
 	
 	//문의 리스트
 	List<Map<String, Object>> selectEnquiryList(@Param("userIdx")int userIdx, @Param("fromDate")String fromDate, @Param("endDate")String endDate);
+	
+	//FAQ 리스트
+	//@Select("select * from qna where user_idx=9 and type=#{type}") //관리자가 등록한 FAQ 리스트
+	List<QNA> selectFAQList(@Param("type")String type);
+	
+	//address
+	void insertAddress(Address address);
+	
+	void updateAddress(Address address);
+	
+	void updateAddressIsDefault(Address address);
+	
+	@Delete("DELETE \"ADDRESS\" where  address_idx = #{addressIdx}")
+	void deleteAddress(int addressIdx);
+	
+	@Select("select * from \"ADDRESS\" where user_idx=#{userIdx} order by is_default desc")
+	List<Address> selectAddressList(int userIdx);
+	
+	@Select("select * from \"ADDRESS\" where address_idx=${addressIdx}")
+	Address selectAddressDetail(int addressIdx);
+	
 }

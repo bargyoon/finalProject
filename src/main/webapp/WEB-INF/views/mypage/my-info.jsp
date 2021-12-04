@@ -39,27 +39,32 @@
 		
 		<div style="margin: 0 auto; width: 400px">
 			<div class="form-floating mb-3">
-			  <text class="form-control" id="floatingUserName" value="${authentication.userName}">홍길동</text>
+			  <text class="form-control" id="floatingUserId">${authentication.userId}</text>
+			  <label for="floatingUserId">아이디</label>
+			</div>
+			
+			<div class="form-floating mb-3">
+			  <text class="form-control" id="floatingUserName">${authentication.userName}</text>
 			  <label for="floatingUserName">이름</label>
 			</div>
 			
 			<div class="form-floating mb-3">
-			  <text class="form-control" id="floatingNickname" value="${authentication.nickName}">gildong123</text>
+			  <text class="form-control" id="floatingNickname">${authentication.nickName}</text>
 			  <label for="floatingNickname">닉네임</label>
 			</div>
 			
 			<div class="form-floating mb-3">
-			  <text class="form-control" id="floatingEmail" value="${authentication.email}">gildong@test.com</text>
+			  <text class="form-control" id="floatingEmail">${authentication.email}</text>
 			  <label for="floatingEmail">이메일</label>
 			</div>
 			
 			<div class="form-floating">
-			  <text class="form-control" id="floatingAddress" value="${authentication.address}">집주소1</text>
+			  <text class="form-control" id="floatingAddress">${authentication.address}</text>
 			  <label for="floatingAddress">주소</label>
 			</div>
 			
 			<div class="form-floating mb-3">
-				<text class="form-control" id="floatingAddress2" value="${authentication.address}">집주소2</text>
+				<text class="form-control" id="floatingAddress2">${authentication.addressDetail}</text>
 				<label for="floatingAddress2">상세주소</label>
 			</div>
 			

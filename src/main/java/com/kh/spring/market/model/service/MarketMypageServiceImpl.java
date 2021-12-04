@@ -1,6 +1,5 @@
 package com.kh.spring.market.model.service;
 
-import java.sql.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -11,7 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.kh.spring.common.util.FileDTO;
 import com.kh.spring.common.util.FileUtil;
-import com.kh.spring.market.model.dto.Coupon;
+import com.kh.spring.market.model.dto.Address;
 import com.kh.spring.market.model.dto.Order;
 import com.kh.spring.market.model.dto.QNA;
 import com.kh.spring.market.model.dto.Review;
@@ -52,14 +51,14 @@ public class MarketMypageServiceImpl implements MarketMypageService{
 	}
 
 	@Override
-	public List<Map<String, Object>> selectOrderList(int userIdx, String state) {
-		List<Map<String, Object>> orderList = mypageRepository.selectOrderList(userIdx,state);
+	public List<Map<String, Object>> selectOrderList(int userIdx, int state, String fromDate, String endDate) {
+		List<Map<String, Object>> orderList = mypageRepository.selectOrderList(userIdx,state,fromDate, endDate);
 		return orderList;
 	}
 
 	@Override
-	public List<Map<String, Object>> selectReviewList(int userIdx,String state) {
-		List<Map<String, Object>> reviewList = mypageRepository.selectOrderList(userIdx,state);		
+	public List<Map<String, Object>> selectReviewList(int userIdx, String fromDate, String endDate) {
+		List<Map<String, Object>> reviewList = mypageRepository.selectReviewList(userIdx, fromDate, endDate);
 		return reviewList;
 	}
 
@@ -86,8 +85,12 @@ public class MarketMypageServiceImpl implements MarketMypageService{
 					mypageRepository.insertFileInfo(fileUtil.fileUpload(multipartFile));
 				}
 			}
-		}
-		
+		}		
+	}
+	
+	@Override
+	public void updateIsReview(int orderIdx) {
+		mypageRepository.updateIsReview(orderIdx);		
 	}
 
 	@Override
@@ -118,7 +121,7 @@ public class MarketMypageServiceImpl implements MarketMypageService{
 	}
 
 	@Override
-	public List<Review> selectReviewListByState(String state) {
+	public List<Review> selectReviewListByState(int state) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -146,6 +149,13 @@ public class MarketMypageServiceImpl implements MarketMypageService{
 		mypageRepository.insertEnquiry(qna);
 		
 	}
+	
+	@Override
+	public List<QNA> selectFAQList(String type) {
+		List<QNA> faqList = mypageRepository.selectFAQList(type);
+		 return faqList;
+	}
+
 
 	@Override
 	public void insertSaveMoney(SaveHistory saveHistory) {
@@ -153,8 +163,37 @@ public class MarketMypageServiceImpl implements MarketMypageService{
 		
 	}
 
-	
+	@Override
+	public void insertAddress(Address address) {
+		mypageRepository.insertAddress(address);
+	}
 
+	@Override
+	public void updateAddress(Address address) {
+		mypageRepository.updateAddress(address);
+	}
+
+	@Override
+	public void deleteAddress(int addressIdx) {
+		mypageRepository.deleteAddress(addressIdx);
+	}
+
+	@Override
+	public List<Address> selectAddressList(int userIdx) {
+		return mypageRepository.selectAddressList(userIdx);
+	}
+
+	@Override
+	public void updateAddressIsDefault(Address address) {
+		mypageRepository.updateAddressIsDefault(address);
+	}
+
+	@Override
+	public Address selectAddressDetail(int addressIdx) {
+		return mypageRepository.selectAddressDetail(addressIdx);
+	}
+
+	
 	
 	
 }

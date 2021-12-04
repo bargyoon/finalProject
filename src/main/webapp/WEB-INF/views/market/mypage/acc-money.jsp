@@ -55,7 +55,7 @@
 					<li><a href="/market/mypage/review/review-list2">구매후기</a></li>
 					<li><a href="/market/mypage/cart">장바구니</a></li>
 					<li><a href="#!">상품문의</a></li>
-					<li><a href="#!">주소록 관리</a></li>
+					<li><a href="/market/mypage/address-list">주소록 관리</a></li>
 				</ul>
 			</div>
 		</aside>
@@ -72,7 +72,6 @@
 				<li>적립금은 상품 금액의 5%까지만 사용 가능합니다.</li>
 			</ul>
 			<ul class="sub-ul pt-4 pb-2">
-				<li><a href="/market/mypage/acc-money">전체</a></li>
 				<li><a href="/market/mypage/acc-money?state=0">적립</a></li>
 				<li><a href="/market/mypage/acc-money?state=1">사용</a></li>
 			</ul>

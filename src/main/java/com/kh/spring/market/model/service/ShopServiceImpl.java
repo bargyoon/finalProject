@@ -132,15 +132,18 @@ public class ShopServiceImpl implements ShopService{
 
 		}
 		for (Map<String, Object> map : commandList) {
-			shopRepository.insertPrdDetail(map);
+			int price = (int) map.get("price");
+			int salePrice = price *(100 - product.getSalePer()) /100;
+			 
+			shopRepository.insertPrdDetail(map,salePrice);
 		}
 		
 		
 	}
 	
-	public Map<String,Object> selectPrdList(Map<String, Object> commandmap) {
+	public Map<String,Object> selectPrdList(Map<String, Object> commandmap, Paging pageUtil) {
 		Map<String,Object> viewMap = new LinkedHashMap<String, Object>();
-		List<Map<String, Object>> prdList = shopRepository.selectPrdList(commandmap);
+		List<Map<String, Object>> prdList = shopRepository.selectPrdList(commandmap,pageUtil);
 		int totalCnt = shopRepository.selectAllCnt();
 		int saleCnt = shopRepository.selectSpecCnt("sale");
 		int soldoutCnt = shopRepository.selectSpecCnt("soldout");
@@ -168,4 +171,18 @@ public class ShopServiceImpl implements ShopService{
 		return res;
 	}
 
+	public int selectPrdListCnt(Map<String, Object> commandMap) {
+		
+		return shopRepository.selectPrdListCnt(commandMap);
+	}
+	
+	public List<Map<String, Object>> selectOrderList() {
+		List<Map<String, Object>> orderList = shopRepository.selectOrderList();
+		for (Map<String, Object> map : orderList) {
+			List<Map<String,Object>> specList = shopRepository.selectOrderSpec(Integer.parseInt(map.get("DT_IDX").toString()));
+			map.put("specList", specList);
+		}
+		return orderList;
+	}
+	
 }

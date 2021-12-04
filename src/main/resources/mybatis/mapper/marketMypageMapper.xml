@@ -10,17 +10,51 @@
 		from "ORDER" o
 		inner join product p USING(PRD_IDX)
 		inner join prd_detail d USING(PRD_IDX)
-		where user_idx = #{userIdx} and o.dt_idx=d.dt_idx and o.state = #{state}
+		<where>
+		user_idx = #{userIdx} and o.dt_idx=d.dt_idx		
+			<if test="state == 0">
+				and o.state is not null
+			</if>	
+			<if test="state != 0">
+				 and o.STATE = #{state}
+			</if>
+			<if test="fromDate != null and endDate != null">
+			and o.order_date between TO_DATE(#{fromDate},'YYYY-MM-DD') and TO_DATE(#{endDate},'YYYY-MM-DD')+1
+		</if>
+		</where>
 		order by o.order_date desc
 	</select>
   
+  <!-- review -->
+  <insert id="insertReview">
+  	insert into REVIEW(RV_IDX,USER_IDX,PRD_IDX,ORDER_IDX,DT_IDX,RATING,RV_CONTENT,TYPE)
+	values(SC_RV_IDX.nextval,  #{userIdx}, 
+    	(select prd_idx from "ORDER" o
+    	join prd_detail d using(prd_idx)
+   		where order_idx = 10006 and o.dt_idx=d.dt_idx)
+    	,#{orderIdx}, (select dt_idx from "ORDER" where order_idx=#{orderIdx}) ,#{rating},#{rvContent},#{type})
+  </insert>
+  
   	<select id="selectReviewList" resultType="map">
-  	 	select ORDER_IDX, USER_IDX, PRD_IDX, ORDER_DATE, o.STATE, ORDER_CNT, UPDATE_DATE, p.name, p.brand, d.po_name
+  	 	select ORDER_IDX, USER_IDX, PRD_IDX, ORDER_DATE, o.STATE, ORDER_CNT, UPDATE_DATE,IS_REVIEW, p.name, p.brand, d.po_name, d.dt_idx, o.order_date
 		from "ORDER" o
 		inner join product p USING(PRD_IDX)
 		inner join prd_detail d USING(PRD_IDX)
-		where USER_IDX = #{userIdx} and o.STATE = 3  <!-- state가 3일 때 구매 확정이라면 -->
-		order by UPDATE_DATE desc
+		<where>
+			USER_IDX = #{userIdx} and is_review=0 and o.dt_idx=d.dt_idx and o.STATE = 4  <!-- state가 4일 때 구매 확정이라면 -->
+		<if test="fromDate != null and endDate != null">
+			and ORDER_DATE between TO_DATE(#{fromDate},'YYYY-MM-DD') and TO_DATE(#{endDate},'YYYY-MM-DD')+1
+		</if>
+		</where>
+		order by o.order_date desc
+	</select>
+	
+	<select id="selectReviewDetail" resultType="map">
+  	 	select ORDER_IDX, USER_IDX, PRD_IDX, o.state, ORDER_CNT, p.name, p.brand, po_name,d.dt_idx
+		from "ORDER" o
+		inner join product p USING(PRD_IDX)
+		inner join prd_detail d USING(PRD_IDX)
+		where user_idx = #{userIdx} and o.state = 4 and o.order_idx = #{orderIdx} and o.dt_idx=d.dt_idx
 	</select>
   	
   	 <select id="selectMyReviewList" resultType="map">
@@ -29,26 +63,28 @@
 		inner join product p USING(PRD_IDX)
 		inner join prd_detail d USING(PRD_IDX)
 		inner join "ORDER" o USING(PRD_IDX)
-		where r.USER_IDX = #{userIdx} and o.dt_idx = d.dt_idx
-		 order by reg_date desc
+		<where>
+		r.USER_IDX = #{userIdx} and o.dt_idx = d.dt_idx 
+			<if test="state == null">
+				and r.state is not null
+			</if>	
+			<if test="state != null">
+				 and r.STATE = #{state}
+			</if>			
+		</where>
+		order by reg_date desc
 	</select>
 	
-	<select id="selectReviewDetail" resultType="map">
-  	 	select ORDER_IDX, USER_IDX, PRD_IDX, o.state, ORDER_CNT, p.name, p.brand, po_name,d.dt_idx
-		from "ORDER" o
-		inner join product p USING(PRD_IDX)
-		inner join prd_detail d USING(PRD_IDX)
-		where user_idx = #{userIdx} and o.state = 3 and o.order_idx = #{orderIdx} and o.dt_idx=d.dt_idx
-	</select>
+
 	
-	<!-- acc-money / save history -->
+	<!-- acc-money / save history ********주문,리뷰로 받았을 경우 -->
 	<select id="selectReserveList" resultType="map">
   	 	select SH_IDX, USER_IDX, s.STATE, s.TYPE, s.AMOUNT, s.REG_DATE, PRD_IDX, p.NAME,o.dt_idx, o.order_idx
 		from SAVE_HISTORY s
 		inner join "ORDER" o USING(USER_IDX)
 		inner join product p using(PRD_IDX)
 		inner join prd_detail d USING(PRD_IDX)
-		where user_idx = #{userIdx} and o.dt_idx=d.dt_idx and o.order_idx=s.order_idx
+		where user_idx = #{userIdx} and o.dt_idx=d.dt_idx and o.order_idx=s.order_idx and s.state=#{state}
 		order by s.reg_date desc
 	</select>
 	
@@ -60,7 +96,7 @@
 		where u.user_idx = #{userIdx} and u.exp_date > sysdate
 	</select>
 	
-	<!-- enquiry form ***********필요없을듯-->
+	<!-- enquiry form -->
 	<select id="memberInfoForEnquiry" resultType="map">
   	 	select USER_IDX, EMAIL, NICKNAME,GRADE, USER_ID, ADDRESS, JOIN_DATE, SAVEMONEY,IS_LEAVE ,USER_NAME, ORDER_IDX
 		from "USER" u
@@ -77,7 +113,7 @@
 		inner join prd_detail d USING(PRD_IDX)
 		inner join "ORDER" o using(PRD_IDX)
 		<where>
-		 q.USER_IDX = #{userIdx} and o.dt_idx=d.dt_idx
+		 q.USER_IDX = #{userIdx} and o.dt_idx=d.dt_idx and q.order_idx = o.order_idx
 			<if test="fromDate != null and endDate != null">
 				and q.REG_DATE between TO_DATE(#{fromDate},'YYYY-MM-DD') and TO_DATE(#{endDate},'YYYY-MM-DD')+1
 			</if>
@@ -86,13 +122,69 @@
 		order by q.reg_date desc
 	</select>
 	
+	<select id="selectFAQList" resultType="map">
+  	 	
+  	 	select * from qna    	 	
+		<where>
+		user_idx=9
+			<if test="type == null">
+				and type is not null
+			</if>	
+			<if test="type != null">
+				 and type=#{type}
+			</if>			
+		</where>		
+	</select>
+
+	
 	<!-- ok -->
 	<select id="selectMemberInfo" resultType="Member">
-  	 	select user_name, nickname, join_date, savemoney, user_idx
+  	 	select *
 		from "USER"
 		where user_idx = #{userIdx}
 	</select>
 	
+	<!-- address -->
+	<insert id="insertAddress">
+		insert into "ADDRESS"(address_idx,address,user_idx, address_name, address_detail
+		<if test="isDefault != null">
+		, is_default
+		</if>
+		)
+		values(SC_ADDRESS_IDX.NEXTVAL,#{address},#{userIdx},#{addressName},#{addressDetail}
+		<if test="isDefault != null">
+		,#{isDefault}
+		</if>
+		)
+	</insert>
+	<update id="updateAddress">
+		update "ADDRESS"
+		set address = #{address}, address_name = #{addressName}, address_detail = #{addressDetail}
+		<if test="isDefault != null"> <!-- 기본배송지 선택했으면 -->
+		, is_default = #{isDefault}
+		</if>
+		where address_idx = #{addressIdx}
+	</update>
+	
+	<!-- 기본배송지 등록-->
+	<update id="updateAddressIsDefault">
+		update "ADDRESS"
+		set is_default = 'N'
+		<where>
+			<if test="addressIdx != null"> <!-- 배송지 수정일 때 -->
+				<if test="isDefault != null"> <!-- 기본배송지 선택했으면 -->
+					address_idx != #{addressIdx} and user_idx = #{userIdx}
+				</if>
+			</if>
+			<if test="addressIdx == null"><!-- 배송지 새로 등록일 때 -->
+				<if test="isDefault != null"> <!-- 기본배송지 선택했으면 -->
+					address_idx != SC_ADDRESS_IDX.currval and user_idx = #{userIdx}
+				</if>
+			</if>
+			
+		</where>
+		
+	</update>
 	
 	
   	

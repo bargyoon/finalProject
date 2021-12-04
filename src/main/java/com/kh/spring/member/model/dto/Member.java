@@ -14,6 +14,7 @@ public class Member {
 	   private String grade;
 	   private String userId;
 	   private String address;
+	   private String addressDetail;
 	   private Date joinDate;
 	   private int isLeave;
 	   private String userName;

@@ -59,26 +59,33 @@
 		<div style="margin: 0 auto; width: 800px">
 			
 			<div class="modal">
-				<form action="" style="margin: auto auto;">
+				<form action="/mypage/vaccination" method="post" style="margin: auto auto;">
 					<div class="mb-3">
 						<label class="form-label" for="pet-select">등록할 펫 선택:</label>
-						<select class="form-select"  name="pet" id="pet-select">
+						<select class="form-select"  name="pet" id="pet-select" required="required">
 							<!-- foreach문 -->
-							<option value="">--Please choose an option--</option>
+							<option value="" selected="selected">--Please choose an option--</option>
+							<c:forEach var="pet" items="${petList}">
+								<option value="${pet.petIdx}">${pet.name}</option>
+							</c:forEach>
 						</select>
 					</div>
 					
 					<div class="mb-3">
 						<label class="form-label" for="vaccine-list">예방접종항목 선택:</label>
-						<select class="form-select"  name="vaccine" id="vaccine-list">
+						<select class="form-select"  name="vaccine" id="vaccine-list" required="required">
 							<!-- foreach문 -->
 							<option value="">--Please choose an option--</option>
+							<c:forEach var="vaccineInfo" items="${vaccineList}">
+								<option value="${vaccineInfo.viIdx}">${vaccineInfo.name}</option>
+							</c:forEach>
 						</select>
 					</div>
 					
 					<div class="mb-3">
 						<label class="form-label" for="last-record">마지막 접종일 선택:</label><br>
-						<input class="form-date" type="date" name="criterion-date" id="last-record">
+						<input type="date" name="date" id="last-record" required="required"
+							style="width: 400px;">
 					</div>
 					
 					<hr class="my-3">

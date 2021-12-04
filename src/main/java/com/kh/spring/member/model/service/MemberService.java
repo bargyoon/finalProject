@@ -21,4 +21,7 @@ public interface MemberService {
 	Member selectMemberById(String userId);
 
 	void insertKakaoMember(Member member);
+
+	void authenticateByEmail(Member member, String token);
+
 }

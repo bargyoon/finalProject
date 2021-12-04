@@ -3,6 +3,8 @@
 <html>
 <head>
 <%@ include file="/WEB-INF/views/include/market/mypage-head.jsp"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
 <style>
             div#wrapper {
                 width : 1000px;
@@ -41,7 +43,7 @@
 				        	<td>${orderList.ORDER_IDX}</td>
 				        	<td>${orderList.NAME}</td>		         
 				            <td>${orderList.PO_NAME}</td>
-				            <td>${orderList.ORDER_DATE}</td>
+				            <td><fmt:formatDate value="${orderList.ORDER_DATE}" pattern="yyyy-MM-dd"/></td>
 				            <c:if test="${orderList.length == 0}">
 				        	  <td colspan="5">조회결과가 없습니다.</td>
 				   		    </c:if>
@@ -62,7 +64,6 @@
 	       
 	   		document.getElementById("closeBtn").onclick = function(){
 	        	
-	   	
 	   			var orderIdx = $("input[name='chk_res']:checked").val();
 	   			window.opener.document.getElementById("orderIdx").value = orderIdx;		        
 		        window.close();

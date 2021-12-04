@@ -20,12 +20,10 @@
 				<div class="px-4 px-lg-5 my-3">
 					<div>
 						<div class="mt-4" style="display: flex; flex-direction: column;">
-							<h1 class="display-4 fw-bolder">닉네임</h1>
+							<h1 class="display-4 fw-bolder">${memberInfo.nickName}</h1>
 							<div style="display: flex;">
-								<h1 class="display-7 fw-bolder">회원등급</h1>
-								<p class="px-lg-2 pt-1" style="color: lightgray;">가입일 : 2021.4.26</p>
-							</div>
-							<a class="fw-normal btn-" href="#!" style="text-decoration: none;">등급별 혜택 확인 <i class="fas fa-chevron-right"></i></a>
+								<p class="px-lg-2 pt-1" style="color: lightgray;">가입일 : ${memberInfo.joinDate}</p>
+							</div>							
 						</div>
 					</div>
 				</div>
@@ -34,12 +32,12 @@
 				<div class="mt-5" style="display: flex; flex-direction: column;">
 					<i class="fas fa-coins py-2" style="font-size: 1.5rem;"></i>
 					<p class="fw-normal mt-2">적립금</p>
-					<p style="font-size: 1.3rem;">10,000</p>
+					<p style="font-size: 1.3rem;">${memberInfo.saveMoney}</p>
 				</div>
 				<div class="mt-5" style="display: flex; flex-direction: column;">
 					<i class="fas fa-ticket-alt py-2" style="font-size: 1.5rem"></i>
 					<p class="fw-normal mt-2">쿠폰</p>
-					<p style="font-size: 1.3rem;">3장</p>
+					<p style="font-size: 1.3rem;">${couponCnt}장</p>
 				</div>
 			</div>
 		</div>
@@ -51,11 +49,11 @@
 				<ul class="aside-ul">
 					<li class="ft-SBAggroM" style="font-size: 1.3rem;">나의 쇼핑 활동</li>
 					<li><hr class="dropdown-divider" /></li>
-					<li><a href="#!">주문 내역 조회</a></li>
-					<li><a href="#!">구매후기</a></li>
-					<li><a href="#!">장바구니</a></li>
-					<li><a href="#!">상품문의</a></li>
-					<li><a href="#!">주소록 관리</a></li>
+					<li><a href="/market/mypage">주문 내역 조회</a></li>
+					<li><a href="/market/mypage/review/review-list2">구매후기</a></li>
+					<li><a href="/market/mypage/cart">장바구니</a></li>
+					<li><a href="#!" style="color: black;">상품문의</a></li>
+					<li><a href="/market/mypage/address-list">주소록 관리</a></li>
 				</ul>
 			</div>
 		</aside>
@@ -83,14 +81,14 @@
 				<input type="text" name="faq_search_value"><a class="btn btn-outline-dark" type="submit" href="#!">검색</a>
 			</form>
 			<ul class="faq-nav">
-				<li><a href="faq-type-1">주문/결제</a></li>
-				<li><a href="faq-type-2">배송</a></li>
-				<li><a href="faq-type-3">교환/환불</a></li>
-				<li><a href="faq-type-4">회원관련</a></li>
-				<li><a href="faq-type-5">신고</a></li>
-				<li><a href="faq-type-6">상품 문의</a></li>
-				<li><a class="faq-type-7" href="faq-type-7">적립금</a></li>
-				<li><a href="faq-type-8">기타 문의</a></li>
+				<li><a href="/market/mypage/enquiry/faq?type=1">주문/결제</a></li>
+				<li><a href="/market/mypage/enquiry/faq?type=2">배송</a></li>
+				<li><a href="/market/mypage/enquiry/faq?type=3">교환/환불</a></li>
+				<li><a href="/market/mypage/enquiry/faq?type=4">회원관련</a></li>
+				<li><a href="/market/mypage/enquiry/faq?type=5">신고</a></li>
+				<li><a href="/market/mypage/enquiry/faq?type=6">상품 문의</a></li>
+				<li><a href="/market/mypage/enquiry/faq?type=7">적립금</a></li>
+				<li><a href="/market/mypage/enquiry/faq?type=8">기타 문의</a></li>
 			</ul>
 			<table class="n-table table-col faq-table">
 				<colgroup>
@@ -103,30 +101,21 @@
 						<th scope="col">내용</th>
 					</tr>
 				</thead>
+				
+				<c:forEach var="faqList" items="${faqList}">
 				<tbody>
 					<tr>
 						<td>1</td>
-						<td onclick="openFaq(1)">재고가 없어요. 언제쯤 구입할 수 있을까요?</td>
+						<td onclick="openFaq(1)">${faqList.TITLE}</td>
 					</tr>
 					<tr class="faq-answer" id="faq-answer-1">
 						<td>답변</td>
 						<td>
-							<p>일반적으로 입점 업체의 품절 상품 재입고 여부 및 일정은 무신사 스토어에서는 정확히 알기 어렵습니다.
-							재입고 여부는 상품 상세 페이지의 상품문의 게시판을 통하여 문의하시는 것이 가장 정확합니다. 재입고 알림을
-							등록하시면 재입고 알림 문자를 받아보실 수 있습니다.</p>
-						</td>
-					</tr>
-					<tr>
-						<td>2</td>
-						<td onclick="openFaq(2)">가격이 떨어져 예전에 구매했을 때 보다 싸게 팔고 있는 경우 차액 환불이 되나요?</td>
-					</tr>
-					<tr class="faq-answer" id="faq-answer-2">
-						<td>답변</td>
-						<td>
-							<p>판매 가격의 변동에 따른 차액을 보상해드리지 않습니다.</p>
+							<p>${faqList.AW_CONTEXT}</p>
 						</td>
 					</tr>
 				</tbody>
+				</c:forEach>
 			</table>
 		</div>
 	</section>

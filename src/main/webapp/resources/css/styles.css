@@ -1213,7 +1213,7 @@ progress {
   .board-in-main {
   	border: 0.1px solid lightgray;
     flex: 0 0 auto;
-    width: 50%;
+    width: 33.33333%;
   }
   .board-list-in-main{
   	height: 500px !important;
@@ -4006,6 +4006,11 @@ textarea.form-control-lg {
   border-top-right-radius: 0;
 }
 
+.fas fa-circle fa-stack-2x text-primary{
+	color: black !important;
+}
+
+
 .nav {
   display: flex;
   flex-wrap: wrap;
@@ -4024,7 +4029,7 @@ textarea.form-control-lg {
 /* 메뉴 하단바 색깔 */
 .navbar-detail > li{
 	list-style: none;
-	background-color: silver;
+	background-color: #f0ead5;
 	padding: 10px 0px 5px 0px;
 }
 
@@ -4074,7 +4079,7 @@ textarea.form-control-lg {
   background-color: #21252961;
 }
 .nav-link.disabled {
-  color: #6c757d;
+  /* color: #6c757d; */
   pointer-events: none;
   cursor: default;
 }
@@ -4092,6 +4097,11 @@ textarea.form-control-lg {
 .nav-tabs .nav-link:hover, .nav-tabs .nav-link:focus {
   border-color: #e9ecef #e9ecef #dee2e6;
   isolation: isolate;
+}
+.nav-link:hover{
+	background: none !important;
+	font-weight: bold;
+	color: black !important;
 }
 .nav-tabs .nav-link.disabled {
   color: #6c757d;
@@ -11902,8 +11912,9 @@ section#contact form#contactForm :-ms-input-placeholder {
 } */
 
 footer {
+  padding: 10px;
   background-color : #F0EAD5;
-  text-align: center;
+  text-align: right;
   font-size: 0.9rem;
   color: gray;
   }

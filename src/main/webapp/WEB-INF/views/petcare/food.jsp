@@ -8,13 +8,12 @@
 </head>
 <body>
 
-<section>
+<section style="background-color: rgb(240, 234, 213);">
 		<div class="petcare-back">					
 				
 				
 			<h1> 금지음식 </h1>
 			<h5 class="second-title">반려동물이 꼭 피해야하는 음식은?</h5>
-			<h3 class="third-title">대표 금지 음식</h3>
 			<div class="top-food">	
 				<div class="food-one">
 					<div class="caffeine">

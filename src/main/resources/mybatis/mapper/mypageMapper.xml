@@ -5,19 +5,61 @@
   <mapper namespace="com.kh.spring.mypage.model.repository.MypageRepository">
 
   	<update id="updateMemberDynamicQuery">
-  		update member
+  		update "USER"
   		<set>
-  			<if test="form.nickName != null">
-  				nickname = #{form.nickName}
-  			</if>
-  			<if test="form.password != null">
-  				,password = #{form.password}
-  			</if>
-  			<if test="form.address != null">
-  				,address = #{form.address}
-  			</if>
+			<if test="nickName != ''">
+				nickname = #{nickName}
+			</if>
+			<if test="password != ''">
+				,password = #{password}
+			</if>
+			<if test="address != ''">
+				,address = #{address}, address_detail = #{addressDetail}
+			</if>
   		</set>
   		where user_idx = #{userIdx}
   	</update>
+  	
+  	<select id="selectBoardCommentCnt" resultType="int">
+  		select count(*) from board_comment
+  		where user_idx = #{userIdx}
+  		<if test="keyword != null">
+			and cm_content like '%'||#{keyword}||'%'
+		</if>
+  	</select>
+  	
+  	<select id="selectBoardCnt" resultType="int">
+  		select count(*) from board
+  		where user_idx = #{userIdx}
+  		<if test="keyword != null">
+			and content like '%'||#{keyword}||'%'
+		</if>
+  	</select>
+  	
+  	<select id="selectBoardComment" resultType="BoardComment">
+  		select *
+		from (select CM_IDX, BD_IDX, CM_CONTENT, REG_DATE, CM_REC_COUNT, USER_IDX, NICKNAME, PR_IDX, CM_TYPE, rownum rnum
+        from (select CM_IDX, BD_IDX, CM_CONTENT, REG_DATE, CM_REC_COUNT, USER_IDX, NICKNAME, PR_IDX, CM_TYPE
+        from board_comment where user_idx = #{searchSet.userIdx}
+		<if test="searchSet.keyword != null">
+			and cm_content like '%'||#{searchSet.keyword}||'%' 
+		</if>
+  		order by cm_idx desc)) 
+  		where rnum between ${((pageUtil.curPage-1) * pageUtil.cntPerPage) + 1} 
+  		and ${pageUtil.curPage * pageUtil.cntPerPage}
+  	</select>
+  	
+  	<select id="selectBoard" resultType="Board">
+  		select *
+		from (select BD_IDX, USER_IDX, BD_TITLE, REG_DATE, VIEW_COUNT, REC_COUNT, CONTENT, CATEGORY, NICKNAME, rownum rnum
+        from (select BD_IDX, USER_IDX, BD_TITLE, REG_DATE, VIEW_COUNT, REC_COUNT, CONTENT, CATEGORY, NICKNAME
+        from board where user_idx = #{searchSet.userIdx}
+		<if test="searchSet.keyword != null">
+			and content like '%'||#{searchSet.keyword}||'%' 
+		</if>
+  		order by bd_idx desc)) 
+  		where rnum between ${((pageUtil.curPage-1) * pageUtil.cntPerPage) + 1} 
+  		and ${pageUtil.curPage * pageUtil.cntPerPage}
+  	</select>
   	
   </mapper>

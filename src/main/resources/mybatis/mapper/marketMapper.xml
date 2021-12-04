@@ -94,20 +94,23 @@
 	</select>
 	
 	<select id="selectPrdList" resultType="map">
-		select p.prd_idx, p.name, p.brand, p.category, p.reg_date,d.po_name, d.po_stock, d.price, d.state, d.dt_idx
+	select * from 
+	(select rownum rnum, prd_idx, name, brand, category, reg_date, po_name, po_stock, sale_price, price, state, dt_idx, save_path, RENAME_FILE_NAME from
+		(select p.prd_idx, p.name, p.brand, p.category, p.reg_date,d.po_name, d.po_stock, d.sale_price, d.price, d.state, d.dt_idx
 		,f.save_path, max(f.rename_file_name) RENAME_FILE_NAME from product p join prd_detail d on(p.prd_idx = d.prd_idx) 
 		join file_info f on (f.type_idx = p.prd_idx) 
 		
 		<where>
-			<if test="state != 'all'">
-				pd.state = #{state}
+			<if test="commandMap.state != 'all'">
+				d.state = #{commandMap.state}
 			</if>
-			<if test="keyword != null">
-				p.name = #{keyword} or pd.po_name = #{keyword}
+			<if test="commandMap.keyword != null">
+				p.name = #{commandMap.keyword} or d.po_name = #{commandMap.keyword}
 			</if>
 		</where>
-		group by  p.prd_idx, p.name, p.brand, p.category, p.reg_date,d.po_name, d.po_stock, d.price, d.state, d.dt_idx
-		,f.save_path
+		group by  p.prd_idx, p.name, p.brand, p.category, p.reg_date,d.po_name, d.po_stock,  d.sale_price,d.price, d.state, d.dt_idx
+		,f.save_path ))
+		where rnum between ${((pageUtil.curPage-1) * pageUtil.cntPerPage) + 1} and ${pageUtil.curPage * pageUtil.cntPerPage} 
 	</select>
 	
   	
@@ -134,6 +137,35 @@
 		from coupon
 		join user_coupon using(coupon_idx)
 		where user_idx = #{userIdx}
+	</select>
+	
+  	<select id="selectOrderList" resultType="map">
+  		select dt_idx, count(dt_idx) cnt
+  		from "ORDER" group by dt_idx
+  	</select>
+  	
+  	<select id="selectOrderSpec" resultType="map">
+  		select o.dt_idx,  o.user_idx, o.prd_idx, o.payment_method,  o.payment_amount, o.order_date, o.state, o.order_cnt , f.save_path, f.rename_file_name
+  		from "ORDER" o join file_info f on(o.prd_idx = f.type_idx)
+  		where dt_idx = #{dtIdx}
+  	</select>
+  	
+  	<select id="selectPrdListCnt" resultType="java.lang.Integer">
+  	select count(*) from(
+  	select p.prd_idx, p.name, p.brand, p.category, p.reg_date,d.po_name, d.po_stock, d.sale_price, d.price, d.state, d.dt_idx
+		,f.save_path, max(f.rename_file_name) RENAME_FILE_NAME from product p join prd_detail d on(p.prd_idx = d.prd_idx) 
+		join file_info f on (f.type_idx = p.prd_idx) 
+		
+		<where>
+			<if test="state != 'all'">
+				d.state = #{state}
+			</if>
+			<if test="keyword != null">
+				p.name = #{keyword} or d.po_name = #{keyword}
+			</if>
+		</where>
+		group by  p.prd_idx, p.name, p.brand, p.category, p.reg_date,d.po_name, d.po_stock, d.sale_price, d.price, d.state, d.dt_idx
+		,f.save_path)
   	</select>
   	
   </mapper>

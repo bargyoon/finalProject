@@ -25,5 +25,5 @@ public class Product {
      private Date regDate;
      private String type;
      private int salePrice;
-
+     
 }

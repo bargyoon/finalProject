@@ -14,7 +14,8 @@ function kakaoLogin() {
 											if(response.ok){
 												/*console.dir(response.status);
 												console.dir('통신성공' + res.id);
-												console.dir(response.text());*/
+												console.dir(response.text()); 
+												전체 코드를 읽는중에 여기 주석 풀면 오류남!*/
 												return response.text();
 
 											}else{

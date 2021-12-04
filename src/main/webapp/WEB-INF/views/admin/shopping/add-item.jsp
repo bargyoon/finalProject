@@ -169,7 +169,7 @@
 																<div class="col-md-6 m-margin-bottom-xl">
 																	<label class="control-label">애완동물 종류</label> <select name="type"
 																		class="form-control">
-																		<option value="" selected disabled>종류 선택</option>
+																		<option value="A" selected>공용</option>
 																		<option value="C">고양이</option>
 																		<option value="D">강아지</option>
 																	</select>

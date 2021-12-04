@@ -2,19 +2,123 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-  <mapper namespace="com.kh.spring.board.model.repository.BoardRepository">
-  
-  	
+<mapper namespace="com.kh.spring.board.model.repository.BoardRepository">
 
-  	<select id="selectBoard" resultType="map">
-  		select m.nickname, b.bd_idx, b.bd_title, b.reg_date, b.view_count, b.rec_count, b.content 
-  		from board b join "USER" m on(b.user_idx = m.user_idx)
-  		<where>
-  			<if test="category != null">category = #{category}</if>
-  		</where>
-  	</select>
-  	
-  
-  	
-  	
-  </mapper>
+
+
+	<select id="selectBoard" resultType="map">
+		select * from( select rownum rnum ,cm_cnt, nickname, user_idx,
+		bd_idx, bd_title, reg_date, view_count, rec_count, content ,category
+		from (select count(c.bd_idx) cm_cnt,
+		b.nickname,
+		b.user_idx, b.bd_idx,
+		b.bd_title, b.reg_date,
+		b.view_count,
+		b.rec_count, b.content ,b.category
+		from board b left join board_comment c on(b.bd_idx = c.bd_idx)
+		<where>
+			<if
+				test="commandMap.category != null and commandMap.category != 'all'">category = #{commandMap.category}</if>
+			<if
+				test="commandMap.option != null and commandMap.keyword != null">and ${commandMap.option} like '%'||#{commandMap.keyword}||'%'
+			</if>
+
+		</where>
+		group by b.bd_idx,b.nickname,
+		b.user_idx, b.bd_idx,
+		b.bd_title,
+		b.reg_date,
+		b.view_count,
+		b.rec_count, b.content ,b.category
+		<if test="commandMap.sort != null">order by ${commandMap.sort} desc</if>
+		))where rnum between ${((pageUtil.curPage-1) * pageUtil.cntPerPage) +
+		1} and ${pageUtil.curPage * pageUtil.cntPerPage}
+	</select>
+
+	<select id="selectBoardCnt" resultType="java.lang.Integer">
+		select count(*) from(
+
+		select nickname, bd_idx, bd_title, reg_date,
+		view_count, rec_count, content
+		,category
+		from (select nickname,
+		user_idx, bd_idx, bd_title, reg_date, view_count,
+		rec_count, content
+		,category from board
+		<where>
+			<if
+				test="commandMap.category != null and commandMap.category != 'all'">category = #{commandMap.category}</if>
+			<if
+				test="commandMap.option != null and commandMap.keyword != null">and ${commandMap.option} like '%'||#{commandMap.keyword}||'%'
+			</if>
+
+		</where>
+		))
+	</select>
+	<insert id="insertComment">
+		<choose>
+			<when test="cmType == 0">
+				insert into board_comment(cm_idx, bd_idx, cm_content,
+				user_idx, nickname,
+				pr_idx) values(sc_cm_idx.nextval, #{bdIdx},
+				#{cmContent},
+				#{userIdx}, #{nickname}, sc_cm_idx.nextval)
+			</when>
+			<otherwise>
+				insert into board_comment(cm_idx, bd_idx, cm_content,
+				user_idx, nickname,
+				pr_idx, cm_type) values(sc_cm_idx.nextval,
+				#{bdIdx}, #{cmContent},
+				#{userIdx}, #{nickname}, #{cmIdx}, #{cmType})
+			</otherwise>
+		</choose>
+
+	</insert>
+
+	<select id="selectCommentCnt" resultType="java.lang.Integer">
+		select count(*) from board_comment
+
+
+		<where>
+			<if
+				test="commandMap.category != null and commandMap.category != 'all'">category = #{commandMap.category}</if>
+			<if
+				test="commandMap.option != null and commandMap.keyword != null">and ${commandMap.option} like '%'||#{commandMap.keyword}||'%'
+			</if>
+
+		</where>
+
+	</select>
+	<select id="selectCommentList" resultType="map">
+		select * from
+		(select rownum rnum, cm_idx, bd_idx,cm_content,reg_date,
+		cm_rec_count,
+		user_idx, nickname, pr_idx, cm_type , bd_title, category
+		, origin_tit,
+		origin_nick from
+		(select c.cm_idx, c.bd_idx,
+		c.cm_content,c.reg_date, c.cm_rec_count,
+		c.user_idx, c.nickname,
+		c.pr_idx, c.cm_type, b.bd_title, b.category ,
+		c1.cm_content origin_tit,
+		c1.nickname origin_nick
+		from board_comment c join board b on(c.bd_idx =
+		b.bd_idx) join
+		board_comment c1 on(c.pr_idx = c1.cm_idx)
+		<where>
+
+			<if
+				test="commandMap.category != null and commandMap.category != 'all'">category = #{commandMap.category}</if>
+			<if
+				test="commandMap.option != null and commandMap.keyword != null">and ${commandMap.option} like '%'||#{commandMap.keyword}||'%'
+			</if>
+
+		</where>
+		<if test="commandMap.sort != null">order by ${commandMap.sort} desc</if>
+		))where rnum between ${((pageUtil.curPage-1) * pageUtil.cntPerPage) +
+		1} and ${pageUtil.curPage * pageUtil.cntPerPage}
+
+	</select>
+
+
+</mapper>

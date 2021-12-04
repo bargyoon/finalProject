@@ -38,7 +38,7 @@
 	<!-- Bootstrap tether Core JavaScript -->
 	<script src="/resources/js/admin/popper.min.js"></script>
 	<script src="/resources/js/admin/bootstrap.min.js"></script>
-	<script src="/resources/js/price/drag-drop.js"></script>
+	<script src="/resources/js/admin/drag-drop.js"></script>
 	<script type="text/javascript">
 	document.querySelector("#add_img").addEventListener("click", e =>{
 		if(document.querySelector(".img-1").files.length == 0) {

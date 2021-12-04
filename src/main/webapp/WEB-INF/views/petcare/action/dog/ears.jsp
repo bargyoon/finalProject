@@ -8,7 +8,7 @@
 </head>
 <body>
 
-<section>
+<section style="background-color: rgb(240, 234, 213);">
 	
 		<div class="petcare-back">						
 				<a href="/petcare/action/cat/eyes"><i class="fas fa-angle-double-right"></i>  고양이 행동 의미 보러가기</a>
@@ -58,7 +58,7 @@
 					
 		</div>
 	</section>
-
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 <script type="text/javascript">
 
 	let tabBtns = document.querySelector('.petcare-tab-wrap').children;
