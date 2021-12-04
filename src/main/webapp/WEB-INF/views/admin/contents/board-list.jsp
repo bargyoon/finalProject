@@ -82,7 +82,8 @@
 				<!-- ============================================================== -->
 				<!-- Start Page Content -->
 				<!-- ============================================================== -->
-				<div class="row">
+				<form class="row">
+
 					<div class="col-md-12">
 						<div class="card">
 							<div class="card-body no-padding">
@@ -93,36 +94,14 @@
 										<div>
 											<div style="display: table; width: 100%; margin-bottom: 5px;">
 												<div style="display: table-row-group;">
-													<div class='d-table-cell' style="width: 15%;">카테고리</div>
-													<div class='d-table-cell '>
-														<select style="width: 50%;" class="form-control"
-															aria-hidden="true" name="category" id="category">
-															<option data-select2-id="3">전체</option>
-
-
-															<option value="info" data-select2-id="17">정보게시판</option>
-															<option value="dog" data-select2-id="18">강아지게시판</option>
-
-															<option value="cat" data-select2-id="20">고양이게시판</option>
-															<option value="review" data-select2-id="21">후기게시판</option>
-															<option value="meet" data-select2-id="22">모임게시판</option>
-															<option value="consulting" data-select2-id="23">상담게시판</option>
-
-
-														</select>
-													</div>
-												</div>
-											</div>
-
-											<div style="display: table; width: 100%; margin-bottom: 5px;">
-												<div style="display: table-row-group;">
 													<div class='d-table-cell' style="width: 15%;">검색 종류</div>
 													<div class='d-table-cell '>
-														<input type="radio" name="sort" id="search_option" value="nickname" checked><label
-															class="ml-2 mr-2">작성자</label> <input type="radio" value="content"
-															 name="sort" id="search_option"><label class="ml-2 mr-2">게시글</label>
-														<input type="radio" name="sort" id="search_option" value="bd_title"><label
-															class="ml-2 mr-2">제목</label>
+														<input type="radio" name="option" id="search_option"
+															value="nickname" checked><label class="ml-2 mr-2">작성자</label>
+														<input type="radio" value="content" name="option"
+															id="search_option"><label class="ml-2 mr-2">게시글</label>
+														<input type="radio" name="option" id="search_option"
+															value="bd_title"><label class="ml-2 mr-2">제목</label>
 													</div>
 												</div>
 											</div>
@@ -130,8 +109,9 @@
 												<div style="display: table-row-group;">
 													<div class='d-table-cell' style="width: 15%;">키워드 검색</div>
 													<div class='d-table-cell '>
-														<input type="text" class="form-control" style="width: 50%"
-															placeholder="작성자 내용 검색" name="keyword" id="inp">
+														<input type="search" class="form-control" style="width: 50%" 
+															placeholder="작성자 내용 검색" name="keyword" aria-label="Search" required
+															id="inp" value="${dataMap.keyword }">
 													</div>
 												</div>
 											</div>
@@ -139,7 +119,8 @@
 										</div>
 										<div class="border-top">
 											<div class="card-body">
-												<button class="btn-secondary float-right ml-2" onclick="searchKeyword()">검색</button>
+												<button class="btn-secondary float-right ml-2"
+													onclick="searchKeyword()">검색</button>
 												<button class="btn-primary float-right" type="button"
 													onclick="javascript:location.href=location.pathname">초기화</button>
 											</div>
@@ -152,7 +133,7 @@
 
 					</div>
 
-				</div>
+				</form>
 				<div class="row">
 
 					<div class="col-12">
@@ -160,7 +141,22 @@
 						<div class="card">
 							<div class="card-body">
 								<h5 class="card-title m-b-0">게시글 관리</h5>
-								<span class="float-right"><select name="category"
+								<span class="float-left"> <select class="form-control" onchange="changeCategory()"
+									aria-hidden="true" name="category" id="categorySelect">
+										<option value="all">전체</option>
+
+
+										<option value="info" data-select2-id="17">정보게시판</option>
+										<option value="dog" data-select2-id="18">강아지게시판</option>
+
+										<option value="cat" data-select2-id="20">고양이게시판</option>
+										<option value="review" data-select2-id="21">후기게시판</option>
+										<option value="meet" data-select2-id="22">모임게시판</option>
+										<option value="consulting" data-select2-id="23">상담게시판</option>
+
+
+								</select>
+								</span> <span class="float-right"><select name="sort"
 									id="sortSelect" onchange="sortList()" class="form-control">
 										<option value="reg_date">등록일순</option>
 										<option value="view_count">조회순</option>
@@ -195,7 +191,7 @@
 													</label></th>
 													<td><a
 														href="/board/${bList.CATEGORY}/detail?bdIdx=${bList.BD_IDX}">${bList.BD_TITLE}</a><small
-														class="ml-2"><i class="fas fa-comment mr-1"></i>댓글수</small></td>
+														class="ml-2"><i class="fas fa-comment mr-1"></i>${bList.CM_CNT}</small></td>
 													<td><a href="">${bList.NICKNAME}</a></td>
 													<td>${bList.CATEGORY}</td>
 													<td><fmt:formatDate pattern="yyyy-MM-dd hh:mm:ss"
@@ -309,6 +305,17 @@
 	Array.prototype.forEach.call(document.querySelector("#sortSelect").options, e =>{
 		if(e.value == "${dataMap.sort}") e.selected = true;
 	})
+	
+	Array.prototype.forEach.call(document.querySelector("#categorySelect").options, e =>{
+		if(e.value == "${dataMap.category}") e.selected = true;
+	})
+	
+	document.querySelectorAll("#search_option").forEach(e =>{
+		if(e.value == "${dataMap.option}") e.checked = true;
+		
+	})
+	
+	
 })();
 
 
@@ -323,20 +330,29 @@
     	 location.href = location.pathname + '?' + newParam
  	 
 		}
+    let changeCategory = () =>{
+    	var categorySelect = document.getElementById("categorySelect");  
+    	var categoryValue = categorySelect.options[categorySelect.selectedIndex].value; 
+ 		 URLSearch.set('category', String(categoryValue));
+ 		 URLSearch.set('page', String("1"));
+    	 const newParam = URLSearch.toString();
+    	 location.href = location.pathname + '?' + newParam
+ 	 
+		}
     
     let searchKeyword = () =>{
     	var option = document.querySelector("#search_option").value
     	var keyword = document.querySelector("#inp").value
     	var category = document.querySelector("#category").value
     	keyword = keyword.trim()
-    	if(keyword == ''){
-    		alert("검색어를 입력해주세요.")
-    		return
-    	}
+    	
     	 URLSearch.set("option", String(option));
   		 URLSearch.set("keyword", String(keyword));
   		 URLSearch.set("category", String(category));
-  		 
+  		if(keyword == ''){
+    		alert("검색어를 입력해주세요.")
+    		return
+    	}
      	 const newParam = URLSearch.toString();
      	 location.href = location.pathname + '?' + newParam
   	

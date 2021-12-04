@@ -40,10 +40,7 @@ public class BoardServiceImpl implements BoardService {
 
 	public List<Map<String, Object>> selectBoard(Map<String, Object> commandMap, Paging pageUtil) {
 		List<Map<String, Object>> commandList = boardRepository.selectBoard(commandMap, pageUtil);
-		for (Map<String, Object> map : commandList) {
-			int commentCnt = boardRepository.selectCommentCntByIdx(Integer.parseInt(map.get("BD_IDX").toString()));
-			map.put("commentCnt", commentCnt);
-		}
+	
 
 		return commandList;
 	}
@@ -99,9 +96,11 @@ public class BoardServiceImpl implements BoardService {
 		return boardRepository.selectCommentCnt(commandMap);
 	}
 	
-	@Override
+
 	public List<Map<String, Object>> selectCommentList(Map<String, Object> commandMap, Paging pageUtil) {
 		
 		return boardRepository.selectCommentList(commandMap, pageUtil);
 	}
+	
+	
 }

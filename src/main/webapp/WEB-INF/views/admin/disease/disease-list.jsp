@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 
@@ -93,7 +96,7 @@
 							<div class="card-body">
 								<h5 class="card-title m-b-0 d-inline-block">병명 목록</h5>
 
-								<button class="btn-primary float-right btn-lg" onclick="location.reload()">병명 추가</button>
+								<button class="btn-primary float-right btn-lg" onclick="location.href='/admin/disease/add-disease-spec'">병명 추가</button>
 
 							</div>
 

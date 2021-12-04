@@ -33,8 +33,8 @@ public interface ShopRepository {
 			+ " values(sc_file_idx.nextval, sc_si_idx.currval, #{originFileName}, #{renameFileName}, #{savePath})")
 	void insertSubImgFileInfo(FileDTO fileUpload);
 
-	@Insert("insert into prd_detail(prd_idx, po_name, price, po_stock, dt_idx) values(sc_prd_idx.currval,#{option}, #{price}, #{stock}, sc_dt_idx.nextval)")
-	void insertPrdDetail(Map<String, Object> map);
+	@Insert("insert into prd_detail(prd_idx, po_name, price, po_stock, dt_idx, sale_price) values(sc_prd_idx.currval,#{map.option}, #{map.price}, #{map.stock}, sc_dt_idx.nextval, ${salePrice})")
+	void insertPrdDetail(@Param("map")Map<String, Object> map,@Param("salePrice") int salePrice);
 
 	@Select("select * from product join prd_detail using (prd_idx) where prd_idx = #{prdIdx}")
 	List<Product> selectPrdListByIdx(int prdIdx);
@@ -52,6 +52,13 @@ public interface ShopRepository {
 	@Select("select count(*) from prd_detail where state = #{state}")
 	int selectSpecCnt(String state);
 
-	List<Map<String, Object>> selectPrdList(Map<String, Object> commandmap);
+	List<Map<String, Object>> selectPrdList(@Param("commandMap") Map<String, Object> commandmap,@Param("pageUtil") Paging pageUtil);
+
+	
+	List<Map<String,Object>> selectOrderList();
+
+	List<Map<String, Object>> selectOrderSpec(int dtIdx);
+
+	int selectPrdListCnt(Map<String, Object> commandMap);
 
 }

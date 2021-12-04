@@ -9,6 +9,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="https://use.fontawesome.com/releases/v5.15.4/js/all.js"></script>
 <link rel="stylesheet" href="/resources/css/board/board-list.css">
 </head>
 <body>
@@ -48,7 +49,7 @@
 						<td>${bList.RNUM}</td>
 						<td class="tit"><a
 							href="/board/${dataMap.category}/detail?bdIdx=${bList.BD_IDX}">${bList.BD_TITLE}</a><span><i
-								class="fas fa-comment" style="margin-right: 5px"></i></span>${bList.commentCnt }
+								class="fas fa-comment" style="margin-right: 5px"></i></span>${bList.CM_CNT }
 						</td>
 						<td>${bList.NICKNAME}</td>
 						<td><fmt:formatDate value="${bList.REG_DATE}"

@@ -29,6 +29,10 @@ public interface ShopService {
 	void insertProduct(List<MultipartFile> mainImg, List<MultipartFile> specImg, List<Map<String, Object>> commandList,
 			Product product);
 
-	Map<String, Object> selectPrdList(Map<String, Object> commandmap);
+	Map<String, Object> selectPrdList(Map<String, Object> commandmap, Paging pageUtil);
+
+	List<Map<String, Object>> selectOrderList();
+
+	int selectPrdListCnt(Map<String, Object> commandMap);
 
 }

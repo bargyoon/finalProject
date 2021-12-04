@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 
@@ -151,7 +154,7 @@
 							<div class="card-body">
 								<h5 class="card-title m-b-0 d-inline-block">상품목록</h5>
 
-								<span class="btn-primary float-right btn-lg" onclick="location.href('/admin/shopping/add-item')">상품추가</span>
+								<span class="btn-primary float-right btn-lg" onclick="location.href='/admin/shopping/add-item'">상품추가</span>
 
 							</div>
 
@@ -171,6 +174,7 @@
 											</tr>
 										</thead>
 										<tbody class="customtable">
+										
 										<c:forEach items="${datas.prdList}" var="data"
 												varStatus="status">
 											<tr>
@@ -178,12 +182,12 @@
 														class="listCheckbox" /> <span class="checkmark"></span>
 												</label></td>
 												<td>01</td>
-												<td><a><img
+												<td><a><img style="height: 60px; widht: 60px;"
 														src="${data.downloadURL}"></a>
 													<div class="d-inline-block">
-														<a href="#">(${data.BRAND})${data.NAME} - ${data.PO_NAME}</a>
+														<a href="#">(${data.BRAND})${data.NAME}/${data.PO_NAME}</a>
 													</div></td>
-												<td>${data.PRICE}원</td>
+												<td>${data.SALE_PRICE}원</td>
 												<td>
 												<c:choose>
 														<c:when test="${data.CATEGORY eq 'feed'}">사료</c:when>
@@ -211,10 +215,11 @@
 													</span><i
 													class="m-r-10 mdi mdi-chevron-down ml-2"> </i>
 													<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-														<a class="dropdown-item" href="#">Action</a> <a
-															class="dropdown-item" href="#">Another action</a>
+														<c:if test="${data.STATE ne 'sale'}"><a class="dropdown-item" href="#">판매중</a></c:if> 
+														<c:if test="${data.STATE ne 'soldout'}"><a class="dropdown-item" href="#">품절</a></c:if> 
+														<c:if test="${data.STATE ne 'hidden'}"><a class="dropdown-item" href="#">숨김</a></c:if> 
 														<div class="dropdown-divider"></div>
-														<a class="dropdown-item" href="#">Something else here</a>
+														<a class="dropdown-item text-warning" href="#">삭제</a>
 													</div></td>
 
 												<td>${data.PO_STOCK }</td>
@@ -302,9 +307,40 @@
 											</tr>
 										</tbody>
 									</table>
+									
 									<div class="border-top">
 										<div class="card-body">
 											<button class="btn-secondary ">submit</button>
+											<div
+												class="dataTables_paginate paging_simple_numbers float-right"
+												id="zero_config_paginate">
+												<ul class="pagination">
+													<li class="paginate_button page-item previous disabled"
+														id="zero_config_previous"><a
+														aria-controls="zero_config" data-dt-idx="0" tabindex="0"
+														class="page-link" onclick="prevBtn(${pageUtil.curPage})">Previous</a></li>
+													<c:if test="${pageUtil.blockEnd eq 1}">
+														<li class="paginate_button page-item active"><a
+															href="#" aria-controls="zero_config" data-dt-idx="1"
+															tabindex="0" class="page-link">1</a></li>
+													</c:if>
+													<c:if test="${pageUtil.blockEnd > 1}">
+														<c:forEach var="i" begin="1" step="1"
+															end="${pageUtil.blockEnd}">
+
+															<li class="paginate_button page-item"><a href="#"
+																aria-controls="zero_config" class="page-link"
+																onclick="changePage(${i})">${i}</a></li>
+														</c:forEach>
+													</c:if>
+
+
+													<li class="paginate_button page-item next"
+														id="zero_config_next"><a href="#"
+														aria-controls="zero_config" class="page-link"
+														onclick="nextBtn(${pageUtil.curPage},${pageUtil.blockEnd})">Next</a></li>
+												</ul>
+											</div>
 										</div>
 									</div>
 								</form>
@@ -378,6 +414,38 @@
   		}
   	  
    }
+
+    
+   	let prevBtn = (page) => {
+		if(page == 1){
+			alert("첫번째 페이지 입니다.")
+			return;
+		}
+		
+		page--;
+
+		changePage(page);
+		
+	}
+	
+	let nextBtn = (page, blockEnd) => {
+		if(page == blockEnd){
+			alert("마지막 페이지 입니다.")
+			return;
+		}
+		
+		page++;
+		
+		changePage(page);
+		
+	}
+    let changePage = (page) =>{
+    	
+      		 URLSearch.set('page', String(page));
+         	 const newParam = URLSearch.toString();
+         	 location.href = location.pathname + '?' + newParam
+      	 
+    }
    
     </script>
 

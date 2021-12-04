@@ -179,6 +179,330 @@
                                             </tr>
                                         </thead>
                                         <tbody class="customtable">
+                                        <c:forEach items="${orderList}" var="orderList">
+                                        
+                                        <c:choose>
+                                        	<c:when test="${orderList.CNT == 1}">
+                                        	
+                                        	<c:forEach items="${orderList.specList}" var="specList">
+                                        	
+                                        	<tr>
+
+                                                <td>
+                                                    <div><span style="color: black;">${specList.DT_IDX}</span></div>
+                                                    <div style="font-size: 10pt; color: gray;">
+                                                        ${specList.ORDER_DATE }
+                                                    </div>
+                                                    <p style="margin-top: 10px;">주문자${specList.USER_IDX}</p>
+                                                </td>
+                                                <td>
+                                                    <a><img
+                                                            src="https://cdn.imweb.me/thumbnail/20180305/5a9cea9e49044.png"></a>
+                                                    <div class="d-inline-block">
+                                                        <div style="font-size: 10pt; color: gray;">${specList.DT_IDX}</div>
+                                                        <div><a href="#">화장품${specList.PRD_IDX}</a></div>
+                                                    </div>
+                                                </td>
+                                                <td class="text-right  ">100원 수정</td>
+                                                <td class="text-center">${specList.ORDER_CNT }</td>
+                                                <td>
+                                                    <div>
+                                                        <div>
+                                                            <select>
+                                                                <option value="" selected="">택배사 선택</option>
+                                                                <option value="CJ">CJ대한통운</option>
+                                                                <option value="EPOST">우체국택배</option>
+                                                                <option value="REGISTPOST">우편등기</option>
+                                                                <option value="HANJIN">한진택배</option>
+                                                                <option value="LOGEN">로젠택배</option>
+                                                                <option value="GTX">GTX로지스</option>
+                                                                <option value="LOTTE">롯데택배</option>
+                                                                <option value="DS">대신택배</option>
+                                                                <option value="IY">일양로지스</option>
+                                                                <option value="KD">경동택배</option>
+                                                                <option value="NHLOGIS">농협택배</option>
+                                                                <option value="SEBANG">세방택배</option>
+                                                                <option value="CI">천일택배</option>
+                                                                <option value="CVS">CVSnet 편의점택배</option>
+                                                                <option value="HD">합동택배</option>
+                                                                <option value="EMS">EMS</option>
+                                                                <option value="kpacket">K-Packet</option>
+                                                                <option value="DHL">DHL</option>
+                                                                <option value="FEDEX">Fedex</option>
+                                                                <option value="GSMN">GSMNtoN</option>
+                                                                <option value="UPS">UPS</option>
+                                                                <option value="TNT">TNT Express</option>
+                                                                <option value="USPS">USPS</option>
+                                                                <option value="AIRBOY">에어보이익스프레스</option>
+                                                                <option value="DHLMAIL">DHL Global Mail</option>
+                                                                <option value="IPARCEL">i-Parcel</option>
+                                                                <option value="HANWISA">한의사랑택배</option>
+                                                                <option value="GUNYOUNG">건영택배</option>
+                                                                <option value="BUMHAN">범한판토스</option>
+                                                                <option value="APEX">APEX</option>
+                                                                <option value="ECMSExpress">ECMSExpress</option>
+                                                                <option value="GOODTOLUCK">굿투럭</option>
+                                                                <option value="DHLGER">DHL 독일</option>
+                                                                <option value="ACI">ACI</option>
+                                                                <option value="LOTTEGLOBAL">롯데택배(국제택배)</option>
+                                                                <option value="CJGLOBAL">CJ대한통운(국제택배)</option>
+                                                                <option value="SUNGWON">성원글로벌</option>
+                                                                <option value="DAEWOON">대운글로벌</option>
+                                                                <option value="SLX">SLX택배</option>
+                                                                <option value="HONAM">호남택배</option>
+                                                                <option value="GSIEXPRESS">GSI익스프레스</option>
+                                                                <option value="KGBPS">KGB 택배</option>
+                                                                <option value="CUPARCEL">CU편의점택배</option>
+                                                                <option value="VROONG">부릉</option>
+                                                                <option value="todaypickup">오늘의 픽업</option>
+                                                                <option value="CHAINLOGIS">두발히어로</option>
+                                                                <option value="HOMEPICK">홈픽택배</option>
+                                                                <option value="QXPRESS">큐익스프레스</option>
+                                                                <option value="LINEEXP">라인익스프레스</option>
+                                                                <option value="GPSLOGIX">GPS LOGIX</option>
+                                                                <option value="CRLX">시알로지텍</option>
+                                                                <option value="BRIDGE">브릿지로지스</option>
+                                                                <option value="EFS">EFS</option>
+                                                                <option value="FRESH">프레시솔루션</option>
+                                                                <option value="FRESHMATES">프레시메이트</option>
+                                                                <option value="GTSLOGIS">GTS로지스</option>
+                                                                <option value="GENIEGO">지니고</option>
+                                                                <option value="PINGPONG">핑퐁</option>
+                                                                <option value="ETC">기타택배</option>
+                                                            </select>
+                                                        </div>
+                                                        <div>
+                                                            <input type="text"
+                                                                placeholder="송장번호" value="">
+                                                           
+                                                        </div>
+                                                      
+                                                    </div>
+                                                </td>
+
+                                                <td>
+                                                    <div class="mb-2">
+                                                        <strong>${specList.USER_IDX }</strong>/<span>전화번호</span>
+                                                        <div class="mb-1" style="font-size: 10pt; color:gray">
+                                                            주소주소주소주소<br>
+                                                            <div>우편번호</div>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div>
+                                                        <div style="display: table; width: 100%; margin-bottom: 7px;">
+                                                            <div style="display: table-row-group; ">
+                                                                <div class='d-table-cell'>총 결제금액</div>
+                                                                <div class='d-table-cell text-right'>${specList.PAYMENT_AMOUNT}원</div>
+                                                            </div>
+                                                        </div>
+                                                        <div style="display: table; width: 100%; color: gray;">
+                                                            <div style="display: table-row-group;">
+                                                                <div class='d-table-cell'>소계</div>
+                                                                <div class='d-table-cell text-right'>25000원?</div>
+                                                            </div>
+                                                            <div style="display: table-row-group;">
+                                                                <div class='d-table-cell'>상품 할인금액</div>
+                                                                <div class='d-table-cell text-right'>5000원?</div>
+                                                            </div>
+                                                        </div>
+                                                        <div style="display: table; width: 100%; color: gray;">
+                                                            <div style="display: table-row-group;">
+                                                                <div class='d-table-cell'>결제방법</div>
+                                                                <div class='d-table-cell text-right'>${specList.PAYMENT_METHOD}<br>신한은행</div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td class="nav-item text-center dropdown" href="" data-toggle="dropdown"
+                                                    aria-haspopup="true" aria-expanded="false">
+                                                    <span>반품중</span><i class="m-r-10 mdi mdi-chevron-down ml-2"> </i>
+                                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                                        <a class="dropdown-item" href="#">Action</a>
+                                                        <a class="dropdown-item" href="#">Another action</a>
+                                                        <div class="dropdown-divider"></div>
+                                                        <a class="dropdown-item" href="#">Something else here</a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            </c:forEach>
+                                        	</c:when>
+                                        	<c:otherwise>
+                                        	<c:forEach items="${orderList.specList}" var="specList" varStatus="status">
+                                        	<c:choose>
+                                        		<c:when test="${status.count == 1}">
+                                        		 <tr>
+
+                                             <td rowspan="${orderList.CNT}">
+                                                    <div><span style="color: black;">${specList.DT_IDX}</span></div>
+                                                    <div style="font-size: 10pt; color: gray;">
+                                                        ${specList.ORDER_DATE }
+                                                    </div>
+                                                    <p style="margin-top: 10px;">주문자${specList.USER_IDX}</p>
+                                                </td>
+                                                <td>
+                                                    <a><img
+                                                            src="https://cdn.imweb.me/thumbnail/20180305/5a9cea9e49044.png"></a>
+                                                    <div class="d-inline-block">
+                                                        <div style="font-size: 10pt; color: gray;">${specList.DT_IDX}</div>
+                                                        <div><a href="#">상품이름${specList.PRD_IDX}</a></div>
+                                                    </div>
+                                                </td>
+                                                <td class="text-right  ">100원 수정</td>
+                                                <td class="text-center">${specList.ORDER_CNT }</td>
+                                                 <td rowspan="${orderList.CNT}">
+                                                    <div>
+                                                        <div>
+                                                            <select>
+                                                                <option value="" selected="">택배사 선택</option>
+                                                                <option value="CJ">CJ대한통운</option>
+                                                                <option value="EPOST">우체국택배</option>
+                                                                <option value="REGISTPOST">우편등기</option>
+                                                                <option value="HANJIN">한진택배</option>
+                                                                <option value="LOGEN">로젠택배</option>
+                                                                <option value="GTX">GTX로지스</option>
+                                                                <option value="LOTTE">롯데택배</option>
+                                                                <option value="DS">대신택배</option>
+                                                                <option value="IY">일양로지스</option>
+                                                                <option value="KD">경동택배</option>
+                                                                <option value="NHLOGIS">농협택배</option>
+                                                                <option value="SEBANG">세방택배</option>
+                                                                <option value="CI">천일택배</option>
+                                                                <option value="CVS">CVSnet 편의점택배</option>
+                                                                <option value="HD">합동택배</option>
+                                                                <option value="EMS">EMS</option>
+                                                                <option value="kpacket">K-Packet</option>
+                                                                <option value="DHL">DHL</option>
+                                                                <option value="FEDEX">Fedex</option>
+                                                                <option value="GSMN">GSMNtoN</option>
+                                                                <option value="UPS">UPS</option>
+                                                                <option value="TNT">TNT Express</option>
+                                                                <option value="USPS">USPS</option>
+                                                                <option value="AIRBOY">에어보이익스프레스</option>
+                                                                <option value="DHLMAIL">DHL Global Mail</option>
+                                                                <option value="IPARCEL">i-Parcel</option>
+                                                                <option value="HANWISA">한의사랑택배</option>
+                                                                <option value="HANWISA">한의사랑택배</option>
+                                                                <option value="GUNYOUNG">건영택배</option>
+                                                                <option value="BUMHAN">범한판토스</option>
+                                                                <option value="APEX">APEX</option>
+                                                                <option value="ECMSExpress">ECMSExpress</option>
+                                                                <option value="GOODTOLUCK">굿투럭</option>
+                                                                <option value="DHLGER">DHL 독일</option>
+                                                                <option value="ACI">ACI</option>
+                                                                <option value="LOTTEGLOBAL">롯데택배(국제택배)</option>
+                                                                <option value="CJGLOBAL">CJ대한통운(국제택배)</option>
+                                                                <option value="SUNGWON">성원글로벌</option>
+                                                                <option value="DAEWOON">대운글로벌</option>
+                                                                <option value="SLX">SLX택배</option>
+                                                                <option value="HONAM">호남택배</option>
+                                                                <option value="GSIEXPRESS">GSI익스프레스</option>
+                                                                <option value="KGBPS">KGB 택배</option>
+                                                                <option value="CUPARCEL">CU편의점택배</option>
+                                                                <option value="VROONG">부릉</option>
+                                                                <option value="todaypickup">오늘의 픽업</option>
+                                                                <option value="CHAINLOGIS">두발히어로</option>
+                                                                <option value="HOMEPICK">홈픽택배</option>
+                                                                <option value="QXPRESS">큐익스프레스</option>
+                                                                <option value="LINEEXP">라인익스프레스</option>
+                                                                <option value="GPSLOGIX">GPS LOGIX</option>
+                                                                <option value="CRLX">시알로지텍</option>
+                                                                <option value="BRIDGE">브릿지로지스</option>
+                                                                <option value="EFS">EFS</option>
+                                                                <option value="FRESH">프레시솔루션</option>
+                                                                <option value="FRESHMATES">프레시메이트</option>
+                                                                <option value="GTSLOGIS">GTS로지스</option>
+                                                                <option value="GENIEGO">지니고</option>
+                                                                <option value="PINGPONG">핑퐁</option>
+                                                                <option value="ETC">기타택배</option>
+                                                            </select>
+                                                        </div>
+                                                        <div>
+                                                            <input type="text"
+                                                                placeholder="송장번호" value="">
+                                                           
+                                                        </div>
+                                                      
+                                                    </div>
+                                                </td>
+
+
+
+                                                <td rowspan="${orderList.CNT}">
+                                                    <div class="mb-2">
+                                                        <strong>${specList.USER_IDX}</strong>/<span>전화번호</span>
+                                                        <div class="mb-1" style="font-size: 10pt; color:gray">
+                                                            주소주소주소주소<br>
+                                                            <div>우편번호</div>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td rowspan="${orderList.CNT}">
+                                                    <div>
+                                                        <div style="display: table; width: 100%; margin-bottom: 7px;">
+                                                            <div style="display: table-row-group; ">
+                                                                <div class='d-table-cell'>총 결제금액</div>
+                                                                <div class='d-table-cell text-right'>${specList.PAYMENT_AMOUNT}원</div>
+                                                            </div>
+                                                        </div>
+                                                        <div style="display: table; width: 100%; color: gray;">
+                                                            <div style="display: table-row-group;">
+                                                                <div class='d-table-cell'>소계</div>
+                                                                <div class='d-table-cell text-right'>25000원</div>
+                                                            </div>
+                                                            <div style="display: table-row-group;">
+                                                                <div class='d-table-cell'>상품 할인금액</div>
+                                                                <div class='d-table-cell text-right'>5000원</div>
+                                                            </div>
+                                                        </div>
+                                                        <div style="display: table; width: 100%; color: gray;">
+                                                            <div style="display: table-row-group;">
+                                                                <div class='d-table-cell'>결제방법</div>
+                                                                <div class='d-table-cell text-right'>${specList.PAYMENT_METHOD}<br>신한은행</div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td rowspan="${orderList.CNT}" class="nav-item text-center dropdown" href=""
+                                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                    <span>반품중</span><i class="m-r-10 mdi mdi-chevron-down ml-2"> </i>
+                                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                                        <a class="dropdown-item" href="#">Action</a>
+                                                        <a class="dropdown-item" href="#">Another action</a>
+                                                        <div class="dropdown-divider"></div>
+                                                        <a class="dropdown-item" href="#">Something else here</a>
+                                                    </div>
+                                                </td>
+
+                                            </tr>
+                                        		</c:when>
+                                        		<c:otherwise>
+                                        		 <tr>
+
+                                                <td>
+                                                    <a><img
+                                                            src="https://cdn.imweb.me/thumbnail/20180305/5a9cea9e49044.png"></a>
+                                                    <div class="d-inline-block">
+                                                        <div style="font-size: 10pt; color: gray;">${specList.DT_IDX}</div>
+                                                        <div><a href="#">화장품${specList.PRD_IDX}</a></div>
+                                                    </div>
+                                                </td>
+                                                <td class="text-right  ">10000원</td>
+                                                <td class="text-center">${specList.ORDER_CNT}</td>
+
+
+                                            </tr>
+                                        		</c:otherwise>
+                                        	</c:choose>
+                                        	
+                                        	</c:forEach>
+                                        	
+                                        	</c:otherwise>
+                                        </c:choose>
+                                        
+                                        
+                                        </c:forEach>
                                             <tr>
 
                                                 <td rowspan="2">

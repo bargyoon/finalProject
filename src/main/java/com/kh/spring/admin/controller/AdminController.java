@@ -50,14 +50,21 @@ public class AdminController {
 	}
 
 	@GetMapping("shopping/item-list")
-	public void itemList(@RequestParam(value = "keyword", required = false) String keyword,
+	public void itemList(@RequestParam(value = "keyword", required = false) String keyword,@RequestParam(required = false, defaultValue = "1") int page,
 			@RequestParam(value = "state", required = false, defaultValue = "all") String state, Model model) {
-		Map<String, Object> commandmap = new LinkedHashMap<String, Object>();
-		commandmap.put("keyword", keyword);
-		commandmap.put("state", state);
+		Map<String, Object> commandMap = new LinkedHashMap<String, Object>();
+		commandMap.put("keyword", keyword);
+		commandMap.put("state", state);
+		Paging pageUtil = Paging.builder()
+				.curPage(page)
+				.cntPerPage(15)
+				.blockCnt(10)
+				.total(shopService.selectPrdListCnt(commandMap))
+				.build();
 
-		Map<String, Object> commandMap = shopService.selectPrdList(commandmap);
-		model.addAttribute("datas", commandMap);
+		Map<String, Object> dataMap = shopService.selectPrdList(commandMap,pageUtil);
+		model.addAttribute("pageUtil", pageUtil);
+		model.addAttribute("datas", dataMap);
 
 	}
 
@@ -66,7 +73,9 @@ public class AdminController {
 	}
 
 	@GetMapping("shopping/order-list")
-	public void orderList() {
+	public void orderList(Model model) {
+		List<Map<String,Object>> orderList = shopService.selectOrderList();
+		model.addAttribute("orderList", orderList);
 	}
 
 	@GetMapping("shopping/QnA")
@@ -176,7 +185,7 @@ public class AdminController {
 	@PostMapping("shopping/add-product")
 	public String shoppingTest(@RequestParam(value = "main_img") List<MultipartFile> mainImg,
 			@RequestParam(value = "spec_img") List<MultipartFile> specImg,
-			@RequestParam(value = "option", required = false, defaultValue = "none") List<String> option,
+			@RequestParam(value = "option", required = false, defaultValue = "기본") List<String> option,
 			@RequestParam(value = "stock") List<String> stock, @RequestParam(value = "price") List<String> price,
 			Product product) {
 		List<Map<String, Object>> commandList = new ArrayList<Map<String, Object>>();
