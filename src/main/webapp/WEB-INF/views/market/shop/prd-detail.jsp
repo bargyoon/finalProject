@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -36,27 +36,25 @@
 
 	<section class="container" style="margin-top: 10rem;">
 		<div class="prd-detail">
-			<img class="prd-detail-img"
-				src="https://dummyimage.com/500x500/dee2e6/6c757d.jpg" alt="..." />
+			<img class="prd-detail-img" src="https://dummyimage.com/500x500/dee2e6/6c757d.jpg" alt="..." />
 			<div class="prd-detail-info">
 				<p class="prd-name mb-2" style="font-size: 23px; font-weight: bold;"><c:out value="${prdInfo.name}"/></p>
+				<input type="hidden" id="prd-name" value="${prdInfo.name}">
 				<div class="d-flex small text-warning pb-1">
-					<i class="fas fa-star"></i>
-					<i class="fas fa-star"></i>
-					<i class="fas fa-star"></i>
-					<i class="fas fa-star"></i>
-					<i class="fas fa-star"></i>
+					<c:forEach var="i" begin="0" step="1" end="${prdInfo.rating-1}">
+						<i class="fas fa-star"></i>
+					</c:forEach>
 					<button class="review-btn" type="button" onclick="focusReview()"><c:out value="(${reviews.size()})"/></button>
 				</div>
 				<div class="d-flex justify-content-between mt-2">
-					<p style="font-size: 18px;"><c:out value="${prdInfo.price}"/></p>
+					<p style="font-size: 18px;"><fmt:formatNumber value="${prdInfo.price}"/></p>
 					<button class="review-btn" type="button">
 						<i class="fas fa-share-alt"></i>
 					</button>
 				</div>
 				<hr class="mt-0">
 				<ul class="prd-detail-sub">
-					<li id="sm-amount" class="pb-1">구매혜택 <span class="fw-normal" style="padding-left: 0.8rem;">3,350원 적립예정</span></li>
+					<li id="sm-amount" class="pb-1">구매혜택 <span class="fw-normal" style="padding-left: 0.8rem;">상품주문가격의 5% 적립</span></li>
 					<li class="pb-1">배송방법 <span class="fw-normal" style="padding-left: 0.8rem;">택배</span></li>
 					<li class="pb-1">배송비 <span class="fw-normal" style="padding-left: 1.55rem;">50,000원 이상 구매시 무료</span></li>
 				</ul>
@@ -66,25 +64,59 @@
 					<select class="prd-option-select" onchange="addOption(this.value)">
 						<option value="">상품 옵션 선택</option>
 							<c:forEach var="i" begin="0" step="1" end="${optionInfos.size()-1}">
-								<option value="${optionInfos[i].dtIdx}">
-									<c:if test="${optionInfos[i].poStock eq 0}">
+								<c:if test="${optionInfos[i].poStock eq 0}">
+									<option class="sold-out-prd" value="null">
 										<c:out value="${optionInfos[i].poName} (품절)"/>
-									</c:if>
-									<c:if test="${optionInfos[i].poStock ne 0}">
-										<c:out value="${optionInfos[i].poName}"/>
-									</c:if>
-								</option>
+									</option>
+								</c:if>
+								<c:if test="${optionInfos[i].poStock ne 0}">
+									<option value="${optionInfos[i].dtIdx}">
+										<c:out value="${optionInfos[i].poName} (${optionInfos[i].poStock} 개 남음)"/>
+									</option>
+								</c:if>
 							</c:forEach>
 					</select>
 				</div>
-				<div class="option-form"></div>
-				<div class="mt-5 pt-4 d-flex justify-content-between">
+				<div class="option-form">
+					<c:forEach var="i" begin="0" step="1" end="${optionInfos.size()-1}">
+						<input type="checkbox" name="dtIdxs" value="${optionInfos[i].dtIdx}">
+					</c:forEach>
+				</div>
+				<div class="mt-5 discount-div">
+					<div class="d-flex justify-content-between">
+						<input id="uc-idx" name="uc-idx" type="hidden" value="0">
+						<input id="cp-amount-hidden" type="hidden" value="0">
+						<button class="fw-bolder" type="button" onclick="useCoupon()">쿠폰 적용</button>
+						<span id="cp-amount" style="font-size: 15px;">버튼을 눌러 쿠폰을 적용하세요.</span>
+					</div>
+					<div class="mt-3 d-flex justify-content-between">
+						<span id="sm-use" style="font-size: 15px;">적립금 사용</span>
+						<input id="sm-value-hidden" name="sm-amount" type="hidden" value="0">
+						<strong>
+							<input id="sm-value" value="" onkeyup="applySm()">
+							<label for="sm-value" style="font-size: 15px;">원</label>
+						</strong>
+					</div>
+					<div style="font-family: 'SBAggroL'; flex-direction:column; color: gray;" class="d-flex justify-content-between">
+						<div>
+							<span>사용 가능 적립금 : </span>
+							<input id="sm-available-hidden" type="hidden" value="0">
+							<input id="sm-available" style="outline: none;" type="text" readonly="readonly" value="0">
+						</div>
+						<div>
+							<span>총 보유 적립금 : </span>
+							<input id="have-sm-hidden" type="hidden" value="10000">
+							<input id="have-sm" style="outline: none;" type="text" readonly="readonly" value="10000 원" />
+						</div>
+					</div>
+				</div>
+				<div class="pt-4 d-flex justify-content-between">
 					<p class="mb-0">총 상품금액</p>
 					<input type="hidden" id="total-price-hidden" value="0">
 					<input class="fw-bolder" type="text" id="prd-total-price" readonly="readonly" value="0 원"></input>
 				</div>
 				<div class="mt-4 d-flex justify-content-between buy-btns">
-					<button class="buy-btn" type="button" onclick="requestPay('${prdInfo.prdIdx}')">구매하기</button>
+					<button class="buy-btn" type="submit" onclick="requestPay('${prdInfo.prdIdx}', '${sessionScope.authentication.userIdx}')">구매하기</button>
 					<button class="cart-btn" type="button">장바구니</button>
 				</div>
 			</div>

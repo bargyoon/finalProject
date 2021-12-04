@@ -129,4 +129,11 @@
 		where rv.prd_idx = #{prdIdx}
   	</select>
   	
+  	<select id="selectCouponByUserIdx" resultType="Coupon">
+	  	select coupon_idx, uc_idx, user_idx, name, sale_per, type, coupon.exp_date exp_date ,user_coupon.exp_date uc_exp_date, reg_date, user_coupon.is_del
+		from coupon
+		join user_coupon using(coupon_idx)
+		where user_idx = #{userIdx}
+  	</select>
+  	
   </mapper>

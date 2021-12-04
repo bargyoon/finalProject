@@ -542,6 +542,12 @@ tbody > tr:hover{
     color: steelblue;
 }
 
+.simple-table input {
+    border: none;
+    text-align: center;
+    background-color: transparent;
+}
+
 .address-btn > ul{
     display: flex;
     justify-content: space-around;

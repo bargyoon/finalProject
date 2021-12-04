@@ -6,6 +6,8 @@ import java.util.Map;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.kh.spring.common.util.pagination.Paging;
+import com.kh.spring.market.model.dto.Coupon;
+import com.kh.spring.market.model.dto.Order;
 import com.kh.spring.market.model.dto.Product;
 import com.kh.spring.market.model.dto.Review;
 import com.kh.spring.market.model.dto.prdListSet;
@@ -30,5 +32,9 @@ public interface ShopService {
 			Product product);
 
 	Map<String, Object> selectPrdList(Map<String, Object> commandmap);
+
+	List<Coupon> selectCouponByUserIdx(int userIdx);
+
+	int selectPoStackByDtIdx(int dtIdx);
 
 }

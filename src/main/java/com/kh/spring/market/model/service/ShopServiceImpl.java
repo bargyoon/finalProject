@@ -11,6 +11,8 @@ import org.springframework.web.multipart.MultipartFile;
 import com.kh.spring.common.util.FileDTO;
 import com.kh.spring.common.util.FileUtil;
 import com.kh.spring.common.util.pagination.Paging;
+import com.kh.spring.market.model.dto.Coupon;
+import com.kh.spring.market.model.dto.Order;
 import com.kh.spring.market.model.dto.Product;
 import com.kh.spring.market.model.dto.Review;
 import com.kh.spring.market.model.dto.prdListSet;
@@ -107,6 +109,12 @@ public class ShopServiceImpl implements ShopService{
 		return prdOption;
 	}
 	
+
+	public List<Coupon> selectCouponByUserIdx(int userIdx) {
+		List<Coupon> couponList = shopRepository.selectCouponByUserIdx(userIdx);
+		return couponList;
+	}
+	
 	public void insertProduct(List<MultipartFile> mainImg, List<MultipartFile> specImg,
 			List<Map<String, Object>> commandList, Product product) {
 		shopRepository.insertProduct(product);
@@ -154,4 +162,10 @@ public class ShopServiceImpl implements ShopService{
 		
 		
 	}
+
+	public int selectPoStackByDtIdx(int dtIdx) {
+		int res = shopRepository.selectPoStackByDtIdx(dtIdx);
+		return res;
+	}
+
 }

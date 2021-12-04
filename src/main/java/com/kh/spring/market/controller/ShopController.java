@@ -1,5 +1,6 @@
 	package com.kh.spring.market.controller;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
@@ -8,19 +9,27 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.spring.common.util.pagination.Paging;
+import com.kh.spring.market.model.dto.Coupon;
 import com.kh.spring.market.model.dto.Order;
 import com.kh.spring.market.model.dto.Product;
 import com.kh.spring.market.model.dto.Review;
 import com.kh.spring.market.model.dto.prdListSet;
 import com.kh.spring.market.model.service.ShopService;
+import com.kh.spring.member.model.dto.Member;
+import com.siot.IamportRestClient.IamportClient;
+import com.siot.IamportRestClient.exception.IamportResponseException;
+import com.siot.IamportRestClient.response.IamportResponse;
+import com.siot.IamportRestClient.response.Payment;
 
 import lombok.RequiredArgsConstructor;
 
@@ -91,9 +100,33 @@ public class ShopController {
 		return prdOption;
 	}
 	
+	@PostMapping("check-stock")
+	@ResponseBody
+	public Member checkStock(@RequestBody List<Order> orderInfos, @SessionAttribute(name="authentication")Member certifiedUser) {
+		int[] cntArr = new int[orderInfos.size()];
+		for (int i = 0; i < orderInfos.size(); i++) {
+			cntArr[i] = shopService.selectPoStackByDtIdx(orderInfos.get(i).getDtIdx());
+			if(orderInfos.get(i).getOrderCnt() > cntArr[i]) {
+				Member emptyMember = new Member();
+				emptyMember.setUserName("disavailable");
+				return emptyMember;
+			}
+		}
+		return certifiedUser;
+	}
+	
+	@GetMapping("choice-coupon")
+	public void choiceCoupon(@SessionAttribute(name="authentication")Member certifiedUser, Model model) {
+		int userIdx = certifiedUser.getUserIdx();
+		List<Coupon> couponList = shopService.selectCouponByUserIdx(userIdx);
+		model.addAttribute("couponList", couponList);
+	}
+	
 	@PostMapping("buy-test")
-	public void buyTest(@RequestBody Order order){
-		logger.debug("order : {}", order);
+	@ResponseBody
+	public IamportResponse<Payment> buyTest(@PathVariable(value= "imp_uid") String imp_uid) throws IamportResponseException, IOException{
+		IamportClient client = new IamportClient("8272885714375817", "f27d12b907ecd3d120d853acafa0791ae35c2d3a309e7ae0ffe2c05a90dea7edf322f437d1f62fa6");
+		return client.paymentByImpUid(imp_uid);
 	}
 	
 }

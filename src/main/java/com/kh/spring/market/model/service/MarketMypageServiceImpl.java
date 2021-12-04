@@ -16,7 +16,6 @@ import com.kh.spring.market.model.dto.Order;
 import com.kh.spring.market.model.dto.QNA;
 import com.kh.spring.market.model.dto.Review;
 import com.kh.spring.market.model.dto.SaveHistory;
-import com.kh.spring.market.model.dto.UserCoupon;
 import com.kh.spring.market.model.repository.MarketMypageRepository;
 import com.kh.spring.member.model.dto.Member;
 

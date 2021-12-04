@@ -24,4 +24,6 @@ public class Product {
      private String state;
      private Date regDate;
      private String type;
+     private int salePrice;
+
 }

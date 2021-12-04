@@ -49,7 +49,7 @@ public class ShopControllerTest {
 		order.setOrderCnt(5);
 		order.setPaymentAmount(1000);
 		order.setPaymentMethod("card");
-		order.setState(0);
+		order.setState("");
 		String orderJson = mapper.writeValueAsString(order);
 		
 		mockMvc.perform(post("/market/shop/buy-test")

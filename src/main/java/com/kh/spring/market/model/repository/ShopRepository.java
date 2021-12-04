@@ -10,6 +10,7 @@ import org.apache.ibatis.annotations.Select;
 
 import com.kh.spring.common.util.FileDTO;
 import com.kh.spring.common.util.pagination.Paging;
+import com.kh.spring.market.model.dto.Coupon;
 import com.kh.spring.market.model.dto.Product;
 import com.kh.spring.market.model.dto.Review;
 import com.kh.spring.market.model.dto.prdListSet;
@@ -42,6 +43,9 @@ public interface ShopRepository {
 	Product selectPrdByIdx(int prdIdx);
 
 	List<Review> selectReviewByPrdIdx(int prdIdx);
+	
+	List<Coupon> selectCouponByUserIdx(int userIdx);
+	
 
 	@Select("select * from prd_detail where dt_idx = #{dtIdx}")
 	Product selectPrdByDtIdx(int dtIdx);
@@ -53,5 +57,8 @@ public interface ShopRepository {
 	int selectSpecCnt(String state);
 
 	List<Map<String, Object>> selectPrdList(Map<String, Object> commandmap);
+
+	@Select("select po_stock from prd_detail where dt_idx = #{dtIdx}")
+	int selectPoStackByDtIdx(int dtIdx);
 
 }

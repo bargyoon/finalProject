@@ -421,6 +421,26 @@ input[type=checkbox]:checked + .like-btn{
 	margin-right: 5px;
 }
 
+
+.discount-div{
+    display: flex;
+    font-size: 12px;
+    flex-direction: column;
+}
+
+.discount-div button {
+    margin-top: 4px;
+    border: none;
+    background-color: steelblue;
+    color: white;
+    width: 20%;
+}
+
+.discount-div button:hover {
+    background-color: black;
+    color: white;
+}
+
 /* pagination */
 .page_wrap {
 	
@@ -487,3 +507,30 @@ input[type=checkbox]:checked + .like-btn{
 	display: flex;
     justify-content: center;
 }
+
+
+#sm-value{
+    border: 1px solid gray;
+    border-radius: 0.2rem;
+    width: 5rem;
+    text-align: right;
+}
+
+#sm-available, #have-sm{
+    border: none;
+    border-radius: 0.2rem;
+    line-height: 3px;
+}
+
+#sm-available{
+    color: steelblue;
+}
+
+#have-sm{
+    color: #f60;
+}
+
+#cp-amount{
+	paddi
+}
+
