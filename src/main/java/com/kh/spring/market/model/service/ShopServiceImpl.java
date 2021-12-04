@@ -144,10 +144,10 @@ public class ShopServiceImpl implements ShopService{
 	public Map<String,Object> selectPrdList(Map<String, Object> commandmap, Paging pageUtil) {
 		Map<String,Object> viewMap = new LinkedHashMap<String, Object>();
 		List<Map<String, Object>> prdList = shopRepository.selectPrdList(commandmap,pageUtil);
-		int totalCnt = shopRepository.selectAllCnt();
-		int saleCnt = shopRepository.selectSpecCnt("sale");
-		int soldoutCnt = shopRepository.selectSpecCnt("soldout");
-		int hiddenCnt = shopRepository.selectSpecCnt("hidden");
+		int totalCnt = shopRepository.selectAllPrdCnt();
+		int saleCnt = shopRepository.selectPrdSpecCnt("sale");
+		int soldoutCnt = shopRepository.selectPrdSpecCnt("soldout");
+		int hiddenCnt = shopRepository.selectPrdSpecCnt("hidden");
 		for (Map<String, Object> map : prdList) {
 			FileDTO files = new FileDTO();
 			files.setSavePath((String) map.get("SAVE_PATH"));
@@ -176,13 +176,65 @@ public class ShopServiceImpl implements ShopService{
 		return shopRepository.selectPrdListCnt(commandMap);
 	}
 	
-	public List<Map<String, Object>> selectOrderList() {
-		List<Map<String, Object>> orderList = shopRepository.selectOrderList();
+	public Map<String, Object> selectOrderList(Map<String, Object> commandMap, Paging pageUtil) {
+		List<Map<String, Object>> orderList = shopRepository.selectOrderList(commandMap,pageUtil);
+		Map<String, Object> tempMap = new LinkedHashMap<String, Object>();
+		int totalCnt = shopRepository.selectAllOrderCnt();
+		int newOrderCnt = shopRepository.selectOrderSpecCnt("newOrder");
+		int deliveringCnt = shopRepository.selectOrderSpecCnt("delivering");
+		int deliverCompleteCnt = shopRepository.selectOrderSpecCnt("deliverComplete");
+		int newRefundCnt = shopRepository.selectOrderSpecCnt("newRefund");
+		int refundCompleteCnt = shopRepository.selectOrderSpecCnt("refundComplete");
+		int newCancelCnt = shopRepository.selectOrderSpecCnt("newCancel");
+		int cancelCompleteCnt = shopRepository.selectOrderSpecCnt("cancelComplete");
+		
 		for (Map<String, Object> map : orderList) {
-			List<Map<String,Object>> specList = shopRepository.selectOrderSpec(Integer.parseInt(map.get("DT_IDX").toString()));
+			List<Map<String,Object>> specList = shopRepository.selectOrderSpec(Long.parseLong(map.get("ORDER_NUM").toString()));
+			for (Map<String, Object> map2 : specList) {
+				FileDTO files = new FileDTO();
+				files.setSavePath((String) map.get("SAVE_PATH"));
+				files.setRenameFileName((String) map.get("RENAME_FILE_NAME"));
+				map2.put("downloadURL", files.getDownloadURL());
+			}
 			map.put("specList", specList);
 		}
-		return orderList;
+		
+		tempMap.put("orderList", orderList);
+		tempMap.put("totalCnt", totalCnt);
+		tempMap.put("newOrderCnt", newOrderCnt);
+		tempMap.put("deliveringCnt", deliveringCnt);
+		tempMap.put("deliverCompleteCnt", deliverCompleteCnt);
+		tempMap.put("newRefundCnt", newRefundCnt);
+		tempMap.put("refundCompleteCnt", refundCompleteCnt);
+		tempMap.put("newCancelCnt", newCancelCnt);
+		tempMap.put("cancelCompleteCnt", cancelCompleteCnt);
+		
+		return tempMap;
+	}
+	
+	public int selectOrderListCnt(Map<String, Object> commandMap) {
+		
+		return shopRepository.selectOrderListCnt(commandMap);
+	}
+	
+	public int selectItemCommentListCnt(Map<String, Object> commandMap) {
+		
+		return shopRepository.selectItemCommentListCnt(commandMap);
+	}
+	
+	public List<Map<String,Object>> selectItemCommentList(Map<String, Object> commandMap, Paging pageUtil) {
+		List<Map<String,Object>> commandList = shopRepository.selectItemCommentList(commandMap,pageUtil);
+		for (Map<String, Object> map : commandList) {
+			if(Integer.parseInt(map.get("TYPE").toString()) == 1) {
+				FileDTO files = new FileDTO();
+				files.setSavePath((String) map.get("SAVE_PATH"));
+				files.setRenameFileName((String) map.get("RENAME_FILE_NAME"));
+				map.put("downloadURL", files.getDownloadURL());
+				
+			}
+		}
+		
+		return commandList;
 	}
 	
 }

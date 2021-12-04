@@ -187,13 +187,66 @@
                         <div class="card" id="review_list">
                             <div class="card-body no-padding ">
                                 <div style="">
-                                    <div class="card" style="display: table; border-collapse: collapse; width: 100%;">
-                                        
-                                        <div class="border-bottom" style="display: table-row-group;">
-                                            <div class="d-table-cell" style="width: 2%; vertical-align: top;">
+                                <div class="card" style="display: table; border-collapse: collapse; width: 100%;">
+                                    <c:forEach items="${orderList}" var="orderList">
+                                    <div class="border-bottom" style="display: table-row-group; padding: 20px 30px 20px 0;">
+                                            <div class="d-table-cell pt-3" style="width: 2%; vertical-align: top;">
                                                 <label><input type="checkbox"></label>
                                             </div>
                                             <div class="d-table-cell" style="vertical-align: top; width: 20%;">
+                                                <div><a href="#">${orderList.NAME }</a></div>
+                                                <div class="d-inline-block">
+                                                    <div class="d-flex small text-warning justify-content-center">
+                                                        <i class="fas fa-star"></i>
+                                                        <i class="fas fa-star"></i>
+                                                        <i class="fas fa-star"></i>
+                                                        <i class="fas fa-star"></i>
+                                                        <i class="fas fa-star"></i>
+                                                    </div>
+                                                </div>
+                                                <span class="d-inline-block">${orderList.USER_NAME}</span>
+                                                <div class="d-inline-block">
+                                                   
+
+                                                </div>
+                                                <span class="d-inline-block ml-2" style="color: gray;"><fmt:formatDate pattern="yyyy-MM-dd hh:mm:ss"
+																		value="${orderList.REG_DATE}" /></span>
+                                                <div class="pt-2" style="cursor: pointer;" onclick="">${orderList.RV_CONTENT}</div>
+                                                <div class="pt-2 pb-3" style="cursor: pointer;" onclick="">추천수 ${orderList.RECOMMAND}</div>
+                                            </div>
+                                            <div class="d-table-cell board_thumb_wrap"
+                                                style="padding: 10px; cursor:pointer; "
+                                                onclick="">
+                                                <c:if test="${orderList.TYPE== 1 }">
+                                                <div>
+                                                    <img src="${orderList.downloadURL }"
+                                                        class="board_thumb">
+                                                        <img src="${orderList.downloadURL }"
+                                                        class="board_thumb">
+                                                </div>
+                                                </c:if>
+                                            </div>
+                                            
+                                            <div class="d-table-cell text-right" style="vertical-align: middle;">
+                                                <div class="nav-item text-center dropdown" href=""
+                                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                    <i class="m-r-10 mdi mdi-menu ml-2"> </i>
+                                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                                        <a class="dropdown-item" href="#">Action</a>
+                                                        <a class="dropdown-item" href="#">Another action</a>
+                                                        <div class="dropdown-divider"></div>
+                                                        <a class="dropdown-item" href="#">Something else here</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </c:forEach>
+                                        
+                                        <div class="border-bottom" style="display: table-row-group; padding: 20px 30px 20px 0;">
+                                            <div class="d-table-cell pt-3" style="width: 2%; vertical-align: top;">
+                                                <label><input type="checkbox"></label>
+                                            </div>
+                                            <div class="d-table-cell pt-3" style="vertical-align: top; width: 20%;">
                                                 <div><a href="#">상품이름</a></div>
                                                 <div class="d-inline-block">
                                                     <div class="d-flex small text-warning justify-content-center">
@@ -212,12 +265,12 @@
                                                 </div>
                                                 <span class="d-inline-block ml-2" style="color: gray;">날짜</span>
                                                 <div class="pt-2" style="cursor: pointer;" onclick="">구매평</div>
-                                                <div class="pt-2" style="cursor: pointer;" onclick="">댓글 1</div>
+                                                <div class="pt-2 pb-3" style="cursor: pointer;" onclick="">댓글 1</div>
                                             </div>
                                             <div class="d-table-cell board_thumb_wrap"
-                                                style="padding: 10px; cursor:pointer; "
+                                                style="padding: 10px; cursor:default;  "
                                                 onclick="">
-                                                <div>
+                                                <div style="display: none;">
                                                     <img src="https://cdn.imweb.me/thumbnail/20211117/2fe09638f49bd.png"
                                                         class="board_thumb">
                                                         <img src="https://cdn.imweb.me/thumbnail/20211117/2fe09638f49bd.png"
@@ -238,9 +291,14 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        
                                      
                                     </div>
+                                 
+                                        
+                                        
+                                        
+                                     
+                                    
                                 </div>
                             </div>
                             <nav class="text-center">

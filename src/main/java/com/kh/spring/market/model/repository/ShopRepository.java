@@ -7,10 +7,12 @@ import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import com.kh.spring.common.util.FileDTO;
 import com.kh.spring.common.util.pagination.Paging;
 import com.kh.spring.market.model.dto.Coupon;
+import com.kh.spring.market.model.dto.Order;
 import com.kh.spring.market.model.dto.Product;
 import com.kh.spring.market.model.dto.Review;
 import com.kh.spring.market.model.dto.prdListSet;
@@ -51,21 +53,38 @@ public interface ShopRepository {
 	Product selectPrdByDtIdx(int dtIdx);
 	
 	@Select("select count(*) from prd_detail")
-	int selectAllCnt();
+	int selectAllPrdCnt();
 	
 	@Select("select count(*) from prd_detail where state = #{state}")
-	int selectSpecCnt(String state);
+	int selectPrdSpecCnt(String state);
+	
+	@Select("select count(*) from(select order_num, count(order_num) cnt from \"ORDER\" group by order_num)")
+	int selectAllOrderCnt();
+	
+	@Select("select count(*) from(select order_num, count(order_num) cnt from \"ORDER\" where state = #{state} group by order_num)")
+	int selectOrderSpecCnt(String state);
 
 	List<Map<String, Object>> selectPrdList(@Param("commandMap") Map<String, Object> commandmap,@Param("pageUtil") Paging pageUtil);
 
 	
-	List<Map<String,Object>> selectOrderList();
+	List<Map<String,Object>> selectOrderList(@Param("commandMap") Map<String, Object> commandmap,@Param("pageUtil") Paging pageUtil);
 
-	List<Map<String, Object>> selectOrderSpec(int dtIdx);
+	List<Map<String, Object>> selectOrderSpec(long orderNum);
 
 	int selectPrdListCnt(Map<String, Object> commandMap);
 
 	@Select("select po_stock from prd_detail where dt_idx = #{dtIdx}")
 	int selectPoStackByDtIdx(int dtIdx);
+	@Update("update \"ORDER\" set state = #{state}, update_date = sysdate  where order_num = #{orderNum}")
+	void updateOrderState(Map<String, Object> jsonMap);
+
+	@Update("update \"ORDER\" set shipping_company = #{shippingCompany}, shipping_num = #{shippingNum},update_date = sysdate, state= 'delivering' where order_num = #{orderNum}")
+	void updateShipping(Order order);
+
+	int selectOrderListCnt(Map<String, Object> commandMap);
+
+	int selectItemCommentListCnt(Map<String, Object> commandMap);
+
+	List<Map<String,Object>> selectItemCommentList(@Param("commandMap") Map<String, Object> commandmap,@Param("pageUtil") Paging pageUtil);
 
 }
