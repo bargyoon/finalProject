@@ -21,34 +21,35 @@ public interface MypageRepository {
 	
 	void updateMemberDynamicQuery(UpdateMemberForm form);
 	
-	@Select("select * from pet where user_idx = #{userIdx} order by pet_idx desc")
-	List<Pet> selectPetByUserIdx(int userIdx);
+	int selectBoardCommentCnt(MypageSearchSet searchSet);
+
+	List<Map<String, Object>> selectCommentList(Map<String, Object> commandMap);
+
+	int selectBoardCnt(MypageSearchSet searchSet);
 	
-	@Insert("insert into pet(pet_idx, name, specify, gender, age, user_idx)"
-			+ " values(sc_pet_idx.nextval, #{name}, #{specify}, #{gender}, #{age}, #{userIdx})")
+	List<Board> selectBoard(Map<String, Object> map);
+	
+	@Insert("insert into pet(pet_idx, name, species, gender, age, user_idx)"
+			+ " values(sc_pet_idx.nextval, #{name}, #{species}, #{gender}, #{age}, #{userIdx})")
 	void insertPet(Pet pet);
 	
 	@Insert("insert into file_info(fl_idx, type_idx, origin_file_name, rename_file_name, save_path)"
 			+ " values(sc_file_idx.nextval, sc_pet_idx.currval, #{originFileName}, #{renameFileName}, #{savePath})")
 	void insertFile(FileDTO file);
 	
+	List<Map<String, Object>> selectPetList(Map<String, Object> commandMap);
+	
+	@Select("select count(*) from pet where user_idx = #{userIdx}")
+	int selectPetCnt(int userIdx);
+	
+	@Select("select * from pet where user_idx = #{userIdx}")
+	List<Pet> selectAllPet(Object commandMap);
+
 	@Select("select * from vaccine_info order by vi_idx")
-	List<VaccineInfo> selectAllVaccineInfo();
+	List<VaccineInfo> selectVaccineInfoList();
 	
-	@Select("select cycle from vaccineInfo where vi_idx = #{viIdx}")
-	int selectCycle(int viIdx);
+	@Select("select * from vaccination_calendar where user_idx = #{userIdx}")
+	List<Vaccination> selectVaccinationList(int userIdx);
 	
-	@Insert("insert into vaccination(vc_idx, pet_idx, vi_idx, date, user_idx)"
-			+ " values(sc_vc_idx.nextval, #{petIdx}, #{viIdx}, #{date}, #{userIdx})") 
-	void insertVaccination(Vaccination vaccination);
-
-	int selectBoardCommentCnt(MypageSearchSet searchSet);
-
-	List<BoardComment> selectBoardComment(Map<String, Object> map);
-
-	int selectBoardCnt(MypageSearchSet searchSet);
-	
-	List<Board> selectBoard(Map<String, Object> map);
-
 	
 }

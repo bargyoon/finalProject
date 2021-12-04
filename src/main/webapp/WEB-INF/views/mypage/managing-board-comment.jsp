@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,31 +12,22 @@
 	crossorigin="anonymous">
 <link href="/resources/css/styles.css" rel="stylesheet">
 <link href="/resources/css/mypage/font.css" rel="stylesheet">
-
+<link href="/resources/css/mypage/mypage.css" rel="stylesheet">
 </head>
 <body>
 
 <section>
-	<div class="container">
-		<header class="d-flex justify-content-center py-3"style="min-width: 500px;">
-			<ul class="nav nav-pills">
-				<li class="nav-item"><a href="/mypage/my-info" class="nav-link">회원정보</a></li>
-				<li class="nav-item"><a href="/mypage/pet-info" class="nav-link">마이펫</a></li>
-				<li class="nav-item"><a href="/mypage/vaccination" class="nav-link">예방접종</a></li>
-				<li class="nav-item"><a href="/mypage/managing-board" class="nav-link active">작성글</a></li>
-			</ul>
-		</header>
-		<h4 class="mb-3">마이페이지</h4>
-	</div>
 
 	<div class="container" style="display: flex;">
 		<nav class="d-flex flex-column flex-shrink-0 p-3" style="width: 280px;">
-			<span class="fs-4">작성글</span>
+			<span class="fs-4"><a href="/mypage/my-info" class="nav-link">회원정보</a></li></span>
+			<span class="fs-4"><a href="/mypage/pet-info" class="nav-link">마이펫</a></li></span>
+			<span class="fs-4"><a href="/mypage/vaccination" class="nav-link">예방접종</a></li></span>
+			<span class="fs-4"><a href="/mypage/managing-board" class="nav-link">작성글</a></li></span>
 			<hr>
 			<ul class="nav nav-pills flex-column mb-auto">
 				<li><a href="/mypage/managing-board" class="nav-link">게시글</a></li>
-				<li><a href="/mypage/managing-board-comment" class="nav-link active">댓글</a></li>
-				<li><a href="/mypage/managing-counseling" class="nav-link">상담내역</a></li>
+				<li><a href="/mypage/managing-board-comment" class="nav-link">댓글</a></li>
 			</ul>
 		</nav>
 		
@@ -54,11 +46,11 @@
 				  <tbody>
 				  	<c:forEach var="comment" items="${commentList}">
 				  	<tr>
-				  		<td><input type="checkbox" name="cmIdx" value="${comment.cmIdx}"></td>
-				  		<td>${comment.cmIdx}</td>
-				  		<td><a href="/board/${category}/detail?bdIdx=${comment.bdIdx}">${comment.cmContent}</a></td>
-				  		<td>${comment.cmRecCount}</td>
-				  		<td>${comment.regDate}</td>
+				  		<td><input type="checkbox" name="cmIdx" value="${comment.CM_IDX}"></td>
+				  		<td>${comment.CM_IDX}</td>
+				  		<td><a href="/board/${comment.CATEGORY}/detail?bdIdx=${comment.BD_IDX}">${comment.CM_CONTENT}</a></td>
+				  		<td>${comment.CM_REG_COUNT}</td>
+				  		<td><fmt:formatDate value="${comment.REG_DATE}" pattern="yyyy-MM-dd" /></td>
 				  	</tr>
 				  	</c:forEach>
 				  </tbody>
@@ -73,7 +65,7 @@
 				  <ul class="pagination">
 				    <li class="page-item">
 				      <a class="page-link" aria-label="Previous"
-				      	onclick="prevBtn('${pageUtil.curPage}', '${searchSet.keyword}')">
+				      	onclick="prevBtn('${pageUtil.curPage}')">
 				        <span aria-hidden="true">&laquo;</span>
 				      </a>
 				    </li>
@@ -84,12 +76,12 @@
 				    <c:if test="${pageUtil.blockEnd > 1}">
 				    	<c:forEach var="i" begin="1" step="1" end="${pageUtil.blockEnd}">
 				    		<li class="page-item"><a class="page-link" 
-				    			onclick="pageBtn('${searchSet.keyword}', this.text)"><c:out value="${i}"/></a></li>
+				    			onclick="pageBtn(this.text)"><c:out value="${i}"/></a></li>
 				    	</c:forEach>
 				    </c:if>
 				    <li class="page-item">
 				      <a class="page-link" aria-label="Next" 
-				      	onclick="nextBtn('${pageUtil.curPage}', '${searchSet.keyword}', '${pageUtil.blockEnd}')">
+				      	onclick="nextBtn('${pageUtil.curPage}', '${pageUtil.blockEnd}')">
 				        <span aria-hidden="true">&raquo;</span>
 				      </a>
 				    </li>
@@ -109,32 +101,35 @@
 </section>
 
 <script type="text/javascript">
+	/* 검색기능 */
+	const URLSearch = new URLSearchParams(location.search);
 	/* 페이징 기능 */
-	let prevBtn = (curPage, keyword) => {
+	let prevBtn = (curPage) => {
 		if(curPage == 1){
 			alert("첫번째 페이지 입니다.")
 			return;
 		}
 		
 		let prevPage = curPage - 1;
-		pageBtn(keyword, prevPage);
+		pageBtn(prevPage);
 	}
 	
-	let nextBtn = (curPage, keyword, blockEnd) => {
+	let nextBtn = (curPage, blockEnd) => {
 		if(curPage == blockEnd){
 			alert("마지막 페이지 입니다.")
 			return;
 		}
 		
 		let nextPage = curPage + 1;
-		pageBtn(keyword, nextPage);
+		pageBtn(nextPage);
 	}
 	
-	let pageBtn = (keyword, page) => {
-		location.href = "/mypage/managing-board-comment?keyword=" + keyword + "&page=" + page;
+	let pageBtn = (page) => {
+		 URLSearch.set("page", String(page));
+     	 const newParam = URLSearch.toString();
+     	 location.href = location.pathname + '?' + newParam
 	}
-	/* 검색기능 */
-	const URLSearch = new URLSearchParams(location.search);
+	
 	
 	let searchKeyword = () =>{
     	var keyword = document.querySelector("#keyword").value

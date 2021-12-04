@@ -1,5 +1,6 @@
 package com.kh.spring.mypage.model.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -8,6 +9,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.kh.spring.board.model.dto.Board;
 import com.kh.spring.board.model.dto.BoardComment;
+import com.kh.spring.common.util.FileDTO;
 import com.kh.spring.common.util.FileUtil;
 import com.kh.spring.mypage.model.dto.MypageSearchSet;
 import com.kh.spring.mypage.model.dto.Pet;
@@ -28,31 +30,12 @@ public class MypageServiceImpl implements MypageService {
 		mypageRepository.updateMemberDynamicQuery(form);
 	}
 	
-	public List<Pet> selectPetByUserIdx(int userIdx){
-		return mypageRepository.selectPetByUserIdx(userIdx);
-	}
-	
-	public void insertPet(Pet pet, MultipartFile file) {
-		mypageRepository.insertPet(pet);
-		
-		FileUtil fileUtil = new FileUtil();
-		mypageRepository.insertFile(fileUtil.fileUpload(file));
-	}
-
-	public List<VaccineInfo> selectAllVaccine() {
-		return mypageRepository.selectAllVaccineInfo();
-	}
-	
-	public void insertVaccination(Vaccination vaccination) {
-		mypageRepository.insertVaccination(vaccination);
-	}
-
 	public int selectBoardCommentCnt(MypageSearchSet searchSet) {
 		return mypageRepository.selectBoardCommentCnt(searchSet);
 	}
 
-	public List<BoardComment> selectBoardComment(Map<String, Object> map){
-		return mypageRepository.selectBoardComment(map);
+	public List<Map<String, Object>> selectCommentList(Map<String, Object> commandMap){
+		return mypageRepository.selectCommentList(commandMap);
 	};
 	
 	public int selectBoardCnt(MypageSearchSet searchSet) {
@@ -62,6 +45,42 @@ public class MypageServiceImpl implements MypageService {
 	public List<Board> selectBoard(Map<String, Object> map){
 		return mypageRepository.selectBoard(map);
 	};
+
+	public void insertPet(Pet pet, MultipartFile file) {
+		mypageRepository.insertPet(pet);
+		
+		FileUtil fileUtil = new FileUtil();
+		mypageRepository.insertFile(fileUtil.fileUpload(file));
+	}
+	
+	public List<Map<String, Object>> selectPetList(Map<String, Object> commandMap){
+		
+		List<Map<String, Object>> commandList = mypageRepository.selectPetList(commandMap);
+		for (Map<String, Object> map : commandList) {
+			FileDTO files = new FileDTO();
+			files.setSavePath((String) map.get("SAVE_PATH"));
+			files.setRenameFileName((String) map.get("RENAME_FILE_NAME"));
+			map.put("downloadURL", files.getDownloadURL());
+		}
+		return commandList;
+	}
+
+	public int selectPetCnt(int userIdx) {
+		return mypageRepository.selectPetCnt(userIdx);
+	}
+
+	public List<Pet> selectAllPet(int userIdx) {
+		return mypageRepository.selectAllPet(userIdx);
+	}
+
+	public List<VaccineInfo> selectVaccineInfoList() {
+		return mypageRepository.selectVaccineInfoList();
+	}
+
+	@Override
+	public List<Vaccination> selectVaccinationList(int userIdx) {
+		return mypageRepository.selectVaccinationList(userIdx);
+	}
 	
 	
 }

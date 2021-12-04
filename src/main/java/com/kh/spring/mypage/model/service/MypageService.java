@@ -17,20 +17,24 @@ public interface MypageService {
 	
 	void updateMemberDynamicQuery(UpdateMemberForm form);
 	
-	List<Pet> selectPetByUserIdx(int userIdx);
-
-	void insertPet(Pet pet, MultipartFile file);
-
-	List<VaccineInfo> selectAllVaccine();
-	
-	void insertVaccination(Vaccination vaccination);
-
 	int selectBoardCommentCnt(MypageSearchSet searchSet);
-
-	List<BoardComment> selectBoardComment(Map<String, Object> map);
 
 	int selectBoardCnt(MypageSearchSet searchSet);
 
 	List<Board> selectBoard(Map<String, Object> map);
+
+	List<Map<String, Object>> selectCommentList(Map<String, Object> commandMap);
+
+	void insertPet(Pet pet, MultipartFile file);
+
+	List<Map<String, Object>> selectPetList(Map<String, Object> commandMap);
+
+	int selectPetCnt(int userIdx);
+
+	List<Pet> selectAllPet(int userIdx);
+
+	List<VaccineInfo> selectVaccineInfoList();
+
+	List<Vaccination> selectVaccinationList(int userIdx);
 	
 }

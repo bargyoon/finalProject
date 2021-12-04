@@ -9,5 +9,6 @@ public class VaccineInfo {
 	
 	private int viIdx;
 	private String name;
-	private Date cycle;
+	private int cycle;
+	private String species;
 }

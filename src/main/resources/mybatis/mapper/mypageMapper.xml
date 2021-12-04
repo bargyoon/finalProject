@@ -36,24 +36,12 @@
 		</if>
   	</select>
   	
-  	<select id="selectBoardComment" resultType="BoardComment">
-  		select *
-		from (select CM_IDX, BD_IDX, CM_CONTENT, REG_DATE, CM_REC_COUNT, USER_IDX, NICKNAME, PR_IDX, CM_TYPE, rownum rnum
-        from (select CM_IDX, BD_IDX, CM_CONTENT, REG_DATE, CM_REC_COUNT, USER_IDX, NICKNAME, PR_IDX, CM_TYPE
-        from board_comment where user_idx = #{searchSet.userIdx}
-		<if test="searchSet.keyword != null">
-			and cm_content like '%'||#{searchSet.keyword}||'%' 
-		</if>
-  		order by cm_idx desc)) 
-  		where rnum between ${((pageUtil.curPage-1) * pageUtil.cntPerPage) + 1} 
-  		and ${pageUtil.curPage * pageUtil.cntPerPage}
-  	</select>
-  	
   	<select id="selectBoard" resultType="Board">
   		select *
 		from (select BD_IDX, USER_IDX, BD_TITLE, REG_DATE, VIEW_COUNT, REC_COUNT, CONTENT, CATEGORY, NICKNAME, rownum rnum
         from (select BD_IDX, USER_IDX, BD_TITLE, REG_DATE, VIEW_COUNT, REC_COUNT, CONTENT, CATEGORY, NICKNAME
-        from board where user_idx = #{searchSet.userIdx}
+        from board 
+        where user_idx = #{searchSet.userIdx}
 		<if test="searchSet.keyword != null">
 			and content like '%'||#{searchSet.keyword}||'%' 
 		</if>
@@ -61,5 +49,30 @@
   		where rnum between ${((pageUtil.curPage-1) * pageUtil.cntPerPage) + 1} 
   		and ${pageUtil.curPage * pageUtil.cntPerPage}
   	</select>
+  	
+  	<select id="selectCommentList" resultType="map">
+	    select * 
+	    from (select cm_idx, bd_idx, cm_content, reg_date, cm_rec_count, user_idx, nickname, category, rownum rnum
+		from (select c.cm_idx, c.bd_idx, c.cm_content, c.reg_date, c.cm_rec_count, c.user_idx, c.nickname, b.category
+		from board_comment c join board b on(c.bd_idx = b.bd_idx) 
+		where c.user_idx = #{searchSet.userIdx}
+		<if test="searchSet.keyword != null">
+			and c.cm_content like '%'||#{searchSet.keyword}||'%'
+		</if>
+		order by c.cm_idx desc))
+		where rnum between ${((pageUtil.curPage-1) * pageUtil.cntPerPage) + 1} 
+	  	and ${pageUtil.curPage * pageUtil.cntPerPage}
+	</select>
+	
+	<select id="selectPetList" resultType="map">
+		select *
+		from (select age, user_idx, pet_idx, name, species, reg_date, gender, fl_idx, origin_file_name, rename_file_name, save_path, rownum rnum
+		from (select p.age, p.user_idx, p.pet_idx, p.name, p.species, p.reg_date, p.gender, f.fl_idx, f.origin_file_name, f.rename_file_name, f.save_path
+		from pet p join file_info f on (p.pet_idx = f.type_idx)
+		where p.user_idx = #{userIdx}
+		order by p.pet_idx desc))
+		where rnum between ${((pageUtil.curPage-1) * pageUtil.cntPerPage) + 1} 
+	  	and ${pageUtil.curPage * pageUtil.cntPerPage}
+	</select>
   	
   </mapper>
