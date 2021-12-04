@@ -68,7 +68,7 @@
 				  <ul class="pagination">
 				    <li class="page-item">
 				      <a class="page-link" aria-label="Previous"
-				      	onclick="prevBtn('${pageUtil.curPage}')">
+				      	onclick="prevBtn(${pageUtil.curPage})">
 				        <span aria-hidden="true">&laquo;</span>
 				      </a>
 				    </li>
@@ -84,7 +84,7 @@
 				    </c:if>
 				    <li class="page-item">
 				      <a class="page-link" aria-label="Next" 
-				      	onclick="nextBtn('${pageUtil.curPage}', '${pageUtil.blockEnd}')">
+				      	onclick="nextBtn(${pageUtil.curPage}, ${pageUtil.blockEnd})">
 				        <span aria-hidden="true">&raquo;</span>
 				      </a>
 				    </li>

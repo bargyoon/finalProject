@@ -35,7 +35,7 @@
 		    <div class="container pet-container">
 				<c:forEach var="pet" items="${petList}">
 					<div class="pet-div">
-						<img src="${pet.downloadURL}" style="max-width: 150px; max-height: 150px">
+						<img src="${pet.downloadURL}" style="width: 200px; height: 200px">
 						<div>이름 : ${pet.NAME}</div>
 						<div>종류 : ${pet.SPECIES}</div>
 						<div>나이 : ${pet.AGE}</div>
@@ -49,7 +49,7 @@
 				  <ul class="pagination">
 				    <li class="page-item">
 				      <a class="page-link" aria-label="Previous"
-				      	onclick="prevBtn('${pageUtil.curPage}')">
+				      	onclick="prevBtn(${pageUtil.curPage})">
 				        <span aria-hidden="true">&laquo;</span>
 				      </a>
 				    </li>
@@ -65,7 +65,7 @@
 				    </c:if>
 				    <li class="page-item">
 				      <a class="page-link" aria-label="Next" 
-				      	onclick="nextBtn('${pageUtil.curPage}', '${pageUtil.blockEnd}')">
+				      	onclick="nextBtn(${pageUtil.curPage}, ${pageUtil.blockEnd})">
 				        <span aria-hidden="true">&raquo;</span>
 				      </a>
 				    </li>
