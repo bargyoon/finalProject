@@ -16,11 +16,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.kh.spring.admin.model.service.AdminService;
-import com.kh.spring.board.model.dto.BoardComment;
 import com.kh.spring.board.model.service.BoardService;
 import com.kh.spring.common.util.pagination.Paging;
 import com.kh.spring.disease.model.dto.Disease;
 import com.kh.spring.disease.model.service.DiseaseService;
+import com.kh.spring.market.model.dto.Order;
 import com.kh.spring.market.model.dto.Product;
 import com.kh.spring.market.model.service.ShopService;
 
@@ -69,17 +69,81 @@ public class AdminController {
 	}
 
 	@GetMapping("shopping/item-comment")
-	public void itemComment() {
+	public void itemComment(Model model ,@RequestParam(required = false, defaultValue = "1") int page) {
+		Map<String,Object> commandMap = new LinkedHashMap<String,Object>();
+		Paging pageUtil = Paging.builder()
+				.curPage(page)
+				.cntPerPage(15)
+				.blockCnt(10)
+				.total(shopService.selectItemCommentListCnt(commandMap))
+				.build();
+		
+		List<Map<String,Object>> orderList = shopService.selectItemCommentList(commandMap, pageUtil);
+		model.addAttribute("orderList", orderList);
+		model.addAttribute("pageUtil", pageUtil);
+		
 	}
 
 	@GetMapping("shopping/order-list")
-	public void orderList(Model model) {
-		List<Map<String,Object>> orderList = shopService.selectOrderList();
-		model.addAttribute("orderList", orderList);
-	}
+	public void orderList(Model model ,@RequestParam(required = false, defaultValue = "1") int page
+			,@RequestParam(value = "state", required = false, defaultValue = "all") String state) {
+		Map<String, Object> commandMap = new LinkedHashMap<String, Object>();
+		commandMap.put("state", state);
+		Paging pageUtil = Paging.builder()
+				.curPage(page)
+				.cntPerPage(15)
+				.blockCnt(10)
+				.total(shopService.selectOrderListCnt(commandMap))
+				.build();
 
+		
+		
+		Map<String,Object> orderMap = shopService.selectOrderList(commandMap, pageUtil);
+		model.addAttribute("pageUtil", pageUtil);
+		model.addAttribute("orderMap", orderMap);
+	}
+	
+	@PostMapping("shopping/update-order-state")
+	@ResponseBody
+	public String updateOrderState(@RequestBody Map<String, Object> jsonMap) {
+		adminService.updateOrderState(jsonMap);
+		
+		return "good";
+
+	}
+	
+	@PostMapping("shopping/update-shipping")
+	public String updateShipping(Order order) {
+		adminService.updateShipping(order);
+		return "redirect:/admin/shopping/order-list";
+	}
+	
+
+	@PostMapping("shopping/add-product")
+	public String shoppingTest(@RequestParam(value = "main_img") List<MultipartFile> mainImg,
+			@RequestParam(value = "spec_img") List<MultipartFile> specImg,
+			@RequestParam(value = "option", required = false, defaultValue = "기본") List<String> option,
+			@RequestParam(value = "stock") List<String> stock, @RequestParam(value = "price") List<String> price,
+			Product product) {
+		List<Map<String, Object>> commandList = new ArrayList<Map<String, Object>>();
+		for (int i = 0; i < option.size(); i++) {
+			String optionTemp = option.get(i);
+			int stockTemp = Integer.parseInt(stock.get(i));
+			int priceTemp = Integer.parseInt(price.get(i));
+			commandList.add(Map.of("option", optionTemp, "stock", stockTemp, "price", priceTemp));
+
+		}
+
+		shopService.insertProduct(mainImg, specImg, commandList, product);
+
+		return "redirect:/admin/shopping/item-list";
+
+	}
+	
 	@GetMapping("shopping/QnA")
-	public void qna() {
+	public void qna(Model model ,@RequestParam(required = false, defaultValue = "1") int page) {
+		
+		
 	}
 
 	
@@ -182,25 +246,5 @@ public class AdminController {
 
 	}
 
-	@PostMapping("shopping/add-product")
-	public String shoppingTest(@RequestParam(value = "main_img") List<MultipartFile> mainImg,
-			@RequestParam(value = "spec_img") List<MultipartFile> specImg,
-			@RequestParam(value = "option", required = false, defaultValue = "기본") List<String> option,
-			@RequestParam(value = "stock") List<String> stock, @RequestParam(value = "price") List<String> price,
-			Product product) {
-		List<Map<String, Object>> commandList = new ArrayList<Map<String, Object>>();
-		for (int i = 0; i < option.size(); i++) {
-			String optionTemp = option.get(i);
-			int stockTemp = Integer.parseInt(stock.get(i));
-			int priceTemp = Integer.parseInt(price.get(i));
-			commandList.add(Map.of("option", optionTemp, "stock", stockTemp, "price", priceTemp));
-
-		}
-
-		shopService.insertProduct(mainImg, specImg, commandList, product);
-
-		return "redirect:/admin/shopping/item-list";
-
-	}
 
 }

@@ -60,11 +60,13 @@ public class MypageController {
 	@ResponseBody
 	public int nickNameCheck(@RequestParam("nickName") String nickName) {
 		
-		logger.info("userIdCheck 진입");
-        logger.info("전달받은 nickname:" + nickName);
-		
         int cnt = memberService.nickNameCheck(nickName);
         return cnt;		
+	}
+
+	@GetMapping("my-info")
+	public void myInfo(@SessionAttribute(name = "authentication")Member certifiedUser, Model model) {
+		model.addAttribute("authentication", certifiedUser);
 	}
 	
 	@GetMapping("update-member-info")
@@ -89,9 +91,6 @@ public class MypageController {
 
 		int userIdx = certifiedUser.getUserIdx();
 		form.setUserIdx(userIdx);
-		
-		System.out.println(form.getAddress());
-		System.out.println(form.getAddressDetail());
 		
 		mypageService.updateMemberDynamicQuery(form);
 		redirectAttr.addFlashAttribute("message", "회원정보가 수정되었습니다.");
@@ -148,43 +147,43 @@ public class MypageController {
 				.total(mypageService.selectBoardCommentCnt(searchSet))
 				.build();
 		
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("pageUtil", pageUtil);
-		map.put("searchSet", searchSet);
+		Map<String, Object> commandMap = new HashMap<String, Object>();
+		commandMap.put("pageUtil", pageUtil);
+		commandMap.put("searchSet", searchSet);
 		
-		List<BoardComment> commentList = mypageService.selectBoardComment(map);
+		List<Map<String, Object>> commentList = mypageService.selectCommentList(commandMap);
 		
 		model.addAttribute("commentList", commentList)
 		.addAttribute("pageUtil", pageUtil)
 		.addAttribute("searchSet", searchSet);
 	}
 	
-//	@GetMapping("managing-counseling")
-//	public void managingCounseling(
-//			@SessionAttribute(name = "authentication")Member certifiedUser, Model model
-//			) {
-//		
-//		int userIdx = certifiedUser.getUserIdx();
-//		List<Counseling> counselingList = mypageService.selectCounselingByUserIdx(userIdx);
-//		model.addAttribute("counselingList", counselingList);
-//	}
-	
 	@GetMapping("pet-info")
-	public void petInfo(@SessionAttribute(name = "authentication")Member certifiedUser, Model model) {
+	public void petInfo(
+			@SessionAttribute(name = "authentication")Member certifiedUser, Model model,
+			@RequestParam(required = false, defaultValue = "1") int page
+			) {
 		int userIdx = certifiedUser.getUserIdx();
-		List<Pet> petList = mypageService.selectPetByUserIdx(userIdx);
+		
+		Paging pageUtil = Paging.builder()
+				.curPage(page)
+				.cntPerPage(4)
+				.blockCnt(10)
+				.total(mypageService.selectPetCnt(userIdx))
+				.build();
+		
+		Map<String, Object> commandMap = new HashMap<String, Object>();
+		commandMap.put("userIdx", userIdx);
+		commandMap.put("pageUtil", pageUtil);
+		
+		List<Map<String, Object>> petList = mypageService.selectPetList(commandMap);
+		
 		model.addAttribute("petList", petList);
-	}
-	
-	@GetMapping("my-info")
-	public void myInfo(@SessionAttribute(name = "authentication")Member certifiedUser, Model model) {
-		model.addAttribute("authentication", certifiedUser);
+		model.addAttribute("pageUtil", pageUtil);
 	}
 	
 	@GetMapping("registration-pet")
-	public void registrationPetForm() {
-		
-	}
+	public void registrationPetForm() {}
 	
 	@PostMapping("registration-pet")
 	public String registrationPet(@SessionAttribute(name = "authentication")Member certifiedUser, Pet pet, MultipartFile file) {
@@ -199,13 +198,16 @@ public class MypageController {
 	@GetMapping("vaccination")
 	public void vaccination(@SessionAttribute(name = "authentication")Member certifiedUser, Model model) {
 		int userIdx = certifiedUser.getUserIdx();
-		List<Pet> petList = mypageService.selectPetByUserIdx(userIdx);
-		List<VaccineInfo> vaccineList = mypageService.selectAllVaccine();
+		
+		List<Pet> petList = mypageService.selectAllPet(userIdx);
+		
+		List<VaccineInfo> vaccineInfoList = mypageService.selectVaccineInfoList();
 //		백신 cycle을 계산해서 뿌려줘야함 도움필요
-//		List<Vaccination> vaccinationList = mypageService.selectVaccination(userIdx);
+		List<Vaccination> vaccinationList = mypageService.selectVaccinationList(userIdx);
 		
 		model.addAttribute("petList", petList)
-		.addAttribute("vaccineList", vaccineList);
+		.addAttribute("vaccineInfoList", vaccineInfoList)
+		.addAttribute("vaccinationList", vaccinationList);
 	}
 	
 	@PostMapping("vaccination")
@@ -213,7 +215,7 @@ public class MypageController {
 		int userIdx = certifiedUser.getUserIdx();
 		vaccination.setUserIdx(userIdx);
 		
-		mypageService.insertVaccination(vaccination);
+//		mypageService.insertVaccination(vaccination);
 	}
 	
 }

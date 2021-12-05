@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html>
 <html>
 
@@ -11,10 +11,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 
-<!-- ===============================================-->
-<!--    Document Title-->
-<!-- ===============================================-->
-<title>Sevi | Landing, Corporate &amp; Business Templatee</title>
+
 
 
 <!-- ===============================================-->
@@ -37,6 +34,7 @@
 <!-- ===============================================-->
 <!--    Stylesheets-->
 <!-- ===============================================-->
+<%@ include file="/WEB-INF/views/include/head.jsp"%>
 <link rel="stylesheet"
 	href="https://unicons.iconscout.com/release/v2.1.9/css/unicons.css">
 <link href="/resources/css/disease/theme.css" rel="stylesheet" />
@@ -50,45 +48,7 @@
 	<!--    Main Content-->
 	<!-- ===============================================-->
 	<main class="main" id="top">
-		<nav
-			class="navbar navbar-expand-lg navbar-light fixed-top py-3 backdrop"
-			data-navbar-on-scroll="data-navbar-on-scroll">
-			<div class="container">
-				<a class="navbar-brand d-flex align-items-center fw-semi-bold fs-3"
-					href="#"> <img class="me-3"
-					src="/resources/img/gallery/logo.png" alt="" />
-					<div class="text-primary font-base">똑DOG한 집사들</div>
-				</a>
-				<button class="navbar-toggler collapsed" type="button"
-					data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-					aria-controls="navbarSupportedContent" aria-expanded="false"
-					aria-label="Toggle navigation">
-					<span class="navbar-toggler-icon"></span>
-				</button>
-				<div
-					class="collapse navbar-collapse border-top border-lg-0 mt-4 mt-lg-0"
-					id="navbarSupportedContent">
-					<ul class="navbar-nav ms-auto pt-2 pt-lg-0 font-base">
-						<li class="nav-item"><a class="nav-link fw-medium active"
-							aria-current="page" href="#">Home</a></li>
-						<li class="nav-item"><a class="nav-link" href="#books">Books</a></li>
-						<li class="nav-item"><a class="nav-link" href="#libraries">Libraries</a></li>
-						<li class="nav-item dropdown"><a
-							class="nav-link dropdown-toggle" id="navbarDropdown" href="#"
-							role="button" data-bs-toggle="dropdown" aria-expanded="false">More</a>
-							<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-								<li><a class="dropdown-item" href="#">Action</a></li>
-								<li><a class="dropdown-item" href="#">Another action </a></li>
-							</ul></li>
-					</ul>
-					<form class="ps-lg-5">
-						<button
-							class="btn btn-lg btn-primary rounded-pill bg-gradient font-base order-0"
-							type="submit">Login</button>
-					</form>
-				</div>
-			</div>
-		</nav>
+		<%@ include file="/WEB-INF/views/include/navBar.jsp"%>
 
 		<div class="container-fluid mt-7">
 			<div>
@@ -124,15 +84,15 @@
 										</div>
 										<div class="row">
 											<c:forEach items="${datas}" var="data" varStatus="status">
-											<c:if test="${data.CATEGORY eq 'dog'}">
-												<a class="col-sm-3 col-lg-3 mb-4 mb-lg-0 text-center" href="/disease/disease-spec?dsIdx=${data.DS_IDX}">
-													<div class="px-0 px-lg-3">
-														<img class="img-fluid mb-4"
-															src="${data.downloadURL}" width="100"
-															alt="..." />
-														<h3 class="h5 mb-4 font-base">${data.NAME}</h3>
-													</div>
-												</a>
+												<c:if test="${data.CATEGORY eq 'dog'}">
+													<a class="col-sm-3 col-lg-3 mb-4 mb-lg-0 text-center"
+														href="/disease/disease-spec?dsIdx=${data.DS_IDX}">
+														<div class="px-0 px-lg-3">
+															<img class="img-fluid mb-4" src="${data.downloadURL}"
+																width="100" alt="..." />
+															<h3 class="h5 mb-4 font-base">${data.NAME}</h3>
+														</div>
+													</a>
 												</c:if>
 											</c:forEach>
 											<a class="col-sm-3 col-lg-3 mb-4 mb-lg-0 text-center">
@@ -275,15 +235,15 @@
 										</div>
 										<div class="row">
 											<c:forEach items="${datas}" var="data" varStatus="status">
-											<c:if test="${data.disease.category eq 'cat'}">
-												<a class="col-sm-3 col-lg-3 mb-4 mb-lg-0 text-center" href="/disease/disease-spec?${data.disease.dsIdx}">
-													<div class="px-0 px-lg-3">
-														<img class="img-fluid mb-4"
-															src="${data.files.downloadURL }" width="100"
-															alt="..." />
-														<h3 class="h5 mb-4 font-base">${data.disease.name}</h3>
-													</div>
-												</a>
+												<c:if test="${data.disease.category eq 'cat'}">
+													<a class="col-sm-3 col-lg-3 mb-4 mb-lg-0 text-center"
+														href="/disease/disease-spec?${data.disease.dsIdx}">
+														<div class="px-0 px-lg-3">
+															<img class="img-fluid mb-4"
+																src="${data.files.downloadURL }" width="100" alt="..." />
+															<h3 class="h5 mb-4 font-base">${data.disease.name}</h3>
+														</div>
+													</a>
 												</c:if>
 											</c:forEach>
 											<div class="col-sm-3 col-lg-3 mb-4 mb-lg-0 text-center">
@@ -311,7 +271,7 @@
 												</div>
 											</div>
 
-										
+
 											<div class="col-sm-3 col-lg-3 mb-4 mb-lg-0 text-center">
 												<div class="px-0 px-lg-3">
 													<img class="img-fluid mb-4"
@@ -345,7 +305,7 @@
 												</div>
 											</div>
 
-										
+
 											<div class="col-sm-3 col-lg-3 mb-4 mb-lg-0 text-center">
 												<div class="px-0 px-lg-3">
 													<img class="img-fluid mb-4"
@@ -379,7 +339,7 @@
 												</div>
 											</div>
 
-										
+
 											<div class="col-sm-3 col-lg-3 mb-4 mb-lg-0 text-center">
 												<div class="px-0 px-lg-3">
 													<img class="img-fluid mb-4"
@@ -426,21 +386,21 @@
 			<!-- end of .container-->
 
 		</section>
+	</main>
+
+	<%@ include file="/WEB-INF/views/include/footer.jsp"%>
+	<%@ include file="/WEB-INF/views/include/mainJs.jsp"%>
+
+	<!-- ===============================================-->
+	<!--    JavaScripts-->
+	<!-- ===============================================-->
+
+	<script
+		src="https://polyfill.io/v3/polyfill.min.js?features=window.scroll"></script>
+	<script src="/resources/js/disease/theme.js"></script>
 
 
 
-		<!-- ===============================================-->
-		<!--    JavaScripts-->
-		<!-- ===============================================-->
-
-		<script
-			src="https://polyfill.io/v3/polyfill.min.js?features=window.scroll"></script>
-		<script src="/resources/js/disease/theme.js"></script>
-
-	
-		<link
-			href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&amp;display=swap"
-			rel="stylesheet">
 </body>
 
 </html>

@@ -33,13 +33,18 @@ public interface ShopService {
 
 	Map<String, Object> selectPrdList(Map<String, Object> commandmap, Paging pageUtil);
 
-	List<Map<String, Object>> selectOrderList();
+	Map<String, Object> selectOrderList(Map<String, Object> commandMap, Paging pageUtil);
 
 	int selectPrdListCnt(Map<String, Object> commandMap);
 
 	List<Coupon> selectCouponByUserIdx(int userIdx);
 
 	int selectPoStackByDtIdx(int dtIdx);
+	int selectOrderListCnt(Map<String, Object> commandMap);
+
+	int selectItemCommentListCnt(Map<String, Object> commandMap);
+
+	List<Map<String,Object>> selectItemCommentList(Map<String, Object> commandMap, Paging pageUtil);
 
 	boolean insertOrder(List<Order> orderInfos);
 

@@ -18,5 +18,6 @@ public class QNA {
 	   private String isAnswer;
 	   private String awContext;
 	   private Date awRegDate;
+	   private String tell;
 
 }

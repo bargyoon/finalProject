@@ -33,10 +33,10 @@
 				<div class="mt-5" style="display: flex; flex-direction: column;">
 					<i class="fas fa-coins py-2" style="font-size: 1.5rem;"></i>
 					<p class="fw-normal mt-2">적립금</p>
-					<p style="font-size: 1.3rem;">${memberInfo.saveMoney}</p>
+					<p style="font-size: 1.3rem;">${memberInfo.saveMoney}원</p>
 				</div>
 				<div class="mt-5" style="display: flex; flex-direction: column;">
-					<i class="fas fa-ticket-alt py-2" style="font-size: 1.5rem"></i>
+					<i class="fas fa-ticket-alt py-2" style="font-size: 1.5rem"><a href="/market/mypage/coupon-list"></a> </i>
 					<p class="fw-normal mt-2">쿠폰</p>
 					<p style="font-size: 1.3rem;">${couponCnt}장</p>
 				</div>
@@ -55,19 +55,20 @@
 					<li><a href="/market/mypage/cart">장바구니</a></li>
 					<li><a href="#!">상품문의</a></li>
 					<li><a href="/market/mypage/address-list" style="color: black;">주소록 관리</a></li>
+					<li><a href="/market/mypage/enquiry/faq?type=1">FAQ</a></li>
 				</ul>
 			</div>
 		</aside>
 		<div class="container2" style="display: flex; flex-direction: column;">
 			<p class="py-3 mb-0" style="font-size: 1.3rem;">주문 내역 조회</p>
-			<ul class="sub-ul pb-2">
-				<li><a href="/market/mypage">전체 조회</a></li>
-				<li><a href="/market/mypage?state=1">입금/결제</a></li>
-				<li><a href="/market/mypage?state=2">배송중</a></li>
-				<li><a href="/market/mypage?state=3">배송완료</a></li>
-				<li><a href="/market/mypage?state=4">구매확정</a></li>
-				<li><a href="/market/mypage?state=5">교환</a></li>
-				<li><a href="/market/mypage?state=6">환불</a></li>
+			<ul class="order-nav sub-ul pb-2">
+				<li><a class="selected" href="/market/mypage">전체 조회</a></li>
+				<li><a href="/market/mypage?state=newOrder">입금/결제</a></li>
+				<li><a href="/market/mypage?state=delivering">배송중</a></li>
+				<li><a href="/market/mypage?state=deliverComplete">배송완료</a></li>
+				<li><a href="/market/mypage?state=orderComplete">구매확정</a></li>
+				<li><a href="/market/mypage?state=exchange">교환</a></li>
+				<li><a href="/market/mypage?state=newRefund">환불</a></li>
 			</ul>
 			<hr class="mt-0" style="height: 3px; opacity: 1;">
 			<ul>
@@ -135,16 +136,19 @@
 						</td>
 						<td>
 						<c:choose>
-							<c:when test="${orderList.STATE eq 1}"><p class="ft-SBAggroM mb-3" style="font-size: 20px;">입금/결제</p></c:when>
-							<c:when test="${orderList.STATE eq 2}"><p class="ft-SBAggroM mb-3" style="font-size: 20px;">배송중</p></c:when>
-							<c:when test="${orderList.STATE eq 3}"><p class="ft-SBAggroM mb-3" style="font-size: 20px;">배송완료</p></c:when>
-							<c:when test="${orderList.STATE eq 4}"><p class="ft-SBAggroM mb-3" style="font-size: 20px;">구매확정</p></c:when>
-							<c:when test="${orderList.STATE eq 5}"><p class="ft-SBAggroM mb-3" style="font-size: 20px;">교환</p></c:when>
-							<c:when test="${orderList.STATE eq 6}"><p class="ft-SBAggroM mb-3" style="font-size: 20px;">환불</p></c:when>
+							<c:when test="${orderList.STATE eq 'newOrder'}"><p class="ft-SBAggroM mb-3" style="font-size: 20px;">입금/결제</p></c:when>
+							<c:when test="${orderList.STATE eq 'delivering'}"><p class="ft-SBAggroM mb-3" style="font-size: 20px;">배송중</p></c:when>
+							<c:when test="${orderList.STATE eq 'deliverComplete'}"><p class="ft-SBAggroM mb-3" style="font-size: 20px;">배송완료</p></c:when>
+							<c:when test="${orderList.STATE eq 'orderComplete'}"><p class="ft-SBAggroM mb-3" style="font-size: 20px;">구매확정</p></c:when>
+							<c:when test="${orderList.STATE eq 'exchange'}"><p class="ft-SBAggroM mb-3" style="font-size: 20px;">교환</p></c:when>
+							<c:when test="${orderList.STATE eq 'newRefund'}"><p class="ft-SBAggroM mb-3" style="font-size: 20px;">환불</p></c:when>
 						</c:choose>
+						
+						<c:if test="${(orderList.STATE eq 'delivering')}">
 							<p class="mb-2" style="border: 1px solid lightgray;">배송조회</p>
-							
-							<c:if test="${orderList.STATE eq 4 || orderList.STATE eq 3}">
+						</c:if>
+							<!-- 구매확정/배송완료 상태만 후기작성 버튼 보임 -->
+							<c:if test="${(orderList.STATE eq 'orderComplete' || orderList.STATE eq 'deliverComplete') and orderList.IS_REVIEW eq 0}">
 							<div class="text-white" href="#" role="button" style="background-color: black;">
 								<div class="btn-group">
 									<a class="nav-link link-white" href="#!">후기작성</a>
@@ -168,7 +172,18 @@
 
 	<%@ include file="/WEB-INF/views/include/market/footer.jsp"%>
 	<script type="text/javascript" src="${contextPath}/resources/js/market/mypage/date-search.js"></script>
-
+	<script type="text/javascript">
+		let tabBtns = document.querySelector('.order-nav').children;
+		for (var i = 0; i < tabBtns.length; i++) {
+			let tabBtn = tabBtns[i].children[0];
+			
+			if(tabBtn.href==document.location.href){
+				tabBtn.classList.add('selected');
+			}else{
+				tabBtn.classList.remove('selected');
+			}
+		}
+	</script>
 
 </body>
 </html>

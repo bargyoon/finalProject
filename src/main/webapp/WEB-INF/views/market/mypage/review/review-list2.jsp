@@ -58,6 +58,7 @@
 					<li><a href="/market/mypage/cart">장바구니</a></li>
 					<li><a href="#!">상품문의</a></li>
 					<li><a href="/market/mypage/address-list">주소록 관리</a></li>
+					<li><a href="/market/mypage/enquiry/faq?type=1">FAQ</a></li>
 				</ul>
 			</div>
 		</aside>
@@ -151,9 +152,9 @@
 								
 								<p>${myReviewList.RV_CONTENT}</p>
 								<div>
-									<input id="likeBtn" type="checkbox" onclick="" style="display: none;">
+									<!-- <input id="likeBtn" type="checkbox" onclick="" style="display: none;"> -->
 									<label class="like-btn px-lg-2" for="likeBtn">
-										<i class="fas fa-laugh-beam py-1" style="color: orange;"></i>도움돼요 3
+										<i class="fas fa-laugh-beam py-1" style="color: orange;"></i> 도움돼요 ${myReviewList.RECOMMAND}
 									</label>
 								</div>
 							</div>

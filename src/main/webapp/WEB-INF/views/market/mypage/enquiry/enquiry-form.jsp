@@ -86,7 +86,7 @@
 				<li>1:1문의 처리 내역은 <span style="text-decoration: underline;">마이페이지>상품문의</span>를 통해 확인하실 수 있습니다.</li>
 			</ul>
 			<form action="/market/mypage/enquiry/upload" class="pt-5" 
-				method="post" onsubmit="return minLengthCheck(this);" >
+				method="post" onsubmit="return check(this);" >
 				<p class="mb-0">문의작성</p>
 				<hr class="mt-0" style="height: 2px; opacity: 1;">
 				<div class="py-2">
@@ -102,7 +102,7 @@
 								<th>문의유형</th>
 								<td>
 									<div class="bg-select">
-										<select name="type">
+										<select name="type" id="type">
 											<option value="0">문의유형 선택</option>
 											<option value="1">교환</option>
 											<option value="2">환불</option>
@@ -125,13 +125,13 @@
 							</tr>
 							<tr>
 								<th>작성자</th>
-								<td><input type="text" class="n-input" name="user_name" value="${memberInfo.userName}"></td>
-								<th>휴대전화</th>
-								<td><input type="text" class="n-input" name="phone" placeholder="010-0000-0000"></td>
+								<td><input type="text" class="n-input" name="user_name" value="${memberInfo.userName}" readonly="readonly"></td>
+								<th>휴대전화(선택)</th>
+								<td><input type="text" class="n-input" name="tell" placeholder="010-0000-0000"></td>
 							</tr>
 							<tr style="border-bottom: 1px solid lightgray;">
 								<th style="padding-bottom: 2rem;">이메일</th>
-								<td style="padding-bottom: 2rem;"><input type="text" name="email" placeholder="이메일을 입력해주세요"></td>
+								<td style="padding-bottom: 2rem;"><input type="text" name="email" value="${memberInfo.email}" readonly="readonly"></td>
 							</tr>
 							<tr>
 								<th style="padding-top: 2rem;">제목</th>
@@ -173,16 +173,17 @@
 		}
 	});
 		
-	function minLengthCheck(i) {
+	function check(i) {
 		
-	    var content = document.getElementById("inputContent");
-	    if(content.value.length < 20) {
-	    	content.value =  content.value.substr(0, 20);
-	        document.querySelector('#contentCheck').innerHTML = '최소 20자 이상을 입력해야 합니다.';
+		var target = document.getElementById("type");
+		target = target.options[target.selectedIndex].value;     // 옵션 value 값		
+		var orderIdx = document.getElementById("orderIdx").value.length;
+		var content = document.getElementById("inputContent").value.length;
+		if(orderIdx==0 || content==0 || target == 0){
+			document.querySelector('#contentCheck').innerHTML = '모든 정보를 입력해야합니다.';
 	        return false;
-	    }
-	    
-	}
+		}
+	   }
 	
 	window.onload = function(){
         document.getElementById("pop").onclick = function(){

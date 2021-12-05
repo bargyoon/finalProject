@@ -11,28 +11,21 @@
 	crossorigin="anonymous">
 <link href="/resources/css/styles.css" rel="stylesheet">
 <link href="/resources/css/mypage/font.css" rel="stylesheet">
+<link href="/resources/css/mypage/mypage.css" rel="stylesheet">
 </head>
 <body>
 
 <section>
-	<div class="container">
-		<header class="d-flex justify-content-center py-3"style="min-width: 500px;">
-			<ul class="nav nav-pills">
-				<li class="nav-item"><a href="/mypage/my-info" class="nav-link active">회원정보</a></li>
-				<li class="nav-item"><a href="/mypage/pet-info" class="nav-link">마이펫</a></li>
-				<li class="nav-item"><a href="/mypage/vaccination" class="nav-link">예방접종</a></li>
-				<li class="nav-item"><a href="/mypage/managing-board" class="nav-link">작성글</a></li>
-			</ul>
-		</header>
-		<h4 class="mb-3">마이페이지</h4>
-	</div>
 	
 	<div class="container" style="display: flex;">
 		<nav class="d-flex flex-column flex-shrink-0 p-3" style="width: 280px;">
-			<span class="fs-4">회원정보</span>
+			<span class="fs-4"><a href="/mypage/my-info" class="nav-link">회원정보</a></li></span>
+			<span class="fs-4"><a href="/mypage/pet-info" class="nav-link">마이펫</a></li></span>
+			<span class="fs-4"><a href="/mypage/vaccination" class="nav-link">예방접종</a></li></span>
+			<span class="fs-4"><a href="/mypage/managing-board" class="nav-link">작성글</a></li></span>
 			<hr>
 			<ul class="nav nav-pills flex-column mb-auto">
-				<li><a href="/mypage/my-info" class="nav-link active">내 정보</a></li>
+				<li><a href="/mypage/my-info" class="nav-link">내 정보</a></li>
 				<li><a href="/mypage/update-member-info" class="nav-link">회원정보 수정</a></li>
 			</ul>
 		</nav>

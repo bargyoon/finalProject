@@ -1,6 +1,5 @@
 package com.kh.spring.market.model.repository;
 
-import java.sql.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -14,6 +13,7 @@ import org.apache.ibatis.annotations.Update;
 import com.kh.spring.common.util.FileDTO;
 import com.kh.spring.common.util.pagination.Paging;
 import com.kh.spring.market.model.dto.Address;
+import com.kh.spring.market.model.dto.Like;
 import com.kh.spring.market.model.dto.Order;
 import com.kh.spring.market.model.dto.Product;
 import com.kh.spring.market.model.dto.QNA;
@@ -44,14 +44,14 @@ public interface MarketMypageRepository {
 	//적립금 유형 : 주문(0), 일반후기(2), 사진후기(3), 적립금결제(4), 결제취소(5)
 	
 	//Order List
-	List<Map<String, Object>> selectOrderList(@Param("userIdx")int userIdx, @Param("state")int state, @Param("fromDate")String fromDate, @Param("endDate")String endDate);
+	List<Map<String, Object>> selectOrderList(@Param("userIdx")int userIdx, @Param("state")String state, @Param("fromDate")String fromDate, @Param("endDate")String endDate);
 	
 	//reveiwList 구매확정 목록
 	List<Map<String, Object>> selectReviewList(@Param("userIdx")int userIdx, @Param("fromDate")String fromDate, @Param("endDate")String endDate);
 	
 	//update state of ORDER
 	@Update("update \"ORDER\""
-			+ " set update_date = sysdate, state = 4" //구매 후 일주일이 지나면 구매확정(state=4)
+			+ " set update_date = sysdate, state = 'orderCompelte'" //구매 후 일주일이 지나면 구매확정(state=4)
 			+ " where order_date+7 <= sysdate")
 	void updateDateAndState();
 	
@@ -91,9 +91,10 @@ public interface MarketMypageRepository {
 	Member selectMemberInfo(int userIdx);
 	
 	//문의 등록
-	@Insert("insert into QNA(QNA_IDX, USER_IDX, prd_idx, ORDER_IDX, TITLE, CONTEXT, TYPE)"
+	@Insert("insert into QNA(QNA_IDX, USER_IDX, prd_idx, ORDER_IDX, TITLE, CONTEXT, TYPE, TELL)"
 			+ " values(SC_QNA_IDX.NEXTVAL, #{userIdx},"
-			+ " ( SELECT prd_idx FROM \"ORDER\" WHERE order_idx = #{orderIdx}), #{orderIdx}, #{title}, #{context}, #{type})")
+			+ " ( SELECT prd_idx FROM \"ORDER\" WHERE order_idx = #{orderIdx}), "
+			+ " #{orderIdx}, #{title}, #{context}, #{type}, #{tell})")
 	void insertEnquiry(QNA qna);
 	
 	//문의폼 회원정보 
@@ -103,8 +104,7 @@ public interface MarketMypageRepository {
 	List<Map<String, Object>> selectEnquiryList(@Param("userIdx")int userIdx, @Param("fromDate")String fromDate, @Param("endDate")String endDate);
 	
 	//FAQ 리스트
-	//@Select("select * from qna where user_idx=9 and type=#{type}") //관리자가 등록한 FAQ 리스트
-	List<QNA> selectFAQList(@Param("type")String type);
+	List<QNA> selectFAQList(@Param("type")String type,@Param("keyword")String keyword);
 	
 	//address
 	void insertAddress(Address address);
@@ -121,5 +121,21 @@ public interface MarketMypageRepository {
 	
 	@Select("select * from \"ADDRESS\" where address_idx=${addressIdx}")
 	Address selectAddressDetail(int addressIdx);
+	
+	//좋아요 like
+	@Insert("insert into \"LIKE\" (LIKE_IDX, user_idx, board_idx) values(sc_like_idx.nextval, #{userIdx}, #{boardIdx})")
+	void insertLike(Like like);
+	@Update("update review set RECOMMAND = RECOMMAND+1 where rv_idx=${rvIdx}")
+	void plusRecommand(int rvIdx);	
+	
+	//좋아요 취소
+	@Delete("delete \"LIKE\" where like_idx=${likeIdx}")
+	void deleteLike(int likeIdx);
+	@Update("update review set RECOMMAND = RECOMMAND-1 where rv_idx=${rvIdx}")
+	void minusRecommand(int rvIdx);
+	
+	//좋아요여부
+	@Select("select LIKE_IDX from \"LIKE\" where board_idx=#{boardIdx} and user_idx=#{userIdx}")
+	int selectisLike(int rvIdx);
 	
 }

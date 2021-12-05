@@ -53,17 +53,23 @@ public interface ShopRepository {
 	Product selectPrdByDtIdx(int dtIdx);
 	
 	@Select("select count(*) from prd_detail")
-	int selectAllCnt();
+	int selectAllPrdCnt();
 	
 	@Select("select count(*) from prd_detail where state = #{state}")
-	int selectSpecCnt(String state);
+	int selectPrdSpecCnt(String state);
+	
+	@Select("select count(*) from(select order_num, count(order_num) cnt from \"ORDER\" group by order_num)")
+	int selectAllOrderCnt();
+	
+	@Select("select count(*) from(select order_num, count(order_num) cnt from \"ORDER\" where state = #{state} group by order_num)")
+	int selectOrderSpecCnt(String state);
 
 	List<Map<String, Object>> selectPrdList(@Param("commandMap") Map<String, Object> commandmap,@Param("pageUtil") Paging pageUtil);
 
 	
-	List<Map<String,Object>> selectOrderList();
+	List<Map<String,Object>> selectOrderList(@Param("commandMap") Map<String, Object> commandmap,@Param("pageUtil") Paging pageUtil);
 
-	List<Map<String, Object>> selectOrderSpec(int dtIdx);
+	List<Map<String, Object>> selectOrderSpec(long orderNum);
 
 	int selectPrdListCnt(Map<String, Object> commandMap);
 
@@ -83,5 +89,17 @@ public interface ShopRepository {
 
 	@Update("update \"USER\" set savemoney = savemoney - #{saveMoney} where user_idx = #{userIdx}")
 	boolean updateUserMinusSm(Order order);
+
+	@Update("update \"ORDER\" set state = #{state}, update_date = sysdate  where order_num = #{orderNum}")
+	void updateOrderState(Map<String, Object> jsonMap);
+
+	@Update("update \"ORDER\" set shipping_company = #{shippingCompany}, shipping_num = #{shippingNum},update_date = sysdate, state= 'delivering' where order_num = #{orderNum}")
+	void updateShipping(Order order);
+
+	int selectOrderListCnt(Map<String, Object> commandMap);
+
+	int selectItemCommentListCnt(Map<String, Object> commandMap);
+
+	List<Map<String,Object>> selectItemCommentList(@Param("commandMap") Map<String, Object> commandmap,@Param("pageUtil") Paging pageUtil);
 
 }

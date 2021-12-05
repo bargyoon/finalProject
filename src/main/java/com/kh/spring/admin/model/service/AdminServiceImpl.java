@@ -22,6 +22,8 @@ import com.kh.spring.common.util.FileUtil;
 import com.kh.spring.disease.model.dto.Disease;
 import com.kh.spring.disease.model.dto.PriceImg;
 import com.kh.spring.disease.model.repository.DiseaseRepository;
+import com.kh.spring.market.model.dto.Order;
+import com.kh.spring.market.model.repository.ShopRepository;
 
 import lombok.RequiredArgsConstructor;
 
@@ -29,6 +31,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class AdminServiceImpl implements AdminService {
 	private final DiseaseRepository diseaseRepository;
+	private final ShopRepository shopRepository;
 
 	public void insertDisease(Disease disease, List<MultipartFile> mfs) {
 		FileUtil fileUtil = new FileUtil();
@@ -127,6 +130,18 @@ public class AdminServiceImpl implements AdminService {
 		disease.setCount(cnt);
 		disease.setPrice(price);
 		diseaseRepository.updateDiseasePriceAndCount(disease);
+		
+	}
+	
+	
+	public void updateOrderState(Map<String, Object> jsonMap) {
+		shopRepository.updateOrderState(jsonMap);
+		
+		
+	}
+	
+	public void updateShipping(Order order) {
+		shopRepository.updateShipping(order);
 		
 	}
 	

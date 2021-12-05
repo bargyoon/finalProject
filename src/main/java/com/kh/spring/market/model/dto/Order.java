@@ -15,14 +15,13 @@ public class Order {
 	private long orderNum;
 	private String paymentMethod;
 	private int paymentAmount;
-	private Date orderDate; //주문날짜
-	private int state;
+	private Date orderDate; // 주문날짜
+	private String state;
 	private int orderCnt;
 	private int shippingNum;
 	private String shippingCompany;
 	private int saveMoney;
 	private int cpSaveMoney;
 	private Date updateDate;
-	private int isReview;
 	
 }

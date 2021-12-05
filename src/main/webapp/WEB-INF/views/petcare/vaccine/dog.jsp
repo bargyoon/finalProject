@@ -11,7 +11,7 @@
 <section style="background-color: rgb(240, 234, 213);">
 	
 		<div class="petcare-back">						
-					<h2>  예방접종 </h2>
+					<h2>  반려동물 예방접종 </h2>
 				
 				<div class="petcare-wrap">
 					<ul class="petcare-tab-wrap">
@@ -45,7 +45,7 @@
 						          <td class="l-yellow">선택접종</td><td></td><td>개 인플루엔자</td>
 						        </tr>
 						        <tr>
-						          <td class="l-yellow">추가접종</td><td>매년 1회</td><td>종합 + 코로나 + 켄넬코프 + 광견병</td>
+						          <td class="l-yellow">추가접종</td><td>매년 1회</td><td>종합백신 + 코로나 + 켄넬코프 + 광견병</td>
 						        </tr>
 						      </tbody>
 			    	</table>

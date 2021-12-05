@@ -41,12 +41,10 @@ public class MarketMypageController {
 						@RequestParam(value = "endDate", required = false)String endDate) {
 		
 		int member = certifiedUser.getUserIdx();
-		int state = order.getState();
-		
+		String state = order.getState();		
 		List<Map<String, Object>> orderList = marketMypageService.selectOrderList(member,state,fromDate, endDate);
 		Member memberInfo = marketMypageService.selectMemberInfo(member);
 		int couponCnt = marketMypageService.selectCouponCount(member);
-				
 		model.addAttribute("memberInfo", memberInfo);
 		model.addAttribute("couponCnt", couponCnt);
 		model.addAttribute("orderList", orderList);
@@ -166,9 +164,9 @@ public class MarketMypageController {
 							Order order,
 							@RequestParam(value = "fromDate", required = false)String fromDate,
 							@RequestParam(value = "endDate", required = false)String endDate) {
-		
-		List<Map<String, Object>> orderList = marketMypageService.selectOrderList(certifiedUser.getUserIdx(), order.getState(),fromDate, endDate);
-		model.addAttribute("orderList", orderList);
+		System.out.println("order : " + order);
+		//List<Map<String, Object>> orderList = marketMypageService.selectOrderList(certifiedUser.getUserIdx(), order.getState(),fromDate, endDate);
+		//model.addAttribute("orderList", orderList);
 	}
 	
 	@PostMapping("enquiry/upload")
@@ -200,11 +198,16 @@ public class MarketMypageController {
 	@GetMapping("enquiry/faq")
 	public void faq(@SessionAttribute(name="authentication")Member certifiedUser,
 					Model model,
-					QNA qna) {
-		Member memberInfo = marketMypageService.selectMemberInfo(certifiedUser.getUserIdx());
-		int couponCnt = marketMypageService.selectCouponCount(certifiedUser.getUserIdx());
-		List<QNA> faqList = marketMypageService.selectFAQList(qna.getType());
+					QNA qna,
+					@RequestParam(defaultValue="") String keyword,
+					@RequestParam(required = false) String type) {
 		
+		int member = certifiedUser.getUserIdx();
+		Member memberInfo = marketMypageService.selectMemberInfo(member);
+		int couponCnt = marketMypageService.selectCouponCount(member);
+		List<QNA> faqList = marketMypageService.selectFAQList(type,keyword);
+		
+		model.addAttribute("keyword", keyword);
 		model.addAttribute("memberInfo", memberInfo);
 		model.addAttribute("couponCnt", couponCnt);	
 		model.addAttribute("faqList", faqList);
@@ -222,7 +225,8 @@ public class MarketMypageController {
 		List<Map<String, Object>> reviewDetail = marketMypageService.selectReviewDetail(order);		
 		Member memberInfo = marketMypageService.selectMemberInfo(certifiedUser.getUserIdx());
 		int couponCnt = marketMypageService.selectCouponCount(certifiedUser.getUserIdx());
-				
+			
+		System.out.println("reviewDetail : " + reviewDetail);
 		model.addAttribute("memberInfo", memberInfo);
 		model.addAttribute("couponCnt", couponCnt);		
 		model.addAttribute("reviewDetail", reviewDetail);
@@ -260,6 +264,8 @@ public class MarketMypageController {
 		int couponCnt = marketMypageService.selectCouponCount(certifiedUser.getUserIdx());
 		marketMypageService.updateDateAndState(); //구매 후 일주일 지나면 구매확정 state 변경
 		
+		System.out.println("reviewList : " + reviewList);
+		
 		model.addAttribute("reviewList", reviewList);
 		model.addAttribute("memberInfo", memberInfo);
 		model.addAttribute("couponCnt", couponCnt);
@@ -277,6 +283,8 @@ public class MarketMypageController {
 		List<FileDTO> files = marketMypageService.selectFileList(member);
 		Member memberInfo = marketMypageService.selectMemberInfo(member);
 		int couponCnt = marketMypageService.selectCouponCount(member);
+		
+		System.out.println("myReviewList : " + myReviewList);
 		
 		model.addAttribute("myReviewList", myReviewList);
 		model.addAttribute("files", files);

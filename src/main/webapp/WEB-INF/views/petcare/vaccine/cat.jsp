@@ -12,7 +12,7 @@
 	
 		<div class="petcare-back">						
 				
-					<h2>  예방접종 </h2>
+					<h2>  반려동물 예방접종 </h2>
 				
 				<div class="petcare-wrap">
 					<ul class="petcare-tab-wrap">
@@ -46,7 +46,7 @@
 						          <td class="l-yellow">선택접종</td><td></td><td>백혈병, 클라미디아</td>
 						        </tr>
 						        <tr>
-						          <td class="l-yellow">추가접종</td><td>매년 1회</td><td>종합, 광견병, 심장사상충</td>
+						          <td class="l-yellow">추가접종</td><td>매년 1회</td><td>종합백신, 광견병</td>
 						        </tr>
 						      </tbody>
 			    	</table>

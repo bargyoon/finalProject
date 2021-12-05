@@ -2,160 +2,193 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-  <mapper namespace="com.kh.spring.market.model.repository.ShopRepository">
-  	
-  	 <select id="selectPrdListBySet" resultType="Product">
-  	 	select *
-  	 	from (select rownum rnum, prd_idx, event_idx, sub_img_idx, name, brand, rating, price, sale_per, reg_date, type
-				from (select prd_idx, event_idx, sub_img_idx, name, brand, rating, min(price) price, sale_per, reg_date, type
-        				from product
-        				join prd_detail using (prd_idx)
-        		<choose>
-	        		<when test="listSet.category != 'all'">
-	        		where category = #{listSet.category} and type in ('A',
-	        			<choose>
-	        				<when test="listSet.check == 'true'">
-								'C')
-	        				</when>
-	        				<otherwise>
-								'D')
-	        				</otherwise>
-	        			</choose>
-	        		</when>
-	        		<otherwise>
-	        		where type in ('A',
-	        			<choose>
-	        				<when test="listSet.check == 'true'">
-								'C')
-	        				</when>
-	        				<otherwise>
-								'D')
-	        				</otherwise>
-	        			</choose>
-	        		</otherwise>
-        		</choose>
-        		GROUP BY prd_idx, event_idx, sub_img_idx, name, brand, rating, sale_per, reg_date, type
-				<if test="listSet.option != null">
-        		order by
-        			<choose>
-        				<when test="listSet.option == 'new'">
-        					reg_date
-        				</when>
-        				<when test="listSet.option == 'pop'">
-        					rating
-        				</when>
-        				<otherwise>
-        					price
-        				</otherwise>
-        			</choose>
-					<choose>
-						<when test="listSet.option == 'low'">
-							asc
-						</when>
-						<otherwise>
-							desc
-						</otherwise>
-					</choose>    		
-        		</if>
-        		))
-		where rnum between ${((pageUtil.curPage-1) * pageUtil.cntPerPage) + 1} and ${pageUtil.curPage * pageUtil.cntPerPage} 
+<mapper
+	namespace="com.kh.spring.market.model.repository.ShopRepository">
+
+	<select id="selectPrdListBySet" resultType="Product">
+		select *
+		from (select rownum rnum, prd_idx, event_idx, sub_img_idx, name, brand,
+		rating, price, sale_per, reg_date, type
+		from (select prd_idx, event_idx, sub_img_idx, name, brand, rating,
+		min(price) price, sale_per, reg_date, type
+		from product
+		join prd_detail using (prd_idx)
+		<choose>
+			<when test="listSet.category != 'all'">
+				where category = #{listSet.category} and type in ('A',
+				<choose>
+					<when test="listSet.check == 'true'">
+						'C')
+					</when>
+					<otherwise>
+						'D')
+					</otherwise>
+				</choose>
+			</when>
+			<otherwise>
+				where type in ('A',
+				<choose>
+					<when test="listSet.check == 'true'">
+						'C')
+					</when>
+					<otherwise>
+						'D')
+					</otherwise>
+				</choose>
+			</otherwise>
+		</choose>
+		GROUP BY prd_idx, event_idx, sub_img_idx, name, brand, rating,
+		sale_per, reg_date, type
+		<if test="listSet.option != null">
+			order by
+			<choose>
+				<when test="listSet.option == 'new'">
+					reg_date
+				</when>
+				<when test="listSet.option == 'pop'">
+					rating
+				</when>
+				<otherwise>
+					price
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="listSet.option == 'low'">
+					asc
+				</when>
+				<otherwise>
+					desc
+				</otherwise>
+			</choose>
+		</if>
+		))
+		where rnum between ${((pageUtil.curPage-1) * pageUtil.cntPerPage) +
+		1} and ${pageUtil.curPage * pageUtil.cntPerPage}
 	</select>
-	
+
 	<select id="prdListCnt" resultType="java.lang.Integer">
-  	 	select count(*)
-		from (select prd_idx, event_idx, sub_img_idx, name, brand, rating, min(price) price, sale_per, reg_date, type
-        		from product
-        		join prd_detail using (prd_idx)
-        		<choose>
-	        		<when test="listSet.category != 'all'">
-	        		where category = #{listSet.category} and type in ('A',
-	        			<choose>
-	        				<when test="listSet.check == 'true'">
-								'C')
-	        				</when>
-	        				<otherwise>
-								'D')
-	        				</otherwise>
-	        			</choose>
-	        		</when>
-	        		<otherwise>
-	        		where type in ('A',
-	        			<choose>
-	        				<when test="listSet.check == 'true'">
-								'C')
-	        				</when>
-	        				<otherwise>
-								'D')
-	        				</otherwise>
-	        			</choose>
-	        		</otherwise>
-        		</choose>
-        		GROUP BY prd_idx, event_idx, sub_img_idx, name, brand, rating, sale_per, reg_date, type)
+		select count(*)
+		from (select prd_idx, event_idx, sub_img_idx, name,
+		brand, rating, min(price) price, sale_per, reg_date, type
+		from product
+		join prd_detail using (prd_idx)
+		<choose>
+			<when test="listSet.category != 'all'">
+				where category = #{listSet.category} and type in ('A',
+				<choose>
+					<when test="listSet.check == 'true'">
+						'C')
+					</when>
+					<otherwise>
+						'D')
+					</otherwise>
+				</choose>
+			</when>
+			<otherwise>
+				where type in ('A',
+				<choose>
+					<when test="listSet.check == 'true'">
+						'C')
+					</when>
+					<otherwise>
+						'D')
+					</otherwise>
+				</choose>
+			</otherwise>
+		</choose>
+		GROUP BY prd_idx, event_idx, sub_img_idx, name, brand, rating,
+		sale_per, reg_date, type)
 	</select>
-	
+
 	<select id="selectPrdList" resultType="map">
-	select * from 
-	(select rownum rnum, prd_idx, name, brand, category, reg_date, po_name, po_stock, sale_price, price, state, dt_idx, save_path, RENAME_FILE_NAME from
-		(select p.prd_idx, p.name, p.brand, p.category, p.reg_date,d.po_name, d.po_stock, d.sale_price, d.price, d.state, d.dt_idx
-		,f.save_path, max(f.rename_file_name) RENAME_FILE_NAME from product p join prd_detail d on(p.prd_idx = d.prd_idx) 
-		join file_info f on (f.type_idx = p.prd_idx) 
-		
+		select * from
+		(select rownum rnum, prd_idx, name, brand, category, reg_date, po_name,
+		po_stock, sale_price, price, state, dt_idx, save_path,
+		RENAME_FILE_NAME from
+		(select p.prd_idx, p.name, p.brand, p.category,
+		p.reg_date,d.po_name, d.po_stock, d.sale_price, d.price, d.state,
+		d.dt_idx
+		,f.save_path, max(f.rename_file_name) RENAME_FILE_NAME from
+		product p join prd_detail d on(p.prd_idx = d.prd_idx)
+		join file_info f on (f.type_idx = p.prd_idx)
+
 		<where>
 			<if test="commandMap.state != 'all'">
 				d.state = #{commandMap.state}
 			</if>
 			<if test="commandMap.keyword != null">
-				p.name = #{commandMap.keyword} or d.po_name = #{commandMap.keyword}
+				p.name = #{commandMap.keyword} or d.po_name =
+				#{commandMap.keyword}
 			</if>
 		</where>
-		group by  p.prd_idx, p.name, p.brand, p.category, p.reg_date,d.po_name, d.po_stock,  d.sale_price,d.price, d.state, d.dt_idx
+		group by p.prd_idx, p.name, p.brand, p.category, p.reg_date,d.po_name,
+		d.po_stock, d.sale_price,d.price, d.state, d.dt_idx
 		,f.save_path ))
-		where rnum between ${((pageUtil.curPage-1) * pageUtil.cntPerPage) + 1} and ${pageUtil.curPage * pageUtil.cntPerPage} 
+		where rnum between ${((pageUtil.curPage-1) * pageUtil.cntPerPage) + 1}
+		and ${pageUtil.curPage * pageUtil.cntPerPage}
 	</select>
-	
-  	
-  	<select id="selectPrdByIdx" resultType="Product">
-  		select prd_idx, event_idx, sub_img_idx, name, brand, rating, min(price) price, sale_per
+
+
+	<select id="selectPrdByIdx" resultType="Product">
+		select prd_idx, event_idx, sub_img_idx, name, brand, rating, min(price)
+		price, sale_per
 		from product
 		join prd_detail using(prd_idx)
-		where prd_idx = #{prdIdx}
-		GROUP by prd_idx, event_idx, sub_img_idx, name, brand, rating, sale_per
-  		
-  	</select>
-  	
-  	<select id="selectReviewByPrdIdx" resultType="Review">
-		select rv_idx, rv.user_idx user_idx, rv.prd_idx prd_idx, order_idx, rv.dt_idx dt_idx, rv.state state, "USER".user_name user_name, prd.name prd_name, pd.po_name dt_name, rv.rating rating, rv.type type, recommand, rv.reg_date reg_date, rv.is_del is_del, rv_content
-		from review rv
-		join product prd on (rv.prd_idx = prd.prd_idx)
-		join "USER" ON (rv.USER_IDX = "USER".USER_IDX)
-		join prd_detail pd on(rv.dt_idx = pd.dt_idx) 
-		where rv.prd_idx = #{prdIdx}
-  	</select>
-  	
-  	<select id="selectCouponByUserIdx" resultType="Coupon">
-	  	select coupon_idx, uc_idx, user_idx, name, sale_per, type, coupon.exp_date exp_date ,user_coupon.exp_date uc_exp_date, reg_date, user_coupon.is_del
-		from coupon
-		join user_coupon using(coupon_idx)
-		where user_idx = #{userIdx}
+		where prd_idx
+		= #{prdIdx}
+		GROUP by prd_idx, event_idx, sub_img_idx, name, brand,
+		rating, sale_per
+
 	</select>
-	
-  	<select id="selectOrderList" resultType="map">
-  		select dt_idx, count(dt_idx) cnt
-  		from "ORDER" group by dt_idx
-  	</select>
-  	
-  	<select id="selectOrderSpec" resultType="map">
-  		select o.dt_idx,  o.user_idx, o.prd_idx, o.payment_method,  o.payment_amount, o.order_date, o.state, o.order_cnt , f.save_path, f.rename_file_name
-  		from "ORDER" o join file_info f on(o.prd_idx = f.type_idx)
-  		where dt_idx = #{dtIdx}
-  	</select>
-  	
-  	<select id="selectPrdListCnt" resultType="java.lang.Integer">
-  	select count(*) from(
-  	select p.prd_idx, p.name, p.brand, p.category, p.reg_date,d.po_name, d.po_stock, d.sale_price, d.price, d.state, d.dt_idx
-		,f.save_path, max(f.rename_file_name) RENAME_FILE_NAME from product p join prd_detail d on(p.prd_idx = d.prd_idx) 
-		join file_info f on (f.type_idx = p.prd_idx) 
-		
+
+	<select id="selectReviewByPrdIdx" resultType="Review">
+		select rv_idx,
+		rv.user_idx user_idx, rv.prd_idx prd_idx, order_idx, rv.dt_idx dt_idx,
+		rv.state state, "USER".user_name user_name, prd.name prd_name,
+		pd.po_name dt_name, rv.rating rating, rv.type type, recommand,
+		rv.reg_date reg_date, rv.is_del is_del, rv_content
+		from review rv
+		join
+		product prd on (rv.prd_idx = prd.prd_idx)
+		join "USER" ON (rv.USER_IDX =
+		"USER".USER_IDX)
+		join prd_detail pd on(rv.dt_idx = pd.dt_idx)
+		where rv.prd_idx = #{prdIdx}
+	</select>
+
+	<select id="selectOrderList" resultType="map">
+	select * from
+	(select rownum rnum , order_num, cnt from(
+		select order_num, count(order_num) cnt
+		from "ORDER" 
+		  <where>
+		  <if test="commandMap.state != 'all'">
+		  	state = #{commandMap.state}
+		  </if>
+		  </where>
+		group by order_num
+		)) where rnum between ${((pageUtil.curPage-1) * pageUtil.cntPerPage) + 1}
+		and ${pageUtil.curPage * pageUtil.cntPerPage}
+	</select>
+
+	<select id="selectOrderSpec" resultType="map">
+		select p.name, d.po_name,d.price, m.user_name, o.cp_save_money,o.save_money, o.order_num, o.shipping_num, o.shipping_company,
+		o.payment_method, o.payment_amount, o.order_date, o.state, o.order_cnt
+		, f.save_path, f.rename_file_name
+		from "ORDER" o join file_info f on(o.prd_idx = f.type_idx) join product p
+		on (o.prd_idx = p.prd_idx) join prd_detail d on(o.dt_idx = d.dt_idx)
+		join "USER" m on(o.user_idx = m.user_idx) where order_num = #{orderNum}
+	</select>
+
+	<select id="selectPrdListCnt" resultType="java.lang.Integer">
+		select count(*) from(
+		select p.prd_idx, p.name, p.brand, p.category, p.reg_date,d.po_name,
+		d.po_stock, d.sale_price, d.price, d.state, d.dt_idx
+		,f.save_path,
+		max(f.rename_file_name) RENAME_FILE_NAME from product p join
+		prd_detail d on(p.prd_idx = d.prd_idx)
+		join file_info f on (f.type_idx = p.prd_idx)
+
 		<where>
 			<if test="state != 'all'">
 				d.state = #{state}
@@ -164,8 +197,36 @@
 				p.name = #{keyword} or d.po_name = #{keyword}
 			</if>
 		</where>
-		group by  p.prd_idx, p.name, p.brand, p.category, p.reg_date,d.po_name, d.po_stock, d.sale_price, d.price, d.state, d.dt_idx
+		group by p.prd_idx, p.name, p.brand, p.category, p.reg_date,d.po_name,
+		d.po_stock, d.sale_price, d.price, d.state, d.dt_idx
 		,f.save_path)
-  	</select>
-  	
-  </mapper>
+	</select>
+	
+	<select id="selectOrderListCnt" resultType="java.lang.Integer">
+		select count(*) from(
+		select order_num, count(order_num) cnt
+		from "ORDER" group by order_num)
+	</select>
+	
+	<select id="selectItemCommentListCnt" resultType="java.lang.Integer">
+	select count(*) from 
+	
+	(select p.name, p.prd_idx, o.order_idx, r.rating, r.user_idx, m.user_name, r.reg_date, r.recommand, f.save_path, f.rename_file_name, r.state, r.rv_content
+	from review r join "USER" m on(r.user_idx = m.user_idx)
+	join product p on (r.prd_idx = p.prd_idx) 
+	join "ORDER" o on(r.order_idx =  o.order_idx) 
+	join file_info f on(r.rv_idx = f.type_idx))
+	</select>
+	
+	<select id="selectItemCommentList" resultType="map">
+	select * from 
+	(select rownum rnum , name, prd_idx, order_idx,rating, type, user_idx, user_name, reg_date, recommand, save_path, rename_file_name, state , rv_content from
+	(select p.name, p.prd_idx, o.order_idx, r.rating, r.type,r.user_idx, m.user_name, r.reg_date, r.recommand, f.save_path, f.rename_file_name, r.state,r.rv_content
+	from review r join "USER" m on(r.user_idx = m.user_idx)
+	join product p on (r.prd_idx = p.prd_idx) 
+	join "ORDER" o on(r.order_idx =  o.order_idx) 
+	join file_info f on(r.rv_idx = f.type_idx)
+	)) where rnum between ${((pageUtil.curPage-1) * pageUtil.cntPerPage) + 1} and ${pageUtil.curPage * pageUtil.cntPerPage}
+	</select>
+
+</mapper>

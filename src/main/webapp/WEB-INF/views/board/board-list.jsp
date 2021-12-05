@@ -9,10 +9,14 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<%@ include file="/WEB-INF/views/include/head.jsp" %>
 <script src="https://use.fontawesome.com/releases/v5.15.4/js/all.js"></script>
 <link rel="stylesheet" href="/resources/css/board/board-list.css">
 </head>
 <body>
+<%@ include file="/WEB-INF/views/include/navBar.jsp" %>
+
+
 	<div class="board_list_wrap">
 	<div class="paging">
 				<a href="/board/info" class="bt">정보게시판</a> <a href="/board/dog"
@@ -98,8 +102,9 @@
 
 
 	</div>
-</body>
-<script type="text/javascript">
+	<%@ include file="/WEB-INF/views/include/footer.jsp" %>	
+	 <%@ include file="/WEB-INF/views/include/mainJs.jsp" %>
+	 <script type="text/javascript">
 
 	(() =>{
 		Array.prototype.forEach.call(document.querySelector("#search_option").options, e =>{
@@ -174,4 +179,9 @@
         
         
         </script>
+</body>
+
+  
+
+        
 </html>

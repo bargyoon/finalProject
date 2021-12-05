@@ -14,6 +14,7 @@
 		<typeAlias alias="Coupon" type="com.kh.spring.market.model.dto.Coupon"/>
 		<typeAlias alias="BoardComment" type="com.kh.spring.board.model.dto.BoardComment"/>
 		<typeAlias alias="Board" type="com.kh.spring.board.model.dto.Board"/>
+		<typeAlias alias="Pet" type="com.kh.spring.mypage.model.dto.Pet"/>
 	</typeAliases>
 	<mappers>
 		<mapper resource="mybatis/mapper/mybatisMapper.xml" />

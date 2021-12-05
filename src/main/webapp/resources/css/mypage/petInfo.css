@@ -1,0 +1,10 @@
+@charset "UTF-8";
+
+.pet-container{
+	display: flex;
+	justify-content: space-between;
+}
+.pet-div{
+	width: 200px;
+	height: 200px;
+}

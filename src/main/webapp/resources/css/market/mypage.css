@@ -368,12 +368,21 @@ tbody > tr:hover{
     text-decoration: none;
 }
 
+.faq-nav > li a.selected{	
+	color:black;
+	font-weight:bold;
+}
+
 .faq-table *{
     font-size: 14px !important;
 }
 
 .faq-table td, th{
     height: 30px !important;
+}
+
+.faq-answer{
+	background-color: lightgray;
 }
 
 .faq-answer *{
@@ -492,8 +501,11 @@ tbody > tr:hover{
 }
 
 
-
-
+/* order list */
+.order-nav > li a.selected{	
+	color:black;
+	font-weight:bold;
+}
 
 
 
@@ -542,12 +554,13 @@ tbody > tr:hover{
     color: steelblue;
 }
 
-<<<<<<< HEAD
+
 .simple-table input {
     border: none;
     text-align: center;
     background-color: transparent;
-=======
+}
+
 .address{
 	display: flex;
 	align-items: center;
@@ -555,7 +568,7 @@ tbody > tr:hover{
 
 .address span{
 	margin-right: 20px;
->>>>>>> branch 'main' of https://github.com/bargyoon/finalProject.git
+
 }
 
 .address-btn > ul{
@@ -567,7 +580,6 @@ tbody > tr:hover{
 	outline:none; 
 	text-decoration: none;
 }
-
 .address-btn a {
     background-color: lightgray;
     padding-bottom: 0;
@@ -581,7 +593,6 @@ tbody > tr:hover{
     border-color: lightgray;
     color: white;
 }
-
 .address-insert-btn{
 	width: 9em;
     background: ButtonFace;  

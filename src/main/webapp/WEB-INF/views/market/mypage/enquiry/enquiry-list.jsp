@@ -56,6 +56,7 @@
 					<li><a href="/market/mypage/cart">장바구니</a></li>
 					<li><a href="#!">상품문의</a></li>
 					<li><a href="/market/mypage/address-list">주소록 관리</a></li>
+					<li><a href="/market/mypage/enquiry/faq?type=1">FAQ</a></li>
 				</ul>
 			</div>
 		</aside>
@@ -172,7 +173,8 @@
 	<%@ include file="/WEB-INF/views/include/market/footer.jsp"%>
 	<script type="text/javascript" src="${contextPath}/resources/js/market/mypage/enquiry-list.js"></script>
 	<script type="text/javascript" src="${contextPath}/resources/js/market/mypage/date-search.js"></script>
-
+	
+	
 
 </body>
 </html>
