@@ -96,9 +96,11 @@
 						right: 'prev next today'
 					},
 					locale: 'ko',
-					eventLimit: true,
+					dayMaxEvents: true,
 					views: {
-						month: {eventLimit: 4}
+						dayGrid: {
+							dayMaxEvents: 3
+						}
 					},
 					customButtons: {
 						addEventButton: {
@@ -108,19 +110,19 @@
 							}
 						}
 					},
-					/* dateClick: (info)=>{
-						var title = prompt('Event Title:');
-					},
-					 */
-					
 					events: [
-						<c:forEach var="vaccination" items="${vaccinationList}">
-						{
-							title: ${vaccination.VI_NAME}/${vaccination.PET_NAME},
-							start: ${vaccination.NEXT_DATE}
-						}
+						<c:forEach var="vaccination" items="${vaccinationList}" varStatus="status">
+							{
+								title: "${vaccination.PET_NAME}-${vaccination.VI_NAME}",
+								start: "${vaccination.NEXT_DATE}",
+								allDay: true
+							}
+							<c:if test="${!status.last}">, </c:if>
 						</c:forEach>
-					]
+					],
+					eventClick: (info)=>{
+						var title = prompt('Event Title:');
+					}
 					
 				});
 				calendar.render();

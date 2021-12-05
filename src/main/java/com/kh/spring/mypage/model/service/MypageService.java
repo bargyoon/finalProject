@@ -6,7 +6,6 @@ import java.util.Map;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.kh.spring.board.model.dto.Board;
-import com.kh.spring.board.model.dto.BoardComment;
 import com.kh.spring.member.model.dto.Member;
 import com.kh.spring.mypage.model.dto.MypageSearchSet;
 import com.kh.spring.mypage.model.dto.Pet;
@@ -41,5 +40,7 @@ public interface MypageService {
 	void insertVaccinationCalendar(Vaccination vaccination);
 
 	Member selectMember(int userIdx);
+
+	List<Map<String, Object>> selectVaccinationForBatch();
 	
 }

@@ -1,6 +1,9 @@
 package com.kh.spring.mypage.controller;
 
 import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,14 +14,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -27,7 +28,6 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.spring.board.model.dto.Board;
-import com.kh.spring.board.model.dto.BoardComment;
 import com.kh.spring.common.util.pagination.Paging;
 import com.kh.spring.common.validator.ValidatorResult;
 import com.kh.spring.member.model.dto.Member;
@@ -67,7 +67,7 @@ public class MypageController {
 	}
 
 	@GetMapping("my-info")
-	public void myInfo(@SessionAttribute(name = "authentication")Member certifiedUser, Model model) {
+	public void myInfo(@SessionAttribute(name = "authentication")Member certifiedUser, Model model) throws ParseException {
 		model.addAttribute("authentication", certifiedUser);
 	}
 	

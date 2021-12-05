@@ -81,5 +81,12 @@
 		join pet p on(vc.pet_idx = p.pet_idx)
 		where vc.user_idx = #{userIdx}
 	</select>
+	
+	<select id="selectVaccinationForBatch" resultType="map">
+		select vc.user_idx "user_idx", to_char(next_date, 'YYYY-MM-DD') "next_date", p.pet_name "pet_name", vi.vi_name "vi_name"
+		from vaccination_calendar vc join "USER" u on(vc.user_idx = u.user_idx)
+		join pet p on(vc.pet_idx = p.pet_idx)
+		join vaccine_info vi on(vc.vi_idx = vi.vi_idx)
+	</select>
   	
   </mapper>

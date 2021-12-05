@@ -1,9 +1,6 @@
 package com.kh.spring.mypage.model.service;
 
 import java.sql.Date;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
@@ -12,7 +9,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.kh.spring.board.model.dto.Board;
-import com.kh.spring.board.model.dto.BoardComment;
 import com.kh.spring.common.util.FileDTO;
 import com.kh.spring.common.util.FileUtil;
 import com.kh.spring.member.model.dto.Member;
@@ -105,6 +101,10 @@ public class MypageServiceImpl implements MypageService {
 	
 	public Member selectMember(int userIdx) {
 		return mypageRepository.selectMember(userIdx);
+	}
+
+	public List<Map<String, Object>> selectVaccinationForBatch() {
+		return mypageRepository.selectVaccinationForBatch();
 	}
 	
 	

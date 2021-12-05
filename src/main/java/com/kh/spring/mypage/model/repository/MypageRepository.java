@@ -8,7 +8,6 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
 import com.kh.spring.board.model.dto.Board;
-import com.kh.spring.board.model.dto.BoardComment;
 import com.kh.spring.common.util.FileDTO;
 import com.kh.spring.member.model.dto.Member;
 import com.kh.spring.mypage.model.dto.MypageSearchSet;
@@ -58,6 +57,8 @@ public interface MypageRepository {
 			+ " values(sc_vc_idx.nextval, #{userIdx}, #{petIdx}, #{viIdx}, #{criterionDate}, #{nextDate})")
 	void insertVaccinationCalendar(Vaccination vaccination);
 	
-	@Select("select * from member where user_idx = #{userIdx}")
+	@Select("select * from \"USER\" where user_idx = #{userIdx}")
 	Member selectMember(int userIdx);
+
+	List<Map<String, Object>> selectVaccinationForBatch();
 }
