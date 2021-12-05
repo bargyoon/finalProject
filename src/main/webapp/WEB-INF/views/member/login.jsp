@@ -11,16 +11,10 @@
 </head>
 <body>
 <%@ include file="/WEB-INF/views/include/navBar.jsp" %>
-	<div class="sidenav">
-         <div class="login-main-text">
-            <h2>똑dog한<br>집사님, 어서오세요!</h2>
-            <p>Login or register from here to access.</p>
-         </div>
-      </div>
       <div class="main">
-         <div class="col-md-6 col-sm-12">         
+         <div class="col-md-6 col-sm-12">     
             <div class="login-form">
-               <form action="/member/login" method="post">
+               <form action="/member/login" method="post">               
                	  <div id=page-logo><img src="/resources/assets/img/dog-and-cat-yellow.png" alt="..." /></div><br><hr>
                   <div class="form-group">
                      <span>아이디</span>

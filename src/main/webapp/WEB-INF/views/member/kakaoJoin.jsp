@@ -21,12 +21,6 @@
 <%@ include file="/WEB-INF/views/include/navBar.jsp" %>
 <form:form modelAttribute="joinForm"
    				   action="/member/kakaoJoin" method="post" id="frm_join" >
-<div class="sidenav">
-         <div class="login-main-text">
-            <h2>똑dog한<br>집사님, 환영합니다!</h2>
-            <p>Login or register from here to access.</p>
-         </div>
-      </div>
       <div class="main">
          <div class="col-md-6 col-sm-12">
             <div class="register-form">

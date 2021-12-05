@@ -5,6 +5,7 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import com.kh.spring.member.model.dto.Member;
 
@@ -31,8 +32,11 @@ public interface MemberRepository {
 	@Select("select user_id from \"USER\" where email = #{email}")
 	Member searchId(Member member);
 	
-	@Select("select password from \"USER\" where user_id = #{userId} and email = #{email}")
-	String searchPw(Map<String, Object> member);
+	@Select("select * from \"USER\" where user_id = #{userId} and email = #{email}")
+	Member searchPw(Member member);
+	
+	@Update("update \"USER\" set password=#{password} where user_id=#{userId}")
+	void updatePw(Member member);
 
 	@Select("select * from \"USER\" where user_id= #{userId}")
 	Member selectMemberById(String userId);

@@ -63,7 +63,7 @@ url(/fonts/NotoSans-Bold.woff) format('woff');
 
 
 .agree {width:100%; border: 1px solid #e6e6e6;}
-.agree > div {font-weight: 300; overflow: auto; height: 124px; padding: 24px 19px; font-size: 13px; color: #555; line-height: 16px;}
+.agree > div {font-weight: 300; overflow: auto; height: 124px; padding: 24px 19px; font-size: 13px; color: #555; line-height: 16px;background-color: white;}
 .agree > p { height: 43px; background:#f8f8f8; border-top: 1px solid #e6e6e6; line-height: 43px; font-size: 13px; color: #222; text-indent: 19px;}
 
 
@@ -71,6 +71,7 @@ body {
    font-family: 'SBAggroL';
    font-size: var(--bs-body-font-size);
    font-weight: var(--bs-body-font-weight);
+   background-color: rgb(240, 234, 213);
 }
 
 .main-head{
@@ -133,7 +134,7 @@ body {
 
 .login-main-text{
     margin-top: 20%;
-    padding: 60px;
+    padding: 40px;
     color: black;
 }
 

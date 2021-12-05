@@ -1,7 +1,5 @@
 package com.kh.spring.member.model.service;
 
-import java.util.Map;
-
 import com.kh.spring.member.model.dto.Member;
 
 public interface MemberService {
@@ -16,8 +14,10 @@ public interface MemberService {
 	
 	Member searchId(Member member);
 	
-	String searchPw(Map<String, Object> member);
+	Member searchPw(Member member);
 
+	void updatePw(Member member);
+	
 	Member selectMemberById(String userId);
 
 	void insertKakaoMember(Member member);

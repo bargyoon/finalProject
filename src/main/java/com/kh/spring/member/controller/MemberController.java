@@ -143,7 +143,37 @@ public class MemberController {
 		return searchId;
 
 	}
-
+	
+	@PostMapping("search-pw")
+	public String searchPwImpl(Member member, Model model) {
+		Member serchPw = memberService.searchPw(member);
+		
+		if(serchPw == null) { 
+			model.addAttribute("check", 1);
+		} else { 
+			model.addAttribute("check", 0);
+			model.addAttribute("userId", serchPw.getUserId());
+			System.out.println(serchPw.getUserId());
+		}
+				
+		return "member/search-pw";
+		
+	}
+	
+	@PostMapping("update-pw")
+	public String updatePwImpl(@RequestParam("userId") String userId, Member member) {
+		//System.out.println("넘어온값 : " + userId);
+		String updateUser = userId;
+		String updateUser2 = updateUser.substring(updateUser.lastIndexOf(",")+1);
+		//System.out.println("자른값 : " +updateUser2);
+		member.setUserId(updateUser2);
+		//System.out.println(member);
+		memberService.updatePw(member);
+		return "member/login";
+	}
+	
+	
+	/*
 	@PostMapping("search-pw")
 	public ModelAndView searchPwImpl(@RequestParam Map<String, Object> member, ModelMap model) throws Exception {
 		ModelAndView mav;
@@ -165,6 +195,7 @@ public class MemberController {
             return mav;
         }
 	}
+	*/
 	
 	@GetMapping("kakaoLogin")
 	public void kakaoLogin(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
