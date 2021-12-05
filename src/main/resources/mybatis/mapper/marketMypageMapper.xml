@@ -6,16 +6,17 @@
   
  	 <!-- 구매내역 orderList -->
 	<select id="selectOrderList" resultType="map">
-  	 	select ORDER_IDX, UC_IDX, USER_IDX, o.order_date, PRD_IDX, PAYMENT_AMOUNT, o.state, ORDER_CNT, SAVE_MONEY, p.name, p.brand, po_name, d.dt_idx
+  	 	select ORDER_IDX, UC_IDX, USER_IDX, o.order_date, PRD_IDX, PAYMENT_AMOUNT, o.state
+  	 	, ORDER_CNT, SAVE_MONEY, IS_REVIEW,p.name, p.brand, po_name, d.dt_idx
 		from "ORDER" o
 		inner join product p USING(PRD_IDX)
 		inner join prd_detail d USING(PRD_IDX)
 		<where>
 		user_idx = #{userIdx} and o.dt_idx=d.dt_idx		
-			<if test="state == 0">
+			<if test="state == null">
 				and o.state is not null
 			</if>	
-			<if test="state != 0">
+			<if test="state != null">
 				 and o.STATE = #{state}
 			</if>
 			<if test="fromDate != null and endDate != null">
@@ -41,7 +42,7 @@
 		inner join product p USING(PRD_IDX)
 		inner join prd_detail d USING(PRD_IDX)
 		<where>
-			USER_IDX = #{userIdx} and is_review=0 and o.dt_idx=d.dt_idx and o.STATE = 4  <!-- state가 4일 때 구매 확정이라면 -->
+			USER_IDX = #{userIdx} and is_review=0 and o.dt_idx=d.dt_idx and o.STATE = 'deleverComplete'  <!-- state가 4일 때 구매 확정이라면 -->
 		<if test="fromDate != null and endDate != null">
 			and ORDER_DATE between TO_DATE(#{fromDate},'YYYY-MM-DD') and TO_DATE(#{endDate},'YYYY-MM-DD')+1
 		</if>
@@ -54,7 +55,7 @@
 		from "ORDER" o
 		inner join product p USING(PRD_IDX)
 		inner join prd_detail d USING(PRD_IDX)
-		where user_idx = #{userIdx} and o.state = 4 and o.order_idx = #{orderIdx} and o.dt_idx=d.dt_idx
+		where user_idx = #{userIdx} <!-- and o.state = 4 --> and o.order_idx = #{orderIdx} and o.dt_idx=d.dt_idx
 	</select>
   	
   	 <select id="selectMyReviewList" resultType="map">
@@ -116,23 +117,22 @@
 		 q.USER_IDX = #{userIdx} and o.dt_idx=d.dt_idx and q.order_idx = o.order_idx
 			<if test="fromDate != null and endDate != null">
 				and q.REG_DATE between TO_DATE(#{fromDate},'YYYY-MM-DD') and TO_DATE(#{endDate},'YYYY-MM-DD')+1
-			</if>
-			
+			</if>			
 		</where>
 		order by q.reg_date desc
 	</select>
 	
 	<select id="selectFAQList" resultType="map">
-  	 	
-  	 	select * from qna    	 	
+	select rownum rnum, q.*
+	from(select * from qna 
 		<where>
-		user_idx=9
-			<if test="type == null">
-				and type is not null
+		user_idx =9 and type=#{type}
+			<if test="keyword == null">
+				)q 
 			</if>	
-			<if test="type != null">
-				 and type=#{type}
-			</if>			
+			<if test="keyword != null">	
+				and title like '%'||#{keyword}||'%')q 			
+			</if>	
 		</where>		
 	</select>
 

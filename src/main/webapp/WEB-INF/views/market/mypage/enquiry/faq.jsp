@@ -54,6 +54,7 @@
 					<li><a href="/market/mypage/cart">장바구니</a></li>
 					<li><a href="#!" style="color: black;">상품문의</a></li>
 					<li><a href="/market/mypage/address-list">주소록 관리</a></li>
+					<li><a href="/market/mypage/enquiry/faq?type=1">FAQ</a></li>
 				</ul>
 			</div>
 		</aside>
@@ -76,12 +77,17 @@
 				</li>
 			</ul>
 			<hr class="mt-0" style="height: 3px; opacity: 1;">
+			
+			<!-- 검색 -->
 			<form id="faq-search" class="mb-3" action="" method="get">
 				<p class="py-3 mb-0" style="font-size: 1rem;">FAQ</p>
-				<input type="text" name="faq_search_value"><a class="btn btn-outline-dark" type="submit" href="#!">검색</a>
+				<input type="text" id="keyword" name="keyword" value="${keyword}">
+				<a class="btn btn-outline-dark" id="btnSearch" 
+				type="submit" href="#!">검색</a>
 			</form>
+			
 			<ul class="faq-nav">
-				<li><a href="/market/mypage/enquiry/faq?type=1">주문/결제</a></li>
+				<li><a class="selected" href="/market/mypage/enquiry/faq?type=1">주문/결제</a></li>
 				<li><a href="/market/mypage/enquiry/faq?type=2">배송</a></li>
 				<li><a href="/market/mypage/enquiry/faq?type=3">교환/환불</a></li>
 				<li><a href="/market/mypage/enquiry/faq?type=4">회원관련</a></li>
@@ -105,10 +111,10 @@
 				<c:forEach var="faqList" items="${faqList}">
 				<tbody>
 					<tr>
-						<td>1</td>
-						<td onclick="openFaq(1)">${faqList.TITLE}</td>
+						<td>${faqList.RNUM}</td>
+						<td onclick="openFaq(${faqList.RNUM})">${faqList.TITLE}</td>
 					</tr>
-					<tr class="faq-answer" id="faq-answer-1">
+					<tr class="faq-answer" id="faq-answer-${faqList.RNUM}">
 						<td>답변</td>
 						<td>
 							<p>${faqList.AW_CONTEXT}</p>
@@ -118,12 +124,25 @@
 				</c:forEach>
 			</table>
 		</div>
+		<%-- <c:url var="getURL" value="/enquiry/enquiry-list"></c:url> --%>
 	</section>
 	
 	<%@ include file="/WEB-INF/views/include/market/footer.jsp"%>
 	<script type="text/javascript" src="${contextPath}/resources/js/market/mypage/faq.js"></script>
+	 <script>
 
-
+		$(document).on('click', '#btnSearch', function(e){
+	
+			e.preventDefault();	
+			/* var url = "${getURL}"; */
+			var url = document.location.href;
+			url = url + "&keyword=" + $('#keyword').val();	
+			location.href = url;	
+			console.log(url);
+	
+		});	
+	
+	</script>
 
 </body>
 </html>

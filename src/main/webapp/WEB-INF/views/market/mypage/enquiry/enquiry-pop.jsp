@@ -39,7 +39,7 @@
 				<tbody>
 				    <c:forEach var="orderList" items="${orderList}">
 				        <tr>
-				        	<td><input type="checkbox" id="orderIdx" name="chk_res" value="${orderList.ORDER_IDX}" /></td>
+				        	<td><input type="radio" id="orderIdx" name="chk_res" value="${orderList.ORDER_IDX}" /></td>
 				        	<td>${orderList.ORDER_IDX}</td>
 				        	<td>${orderList.NAME}</td>		         
 				            <td>${orderList.PO_NAME}</td>

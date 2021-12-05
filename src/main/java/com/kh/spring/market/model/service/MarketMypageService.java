@@ -24,7 +24,7 @@ public interface MarketMypageService {
 	void insertSaveMoney(SaveHistory saveHistory);
 	
 	//OrderList
-	List<Map<String, Object>> selectOrderList(int userIdx, int state,String fromDate, String endDate);
+	List<Map<String, Object>> selectOrderList(int userIdx, String state,String fromDate, String endDate);
 	
 	//reveiwList 구매확정 목록
 	List<Map<String, Object>> selectReviewList(int userIdx, String fromDate, String endDate);
@@ -59,7 +59,7 @@ public interface MarketMypageService {
 	
 	//문의 리스트
 	List<Map<String, Object>> selectEnquiryList(int userIdx, String fromDate, String endDate);
-	List<QNA> selectFAQList(String type);
+	List<QNA> selectFAQList(String type,String keyword);
 	
 	//문의 등록
 	void insertEnquiry(QNA qna);
@@ -71,4 +71,8 @@ public interface MarketMypageService {
 	void deleteAddress(int addressIdx);
 	List<Address> selectAddressList(int userIdx);
 	Address selectAddressDetail(int addressIdx);
+	
+	//좋아요 like
+	int selectisLike(int rvIdx);
+
 }

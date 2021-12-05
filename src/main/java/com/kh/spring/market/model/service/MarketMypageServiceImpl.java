@@ -51,7 +51,7 @@ public class MarketMypageServiceImpl implements MarketMypageService{
 	}
 
 	@Override
-	public List<Map<String, Object>> selectOrderList(int userIdx, int state, String fromDate, String endDate) {
+	public List<Map<String, Object>> selectOrderList(int userIdx, String state, String fromDate, String endDate) {
 		List<Map<String, Object>> orderList = mypageRepository.selectOrderList(userIdx,state,fromDate, endDate);
 		return orderList;
 	}
@@ -151,8 +151,8 @@ public class MarketMypageServiceImpl implements MarketMypageService{
 	}
 	
 	@Override
-	public List<QNA> selectFAQList(String type) {
-		List<QNA> faqList = mypageRepository.selectFAQList(type);
+	public List<QNA> selectFAQList(String type,String keyword) {
+		List<QNA> faqList = mypageRepository.selectFAQList(type,keyword);
 		 return faqList;
 	}
 
@@ -193,7 +193,11 @@ public class MarketMypageServiceImpl implements MarketMypageService{
 		return mypageRepository.selectAddressDetail(addressIdx);
 	}
 
-	
-	
+	@Override
+	public int selectisLike(int rvIdx) {
+		
+		return mypageRepository.selectisLike(rvIdx);
+	}
+
 	
 }

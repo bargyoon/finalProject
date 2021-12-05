@@ -12,3 +12,14 @@ let openFaq = (num) => {
     }
 
 }
+
+let tabBtns = document.querySelector('.faq-nav').children;
+	for (var i = 0; i < tabBtns.length; i++) {
+		let tabBtn = tabBtns[i].children[0];
+		
+		if(tabBtn.href==document.location.href){
+			tabBtn.classList.add('selected');
+		}else{
+			tabBtn.classList.remove('selected');
+		}
+	}

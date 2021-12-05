@@ -54,6 +54,7 @@
 					<li><a href="/market/mypage/cart">장바구니</a></li>
 					<li><a href="#!">상품문의</a></li>
 					<li><a href="/market/mypage/address-list">주소록 관리</a></li>
+					<li><a href="/market/mypage/enquiry/faq?type=1">FAQ</a></li>
 				</ul>
 			</div>
 		</aside>
