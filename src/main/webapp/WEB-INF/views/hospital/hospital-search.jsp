@@ -3,10 +3,13 @@
     <!DOCTYPE html>
 <html>
 <head>
+
 <meta charset="UTF-8">
-<title>Insert title here</title>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+
+<c:set var="contextPath" value="${pageContext.request.contextPath}" />
+
 <script type="text/javascript" src="${contextPath}/resources/js/hospital/jquery.js"></script>
 <script type="text/javascript" src="${contextPath}/resources/js/hospital/hospital_adress.js"></script>
  <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
@@ -18,25 +21,90 @@
 
 <!-- 합쳐지고 최소화된 최신 자바스크립트 -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-<link rel='stylesheet' href="${contextPath}/resources/css/all.css">
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/proj4js/1.1.0/proj4js-combined.min.js"></script>
 
 <style type="text/css">
 
+/* 폰트 어그로 */
+@font-face {
+    font-family: 'SBAggroB';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/SBAggroB.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'SBAggroL';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/SBAggroL.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'SBAggroM';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/SBAggroM.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* google noto sans */
+
+@font-face {
+font-family: 'NotoKrL';
+font-style: normal;
+font-weight: 100;
+src: local('Noto Sans Light'), local('NotoSans-Light'), url(/fonts/NotoSans-Light.eot);
+src: url(/fonts/NotoSans-Light.eot?#iefix) format('embedded-opentype'),
+url(/fonts/NotoSans-Light.woff2) format('woff2'),
+url(/fonts/NotoSans-Light.woff) format('woff');;
+}
+@font-face {
+font-family: 'NotoKrR';
+font-style: normal;
+font-weight: 300;
+src: local('Noto Sans Regular'), local('NotoSans-Regular'), url(/fonts/NotoSans-Regular.eot);
+src: url(/fonts/NotoSans-Regular.eot?#iefix) format('embedded-opentype'),
+url(/fonts/NotoSans-Regular.woff2) format('woff2'),
+url(/fonts/NotoSans-Regular.woff) format('woff');
+}
+@font-face {
+font-family: 'NotoKrM';
+font-style: normal;
+font-weight: 500;
+src: local('Noto Sans Medium'), local('NotoSans-Medium'), url(/fonts/NotoSans-Medium.eot);
+src: url(/fonts/NotoSans-Medium.eot?#iefix) format('embedded-opentype'),
+url(/fonts/NotoSans-Medium.woff2) format('woff2'),
+url(/fonts/NotoSans-Medium.woff) format('woff');
+}
+@font-face {
+font-family: 'NotoKrB';
+font-style: normal;
+font-weight: 700;
+src: local('Noto Sans Bold'), local('NotoSans-Bold'), url(/fonts/NotoSans-Bold.eot);
+src: url(/fonts/NotoSans-Bold.eot?#iefix) format('embedded-opentype'),
+url(/fonts/NotoSans-Bold.woff2) format('woff2'),
+url(/fonts/NotoSans-Bold.woff) format('woff');
+}
+
+
+
 	.name_section{
-    height: 150px;
+	background-color: rgb(240, 234, 213);
+       height: 250px;
 	}
   .main1{
     height: 50px;
-    margin: 100px 0px 0px 0px; 
+    margin: 0px 0px 0px 0px; 
   }
   .main_name{
     font-size: 25px;
     height:65%;
     text-align: center;
+    font-family: 'SBAggroL';
   }
 	.body_section{
-    height: 2000px;
+	background-color: rgb(240, 234, 213);
+    height: 2500px;
     position:relative;
 	}
   .main2{
@@ -45,6 +113,8 @@
     position: absolute;
     left:50%;
     transform: translate(-50%,-30%);
+    font-family: 'SBAggroL';
+    
   }
   .search{
     height:150px;
@@ -70,18 +140,19 @@
     position: absolute;
   left:50%;
   transform: translate(-50%,10%);
+  font-family: 'SBAggroB';
   }
   #main_map{
-    width:1300px;
+    width:1000px;
     height:700px;
-    border:3px solid #F6E3CE;
-    border-radius: 28px;
+    border:3px solid white;
   }
   .main4{
     height: 1300px;
     position: absolute;
   	left:50%;
   	transform: translate(-50%,66%);
+  	font-family: 'SBAggroL';
   }
   .resultBlock{
   	display: flex;
@@ -91,11 +162,9 @@
   }
   .resultText{
   	margin-left:20px;
-  	margin-top:20px;
   	padding:30px;
   	width:910px;
-    border:3px solid #F6E3CE;
-    border-radius: 28px;
+    border:3px solid white;
     overflow:auto; 
         -ms-overflow-style: none; /* IE and Edge */
     scrollbar-width: none; /* Firefox */
@@ -104,7 +173,7 @@
  width: 8px;
 }
 .resultText::-webkit-scrollbar-thumb {
-    background-color: #F3E2A9; /*스크롤바의 색상*/
+    background-color: white; /*스크롤바의 색상*/
 }
 
 
@@ -124,6 +193,7 @@
     font-size: 15px;
     color: #000;
     outline:none;
+    	font-family: 'SBAggroL';
 }
 .bo_w_select1:hover {border: 1px solid #aaa;} /* 마우스오버 */
 
@@ -141,6 +211,7 @@
     font-size: 15px;
     color: #000;
     outline:none;
+    	font-family: 'SBAggroL';
 }
 .bo_w_select2:hover {border: 1px solid #aaa;} /* 마우스오버 */
 
@@ -149,7 +220,7 @@
     padding: 10px; /* 내부여백 */
     padding-left: 12px;
     border: 1px solid #ddd;
-    background-color:  rgb(240, 234, 213);
+    background-color: white;
     border-radius: 4px;
     box-sizing: border-box;
     -webkit-appearance: none;
@@ -158,7 +229,8 @@
     font-size: 15px;
     color: #000;
     outline:none;
-    margin-left: 1000px;
+    margin-left: 700px;
+    	font-family: 'SBAggroL';
 }
 .myGeo:hover {border: 1px solid #aaa;} /* 마우스오버 */
 
@@ -170,12 +242,61 @@
 
 </style>
 
-
-
+<%@ include file="/WEB-INF/views/include/head.jsp" %>
 </head>
 <body>
-  <section >
-    <div class="name_section">
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
+            <div class="container" style="padding:1.5rem;">
+                <a class="navbar-brand" href="/"><img src="/resources/assets/img/site-logo-and-name.png" alt="..." style="width:280px;height:48px"/></a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                    Menu
+                    <i class="fas fa-bars ms-1"></i>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0"><hr>
+                       <li class="nav-item"><a class="nav-link" href="#"  style="font-size: 1.5rem;">병원/시설</a>
+	                        	<ul class="navbar-detail" ><hr>
+		                        	<li><a href=#  style="font-size: 1.5rem;">동물병원</a>
+	                        		<li><a href=#  style="font-size: 1.5rem;">편의시설검색</a>
+	                        	</ul>
+	                        </li>	
+	                        <li class="nav-item"><a class="nav-link" href="/disease/index"  style="font-size: 1.5rem;">수술비용</a></li>
+	                        <li class="nav-item"><a class="nav-link" href="/petcare/vaccine/dog"  style="font-size: 1.5rem;">펫케어</a>
+	                       		<ul class="navbar-detail"><hr>
+		                        	<li><a href="/petcare/vaccine/dog"  style="font-size: 1.5rem;">예방접종</a>
+	                        		<li><a href="/petcare/food"  style="font-size: 1.5rem;">금지음식</a>
+	                        		<li><a href="/petcare/action/dog/eyes"  style="font-size: 1.5rem;">행동의미</a>
+	                        	</ul>
+	                        </li>
+	                        <li class="nav-item"><a class="nav-link" href="/board/info"  style="font-size: 1.5rem;">게시판</a>
+	                        	<ul class="navbar-detail"><hr>
+		                        	<li><a href=#  style="font-size: 1.5rem;">정보게시판</a>
+	                        		<li><a href=#  style="font-size: 1.5rem;">고양이</a>
+	                        		<li><a href=#  style="font-size: 1.5rem;">강아지</a>
+	                        		<li><a href=#  style="font-size: 1.5rem;">후기</a>
+	                        		<li><a href=#  style="font-size: 1.5rem;">모임게시판</a>
+	                        		<li><a href=#  style="font-size: 1.5rem;">상담게시판</a>
+	                        	</ul>
+							</li>
+	                        <li class="nav-item"><a class="nav-link" href="/market"  style="font-size: 1.5rem;">마켓</a></li>
+	                        <c:if test="${empty authentication}">
+								<li class="nav-item"><a class="nav-link" href="/member/login"  style="font-size: 1.5rem;">로그인</a></li><hr>
+							</c:if>
+							<c:if test="${not empty authentication}">
+								<li class="nav-item"><a class="nav-link" href="/mypage/my-info"  style="font-size: 1.5rem;">마이페이지</a>
+									<ul class="navbar-detail"><hr>
+									<li><a href="/mypage/my-info"  style="font-size: 1.5rem;">마이페이지</a>
+		                        	<li><a href="/member/logout"  style="font-size: 1.5rem;">로그아웃</a>
+		                        	</ul>
+								</li><hr>
+							</c:if> 
+					</ul>
+                </div>
+            </div>
+        </nav>
+  <section style="padding:0px;" >
+  
+    <div class="name_section" >
       <div class="main1">
         <div class="main_name" >병원/편의시설 검색</div>
       </div>
@@ -218,34 +339,33 @@
             <span class="myGeo" >현재위치</span>
             <div id="main_map"></div>
            	  <div class="nameMarker">
-                <label>동물병원<img src="/resources/img/map-pin-red2.png" style="width:40px; height:50px"/></label>
-                <label>약국<img src="/resources/img/map-pin-green.png"/></label>
-                <label>편의시설<img src="/resources/img/map-pin-pink.png"/>  </label>
+                <label>동물병원<img src="/resources/img/hospital/map-pin-red2.png" style="width:32px; height:38px"/></label>
+                <label>약국<img src="/resources/img/hospital/map-pin-green.png"/></label>
+                <label>편의시설<img src="/resources/img/hospital/map-pin-pink.png"/></label>
               </div>
         </div>
-        <hr>
         <div class="main4">
             <div class="search_result">
             <br>
             <br>
            <div class="resultContainer">
 	           <section class="resultBlock" >
-	           		<img src="/resources/img/map-premium-ban-hospital.jpg" style="border-radius: 28px;">
-	           		<div class="resultText" >
+	           		<img src="/resources/img/hospital/my2.png">
+	           		<div class="resultText" style=" height:340px">
 	           			<ul class="resultLists" id="hosUL">
 	           			</ul>
 	           		</div>
 	           </section>
 	           <section class="resultBlock">
-	           		<img src="/resources/img/map-premium-ban-pharmacy.jpg" style="border-radius: 28px;">
-	           		<div class="resultText" >
+	           		<img src="/resources/img/hospital/my3.png">
+	           		<div class="resultText" style=" height:340px">
 	           			<ul class="resultLists" id="pharUL">
 	           			</ul>
 	           		</div>
 	           </section>
 	           <section class="resultBlock">
-	           		<img src="/resources/img/ham.png"  style="border-radius: 28px;">
-	           		<div class="resultText" >
+	           		<img src="/resources/img/hospital/my1.png" >
+	           		<div class="resultText" style="height:340px" >
 	           			<ul class="resultLists" id="toyUL">
 	           			</ul>
 	           		</div>
