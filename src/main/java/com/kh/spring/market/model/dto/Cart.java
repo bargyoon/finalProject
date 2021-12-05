@@ -11,5 +11,6 @@ public class Cart {
 	private int prdIdx;
 	private int count; //상품개수
 	private Date regDate;
-	
+	private int cartIdx;
+	private int dtIdx;
 }

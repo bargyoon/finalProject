@@ -129,7 +129,7 @@
 									<div class="slick_test3">
 									<c:forEach var="files" items="${files}">
 										<div class="px-4 px-lg-5 my-5">
-											<img class="container" src="/upload/${files.savePath}${files.renameFileName}" style="max-height: 20rem; max-width: 20rem;">
+											<img class="container" src="${myReviewList.downloadURL}" style="max-height: 20rem; max-width: 20rem;">
 										</div>
 										<div class="px-4 px-lg-5 my-5">
 											<img src="https://dummyimage.com/400x550/dee2e6/6c757d.jpg" style="max-height: 20rem; max-width: 20rem;">

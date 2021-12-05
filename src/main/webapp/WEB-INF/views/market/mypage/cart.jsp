@@ -3,6 +3,7 @@
 <html>
 <head>
 <%@ include file="/WEB-INF/views/include/market/mypage-head.jsp"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 </head>
 <body onscroll="checkHeight()">
@@ -20,12 +21,10 @@
 				<div class="px-4 px-lg-5 my-3">
 					<div>
 						<div class="mt-4" style="display: flex; flex-direction: column;">
-							<h1 class="display-4 fw-bolder">닉네임</h1>
+							<h1 class="display-4 fw-bolder">${memberInfo.nickName}</h1>
 							<div style="display: flex;">
-								<h1 class="display-7 fw-bolder">회원등급</h1>
-								<p class="px-lg-2 pt-1" style="color: lightgray;">가입일 : 2021.4.26</p>
-							</div>
-							<a class="fw-normal btn-" href="#!" style="text-decoration: none;">등급별 혜택 확인 <i class="fas fa-chevron-right"></i></a>
+								<p class="px-lg-2 pt-1" style="color: lightgray;">가입일 : ${memberInfo.joinDate}</p>
+							</div>							
 						</div>
 					</div>
 				</div>
@@ -34,12 +33,12 @@
 				<div class="mt-5" style="display: flex; flex-direction: column;">
 					<i class="fas fa-coins py-2" style="font-size: 1.5rem;"></i>
 					<p class="fw-normal mt-2">적립금</p>
-					<p style="font-size: 1.3rem;">10,000</p>
+					<p style="font-size: 1.3rem;">${memberInfo.saveMoney}</p>
 				</div>
 				<div class="mt-5" style="display: flex; flex-direction: column;">
 					<i class="fas fa-ticket-alt py-2" style="font-size: 1.5rem"></i>
 					<p class="fw-normal mt-2">쿠폰</p>
-					<p style="font-size: 1.3rem;">3장</p>
+					<p style="font-size: 1.3rem;">${couponCnt}장</p>
 				</div>
 			</div>
 		</div>
@@ -70,7 +69,7 @@
 				<li>장바구니 상품은 최대 1년 보관(비회원 2일)되며 담은 시점과 현재의 판매 가격이 달라질 수 있습니다.</li>
 				<li>장바구니에는 최대 100개의 상품을 보관할 수 있으며, 주문당 한번에 주문 가능한 상품수는 100개로 제한됩니다.</li>
 			</ul>
-			<form>
+			<form name="form">
 				<table class="n-table table-col">
 					<colgroup>
 						<col width="5%">
@@ -85,10 +84,11 @@
 					</colgroup>
 					<thead>
 						<tr>
-							<th scope="col">전체 <strong>1</strong> 개
+							<th scope="col">전체 <strong>${cartCnt}</strong> 개
 							</th>
-							<th scope="col" style="cursor: pointer"><input
-								type="checkbox" class="chk_all" id="chk_all" checked=""></th>
+							<th scope="col" style="cursor: pointer">
+								<input type="checkbox" class="chk_all" id="chk_all" checked="checked">
+							</th>
 							<th scope="col">상품명(옵션)</th>
 							<th scope="col">판매가</th>
 							<th scope="col">등급 할인</th>
@@ -99,86 +99,90 @@
 							<th scope="col">배송비</th>
 						</tr>
 					</thead>
+					<c:if test="${cartCnt eq 0}" >
+						<p style="font-weight: bold;">! 장바구니에 담긴 상품이 없습니다.</p>
+					</c:if>
+					
+					<c:if test="${cartCnt ne 0}">
+					<c:forEach var="cartList" items="${cartList}">
 					<tbody>
 						<tr>
-							<td>1</td>
-							<td><input type="checkbox" class="checked_cart" name="cart_no" value="589117569" checked="checked"></td>
+							<td>${cartList.RNUM}</td>
+							<td><input type="checkbox" class="checked_cart" name="cartIdx" value="${cartList.CART_IDX}" checked="checked"></td>
 							<td>
 								<div class="n-prd-row">
 									<a href="#!"><img src="https://dummyimage.com/80x100/dee2e6/6c757d.jpg"></a>
 									<ul class="cart-info">
-										<li class="name ft-SBAggroM"><a href="#!"style="text-decoration: none; color: black;">[브랜드]제품명</a></li>
-										<li class="option">옵션 / 재고수량</li>
+										<li class="name ft-SBAggroM">
+											<a href="#!"style="text-decoration: none; color: black;">
+											[${cartList.BRAND}] ${cartList.NAME}
+											<span style="color: red;"><c:if test="${cartList.PO_STOCK eq 0}"> (품절)</c:if></span>
+											</a>
+										</li>
+										<c:if test="${cartList.PO_NAME eq null}">
+											<li class="option">(재고수량 : ${cartList.PO_STOCK}개)</li>
+										</c:if>
+										<c:if test="${cartList.PO_NAME ne null}">
+											<li class="option">${cartList.PO_NAME} / (재고수량 : ${cartList.PO_STOCK}개)</li>
+										</c:if>
 									</ul>
 								</div>
 							</td>
 							<td>
 								<ul class="prd-price">
-									<li class="sale-price"><del>70,000</del></li>
-									<li class="normal-price">50,000</li>
+								<c:if test="${cartList.STATE ne 'sale'}">
+									<li class="normal-price">
+										<fmt:formatNumber value="${cartList.PRICE}" type="number" pattern=""></fmt:formatNumber>
+									</li>
+								</c:if>
+									
+								<c:if test="${cartList.STATE eq 'sale'}">
+								<li class="normal-price">
+									<del><fmt:formatNumber value="${cartList.PRICE}" type="number" pattern=""></fmt:formatNumber></del>
+								</li>								
+								<li class="sale-price">
+									<fmt:formatNumber value="${cartList.SALE_PRICE}" type="number" pattern=""></fmt:formatNumber>
+								</li>
+								</c:if>
 								</ul>
 							</td>
 							<td>0</td>
+							
+							<!-- 수량 -->
 							<td>
 								<div class="cart-prd-amount">
-									<button type="button" class="prd-reduce-btn" onclick="">-1</button>
-									<input name="prd-cnt" type="text" onkeyup="" autocomplete="off" onfocus="this.select();" value="1" onchange="">
-									<button type="button" class="prd-increase-btn " onclick="">+1</button>
+									<button type="button" class="prd-reduce-btn" onclick="count('minus')">-1</button>
+									<input id="cnt-${cartList.CART_IDX}" name="prd-cnt" type="text" onkeyup='printName()' autocomplete="off" onfocus="this.select();" 
+											value="${cartList.COUNT}" onchange="">
+									<button type="button" class="prd-increase-btn " onclick="count('plus')">+1</button>
 								</div>
 							</td>
 							<td>
+							
+							<!-- 주문금액 -->							
 								<ul class="prd-price">
-									<li>50,000</li>
-									<li>(1,500)</li>
+								<c:if test="${cartList.STATE ne 'sale'}">
+									<li id="price" value="${cartList.PRICE*cartList.COUNT}"></li>
+									(<li id="reserve" value="${cartList.PRICE*cartList.COUNT*0.03}"></li>)
+								</c:if>
+								<c:if test="${cartList.STATE eq 'sale'}">
+									<li id="price" value="${cartList.SALE_PRICE*cartList.COUNT}"></li>
+									(<li id="reserve" value="${cartList.SALE_PRICE*cartList.COUNT*0.03}"></li>)
+								</c:if>
 								</ul>
 							</td>
 							<td>
-								<button type="button" class="cart-del-btn">삭제하기</button>
-							</td>
-							<td>3,000</td>
-						</tr>
-						<tr>
-							<td>2</td>
-							<td><input type="checkbox" class="checked_cart" name="cart_no" value="589117569" checked="checked"></td>
-							<td>
-								<div class="n-prd-row">
-									<a href="#!"><img src="https://dummyimage.com/80x100/dee2e6/6c757d.jpg"></a>
-									<ul class="cart-info">
-										<li class="name ft-SBAggroM"><a href="#!" style="text-decoration: none; color: black;">[브랜드]제품명</a></li>
-										<li class="option">옵션 / 재고수량</li>
-									</ul>
-								</div>
-							</td>
-							<td>
-								<ul class="prd-price">
-									<li class="sale-price"><del>50,000</del></li>
-									<li class="normal-price">30,000</li>
-								</ul>
-							</td>
-							<td>0</td>
-							<td>
-								<div class="cart-prd-amount">
-									<button type="button" class="prd-reduce-btn" onclick="">-1</button>
-									<input name="prd-cnt" type="text" onkeyup="" autocomplete="off" onfocus="this.select();" value="1" onchange="">
-									<button type="button" class="prd-increase-btn " onclick="">+1</button>
-								</div>
-							</td>
-							<td>
-								<ul class="prd-price">
-									<li>30,000</li>
-									<li>(900)</li>
-								</ul>
-							</td>
-							<td>
-								<button type="button" class="cart-del-btn">삭제하기</button>
+								<button type="button" class="cart-del-btn" onclick="deleteCart()">삭제하기</button>
 							</td>
 							<td>3,000</td>
 						</tr>
 					</tbody>
+					</c:forEach>
+					</c:if>
 				</table>
 				<div class="cart-del py-3">
-					<button type="button" onclick="">모두삭제</button>
-					<button type="button" onclick="">선택삭제</button>
+					<button type="button" onclick="AllDelete()">모두삭제</button>
+					<button type="button" onclick="selectDelete()">선택삭제</button>
 				</div>
 				<div class="cart-discount-info">
 					<p>할인 금액</p>
@@ -236,11 +240,148 @@
 					</div>
 				</div>
 				<button class="cart-buy-btn">구매하기</button>
+				<button id="check_module" type="button">아임 서포트 결제 모듈 테스트 해보기</button>
+
 			</form>
 		</div>
 	</section>
 	
 	<%@ include file="/WEB-INF/views/include/market/footer.jsp"%>
+<script type="text/javascript" src="https://service.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+
+
+<script>
+//상품 개수 증감 버튼 ****작업중
+function count(type){
+	 var cartIdx = document.getElementsByName("cartIdx");
+	 var cnt  = document.getElementById('cnt-'+cartIdx);
+	 var number = cnt.value;
+	 
+	 var price = document.getElementById('price').value;
+	 var reserve = document.getElementById('reserve').value;
+	 console.dir(price);
+	 console.dir(reserve);
+	 
+	if(type=='plus'){
+		number = parseInt(number)+1;
+		
+	}else if(type == 'minus'){
+		if(number<2){
+			alert('수량은 한 개 이상 선택해주세요.');
+			return false;
+		}
+		number = parseInt(number)-1;
+	}
+	cnt.value = number;
+}
+
+
+
+/* checkbox 설정 */
+$(".chk_all").click(function(){
+ var chk = $(".chk_all").prop("checked");
+ if(chk) {
+  $("input:checkbox[name='cartIdx']").prop("checked", true);
+ } else {
+  $("input:checkbox[name='cartIdx']").prop("checked", false);
+ }
+});
+$("input:checkbox[name='cartIdx']").click(function(){
+	  $(".chk_all").prop("checked", false);
+	 });
+
+/* selectbox 상품개별삭제 */
+function selectDelete() {
+	 var url = "cart/delete";
+	 var selectedArr = new Array();
+	 var cartIdx = document.getElementsByName("cartIdx"); //
+	 console.dir("cartIdx : " + cartIdx);
+
+	  for (var i = 0; i < cartIdx.length; i++) {
+	   if (cartIdx[i].checked) {
+		   console.dir(cartIdx[i]);
+		   selectedArr.push(cartIdx[i].value);
+		   console.dir("selectedArr : " + selectedArr);
+	   }
+	  }
+	
+	 if (selectedArr.length == 0) {
+		 alert("삭제하실 항목을 적어도 하나는 체크해 주세요.");
+	 } else {
+	  	$.ajax({
+	  		url : url,
+	  		type : 'POST',
+	  		traditional : true,
+	  		data : {
+	  			selectedArr : selectedArr
+	  		},
+	  		success : function(jdata){
+	  			if(jdata = 1){
+	  				location.replace("cart")
+	  			}else{
+	  				alert("삭제 실패");
+	  			}
+	  		}
+	  	});
+	 }
+	}
+
+//상품 삭제 버튼
+function deleteCart(){
+	var cartIdx = document.getElementsByName("cartIdx");
+	form.action = "cart/delete?cartIdx="+cartIdx;
+	form.submit();
+} 
+
+//모두 삭제
+function AllDelete(){
+	form.action = "cart/deleteAll";
+	form.submit();
+}
+
+</script>
+
+
+
+
+<script>
+    $("#check_module").click(function () {
+        var IMP = window.IMP; // 생략가능
+        IMP.init('imp88593867'); //가맹점 식별코드
+
+        IMP.request_pay({
+            pg: 'html5_inicis',       
+            pay_method: 'card',           
+            merchant_uid: 'merchant_' + new Date().getTime(),          
+            name: '상품이름(테스트)',//결제창에서 보여질 이름
+            amount: 10,  //가격 
+            buyer_email: 'iamport@siot.do',
+            buyer_name: '구매자이름',
+            buyer_tel: '010-1234-5678',
+            buyer_addr: '서울특별시 강남구 삼성동',
+            buyer_postcode: '123-456',
+            m_redirect_url: 'https://www.yourdomain.com/payments/complete'
+            /*  
+                모바일 결제시,
+                결제가 끝나고 랜딩되는 URL을 지정 
+                (카카오페이, 페이코, 다날의 경우는 필요없음. PC와 마찬가지로 callback함수로 결과가 떨어짐) 
+                */
+        }, function (rsp) { //callback
+            console.log(rsp);
+            if (rsp.success) {
+                var msg = '결제가 완료되었습니다.';
+                msg += '고유ID : ' + rsp.imp_uid;
+                msg += '상점 거래ID : ' + rsp.merchant_uid;
+                msg += '결제 금액 : ' + rsp.paid_amount;
+                msg += '카드 승인번호 : ' + rsp.apply_num;
+            } else {
+                var msg = '결제에 실패하였습니다.';
+                msg += '에러내용 : ' + rsp.error_msg;
+            }
+            alert(msg);
+        });
+    });
+</script>
 
 
 

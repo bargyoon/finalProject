@@ -94,10 +94,18 @@ public class MarketMypageServiceImpl implements MarketMypageService{
 	}
 
 	@Override
-	public List<Map<String, Object>> selectMyReviewList(int userIdx, String state) {
+	public List<Map<String, Object>> selectMyReviewList(Map<String, Object> commandMap) {
 		
-		List<Map<String, Object>> myReviewList = mypageRepository.selectMyReviewList(userIdx, state);
-		return myReviewList;
+		List<Map<String, Object>> commandList = mypageRepository.selectMyReviewList(commandMap);
+		
+		for (Map<String, Object> map : commandList) {
+			FileDTO files = new FileDTO();
+			files.setSavePath((String) map.get("SAVE_PATH"));
+			files.setRenameFileName((String) map.get("RENAME_FILE_NAME"));
+			map.put("downloadURL", files.getDownloadURL());
+		}
+		
+		return commandList;
 	}
 	
 	@Override
@@ -197,6 +205,25 @@ public class MarketMypageServiceImpl implements MarketMypageService{
 	public int selectisLike(int rvIdx) {
 		
 		return mypageRepository.selectisLike(rvIdx);
+	}
+
+	@Override
+	public List<Map<String, Object>> selectCartList(int userIdx) {
+		return mypageRepository.selectCartList(userIdx);
+	}
+
+	@Override
+	public int selectCartCnt(int userIdx) {
+		return mypageRepository.selectCartCnt(userIdx);
+	}
+
+	@Override
+	public void deleteCart(int cartIdx) {
+		mypageRepository.deleteCart(cartIdx);		
+	}
+	@Override
+	public void deleteAllCart(int userIdx) {
+		mypageRepository.deleteAllCart(userIdx);		
 	}
 
 	

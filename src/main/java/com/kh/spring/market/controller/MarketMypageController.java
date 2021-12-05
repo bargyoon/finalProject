@@ -1,6 +1,8 @@
 package com.kh.spring.market.controller;
 
 
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -72,7 +74,39 @@ public class MarketMypageController {
 	}
 
 	@GetMapping("cart")
-	public void cart() {}
+	public void cart(@SessionAttribute(name="authentication")Member certifiedUser,
+					Model model) {
+		
+		int member = certifiedUser.getUserIdx();
+		Member memberInfo = marketMypageService.selectMemberInfo(member);
+		List<Map<String, Object>> cartList = marketMypageService.selectCartList(member);
+		int couponCnt = marketMypageService.selectCouponCount(member);
+		int cartCnt = marketMypageService.selectCartCnt(member);
+		
+		model.addAttribute("cartList", cartList);
+		model.addAttribute("memberInfo", memberInfo);
+		model.addAttribute("couponCnt", couponCnt);
+		model.addAttribute("cartCnt", cartCnt);
+		
+		System.out.println("cartList : " + cartList);
+				
+	}
+	
+	@PostMapping("cart/delete")
+	public String deleteCart(@RequestParam("selectedArr")int[] selectedArr) {		
+		
+		for(int i = 0; i<selectedArr.length; i++) {
+			marketMypageService.deleteCart(selectedArr[i]);
+		}
+		
+		return "redirect:/market/mypage/cart"; 
+	}
+	
+	@GetMapping("cart/deleteAll")
+	public String deleteAllCart(@SessionAttribute(name="authentication")Member certifiedUser) {		
+		marketMypageService.deleteAllCart(certifiedUser.getUserIdx());
+		return "redirect:/market/mypage/cart"; 
+	}
 
 	@GetMapping("address-list")
 	public void addressList(@SessionAttribute(name="authentication")Member certifiedUser,
@@ -206,7 +240,7 @@ public class MarketMypageController {
 		Member memberInfo = marketMypageService.selectMemberInfo(member);
 		int couponCnt = marketMypageService.selectCouponCount(member);
 		List<QNA> faqList = marketMypageService.selectFAQList(type,keyword);
-		
+		System.out.println("keyword : " + keyword);
 		model.addAttribute("keyword", keyword);
 		model.addAttribute("memberInfo", memberInfo);
 		model.addAttribute("couponCnt", couponCnt);	
@@ -276,18 +310,22 @@ public class MarketMypageController {
 							Model model,
 							Review review) {
 		
-		int member = certifiedUser.getUserIdx();
+		int userIdx = certifiedUser.getUserIdx();
 		String state = review.getState();
 		System.out.println("state : " +  review.getState());
-		List<Map<String, Object>> myReviewList = marketMypageService.selectMyReviewList(member, state);
-		List<FileDTO> files = marketMypageService.selectFileList(member);
-		Member memberInfo = marketMypageService.selectMemberInfo(member);
-		int couponCnt = marketMypageService.selectCouponCount(member);
+		
+		Map<String, Object> commandMap = new HashMap<String, Object>();
+		commandMap.put("userIdx", userIdx);
+		commandMap.put("state", state);
+		
+		List<Map<String, Object>> myReviewList = marketMypageService.selectMyReviewList(commandMap);
+	
+		Member memberInfo = marketMypageService.selectMemberInfo(userIdx);
+		int couponCnt = marketMypageService.selectCouponCount(userIdx);
 		
 		System.out.println("myReviewList : " + myReviewList);
 		
 		model.addAttribute("myReviewList", myReviewList);
-		model.addAttribute("files", files);
 		model.addAttribute("memberInfo", memberInfo);
 		model.addAttribute("couponCnt", couponCnt);
 	}
@@ -299,16 +337,17 @@ public class MarketMypageController {
 							,@SessionAttribute("authentication")Member certifiedUser
 							,@PathVariable int orderIdx) {
 		
+		int memeber= certifiedUser.getUserIdx();
 		System.out.println("files : " + files);
 		System.out.println("orderIdx : " + orderIdx);
 		
-		review.setUserIdx(certifiedUser.getUserIdx());
-		saveHistory.setUserIdx(certifiedUser.getUserIdx());
+		review.setUserIdx(memeber);
+		saveHistory.setUserIdx(memeber);
 		
 		if(files == null) { //일반후기
 			review.setType("0"); 
-			saveHistory.setState("0");
-			saveHistory.setType("1");
+			saveHistory.setState("0"); 
+			saveHistory.setType("1"); 
 		}else {				 //사진후기
 			review.setType("1"); 
 			saveHistory.setState("0");

@@ -46,7 +46,7 @@ public interface MarketMypageService {
 	void updatePrdIdx(int orderIdx);
 	
 	//reviewList 작성한 리뷰 목록
-	List<Map<String, Object>> selectMyReviewList(int userIdx, String state);
+	List<Map<String, Object>> selectMyReviewList(Map<String, Object> commandMap);
 	
 	//fileList
 	List<FileDTO> selectFileList(int userIdx);
@@ -74,5 +74,11 @@ public interface MarketMypageService {
 	
 	//좋아요 like
 	int selectisLike(int rvIdx);
+	
+	//장바구니
+	List<Map<String, Object>> selectCartList(int userIdx);
+	int selectCartCnt(int userIdx);
+	void deleteCart(int cartIdx);
+	void deleteAllCart(int userIdx);
 
 }

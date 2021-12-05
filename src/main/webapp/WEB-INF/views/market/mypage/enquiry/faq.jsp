@@ -83,7 +83,8 @@
 				<p class="py-3 mb-0" style="font-size: 1rem;">FAQ</p>
 				<input type="text" id="keyword" name="keyword" value="${keyword}">
 				<a class="btn btn-outline-dark" id="btnSearch" 
-				type="submit" href="#!">검색</a>
+				type="submit" href="">검색</a>
+				
 			</form>
 			
 			<ul class="faq-nav">
@@ -129,20 +130,23 @@
 	
 	<%@ include file="/WEB-INF/views/include/market/footer.jsp"%>
 	<script type="text/javascript" src="${contextPath}/resources/js/market/mypage/faq.js"></script>
-	 <script>
-
+	 <script>	
+		
 		$(document).on('click', '#btnSearch', function(e){
-	
+			
 			e.preventDefault();	
-			/* var url = "${getURL}"; */
+			
 			var url = document.location.href;
+			var urlArr = url.split('&');
+			url = urlArr[0];
 			url = url + "&keyword=" + $('#keyword').val();	
 			location.href = url;	
 			console.log(url);
 	
 		});	
 	
-	</script>
+		
+		</script> 
 
 </body>
 </html>
