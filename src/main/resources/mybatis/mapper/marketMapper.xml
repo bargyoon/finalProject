@@ -154,32 +154,6 @@
 		"USER".USER_IDX)
 		join prd_detail pd on(rv.dt_idx = pd.dt_idx)
 		where rv.prd_idx = #{prdIdx}
-  	</select>
-  	
-  	<select id="selectCouponByUserIdx" resultType="Coupon">
-	  	select coupon_idx, uc_idx, user_idx, name, sale_per, type, coupon.exp_date exp_date ,user_coupon.exp_date uc_exp_date, reg_date, user_coupon.is_del
-		from coupon
-		join user_coupon using(coupon_idx)
-		where user_idx = #{userIdx}
-	</select>
-	
-  	<select id="selectOrderList" resultType="map">
-  		select dt_idx, count(dt_idx) cnt
-  		from "ORDER" group by dt_idx
-  	</select>
-  	
-  	<select id="selectOrderSpec" resultType="map">
-  		select o.dt_idx,  o.user_idx, o.prd_idx, o.payment_method,  o.payment_amount, o.order_date, o.state, o.order_cnt , f.save_path, f.rename_file_name
-  		from "ORDER" o join file_info f on(o.prd_idx = f.type_idx)
-  		where dt_idx = #{dtIdx}
-  	</select>
-  	
-  	<select id="selectPrdListCnt" resultType="java.lang.Integer">
-  	select count(*) from(
-  	select p.prd_idx, p.name, p.brand, p.category, p.reg_date,d.po_name, d.po_stock, d.sale_price, d.price, d.state, d.dt_idx
-		,f.save_path, max(f.rename_file_name) RENAME_FILE_NAME from product p join prd_detail d on(p.prd_idx = d.prd_idx) 
-		join file_info f on (f.type_idx = p.prd_idx) 
-		
 	</select>
 
 	<select id="selectOrderList" resultType="map">
