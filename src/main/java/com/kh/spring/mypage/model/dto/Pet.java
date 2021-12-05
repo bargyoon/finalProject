@@ -6,9 +6,9 @@ import lombok.Data;
 public class Pet {
 	
 	private int petIdx;
-	private String name;
+	private String petName;
 	private String gender;
 	private String species;
-	private int age;
+	private int petAge;
 	private int userIdx;
 }

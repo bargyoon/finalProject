@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -79,7 +81,7 @@ public class MypageController {
 	
 	@PostMapping("update-member-info")
 	public String updateMember(
-			@SessionAttribute(name = "authentication")Member certifiedUser, Model model, 
+			@SessionAttribute(name = "authentication")Member certifiedUser, Model model, HttpSession session,
 			@Validated UpdateMemberForm form, Errors errors, RedirectAttributes redirectAttr
 			) {
 		if(errors.hasErrors()) {
@@ -93,6 +95,9 @@ public class MypageController {
 		form.setUserIdx(userIdx);
 		
 		mypageService.updateMemberDynamicQuery(form);
+		
+		Member updatedMember = mypageService.selectMember(userIdx);
+		session.setAttribute("authentication", updatedMember);
 		redirectAttr.addFlashAttribute("message", "회원정보가 수정되었습니다.");
 		
 		return "mypage/my-info";
@@ -186,13 +191,13 @@ public class MypageController {
 	public void registrationPetForm() {}
 	
 	@PostMapping("registration-pet")
-	public String registrationPet(@SessionAttribute(name = "authentication")Member certifiedUser, Pet pet, MultipartFile file) {
+	public void registrationPet(@SessionAttribute(name = "authentication")Member certifiedUser,
+			Pet pet, MultipartFile file) {
 		int userIdx = certifiedUser.getUserIdx();
 		pet.setUserIdx(userIdx);
 		
 		mypageService.insertPet(pet, file);
 		
-		return "mypage/pet-info";
 	}
 	
 	@GetMapping("vaccination")
@@ -202,8 +207,8 @@ public class MypageController {
 		List<Pet> petList = mypageService.selectAllPet(userIdx);
 		
 		List<VaccineInfo> vaccineInfoList = mypageService.selectVaccineInfoList();
-//		백신 cycle을 계산해서 뿌려줘야함 도움필요
-		List<Vaccination> vaccinationList = mypageService.selectVaccinationList(userIdx);
+
+		List<Map<String, Object>> vaccinationList = mypageService.selectVaccinationList(userIdx);
 		
 		model.addAttribute("petList", petList)
 		.addAttribute("vaccineInfoList", vaccineInfoList)
@@ -211,11 +216,25 @@ public class MypageController {
 	}
 	
 	@PostMapping("vaccination")
-	public void vaccination(@SessionAttribute(name = "authentication")Member certifiedUser, Vaccination vaccination) {
+	public void vaccination(@SessionAttribute(name = "authentication")Member certifiedUser, Model model,
+			Vaccination vaccination) {
 		int userIdx = certifiedUser.getUserIdx();
+		
 		vaccination.setUserIdx(userIdx);
 		
-//		mypageService.insertVaccination(vaccination);
+		mypageService.insertVaccinationCalendar(vaccination);
+		
+		//다시 받아와서 뿌려주기
+		
+		List<Pet> petList = mypageService.selectAllPet(userIdx);
+		
+		List<VaccineInfo> vaccineInfoList = mypageService.selectVaccineInfoList();
+
+		List<Map<String, Object>> vaccinationList = mypageService.selectVaccinationList(userIdx);
+		
+		model.addAttribute("petList", petList)
+		.addAttribute("vaccineInfoList", vaccineInfoList)
+		.addAttribute("vaccinationList", vaccinationList);
 	}
 	
 }

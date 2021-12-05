@@ -66,13 +66,20 @@
 	
 	<select id="selectPetList" resultType="map">
 		select *
-		from (select age, user_idx, pet_idx, name, species, reg_date, gender, fl_idx, origin_file_name, rename_file_name, save_path, rownum rnum
-		from (select p.age, p.user_idx, p.pet_idx, p.name, p.species, p.reg_date, p.gender, f.fl_idx, f.origin_file_name, f.rename_file_name, f.save_path
+		from (select pet_age, user_idx, pet_idx, pet_name, species, reg_date, gender, fl_idx, origin_file_name, rename_file_name, save_path, rownum rnum
+		from (select p.pet_age, p.user_idx, p.pet_idx, p.pet_name, p.species, p.reg_date, p.gender, f.fl_idx, f.origin_file_name, f.rename_file_name, f.save_path
 		from pet p join file_info f on (p.pet_idx = f.type_idx)
 		where p.user_idx = #{userIdx}
 		order by p.pet_idx desc))
 		where rnum between ${((pageUtil.curPage-1) * pageUtil.cntPerPage) + 1} 
 	  	and ${pageUtil.curPage * pageUtil.cntPerPage}
+	</select>
+	
+	<select id="selectVaccinationList" resultType="map">
+		select *
+		from vaccination_calendar vc join vaccine_info vi on(vc.vi_idx = vi.vi_idx)
+		join pet p on(vc.pet_idx = p.pet_idx)
+		where vc.user_idx = #{userIdx}
 	</select>
   	
   </mapper>

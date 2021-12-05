@@ -36,9 +36,9 @@
 				<c:forEach var="pet" items="${petList}">
 					<div class="pet-div">
 						<img src="${pet.downloadURL}" style="width: 200px; height: 200px">
-						<div>이름 : ${pet.NAME}</div>
+						<div>이름 : ${pet.PET_NAME}</div>
 						<div>종류 : ${pet.SPECIES}</div>
-						<div>나이 : ${pet.AGE}</div>
+						<div>나이 : ${pet.PET_AGE}</div>
 						<div>성별 : ${pet.GENDER}</div>
 					</div>
 				</c:forEach>

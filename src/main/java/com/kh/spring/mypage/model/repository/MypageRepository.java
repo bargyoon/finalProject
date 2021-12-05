@@ -10,6 +10,7 @@ import org.apache.ibatis.annotations.Select;
 import com.kh.spring.board.model.dto.Board;
 import com.kh.spring.board.model.dto.BoardComment;
 import com.kh.spring.common.util.FileDTO;
+import com.kh.spring.member.model.dto.Member;
 import com.kh.spring.mypage.model.dto.MypageSearchSet;
 import com.kh.spring.mypage.model.dto.Pet;
 import com.kh.spring.mypage.model.dto.Vaccination;
@@ -29,8 +30,8 @@ public interface MypageRepository {
 	
 	List<Board> selectBoard(Map<String, Object> map);
 	
-	@Insert("insert into pet(pet_idx, name, species, gender, age, user_idx)"
-			+ " values(sc_pet_idx.nextval, #{name}, #{species}, #{gender}, #{age}, #{userIdx})")
+	@Insert("insert into pet(pet_idx, pet_name, species, gender, pet_age, user_idx)"
+			+ " values(sc_pet_idx.nextval, #{petName}, #{species}, #{gender}, #{petAge}, #{userIdx})")
 	void insertPet(Pet pet);
 	
 	@Insert("insert into file_info(fl_idx, type_idx, origin_file_name, rename_file_name, save_path)"
@@ -48,8 +49,15 @@ public interface MypageRepository {
 	@Select("select * from vaccine_info order by vi_idx")
 	List<VaccineInfo> selectVaccineInfoList();
 	
-	@Select("select * from vaccination_calendar where user_idx = #{userIdx}")
-	List<Vaccination> selectVaccinationList(int userIdx);
+	List<Map<String, Object>> selectVaccinationList(int userIdx);
 	
+	@Select("select cycle from vaccine_info where vi_idx = #{viIdx}")
+	int selectCycle(int viIdx);
 	
+	@Insert("insert into vaccination_calendar(vc_idx, user_idx, pet_idx, vi_idx, criterion_date, next_date)"
+			+ " values(sc_vc_idx.nextval, #{userIdx}, #{petIdx}, #{viIdx}, #{criterionDate}, #{nextDate})")
+	void insertVaccinationCalendar(Vaccination vaccination);
+	
+	@Select("select * from member where user_idx = #{userIdx}")
+	Member selectMember(int userIdx);
 }
