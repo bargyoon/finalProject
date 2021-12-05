@@ -4,7 +4,6 @@
 <html>
 <head>
 <%@ include file="/WEB-INF/views/include/head.jsp" %>
-<%@ include file="/WEB-INF/views/include/navBar.jsp" %>
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
@@ -18,7 +17,7 @@
 </style>
 </head>
 <body>
-
+<%@ include file="/WEB-INF/views/include/navBar.jsp" %>
 <form:form modelAttribute="joinForm"
    				   action="/member/join" method="post" id="frm_join" >
 <div class="sidenav">
@@ -245,7 +244,7 @@
 	                  		<div class="mail_auth_ck">
 	                     		<input class="form-control" id="email_ck"disabled="disabled">
 	                  		</div>
-		                  	<div class="btn btn-black" id="mail_auth_bnt">
+		                  	<div class="btn btn-secondary" id="mail_auth_bnt">
 		                  	 	<span>인증번호 발송</span>
 		                  	</div>
 		                  	<div class="clearfix"></div>
@@ -259,7 +258,7 @@
                      <input type="text" name="address" id="address" class="form-control" id="address" placeholder="주소를 입력하세요">
                      <input type="text" name="addressDetail" id="addressDetail" class="form-control" placeholder="상세주소를 입력하세요">
                   </div><br><hr>                  
-                  <input type="submit" class="btn btn-black" id="joinBtn" style="width: 100%" value="가입하기" />
+                  <input type="submit" class="btn btn-secondary" id="joinBtn" style="width: 100%" value="가입하기" />
                </form>
             </div>
          </div>

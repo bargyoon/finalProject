@@ -4,7 +4,6 @@
 <html>
 <head>
 <%@ include file="/WEB-INF/views/include/head.jsp" %>
-<%@ include file="/WEB-INF/views/include/navBar.jsp" %>
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
@@ -12,6 +11,7 @@
 
 </head>
 <body>
+<%@ include file="/WEB-INF/views/include/navBar.jsp" %>
 	<div class="sidenav">
          <div class="login-main-text">
             <h2>똑dog한<br>집사님, 어서오세요!</h2>
@@ -29,7 +29,7 @@
                      <label>회원가입 시 작성한 이메일을 입력해주세요</label><br>
                      <input type="text" class="form-control" id="email" name="email" placeholder="email" >
                   </div>
-                  <input class="btn btn-black" type="submit" value="아이디 찾기" /><br><br>                     
+                  <input class="btn btn-secondary" type="submit" value="아이디 찾기" /><br><br>                     
                   <c:if test="${check == 1}">
 					<label class="search-id-box"><b>일치하는 정보가 존재하지 않습니다.</b></label>
 				  </c:if>

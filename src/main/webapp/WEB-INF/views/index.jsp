@@ -21,6 +21,38 @@
 	                <a class="btn btn-primary btn-xl text-uppercase" href="#services">Tell Me More</a>
 	            </div>
 	        </header>
+        <!-- Board -->
+        <section class="page-section" id="boards">
+            <div class="container">
+                <div class="row text-center">
+                    <div class="board-in-main">
+                        <h2 class="my-3">강아지 게시판</h2>                      
+                    </div>
+                    <div class="board-in-main">
+                        <h2 class="my-3">고양이 게시판</h2>
+                         <div class=board-list-in-main>
+                        	게시판 코드 따 올 예정
+                        </div>
+                    </div>
+                     <div class="board-in-main">
+                        <h2 class="my-3">다른 게시판</h2>
+                         <div class=board-list-in-main>
+                        	게시판 코드 따 올 예정
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section> 
+        <!-- market-items-->
+        <section class="page-section" id="market-items">
+        
+        
+        
+        
+        
+        
+        
+        </section> 
         <!-- Services-->
         <section class="page-section" id="services">
             <div class="container">
@@ -55,29 +87,8 @@
                     </div>
                 </div>
             </div>
-        </section>        
-        <!-- Board -->
-        <section class="page-section" id="board">
-            <div class="container">
-                <div class="row text-center">
-                    <div class="board-in-main">
-                        <h2 class="my-3">강아지 게시판</h2>                      
-                    </div>
-                    <div class="board-in-main">
-                        <h2 class="my-3">고양이 게시판</h2>
-                         <div class=board-list-in-main>
-                        	게시판 코드 따 올 예정
-                        </div>
-                    </div>
-                     <div class="board-in-main">
-                        <h2 class="my-3">다른 게시판</h2>
-                         <div class=board-list-in-main>
-                        	게시판 코드 따 올 예정
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section> 
+        </section>     
+           
     </body>
    <%@ include file="/WEB-INF/views/include/footer.jsp" %>	
    <%@ include file="/WEB-INF/views/include/mainJs.jsp" %>

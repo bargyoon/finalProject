@@ -28,10 +28,12 @@
 	                        </li>
 	                        <li class="nav-item"><a class="nav-link" href="/board/info">게시판</a>
 	                        	<ul class="navbar-detail"><hr>
-		                        	<li><a href=#>정보/컬럼</a>
+		                        	<li><a href=#>정보게시판</a>
 	                        		<li><a href=#>고양이</a>
 	                        		<li><a href=#>강아지</a>
-	                        		<li><a href=#>상담</a>
+	                        		<li><a href=#>후기</a>
+	                        		<li><a href=#>모임게시판</a>
+	                        		<li><a href=#>상담게시판</a>
 	                        	</ul>
 							</li>
 	                        <li class="nav-item"><a class="nav-link" href="/market">마켓</a></li>

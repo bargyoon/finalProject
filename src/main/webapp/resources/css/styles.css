@@ -11526,6 +11526,7 @@ p {
     padding-top: 1rem;
     padding-bottom: 1rem;
     background-color: rgb(240, 234, 213);
+    height: 100px;
   }
   #mainNav.navbar-shrink .navbar-brand {
     font-size: 1.25em;
