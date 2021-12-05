@@ -8,9 +8,6 @@
     for (let index = 0; index < eqClick.length; index++) {
         eqClick[index].style.display = "none";
     }
-    
-    var IMP = window.IMP;
-    IMP.init("imp96539619");
 
 	focusReview = () => {
 	    document.getElementById("focus-r").focus({preventScroll:false});
@@ -120,8 +117,8 @@
 		        div.appendChild(div3);
 		        baseDiv.appendChild(div);
 			})
-			.catch(error => {
-				console.dir(error);
+			.catch(error => { 
+				throw new Error(response.status);
 			})
 	    }
 	}
@@ -212,7 +209,7 @@
 	        return false;
 	    } else if(inputVal > limitSm) {
 	        alert("사용 가능한 적립금을 초과하였습니다.");
-	        document.getElementById("sm-value").value = limitSm;
+	        document.getElementById("sm-value").value = Number(document.getElementById("sm-available-hidden").value);
 	        changeTotal(limitSm);
 	        return false;
 	    }
@@ -266,8 +263,12 @@
 	}
 	
 	requestPay = (prdIdx, userIdx) => {
+		    
+    	var IMP = window.IMP;
+    	IMP.init("imp96539619");
+
 		let dtIdxArr = document.getElementsByName("dtIdxs");
-		let smAmount = document.getElementById('sm-value-hidden').value;
+		let smAmount = document.getElementById('sm-value').value;
 		let ucIdx = document.getElementById('uc-idx').value;
 		let cpAmount = document.getElementById('cp-amount-hidden').value;
 		let total = document.getElementById('total-price-hidden').value;
@@ -285,7 +286,6 @@
 					dtIdx : dtIdxArr[i].value,
 					orderCnt : document.getElementById(dtIdxArr[i].value + "-cnt").value,
 					saveMoney : smAmount,
-					orderDate : new Date(),
 					ucIdx : ucIdx,
 					cpSaveMoney : cpAmount,
 					paymentAmount : total - cpAmount - smAmount
@@ -321,34 +321,89 @@
 			        buyer_tel : memberInfo.password,
 			        buyer_addr : memberInfo.address
 			    }, (rsp) => { // callback
-			    	console.dir(rsp);
-			        if ( rsp.success ) {
-			            //[1] 서버단에서 결제정보 조회를 위해 jQuery ajax로 imp_uid 전달하기
-			            jQuery.ajax({
-			                url: "/market/shop/buy-test", //cross-domain error가 발생하지 않도록 주의해주세요
-			                type: 'POST',
-			                contentType: 'application/json',
-			                data: JSON.stringify(orderInfos)
-			            }).done(function(data) {
-			                //[2] 서버에서 REST API로 결제정보확인 및 서비스루틴이 정상적인 경우
-			                if ( everythings_fine ) {
-			                    var msg = '결제가 완료되었습니다.';
-			                    msg += '\n고유ID : ' + rsp.imp_uid;
-			                    msg += '\n상점 거래ID : ' + rsp.merchant_uid;
-			                    msg += '\결제 금액 : ' + rsp.paid_amount;
-			                    msg += '카드 승인번호 : ' + rsp.apply_num;
-			                } else {
-			                    //[3] 아직 제대로 결제가 되지 않았습니다.
-			                    //[4] 결제된 금액이 요청한 금액과 달라 결제를 자동취소처리하였습니다.
-			                }
-			            });
-			        } else {
-			            var msg = '결제에 실패하였습니다.';
-			            msg += '에러내용 : ' + rsp.error_msg;
-			            
-			        }
-					alert(msg);
-	    		});
+			    	if(rsp.success){
+						jQuery.ajax({
+							url: "/market/shop/iamport-certification/" + rsp.imp_uid, //cross-domain error가 발생하지 않도록 주의해주세요
+							type: 'GET'
+						})
+						.done(data => {
+							if (rsp.paid_amount == data.response.amount) {
+								fetch("/market/shop/regist-order", {
+									method : "POST",
+									headers:{
+										"Content-type": "application/json;"
+									},
+									body : JSON.stringify(orderInfos)
+								})
+								.then(response => {
+									if(response.ok){
+										var msg = '결제가 완료되었습니다.';
+									    msg += '\n고유ID : ' + rsp.imp_uid;
+									    msg += '\n상점 거래ID : ' + rsp.merchant_uid;
+									    msg += '\결제 금액 : ' + rsp.paid_amount;
+									    msg += '카드 승인번호 : ' + rsp.apply_num;
+						        		alert(msg);
+									} else {
+										jQuery.ajax({
+											url: "/market/shop/get-access-token",
+											type : "GET",
+										})
+										.done(data => {
+											jQuery.ajax({
+												url : "https://cors-anywhere.herokuapp.com/https://api.iamport.kr/payments/cancel",
+												method: "POST",
+												headers: {
+													"Content-type": "application/json",
+													"Authorization": data.response.token
+												},
+												data: JSON.stringify({
+												   	imp_uid: rsp.imp_uid, //환불 uid
+												    reason: "테스트 결제 환불", // 환불사유
+												}),
+									    	})
+									    	.done(data => {
+												alert("결제에 실패하여 자동취소처리 하였습니다.");
+											})
+											.catch(error => {
+												throw new Error(response.status);
+											})
+										})
+									}
+								});
+							} else {
+								jQuery.ajax({
+									url: "/market/shop/get-access-token",
+									type : "GET",
+								})
+								.done(data => {
+									jQuery.ajax({
+										url : "https://cors-anywhere.herokuapp.com/https://api.iamport.kr/payments/cancel",
+										method: "POST",
+										headers: {
+											"Content-type": "application/json",
+											"Authorization": data.response.token
+										},
+										data: JSON.stringify({
+											imp_uid: rsp.imp_uid, //환불 uid
+											reason: "테스트 결제 환불", // 환불사유
+										}),
+									})
+									.done(data => {
+										alert("결제된 금액이 요청한 금액과 달라 결제를 자동취소처리하였습니다.");
+									})
+									.catch(error => {
+										throw new Error(response.status);
+									})
+								})
+							}
+						});
+					} else {
+						var msg = '결제에 실패하였습니다.';
+				        msg += '에러내용 : ' + rsp.error_msg;
+				        
+				        alert(msg);
+					}
+	    		})
 			}
 		})
 	

@@ -105,8 +105,8 @@
 						</div>
 						<div>
 							<span>총 보유 적립금 : </span>
-							<input id="have-sm-hidden" type="hidden" value="10000">
-							<input id="have-sm" style="outline: none;" type="text" readonly="readonly" value="10000 원" />
+							<input id="have-sm-hidden" type="hidden" value="${sessionScope.authentication.saveMoney}">
+							<input id="have-sm" style="outline: none;" type="text" readonly="readonly" value="${sessionScope.authentication.saveMoney} 원" />
 						</div>
 					</div>
 				</div>
@@ -149,55 +149,56 @@
 			<hr style="margin-top: 0;">
 			<ul class="review-nav mt-3">
 				<li><button id="focus-r" type="button"> 전체 <span style="font-size: 13px;">(${reviews.size()} 건)</span></button></li>
-				<li><button type="button">사진후기 <span style="font-size: 13px;">(10건)</span></button></li>
-				<li><button type="button">일반후기 <span style="font-size: 13px;">(30건)</span></button></li>
+				<li><button type="button">사진후기 <span style="font-size: 13px;">(${commandMap.photoReviewCnt} 건)</span></button></li>
+				<li><button type="button">일반후기 <span style="font-size: 13px;">(${commandMap.normalReviewCnt} 건)</span></button></li>
 			</ul>
 		</div>
 		<div class="prd-review-area my-5">
-			<div class="d-flex my-5">
-				<img src="https://dummyimage.com/100x100/dee2e6/6c757d.jpg" style="border-radius: 7rem; height: 100px; width: 100px;" />
-				<div class="prd-review-content mx-5">
-					<div class="d-flex justify-content-between" style="min-height: 60px;">
-						<p style="font-weight: bold;">NICKNAME</p>
-						<p style="color: lightslategray;">2021.11.15</p>
-					</div>
-					<div class="d-flex text-warning pb-1">
-						<i class="fas fa-star"></i>
-						<i class="fas fa-star"></i>
-						<i class="fas fa-star"></i>
-						<i class="fas fa-star"></i>
-						<i class="fas fa-star"></i>
-					</div>
-					<p class="mt-2">옵션 : 옵션</p>
-					<p class="review-content-text">
-						각 브랜드 사료 성분 검사에서 나쁜거 안나오고 좋은 사료여서 주문했습니다.<br>
-						강아지가 너무 잘 먹어어요.<br>
-						혹시 몰라 제일 작은 용량으로 시킨건데<br>
-						다음에 큰 용량으로 주문해야겠습니다.<br>
-						유통기한은 짧지도 넉넉하지도 않은편입니다.
-					</p>
-					<div class="extend-img-area"></div>
-					<div class="review-content-imgs my-3">
-						<div onclick="changeImgSize(this)">
-							<img src="https://dummyimage.com/500x500/dee2e6/6c757d.jpg" style="max-width: 200px; max-height: 200px;">
+			<c:forEach var="i" begin="0" step="1" end="${reviews.size()-1}">
+				<div class="d-flex my-5">
+					<div class="prd-review-content mx-5">
+						<div class="d-flex justify-content-between" style="min-height: 60px;">
+							<p style="font-weight: bold;">NICKNAME</p>
+							<p style="color: lightslategray;">2021.11.15</p>
 						</div>
-						<div onclick="changeImgSize(this)">
-							<img src="https://dummyimage.com/500x500/dee2e6/6c757d.jpg" style="max-width: 200px; max-height: 200px;">
+						<div class="d-flex text-warning pb-1">
+							<i class="fas fa-star"></i>
+							<i class="fas fa-star"></i>
+							<i class="fas fa-star"></i>
+							<i class="fas fa-star"></i>
+							<i class="fas fa-star"></i>
 						</div>
-						<div onclick="changeImgSize(this)">
-							<img src="https://dummyimage.com/500x500/dee2e6/6c757d.jpg" style="max-width: 200px; max-height: 200px;">
+						<p class="mt-2">옵션 : 옵션</p>
+						<p class="review-content-text">
+							각 브랜드 사료 성분 검사에서 나쁜거 안나오고 좋은 사료여서 주문했습니다.<br>
+							강아지가 너무 잘 먹어어요.<br>
+							혹시 몰라 제일 작은 용량으로 시킨건데<br>
+							다음에 큰 용량으로 주문해야겠습니다.<br>
+							유통기한은 짧지도 넉넉하지도 않은편입니다.
+						</p>
+						<div class="extend-img-area"></div>
+						<div class="review-content-imgs my-3">
+							<div onclick="changeImgSize(this)">
+								<img src="https://dummyimage.com/500x500/dee2e6/6c757d.jpg" style="max-width: 200px; max-height: 200px;">
+							</div>
+							<div onclick="changeImgSize(this)">
+								<img src="https://dummyimage.com/500x500/dee2e6/6c757d.jpg" style="max-width: 200px; max-height: 200px;">
+							</div>
+							<div onclick="changeImgSize(this)">
+								<img src="https://dummyimage.com/500x500/dee2e6/6c757d.jpg" style="max-width: 200px; max-height: 200px;">
+							</div>
+							<div onclick="changeImgSize(this)">
+								<img src="https://dummyimage.com/500x500/dee2e6/6c757d.jpg" style="max-width: 200px; max-height: 200px;">
+							</div>
 						</div>
-						<div onclick="changeImgSize(this)">
-							<img src="https://dummyimage.com/500x500/dee2e6/6c757d.jpg" style="max-width: 200px; max-height: 200px;">
+						<div class="mt-3">
+							<input id="likeBtn" type="checkbox" onclick="" style="display: none;">
+							<label class="like-btn px-lg-2" for="likeBtn"><i class="fas fa-laugh-beam py-1" style="color: orange;"></i> 도움돼요 3</label>
 						</div>
-					</div>
-					<div class="mt-3">
-						<input id="likeBtn" type="checkbox" onclick="" style="display: none;">
-						<label class="like-btn px-lg-2" for="likeBtn"><i class="fas fa-laugh-beam py-1" style="color: orange;"></i> 도움돼요 3</label>
 					</div>
 				</div>
-			</div>
-			<hr>
+				<hr>
+			</c:forEach>
 			<div class="d-flex my-5">
 				<img src="https://dummyimage.com/100x100/dee2e6/6c757d.jpg" style="border-radius: 7rem; height: 100px; width: 100px;" />
 				<div class="prd-review-content mx-5">

@@ -41,4 +41,8 @@ public interface ShopService {
 
 	int selectPoStackByDtIdx(int dtIdx);
 
+	boolean insertOrder(List<Order> orderInfos);
+
+	Map<String, Object> getCntByType(List<Review> reviews);
+
 }

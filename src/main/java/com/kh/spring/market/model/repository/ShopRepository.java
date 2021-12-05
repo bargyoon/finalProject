@@ -7,10 +7,12 @@ import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import com.kh.spring.common.util.FileDTO;
 import com.kh.spring.common.util.pagination.Paging;
 import com.kh.spring.market.model.dto.Coupon;
+import com.kh.spring.market.model.dto.Order;
 import com.kh.spring.market.model.dto.Product;
 import com.kh.spring.market.model.dto.Review;
 import com.kh.spring.market.model.dto.prdListSet;
@@ -67,5 +69,19 @@ public interface ShopRepository {
 
 	@Select("select po_stock from prd_detail where dt_idx = #{dtIdx}")
 	int selectPoStackByDtIdx(int dtIdx);
+	
+	@Insert("insert into \"ORDER\"(ORDER_IDX, DT_IDX, USER_IDX, UC_IDX, PRD_IDX, PAYMENT_AMOUNT, ORDER_CNT, SAVE_MONEY, ORDER_NUM, CP_SAVE_MONEY)"
+			+ " values(SC_ORDER_IDX.nextval, #{dtIdx}, #{userIdx}, #{ucIdx}, #{proIdx}, #{paymentAmount}, #{orderCnt}, #{saveMoney}, #{orderNum}, #{cpSaveMoney})")
+	boolean insertOrder(Order order);
+
+	@Insert("insert into SAVE_HISTORY(SH_IDX, USER_IDX, STATE, TYPE, AMOUNT, ORDER_IDX)"
+			+ " values(SC_SH_IDX.nextval, #{userIdx}, , 0, #{saveMoney}, #{orderIdx})")
+	boolean insertSmHistory(Order order);
+
+	@Update("update user_coupon set is_del = 1 where uc_idx = #{ucIdx}")
+	boolean updateUcIsDel(int ucIdx);
+
+	@Update("update \"USER\" set savemoney = savemoney - #{saveMoney} where user_idx = #{userIdx}")
+	boolean updateUserMinusSm(Order order);
 
 }

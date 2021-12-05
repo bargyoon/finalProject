@@ -1,6 +1,5 @@
 package com.kh.spring.market.model.service;
 
-import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -183,6 +182,42 @@ public class ShopServiceImpl implements ShopService{
 			map.put("specList", specList);
 		}
 		return orderList;
+	}
+
+
+	public boolean insertOrder(List<Order> orderInfos) {
+		for (Order order : orderInfos) {
+			if(!shopRepository.insertOrder(order)) {
+				return false;
+			}
+		}
+		if(!shopRepository.insertSmHistory(orderInfos.get(0))||!shopRepository.updateUserMinusSm(orderInfos.get(0))) {
+			return false;
+		}
+		
+		if(orderInfos.get(0).getUcIdx() != 0) {
+			if(!shopRepository.updateUcIsDel(orderInfos.get(0).getUcIdx())) {
+				return false;
+			}
+		}
+
+		return true;
+	}
+
+	public Map<String, Object> getCntByType(List<Review> reviews) {
+		int photoReviewCnt = 0;
+		int normalReviewCnt = 0;
+		
+		for (Review review : reviews) {
+			if(review.getType().equals("0")) {
+				normalReviewCnt++;
+			} else {
+				photoReviewCnt++;
+			}
+		}
+		
+		
+		return Map.of("photoReviewCnt", photoReviewCnt, "normalReviewCnt", normalReviewCnt);
 	}
 	
 }

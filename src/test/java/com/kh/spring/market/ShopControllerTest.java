@@ -5,6 +5,10 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -19,6 +23,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.kh.spring.market.model.dto.Order;
 
@@ -90,6 +95,29 @@ public class ShopControllerTest {
 		.andDo(print());
 	}
 	
+	
+	@Test
+	public void registOrderTest() throws Exception {
+		Order order = new Order();
+		order.setDtIdx(123);
+		order.setProIdx(0);
+		order.setUserIdx(1234);
+		order.setUcIdx(1111);
+		order.setOrderCnt(3);
+		order.setOrderNum(123144);
+		order.setSaveMoney(11111);
+		order.setProIdx(9999);
+
+		ObjectMapper mapper = new ObjectMapper();
+		String orderJson = mapper.writeValueAsString(order);
+		
+		
+		mockMvc.perform(post("/market/shop/regist-order")
+	            	.contentType(MediaType.APPLICATION_JSON) 
+					.content(orderJson))
+		.andExpect(status().isOk())
+		.andDo(print());
+	}
 	
 	
 	

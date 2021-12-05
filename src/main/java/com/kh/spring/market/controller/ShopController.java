@@ -1,8 +1,13 @@
 	package com.kh.spring.market.controller;
 
 import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.List;
 import java.util.Map;
+
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,6 +23,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.kh.spring.common.util.pagination.Paging;
 import com.kh.spring.market.model.dto.Coupon;
 import com.kh.spring.market.model.dto.Order;
@@ -26,12 +32,18 @@ import com.kh.spring.market.model.dto.Review;
 import com.kh.spring.market.model.dto.prdListSet;
 import com.kh.spring.market.model.service.ShopService;
 import com.kh.spring.member.model.dto.Member;
+import com.siot.IamportRestClient.Iamport;
 import com.siot.IamportRestClient.IamportClient;
 import com.siot.IamportRestClient.exception.IamportResponseException;
+import com.siot.IamportRestClient.request.AuthData;
+import com.siot.IamportRestClient.request.CancelData;
+import com.siot.IamportRestClient.response.AccessToken;
 import com.siot.IamportRestClient.response.IamportResponse;
 import com.siot.IamportRestClient.response.Payment;
 
 import lombok.RequiredArgsConstructor;
+import retrofit2.Call;
+import retrofit2.Response;
 
 @Controller
 @RequiredArgsConstructor
@@ -80,15 +92,13 @@ public class ShopController {
 		
 		Product prdInfo = shopService.selectPrdByIdx(pn);
 		List<Review> reviews = shopService.selectReviewByPrdIdx(pn);
-		
-		for (Review review : reviews) {
-			logger.debug("review : {}", review);
-		}
+		Map<String, Object> commandMap = shopService.getCntByType(reviews);
 		
 		
 		Map<String, Object> prdInfoMap = Map.of("optionList", prdOptionInfos, "prdInfo", prdInfo);
 		model.addAttribute("prdInfoMap", prdInfoMap);
 		model.addAttribute("reviews", reviews);
+		model.addAttribute("commandMap", commandMap);
 		
 		return "market/shop/prd-detail";
 	}
@@ -122,11 +132,30 @@ public class ShopController {
 		model.addAttribute("couponList", couponList);
 	}
 	
-	@PostMapping("buy-test")
+	@GetMapping("iamport-certification/{imp_uid}")
 	@ResponseBody
-	public IamportResponse<Payment> buyTest(@PathVariable(value= "imp_uid") String imp_uid) throws IamportResponseException, IOException{
+	public IamportResponse<Payment> certificationIamPort(@PathVariable(value= "imp_uid") String impUid) throws IamportResponseException, IOException{
 		IamportClient client = new IamportClient("8272885714375817", "f27d12b907ecd3d120d853acafa0791ae35c2d3a309e7ae0ffe2c05a90dea7edf322f437d1f62fa6");
-		return client.paymentByImpUid(imp_uid);
+		return client.paymentByImpUid(impUid);
+	}
+	
+	@GetMapping("get-access-token")
+	@ResponseBody
+	public IamportResponse<AccessToken> iamPortCancel() throws IOException, IamportResponseException {
+		IamportClient client = new IamportClient("8272885714375817", "f27d12b907ecd3d120d853acafa0791ae35c2d3a309e7ae0ffe2c05a90dea7edf322f437d1f62fa6");
+		IamportResponse<AccessToken> accessToken = client.getAuth();
+		
+		return accessToken;
+	}
+	
+	
+	@PostMapping("regist-order")
+	@ResponseBody
+	public void registOrder(@RequestBody List<Order> orderInfos, HttpSession session, @SessionAttribute(name="authentication")Member certifiedUser) {
+		if(shopService.insertOrder(orderInfos)) {
+			certifiedUser.setSaveMoney(certifiedUser.getSaveMoney()-orderInfos.get(0).getSaveMoney());
+			session.setAttribute("authentication", certifiedUser);
+		}
 	}
 	
 }
