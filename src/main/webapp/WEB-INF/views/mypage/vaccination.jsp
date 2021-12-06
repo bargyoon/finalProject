@@ -37,7 +37,7 @@
 		    </ul>
 		</nav>
 		
-		<div style="margin: 0 auto; width: 800px">
+		<div style="margin: 0 auto; width: 800px;">
 			
 			<div class="modal">
 				<form action="/mypage/vaccination" method="post" style="margin: auto auto;">
@@ -78,7 +78,7 @@
 				</form>
 			</div>
 			
-			<div id="calendar" class="calendar"></div>
+			<div id="calendar" class="calendar" style="background-color: white; border: ridge 20px;"></div>
 			
 			<!-- fullCalendar -->
 			<script type="text/javascript">
@@ -99,7 +99,7 @@
 					dayMaxEvents: true,
 					views: {
 						dayGrid: {
-							dayMaxEvents: 3
+							dayMaxEvents: 2
 						}
 					},
 					customButtons: {
@@ -119,10 +119,7 @@
 							}
 							<c:if test="${!status.last}">, </c:if>
 						</c:forEach>
-					],
-					eventClick: (info)=>{
-						var title = prompt('Event Title:');
-					}
+					]
 					
 				});
 				calendar.render();

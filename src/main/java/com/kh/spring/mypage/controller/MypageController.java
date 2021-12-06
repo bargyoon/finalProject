@@ -1,9 +1,6 @@
 package com.kh.spring.mypage.controller;
 
-import java.sql.Date;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -41,6 +38,7 @@ import com.kh.spring.mypage.validator.UpdateMemberForm;
 import com.kh.spring.mypage.validator.UpdateMemberFormValidator;
 
 import lombok.RequiredArgsConstructor;
+import oracle.jdbc.proxy.annotation.Post;
 
 @Controller
 @RequiredArgsConstructor
@@ -235,6 +233,12 @@ public class MypageController {
 		model.addAttribute("petList", petList)
 		.addAttribute("vaccineInfoList", vaccineInfoList)
 		.addAttribute("vaccinationList", vaccinationList);
+	}
+	
+	@PostMapping("delete-board")
+	public void  deleteBoard(@RequestParam int[] bdIdxs, Model model) {
+		mypageService.UpdateBoardIsDel(bdIdxs);
+		
 	}
 	
 }
