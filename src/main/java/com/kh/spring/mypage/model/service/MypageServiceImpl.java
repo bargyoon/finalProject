@@ -107,10 +107,17 @@ public class MypageServiceImpl implements MypageService {
 		return mypageRepository.selectVaccinationForBatch();
 	}
 
-	@Override
-	public void UpdateBoardIsDel(int[] bdIdxs) {
-		for (int bdIdx : bdIdxs) {
-			mypageRepository.UpdateBoardIsDel(bdIdx);
+	public void updateBoardIsDel(List<Integer> bdIdxArr) {
+		
+		for (int bdIdx : bdIdxArr) {
+			mypageRepository.updateBoardIsDel(bdIdx);
+		}
+	}
+
+	public void updateCommentIsDel(List<Integer> cmIdxArr) {
+
+		for (int cmIdx : cmIdxArr) {
+			mypageRepository.updateCommentIsDel(cmIdx);
 		}
 	}
 	

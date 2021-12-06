@@ -17,6 +17,7 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -236,9 +237,16 @@ public class MypageController {
 	}
 	
 	@PostMapping("delete-board")
-	public void  deleteBoard(@RequestParam int[] bdIdxs, Model model) {
-		mypageService.UpdateBoardIsDel(bdIdxs);
-		
+	public void  deleteBoard(@RequestBody List<Integer> bdIdxArr) {
+		mypageService.updateBoardIsDel(bdIdxArr);
 	}
+	
+
+	@PostMapping("delete-board-comment")
+	public void  deleteComment(@RequestBody List<Integer> cmIdxArr) {
+		mypageService.updateCommentIsDel(cmIdxArr);
+	}
+	
+	
 	
 }

@@ -43,6 +43,8 @@ public interface MypageService {
 
 	List<Map<String, Object>> selectVaccinationForBatch();
 
-	void UpdateBoardIsDel(int[] bdIdxs);
+	void updateBoardIsDel(List<Integer> bdIdxArr);
+
+	void updateCommentIsDel(List<Integer> cmIdxArr);
 	
 }
