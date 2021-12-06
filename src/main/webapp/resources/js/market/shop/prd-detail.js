@@ -1,13 +1,57 @@
 (() => {
+	
     const prdOptionDivs = document.querySelectorAll(".selected-prd");
     for (let i = 0; i < prdOptionDivs.length; i++) {
         prdOptionDivs[i].style.display = "none";
     }
-
-    let eqClick = document.querySelectorAll(".eq-click");
-    for (let index = 0; index < eqClick.length; index++) {
-        eqClick[index].style.display = "none";
-    }
+    	
+	prevBtn = (prdIdx, curPage, option) => {
+		if(curPage == 1){
+			alert("첫번째 페이지 입니다.")
+			return;
+		}
+		let prevPage = curPage - 1;
+		pageBtn(prdIdx, option, prevPage);
+	}
+	
+	nextBtn = (prdIdx, curPage, blockEnd, option) => {
+		if(curPage == blockEnd){
+			alert("마지막 페이지 입니다.")
+			return;
+		}
+		let nextPage = curPage + 1;
+		pageBtn(prdIdx, option, nextPage);
+	}
+	
+	pageBtn = (prdIdx, option, page) => {
+		location.href = "/market/shop/prd-detail?pn="+prdIdx+"&option="+option+"&page="+page;
+	}
+	
+	changeOption = (prdIdx, option) => {
+		location.href = "/market/shop/prd-detail?pn="+prdIdx+"&option="+option;
+	}
+	
+	prevBtnQna = (prdIdx, curPage) => {
+		if(curPage == 1){
+			alert("첫번째 페이지 입니다.")
+			return;
+		}
+		let prevPage = curPage - 1;
+		pageBtn(prdIdx, prevPage);
+	}
+	
+	nextBtnQna = (prdIdx, curPage, blockEnd) => {
+		if(curPage == blockEnd){
+			alert("마지막 페이지 입니다.")
+			return;
+		}
+		let nextPage = curPage + 1;
+		pageBtn(prdIdx, nextPage);
+	}
+	
+	pageBtnQna = (prdIdx, page) => {
+		location.href = "/market/shop/prd-detail?pn="+prdIdx+"&pageQna="+page;
+	}
 
 	focusReview = () => {
 	    document.getElementById("focus-r").focus({preventScroll:false});
@@ -165,7 +209,12 @@
 	}
 	
 	
-	useCoupon = () => {
+	useCoupon = (userIdx) => {
+		if(userIdx == ''){
+			alert("로그인이 필요합니다.");
+			return;
+		}
+		
 		if(document.getElementById("total-price-hidden").value == 0){
 			alert("상품의 옵션을 먼저 선택해주세요.")
 			return;
@@ -304,6 +353,7 @@
 			if(response.ok){
 				return response.json()
 			} else {
+				alert("로그인이 필요합니다.");
 				throw new Error(response.status);
 			}
 		})
@@ -350,7 +400,7 @@
 										})
 										.done(data => {
 											jQuery.ajax({
-												url : "https://cors-anywhere.herokuapp.com/https://api.iamport.kr/payments/cancel",
+												url : "https://final-cors.herokuapp.com/https://api.iamport.kr/payments/cancel",
 												method: "POST",
 												headers: {
 													"Content-type": "application/json",
@@ -408,5 +458,93 @@
 		})
 	
 	}
+
+	checkLike = (rvIdx) => {
+		console.dir(rvIdx);
+		let likeRvIdx = document.getElementById("like-" + rvIdx);
+		
+		fetch("/market/shop/update-like/" + rvIdx, {
+			method : "GET"
+		})
+		.then(response => {
+			if(response.ok){
+				return response.text();
+			} else {
+				alert("로그인이 필요합니다.");
+				return;
+			}
+		})
+		.then(text => {
+			if(text == "insert"){
+				document.getElementById("like-" + rvIdx).value = Number(likeRvIdx.value) + 1; 
+			} else if(text == "delete"){
+				document.getElementById("like-" + rvIdx).value = Number(likeRvIdx.value) - 1; 
+			}
+		})
+		.catch(error => {
+			throw new Error(response.status);
+		})
+		
+	}
+	
+	if(window.location.href.indexOf("pageQna") != -1){
+		focusQnA();
+	} else if (window.location.href.indexOf("option") != -1 || window.location.href.indexOf("page") != -1){
+		focusReview();
+	}
+	
+	
+	registCart = (prdIdx, userIdx) => {
+		if(userIdx == ''){
+			alert("로그인이 필요합니다.");
+			return;
+		}
+		
+		if(document.getElementById("total-price-hidden").value == 0){
+			alert("상품의 옵션을 먼저 선택해주세요.")
+			return;
+		}
+		
+		let dtIdxArr = document.getElementsByName("dtIdxs");
+		let cartInfos = [];
+		
+		for(let i = 0; i < dtIdxArr.length; i++){
+			if(dtIdxArr[i].checked){
+				cartInfos.push({
+					userIdx : userIdx,
+					prdIdx : prdIdx,
+					count : document.getElementById(dtIdxArr[i].value + "-cnt").value,
+					dtIdx : dtIdxArr[i].value
+				})
+			}
+		}
+		
+		fetch("/market/shop/regist-cart", {
+			method : "POST",
+			body : JSON.stringify(cartInfos),
+			headers:{
+				"Content-type": "application/json;"
+			}
+		})
+		.then(response => {
+			if(response.ok){
+				return response.text();
+			} else {
+				alert("장바구니에 등록하지 못하였습니다.");
+			}
+		})
+		.then(text => {
+			if(text == "available"){
+				alert("장바구니에 등록하였습니다.");
+			} else {
+				alert("장바구니에 이미 있는 항목이 포함되어있습니다.");
+			}
+		})
+		.catch(error => {
+			throw new Error(response.status);
+		})
+		
+	}
+	
 	
 })();

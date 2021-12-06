@@ -314,11 +314,6 @@
     border-radius: 1rem;
 }
 
-input[type=checkbox]:checked + .like-btn{
-    border: 1px solid steelblue;
-    color: steelblue;
-}
-
 .prd-detail-qna th{
     height: 40px;
     border-top: 2px solid gray;
@@ -440,6 +435,18 @@ input[type=checkbox]:checked + .like-btn{
     background-color: black;
     color: white;
 }
+
+.like-val{
+    border: none;
+    width: 2rem;
+    text-align: center;
+    line-height: 1px;
+}
+
+.like-val:focus{
+    outline: none;
+}
+
 
 /* pagination */
 .page_wrap {

@@ -2,8 +2,7 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper
-	namespace="com.kh.spring.market.model.repository.ShopRepository">
+<mapper namespace="com.kh.spring.market.model.repository.ShopRepository">
 
 	<select id="selectPrdListBySet" resultType="Product">
 		select *
@@ -141,19 +140,73 @@
 
 	</select>
 
-	<select id="selectReviewByPrdIdx" resultType="Review">
-		select rv_idx,
-		rv.user_idx user_idx, rv.prd_idx prd_idx, order_idx, rv.dt_idx dt_idx,
-		rv.state state, "USER".user_name user_name, prd.name prd_name,
-		pd.po_name dt_name, rv.rating rating, rv.type type, recommand,
-		rv.reg_date reg_date, rv.is_del is_del, rv_content
+	<select id="selectCouponByUserIdx" resultType="Coupon">
+      select coupon_idx, uc_idx, user_idx, name, sale_per, type, coupon.exp_date exp_date ,user_coupon.exp_date uc_exp_date, reg_date, user_coupon.is_del
+      from coupon
+      join user_coupon using(coupon_idx)
+      where user_idx = #{userIdx} and user_coupon.is_del = 0
+   </select>
+
+	<select id="selectReviewByPrdIdxWithPaging" resultType="Review">
+		select * 
+		from(
+			select rownum rnum, rv_idx,rv.user_idx user_idx, rv.prd_idx prd_idx, order_idx, rv.dt_idx dt_idx,
+			rv.state state, "USER".user_name user_name, prd.name prd_name,
+			pd.po_name dt_name, rv.rating rating, rv.type type, recommand,
+			rv.reg_date reg_date, rv.is_del is_del, rv_content
+			from review rv
+			join
+			product prd on (rv.prd_idx = prd.prd_idx)
+			join "USER" ON (rv.USER_IDX =
+			"USER".USER_IDX)
+			join prd_detail pd on(rv.dt_idx = pd.dt_idx)
+			where rv.prd_idx = #{pn} and rv.state = 1
+				<if test="listSet.option != ''">
+					<if test="listSet.option == 0">
+						and rv.type=0
+					</if>
+					<if test="listSet.option == 1">
+						and rv.type=1
+					</if>
+				</if>
+				)
+		where rnum between ${((pageUtil.curPage-1) * pageUtil.cntPerPage) + 1}
+		and ${pageUtil.curPage * pageUtil.cntPerPage}
+	</select>
+
+	<select id="selectReviewCnt" resultType="java.lang.Integer">
+		select count(*)
 		from review rv
 		join
 		product prd on (rv.prd_idx = prd.prd_idx)
 		join "USER" ON (rv.USER_IDX =
 		"USER".USER_IDX)
 		join prd_detail pd on(rv.dt_idx = pd.dt_idx)
-		where rv.prd_idx = #{prdIdx}
+		<where>
+			rv.prd_idx = #{pn} and rv.state = 1
+			<if test="listSet.option != ''">
+				<if test="listSet.option == 0">
+					and rv.type=0
+				</if>
+				<if test="listSet.option == 1">
+					and rv.type=1
+				</if>
+			</if>
+		</where>
+	</select>
+
+	<select id="selectReviewByPrdIdx" resultType="Review">
+		select rownum rnum, rv_idx,rv.user_idx user_idx, rv.prd_idx prd_idx, order_idx, rv.dt_idx dt_idx,
+			rv.state state, "USER".user_name user_name, prd.name prd_name,
+			pd.po_name dt_name, rv.rating rating, rv.type type, recommand,
+			rv.reg_date reg_date, rv.is_del is_del, rv_content
+			from review rv
+			join
+			product prd on (rv.prd_idx = prd.prd_idx)
+			join "USER" ON (rv.USER_IDX =
+			"USER".USER_IDX)
+			join prd_detail pd on(rv.dt_idx = pd.dt_idx)
+			where rv.prd_idx = #{pn} and rv.state = 1
 	</select>
 
 	<select id="selectOrderList" resultType="map">
@@ -228,5 +281,14 @@
 	join file_info f on(r.rv_idx = f.type_idx)
 	)) where rnum between ${((pageUtil.curPage-1) * pageUtil.cntPerPage) + 1} and ${pageUtil.curPage * pageUtil.cntPerPage}
 	</select>
-
+	
+	<select id="selectQnaListByPrdIdxWithPaging" resultType="QNA">
+		select *
+		from (select rownum rnum, QNA.*, "USER".user_name user_name
+				from QNA
+				join "USER" on QNA.user_idx = "USER".user_idx
+				where prd_idx = #{pn} and type = 0)
+		where rnum between ${((pageUtil.curPage-1) * pageUtil.cntPerPage) + 1} and ${pageUtil.curPage * pageUtil.cntPerPage}
+	</select>
+	
 </mapper>

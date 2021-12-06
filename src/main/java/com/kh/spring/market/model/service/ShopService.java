@@ -6,11 +6,14 @@ import java.util.Map;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.kh.spring.common.util.pagination.Paging;
+import com.kh.spring.market.model.dto.Cart;
 import com.kh.spring.market.model.dto.Coupon;
 import com.kh.spring.market.model.dto.Order;
 import com.kh.spring.market.model.dto.Product;
+import com.kh.spring.market.model.dto.QNA;
 import com.kh.spring.market.model.dto.Review;
 import com.kh.spring.market.model.dto.prdListSet;
+import com.kh.spring.member.model.dto.Member;
 
 public interface ShopService {
 
@@ -24,7 +27,7 @@ public interface ShopService {
 
 	Product selectPrdByIdx(int prdIdx);
 
-	List<Review> selectReviewByPrdIdx(int pn);
+	List<Review> selectReviewByPrdIdxWithPaging(int pn, prdListSet listSet, Paging pageUtil);
 
 	Product selectPrdByDtIdx(int dtIdx);
 
@@ -48,6 +51,19 @@ public interface ShopService {
 
 	boolean insertOrder(List<Order> orderInfos);
 
-	Map<String, Object> getCntByType(List<Review> reviews);
+	Map<String, Object> getCntByType(int pn);
+
+	int selectReviewCnt(prdListSet listSet, int pn);
+
+	boolean updateLike(int userIdx, int rvIdx);
+
+	List<Integer> checkLike(List<Review> reviews, int userIdx);
+
+	List<QNA> selectQnaListByPrdIdxWithPaging(int pn, Paging pageUtilQna);
+
+	int selectQnaCnt(int pn);
+
+	boolean insertCart(List<Cart> cartInfos, Member certifiedUser);
+
 
 }
