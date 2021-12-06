@@ -49,5 +49,8 @@ public interface ShopService {
 	boolean insertOrder(List<Order> orderInfos);
 
 	Map<String, Object> getCntByType(List<Review> reviews);
+	int selectQnAListCnt(Map<String, Object> commandMap);
+
+	List<Map<String, Object>> selectQnAList(Map<String, Object> commandMap, Paging pageUtil);
 
 }

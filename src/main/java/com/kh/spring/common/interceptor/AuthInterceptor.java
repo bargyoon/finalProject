@@ -94,10 +94,26 @@ public class AuthInterceptor implements HandlerInterceptor {
 		}
 	}
 
-	private void boardAuthorize(HttpServletRequest httpRequest, HttpServletResponse httpResponse, String[] uriArr) throws IOException, ServletException{
+	private void boardAuthorize(HttpServletRequest request, HttpServletResponse response, String[] uriArr) throws IOException, ServletException{
 		
-	
+		Member member = (Member) request.getSession().getAttribute("authentication");
+		if(uriArr.length >3) {
+		switch (uriArr[3]) {
+		case "form":
+			if(member == null) {
+				throw new HandlableException(ErrorCode.UNAUTHORIZED_PAGE);
+			}
+			break;
+		case "modify":
+			System.out.println("찍히나" + request.getSession().getAttribute("modi-bdIdx"));
+			
+			break;
+		default:
+			break;
+		}
 		
+		
+		}
 	}
 
 	private void adminAuthorize(HttpServletRequest httpRequest, HttpServletResponse httpResponse, String[] uriArr)

@@ -59,13 +59,12 @@
 			<div class="page-breadcrumb">
 				<div class="row">
 					<div class="col-12 d-flex no-block align-items-center">
-						<h4 class="page-title">Tables</h4>
+						<h4 class="page-title">게시판관리</h4>
 						<div class="ml-auto text-right">
 							<nav aria-label="breadcrumb">
 								<ol class="breadcrumb">
 									<li class="breadcrumb-item"><a href="#">Home</a></li>
-									<li class="breadcrumb-item active" aria-current="page">사용자
-										리스트</li>
+									<li class="breadcrumb-item active" aria-current="page">게시판관리</li>
 								</ol>
 							</nav>
 						</div>
@@ -198,17 +197,17 @@
 															value="${bList.REG_DATE}" /></td>
 													<td>${bList.REC_COUNT}</td>
 													<td>${bList.VIEW_COUNT}</td>
-													<td class="nav-item dropdown" href=""
-														data-toggle="dropdown" aria-haspopup="true"
-														aria-expanded="false"><i class="m-r-10 mdi mdi-menu ">
-													</i>
-														<div class="dropdown-menu"
-															aria-labelledby="navbarDropdown">
-															<a class="dropdown-item" href="#">Action</a> <a
-																class="dropdown-item" href="#">Another action</a>
-															<div class="dropdown-divider"></div>
-															<a class="dropdown-item" href="#">Something else here</a>
-														</div></td>
+													<td class="nav-item" ><span>
+													<c:choose>
+													
+													<c:when test="${bList.IS_DEL == 1}">
+														삭제요청중<a class="btn btn-warning btn-sm" onclick="confirmDeleteBoard(${bList.BD_IDX})">삭제</a>
+													</c:when>
+													<c:otherwise>
+														등록됨
+													</c:otherwise>
+													</c:choose>
+													</span></td>
 												</tr>
 											</c:forEach>
 
@@ -218,36 +217,7 @@
 									<div class="border-top">
 										<div class="card-body">
 											<button class="btn-secondary ">submit</button>
-											<div
-												class="dataTables_paginate paging_simple_numbers float-right"
-												id="zero_config_paginate">
-												<ul class="pagination">
-													<li class="paginate_button page-item previous disabled"
-														id="zero_config_previous"><a
-														aria-controls="zero_config" data-dt-idx="0" tabindex="0"
-														class="page-link" onclick="prevBtn(${pageUtil.curPage})">Previous</a></li>
-													<c:if test="${pageUtil.blockEnd eq 1}">
-														<li class="paginate_button page-item active"><a
-															href="#" aria-controls="zero_config" data-dt-idx="1"
-															tabindex="0" class="page-link">1</a></li>
-													</c:if>
-													<c:if test="${pageUtil.blockEnd > 1}">
-														<c:forEach var="i" begin="1" step="1"
-															end="${pageUtil.blockEnd}">
-
-															<li class="paginate_button page-item"><a href="#"
-																aria-controls="zero_config" class="page-link"
-																onclick="changePage(${i})">${i}</a></li>
-														</c:forEach>
-													</c:if>
-
-
-													<li class="paginate_button page-item next"
-														id="zero_config_next"><a href="#"
-														aria-controls="zero_config" class="page-link"
-														onclick="nextBtn(${pageUtil.curPage},${pageUtil.blockEnd})">Next</a></li>
-												</ul>
-											</div>
+											<%@ include file="/WEB-INF/views/admin/include/paging.jsp"%>
 										</div>
 									</div>
 
@@ -298,6 +268,8 @@
 	<script src="/resources/js/admin/sidebarmenu.js"></script>
 	<!--Custom JavaScript -->
 	<script src="/resources/js/admin/custom.min.js"></script>
+	<script src="/resources/js/admin/common/paging.js"></script>
+	<script src="/resources/js/admin/common/select-tab.js"></script>
 	<!--This page JavaScript -->
 	<script type="text/javascript">
 (() =>{
@@ -319,7 +291,7 @@
 })();
 
 
-    const URLSearch = new URLSearchParams(location.search);
+  
     
     let sortList = () =>{
     	var sortSelect = document.getElementById("sortSelect");  
@@ -361,36 +333,23 @@
     	
     }
     
-   	let prevBtn = (page) => {
-		if(page == 1){
-			alert("첫번째 페이지 입니다.")
-			return;
-		}
-		
-		page--;
-
-		changePage(page);
-		
-	}
-	
-	let nextBtn = (page, blockEnd) => {
-		if(page == blockEnd){
-			alert("마지막 페이지 입니다.")
-			return;
-		}
-		
-		page++;
-		
-		changePage(page);
-		
-	}
-    let changePage = (page) =>{
-    	
-      		 URLSearch.set('page', String(page));
-         	 const newParam = URLSearch.toString();
-         	 location.href = location.pathname + '?' + newParam
-      	 
-    }
+let confirmDeleteBoard = (bdIdx) =>{
+ 		
+    	return fetch('/admin/contents/delete-board',{
+ 			method:"post",
+ 			body: JSON.stringify({bdIdx : bdIdx}),
+ 			 headers:{
+ 			    'Content-Type': 'application/json'
+ 			  }
+    	}).then(res => {
+    		alert('상태가 변경되었습니다.');
+    		location.reload();
+    	})
+    		
+ 	
+ 	}
+    
+   
     
 </script>
 

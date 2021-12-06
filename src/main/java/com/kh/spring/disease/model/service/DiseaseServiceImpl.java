@@ -10,6 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.kh.spring.common.util.FileDTO;
 import com.kh.spring.common.util.FileUtil;
+import com.kh.spring.common.util.pagination.Paging;
 import com.kh.spring.disease.model.dto.Disease;
 import com.kh.spring.disease.model.dto.PriceImg;
 import com.kh.spring.disease.model.repository.DiseaseRepository;
@@ -23,9 +24,15 @@ public class DiseaseServiceImpl implements DiseaseService{
 	private final DiseaseRepository diseaseRepository;
 	Logger logger = LoggerFactory.getLogger(this.getClass());
 	
-	public List<Map<String, Object>> selectDiseaseList() {
+	
+	public int selectDiseaseListCnt() {
 		
-		List<Map<String, Object>> commandList = diseaseRepository.selectDiseaseListWithImg();
+		return diseaseRepository.selectDiseaseListCnt();
+	}
+	
+	public List<Map<String, Object>> selectDiseaseList(Paging pageUtil) {
+		
+		List<Map<String, Object>> commandList = diseaseRepository.selectDiseaseListWithImg(pageUtil);
 		for (Map<String, Object> map : commandList) {
 			FileDTO files = new FileDTO();
 			files.setSavePath((String) map.get("SAVE_PATH"));
@@ -38,6 +45,7 @@ public class DiseaseServiceImpl implements DiseaseService{
 		
 		
 	}
+	
 
 	public Disease selectDiseaseByIdx(long dsIdx) {
 		return diseaseRepository.selectDiseaseByIdx(dsIdx);
@@ -58,4 +66,6 @@ public class DiseaseServiceImpl implements DiseaseService{
 
 		
 	}
+	
+	
 }

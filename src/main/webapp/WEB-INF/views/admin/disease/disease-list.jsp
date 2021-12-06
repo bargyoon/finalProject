@@ -136,87 +136,13 @@
 											</tr>
 											</c:forEach>
 											
-											<tr>
-												<td><label class="mt-3"> <input type="checkbox"
-														class="listCheckbox" />
-												</label></td>
-												<td>02</td>
-												<td><a><img
-														src="https://cdn.imweb.me/thumbnail/20180305/5a9cea9e49044.png"></a>
-
-												</td>
-												<td>10000원</td>
-												<td>4</td>
-												<td class="nav-item dropdown" href="" data-toggle="dropdown"
-													aria-haspopup="true" aria-expanded="false"><span>반품중</span><i
-													class="m-r-10 mdi mdi-chevron-down ml-2"> </i>
-													<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-														<a class="dropdown-item" href="#">Action</a> <a
-															class="dropdown-item" href="#">Another action</a>
-														<div class="dropdown-divider"></div>
-														<a class="dropdown-item" href="#">Something else here</a>
-													</div></td>
-
-												<td>4</td>
-												<td>4</td>
-
-											</tr>
-											<tr>
-												<td><label class="mt-3"> <input type="checkbox"
-														class="listCheckbox" />
-												</label></td>
-												<td>03</td>
-												<td><a><img
-														src="https://cdn.imweb.me/thumbnail/20180305/5a9cea9e49044.png"></a>
-
-
-												</td>
-												<td>10000원</td>
-												<td>4</td>
-												<td class="nav-item dropdown" href="" data-toggle="dropdown"
-													aria-haspopup="true" aria-expanded="false"><span>반품중</span><i
-													class="m-r-10 mdi mdi-chevron-down ml-2"> </i>
-													<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-														<a class="dropdown-item" href="#">Action</a> <a
-															class="dropdown-item" href="#">Another action</a>
-														<div class="dropdown-divider"></div>
-														<a class="dropdown-item" href="#">Something else here</a>
-													</div></td>
-
-												<td>4</td>
-												<td>4</td>
-
-											</tr>
-											<tr>
-												<td><label class="mt-3"> <input type="checkbox"
-														class="listCheckbox" />
-												</label></td>
-												<td>04</td>
-												<td><a><img
-														src="https://cdn.imweb.me/thumbnail/20180305/5a9cea9e49044.png"></a>
-
-												</td>
-												<td>10000원</td>
-												<td>4</td>
-												<td class="nav-item dropdown" href="" data-toggle="dropdown"
-													aria-haspopup="true" aria-expanded="false"><span>반품중</span><i
-													class="m-r-10 mdi mdi-chevron-down ml-2"> </i>
-													<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-														<a class="dropdown-item" href="#">Action</a> <a
-															class="dropdown-item" href="#">Another action</a>
-														<div class="dropdown-divider"></div>
-														<a class="dropdown-item" href="#">Something else here</a>
-													</div></td>
-
-												<td>4</td>
-												<td>4</td>
-
-											</tr>
+											
 										</tbody>
 									</table>
 									<div class="border-top">
 										<div class="card-body">
-											<button class="btn-secondary">submit</button>
+											<button class="btn-secondary ">submit</button>
+											<%@ include file="/WEB-INF/views/admin/include/paging.jsp"%>
 										</div>
 									</div>
 								</form>
@@ -246,12 +172,10 @@
 	<script src="/resources/js/admin/custom.min.js"></script>
 	<!--This page JavaScript -->
 
-	<script src="/resources/js/admin/datatables.min.js"></script>
-	<script type="text/javascript">
-	
+	<script src="/resources/js/admin/common/paging.js"></script>
+	<script src="/resources/js/admin/common/select-tab.js"></script>
 		
 		
-	</script>
 </body>
 
 </html>

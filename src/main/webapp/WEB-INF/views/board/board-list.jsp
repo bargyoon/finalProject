@@ -17,7 +17,7 @@
 <%@ include file="/WEB-INF/views/include/navBar.jsp" %>
 
 
-	<div class="board_list_wrap">
+	<div class="board_list_wrap" style="padding-top:160px; width:60%; margin-left:20%">
 	<div class="paging">
 				<a href="/board/info" class="bt">정보게시판</a> <a href="/board/dog"
 					class="bt">강아지</a> <a href="/board/cat" class="bt">고양이</a> <a
@@ -28,7 +28,7 @@
 			<br>
 			<span style="float:right">
 			<select name="category" id="sortSelect" onchange="sortList()"
-                    class="form-control">
+                    >
                     <option value="reg_date">등록일순</option>
                     <option value="view_count">조회순</option>
                     <option value="rec_count">추천순</option>
@@ -37,7 +37,7 @@
 		<table class="board_list">
 			<caption>게시판 목록</caption>
 			
-			<thead>
+			<thead style="text-align:center;">
 				<tr>
 					<th>번호</th>
 					<th>제목</th>
@@ -52,7 +52,7 @@
 					<tr>
 						<td>${bList.RNUM}</td>
 						<td class="tit"><a
-							href="/board/${dataMap.category}/detail?bdIdx=${bList.BD_IDX}">${bList.BD_TITLE}</a><span><i
+							href="/board/${dataMap.category}/detail?bdIdx=${bList.BD_IDX}">${bList.BD_TITLE}</a><span style="margin-left: 5px"><i
 								class="fas fa-comment" style="margin-right: 5px"></i></span>${bList.CM_CNT }
 						</td>
 						<td>${bList.NICKNAME}</td>
@@ -66,9 +66,11 @@
 			</tbody>
 		</table>
 		<br>
+		<c:if test="${not empty authentication}">
 		<div style="float: right;" class="btn">
 			<button onclick="javascript:location.href='/board/${dataMap.category}/form'">글쓰기</button>
 		</div>
+		</c:if>
 		<br>
 		<div class="paging">
 			<a class="bt" onclick="changePage(1)">첫 페이지</a> <a

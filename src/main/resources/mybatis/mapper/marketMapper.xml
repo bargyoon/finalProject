@@ -175,7 +175,7 @@
 		select p.name, d.po_name,d.price, m.user_name, o.cp_save_money,o.save_money, o.order_num, o.shipping_num, o.shipping_company,
 		o.payment_method, o.payment_amount, o.order_date, o.state, o.order_cnt
 		, f.save_path, f.rename_file_name
-		from "ORDER" o join file_info f on(o.prd_idx = f.type_idx) join product p
+		from "ORDER" o left join file_info f on(o.prd_idx = f.type_idx) join product p
 		on (o.prd_idx = p.prd_idx) join prd_detail d on(o.dt_idx = d.dt_idx)
 		join "USER" m on(o.user_idx = m.user_idx) where order_num = #{orderNum}
 	</select>
@@ -211,22 +211,53 @@
 	<select id="selectItemCommentListCnt" resultType="java.lang.Integer">
 	select count(*) from 
 	
-	(select p.name, p.prd_idx, o.order_idx, r.rating, r.user_idx, m.user_name, r.reg_date, r.recommand, f.save_path, f.rename_file_name, r.state, r.rv_content
+	(select p.name, p.prd_idx, o.order_idx, r.rv_idx, r.rating, r.user_idx, m.user_name, r.reg_date, r.recommand,  r.state, r.rv_content
 	from review r join "USER" m on(r.user_idx = m.user_idx)
 	join product p on (r.prd_idx = p.prd_idx) 
 	join "ORDER" o on(r.order_idx =  o.order_idx) 
-	join file_info f on(r.rv_idx = f.type_idx))
+	<where>
+		<if test="rating != null and rating != 'all'">r.rating = #{rating}</if>
+		<if test="state != null and state != 'all'">and r.state = #{state}</if>
+		<if test="type != null and type != 'all'">and r.type = #{type}</if>
+		<if test="keyword != null">and (m.user_name like '%'||#{keyword}||'%' or p.name like '%'||#{keyword}||'%' or r.rv_content like '%'||#{keyword}||'%')</if>
+	</where>
+	)
 	</select>
 	
 	<select id="selectItemCommentList" resultType="map">
 	select * from 
-	(select rownum rnum , name, prd_idx, order_idx,rating, type, user_idx, user_name, reg_date, recommand, save_path, rename_file_name, state , rv_content from
-	(select p.name, p.prd_idx, o.order_idx, r.rating, r.type,r.user_idx, m.user_name, r.reg_date, r.recommand, f.save_path, f.rename_file_name, r.state,r.rv_content
+	(select rownum rnum , name, prd_idx, order_idx, rv_idx, rating, type, user_idx, user_name, reg_date, recommand, state , rv_content from
+	(select p.name, p.prd_idx, o.order_idx,r.rv_idx, r.rating, r.type,r.user_idx, m.user_name, r.reg_date, r.recommand,r.state,r.rv_content
 	from review r join "USER" m on(r.user_idx = m.user_idx)
 	join product p on (r.prd_idx = p.prd_idx) 
 	join "ORDER" o on(r.order_idx =  o.order_idx) 
-	join file_info f on(r.rv_idx = f.type_idx)
+	<where>
+		<if test="commandMap.rating != null and commandMap.rating != 'all'">r.rating = #{commandMap.rating}</if>
+		<if test="commandMap.state != null and commandMap.state != 'all'">and r.state = #{commandMap.state}</if>
+		<if test="commandMap.type != null and commandMap.type != 'all'">and r.type = #{commandMap.type}</if>
+		<if test="commandMap.keyword != null">and (m.user_name like '%'||#{commandMap.keyword}||'%' or p.name like '%'||#{commandMap.keyword}||'%' or r.rv_content like '%'||#{commandMap.keyword}||'%')</if>
+	</where>
+	
+	)) where rnum between ${((pageUtil.curPage-1) * pageUtil.cntPerPage) + 1} and ${pageUtil.curPage * pageUtil.cntPerPage}
+	</select>
+	
+	<select id="selectQnAListCnt" resultType="java.lang.Integer">
+	select count(*) from 
+	
+	(select p.name, m.user_name, q.reg_date, q.is_answer, q.context, q.title, q.type, q.tell, q.qna_idx
+	from qna q join "USER" m on(q.user_idx = m.user_idx) join product p on(p.prd_idx = q.prd_idx) left join "ORDER" o on(q.order_idx = o.order_idx) 
+	
+	)
+	</select>
+	
+	<select id="selectQnAList"  resultType="map">
+	select * from 
+	(select rownum rnum, name, user_name, reg_date, is_answer, context, title, type, tell, qna_idx from
+	(select p.name name, m.user_name, q.reg_date, q.is_answer, q.context, q.title, q.type, q.tell, q.qna_idx
+	from qna q join "USER" m on(q.user_idx = m.user_idx) join product p on(p.prd_idx = q.prd_idx) left join "ORDER" o on(q.order_idx = o.order_idx) 
+	
 	)) where rnum between ${((pageUtil.curPage-1) * pageUtil.cntPerPage) + 1} and ${pageUtil.curPage * pageUtil.cntPerPage}
 	</select>
 
+	
 </mapper>

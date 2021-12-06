@@ -225,10 +225,9 @@ public class ShopServiceImpl implements ShopService{
 		List<Map<String,Object>> commandList = shopRepository.selectItemCommentList(commandMap,pageUtil);
 		for (Map<String, Object> map : commandList) {
 			if(Integer.parseInt(map.get("TYPE").toString()) == 1) {
-				FileDTO files = new FileDTO();
-				files.setSavePath((String) map.get("SAVE_PATH"));
-				files.setRenameFileName((String) map.get("RENAME_FILE_NAME"));
-				map.put("downloadURL", files.getDownloadURL());
+				List<FileDTO> files = shopRepository.selectFileInfoByIdx(Integer.parseInt(map.get("RV_IDX").toString()));
+				
+				map.put("files", files);
 				
 			}
 		}
@@ -272,4 +271,16 @@ public class ShopServiceImpl implements ShopService{
 		return Map.of("photoReviewCnt", photoReviewCnt, "normalReviewCnt", normalReviewCnt);
 	}
 	
+	@Override
+	public List<Map<String, Object>> selectQnAList(Map<String, Object> commandMap, Paging pageUtil) {
+		List<Map<String,Object>> commandList = shopRepository.selectQnAList(commandMap,pageUtil);
+		
+		
+		return commandList;
+	}
+	
+	@Override
+	public int selectQnAListCnt(Map<String, Object> commandMap) {
+		return shopRepository.selectQnAListCnt(commandMap);
+	}
 }

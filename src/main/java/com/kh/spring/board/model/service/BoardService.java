@@ -27,4 +27,10 @@ public interface BoardService {
 
 	List<Map<String, Object>> selectCommentList(Map<String, Object> commandMap, Paging pageUtil);
 
+	boolean insertRecommendBoard(int bdIdx, int userIdx);
+
+	boolean insertRecommendComment(int cmIdx, int userIdx);
+
+	void deleteBoard(Board board);
+
 }

@@ -139,8 +139,54 @@
                     </div>
                 </div>
             </div>
-        </section>     
-           
+        </section>        
+        <!-- Board -->
+        <section class="page-section" id="board">
+            <div class="container">
+                <div class="row text-center">
+                    <div class="board-in-main">
+                        <h2 class="my-3">강아지 게시판</h2>                      
+                    </div>
+                    <div class="board-in-main">
+                        <h2 class="my-3">고양이 게시판</h2>
+                         <div class=board-list-in-main>
+                        	<table class="table mb-0">
+										<thead class="thead-dark">
+											<tr>
+												
+												<th scope="col" style="width: 70%">제목</th>
+												
+												<th scope="col" style="width: 30%">조회 수</th>
+												
+											</tr>
+										</thead>
+										<tbody class="customtable">
+											<c:forEach items="${infoList}" var="infoList" varStatus="status">
+												<tr>
+													
+													<td style="text-align:left"><a
+														href="/board/${infoList.CATEGORY}/detail?bdIdx=${infoList.BD_IDX}">${infoList.BD_TITLE}</a><small
+														class="ml-2"><i class="fas fa-comment mr-1"></i>${infoList.CM_CNT}</small></td>
+													
+													
+													<td>${infoList.VIEW_COUNT}</td>
+													
+												</tr>
+											</c:forEach>
+
+										</tbody>
+									</table>
+                        </div>
+                    </div>
+                     <div class="board-in-main">
+                        <h2 class="my-3">다른 게시판</h2>
+                         <div class=board-list-in-main>
+                        	게시판 코드 따 올 예정
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section> 
     </body>
    <%@ include file="/WEB-INF/views/include/footer.jsp" %>	
    <%@ include file="/WEB-INF/views/include/mainJs.jsp" %>
