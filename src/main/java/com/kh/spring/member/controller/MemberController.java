@@ -35,15 +35,11 @@ public class MemberController {
 	Logger logger =  LoggerFactory.getLogger(this.getClass());
 	
 	private MemberService memberService;	
-    private EmailSender emailSender;	//비번찾기때
-    private Email email;
 
-
-	public MemberController(MemberService memberService,EmailSender emailSender,Email email) {
+	public MemberController(MemberService memberService) {
 		super();
 		this.memberService = memberService;
-		this.emailSender = emailSender;
-		this.email = email;
+
 	}
 
 	@GetMapping("login")

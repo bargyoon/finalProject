@@ -68,3 +68,11 @@ $("#userId").keyup(function() {
                 $('#password_discord').css("display", "none");             
             }
       });
+      
+   function check(){
+    if(document.getElementById("email_ck").value==""){
+        alert("메일 인증이 필요합니다.");
+        return;
+    }
+}
+ 

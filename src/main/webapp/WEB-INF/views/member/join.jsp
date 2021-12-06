@@ -236,7 +236,7 @@
                   		</div>
                   		<div class="form-group" id="mail_auth_ck_wrap">
 	                  		<div class="mail_auth_ck">
-	                     		<input class="form-control" id="email_ck"disabled="disabled">
+	                     		<input class="form-control" id="email_ck"disabled="disabled" required>
 	                  		</div>
 		                  	<div class="btn btn-secondary" id="mail_auth_bnt">
 		                  	 	<span>인증번호 발송</span>
@@ -245,14 +245,12 @@
 		                  	<span id="mail_auth_check_warn"></span>
                   	    </div>
                   </div>
-                  
-                  
                    <div class="form-group">
                      <label>주소: </label>
                      <input type="text" name="address" id="address" class="form-control" id="address" placeholder="주소를 입력하세요">
                      <input type="text" name="addressDetail" id="addressDetail" class="form-control" placeholder="상세주소를 입력하세요">
                   </div><br><hr>                  
-                  <input type="submit" class="btn btn-secondary" id="joinBtn" style="width: 100%" value="가입하기" />
+                  <input type="submit" class="btn btn-secondary" id="joinBtn" onclick="check()" style="width: 100%" value="가입하기" />
                </form>
             </div>
          </div>
