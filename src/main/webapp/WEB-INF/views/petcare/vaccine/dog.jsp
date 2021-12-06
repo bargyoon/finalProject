@@ -7,7 +7,7 @@
 <link rel="stylesheet" href="/resources/css/petcare/vaccine.css">
 </head>
 <body>
-
+<%@ include file="/WEB-INF/views/include/navBar.jsp" %>
 <section style="background-color: rgb(240, 234, 213);">
 	
 		<div class="petcare-back">						

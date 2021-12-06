@@ -10,6 +10,7 @@
 		if(nickName == ''){
 			document.querySelector("#nickNameCheck").innerHTML = "닉네임을 입력하세요.";
 			document.querySelector("#nickName").focus();
+			return;
 		}
 		
 		fetch("/mypage/nickNameCheck?nickName=" + nickName)

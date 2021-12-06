@@ -17,13 +17,16 @@ import com.google.cloud.vision.v1.Feature.Type;
 import com.google.cloud.vision.v1.Image;
 import com.google.cloud.vision.v1.ImageAnnotatorClient;
 import com.google.protobuf.ByteString;
+import com.kh.spring.board.model.repository.BoardRepository;
 import com.kh.spring.common.util.FileDTO;
 import com.kh.spring.common.util.FileUtil;
+import com.kh.spring.common.util.pagination.Paging;
 import com.kh.spring.disease.model.dto.Disease;
 import com.kh.spring.disease.model.dto.PriceImg;
 import com.kh.spring.disease.model.repository.DiseaseRepository;
 import com.kh.spring.market.model.dto.Order;
 import com.kh.spring.market.model.repository.ShopRepository;
+import com.kh.spring.member.model.repository.MemberRepository;
 
 import lombok.RequiredArgsConstructor;
 
@@ -32,7 +35,9 @@ import lombok.RequiredArgsConstructor;
 public class AdminServiceImpl implements AdminService {
 	private final DiseaseRepository diseaseRepository;
 	private final ShopRepository shopRepository;
-
+	private final MemberRepository memberRepository;
+	private final BoardRepository boardRepository;
+	
 	public void insertDisease(Disease disease, List<MultipartFile> mfs) {
 		FileUtil fileUtil = new FileUtil();
 		if (disease.getPrice() != 0) {
@@ -50,9 +55,9 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	
-	public Map<String, Object> selectPriceImgList(String state) {
+	public Map<String, Object> selectPriceImgList(String state, Paging pageUtil) {
 		Map<String,Object> viewMap = new LinkedHashMap<String, Object>();
-		List<Map<String, Object>> piList = diseaseRepository.selectPriceImgList(state);
+		List<Map<String, Object>> piList = diseaseRepository.selectPriceImgList(state,pageUtil);
 		int totalCnt = diseaseRepository.selectAllCnt();
 		int noCnt = diseaseRepository.selectSpecCnt("N");
 		int yesCnt = diseaseRepository.selectSpecCnt("Y");
@@ -144,6 +149,39 @@ public class AdminServiceImpl implements AdminService {
 		shopRepository.updateShipping(order);
 		
 	}
+	@Override
+	public int selectPriceImgListCnt(String state) {
+		
+		return diseaseRepository.selectPriceImgListCnt(state);
+	}
 	
+	@Override
+	public void updateReviewState(Map<String, Object> jsonMap) {
+		shopRepository.updateReviewState(jsonMap);
+		int userIdx = Integer.parseInt(jsonMap.get("userIdx").toString());
+		int orderIdx = Integer.parseInt(jsonMap.get("orderIdx").toString());
+		if(jsonMap.get("state").equals("1")) {
+			if(jsonMap.get("type").equals("0")) {
+				memberRepository.updateSaveMoney(userIdx, 300);
+				shopRepository.insertSaveMoney(1,userIdx, 300,orderIdx);
+			}else {
+				memberRepository.updateSaveMoney(userIdx, 600);
+				shopRepository.insertSaveMoney(2,userIdx, 600,orderIdx);
+			}
+			
+		}
+	}
+	
+	@Override
+	public void updateProductState(Map<String, Object> jsonMap) {
+		shopRepository.updateProductState(jsonMap);
+		
+	}
+	
+	@Override
+	public void deleteBaord(int bdIdx) {
+		boardRepository.deleteBoardByIdx(bdIdx);
+		
+	}
 
 }

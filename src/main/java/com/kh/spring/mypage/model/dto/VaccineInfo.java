@@ -8,7 +8,7 @@ import lombok.Data;
 public class VaccineInfo {
 	
 	private int viIdx;
-	private String name;
+	private String viName;
 	private int cycle;
 	private String species;
 }

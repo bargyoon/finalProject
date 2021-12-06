@@ -119,7 +119,7 @@
 								</ul>
 							</div>
 						</td>
-						<td class="enquiry_title text-start" onclick="openEnquiry()">${enquiryList.TITLE}</td>
+						<td class="enquiry_title text-start" onclick="openEnquiry(${enquiryList.RNUM})">${enquiryList.TITLE}</td>
 						<c:choose>
 							<c:when test="${enquiryList.TYPE eq '1'}"><td>교환문의</td></c:when>
 							<c:when test="${enquiryList.TYPE eq '2'}"><td>환불문의</td></c:when>
@@ -141,16 +141,15 @@
 					</tr>
 					
 					<!-- 문의 내용 -->
-					<tr class="enquiry_context eq-click">
-						<td>&nbsp;</td>
+					<tr class="enquiry_context eq-click" id="eq-click-${enquiryList.RNUM}">
 						<td class="text-start" colspan="3">${enquiryList.CONTEXT}</td>
+						<c:if test="${enquiryList.IS_ANSWER eq 0}">
 						<td>&nbsp;</td>
-					</tr>
-					
-					<!-- 답변 -->
-					<c:if test="${enquiryList.IS_ANSWER eq 1}">
-						<tr class="eq-click">
-							<td>스토어 담당자<br>윤수환</td>
+						</c:if>
+						
+					<!-- 관리자 답변 -->
+						<c:if test="${enquiryList.IS_ANSWER eq 1}">
+						<td>스토어 담당자<br>윤수환</td>
 							<td colspan="3" class="text-start">
 								<p class="enquiry-answer" style="line-height: 2rem;">
 									안녕하세요 똑Dog한 집사들 장터 고객센터 입니다.<br>
@@ -161,9 +160,9 @@
 									감사합니다.
 								</p>
 							</td>
-							<td style="font-size: 14px;">21.08.16<br>15:31</td>
-						</tr>
-					</c:if>
+							<td style="font-size: 14px;">${enquiryList.AW_REG_DATE}</td>
+						</c:if>
+					</tr>				
 				</tbody>
 				</c:forEach>
 			</table>

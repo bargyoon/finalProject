@@ -34,7 +34,7 @@
 			
 				<div class="mb-3">
 					<label for="name" class="form-label">이름</label>
-					<input name="name" type="text" class="form-control" id="name" required="required">
+					<input name="petName" type="text" class="form-control" id="name" required="required">
 				</div>
 				
 				<div class="mb-3">
@@ -42,25 +42,25 @@
 					<div style="display: flex;">
 						<select class="form-select" name="species" id="species" required="required" style="text-align: center;">
 							<option disabled="disabled" selected="selected">--선택--</option>
-							<option value="dog">강아지</option>
-							<option value="cat">고양이</option>
+							<option value="강아지">강아지</option>
+							<option value="고양이">고양이</option>
 						</select>
 					</div>
 				</div>
 				
 				<div class="mb-3">
 					<label for="age" class="form-label">나이</label>
-					<input name="age" type="number" class="form-control" id="age" required="required">
+					<input name="petAge" type="number" class="form-control" id="age" required="required">
 				</div>
 				
 				<div class="mb-3">
 					<label for="gender" class="form-label">성별</label>
 					<div class="form-check form-check-inline ms-5">
-					  <input class="form-check-input" type="radio" name="gender" value="m" id="flexRadioDefault1" checked required="required">
+					  <input class="form-check-input" type="radio" name="gender" value="남" id="flexRadioDefault1" checked required="required">
 					  <label class="form-check-label" for="flexRadioDefault1">남</label>
 					</div>
 					<div class="form-check form-check-inline">
-					  <input class="form-check-input" type="radio" name="gender" value="f" id="flexRadioDefault2">
+					  <input class="form-check-input" type="radio" name="gender" value="여" id="flexRadioDefault2">
 					  <label class="form-check-label" for="flexRadioDefault2">여</label>
 					</div>
 				</div>

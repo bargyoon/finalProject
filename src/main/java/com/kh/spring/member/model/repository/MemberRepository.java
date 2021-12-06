@@ -1,11 +1,15 @@
 package com.kh.spring.member.model.repository;
 
+import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
+import com.kh.spring.common.util.pagination.Paging;
 import com.kh.spring.member.model.dto.Member;
 
 @Mapper
@@ -31,8 +35,11 @@ public interface MemberRepository {
 	@Select("select user_id from \"USER\" where email = #{email}")
 	Member searchId(Member member);
 	
-	@Select("select password from \"USER\" where user_id = #{userId} and email = #{email}")
-	String searchPw(Map<String, Object> member);
+	@Select("select * from \"USER\" where user_id = #{userId} and email = #{email}")
+	Member searchPw(Member member);
+	
+	@Update("update \"USER\" set password=#{password} where user_id=#{userId}")
+	void updatePw(Member member);
 
 	@Select("select * from \"USER\" where user_id= #{userId}")
 	Member selectMemberById(String userId);
@@ -49,5 +56,12 @@ public interface MemberRepository {
 
 	@Select("select * from \"USER\" where user_idx = ${userIdx}")
 	Member selectMemberByIdx(int userIdx);
+
+	@Update("update \"USER\" set savemoney = ((select savemoney from \"USER\" where user_idx = #{userIdx})+#{saveMoney}) where user_idx = #{userIdx}")
+	void updateSaveMoney(@Param("userIdx")int userIdx , @Param("saveMoney")int saveMoney);
+
+	int selectMemberListCnt(Map<String, Object> commandMap);
+	
+	List<Member> selectMemberList(@Param("commandMap")Map<String, Object> commandMap, @Param("pageUtil")Paging pageUtil);
 
 }

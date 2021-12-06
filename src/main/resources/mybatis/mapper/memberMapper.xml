@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="com.kh.spring.member.model.repository.MemberRepository">
+  	
+  	<select id="selectMemberListCnt" resultType="java.lang.Integer">
+  		select count(*) from "USER"
+  	</select>
+  	
+  	
+  	<select id="selectMemberList" resultType="Member">
+  		select * from
+  		(select rownum rnum, user_idx, email, nickname, grade, user_id, address, join_date, savemoney, is_leave, address_detail, user_name 
+  		from "USER"
+  		
+  		
+  		)where rnum between ${((pageUtil.curPage-1) * pageUtil.cntPerPage) +
+		1} and ${pageUtil.curPage * pageUtil.cntPerPage}
+  	</select>
+  	
+  	
+  </mapper>

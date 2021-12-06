@@ -33,13 +33,11 @@
 		<div style="margin: 0 auto;">
 			<form:form style="margin: 0 auto; width: 400px;" id="frmUpdateMember"
 				action="/mypage/update-member-info" method="post" enctype="multipart/form-data" modelAttribute="updateMemberForm">
-			
-				<div class="input-group form-floating">
-					<input type="text" class="form-control" id="nickName" name="nickName" placeholder="1"
-						aria-describedby="btnNickNameCheck">
+				<span>닉네임</span>
+				<div class="input-group">
+					<input type="text" class="form-control" id="nickName" name="nickName" placeholder="닉네임을 입력하세요"
+						aria-describedby="btnNickNameCheck" >
 					<button class="btn btn-outline-secondary" type="button" id="btnNickNameCheck">중복확인</button>
-					<label for="nickName" class="form-label">닉네임</label>
-					
 					
 					<form:errors id="nickNameCheck" path="nickName" cssClass="valid-msg"/>
 				</div>
@@ -49,10 +47,10 @@
 					</c:if>
 				</div>
 				
-	
-				<div class="form-floating mb-3">
-					<input type="password" class="form-control" id="password" name="password" placeholder="1">
-					<label for="password" class="form-label">변경할 비밀번호</label>
+				<span>변경할 비밀번호</span>
+				<div class="mb-3">
+					<input type="password" class="form-control" id="password" name="password" placeholder="변경 할 비밀번호를 입력해주세요.">
+					
 					
 					<c:if test="${empty error.password}">
 						<span id="passwordCheck" class="valid-msg"></span>
@@ -60,21 +58,23 @@
 					<form:errors id="passwordCheck" path="password" cssClass="valid-msg"/>
 				</div>
 				
-				<div class="form-floating mb-3">
-					<input type="password" class="form-control" id="password2" name="password2" placeholder="1">
-					<label for="password2" class="form-label">비밀번호 확인</label>
+				<span>비밀번호확인</span>
+				<div class="mb-3">
+					<input type="password" class="form-control" id="password2" name="password2" placeholder="동일한 비밀번호를 입력해주세요.">
+					
 					
 					<form:errors id="passwordCheck" path="password2" cssClass="valid-msg"/>
 				</div>
-	
-				<div class="form-floating">
-					<input type="text" class="form-control" id="address" name="address" placeholder="주소를 입력하세요">
-					<label for="address" class="form-label">주소</label>
+				
+				<span>주소</span>
+				<div class="">
+					<input type="text" class="form-control" id="address" name="address" placeholder="클릭하여 주소를 찾아주세요">
+					
 				</div>
 				
-				<div class="form-floating mb-3">
-					<input type="text" class="form-control" id="addressDetail" name="addressDetail" placeholder="1">
-					<label for="addressDetail" class="form-label">상세주소</label>
+				<div class="mb-3">
+					<input type="text" class="form-control" id="addressDetail" name="addressDetail" placeholder="상세 주소를 입력해주세요.">
+				
 				</div>
 				
 				<%-- <div class="mb-3">

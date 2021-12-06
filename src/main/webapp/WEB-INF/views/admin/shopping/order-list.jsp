@@ -631,345 +631,13 @@
 
 
 										</c:forEach>
-										<tr>
-
-											<td rowspan="2">
-												<div>
-													<span style="color: black;">주문번호</span>
-												</div>
-												<div style="font-size: 10pt; color: gray;">주문시각</div>
-												<p style="margin-top: 10px;">주문한사람</p>
-											</td>
-											<td><a><img
-													src="https://cdn.imweb.me/thumbnail/20180305/5a9cea9e49044.png"></a>
-												<div class="d-inline-block">
-													<div style="font-size: 10pt; color: gray;">주문번호</div>
-													<div>
-														<a href="#">화장품</a>
-													</div>
-												</div></td>
-											<td class="text-right  ">10000원</td>
-											<td class="text-center">4</td>
-											<td rowspan="2">
-												<div>
-													<div>
-														<select>
-															<option value="" selected="">택배사 선택</option>
-															<option value="CJ">CJ대한통운</option>
-															<option value="EPOST">우체국택배</option>
-															<option value="REGISTPOST">우편등기</option>
-															<option value="HANJIN">한진택배</option>
-															<option value="LOGEN">로젠택배</option>
-															<option value="GTX">GTX로지스</option>
-															<option value="LOTTE">롯데택배</option>
-															<option value="DS">대신택배</option>
-															<option value="IY">일양로지스</option>
-															<option value="KD">경동택배</option>
-															<option value="NHLOGIS">농협택배</option>
-															<option value="SEBANG">세방택배</option>
-															<option value="CI">천일택배</option>
-															<option value="CVS">CVSnet 편의점택배</option>
-															<option value="HD">합동택배</option>
-															<option value="EMS">EMS</option>
-															<option value="kpacket">K-Packet</option>
-															<option value="DHL">DHL</option>
-															<option value="FEDEX">Fedex</option>
-															<option value="GSMN">GSMNtoN</option>
-															<option value="UPS">UPS</option>
-															<option value="TNT">TNT Express</option>
-															<option value="USPS">USPS</option>
-															<option value="AIRBOY">에어보이익스프레스</option>
-															<option value="DHLMAIL">DHL Global Mail</option>
-															<option value="IPARCEL">i-Parcel</option>
-															<option value="HANWISA">한의사랑택배</option>
-															<option value="HANWISA">한의사랑택배</option>
-															<option value="GUNYOUNG">건영택배</option>
-															<option value="BUMHAN">범한판토스</option>
-															<option value="APEX">APEX</option>
-															<option value="ECMSExpress">ECMSExpress</option>
-															<option value="GOODTOLUCK">굿투럭</option>
-															<option value="DHLGER">DHL 독일</option>
-															<option value="ACI">ACI</option>
-															<option value="LOTTEGLOBAL">롯데택배(국제택배)</option>
-															<option value="CJGLOBAL">CJ대한통운(국제택배)</option>
-															<option value="SUNGWON">성원글로벌</option>
-															<option value="DAEWOON">대운글로벌</option>
-															<option value="SLX">SLX택배</option>
-															<option value="HONAM">호남택배</option>
-															<option value="GSIEXPRESS">GSI익스프레스</option>
-															<option value="KGBPS">KGB 택배</option>
-															<option value="CUPARCEL">CU편의점택배</option>
-															<option value="VROONG">부릉</option>
-															<option value="todaypickup">오늘의 픽업</option>
-															<option value="CHAINLOGIS">두발히어로</option>
-															<option value="HOMEPICK">홈픽택배</option>
-															<option value="QXPRESS">큐익스프레스</option>
-															<option value="LINEEXP">라인익스프레스</option>
-															<option value="GPSLOGIX">GPS LOGIX</option>
-															<option value="CRLX">시알로지텍</option>
-															<option value="BRIDGE">브릿지로지스</option>
-															<option value="EFS">EFS</option>
-															<option value="FRESH">프레시솔루션</option>
-															<option value="FRESHMATES">프레시메이트</option>
-															<option value="GTSLOGIS">GTS로지스</option>
-															<option value="GENIEGO">지니고</option>
-															<option value="PINGPONG">핑퐁</option>
-															<option value="ETC">기타택배</option>
-														</select>
-													</div>
-													<div>
-														<input type="text" placeholder="송장번호" value="">
-
-													</div>
-
-												</div>
-											</td>
-
-
-
-											<td rowspan="2">
-												<div class="mb-2">
-													<strong>주문자</strong>/<span>전화번호</span>
-													<div class="mb-1" style="font-size: 10pt; color: gray">
-														주소주소주소주소<br>
-														<div>우편번호</div>
-													</div>
-												</div>
-											</td>
-											<td rowspan="2">
-												<div>
-													<div
-														style="display: table; width: 100%; margin-bottom: 7px;">
-														<div style="display: table-row-group;">
-															<div class='d-table-cell'>총 결제금액</div>
-															<div class='d-table-cell text-right'>20000원</div>
-														</div>
-													</div>
-													<div style="display: table; width: 100%; color: gray;">
-														<div style="display: table-row-group;">
-															<div class='d-table-cell'>소계</div>
-															<div class='d-table-cell text-right'>25000원</div>
-														</div>
-														<div style="display: table-row-group;">
-															<div class='d-table-cell'>상품 할인금액</div>
-															<div class='d-table-cell text-right'>5000원</div>
-														</div>
-													</div>
-													<div style="display: table; width: 100%; color: gray;">
-														<div style="display: table-row-group;">
-															<div class='d-table-cell'>결제방법</div>
-															<div class='d-table-cell text-right'>
-																무통장입금<br>신한은행
-															</div>
-														</div>
-													</div>
-												</div>
-											</td>
-											<td rowspan="2" class="nav-item text-center dropdown" href=""
-												data-toggle="dropdown" aria-haspopup="true"
-												aria-expanded="false"><span>반품중</span><i
-												class="m-r-10 mdi mdi-chevron-down ml-2"> </i>
-												<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-													<a class="dropdown-item" href="#">Action</a> <a
-														class="dropdown-item" href="#">Another action</a>
-													<div class="dropdown-divider"></div>
-													<a class="dropdown-item" href="#">Something else here</a>
-												</div></td>
-
-										</tr>
-										<tr>
-
-											<td><a><img
-													src="https://cdn.imweb.me/thumbnail/20180305/5a9cea9e49044.png"></a>
-												<div class="d-inline-block">
-													<div style="font-size: 10pt; color: gray;">주문번호</div>
-													<div>
-														<a href="#">화장품</a>
-													</div>
-												</div></td>
-											<td class="text-right  ">10000원</td>
-											<td class="text-center">4</td>
-
-
-										</tr>
-										<tr>
-
-											<td>
-												<div>
-													<span style="color: black;">주문번호</span>
-												</div>
-												<div style="font-size: 10pt; color: gray;">주문시각</div>
-												<p style="margin-top: 10px;">주문한사람</p>
-											</td>
-											<td><a><img
-													src="https://cdn.imweb.me/thumbnail/20180305/5a9cea9e49044.png"></a>
-												<div class="d-inline-block">
-													<div style="font-size: 10pt; color: gray;">주문번호</div>
-													<div>
-														<a href="#">화장품</a>
-													</div>
-												</div></td>
-											<td class="text-right  ">10000원</td>
-											<td class="text-center">4</td>
-											<td>
-												<div>
-													<div>
-														<select>
-															<option value="" selected="">택배사 선택</option>
-															<option value="CJ">CJ대한통운</option>
-															<option value="EPOST">우체국택배</option>
-															<option value="REGISTPOST">우편등기</option>
-															<option value="HANJIN">한진택배</option>
-															<option value="LOGEN">로젠택배</option>
-															<option value="GTX">GTX로지스</option>
-															<option value="LOTTE">롯데택배</option>
-															<option value="DS">대신택배</option>
-															<option value="IY">일양로지스</option>
-															<option value="KD">경동택배</option>
-															<option value="NHLOGIS">농협택배</option>
-															<option value="SEBANG">세방택배</option>
-															<option value="CI">천일택배</option>
-															<option value="CVS">CVSnet 편의점택배</option>
-															<option value="HD">합동택배</option>
-															<option value="EMS">EMS</option>
-															<option value="kpacket">K-Packet</option>
-															<option value="DHL">DHL</option>
-															<option value="FEDEX">Fedex</option>
-															<option value="GSMN">GSMNtoN</option>
-															<option value="UPS">UPS</option>
-															<option value="TNT">TNT Express</option>
-															<option value="USPS">USPS</option>
-															<option value="AIRBOY">에어보이익스프레스</option>
-															<option value="DHLMAIL">DHL Global Mail</option>
-															<option value="IPARCEL">i-Parcel</option>
-															<option value="HANWISA">한의사랑택배</option>
-															<option value="GUNYOUNG">건영택배</option>
-															<option value="BUMHAN">범한판토스</option>
-															<option value="APEX">APEX</option>
-															<option value="ECMSExpress">ECMSExpress</option>
-															<option value="GOODTOLUCK">굿투럭</option>
-															<option value="DHLGER">DHL 독일</option>
-															<option value="ACI">ACI</option>
-															<option value="LOTTEGLOBAL">롯데택배(국제택배)</option>
-															<option value="CJGLOBAL">CJ대한통운(국제택배)</option>
-															<option value="SUNGWON">성원글로벌</option>
-															<option value="DAEWOON">대운글로벌</option>
-															<option value="SLX">SLX택배</option>
-															<option value="HONAM">호남택배</option>
-															<option value="GSIEXPRESS">GSI익스프레스</option>
-															<option value="KGBPS">KGB 택배</option>
-															<option value="CUPARCEL">CU편의점택배</option>
-															<option value="VROONG">부릉</option>
-															<option value="todaypickup">오늘의 픽업</option>
-															<option value="CHAINLOGIS">두발히어로</option>
-															<option value="HOMEPICK">홈픽택배</option>
-															<option value="QXPRESS">큐익스프레스</option>
-															<option value="LINEEXP">라인익스프레스</option>
-															<option value="GPSLOGIX">GPS LOGIX</option>
-															<option value="CRLX">시알로지텍</option>
-															<option value="BRIDGE">브릿지로지스</option>
-															<option value="EFS">EFS</option>
-															<option value="FRESH">프레시솔루션</option>
-															<option value="FRESHMATES">프레시메이트</option>
-															<option value="GTSLOGIS">GTS로지스</option>
-															<option value="GENIEGO">지니고</option>
-															<option value="PINGPONG">핑퐁</option>
-															<option value="ETC">기타택배</option>
-														</select>
-													</div>
-													<div>
-														<input type="text" placeholder="송장번호" value="">
-
-													</div>
-
-												</div>
-											</td>
-
-											<td>
-												<div class="mb-2">
-													<strong>주문자</strong>/<span>전화번호</span>
-													<div class="mb-1" style="font-size: 10pt; color: gray">
-														주소주소주소주소<br>
-														<div>우편번호</div>
-													</div>
-												</div>
-											</td>
-											<td>
-												<div>
-													<div
-														style="display: table; width: 100%; margin-bottom: 7px;">
-														<div style="display: table-row-group;">
-															<div class='d-table-cell'>총 결제금액</div>
-															<div class='d-table-cell text-right'>20000원</div>
-														</div>
-													</div>
-													<div style="display: table; width: 100%; color: gray;">
-														<div style="display: table-row-group;">
-															<div class='d-table-cell'>소계</div>
-															<div class='d-table-cell text-right'>25000원</div>
-														</div>
-														<div style="display: table-row-group;">
-															<div class='d-table-cell'>상품 할인금액</div>
-															<div class='d-table-cell text-right'>5000원</div>
-														</div>
-													</div>
-													<div style="display: table; width: 100%; color: gray;">
-														<div style="display: table-row-group;">
-															<div class='d-table-cell'>결제방법</div>
-															<div class='d-table-cell text-right'>
-																무통장입금<br>신한은행
-															</div>
-														</div>
-													</div>
-												</div>
-											</td>
-											<td class="nav-item text-center dropdown" href=""
-												data-toggle="dropdown" aria-haspopup="true"
-												aria-expanded="false"><span>반품중</span><i
-												class="m-r-10 mdi mdi-chevron-down ml-2"> </i>
-												<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-													<a class="dropdown-item" href="#">Action</a> <a
-														class="dropdown-item" href="#">Another action</a>
-													<div class="dropdown-divider"></div>
-													<a class="dropdown-item" href="#">Something else here</a>
-												</div></td>
-										</tr>
-
+										
 									</tbody>
 								</table>
 								<div class="border-top">
 										<div class="card-body">
-											<button class="btn-secondary ">submit</button>
-											<div
-												class="dataTables_paginate paging_simple_numbers float-right"
-												id="zero_config_paginate">
-												<ul class="pagination">
-													<li class="paginate_button page-item previous disabled"
-														id="zero_config_previous"><a
-														aria-controls="zero_config" data-dt-idx="0" tabindex="0"
-														class="page-link" onclick="prevBtn(${pageUtil.curPage})">Previous</a></li>
-													<c:if test="${pageUtil.blockEnd eq 1}">
-														<li class="paginate_button page-item active"><a
-															href="#" aria-controls="zero_config" data-dt-idx="1"
-															tabindex="0" class="page-link">1</a></li>
-													</c:if>
-													<c:if test="${pageUtil.blockEnd > 1}">
-														<c:forEach var="i" begin="1" step="1"
-															end="${pageUtil.blockEnd}">
-
-															<li class="paginate_button page-item"><a href="#"
-																aria-controls="zero_config" class="page-link"
-																onclick="changePage(${i})">${i}</a></li>
-														</c:forEach>
-													</c:if>
-
-
-													<li class="paginate_button page-item next"
-														id="zero_config_next"><a href="#"
-														aria-controls="zero_config" class="page-link"
-														onclick="nextBtn(${pageUtil.curPage},${pageUtil.blockEnd})">Next</a></li>
-												</ul>
-											</div>
+											
+											<%@ include file="/WEB-INF/views/admin/include/paging.jsp"%>
 										</div>
 									</div>
 
@@ -1019,9 +687,11 @@
 	<script src="/resources/js/admin/sidebarmenu.js"></script>
 	<!--Custom JavaScript -->
 	<script src="/resources/js/admin/custom.min.js"></script>
-	<!--This page JavaScript -->
+	<script src="/resources/js/admin/common/paging.js"></script>
+	<script src="/resources/js/admin/common/select-tab.js"></script>
+	
 
-	<script src="/resources/js/admin/datatables.min.js"></script>
+	
 	<script type="text/javascript">
 		let changeState = (orderNum, state) =>{
  		
@@ -1038,61 +708,19 @@
     		
  	
  	}
-		
-
-	    const URLSearch = new URLSearchParams(location.search);
-	    
-	    (() =>{
-		     let loadState = URLSearch.get('state')
-		     	document.querySelectorAll('.tab').forEach(e =>{
-		     		if(loadState == null) {
+		(() =>{
+		    
+		     	
+		     let pageState = URLSearch.get('page')
+		     document.querySelectorAll('.page-link').forEach(e =>{
+		    	
+		     		if(pageState == null) {
 		     			document.querySelector(".tab_all").id = "clickedTab"
-		     		}else if(loadState == e.dataset.tab) e.id = "clickedTab"
+		     		}else if(pageState == e.dataset.page) e.classList.push("active")
 		     	})
-	     })();
-	    
-	    let selectTab = (state,res) =>{
-	    	 if(location.search.includes(state)){
-	    		
-	    		 URLSearch.set(state, String(res));
-	       	 	 const newParam = URLSearch.toString();
-	       	 	 location.href = location.pathname + '?' + newParam
-	    	 }else{
-	    		location.href = location.pathname+'?'+state+'='+res
-	    	}
-	    	  
-	     }
-	    
-	   	let prevBtn = (page) => {
-			if(page == 1){
-				alert("첫번째 페이지 입니다.")
-				return;
-			}
-			
-			page--;
+	    })();
 
-			changePage(page);
-			
-		}
-		
-		let nextBtn = (page, blockEnd) => {
-			if(page == blockEnd){
-				alert("마지막 페이지 입니다.")
-				return;
-			}
-			
-			page++;
-			
-			changePage(page);
-			
-		}
-	    let changePage = (page) =>{
-	    	
-	      		 URLSearch.set('page', String(page));
-	         	 const newParam = URLSearch.toString();
-	         	 location.href = location.pathname + '?' + newParam
-	      	 
-	    }
+	   
 	</script>
 
 

@@ -1,22 +1,22 @@
 package com.kh.spring.mypage.controller;
 
-import java.sql.Date;
+import java.text.ParseException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -25,7 +25,6 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.spring.board.model.dto.Board;
-import com.kh.spring.board.model.dto.BoardComment;
 import com.kh.spring.common.util.pagination.Paging;
 import com.kh.spring.common.validator.ValidatorResult;
 import com.kh.spring.member.model.dto.Member;
@@ -39,6 +38,7 @@ import com.kh.spring.mypage.validator.UpdateMemberForm;
 import com.kh.spring.mypage.validator.UpdateMemberFormValidator;
 
 import lombok.RequiredArgsConstructor;
+import oracle.jdbc.proxy.annotation.Post;
 
 @Controller
 @RequiredArgsConstructor
@@ -65,7 +65,7 @@ public class MypageController {
 	}
 
 	@GetMapping("my-info")
-	public void myInfo(@SessionAttribute(name = "authentication")Member certifiedUser, Model model) {
+	public void myInfo(@SessionAttribute(name = "authentication")Member certifiedUser, Model model) throws ParseException {
 		model.addAttribute("authentication", certifiedUser);
 	}
 	
@@ -79,7 +79,7 @@ public class MypageController {
 	
 	@PostMapping("update-member-info")
 	public String updateMember(
-			@SessionAttribute(name = "authentication")Member certifiedUser, Model model, 
+			@SessionAttribute(name = "authentication")Member certifiedUser, Model model, HttpSession session,
 			@Validated UpdateMemberForm form, Errors errors, RedirectAttributes redirectAttr
 			) {
 		if(errors.hasErrors()) {
@@ -93,6 +93,9 @@ public class MypageController {
 		form.setUserIdx(userIdx);
 		
 		mypageService.updateMemberDynamicQuery(form);
+		
+		Member updatedMember = mypageService.selectMember(userIdx);
+		session.setAttribute("authentication", updatedMember);
 		redirectAttr.addFlashAttribute("message", "회원정보가 수정되었습니다.");
 		
 		return "mypage/my-info";
@@ -186,13 +189,13 @@ public class MypageController {
 	public void registrationPetForm() {}
 	
 	@PostMapping("registration-pet")
-	public String registrationPet(@SessionAttribute(name = "authentication")Member certifiedUser, Pet pet, MultipartFile file) {
+	public void registrationPet(@SessionAttribute(name = "authentication")Member certifiedUser,
+			Pet pet, MultipartFile file) {
 		int userIdx = certifiedUser.getUserIdx();
 		pet.setUserIdx(userIdx);
 		
 		mypageService.insertPet(pet, file);
 		
-		return "mypage/pet-info";
 	}
 	
 	@GetMapping("vaccination")
@@ -202,8 +205,8 @@ public class MypageController {
 		List<Pet> petList = mypageService.selectAllPet(userIdx);
 		
 		List<VaccineInfo> vaccineInfoList = mypageService.selectVaccineInfoList();
-//		백신 cycle을 계산해서 뿌려줘야함 도움필요
-		List<Vaccination> vaccinationList = mypageService.selectVaccinationList(userIdx);
+
+		List<Map<String, Object>> vaccinationList = mypageService.selectVaccinationList(userIdx);
 		
 		model.addAttribute("petList", petList)
 		.addAttribute("vaccineInfoList", vaccineInfoList)
@@ -211,11 +214,31 @@ public class MypageController {
 	}
 	
 	@PostMapping("vaccination")
-	public void vaccination(@SessionAttribute(name = "authentication")Member certifiedUser, Vaccination vaccination) {
+	public void vaccination(@SessionAttribute(name = "authentication")Member certifiedUser, Model model,
+			Vaccination vaccination) {
 		int userIdx = certifiedUser.getUserIdx();
+		
 		vaccination.setUserIdx(userIdx);
 		
-//		mypageService.insertVaccination(vaccination);
+		mypageService.insertVaccinationCalendar(vaccination);
+		
+		//다시 받아와서 뿌려주기
+		
+		List<Pet> petList = mypageService.selectAllPet(userIdx);
+		
+		List<VaccineInfo> vaccineInfoList = mypageService.selectVaccineInfoList();
+
+		List<Map<String, Object>> vaccinationList = mypageService.selectVaccinationList(userIdx);
+		
+		model.addAttribute("petList", petList)
+		.addAttribute("vaccineInfoList", vaccineInfoList)
+		.addAttribute("vaccinationList", vaccinationList);
+	}
+	
+	@PostMapping("delete-board")
+	public void  deleteBoard(@RequestParam int[] bdIdxs, Model model) {
+		mypageService.UpdateBoardIsDel(bdIdxs);
+		
 	}
 	
 }

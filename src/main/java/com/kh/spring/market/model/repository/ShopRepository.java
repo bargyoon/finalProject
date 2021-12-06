@@ -135,4 +135,20 @@ public interface ShopRepository {
 	@Select("select * from cart where USER_IDX = #{userIdx} and DT_IDX = #{dtIdx}")
 	Cart selectCartforCheck(Cart cart);
 
+	@Select("select * from file_info where type_idx = ${rvIdx}")
+	List<FileDTO> selectFileInfoByIdx(int rvIdx);
+	
+	@Update("update review set state = #{state} where rv_idx = #{rvIdx}")
+	void updateReviewState(Map<String, Object> jsonMap);
+
+	@Insert("insert into save_history(sh_idx, user_idx, state, type, amount, order_idx) values(sc_sh_idx.nextval,#{userIdx},1,#{type},#{price},#{orderIdx})")
+	void insertSaveMoney(@Param("type")int type,@Param("userIdx") int userIdx,@Param("price") int price,@Param("orderIdx") int orderIdx);
+
+	List<Map<String, Object>> selectQnAList(@Param("commandMap") Map<String, Object> commandmap,@Param("pageUtil") Paging pageUtil);
+
+	int selectQnAListCnt(Map<String, Object> commandMap);
+	
+	@Update("update prd_detail set state = #{state} where dt_idx = #{dtIdx}")
+	void updateProductState(Map<String, Object> jsonMap);
+
 }

@@ -1,6 +1,7 @@
 package com.kh.spring.mypage.model.service;
 
-import java.util.ArrayList;
+import java.sql.Date;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
 
@@ -8,9 +9,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.kh.spring.board.model.dto.Board;
-import com.kh.spring.board.model.dto.BoardComment;
 import com.kh.spring.common.util.FileDTO;
 import com.kh.spring.common.util.FileUtil;
+import com.kh.spring.member.model.dto.Member;
 import com.kh.spring.mypage.model.dto.MypageSearchSet;
 import com.kh.spring.mypage.model.dto.Pet;
 import com.kh.spring.mypage.model.dto.Vaccination;
@@ -78,8 +79,39 @@ public class MypageServiceImpl implements MypageService {
 	}
 
 	@Override
-	public List<Vaccination> selectVaccinationList(int userIdx) {
+	public List<Map<String, Object>> selectVaccinationList(int userIdx) {
 		return mypageRepository.selectVaccinationList(userIdx);
+	}
+
+	public void insertVaccinationCalendar(Vaccination vaccination) {
+		
+		int viIdx = vaccination.getViIdx();
+		int cycle = mypageRepository.selectCycle(viIdx);
+		
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(vaccination.getCriterionDate());
+		calendar.add(Calendar.DATE, cycle);
+		
+		Date nextDate = new Date(calendar.getTimeInMillis());
+		
+		vaccination.setNextDate(nextDate);
+		
+		mypageRepository.insertVaccinationCalendar(vaccination);
+	}
+	
+	public Member selectMember(int userIdx) {
+		return mypageRepository.selectMember(userIdx);
+	}
+
+	public List<Map<String, Object>> selectVaccinationForBatch() {
+		return mypageRepository.selectVaccinationForBatch();
+	}
+
+	@Override
+	public void UpdateBoardIsDel(int[] bdIdxs) {
+		for (int bdIdx : bdIdxs) {
+			mypageRepository.UpdateBoardIsDel(bdIdx);
+		}
 	}
 	
 	

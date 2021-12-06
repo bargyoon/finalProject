@@ -64,6 +64,9 @@ public interface ShopService {
 	int selectQnaCnt(int pn);
 
 	boolean insertCart(List<Cart> cartInfos, Member certifiedUser);
+	
+	int selectQnAListCnt(Map<String, Object> commandMap);
 
+	List<Map<String, Object>> selectQnAList(Map<String, Object> commandMap, Paging pageUtil);
 
 }

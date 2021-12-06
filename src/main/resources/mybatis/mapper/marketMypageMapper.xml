@@ -59,11 +59,14 @@
 	</select>
   	
   	 <select id="selectMyReviewList" resultType="map">
-  	 	select r.RV_IDX, r.USER_IDX, PRD_IDX, r.ORDER_IDX, r.STATE, r.RATING, r.TYPE, r.RECOMMAND, r.REG_DATE, RV_CONTENT, p.name, p.brand, d.po_name, d.dt_idx
+  	 	select r.RV_IDX, r.USER_IDX, PRD_IDX, r.ORDER_IDX, r.STATE, r.RATING, r.TYPE, r.RECOMMAND, r.REG_DATE, RV_CONTENT
+  	 	, p.name, p.brand, d.po_name, d.dt_idx
+  	 	, fl_idx, origin_file_name, rename_file_name, save_path
 		from REVIEW r
-		inner join product p USING(PRD_IDX)
-		inner join prd_detail d USING(PRD_IDX)
-		inner join "ORDER" o USING(PRD_IDX)
+		join product p USING(PRD_IDX)
+		join prd_detail d USING(PRD_IDX)
+		join "ORDER" o USING(PRD_IDX)
+		join file_info f on (r.rv_idx = f.type_idx)
 		<where>
 		r.USER_IDX = #{userIdx} and o.dt_idx = d.dt_idx 
 			<if test="state == null">
@@ -108,7 +111,8 @@
 	
 	<!-- enquiry list -->
 	<select id="selectEnquiryList" resultType="map">
-  	 	select QNA_IDX, q.USER_IDX, PRD_IDX, q.ORDER_IDX, q.TITLE, q.CONTEXT, q.TYPE, q.REG_DATE, IS_ANSWER, AW_CONTEXT, AW_REG_DATE, p.name, p.brand, d.po_name,o.dt_idx
+  	 	select rownum rnum, r.* from
+		(select QNA_IDX, q.USER_IDX, PRD_IDX, q.ORDER_IDX, q.TITLE, q.CONTEXT, q.TYPE, q.REG_DATE, IS_ANSWER, AW_CONTEXT, AW_REG_DATE, p.name, p.brand, d.po_name,o.dt_idx
 		from  QNA q
 		inner join product p USING(PRD_IDX)
 		inner join prd_detail d USING(PRD_IDX)
@@ -119,7 +123,7 @@
 				and q.REG_DATE between TO_DATE(#{fromDate},'YYYY-MM-DD') and TO_DATE(#{endDate},'YYYY-MM-DD')+1
 			</if>			
 		</where>
-		order by q.reg_date desc
+		order by q.reg_date desc)r
 	</select>
 	
 	<select id="selectFAQList" resultType="map">
@@ -182,9 +186,20 @@
 				</if>
 			</if>
 			
-		</where>
-		
+		</where>	
 	</update>
+	
+	<!-- 장바구니 cart -->
+	<select id="selectCartList" resultType="map">
+	select rownum rnum, r.*
+	from(select cart_idx,USER_IDX,PRD_IDX,c.COUNT,c.REG_DATE,c.DT_IDX,
+			p.name, p.brand, d.PO_NAME,d.PRICE,d.PO_STOCK,
+			d.STATE,d.SALE_PRICE
+	from cart c
+	join product p USING(PRD_IDX)
+	join prd_detail d USING(PRD_IDX)
+	where user_idx=10 and c.dt_idx=d.dt_idx)r
+	</select>
 	
 	
   	

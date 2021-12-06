@@ -67,6 +67,33 @@ public interface BoardRepository {
 
 	List<Map<String, Object>> selectCommentList(@Param("commandMap") Map<String, Object> commandMap, @Param("pageUtil")Paging pageUtil);
 
+	@Select("select * from \"LIKE\" where user_idx = #{userIdx} and board_idx = #{bdIdx}")
+	List<Map<String,Object>> selectLikeByIdxs(@Param("bdIdx") int bdIdx,@Param("userIdx") int userIdx);
+
+	@Update("update board set rec_count = ((select rec_count from board where bd_idx = #{bdIdx})+1) where bd_idx = #{bdIdx} ")
+	boolean updateBoardRecommend(int bdIdx);
+
+	@Insert("insert into \"LIKE\"(like_idx, user_idx, board_idx) values(sc_like_idx.nextval,#{userIdx}, #{bdIdx})")
+	boolean insertLikeBoard(@Param("bdIdx") int bdIdx,@Param("userIdx") int userIdx);
+
+	@Update("update board set rec_count = ((select rec_count from board where bd_idx = #{bdIdx})-1) where bd_idx = #{bdIdx} ")
+	boolean deleteBoardRecommend(int bdIdx);
+
+	@Delete("delete from \"LIKE\" where user_idx = #{userIdx} and board_idx = #{bdIdx} ")
+	boolean deleteLikeBoard(@Param("bdIdx") int bdIdx,@Param("userIdx") int userIdx);
+
+	@Update("update board_comment set cm_rec_count = ((select cm_rec_count from board_comment where cm_idx = #{cmIdx})+1) where cm_idx = #{cmIdx} ")
+	boolean updateCommentRecommend(int cmIdx);
+
+	@Update("update board_comment set cm_rec_count = ((select cm_rec_count from board_comment where cm_idx = #{cmIdx})-1) where cm_idx = #{cmIdx} ")
+	boolean deleteCommentRecommend(int cmIdx);
+
+	@Update("update board set is_del = 1 where bd_idx = #{bdIdx}")
+	void updateDeleteBoard(Board board);
+
+	@Delete("delete from board where bd_idx = #{bdIdx}")
+	void deleteBoardByIdx(int bdIdx);
+
 	
 
 

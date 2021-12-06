@@ -31,34 +31,34 @@
 		</nav>
 		
 		<div style="margin: 0 auto; width: 400px">
-			<div class="form-floating mb-3">
-			  <text class="form-control" id="floatingUserId">${authentication.userId}</text>
-			  <label for="floatingUserId">아이디</label>
+		<span>아이디</span>
+			<div class="mb-3" >
+			  <input type="text" class="form-control" id="floatingUserId" value="${authentication.userId}" disabled="disabled" style="background-color:white;">
+
 			</div>
 			
-			<div class="form-floating mb-3">
-			  <text class="form-control" id="floatingUserName">${authentication.userName}</text>
-			  <label for="floatingUserName">이름</label>
+			<span>이름</span>
+			<div class="mb-3">
+			  <input type="text" class="form-control" id="floatingUserName" value="${authentication.userName}" disabled="disabled" style="background-color:white;">
 			</div>
 			
-			<div class="form-floating mb-3">
-			  <text class="form-control" id="floatingNickname">${authentication.nickName}</text>
-			  <label for="floatingNickname">닉네임</label>
+			<span>닉네임</span>
+			<div class="mb-3">
+			  <input type="text" class="form-control" id="floatingNickname" value="${authentication.nickName}" disabled="disabled" style="background-color:white;">
 			</div>
 			
-			<div class="form-floating mb-3">
-			  <text class="form-control" id="floatingEmail">${authentication.email}</text>
-			  <label for="floatingEmail">이메일</label>
+			<span>이메일</span>
+			<div class="mb-3">
+			  <input type="text" class="form-control" id="floatingEmail" value="${authentication.email}" disabled="disabled" style="background-color:white;">
 			</div>
 			
-			<div class="form-floating">
-			  <text class="form-control" id="floatingAddress">${authentication.address}</text>
-			  <label for="floatingAddress">주소</label>
-			</div>
+			<span>주소</span>
+			<div class="">
+			  <input type="text" class="form-control" id="floatingAddress" value="${authentication.address}" disabled="disabled" style="background-color:white;">
+			</div>	
 			
-			<div class="form-floating mb-3">
-				<text class="form-control" id="floatingAddress2">${authentication.addressDetail}</text>
-				<label for="floatingAddress2">상세주소</label>
+			<div class="mb-3">
+				<input type="text" class="form-control" id="floatingAddress2" value="${authentication.addressDetail}" disabled="disabled" style="background-color:white;">
 			</div>
 			
 			<!-- <div class="mb-3">

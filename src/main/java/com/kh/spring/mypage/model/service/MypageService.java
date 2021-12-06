@@ -6,7 +6,7 @@ import java.util.Map;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.kh.spring.board.model.dto.Board;
-import com.kh.spring.board.model.dto.BoardComment;
+import com.kh.spring.member.model.dto.Member;
 import com.kh.spring.mypage.model.dto.MypageSearchSet;
 import com.kh.spring.mypage.model.dto.Pet;
 import com.kh.spring.mypage.model.dto.Vaccination;
@@ -35,6 +35,14 @@ public interface MypageService {
 
 	List<VaccineInfo> selectVaccineInfoList();
 
-	List<Vaccination> selectVaccinationList(int userIdx);
+	List<Map<String, Object>> selectVaccinationList(int userIdx);
+
+	void insertVaccinationCalendar(Vaccination vaccination);
+
+	Member selectMember(int userIdx);
+
+	List<Map<String, Object>> selectVaccinationForBatch();
+
+	void UpdateBoardIsDel(int[] bdIdxs);
 	
 }

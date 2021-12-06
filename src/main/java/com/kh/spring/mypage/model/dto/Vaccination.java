@@ -11,7 +11,7 @@ public class Vaccination {
 	private int userIdx;
 	private int petIdx;
 	private int viIdx;
-	private Date date;
+	private Date criterionDate;
 	private Date nextDate;
 
 }

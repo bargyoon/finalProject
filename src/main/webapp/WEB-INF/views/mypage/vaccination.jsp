@@ -37,35 +37,35 @@
 		    </ul>
 		</nav>
 		
-		<div style="margin: 0 auto; width: 800px">
+		<div style="margin: 0 auto; width: 800px;">
 			
 			<div class="modal">
 				<form action="/mypage/vaccination" method="post" style="margin: auto auto;">
 					<div class="mb-3">
 						<label class="form-label">등록할 펫 선택:</label>
-						<select class="form-select"  name="pet" id="pet-select" required="required">
+						<select class="form-select" name="petIdx" required="required">
 							<!-- foreach문 -->
 							<option value="" selected="selected">--Please choose an option--</option>
 							<c:forEach var="pet" items="${petList}">
-								<option value="${pet.petIdx}">${pet.name}/${pet.species}</option>
+								<option value="${pet.petIdx}">${pet.petName}/${pet.species}</option>
 							</c:forEach>
 						</select>
 					</div>
 					
 					<div class="mb-3">
 						<label class="form-label">예방접종항목 선택:</label>
-						<select class="form-select"  name="vaccine" id="vaccine-list" required="required">
+						<select class="form-select" name="viIdx" required="required">
 							<!-- foreach문 -->
 							<option value="">--Please choose an option--</option>
 							<c:forEach var="vaccineInfo" items="${vaccineInfoList}">
-								<option value="${vaccineInfo.viIdx}">${vaccineInfo.name}/${vaccineInfo.species}</option>
+								<option value="${vaccineInfo.viIdx}">${vaccineInfo.viName}/${vaccineInfo.species}</option>
 							</c:forEach>
 						</select>
 					</div>
 					
 					<div class="mb-3">
-						<label class="form-label" for="last-record">마지막 접종일 선택:</label><br>
-						<input type="date" name="date" id="last-record" required="required">
+						<label class="form-label">마지막 접종일 선택:</label><br>
+						<input type="date" name="criterionDate" required="required">
 					</div>
 					
 					<hr class="my-3">
@@ -78,7 +78,7 @@
 				</form>
 			</div>
 			
-			<div id="calendar" class="calendar"></div>
+			<div id="calendar" class="calendar" style="background-color: white; border: ridge 20px;"></div>
 			
 			<!-- fullCalendar -->
 			<script type="text/javascript">
@@ -96,9 +96,11 @@
 						right: 'prev next today'
 					},
 					locale: 'ko',
-					eventLimit: true,
+					dayMaxEvents: true,
 					views: {
-						month: {eventLimit: 4}
+						dayGrid: {
+							dayMaxEvents: 2
+						}
 					},
 					customButtons: {
 						addEventButton: {
@@ -108,23 +110,17 @@
 							}
 						}
 					},
-					dateClick: (info)=>{
-						var title = prompt('Event Title:');
-					},
-					
-					/*
 					events: [
-						{
-							title: 'title 테스트',
-							start: '2021-11-22',
-							end: '2021-11-24'
-						},
-						{
-							title: 'allDay 테스트',
-							start: '2021-11-25T12:00:00',
-							allDay: false
-						}
-					] */
+						<c:forEach var="vaccination" items="${vaccinationList}" varStatus="status">
+							{
+								title: "${vaccination.PET_NAME}-${vaccination.VI_NAME}",
+								start: "${vaccination.NEXT_DATE}",
+								allDay: true
+							}
+							<c:if test="${!status.last}">, </c:if>
+						</c:forEach>
+					]
+					
 				});
 				calendar.render();
 			});

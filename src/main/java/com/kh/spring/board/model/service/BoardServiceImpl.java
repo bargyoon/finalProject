@@ -102,5 +102,45 @@ public class BoardServiceImpl implements BoardService {
 		return boardRepository.selectCommentList(commandMap, pageUtil);
 	}
 	
+	public boolean insertRecommendBoard(int bdIdx, int userIdx) {
+		if(boardRepository.selectLikeByIdxs(bdIdx, userIdx).isEmpty()) {
+			
+			if(!boardRepository.updateBoardRecommend(bdIdx) || !boardRepository.insertLikeBoard(bdIdx, userIdx)) {
+				return false;
+			}else {
+				return true;
+			}
+			
+		}else {
+			if(!boardRepository.deleteBoardRecommend(bdIdx) || !boardRepository.deleteLikeBoard(bdIdx, userIdx)) {
+				return true;
+			}
+		}
+		return false;
+		
+	}
+	
+	@Override
+	public boolean insertRecommendComment(int cmIdx, int userIdx) {
+		if(boardRepository.selectLikeByIdxs(cmIdx, userIdx).isEmpty()) {
+			
+			if(!boardRepository.updateCommentRecommend(cmIdx) || !boardRepository.insertLikeBoard(cmIdx, userIdx)) {
+				return false;
+			}else {
+				return true;
+			}
+			
+		}else {
+			if(!boardRepository.deleteCommentRecommend(cmIdx) || !boardRepository.deleteLikeBoard(cmIdx, userIdx)) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	@Override
+	public void deleteBoard(Board board) {
+		boardRepository.updateDeleteBoard(board);
+	}
 	
 }

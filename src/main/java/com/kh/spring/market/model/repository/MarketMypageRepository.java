@@ -79,7 +79,7 @@ public interface MarketMypageRepository {
 	void updatePrdIdx(int orderIdx);
 	
 	//myReviewList
-	List<Map<String, Object>> selectMyReviewList(@Param("userIdx")int userIdx, @Param("state")String state);
+	List<Map<String, Object>> selectMyReviewList(Map<String, Object> commandMap);
 	
 	//reviewFileList
 	@Select("select * "
@@ -137,5 +137,20 @@ public interface MarketMypageRepository {
 	//좋아요여부
 	@Select("select LIKE_IDX from \"LIKE\" where board_idx=#{boardIdx} and user_idx=#{userIdx}")
 	int selectisLike(int rvIdx);
+	
+	
+	//장바구니
+	List<Map<String, Object>> selectCartList(int userIdx);
+	
+	@Select("select count(cart_idx) from cart where user_idx=#{userIdx}")
+	int selectCartCnt(int userIdx);
+	
+	@Delete("delete cart where cart_idx=#{cartIdx}")
+	void deleteCart(int cartIdx);
+	@Delete("delete cart where user_idx=#{userIdx}")
+	void deleteAllCart(int userIdx);
+	
+	@Update("update cart set count = #{count} where cart_idx= #{cartIdx}")
+	void updateCart(int count, int cartIdx);
 	
 }

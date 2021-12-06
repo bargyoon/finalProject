@@ -12,10 +12,10 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0"><hr>
-                       <li class="nav-item"><a class="nav-link" href="#">병원/시설</a>
+                       <li class="nav-item"><a class="nav-link" href="/hospital/info">병원/시설</a>
 	                        	<ul class="navbar-detail"><hr>
-		                        	<li><a href=#>동물병원</a>
-	                        		<li><a href=#>편의시설검색</a>
+	                        		<li><a href=/hospital/info>동물병원</a>
+	                        		<li><a href=/hospital/search>편의시설검색</a>
 	                        	</ul>
 	                        </li>	
 	                        <li class="nav-item"><a class="nav-link" href="/disease/index">수술비용</a></li>
@@ -28,10 +28,12 @@
 	                        </li>
 	                        <li class="nav-item"><a class="nav-link" href="/board/info">게시판</a>
 	                        	<ul class="navbar-detail"><hr>
-		                        	<li><a href=#>정보/컬럼</a>
+		                        	<li><a href=#>정보게시판</a>
 	                        		<li><a href=#>고양이</a>
 	                        		<li><a href=#>강아지</a>
-	                        		<li><a href=#>상담</a>
+	                        		<li><a href=#>후기</a>
+	                        		<li><a href=#>모임게시판</a>
+	                        		<li><a href=#>상담게시판</a>
 	                        	</ul>
 							</li>
 	                        <li class="nav-item"><a class="nav-link" href="/market">마켓</a></li>
