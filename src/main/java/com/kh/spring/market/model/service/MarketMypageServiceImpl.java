@@ -226,5 +226,10 @@ public class MarketMypageServiceImpl implements MarketMypageService{
 		mypageRepository.deleteAllCart(userIdx);		
 	}
 
+	@Override
+	public void updateCart(int count, int cartIdx) {
+		mypageRepository.updateCart(count, cartIdx);		
+	}
+
 	
 }

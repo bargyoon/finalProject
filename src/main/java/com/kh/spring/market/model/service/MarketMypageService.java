@@ -80,5 +80,6 @@ public interface MarketMypageService {
 	int selectCartCnt(int userIdx);
 	void deleteCart(int cartIdx);
 	void deleteAllCart(int userIdx);
+	void updateCart(int count, int cartIdx);
 
 }
