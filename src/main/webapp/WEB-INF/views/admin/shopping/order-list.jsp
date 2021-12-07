@@ -708,18 +708,7 @@
     		
  	
  	}
-		(() =>{
-		    
-		     	
-		     let pageState = URLSearch.get('page')
-		     document.querySelectorAll('.page-link').forEach(e =>{
-		    	
-		     		if(pageState == null) {
-		     			document.querySelector(".tab_all").id = "clickedTab"
-		     		}else if(pageState == e.dataset.page) e.classList.push("active")
-		     	})
-	    })();
-
+		
 	   
 	</script>
 

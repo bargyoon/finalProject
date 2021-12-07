@@ -165,7 +165,7 @@
 									<table class="table mb-0">
 										<thead class="thead-dark">
 											<tr>
-												<th><input type="checkbox" id="mainCheckbox" /></th>
+												<th><input type="checkbox" id="mainCheckbox chk_all" /></th>
 												<th scope="col">NO</th>
 												<th scope="col">상품명</th>
 												<th scope="col">판매가</th>
@@ -181,7 +181,7 @@
 												varStatus="status">
 												<tr>
 													<td><label class="mt-3"> <input
-															type="checkbox" class="listCheckbox" value="${data.PRD_IDX }" /> <span
+															type="checkbox" class="listCheckbox" value="${data.DT_IDX }" /> <span
 															class="checkmark"></span>
 													</label></td>
 													<td>${data.RNUM}</td>
@@ -228,7 +228,9 @@
 
 
 													<td>${data.PO_STOCK }</td>
-													<td>${data.REG_DATE}</td>
+													<td><fmt:formatDate
+															pattern="yyyy-MM-dd hh:mm:ss"
+															value="${data.REG_DATE}" /></td>
 
 												</tr>
 											</c:forEach>
@@ -238,7 +240,7 @@
 
 									<div class="border-top">
 										<div class="card-body">
-											<button class="btn-secondary " onclick="testCheck()">submit</button>
+											<button class="btn btn-secondary " onclick="deleteCheckList('shopping/delete-prd')">삭제</button>
 											<%@ include file="/WEB-INF/views/admin/include/paging.jsp"%>
 										</div>
 									</div>
@@ -315,29 +317,7 @@
 	
 	
 	
-	
-let testCheck = () =>{
-	let testArr = []
-	document.querySelectorAll(".listCheckbox").forEach(e =>{
-		if(e.checked) testArr.push(e.value);
-		
-	})
-	console.dir(testArr)
- 		
-    	return fetch('/admin/shopping/test',{
- 			method:"post",
- 			body: JSON.stringify(testArr),
- 			 headers:{
- 			    'Content-Type': 'application/json'
- 			  }
-    	}).then(res => {
-    		alert('상태가 변경되었습니다.');
-    		location.reload();
-    	})
-    		
- 	
- 	}
-	
+
 
 	   
 	</script>

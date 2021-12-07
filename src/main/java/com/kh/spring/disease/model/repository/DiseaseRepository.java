@@ -3,6 +3,7 @@ package com.kh.spring.disease.model.repository;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -69,6 +70,9 @@ public interface DiseaseRepository {
 
 	
 	int selectPriceImgListCnt(String state);
+
+	@Delete("delete from price_img where pi_idx = #{piIdx}")
+	void deletePriceImg(Integer piIdx);
 	
 	
 

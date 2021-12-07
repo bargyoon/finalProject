@@ -22,8 +22,8 @@
 			<c:if test="${pageUtil.blockEnd > 1}">
 				<c:forEach var="i" begin="1" step="1" end="${pageUtil.blockEnd}">
 
-					<li class="paginate_button page-item"><a href="#"
-						aria-controls="zero_config" class="page-link" data-page= ${i}
+					<li class="paginate_button page-item" data-page= ${i}><a href="#"
+						aria-controls="zero_config" class="page-link" 
 						onclick="changePage(${i})">${i}</a></li>
 				</c:forEach>
 			</c:if>

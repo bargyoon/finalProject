@@ -25,6 +25,7 @@ import com.kh.spring.disease.model.dto.Disease;
 import com.kh.spring.disease.model.dto.PriceImg;
 import com.kh.spring.disease.model.repository.DiseaseRepository;
 import com.kh.spring.market.model.dto.Order;
+import com.kh.spring.market.model.dto.QNA;
 import com.kh.spring.market.model.repository.ShopRepository;
 import com.kh.spring.member.model.repository.MemberRepository;
 
@@ -159,29 +160,67 @@ public class AdminServiceImpl implements AdminService {
 	public void updateReviewState(Map<String, Object> jsonMap) {
 		shopRepository.updateReviewState(jsonMap);
 		int userIdx = Integer.parseInt(jsonMap.get("userIdx").toString());
-		int orderIdx = Integer.parseInt(jsonMap.get("orderIdx").toString());
+		int orderNum = Integer.parseInt(jsonMap.get("orderNum").toString());
 		if(jsonMap.get("state").equals("1")) {
 			if(jsonMap.get("type").equals("0")) {
 				memberRepository.updateSaveMoney(userIdx, 300);
-				shopRepository.insertSaveMoney(1,userIdx, 300,orderIdx);
+				shopRepository.insertSaveMoney(1,userIdx, 300,orderNum);
 			}else {
 				memberRepository.updateSaveMoney(userIdx, 600);
-				shopRepository.insertSaveMoney(2,userIdx, 600,orderIdx);
+				shopRepository.insertSaveMoney(2,userIdx, 600,orderNum);
 			}
 			
 		}
 	}
 	
-	@Override
 	public void updateProductState(Map<String, Object> jsonMap) {
 		shopRepository.updateProductState(jsonMap);
 		
 	}
 	
-	@Override
 	public void deleteBaord(int bdIdx) {
 		boardRepository.deleteBoardByIdx(bdIdx);
 		
 	}
 
+	public void deletePrd(List<Integer> dtIdxs) {
+		for (Integer dtIdx : dtIdxs) {
+			shopRepository.deleteProductDetail(dtIdx);
+		}
+		
+		
+	}
+	
+	@Override
+	public void deletePriceImg(List<Integer> piIdxs) {
+		for (Integer piIdx : piIdxs) {
+			diseaseRepository.deletePriceImg(piIdx);
+		}
+		
+	}
+	
+	@Override
+	public void updateQnaAnswer(QNA qna) {
+		shopRepository.updateQnaAnswer(qna);
+		
+	}
+	
+	@Override
+	public void deleteQna(List<Integer> qnaIdxs) {
+		for (Integer qnaIdx : qnaIdxs) {
+			shopRepository.deleteQna(qnaIdx);
+		}
+		
+		
+	}
+	
+	@Override
+	public void deleteComments(List<Integer> rvIdxs) {
+		for (Integer rvIdx : rvIdxs) {
+			shopRepository.deleteComments(rvIdx);
+		}
+		
+		
+	}
+	
 }

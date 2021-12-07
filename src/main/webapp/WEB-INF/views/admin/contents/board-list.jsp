@@ -96,7 +96,7 @@
 													<div class='d-table-cell' style="width: 15%;">검색 종류</div>
 													<div class='d-table-cell '>
 														<input type="radio" name="option" id="search_option"
-															value="nickname" checked><label class="ml-2 mr-2">작성자</label>
+															value="b.nickname" checked><label class="ml-2 mr-2">작성자</label>
 														<input type="radio" value="content" name="option"
 															id="search_option"><label class="ml-2 mr-2">게시글</label>
 														<input type="radio" name="option" id="search_option"
@@ -171,7 +171,7 @@
 										<thead class="thead-dark">
 											<tr>
 												<th style="width: 10%"><input type="checkbox"
-													id="mainCheckbox" /></th>
+													id="chk_all" /></th>
 												<th scope="col" style="width: 20%">제목</th>
 												<th scope="col" style="width: 10%">작성자</th>
 												<th scope="col" style="width: 10%">위치</th>

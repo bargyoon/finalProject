@@ -1,7 +1,6 @@
 package com.kh.spring.admin.controller;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -23,6 +22,7 @@ import com.kh.spring.disease.model.dto.Disease;
 import com.kh.spring.disease.model.service.DiseaseService;
 import com.kh.spring.market.model.dto.Order;
 import com.kh.spring.market.model.dto.Product;
+import com.kh.spring.market.model.dto.QNA;
 import com.kh.spring.market.model.service.ShopService;
 import com.kh.spring.member.model.dto.Member;
 import com.kh.spring.member.model.service.MemberService;
@@ -61,7 +61,7 @@ public class AdminController {
 		commandMap.put("state", state);
 		Paging pageUtil = Paging.builder()
 				.curPage(page)
-				.cntPerPage(15)
+				.cntPerPage(10)
 				.blockCnt(10)
 				.total(shopService.selectPrdListCnt(commandMap))
 				.build();
@@ -88,15 +88,15 @@ public class AdminController {
 		
 		Paging pageUtil = Paging.builder()
 				.curPage(page)
-				.cntPerPage(15)
+				.cntPerPage(10)
 				.blockCnt(10)
 				.total(totalCnt)
 				.build();
 		
-		List<Map<String,Object>> orderList = shopService.selectItemCommentList(commandMap, pageUtil);
+		List<Map<String,Object>> commentList = shopService.selectItemCommentList(commandMap, pageUtil);
 		model.addAttribute("totalCnt", totalCnt);
 		model.addAttribute("dataMap", commandMap);
-		model.addAttribute("orderList", orderList);
+		model.addAttribute("commentList", commentList);
 		model.addAttribute("pageUtil", pageUtil);
 		
 	}
@@ -156,7 +156,7 @@ public class AdminController {
 	
 
 	@PostMapping("shopping/add-product")
-	public String shoppingTest(@RequestParam(value = "main_img") List<MultipartFile> mainImg,
+	public String addProduct(@RequestParam(value = "main_img") List<MultipartFile> mainImg,
 			@RequestParam(value = "spec_img") List<MultipartFile> specImg,
 			@RequestParam(value = "option", required = false, defaultValue = "기본") List<String> option,
 			@RequestParam(value = "stock") List<String> stock, @RequestParam(value = "price") List<String> price,
@@ -177,21 +177,25 @@ public class AdminController {
 	}
 	
 	@GetMapping("shopping/QnA")
-	public void qna(Model model ,@RequestParam(required = false, defaultValue = "1") int page) {
+	public void qna(Model model ,@RequestParam(required = false, defaultValue = "1") int page
+			,@RequestParam(value = "state", required = false, defaultValue = "all") String state
+			,@RequestParam(required = false) String keyword) {
 		Map<String,Object> commandMap = new LinkedHashMap<String,Object>();
+		commandMap.put("state", state);
+		commandMap.put("keyword", keyword);
 		int totalCnt = shopService.selectQnAListCnt(commandMap);
 		
 		Paging pageUtil = Paging.builder()
 				.curPage(page)
-				.cntPerPage(15)
+				.cntPerPage(7)
 				.blockCnt(10)
 				.total(totalCnt)
 				.build();
 		
-		List<Map<String,Object>> qnaList = shopService.selectQnAList(commandMap, pageUtil);
+		Map<String,Object> qnaMap = shopService.selectQnAList(commandMap, pageUtil);
 		model.addAttribute("totalCnt", totalCnt);
 		model.addAttribute("dataMap", commandMap);
-		model.addAttribute("qnaList", qnaList);
+		model.addAttribute("qnaMap", qnaMap);
 		model.addAttribute("pageUtil", pageUtil);
 		
 	}
@@ -202,7 +206,7 @@ public class AdminController {
 		Map<String,Object> commandMap = new LinkedHashMap<String,Object>();
 		Paging pageUtil = Paging.builder()
 				.curPage(page)
-				.cntPerPage(15)
+				.cntPerPage(10)
 				.blockCnt(10)
 				.total(memberService.selectMemberListCnt(commandMap))
 				.build();
@@ -228,7 +232,7 @@ public class AdminController {
 		commandMap.put("sort", sort);
 		Paging pageUtil = Paging.builder()
 				.curPage(page)
-				.cntPerPage(15)
+				.cntPerPage(10)
 				.blockCnt(10)
 				.total(boardService.selectBoardListCnt(commandMap))
 				.build();
@@ -280,7 +284,7 @@ public class AdminController {
 	public void diseaseList(Model model,@RequestParam(required = false, defaultValue = "1") int page) {
 		Paging pageUtil = Paging.builder()
 				.curPage(page)
-				.cntPerPage(16)
+				.cntPerPage(10)
 				.blockCnt(10)
 				.total(diseaseService.selectDiseaseListCnt())
 				.build();
@@ -295,7 +299,7 @@ public class AdminController {
 			,@RequestParam(required = false, defaultValue = "1") int page) {
 		Paging pageUtil = Paging.builder()
 				.curPage(page)
-				.cntPerPage(16)
+				.cntPerPage(10)
 				.blockCnt(10)
 				.total(adminService.selectPriceImgListCnt(state))
 				.build();
@@ -327,12 +331,49 @@ public class AdminController {
 
 	}
 
-	@PostMapping("shopping/test")
+	@PostMapping("shopping/delete-prd")
 	@ResponseBody
-	public String testParam(@RequestBody List<Integer> bdIdx) {
+	public String deleteProduct(@RequestBody List<Integer> dtIdxs) {
 		
 		
-		System.out.println(bdIdx.toString());
+		adminService.deletePrd(dtIdxs);
+		return "good";
+
+	}
+	@PostMapping("shopping/delete-priceImg")
+	@ResponseBody
+	public String deletePriceImg(@RequestBody List<Integer> piIdxs) {
+		
+		
+		adminService.deletePriceImg(piIdxs);
+		return "good";
+
+	}
+	
+	@PostMapping("shopping/update-qnaAnswer")
+	public String updateQnaAnswer(QNA qna) {
+		
+		adminService.updateQnaAnswer(qna);
+		
+		return "redirect:/admin/shopping/QnA";
+	}
+	
+	@PostMapping("shopping/delete-qna")
+	@ResponseBody
+	public String deleteQna(@RequestBody List<Integer> qnaIdxs) {
+		
+		
+		adminService.deleteQna(qnaIdxs);
+		return "good";
+
+	}
+
+	@PostMapping("shopping/delete-comment")
+	@ResponseBody
+	public String deleteComments(@RequestBody List<Integer> rvIdxs) {
+		
+		
+		adminService.deleteComments(rvIdxs);
 		return "good";
 
 	}
