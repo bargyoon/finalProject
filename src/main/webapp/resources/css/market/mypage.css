@@ -1,3 +1,12 @@
+.fa-ticket-alt:before{
+	color: black;
+}
+.fa-coins:before{
+	color: black;
+	padding-left: 10px;
+}
+
+
 .aside-nav{
     display: flex;
     flex-direction: column;
@@ -252,10 +261,26 @@ tbody > tr:hover{
     background-color:rgba(198, 201, 207, 0.3);
 }
 
+.review-nav > li a.selected{	
+	color:black;
+	font-weight:bold;
+}
+
 
 /* enquiry */
 .enquiry_title:hover{
     text-decoration: underline;
+}
+
+.eq-add-btn, .eq-search, .order-search, .review-search, .faq-search{
+	font-family: 'SBAggroL';
+    margin-left: 7px;   
+    box-shadow: 1px 1px 3px 1px #dadce0;
+    background-color: ButtonFace;
+    border: none;
+    width: 6rem;
+    height: 2rem;
+    border-radius: 5px;
 }
 
 .fromDate input {
@@ -270,6 +295,11 @@ tbody > tr:hover{
 .eq-click{
     background-color:rgba(198, 201, 207, 0.1);
 }
+
+.orderList-wrapper *{
+	font-family: 'SBAggroL';
+}
+
 
 .cs-nav{
     padding: 0;
@@ -581,11 +611,14 @@ tbody > tr:hover{
 	text-decoration: none;
 }
 .address-btn a {
-    background-color: lightgray;
     padding-bottom: 0;
     padding-top: 0;
     margin-top: 5px;
     margin-bottom: 5px;
+    font-family: 'SBAggroL';
+    margin-left: 7px;   
+    box-shadow: 1px 1px 3px 1px #dadce0;
+    background-color: ButtonFace;
 }
 
 .address-btn button:hover{
@@ -595,8 +628,14 @@ tbody > tr:hover{
 }
 .address-insert-btn{
 	width: 9em;
-    background: ButtonFace;  
     font-size: 13px;
+}
+
+.address-add-btn{
+	font-family: 'SBAggroL';
+    margin-left: 7px;   
+    box-shadow: 1px 1px 3px 1px #dadce0;
+    background-color: ButtonFace;
 }
 
 /* address-pop  */
@@ -669,6 +708,11 @@ tbody > tr:hover{
 }
 
 /* acc-money 적립금 */
+.acc-nav > li a.selected{	
+	color:black;
+	font-weight:bold;
+}
+
 .acc-money-ul{
     list-style: none;
     padding: 0;

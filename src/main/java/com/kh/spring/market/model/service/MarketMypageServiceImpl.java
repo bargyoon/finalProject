@@ -89,6 +89,11 @@ public class MarketMypageServiceImpl implements MarketMypageService{
 	}
 	
 	@Override
+	public void updateReserveByReview(Member member) {
+		mypageRepository.updateReserveByReview(member);		
+	}
+	
+	@Override
 	public void updateIsReview(int orderIdx) {
 		mypageRepository.updateIsReview(orderIdx);		
 	}
@@ -230,6 +235,8 @@ public class MarketMypageServiceImpl implements MarketMypageService{
 	public void updateCart(int count, int cartIdx) {
 		mypageRepository.updateCart(count, cartIdx);		
 	}
+
+	
 
 	
 }

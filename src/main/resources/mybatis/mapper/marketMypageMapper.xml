@@ -29,20 +29,21 @@
   <!-- review -->
   <insert id="insertReview">
   	insert into REVIEW(RV_IDX,USER_IDX,PRD_IDX,ORDER_IDX,DT_IDX,RATING,RV_CONTENT,TYPE)
-	values(SC_RV_IDX.nextval,  #{userIdx}, 
-    	(select prd_idx from "ORDER" o
-    	join prd_detail d using(prd_idx)
-   		where order_idx = 10006 and o.dt_idx=d.dt_idx)
-    	,#{orderIdx}, (select dt_idx from "ORDER" where order_idx=#{orderIdx}) ,#{rating},#{rvContent},#{type})
+	values(SC_RV_IDX.nextval,  #{userIdx}
+			,(select prd_idx from "ORDER" o join prd_detail d using(prd_idx) where order_idx = #{orderIdx} and o.dt_idx=d.dt_idx)
+    		,#{orderIdx}
+    		, (select dt_idx from "ORDER" where order_idx=#{orderIdx}) 
+    		,#{rating},#{rvContent},#{type})
   </insert>
-  
+  <!-- 작성가능 review list -->
   	<select id="selectReviewList" resultType="map">
   	 	select ORDER_IDX, USER_IDX, PRD_IDX, ORDER_DATE, o.STATE, ORDER_CNT, UPDATE_DATE,IS_REVIEW, p.name, p.brand, d.po_name, d.dt_idx, o.order_date
 		from "ORDER" o
 		inner join product p USING(PRD_IDX)
 		inner join prd_detail d USING(PRD_IDX)
 		<where>
-			USER_IDX = #{userIdx} and is_review=0 and o.dt_idx=d.dt_idx and o.STATE = 'deleverComplete'  <!-- state가 4일 때 구매 확정이라면 -->
+			USER_IDX = #{userIdx} and is_review=0 and o.dt_idx=d.dt_idx 
+			and (o.STATE = 'deliverComplete' or o.STATE =  'orderComplete')
 		<if test="fromDate != null and endDate != null">
 			and ORDER_DATE between TO_DATE(#{fromDate},'YYYY-MM-DD') and TO_DATE(#{endDate},'YYYY-MM-DD')+1
 		</if>
@@ -60,13 +61,13 @@
   	
   	 <select id="selectMyReviewList" resultType="map">
   	 	select r.RV_IDX, r.USER_IDX, PRD_IDX, r.ORDER_IDX, r.STATE, r.RATING, r.TYPE, r.RECOMMAND, r.REG_DATE, RV_CONTENT
-  	 	, p.name, p.brand, d.po_name, d.dt_idx
+  	 	, p.name, p.brand, d.po_name, d.dt_idx	 	
   	 	, fl_idx, origin_file_name, rename_file_name, save_path
 		from REVIEW r
 		join product p USING(PRD_IDX)
 		join prd_detail d USING(PRD_IDX)
 		join "ORDER" o USING(PRD_IDX)
-		join file_info f on (r.rv_idx = f.type_idx)
+		left OUTER join file_info f on (r.rv_idx = f.type_idx)	
 		<where>
 		r.USER_IDX = #{userIdx} and o.dt_idx = d.dt_idx 
 			<if test="state == null">
@@ -88,7 +89,15 @@
 		inner join "ORDER" o USING(USER_IDX)
 		inner join product p using(PRD_IDX)
 		inner join prd_detail d USING(PRD_IDX)
-		where user_idx = #{userIdx} and o.dt_idx=d.dt_idx and o.order_idx=s.order_idx and s.state=#{state}
+		<where>
+		 user_idx = #{userIdx} and o.dt_idx=d.dt_idx and o.order_num = s.order_num
+			<if test="state == null">
+				and s.state is not null
+			</if>	
+			<if test="state != null">
+				and s.state=#{state}	
+			</if>			
+		</where>
 		order by s.reg_date desc
 	</select>
 	

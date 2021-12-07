@@ -32,12 +32,12 @@
 			</div>
 			<div class="px-lg-5 mt-5 mx-5 pt-2" style="display: flex; justify-content: space-between; min-width: 20%">
 				<div class="mt-5" style="display: flex; flex-direction: column;">
-					<i class="fas fa-coins py-2" style="font-size: 1.5rem;"></i>
+					<a href="/market/mypage/acc-money"><i class="fas fa-coins py-2" style="font-size: 1.5rem;"></i></a>
 					<p class="fw-normal mt-2">적립금</p>
 					<p style="font-size: 1.3rem;">${memberInfo.saveMoney}</p>
 				</div>
 				<div class="mt-5" style="display: flex; flex-direction: column;">
-					<i class="fas fa-ticket-alt py-2" style="font-size: 1.5rem"></i>
+					<a href="/market/mypage/coupon-list"><i class="fas fa-ticket-alt py-2" style="font-size: 1.5rem"></i></a>
 					<p class="fw-normal mt-2">쿠폰</p>
 					<p style="font-size: 1.3rem;">${couponCnt}장</p>
 				</div>
@@ -54,8 +54,8 @@
 					<li><a href="/market/mypage">주문 내역 조회</a></li>
 					<li><a href="/market/mypage/review/review-list2">구매후기</a></li>
 					<li><a href="/market/mypage/cart">장바구니</a></li>
-					<li><a href="#!">상품문의</a></li>
 					<li><a href="/market/mypage/address-list">주소록 관리</a></li>
+					<li><a href="/market/mypage/enquiry/enquiry-list">구매상품문의</a></li>
 					<li><a href="/market/mypage/enquiry/faq?type=1">FAQ</a></li>
 				</ul>
 			</div>
@@ -72,7 +72,8 @@
 				<li>구매 후기 작성 시 적립금 지급됩니다.</li>
 				<li>적립금은 상품 금액의 5%까지만 사용 가능합니다.</li>
 			</ul>
-			<ul class="sub-ul pt-4 pb-2">
+			<ul class="acc-nav sub-ul pt-4 pb-2">
+				<li><a class="selected" href="/market/mypage/acc-money">전체</a></li>
 				<li><a href="/market/mypage/acc-money?state=0">적립</a></li>
 				<li><a href="/market/mypage/acc-money?state=1">사용</a></li>
 			</ul>
@@ -91,32 +92,43 @@
 						<td>적용 일시</td>
 					</tr>
 				</thead>
+				
 				<c:forEach var="reserveList" items="${reserveList}">
 				<tbody>
+				
+				<c:choose>				
+					<c:when test="${reserveList.STATE eq '0'}">
 					<tr>
-					<c:choose>
-						<c:when test="${reserveList.STATE eq '1'}"> <!-- 1일 때 적립 -->
-							<td class="acc-state">적립</td>
-						</c:when>
-						<c:when test="${reserveList.STATE ne '1'}">
-							<td class="acc-state">사용</td>
-						</c:when>
-					</c:choose>
-					
+						<td class="acc-state">적립</td>
 						<td class="acc-amount">+${reserveList.AMOUNT}</td>
 						<td class="acc-context">
-							<ul>
+							<ul>							
 							<c:choose>
-							 <c:when test="${reserveList.TYPE == '1'}"><li class="acc-reason">일반 후기 작성 적립금 지급</li></c:when>
-							 <c:when test="${reserveList.TYPE == '2'}"><li class="acc-reason">상품 사진 후기 작성 적립금 지급</li></c:when>
-							 <c:when test="${reserveList.TYPE == '3'}"><li class="acc-reason">주문 적립</li></c:when>
-							</c:choose>
-								<li class="acc-prd">${reserveList.NAME}</li>
+							 	<c:when test="${reserveList.TYPE == '1'}"><li class="acc-reason">일반 후기 작성 적립금 지급</li></c:when>
+							 	<c:when test="${reserveList.TYPE == '2'}"><li class="acc-reason">상품 사진 후기 작성 적립금 지급</li></c:when>
+							 	<c:when test="${reserveList.TYPE == '0'}"><li class="acc-reason">주문 적립</li></c:when>
+							</c:choose>						
+							<li class="acc-prd">${reserveList.NAME}</li> <!-- 상품이름 -->
 							</ul>
 						</td>
 						<td class="acc-date"><fmt:formatDate value="${reserveList.REG_DATE}" pattern="yyyy-MM-dd"/></td>
 					</tr>
-				
+					</c:when>
+					
+					<c:when test="${reserveList.STATE ne '0'}">
+					<tr>
+						<td class="acc-state">사용</td>					
+						<td class="acc-amount">-${reserveList.AMOUNT}</td>
+						<td class="acc-context">
+							<ul>
+								<li class="acc-reason">사용</li>
+								<li class="acc-prd">${reserveList.NAME}</li> <!-- 상품이름 -->
+							</ul>
+						</td>
+						<td class="acc-date"><fmt:formatDate value="${reserveList.REG_DATE}" pattern="yyyy-MM-dd"/></td>
+					</tr>
+				</c:when>
+				</c:choose>
 				</tbody>
 				</c:forEach>
 			</table>
@@ -125,7 +137,19 @@
 	
 	<%@ include file="/WEB-INF/views/include/market/footer.jsp"%>
 	<script type="text/javascript" src="${contextPath}/resources/js/market/mypage/acc-money.js"></script>
-
+	<script type="text/javascript">
+	
+	let tabBtns = document.querySelector('.acc-nav').children;
+	for (var i = 0; i < tabBtns.length; i++) {
+		let tabBtn = tabBtns[i].children[0];
+		
+		if(tabBtn.href==document.location.href){
+			tabBtn.classList.add('selected');
+		}else{
+			tabBtn.classList.remove('selected');
+		}
+	}
+	</script>
 
 
 </body>

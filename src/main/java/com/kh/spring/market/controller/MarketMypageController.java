@@ -47,6 +47,8 @@ public class MarketMypageController {
 		List<Map<String, Object>> orderList = marketMypageService.selectOrderList(member,state,fromDate, endDate);
 		Member memberInfo = marketMypageService.selectMemberInfo(member);
 		int couponCnt = marketMypageService.selectCouponCount(member);
+		marketMypageService.updateDateAndState(); //구매 후 일주일 지나면 구매확정 state 변경
+		
 		model.addAttribute("memberInfo", memberInfo);
 		model.addAttribute("couponCnt", couponCnt);
 		model.addAttribute("orderList", orderList);
@@ -193,11 +195,15 @@ public class MarketMypageController {
 	@GetMapping("acc-money")
 	public void accMoney(@SessionAttribute(name="authentication")Member certifiedUser,
 								Model model,
-								@RequestParam(value = "state", defaultValue="0")String state) {
+								SaveHistory shistory) {
 		
-		List<Map<String, Object>> reserveList = marketMypageService.selectReserveList(certifiedUser.getUserIdx(),state);
-		Member memberInfo = marketMypageService.selectMemberInfo(certifiedUser.getUserIdx());
-		int couponCnt = marketMypageService.selectCouponCount(certifiedUser.getUserIdx());
+		int member = certifiedUser.getUserIdx();
+		String state = shistory.getState();
+		System.out.println("state : " +  shistory.getState());
+		
+		List<Map<String, Object>> reserveList = marketMypageService.selectReserveList(member,state);
+		Member memberInfo = marketMypageService.selectMemberInfo(member);
+		int couponCnt = marketMypageService.selectCouponCount(member);
 				
 		model.addAttribute("memberInfo", memberInfo);
 		model.addAttribute("couponCnt", couponCnt);
@@ -218,8 +224,8 @@ public class MarketMypageController {
 							@RequestParam(value = "fromDate", required = false)String fromDate,
 							@RequestParam(value = "endDate", required = false)String endDate) {
 		System.out.println("order : " + order);
-		//List<Map<String, Object>> orderList = marketMypageService.selectOrderList(certifiedUser.getUserIdx(), order.getState(),fromDate, endDate);
-		//model.addAttribute("orderList", orderList);
+		List<Map<String, Object>> orderList = marketMypageService.selectOrderList(certifiedUser.getUserIdx(), order.getState(),fromDate, endDate);
+		model.addAttribute("orderList", orderList);
 	}
 	
 	@PostMapping("enquiry/upload")
@@ -239,9 +245,10 @@ public class MarketMypageController {
 							@RequestParam(value = "fromDate", required = false)String fromDate,
 							@RequestParam(value = "endDate", required = false)String endDate) {
 		
-		List<Map<String, Object>> enquiryList = marketMypageService.selectEnquiryList(certifiedUser.getUserIdx(),fromDate, endDate);
-		Member memberInfo = marketMypageService.selectMemberInfo(certifiedUser.getUserIdx());
-		int couponCnt = marketMypageService.selectCouponCount(certifiedUser.getUserIdx());
+		int member = certifiedUser.getUserIdx();
+		List<Map<String, Object>> enquiryList = marketMypageService.selectEnquiryList(member,fromDate, endDate);
+		Member memberInfo = marketMypageService.selectMemberInfo(member);
+		int couponCnt = marketMypageService.selectCouponCount(member);
 		
 		model.addAttribute("enquiryList", enquiryList);
 		model.addAttribute("memberInfo", memberInfo);
@@ -259,7 +266,6 @@ public class MarketMypageController {
 		Member memberInfo = marketMypageService.selectMemberInfo(member);
 		int couponCnt = marketMypageService.selectCouponCount(member);
 		List<QNA> faqList = marketMypageService.selectFAQList(type,keyword);
-		System.out.println("keyword : " + keyword);
 		model.addAttribute("keyword", keyword);
 		model.addAttribute("memberInfo", memberInfo);
 		model.addAttribute("couponCnt", couponCnt);	
@@ -315,7 +321,6 @@ public class MarketMypageController {
 		List<Map<String, Object>> reviewList = marketMypageService.selectReviewList(certifiedUser.getUserIdx(),fromDate, endDate);
 		Member memberInfo = marketMypageService.selectMemberInfo(certifiedUser.getUserIdx());
 		int couponCnt = marketMypageService.selectCouponCount(certifiedUser.getUserIdx());
-		marketMypageService.updateDateAndState(); //구매 후 일주일 지나면 구매확정 state 변경
 		
 		System.out.println("reviewList : " + reviewList);
 		
@@ -351,39 +356,37 @@ public class MarketMypageController {
 	
 	@PostMapping("review/upload/{orderIdx}")
 	public String uploadBoard(Review review
+							,Member member
 							,SaveHistory saveHistory
 							, List<MultipartFile> files 
 							,@SessionAttribute("authentication")Member certifiedUser
 							,@PathVariable int orderIdx) {
 		
-		int memeber= certifiedUser.getUserIdx();
+		int user= certifiedUser.getUserIdx();
 		System.out.println("files : " + files);
 		System.out.println("orderIdx : " + orderIdx);
+		System.out.println("userIdx : " + user);
 		
-		review.setUserIdx(memeber);
-		saveHistory.setUserIdx(memeber);
+		review.setUserIdx(user);
+		saveHistory.setUserIdx(user);
+		member.setUserIdx(user);
 		
 		if(files == null) { //일반후기
 			review.setType("0"); 
-			saveHistory.setState("0"); 
 			saveHistory.setType("1"); 
+			member.setSaveMoney(300);
+			saveHistory.setAmount(300);
 		}else {				 //사진후기
 			review.setType("1"); 
-			saveHistory.setState("0");
 			saveHistory.setType("2");
+			member.setSaveMoney(600);
+			saveHistory.setAmount(600);
 		}
 		
 		marketMypageService.insertReview(files, review);
 		marketMypageService.updateIsReview(orderIdx);
-		if(review.getType().equals("0")) { //일반후기라면 적립금 300
-			saveHistory.setAmount(300);
-			System.out.println("saveHistory : " + saveHistory);
-			marketMypageService.insertSaveMoney(saveHistory);
-		}else {
-			saveHistory.setAmount(600);
-			System.out.println("saveHistory : " + saveHistory);
-			marketMypageService.insertSaveMoney(saveHistory);
-		}
+		marketMypageService.insertSaveMoney(saveHistory);
+		marketMypageService.updateReserveByReview(member);
 			
 		//파일첨부 안했을 때 예외처리 (RedirectAttributes)
 		System.out.println("upload review : " + review);

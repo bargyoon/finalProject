@@ -31,12 +31,12 @@
 			</div>
 			<div class="px-lg-5 mt-5 mx-5 pt-2" style="display: flex; justify-content: space-between; min-width: 20%">
 				<div class="mt-5" style="display: flex; flex-direction: column;">
-					<i class="fas fa-coins py-2" style="font-size: 1.5rem;"></i>
+					<a href="/market/mypage/acc-money"><i class="fas fa-coins py-2" style="font-size: 1.5rem;"></i></a>
 					<p class="fw-normal mt-2">적립금</p>
-					<p style="font-size: 1.3rem;">${memberInfo.saveMoney}원</p>
+					<p style="font-size: 1.3rem;">${memberInfo.saveMoney}</p>
 				</div>
 				<div class="mt-5" style="display: flex; flex-direction: column;">
-					<i class="fas fa-ticket-alt py-2" style="font-size: 1.5rem"><a href="/market/mypage/coupon-list"></a> </i>
+					<a href="/market/mypage/coupon-list"><i class="fas fa-ticket-alt py-2" style="font-size: 1.5rem"></i></a>
 					<p class="fw-normal mt-2">쿠폰</p>
 					<p style="font-size: 1.3rem;">${couponCnt}장</p>
 				</div>
@@ -50,11 +50,11 @@
 				<ul class="aside-ul">
 					<li class="ft-SBAggroM" style="font-size: 1.3rem;">나의 쇼핑 활동</li>
 					<li><hr class="dropdown-divider" /></li>
-					<li><a href="/market/mypage">주문 내역 조회</a></li>
+					<li><a href="/market/mypage" style="color: black;">주문 내역 조회</a></li>
 					<li><a href="/market/mypage/review/review-list2">구매후기</a></li>
 					<li><a href="/market/mypage/cart">장바구니</a></li>
-					<li><a href="#!">상품문의</a></li>
-					<li><a href="/market/mypage/address-list" style="color: black;">주소록 관리</a></li>
+					<li><a href="/market/mypage/address-list">주소록 관리</a></li>
+					<li><a href="/market/mypage/enquiry/enquiry-list">구매상품문의</a></li>
 					<li><a href="/market/mypage/enquiry/faq?type=1">FAQ</a></li>
 				</ul>
 			</div>
@@ -96,7 +96,7 @@
 						<div class="n-datepicker">
 							<input type="date" id="endDate" name="endDate">
 						</div>
-						<button type="submit" onclick="search();">조회</button>
+						<button class="order-search" type="submit" onclick="search();">조회</button>
 				</form>
 			</div>
 			
