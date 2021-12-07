@@ -3,6 +3,7 @@ package com.kh.spring.market.model.repository;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -11,9 +12,11 @@ import org.apache.ibatis.annotations.Update;
 
 import com.kh.spring.common.util.FileDTO;
 import com.kh.spring.common.util.pagination.Paging;
+import com.kh.spring.market.model.dto.Cart;
 import com.kh.spring.market.model.dto.Coupon;
 import com.kh.spring.market.model.dto.Order;
 import com.kh.spring.market.model.dto.Product;
+import com.kh.spring.market.model.dto.QNA;
 import com.kh.spring.market.model.dto.Review;
 import com.kh.spring.market.model.dto.prdListSet;
 
@@ -44,7 +47,9 @@ public interface ShopRepository {
 
 	Product selectPrdByIdx(int prdIdx);
 
-	List<Review> selectReviewByPrdIdx(int prdIdx);
+	List<Review> selectReviewByPrdIdxWithPaging(@Param("pn") int prdIdx, @Param("listSet") prdListSet listSet, @Param("pageUtil") Paging pageUtil);
+	
+	int selectReviewCnt(@Param("listSet") prdListSet listSet, @Param("pn") int pn);
 	
 	List<Coupon> selectCouponByUserIdx(int userIdx);
 	
@@ -81,7 +86,7 @@ public interface ShopRepository {
 	boolean insertOrder(Order order);
 
 	@Insert("insert into SAVE_HISTORY(SH_IDX, USER_IDX, STATE, TYPE, AMOUNT, ORDER_IDX)"
-			+ " values(SC_SH_IDX.nextval, #{userIdx}, , 0, #{saveMoney}, #{orderIdx})")
+			+ " values(SC_SH_IDX.nextval, #{userIdx}, 0, 0, #{saveMoney}, #{orderIdx})")
 	boolean insertSmHistory(Order order);
 
 	@Update("update user_coupon set is_del = 1 where uc_idx = #{ucIdx}")
@@ -101,5 +106,49 @@ public interface ShopRepository {
 	int selectItemCommentListCnt(Map<String, Object> commandMap);
 
 	List<Map<String,Object>> selectItemCommentList(@Param("commandMap") Map<String, Object> commandmap,@Param("pageUtil") Paging pageUtil);
+
+	List<Review> selectReviewByPrdIdx(int pn);
+	
+	@Select("select count(*) from \"LIKE\" where board_idx = #{rvIdx} and user_idx = #{userIdx}")
+	int selectListForCheck(@Param("userIdx") int userIdx, @Param("rvIdx") int rvIdx);
+
+	@Insert("insert into \"LIKE\" (LIKE_IDX, USER_IDX, BOARD_IDX) values(SC_LIKE_IDX.nextval, #{userIdx}, #{rvIdx})")
+	void insertLike(@Param("userIdx") int userIdx, @Param("rvIdx") int rvIdx);
+
+	@Update("update REVIEW set RECOMMAND = RECOMMAND + 1 where RV_IDX = #{rvIdx}")
+	void updateRvRecommandPlus(int rvIdx);
+
+	@Delete("delete from \"LIKE\" where user_idx = #{userIdx} and BOARD_IDX = #{rvIdx}")
+	void deleteLike(@Param("userIdx") int userIdx, @Param("rvIdx") int rvIdx);
+
+	@Update("update REVIEW set RECOMMAND = RECOMMAND - 1 where RV_IDX = #{rvIdx}")
+	void updateRvRecommandMinus(int rvIdx);
+
+	List<QNA> selectQnaListByPrdIdxWithPaging(@Param("pn") int pn, @Param("pageUtil") Paging pageUtilQna);
+
+	@Select("select count(*) from QNA where prd_idx = #{pn} and type = 0")
+	int selectQnaCnt(int pn);
+
+	@Insert("insert into cart (CART_IDX, USER_IDX, PRD_IDX, COUNT, DT_IDX) values(SC_CART_IDX.nextval, #{userIdx}, #{prdIdx}, #{count}, #{dtIdx})")
+	void insertCart(Cart cartInfos);
+	
+	@Select("select * from cart where USER_IDX = #{userIdx} and DT_IDX = #{dtIdx}")
+	Cart selectCartforCheck(Cart cart);
+
+	@Select("select * from file_info where type_idx = ${rvIdx}")
+	List<FileDTO> selectFileInfoByIdx(int rvIdx);
+	
+	@Update("update review set state = #{state} where rv_idx = #{rvIdx}")
+	void updateReviewState(Map<String, Object> jsonMap);
+
+	@Insert("insert into save_history(sh_idx, user_idx, state, type, amount, order_idx) values(sc_sh_idx.nextval,#{userIdx},1,#{type},#{price},#{orderIdx})")
+	void insertSaveMoney(@Param("type")int type,@Param("userIdx") int userIdx,@Param("price") int price,@Param("orderIdx") int orderIdx);
+
+	List<Map<String, Object>> selectQnAList(@Param("commandMap") Map<String, Object> commandmap,@Param("pageUtil") Paging pageUtil);
+
+	int selectQnAListCnt(Map<String, Object> commandMap);
+	
+	@Update("update prd_detail set state = #{state} where dt_idx = #{dtIdx}")
+	void updateProductState(Map<String, Object> jsonMap);
 
 }

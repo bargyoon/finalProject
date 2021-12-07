@@ -131,16 +131,16 @@
 							<td>
 								<ul class="prd-price">
 								<c:if test="${cartList.STATE ne 'sale'}">
-									<li class="normal-price">
+									<li class="normal-price" value="${cartList.PRICE}">
 										<fmt:formatNumber value="${cartList.PRICE}" type="number" pattern=""></fmt:formatNumber>
 									</li>
 								</c:if>
 									
 								<c:if test="${cartList.STATE eq 'sale'}">
-								<li class="normal-price">
+								<li class="normal-price" id="normal-price" value="${cartList.PRICE}">
 									<del><fmt:formatNumber value="${cartList.PRICE}" type="number" pattern=""></fmt:formatNumber></del>
 								</li>								
-								<li class="sale-price">
+								<li class="sale-price" id="sale-price" value="${cartList.SALE_PRICE}">
 									<fmt:formatNumber value="${cartList.SALE_PRICE}" type="number" pattern=""></fmt:formatNumber>
 								</li>
 								</c:if>
@@ -151,23 +151,25 @@
 							<!-- 수량 -->
 							<td>
 								<div class="cart-prd-amount">
-									<button type="button" class="prd-reduce-btn" onclick="count('minus')">-1</button>
-									<input id="cnt-${cartList.CART_IDX}" name="prd-cnt" type="text" onkeyup='printName()' autocomplete="off" onfocus="this.select();" 
-											value="${cartList.COUNT}" onchange="">
-									<button type="button" class="prd-increase-btn " onclick="count('plus')">+1</button>
+									<button type="button" id="minus-${cartList.RNUM}" class="prd-reduce-btn down" onclick='count("minus")'>-1</button>
+									<input id="cnt-${cartList.CART_IDX}" name="count" type="text" onkeyup='printName()' autocomplete="off" onfocus="this.select();" 
+											class="prd-cnt" value="${cartList.COUNT}" onchange="">
+									<button type="button" id="plus-${cartList.RNUM}" class="prd-increase-btn up" onclick='count("plus")'>+1</button>
 								</div>
+								<button type="button" onclick="updateCart()">변경</button>
 							</td>
 							<td>
-							
+							<input name="state${cartList.RNUM}" type="hidden" value="${cartList.STATE}">
 							<!-- 주문금액 -->							
 								<ul class="prd-price">
+									
 								<c:if test="${cartList.STATE ne 'sale'}">
-									<li id="price" value="${cartList.PRICE*cartList.COUNT}"></li>
-									(<li id="reserve" value="${cartList.PRICE*cartList.COUNT*0.03}"></li>)
+									<li id="set-price" value="${cartList.PRICE*cartList.COUNT}"></li>
+									(<li id="set-reserve" value="${cartList.PRICE*cartList.COUNT*0.03}"></li>)
 								</c:if>
 								<c:if test="${cartList.STATE eq 'sale'}">
-									<li id="price" value="${cartList.SALE_PRICE*cartList.COUNT}"></li>
-									(<li id="reserve" value="${cartList.SALE_PRICE*cartList.COUNT*0.03}"></li>)
+									<li id="set-sale-price" value="${cartList.SALE_PRICE*cartList.COUNT}"></li>
+									(<li id="set-sale-reserve" value="${cartList.SALE_PRICE*cartList.COUNT*0.03}"></li>)
 								</c:if>
 								</ul>
 							</td>
@@ -225,7 +227,7 @@
 				<div class="cart-total p-5 mx-5">
 					<div>
 						<span style="color: gray;">상품 가격</span>
-						<p>120,000 원</p>
+						<p id="total_price">120,000 원</p>
 					</div>
 					<i class="fas fa-minus"></i>
 					<div>
@@ -251,32 +253,6 @@
 
 
 <script>
-//상품 개수 증감 버튼 ****작업중
-function count(type){
-	 var cartIdx = document.getElementsByName("cartIdx");
-	 var cnt  = document.getElementById('cnt-'+cartIdx);
-	 var number = cnt.value;
-	 
-	 var price = document.getElementById('price').value;
-	 var reserve = document.getElementById('reserve').value;
-	 console.dir(price);
-	 console.dir(reserve);
-	 
-	if(type=='plus'){
-		number = parseInt(number)+1;
-		
-	}else if(type == 'minus'){
-		if(number<2){
-			alert('수량은 한 개 이상 선택해주세요.');
-			return false;
-		}
-		number = parseInt(number)-1;
-	}
-	cnt.value = number;
-}
-
-
-
 /* checkbox 설정 */
 $(".chk_all").click(function(){
  var chk = $(".chk_all").prop("checked");
@@ -292,16 +268,13 @@ $("input:checkbox[name='cartIdx']").click(function(){
 
 /* selectbox 상품개별삭제 */
 function selectDelete() {
-	 var url = "cart/delete";
+	 var url = "cart/selectDelete";
 	 var selectedArr = new Array();
 	 var cartIdx = document.getElementsByName("cartIdx"); //
-	 console.dir("cartIdx : " + cartIdx);
 
 	  for (var i = 0; i < cartIdx.length; i++) {
-	   if (cartIdx[i].checked) {
-		   console.dir(cartIdx[i]);
+	   if (cartIdx[i].checked == true) {
 		   selectedArr.push(cartIdx[i].value);
-		   console.dir("selectedArr : " + selectedArr);
 	   }
 	  }
 	
@@ -339,6 +312,42 @@ function AllDelete(){
 	form.submit();
 }
 
+//장바구니 변경 ***
+/* function updateCart(){
+	var cartIdx = document.getElementsByName("count");
+	var cartIdx = document.getElementsByName("cartIdx");
+	console.dir("count : " + count);
+	console.dir("cartIdx : " + cartIdx);
+	form.action = "cart/update?count="+count"&cartIdx="cartIdx;
+	form.submit();
+} */
+
+//상품 개수 증감 버튼 ****작업중
+function count(type){
+	
+	 var cnt  = document.getElementById('cnt-'+cartIdx);
+	 var number = cnt.value;
+	 console.dir(number);
+	 
+	 var result = document.getElementByName('count');
+	 var price = document.getElementById('price').value;
+	 var reserve = document.getElementById('reserve').value;
+	 console.dir(price);
+	 console.dir(reserve);
+	 
+	if(type=='plus'){
+		number = parseInt(number)+1;
+		
+	}else if(type == 'minus'){
+		if(number<2){
+			alert('수량은 한 개 이상 선택해주세요.');
+			return false;
+		}
+		number = parseInt(number)-1;
+	}
+	result.innerText=number;
+	cnt.value = number;
+}
 </script>
 
 

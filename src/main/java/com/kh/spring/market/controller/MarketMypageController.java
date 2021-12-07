@@ -84,6 +84,9 @@ public class MarketMypageController {
 		int cartCnt = marketMypageService.selectCartCnt(member);
 		
 		model.addAttribute("cartList", cartList);
+	
+		
+		
 		model.addAttribute("memberInfo", memberInfo);
 		model.addAttribute("couponCnt", couponCnt);
 		model.addAttribute("cartCnt", cartCnt);
@@ -92,10 +95,19 @@ public class MarketMypageController {
 				
 	}
 	
-	@PostMapping("cart/delete")
-	public String deleteCart(@RequestParam("selectedArr")int[] selectedArr) {		
+	@GetMapping("cart/delete")
+	public String deleteCart(@RequestParam("cartIdx")int cartIdx) {		
+		
+		marketMypageService.deleteCart(cartIdx);
+	
+		return "redirect:/market/mypage/cart"; 
+	}
+	
+	@PostMapping("cart/selectDelete")
+	public String selectDeleteCart(@RequestParam("selectedArr")int[] selectedArr) {		
 		
 		for(int i = 0; i<selectedArr.length; i++) {
+			System.out.println("selectedArr : " + selectedArr[i]);
 			marketMypageService.deleteCart(selectedArr[i]);
 		}
 		
@@ -107,6 +119,13 @@ public class MarketMypageController {
 		marketMypageService.deleteAllCart(certifiedUser.getUserIdx());
 		return "redirect:/market/mypage/cart"; 
 	}
+	
+	@GetMapping("cart/update")
+	public String updateCart(@RequestParam("count")int count,@RequestParam("cartIdx")int cartIdx) {		
+		marketMypageService.updateCart(count, cartIdx);
+		return "redirect:/market/mypage/cart"; 
+	}
+
 
 	@GetMapping("address-list")
 	public void addressList(@SessionAttribute(name="authentication")Member certifiedUser,

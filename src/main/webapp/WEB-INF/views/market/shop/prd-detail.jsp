@@ -86,7 +86,7 @@
 					<div class="d-flex justify-content-between">
 						<input id="uc-idx" name="uc-idx" type="hidden" value="0">
 						<input id="cp-amount-hidden" type="hidden" value="0">
-						<button class="fw-bolder" type="button" onclick="useCoupon()">쿠폰 적용</button>
+						<button class="fw-bolder" type="button" onclick="useCoupon('${sessionScope.authentication.userIdx}')">쿠폰 적용</button>
 						<span id="cp-amount" style="font-size: 15px;">버튼을 눌러 쿠폰을 적용하세요.</span>
 					</div>
 					<div class="mt-3 d-flex justify-content-between">
@@ -117,7 +117,7 @@
 				</div>
 				<div class="mt-4 d-flex justify-content-between buy-btns">
 					<button class="buy-btn" type="submit" onclick="requestPay('${prdInfo.prdIdx}', '${sessionScope.authentication.userIdx}')">구매하기</button>
-					<button class="cart-btn" type="button">장바구니</button>
+					<button class="cart-btn" type="button" onclick="registCart('${prdInfo.prdIdx}', '${sessionScope.authentication.userIdx}')">장바구니</button>
 				</div>
 			</div>
 		</div>
@@ -131,12 +131,12 @@
 				<li>/</li>
 				<li>
 					<button type="button" onclick="focusReview()">구매평</button>
-					<span class="badge text-white pt-2 rounded-pill" style="background-color: lightslategrey;">40</span>
+					<span class="badge text-white pt-2 rounded-pill" style="background-color: lightslategrey;">${cntByReviewType.photoReviewCnt + cntByReviewType.normalReviewCnt}</span>
 				</li>
 				<li>/</li>
 				<li>
 					<button type="button" onclick="focusQnA()">상품 Q&A</button>
-					<span class="badge text-white pt-2 rounded-pill" style="background-color: lightslategrey;">0</span>
+					<span class="badge text-white pt-2 rounded-pill" style="background-color: lightslategrey;">${qnaList.size()}</span>
 				</li>
 			</ul>
 		</div>
@@ -148,177 +148,155 @@
 			<p id="prd-review-tit">구매평</p>
 			<hr style="margin-top: 0;">
 			<ul class="review-nav mt-3">
-				<li><button id="focus-r" type="button"> 전체 <span style="font-size: 13px;">(${reviews.size()} 건)</span></button></li>
-				<li><button type="button">사진후기 <span style="font-size: 13px;">(${commandMap.photoReviewCnt} 건)</span></button></li>
-				<li><button type="button">일반후기 <span style="font-size: 13px;">(${commandMap.normalReviewCnt} 건)</span></button></li>
+				<li><button id="focus-r" type="button" onclick="changeOption('${prdInfo.prdIdx}', '')"> 전체 <span style="font-size: 13px;">(${cntByReviewType.photoReviewCnt + cntByReviewType.normalReviewCnt} 건)</span></button></li>
+				<li><button type="button" onclick="changeOption('${prdInfo.prdIdx}', '1')">사진후기 <span style="font-size: 13px;">(${cntByReviewType.photoReviewCnt} 건)</span></button></li>
+				<li><button type="button" onclick="changeOption('${prdInfo.prdIdx}', '0')">일반후기 <span style="font-size: 13px;">(${cntByReviewType.normalReviewCnt} 건)</span></button></li>
 			</ul>
 		</div>
 		<div class="prd-review-area my-5">
-			<c:forEach var="i" begin="0" step="1" end="${reviews.size()-1}">
-				<div class="d-flex my-5">
-					<div class="prd-review-content mx-5">
-						<div class="d-flex justify-content-between" style="min-height: 60px;">
-							<p style="font-weight: bold;">NICKNAME</p>
-							<p style="color: lightslategray;">2021.11.15</p>
-						</div>
-						<div class="d-flex text-warning pb-1">
-							<i class="fas fa-star"></i>
-							<i class="fas fa-star"></i>
-							<i class="fas fa-star"></i>
-							<i class="fas fa-star"></i>
-							<i class="fas fa-star"></i>
-						</div>
-						<p class="mt-2">옵션 : 옵션</p>
-						<p class="review-content-text">
-							각 브랜드 사료 성분 검사에서 나쁜거 안나오고 좋은 사료여서 주문했습니다.<br>
-							강아지가 너무 잘 먹어어요.<br>
-							혹시 몰라 제일 작은 용량으로 시킨건데<br>
-							다음에 큰 용량으로 주문해야겠습니다.<br>
-							유통기한은 짧지도 넉넉하지도 않은편입니다.
-						</p>
-						<div class="extend-img-area"></div>
-						<div class="review-content-imgs my-3">
-							<div onclick="changeImgSize(this)">
-								<img src="https://dummyimage.com/500x500/dee2e6/6c757d.jpg" style="max-width: 200px; max-height: 200px;">
+			<c:if test="${reviews.size() ne 0}">
+				<c:forEach var="i" begin="0" step="1" end="${reviews.size()-1}">
+					<div class="d-flex my-5">
+						<div class="prd-review-content mx-5">
+							<div class="d-flex justify-content-between" style="min-height: 60px;">
+								<p style="font-weight: bold;">${reviews[i].userName}</p>
+								<p style="color: lightslategray;"><fmt:formatDate pattern="yyyy-MM-dd" value="${reviews[i].regDate}"/></p>
 							</div>
-							<div onclick="changeImgSize(this)">
-								<img src="https://dummyimage.com/500x500/dee2e6/6c757d.jpg" style="max-width: 200px; max-height: 200px;">
+							<div class="d-flex text-warning pb-1">
+								<c:forEach var="j" begin="0" step="1" end="${reviews[i].rating-1}">
+									<i class="fas fa-star"></i>
+								</c:forEach>
 							</div>
-							<div onclick="changeImgSize(this)">
-								<img src="https://dummyimage.com/500x500/dee2e6/6c757d.jpg" style="max-width: 200px; max-height: 200px;">
-							</div>
-							<div onclick="changeImgSize(this)">
-								<img src="https://dummyimage.com/500x500/dee2e6/6c757d.jpg" style="max-width: 200px; max-height: 200px;">
+							<p class="mt-2">옵션 : ${reviews[i].dtName}</p>
+							<p class="review-content-text">
+								${reviews[i].rvContent}
+							</p>
+							<c:if test="${reviews[i].type eq 1}">
+								<div class="extend-img-area"></div>
+								<div class="review-content-imgs my-3">
+									<div onclick="changeImgSize(this)">
+										<img src="https://dummyimage.com/500x500/dee2e6/6c757d.jpg" style="max-width: 200px; max-height: 200px;">
+									</div>
+									<div onclick="changeImgSize(this)">
+										<img src="https://dummyimage.com/500x500/dee2e6/6c757d.jpg" style="max-width: 200px; max-height: 200px;">
+									</div>
+									<div onclick="changeImgSize(this)">
+										<img src="https://dummyimage.com/500x500/dee2e6/6c757d.jpg" style="max-width: 200px; max-height: 200px;">
+									</div>
+									<div onclick="changeImgSize(this)">
+										<img src="https://dummyimage.com/500x500/dee2e6/6c757d.jpg" style="max-width: 200px; max-height: 200px;">
+									</div>
+								</div>
+							</c:if>
+							<div class="mt-3">
+								<input id="likeBtn-${reviews[i].rvIdx}" type="checkbox" onclick="checkLike(${reviews[i].rvIdx})" style="display: none;">
+								<label class="like-btn px-lg-2" for="likeBtn-${reviews[i].rvIdx}"><i class="fas fa-laugh-beam py-1" style="color: orange;"></i> 
+									도움돼요 <input id="like-${reviews[i].rvIdx}" onclick="checkLike(${reviews[i].rvIdx})" class="like-val" type="text" value="${reviews[i].recommand}">
+								</label>
+								
 							</div>
 						</div>
-						<div class="mt-3">
-							<input id="likeBtn" type="checkbox" onclick="" style="display: none;">
-							<label class="like-btn px-lg-2" for="likeBtn"><i class="fas fa-laugh-beam py-1" style="color: orange;"></i> 도움돼요 3</label>
-						</div>
+					</div>
+					<hr>
+				</c:forEach>
+				<div class="page_wrap" style="margin-left: 2.4rem" id="pagination">
+					<div class="page_nation">
+						<a class="arrow prev" onclick="prevBtn('${prdInfo.prdIdx}',${pageUtil.curPage}, '${listSet.option}')"><i class="fas fa-angle-left"></i></a>
+						<c:if test="${pageUtil.blockEnd eq 1}">
+							<a class="active">1</a> 
+						</c:if>
+						
+						<c:if test="${pageUtil.blockEnd > 1}">
+							<c:forEach var="i" begin="1" step="1" end="${pageUtil.blockEnd}">
+								<a onclick="pageBtn('${prdInfo.prdIdx}', '${listSet.option}', this.text)" class="active"><c:out value="${i}"/></a> 
+							</c:forEach>
+						</c:if>
+						<a class="arrow next" onclick="nextBtn('${prdInfo.prdIdx}', ${pageUtil.curPage}, ${pageUtil.blockEnd} ,'${listSet.option}')"><i class="fas fa-angle-right"></i></a>
 					</div>
 				</div>
-				<hr>
-			</c:forEach>
-			<div class="d-flex my-5">
-				<img src="https://dummyimage.com/100x100/dee2e6/6c757d.jpg" style="border-radius: 7rem; height: 100px; width: 100px;" />
-				<div class="prd-review-content mx-5">
-					<div class="d-flex justify-content-between" style="min-height: 60px;">
-						<p style="font-weight: bold;">NICKNAME</p>
-						<p style="color: lightslategray;">2021.11.15</p>
-					</div>
-					<div class="d-flex text-warning pb-1">
-						<i class="fas fa-star"></i>
-						<i class="fas fa-star"></i>
-						<i class="fas fa-star"></i>
-						<i class="fas fa-star"></i>
-						<i class="fas fa-star"></i>
-					</div>
-					<p class="mt-2">옵션 : 옵션</p>
-					<p class="review-content-text">
-						각 브랜드 사료 성분 검사에서 나쁜거 안나오고 좋은 사료여서 주문했습니다.<br>
-						강아지가 너무 잘 먹어어요.<br>
-						혹시 몰라 제일 작은 용량으로 시킨건데<br>
-						다음에 큰 용량으로 주문해야겠습니다.<br>
-						유통기한은 짧지도 넉넉하지도 않은편입니다.
-					</p>
-					<div class="mt-3">
-						<input id="likeBtn" type="checkbox" onclick=""style="display: none;">
-						<label class="like-btn px-lg-2" for="likeBtn"><i class="fas fa-laugh-beam py-1" style="color: orange;"></i> 도움돼요 3</label>
-					</div>
-				</div>
-			</div>
+			</c:if>
+			<c:if test="${reviews.size() eq 0}">
+				<div class="pt-5 pb-5" style="text-align: center;">
+                    <p>상품 후기가 없습니다</p>
+               </div>
+			</c:if>
 		</div>
 		<div class="prd-review-tab">
 			<div class="d-flex justify-content-between" style="margin-top: 8rem;">
 				<input type="text" readonly="readonly" value="Q&A" id="focus-q">
 				<a href="#!"><button class="prd-enquiry-btn px-3 py-1" type="button">문의 작성</button></a>
 			</div>
-			<table class="prd-detail-qna mt-3">
-				<colgroup>
-					<col style="width: 15%;">
-					<col style="width: auto;">
-					<col style="width: 15%;">
-					<col style="width: 15%;">
-				</colgroup>
-				<thead>
-					<tr style="font-size: 14px; text-align: center;">
-						<th>문의유형</th>
-						<th>문의/답변</th>
-						<th>작성자</th>
-						<th>작성일</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<td>배송</td>
-						<td id="enquiry-1" class="enquiry_title text-start" onclick="openEnquiry(this)">
-							<span style="border: 1px solid steelblue; color: steelblue; padding: 2px;">답변완료</span>배송 언제쯤 도착할까요 ?
-						</td>
-						<td>닉네임</td>
-						<td>2021.08.15</td>
-					</tr>
-					<tr id="enquiry-1-context" class="enquiry_context eq-click">
-						<td style="color: royalblue; font-size: 30px;">Q</td>
-						<td class="text-start">작년에 시켰는데 택배 언제 도착할까요 ?</td>
-						<td>&nbsp;</td>
-						<td>&nbsp;</td>
-					</tr>
-					<tr id="enquiry-1-answer" class="eq-click">
-						<td style="color: red; font-size: 30px;">A</td>
-						<td class="text-start">
-							<p class="enquiry-answer" style="line-height: 2rem;">
-								안녕하세요 똑Dog한 집사들 장터 고객센터 입니다.<br>
-								먼저, 이용에 불편을 끼쳐 드린 점 진심으로 사과드립니다.<br>
-								확인결과 고객님의 상품은 내년에 도착합니다.<br>
-								다른 도움이 필요하시다면 고객센터(1234-4567)로 문의 부탁드립니다.<br>
-								언제나 고객님의 편안한 쇼핑을 위하여 최선을 다하는 똑Dog한 집사들의 장터가 되겠습니다.<br>
-								감사합니다.
-							</p>
-						</td>
-						<td>스토어 담당자<br>윤수환
-						</td>
-						<td style="font-size: 14px;">21.08.16<br>15:31
-						</td>
-					</tr>
-					<tr>
-						<td>상품</td>
-						<td id="enquiry-2" class="enquiry_title text-start">배송 언제쯤 도착할까요 ?</td>
-						<td>닉네임</td>
-						<td>2021.08.15</td>
-					</tr>
-					<tr>
-						<td>배송</td>
-						<td id="enquiry-3" class="enquiry_title text-start" onclick="openEnquiry(this)">
-							<span style="border: 1px solid steelblue; color: steelblue; padding: 2px;">답변완료</span>배송 언제쯤 도착할까요 ?
-						</td>
-						<td>닉네임</td>
-						<td>2021.08.15</td>
-					</tr>
-					<tr id="enquiry-3-context" class="enquiry_context eq-click">
-						<td style="color: royalblue; font-size: 30px;">Q</td>
-						<td class="text-start">작년에 시켰는데 택배 언제 도착할까요 ?</td>
-						<td>&nbsp;</td>
-						<td>&nbsp;</td>
-					</tr>
-					<tr id="enquiry-3-answer" class="eq-click">
-						<td style="color: red; font-size: 30px;">A</td>
-						<td class="text-start">
-							<p class="enquiry-answer" style="line-height: 2rem;">
-								안녕하세요 똑Dog한 집사들 장터 고객센터 입니다.<br>
-								먼저, 이용에 불편을 끼쳐 드린 점 진심으로 사과드립니다.<br>
-								확인결과 고객님의 상품은 내년에 도착합니다.<br>
-								다른 도움이 필요하시다면 고객센터(1234-4567)로 문의 부탁드립니다.<br>
-								언제나 고객님의 편안한 쇼핑을 위하여 최선을 다하는 똑Dog한 집사들의 장터가 되겠습니다.<br>
-								감사합니다.
-							</p>
-						</td>
-						<td>스토어 담당자<br>윤수환
-						</td>
-						<td style="font-size: 14px;">21.08.16<br>15:31
-						</td>
-					</tr>
-				</tbody>
-			</table>
+			<c:if test="${qnaList.size() ne 0}">
+				<table class="prd-detail-qna mt-3">
+					<colgroup>
+						<col style="width: 15%;">
+						<col style="width: auto;">
+						<col style="width: 15%;">
+						<col style="width: 15%;">
+					</colgroup>
+					<thead>
+						<tr style="font-size: 14px; text-align: center;">
+							<th>문의유형</th>
+							<th>문의/답변</th>
+							<th>작성자</th>
+							<th>작성일</th>
+						</tr>
+					</thead>
+					<tbody>
+						<c:forEach var="qna" items="${qnaList}" varStatus="status">
+							<tr>
+								<td>상품</td>
+								<td id="enquiry-${status.index}" class="enquiry_title text-start" onclick="openEnquiry(this)">
+									<c:if test="${qna.isAnswer eq 1}">
+										<span style="border: 1px solid steelblue; color: steelblue; padding: 2px;">답변완료</span>
+									</c:if>
+									배송 언제쯤 도착할까요 ?
+								</td>
+								<td>${qna.userName}</td>
+								<td>${qna.regDate}</td>
+							</tr>
+							<c:if test="${qna.isAnswer eq 1}">
+								<tr id="enquiry-${status.index}-context" class="enquiry_context eq-click" style="display: none">
+									<td style="color: royalblue; font-size: 30px;">Q</td>
+									<td class="text-start">${qna.context}</td>
+									<td>&nbsp;</td>
+									<td>&nbsp;</td>
+								</tr>
+								<tr id="enquiry-${status.index}-answer" class="eq-click" style="display: none">
+									<td style="color: red; font-size: 30px;">A</td>
+									<td class="text-start">
+										<p class="enquiry-answer" style="line-height: 2rem;">${qna.awContext}</p>
+									</td>
+									<td>스토어 담당자<br>윤수환
+									</td>
+									<td style="font-size: 14px;">${qna.awRegDate}</td>
+								</tr>
+							</c:if>
+						</c:forEach>
+					</tbody>
+				</table>
+				<div class="page_wrap" style="margin-left: 2.4rem" id="pagination">
+					<div class="page_nation">
+						<a class="arrow prev" onclick="prevBtnQna('${prdInfo.prdIdx}',${pageUtilQna.curPage})"><i class="fas fa-angle-left"></i></a>
+						<c:if test="${pageUtilQna.blockEnd eq 1}">
+							<a class="active">1</a> 
+						</c:if>
+						
+						<c:if test="${pageUtilQna.blockEnd > 1}">
+							<c:forEach var="i" begin="1" step="1" end="${pageUtilQna.blockEnd}">
+								<a onclick="pageBtnQna('${prdInfo.prdIdx}', this.text)" class="active"><c:out value="${i}"/></a> 
+							</c:forEach>
+						</c:if>
+						<a class="arrow next" onclick="nextBtnQna('${prdInfo.prdIdx}', ${pageUtilQna.curPage}, ${pageUtilQna.blockEnd})"><i class="fas fa-angle-right"></i></a>
+					</div>
+				</div>
+			</c:if>
+			<c:if test="${qnaList.size() eq 0}">
+				<hr>
+				<div class="pt-5 pb-5" style="text-align: center;">
+                    <p>해당 상품에 대한 문의가 없습니다</p>
+               </div>
+			</c:if>
 		</div>
 		<div class="prd-review-tab">
 			<p id="prd-review-tit">환불규정</p>

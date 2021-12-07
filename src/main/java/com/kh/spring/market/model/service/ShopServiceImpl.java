@@ -1,5 +1,6 @@
 package com.kh.spring.market.model.service;
 
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -10,12 +11,15 @@ import org.springframework.web.multipart.MultipartFile;
 import com.kh.spring.common.util.FileDTO;
 import com.kh.spring.common.util.FileUtil;
 import com.kh.spring.common.util.pagination.Paging;
+import com.kh.spring.market.model.dto.Cart;
 import com.kh.spring.market.model.dto.Coupon;
 import com.kh.spring.market.model.dto.Order;
 import com.kh.spring.market.model.dto.Product;
+import com.kh.spring.market.model.dto.QNA;
 import com.kh.spring.market.model.dto.Review;
 import com.kh.spring.market.model.dto.prdListSet;
 import com.kh.spring.market.model.repository.ShopRepository;
+import com.kh.spring.member.model.dto.Member;
 
 import lombok.RequiredArgsConstructor;
 
@@ -86,8 +90,8 @@ public class ShopServiceImpl implements ShopService{
 
 
 	public List<Product> selectPrdListByIdx(int prdIdx) {
-		
 		List<Product> prdList = shopRepository.selectPrdListByIdx(prdIdx);
+		
 		return prdList;
 	}
 
@@ -98,11 +102,15 @@ public class ShopServiceImpl implements ShopService{
 	}
 
 
-	public List<Review> selectReviewByPrdIdx(int prdIdx) {
-		List<Review> reviews = shopRepository.selectReviewByPrdIdx(prdIdx);
+	public List<Review> selectReviewByPrdIdxWithPaging(int prdIdx, prdListSet listSet, Paging pageUtil) {
+		List<Review> reviews = shopRepository.selectReviewByPrdIdxWithPaging(prdIdx, listSet, pageUtil);
 		return reviews;
 	}
 
+	public int selectReviewCnt(prdListSet listSet, int pn) {
+		return shopRepository.selectReviewCnt(listSet, pn);
+	}
+	
 	public Product selectPrdByDtIdx(int dtIdx) {
 		Product prdOption = shopRepository.selectPrdByDtIdx(dtIdx);
 		return prdOption;
@@ -225,10 +233,9 @@ public class ShopServiceImpl implements ShopService{
 		List<Map<String,Object>> commandList = shopRepository.selectItemCommentList(commandMap,pageUtil);
 		for (Map<String, Object> map : commandList) {
 			if(Integer.parseInt(map.get("TYPE").toString()) == 1) {
-				FileDTO files = new FileDTO();
-				files.setSavePath((String) map.get("SAVE_PATH"));
-				files.setRenameFileName((String) map.get("RENAME_FILE_NAME"));
-				map.put("downloadURL", files.getDownloadURL());
+				List<FileDTO> files = shopRepository.selectFileInfoByIdx(Integer.parseInt(map.get("RV_IDX").toString()));
+				
+				map.put("files", files);
 				
 			}
 		}
@@ -256,9 +263,11 @@ public class ShopServiceImpl implements ShopService{
 		return true;
 	}
 
-	public Map<String, Object> getCntByType(List<Review> reviews) {
+	public Map<String, Object> getCntByType(int pn) {
 		int photoReviewCnt = 0;
 		int normalReviewCnt = 0;
+		
+		List<Review> reviews = shopRepository.selectReviewByPrdIdx(pn);
 		
 		for (Review review : reviews) {
 			if(review.getType().equals("0")) {
@@ -268,8 +277,70 @@ public class ShopServiceImpl implements ShopService{
 			}
 		}
 		
-		
 		return Map.of("photoReviewCnt", photoReviewCnt, "normalReviewCnt", normalReviewCnt);
 	}
+
+	public boolean updateLike(int userIdx, int rvIdx) {
+		
+		if(shopRepository.selectListForCheck(userIdx, rvIdx) == 0) {
+			shopRepository.insertLike(userIdx, rvIdx);
+			shopRepository.updateRvRecommandPlus(rvIdx);
+			return true;
+		} else {
+			shopRepository.deleteLike(userIdx, rvIdx);
+			shopRepository.updateRvRecommandMinus(rvIdx);
+			return false;
+		}
+		
+	}
+
+	public List<Integer> checkLike(List<Review> reviews, int userIdx) {
+		List<Integer> checkLikeList = new ArrayList<Integer>();
+		
+		for (Review review : reviews) {
+			if(shopRepository.selectListForCheck(userIdx, review.getRvIdx()) != 0){
+				checkLikeList.add(1);
+			} else {
+				checkLikeList.add(0);
+			}
+		}
+		
+		return checkLikeList;
+	}
+
+
+	public List<QNA> selectQnaListByPrdIdxWithPaging(int pn, Paging pageUtilQna) {
+		List<QNA> qnaList = shopRepository.selectQnaListByPrdIdxWithPaging(pn, pageUtilQna);
+		return qnaList;
+	}
+
+	public int selectQnaCnt(int pn) {
+		return shopRepository.selectQnaCnt(pn);
+	}
+
+	public boolean insertCart(List<Cart> cartInfos, Member certifiedUser) {
+		for (Cart cart : cartInfos) {
+			cart.setUserIdx(certifiedUser.getUserIdx());
+			if(shopRepository.selectCartforCheck(cart) != null) {
+				return false;
+			}
+			shopRepository.insertCart(cart);
+		}
+		return true;
+	}
+
 	
+	@Override
+	public List<Map<String, Object>> selectQnAList(Map<String, Object> commandMap, Paging pageUtil) {
+		List<Map<String,Object>> commandList = shopRepository.selectQnAList(commandMap,pageUtil);
+		
+		
+		return commandList;
+	}
+	
+	@Override
+	public int selectQnAListCnt(Map<String, Object> commandMap) {
+		return shopRepository.selectQnAListCnt(commandMap);
+	}
+
 }

@@ -5,10 +5,12 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 import com.kh.spring.common.util.FileDTO;
+import com.kh.spring.common.util.pagination.Paging;
 import com.kh.spring.disease.model.dto.Disease;
 import com.kh.spring.disease.model.dto.PriceImg;
 
@@ -40,10 +42,15 @@ public interface DiseaseRepository {
 			+ " values(sc_pi_idx.nextval,#{dsIdx},#{userIdx})")
 	void insertPriceImg(PriceImg priceImg);
 
-	List<Map<String, Object>> selectPriceImgList(String state);
+	List<Map<String, Object>> selectPriceImgList(@Param("state") String state, @Param("pageUtil")Paging pageUtil);
 	
-	@Select("select * from disease d left join file_info f on(d.ds_idx = f.type_idx)")
-	List<Map<String, Object>> selectDiseaseListWithImg();
+	@Select("select * from (select rownum rnum, ds_idx, name, explain, "
+			+ "category, count,price, rename_file_name, save_path from "
+			+ "(select d.ds_idx, d.name, d.explain, d.category, d.count, d.price,"
+			+ "f.rename_file_name, f.save_path from disease d left join file_info f "
+			+ "on(d.ds_idx = f.type_idx))) where rnum between ${((curPage-1) * cntPerPage) + 1}"
+			+ "	and ${curPage * cntPerPage} ")
+	List<Map<String, Object>> selectDiseaseListWithImg(Paging pageUtil);
 
 	@Select("select count(*) from price_img")
 	int selectAllCnt();
@@ -56,6 +63,12 @@ public interface DiseaseRepository {
 
 	@Update("update disease set count = #{count}, price = round(#{price},-2) where ds_idx = #{dsIdx}")
 	void updateDiseasePriceAndCount(Disease disease);
+
+	@Select("select count(*) from disease")
+	int selectDiseaseListCnt();
+
+	
+	int selectPriceImgListCnt(String state);
 	
 	
 

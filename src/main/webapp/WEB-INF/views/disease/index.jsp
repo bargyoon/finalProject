@@ -89,7 +89,7 @@
 														href="/disease/disease-spec?dsIdx=${data.DS_IDX}">
 														<div class="px-0 px-lg-3">
 															<img class="img-fluid mb-4" src="${data.downloadURL}"
-																width="100" alt="..." />
+																style="width:200px; height:200px" alt="..." />
 															<h3 class="h5 mb-4 font-base">${data.NAME}</h3>
 														</div>
 													</a>
@@ -98,21 +98,21 @@
 											<a class="col-sm-3 col-lg-3 mb-4 mb-lg-0 text-center">
 												<div class="px-0 px-lg-3">
 													<img class="img-fluid mb-4"
-														src="/resources/img/disease/강아지비용/경계성종양.png" width="100"
+														src="/resources/img/disease/강아지비용/경계성종양.png" style="width:200px; height:200px"
 														alt="..." />
 													<h3 class="h5 mb-4 font-base">경계성종양</h3>
 												</div>
 											</a> <a class="col-sm-3 col-lg-3 mb-4 mb-lg-0 text-center">
 												<div class="px-0 px-lg-3">
 													<img class="img-fluid mb-4"
-														src="/resources/img/disease/강아지비용/골절.png" width="100"
+														src="/resources/img/disease/강아지비용/골절.png" style="width:200px; height:200px"
 														alt="..." />
 													<h3 class="h5 mb-4 font-base">골절</h3>
 												</div>
 											</a> <a class="col-sm-3 col-lg-3 mb-4 mb-lg-0 text-center">
 												<div class="px-0 px-lg-3">
 													<img class="img-fluid mb-4"
-														src="/resources/img/disease/강아지비용/디스크.png" width="100"
+														src="/resources/img/disease/강아지비용/디스크.png" style="width:200px; height:200px"
 														alt="..." />
 													<h3 class="h5 mb-4 font-base">디스크</h3>
 												</div>
@@ -121,7 +121,7 @@
 											<div class="col-sm-3 col-lg-3 mb-4 mb-lg-0 text-center">
 												<div class="px-0 px-lg-3">
 													<img class="img-fluid mb-4"
-														src="/resources/img/disease/강아지비용/슬개골탈구.png" width="100"
+														src="/resources/img/disease/강아지비용/슬개골탈구.png" style="width:200px; height:200px"
 														alt="..." />
 													<h3 class="h5 mb-4 font-base">슬개골탈구</h3>
 												</div>
@@ -129,7 +129,7 @@
 											<div class="col-sm-3 col-lg-3 mb-4 mb-lg-0 text-center">
 												<div class="px-0 px-lg-3">
 													<img class="img-fluid mb-4"
-														src="/resources/img/disease/강아지비용/요도방광결석.png" width="100"
+														src="/resources/img/disease/강아지비용/요도방광결석.png" style="width:200px; height:200px"
 														alt="..." />
 													<h3 class="h5 mb-4 font-base">요도방광결석</h3>
 												</div>
@@ -137,7 +137,7 @@
 											<div class="col-sm-3 col-lg-3 mb-4 mb-lg-0 text-center">
 												<div class="px-0 px-lg-3">
 													<img class="img-fluid mb-4"
-														src="/resources/img/disease/강아지비용/유선종양.png" width="100"
+														src="/resources/img/disease/강아지비용/유선종양.png" style="width:200px; height:200px"
 														alt="..." />
 													<h3 class="h5 mb-4 font-base">유선종양</h3>
 												</div>
@@ -145,7 +145,7 @@
 											<div class="col-sm-3 col-lg-3 mb-4 mb-lg-0 text-center">
 												<div class="px-0 px-lg-3">
 													<img class="img-fluid mb-4"
-														src="/resources/img/disease/강아지비용/자궁축농증.png" width="100"
+														src="/resources/img/disease/강아지비용/자궁축농증.png" style="width:200px; height:200px"
 														alt="..." />
 													<h3 class="h5 mb-4 font-base">자궁축농증</h3>
 												</div>
@@ -154,7 +154,7 @@
 											<div class="col-sm-3 col-lg-3 mb-4 mb-lg-0 text-center">
 												<div class="px-0 px-lg-3">
 													<img class="img-fluid mb-4"
-														src="/resources/img/disease/강아지비용/종양.png" width="100"
+														src="/resources/img/disease/강아지비용/종양.png" style="width:200px; height:200px"
 														alt="..." />
 													<h3 class="h5 mb-4 font-base">종양</h3>
 												</div>
@@ -162,7 +162,7 @@
 											<div class="col-sm-3 col-lg-3 mb-4 mb-lg-0 text-center">
 												<div class="px-0 px-lg-3">
 													<img class="img-fluid mb-4"
-														src="/resources/img/disease/강아지비용/중성화.png" width="100"
+														src="/resources/img/disease/강아지비용/중성화.png" style="width:200px; height:200px"
 														alt="..." />
 													<h3 class="h5 mb-4 font-base">중성화</h3>
 												</div>
@@ -170,7 +170,7 @@
 											<div class="col-sm-3 col-lg-3 mb-4 mb-lg-0 text-center">
 												<div class="px-0 px-lg-3">
 													<img class="img-fluid mb-4"
-														src="/resources/img/disease/강아지비용/체리아이.png" width="100"
+														src="/resources/img/disease/강아지비용/체리아이.png" style="width:200px; height:200px"
 														alt="..." />
 													<h3 class="h5 mb-4 font-base">체리아이</h3>
 												</div>
@@ -178,7 +178,7 @@
 											<div class="col-sm-3 col-lg-3 mb-4 mb-lg-0 text-center">
 												<div class="px-0 px-lg-3">
 													<img class="img-fluid mb-4"
-														src="/resources/img/disease/강아지비용/탈장.png" width="100"
+														src="/resources/img/disease/강아지비용/탈장.png" style="width:200px; height:200px"
 														alt="..." />
 													<h3 class="h5 mb-4 font-base">탈장</h3>
 												</div>
@@ -187,7 +187,7 @@
 											<div class="col-sm-3 col-lg-3 mb-4 mb-lg-0 text-center">
 												<div class="px-0 px-lg-3">
 													<img class="img-fluid mb-4"
-														src="/resources/img/disease/강아지비용/항문낭제거.png" width="100"
+														src="/resources/img/disease/강아지비용/항문낭제거.png" style="width:200px; height:200px"
 														alt="..." />
 													<h3 class="h5 mb-4 font-base">항문낭제거</h3>
 												</div>
@@ -195,7 +195,7 @@
 											<div class="col-sm-3 col-lg-3 mb-4 mb-lg-0 text-center">
 												<div class="px-0 px-lg-3">
 													<img class="img-fluid mb-4"
-														src="/resources/img/disease/강아지비용/CT.png" width="100"
+														src="/resources/img/disease/강아지비용/CT.png" style="width:200px; height:200px"
 														alt="..." />
 													<h3 class="h5 mb-4 font-base">CT</h3>
 												</div>
@@ -203,7 +203,7 @@
 											<div class="col-sm-3 col-lg-3 mb-4 mb-lg-0 text-center">
 												<div class="px-0 px-lg-3">
 													<img class="img-fluid mb-4"
-														src="/resources/img/disease/강아지비용/MRI.png" width="100"
+														src="/resources/img/disease/강아지비용/MRI.png" style="width:200px; height:200px"
 														alt="..." />
 													<h3 class="h5 mb-4 font-base">MRI</h3>
 												</div>
@@ -211,7 +211,7 @@
 											<div class="col-sm-3 col-lg-3 mb-4 mb-lg-0 text-center">
 												<div class="px-0 px-lg-3">
 													<img class="img-fluid mb-4"
-														src="/resources/img/disease/강아지비용/XRAY.png" width="100"
+														src="/resources/img/disease/강아지비용/XRAY.png" style="width:200px; height:200px"
 														alt="..." />
 													<h3 class="h5 mb-4 font-base">XRAY</h3>
 												</div>

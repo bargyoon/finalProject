@@ -1,5 +1,6 @@
 package com.kh.spring.member.model.service;
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.http.MediaType;
@@ -12,6 +13,7 @@ import org.springframework.web.client.RestTemplate;
 
 import com.kh.spring.common.code.Config;
 import com.kh.spring.common.mail.MailSender;
+import com.kh.spring.common.util.pagination.Paging;
 import com.kh.spring.member.model.dto.Member;
 import com.kh.spring.member.model.repository.MemberRepository;
 
@@ -87,5 +89,19 @@ public class MemberServiceImpl implements MemberService{
 		String htmlText = template.exchange(request, String.class).getBody();
 		mailSender.sendEmail(member.getEmail(), "'똑DOG한 집사들' 회원가입 인증 메일입니다.", htmlText);
 	}
+	
+	
+	@Override
+	public int selectMemberListCnt(Map<String, Object> commandMap) {
+		
+		return memberRepository.selectMemberListCnt(commandMap);
+	}
+	
+	@Override
+	public List<Member> selectMemberList(Map<String, Object> commandMap, Paging pageUtil) {
+		
+		return memberRepository.selectMemberList(commandMap,pageUtil);
+	}
+	
 
 }

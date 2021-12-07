@@ -6,6 +6,7 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import com.kh.spring.board.model.dto.Board;
 import com.kh.spring.common.util.FileDTO;
@@ -61,4 +62,10 @@ public interface MypageRepository {
 	Member selectMember(int userIdx);
 
 	List<Map<String, Object>> selectVaccinationForBatch();
+	
+	@Update("update board set is_del = 1 where bd_idx = #{bdIdx}")
+	void updateBoardIsDel(int bdIdx);
+	
+	@Update("update board_comment set is_del = 1 where cm_idx = #{cmIdx}")
+	void updateCommentIsDel(int cmIdx);
 }

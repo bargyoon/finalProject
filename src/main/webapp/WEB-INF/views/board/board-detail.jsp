@@ -31,9 +31,19 @@
 		</div>
 		<div class="row">
 			<div class="col-md-12">
-				<a class="btn btn-danger btn-lg float-end">삭제</a> <a
-					href="/board/${category}/modify?bdIdx=${board.bdIdx}"
-					class="btn btn-warning btn-lg float-end" style="margin-right: 4px;">수정</a>
+				<c:if test="${not empty authentication}">
+				<c:if test="${authentication.userIdx == board.userIdx}">
+					<a class="btn btn-danger btn-lg float-end">삭제</a>
+					<a href="/board/${category}/modify?bdIdx=${board.bdIdx}"
+						class="btn btn-warning btn-lg float-end"
+						style="margin-right: 4px;">수정</a>
+				</c:if>
+				</c:if>
+				<a class="btn btn-danger btn-lg float-end" onclick="deleteBoard(${board.bdIdx} ,${board.userIdx })">삭제</a>
+					<a href="/board/${category}/modify?bdIdx=${board.bdIdx}"
+						class="btn btn-warning btn-lg float-end"
+						style="margin-right: 4px;">수정</a>
+
 			</div>
 		</div>
 		<div class="board_write_wrap">
@@ -44,10 +54,17 @@
 						<dd style="font-size: 17pt">
 							<strong>${board.bdTitle}</strong>
 						</dd>
-						<a class="btn btn-default btn-lg btn-hover-success active"
-							style="float: right" onclick=""> <i
-							class="fa fa-thumbs-up mr-1"></i>추천
-						</a>
+						<c:if test="${not empty authentication}">
+							<a class="btn btn-default btn-lg btn-hover-success active"
+								style="float: right" onclick="recommendBoard(${board.bdIdx})">
+								<i class="fa fa-thumbs-up mr-1"></i>${board.recCount}
+							</a>
+						</c:if>
+						<c:if test="${empty authentication}">
+							<span class="btn btn-default btn-lg btn-hover-success active"
+								style="float: right"> <i class="fa fa-thumbs-up mr-1"></i>${board.recCount}
+							</span>
+						</c:if>
 					</dl>
 				</div>
 				<div class="title"
@@ -131,11 +148,22 @@
 																pattern="yyyy-MM-dd hh:mm:ss" value="${comment.regDate}" /></span>
 														<button type="button" class="newBtn"
 															onclick="addCommentBtn(${comment.cmIdx})">댓글달기</button>
+														<c:if test="${not empty authentication}">
+															<a
+																class="btn btn-default btn-lg btn-hover-success active"
+																style="float: right"
+																onclick="recommendComment(${comment.cmIdx})"> <i
+																class="fa fa-thumbs-up mr-1"></i>${comment.cmRecCount}
+															</a>
+														</c:if>
+														<c:if test="${empty authentication}">
+															<span
+																class="btn btn-default btn-lg btn-hover-success active"
+																style="float: right"> <i
+																class="fa fa-thumbs-up mr-1"></i>${comment.cmRecCount}
+															</span>
+														</c:if>
 
-														<button class="btn btn-default btn-hover-success active"
-															style="float: right">
-															<i class="fa fa-thumbs-up"></i>
-														</button>
 
 
 
@@ -174,7 +202,7 @@
 												<c:if test="${chcomment.prIdx == comment.cmIdx}">
 													<div class="media-block" style="position: relative;">
 														<span style="position: absolute;">ㄴ</span>
-														<div class="media-body" style="padding:0 30px;">
+														<div class="media-body" style="padding: 0 30px;">
 
 															<div class="mar-btm">
 																<span
@@ -188,10 +216,21 @@
 																		value="${chcomment.regDate}" /></span>
 
 
-																<button class="btn btn-default btn-hover-success active"
-																	style="float: right">
-																	<i class="fa fa-thumbs-up"></i>
-																</button>
+																<c:if test="${not empty authentication}">
+																	<a
+																		class="btn btn-default btn-lg btn-hover-success active"
+																		style="float: right"
+																		onclick="recommendComment(${comment.cmIdx})"> <i
+																		class="fa fa-thumbs-up mr-1"></i>${comment.cmRecCount}
+																	</a>
+																</c:if>
+																<c:if test="${empty authentication}">
+																	<span
+																		class="btn btn-default btn-lg btn-hover-success active"
+																		style="float: right"> <i
+																		class="fa fa-thumbs-up mr-1"></i>${comment.cmRecCount}
+																	</span>
+																</c:if>
 
 
 
@@ -245,6 +284,60 @@
 		 	
 		 	}
 		 
+		 let recommendBoard = (bdIdx) =>{
+		 		
+		    	return fetch('/board/recommend-board',{
+		 			method:"post",
+		 			body: JSON.stringify({bdIdx : bdIdx}),
+		 			 headers:{
+		 			    'Content-Type': 'application/json'
+		 			  }
+		    	}).then(response => {
+		    		return response.text();
+		    		
+		    	}).then(res =>{
+		    		console.dir(res)
+		    		if(res == 'good'){
+		    			alert('추천이 완료되었습니다.');
+		    		}else if(res == 'bad'){
+		    			alert('이미 추천한 댓글 입니다.')	
+		    		}else{
+		    			alert('로그인을 하셔야 추천기능이 작동합니다.')	
+		    		}
+		    		
+		    		location.reload();
+		    	})
+		    		
+		 	
+		 	}
+		 
+		 let recommendComment = (cmIdx) =>{
+		 		
+		    	return fetch('/board/recommend-comment',{
+		 			method:"post",
+		 			body: JSON.stringify({cmIdx : cmIdx}),
+		 			 headers:{
+		 			    'Content-Type': 'application/json'
+		 			  }
+		    	}).then(response => {
+		    		return response.text();
+		    		
+		    	}).then(res =>{
+		    		console.dir(res)
+		    		if(res == 'good'){
+		    			alert('추천이 완료되었습니다.');
+		    		}else if(res == 'bad'){
+		    			alert('이미 추천한 댓글 입니다.')	
+		    		}else{
+		    			alert('로그인을 하셔야 추천기능이 작동합니다.')	
+		    		}
+		    		
+		    		location.reload();
+		    	})
+		    		
+		 	
+		 	}
+		 
 		 let addCommentBtn = (idx) =>{
 			 var temp = document.querySelector('#input'+idx);
 			 if(temp.style.display == "none"){
@@ -269,6 +362,25 @@
 		    		
 		 	
 		 	}
+		 
+		 let deleteBoard = (bdIdx, userIdx) =>{
+			 let flg = confirm("정말 삭제하시겠습니까?")
+			 if(flg){
+			 return fetch('/board/delete-board',{
+		 			method:"post",
+		 			body: JSON.stringify({bdIdx : bdIdx, userIdx : userIdx}),
+		 			 headers:{
+		 			    'Content-Type': 'application/json'
+		 			  }
+			 }).then(res => {
+		    		alert('삭제되었습니다.');
+		    		location.replace('/board/${board.category}');
+		    	})
+		    }
+		    		
+		 	
+		 }
+		 
 		 
 		 
 		 

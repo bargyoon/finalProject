@@ -34,6 +34,7 @@ public class HospitalBatch {
 	  public void getData() {
 		
 		Calendar calendar = Calendar.getInstance();
+		
 		String today = calendar.get(Calendar.YEAR)+"년 "+(calendar.get(Calendar.MONTH)+1)+"월 "+calendar.get(Calendar.DATE)+"일자";
 		
 		RestTemplate restTemplate = new RestTemplate();

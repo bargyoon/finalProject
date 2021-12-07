@@ -60,13 +60,12 @@
 			<div class="page-breadcrumb">
 				<div class="row">
 					<div class="col-12 d-flex no-block align-items-center">
-						<h4 class="page-title">Tables</h4>
+						<h4 class="page-title">댓글관리</h4>
 						<div class="ml-auto text-right">
 							<nav aria-label="breadcrumb">
 								<ol class="breadcrumb">
 									<li class="breadcrumb-item"><a href="#">Home</a></li>
-									<li class="breadcrumb-item active" aria-current="page">사용자
-										리스트</li>
+									<li class="breadcrumb-item active" aria-current="page">댓글관리</li>
 								</ol>
 							</nav>
 						</div>
@@ -98,11 +97,13 @@
 													<div class='d-table-cell' style="width: 15%;">검색 종류</div>
 													<div class='d-table-cell '>
 														<input type="radio" name="option" id="search_option"
-															value="nickname" checked><label class="ml-2 mr-2">작성자</label>
+															value="c.nickname" checked><label class="ml-2 mr-2">작성자</label>
 														<input type="radio" value="content" name="option"
 															id="search_option"><label class="ml-2 mr-2">게시글</label>
 														<input type="radio" name="option" id="search_option"
 															value="bd_title"><label class="ml-2 mr-2">제목</label>
+														<input type="radio" name="option" id="search_option"
+															value="c.cm_content"><label class="ml-2 mr-2">댓글내용</label>
 													</div>
 												</div>
 											</div>
@@ -145,7 +146,7 @@
 								<header>
 									<input type="checkbox" class="all-check"
 										style="vertical-align: middle;"> <span class="ml-2">전체
-										댓글 <span class="text-primary">3</span>
+										댓글 <span class="text-primary">${totalCnt}</span>
 									</span> <span class="float-right"> <select class="form-control"
 										onchange="changeCategory()" aria-hidden="true" name="category"
 										id="categorySelect">
@@ -291,36 +292,7 @@
 									<div class="border-top">
 										<div class="card-body">
 											<button class="btn-secondary ">submit</button>
-											<div
-												class="dataTables_paginate paging_simple_numbers float-right"
-												id="zero_config_paginate">
-												<ul class="pagination">
-													<li class="paginate_button page-item previous disabled"
-														id="zero_config_previous"><a
-														aria-controls="zero_config" data-dt-idx="0" tabindex="0"
-														class="page-link" onclick="prevBtn(${pageUtil.curPage})">Previous</a></li>
-													<c:if test="${pageUtil.blockEnd eq 1}">
-														<li class="paginate_button page-item active"><a
-															href="#" aria-controls="zero_config" data-dt-idx="1"
-															tabindex="0" class="page-link">1</a></li>
-													</c:if>
-													<c:if test="${pageUtil.blockEnd > 1}">
-														<c:forEach var="i" begin="1" step="1"
-															end="${pageUtil.blockEnd}">
-
-															<li class="paginate_button page-item"><a href="#"
-																aria-controls="zero_config" class="page-link"
-																onclick="changePage(${i})">${i}</a></li>
-														</c:forEach>
-													</c:if>
-
-
-													<li class="paginate_button page-item next"
-														id="zero_config_next"><a href="#"
-														aria-controls="zero_config" class="page-link"
-														onclick="nextBtn(${pageUtil.curPage},${pageUtil.blockEnd})">Next</a></li>
-												</ul>
-											</div>
+											<%@ include file="/WEB-INF/views/admin/include/paging.jsp"%>
 										</div>
 									</div>
 								</div>
@@ -372,8 +344,8 @@
 	<!--Custom JavaScript -->
 	<script src="/resources/js/admin/custom.min.js"></script>
 	<!--This page JavaScript -->
-
-	<script src="/resources/js/admin/datatables.min.js"></script>
+<script src="/resources/js/admin/common/paging.js"></script>
+	<script src="/resources/js/admin/common/select-tab.js"></script>
 	<script type="text/javascript">
 	(() =>{
 		
@@ -389,7 +361,7 @@
 		
 	})();
 
-    const URLSearch = new URLSearchParams(location.search);
+ 
     
   
     let changeCategory = () =>{
@@ -423,36 +395,7 @@
     	
     }
     
-   	let prevBtn = (page) => {
-		if(page == 1){
-			alert("첫번째 페이지 입니다.")
-			return;
-		}
-		
-		page--;
-
-		changePage(page);
-		
-	}
-	
-	let nextBtn = (page, blockEnd) => {
-		if(page == blockEnd){
-			alert("마지막 페이지 입니다.")
-			return;
-		}
-		
-		page++;
-		
-		changePage(page);
-		
-	}
-    let changePage = (page) =>{
-    	
-      		 URLSearch.set('page', String(page));
-         	 const newParam = URLSearch.toString();
-         	 location.href = location.pathname + '?' + newParam
-      	 
-    }
+  
     
 </script>
 

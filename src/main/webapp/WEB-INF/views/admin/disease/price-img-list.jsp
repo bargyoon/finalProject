@@ -65,13 +65,12 @@
 			<div class="page-breadcrumb">
 				<div class="row">
 					<div class="col-12 d-flex no-block align-items-center">
-						<h4 class="page-title">Tables</h4>
+						<h4 class="page-title">사용자등록 사진 관리</h4>
 						<div class="ml-auto text-right">
 							<nav aria-label="breadcrumb">
 								<ol class="breadcrumb">
 									<li class="breadcrumb-item"><a href="#">Home</a></li>
-									<li class="breadcrumb-item active" aria-current="page">사용자
-										리스트</li>
+									<li class="breadcrumb-item active" aria-current="page">사용자등록사진</li>
 								</ol>
 							</nav>
 						</div>
@@ -92,27 +91,27 @@
 							<div class="row">
 								<div class="ml-3">
 									<div class=" text-center m-10">
-										<h4>
+										<h6>
 											<a class="tab_all tab" data-tab="all"
 												onclick="selectTab('state','all')">전체<span> <c:out
 														value="${datas.totalCnt }"></c:out></span></a>
-										</h4>
+										</h6>
 									</div>
 								</div>
 								<div class="ml-3">
 									<div class=" text-center m-10">
-										<h4>
+										<h6>
 											<a class="tab_n tab" data-tab="N" onclick="selectTab('state','N')">등록대기중 <span><c:out
 														value="${datas.noCnt }"></c:out></span></a>
-										</h4>
+										</h6>
 									</div>
 								</div>
 								<div class="ml-3">
 									<div class=" text-center m-10">
-										<h4>
+										<h6>
 											<a class="tab_y tab" data-tab="Y" onclick="selectTab('state','Y')">등록완료 <span><c:out
 														value="${datas.yesCnt }"></c:out></span></a>
-										</h4>
+										</h6>
 									</div>
 								</div>
 
@@ -189,6 +188,7 @@
 									<div class="border-top">
 										<div class="card-body">
 											<button class="btn-secondary ">submit</button>
+											<%@ include file="/WEB-INF/views/admin/include/paging.jsp"%>
 										</div>
 									</div>
 								</form>
@@ -244,7 +244,7 @@
 	<script type="text/javascript">
 	
    
-	 const URLSearch = new URLSearchParams(location.search);
+
      let fnImgPop = (url) =>{
                 var img=new Image();
                 img.src=url;
@@ -282,6 +282,7 @@
     		
  	
  	}
+    
      $(document).ready(function() {
     		$("#chk_all").click(function() {
     			if($("#chk_all").is(":checked")) $("input[class=listCheckbox]").prop("checked", true);
@@ -297,12 +298,20 @@
     		});
     	});
      
+    
      (() =>{
 	     let loadState = URLSearch.get('state')
 	     	document.querySelectorAll('.tab').forEach(e =>{
 	     		if(loadState == null) {
 	     			document.querySelector(".tab_all").id = "clickedTab"
 	     		}else if(loadState == e.dataset.tab) e.id = "clickedTab"
+	     	})
+	     	
+	     let pageState = URLSearch.get('page')
+	     document.querySelectorAll('.page-link').forEach(e =>{
+	     		if(pageState == null) {
+	     			document.querySelector(".tab_all").id = "clickedTab"
+	     		}else if(pageState == e.dataset.page) e.class = "active"
 	     	})
      })();
 	

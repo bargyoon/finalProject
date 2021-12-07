@@ -11,6 +11,7 @@ public class QNA {
 	   private int userIdx;
 	   private int prdIdx;
 	   private int orderIdx;
+	   private String userName;
 	   private String title;
 	   private String context;
 	   private String type;

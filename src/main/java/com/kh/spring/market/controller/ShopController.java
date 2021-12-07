@@ -1,9 +1,6 @@
 	package com.kh.spring.market.controller;
 
 import java.io.IOException;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.List;
 import java.util.Map;
 
@@ -23,27 +20,23 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.kh.spring.common.util.pagination.Paging;
+import com.kh.spring.market.model.dto.Cart;
 import com.kh.spring.market.model.dto.Coupon;
 import com.kh.spring.market.model.dto.Order;
 import com.kh.spring.market.model.dto.Product;
+import com.kh.spring.market.model.dto.QNA;
 import com.kh.spring.market.model.dto.Review;
 import com.kh.spring.market.model.dto.prdListSet;
 import com.kh.spring.market.model.service.ShopService;
 import com.kh.spring.member.model.dto.Member;
-import com.siot.IamportRestClient.Iamport;
 import com.siot.IamportRestClient.IamportClient;
 import com.siot.IamportRestClient.exception.IamportResponseException;
-import com.siot.IamportRestClient.request.AuthData;
-import com.siot.IamportRestClient.request.CancelData;
 import com.siot.IamportRestClient.response.AccessToken;
 import com.siot.IamportRestClient.response.IamportResponse;
 import com.siot.IamportRestClient.response.Payment;
 
 import lombok.RequiredArgsConstructor;
-import retrofit2.Call;
-import retrofit2.Response;
 
 @Controller
 @RequiredArgsConstructor
@@ -81,7 +74,10 @@ public class ShopController {
 	public void eventDetail() {}
 
 	@GetMapping("prd-detail")
-	public String prdDetail(@RequestParam(defaultValue = "0")int pn, RedirectAttributes redirectAttr, Model model) {
+	public String prdDetail(@RequestParam(defaultValue = "0")int pn, RedirectAttributes redirectAttr, Model model
+								,prdListSet listSet, @RequestParam(required = false, defaultValue = "1") int page
+								,@RequestParam(required = false, defaultValue = "1") int pageQna) {
+		
 		List<Product> prdOptionInfos = shopService.selectPrdListByIdx(pn);
 		//prd_idx 유효성 검사
 		if(pn == 0 || prdOptionInfos.size() == 0) {
@@ -90,15 +86,34 @@ public class ShopController {
 			return "redirect:/common/result";
 		}
 		
+		Paging pageUtil = Paging.builder()
+				.curPage(page)
+				.cntPerPage(3)
+				.blockCnt(10)
+				.total(shopService.selectReviewCnt(listSet, pn))
+				.build();
+		
+		Paging pageUtilForQna = Paging.builder()
+				.curPage(pageQna)
+				.cntPerPage(2)
+				.blockCnt(10)
+				.total(shopService.selectQnaCnt(pn))
+				.build();
+		
+		
 		Product prdInfo = shopService.selectPrdByIdx(pn);
-		List<Review> reviews = shopService.selectReviewByPrdIdx(pn);
-		Map<String, Object> commandMap = shopService.getCntByType(reviews);
-		
-		
+		List<Review> reviews = shopService.selectReviewByPrdIdxWithPaging(pn, listSet, pageUtil);
+		Map<String, Object> cntByReviewType = shopService.getCntByType(pn);
 		Map<String, Object> prdInfoMap = Map.of("optionList", prdOptionInfos, "prdInfo", prdInfo);
+		List<QNA> qnaList = shopService.selectQnaListByPrdIdxWithPaging(pn, pageUtilForQna);
+		
 		model.addAttribute("prdInfoMap", prdInfoMap);
 		model.addAttribute("reviews", reviews);
-		model.addAttribute("commandMap", commandMap);
+		model.addAttribute("cntByReviewType", cntByReviewType);
+		model.addAttribute("listSet", listSet);
+		model.addAttribute("pageUtil", pageUtil);
+		model.addAttribute("qnaList", qnaList);
+		model.addAttribute("pageUtilQna", pageUtilForQna);
 		
 		return "market/shop/prd-detail";
 	}
@@ -156,6 +171,26 @@ public class ShopController {
 			certifiedUser.setSaveMoney(certifiedUser.getSaveMoney()-orderInfos.get(0).getSaveMoney());
 			session.setAttribute("authentication", certifiedUser);
 		}
+	}
+	
+	@GetMapping("update-like/{rv_idx}")
+	@ResponseBody
+	public String updateLike(@SessionAttribute(name="authentication")Member certifiedUser, @PathVariable(value= "rv_idx") int rvIdx) {
+		if(shopService.updateLike(certifiedUser.getUserIdx(), rvIdx)) {
+			return "insert";
+		}
+		
+		return "delete";
+	}
+	
+	@PostMapping("regist-cart")
+	@ResponseBody
+	public String registCart(@RequestBody List<Cart> cartInfos, @SessionAttribute(name="authentication")Member certifiedUser) {
+		if(shopService.insertCart(cartInfos, certifiedUser)) {;
+			return "available";
+		}
+		
+		return "disavailable";
 	}
 	
 }

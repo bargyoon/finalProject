@@ -106,6 +106,20 @@ public class MypageServiceImpl implements MypageService {
 	public List<Map<String, Object>> selectVaccinationForBatch() {
 		return mypageRepository.selectVaccinationForBatch();
 	}
+
+	public void updateBoardIsDel(List<Integer> bdIdxArr) {
+		
+		for (int bdIdx : bdIdxArr) {
+			mypageRepository.updateBoardIsDel(bdIdx);
+		}
+	}
+
+	public void updateCommentIsDel(List<Integer> cmIdxArr) {
+
+		for (int cmIdx : cmIdxArr) {
+			mypageRepository.updateCommentIsDel(cmIdx);
+		}
+	}
 	
 	
 }

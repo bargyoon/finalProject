@@ -150,4 +150,7 @@ public interface MarketMypageRepository {
 	@Delete("delete cart where user_idx=#{userIdx}")
 	void deleteAllCart(int userIdx);
 	
+	@Update("update cart set count = #{count} where cart_idx= #{cartIdx}")
+	void updateCart(int count, int cartIdx);
+	
 }

@@ -31,10 +31,10 @@
 			</ul>
 		</nav>
 		
-		<div class="album py-5" style="margin: 0 auto; width: 800px">
-		    <div class="container pet-container">
-				<c:forEach var="pet" items="${petList}">
-					<div class="pet-div">
+		<div class="container">
+		    <div class="row">
+				<c:forEach var="pet" items="${petList}" varStatus="status">
+					<div class="col-md-4" style="margin-bottom:20px">
 						<img src="${pet.downloadURL}" style="width: 200px; height: 200px">
 						<div>이름 : ${pet.PET_NAME}</div>
 						<div>종류 : ${pet.SPECIES}</div>
@@ -44,7 +44,7 @@
 				</c:forEach>
 			</div>
 			
-			<div style="display:flex; justify-content:center; margin-top: 100px;">
+			<div style="display:flex; justify-content:center; margin-top: 20px;">
 				<nav aria-label="Page navigation example">
 				  <ul class="pagination">
 				    <li class="page-item">
