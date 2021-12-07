@@ -1,6 +1,7 @@
 package com.kh.spring.admin.controller;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -326,9 +327,13 @@ public class AdminController {
 
 	}
 
-	@GetMapping("disease/test")
-	public void testParam(@RequestParam Map<String, Object> test) {
-		System.out.println(test.get("test"));
+	@PostMapping("shopping/test")
+	@ResponseBody
+	public String testParam(@RequestBody List<Integer> bdIdx) {
+		
+		
+		System.out.println(bdIdx.toString());
+		return "good";
 
 	}
 

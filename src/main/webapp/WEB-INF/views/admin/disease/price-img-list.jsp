@@ -244,7 +244,7 @@
 	<script type="text/javascript">
 	
    
-	 const URLSearch = new URLSearchParams(location.search);
+
      let fnImgPop = (url) =>{
                 var img=new Image();
                 img.src=url;
@@ -282,6 +282,7 @@
     		
  	
  	}
+    
      $(document).ready(function() {
     		$("#chk_all").click(function() {
     			if($("#chk_all").is(":checked")) $("input[class=listCheckbox]").prop("checked", true);
@@ -297,6 +298,7 @@
     		});
     	});
      
+    
      (() =>{
 	     let loadState = URLSearch.get('state')
 	     	document.querySelectorAll('.tab').forEach(e =>{
