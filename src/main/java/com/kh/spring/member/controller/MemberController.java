@@ -23,8 +23,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.kh.spring.common.email.Email;
-import com.kh.spring.common.email.EmailSender;
 import com.kh.spring.member.model.dto.Member;
 import com.kh.spring.member.model.service.MemberService;
 

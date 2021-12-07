@@ -24,6 +24,10 @@
         <!-- Board -->
         <section class="page-section" id="boards">
             <div class="container">
+           		<div class="text-center">
+                    <h2 class="section-heading text-uppercase">Boards</h2>
+                    <h3 class="section-subheading text-muted">우리 사이트는 아래와 같은 정보를 제공한다.</h3>
+                </div>
                 <div class="row text-center">
                     <div class="board-in-main">
                         <h2 class="my-3">강아지 게시판</h2>     
@@ -38,7 +42,7 @@
                                  <c:forEach items="${infoList}" var="infoList" varStatus="status">
                                     <tr>
                                        <td style="text-align:left"><a
-                                          href="/board/${infoList.CATEGORY}/detail?bdIdx=${infoList.BD_IDX}">${infoList.BD_TITLE}</a><small
+                                          href="/board/dog/detail?bdIdx=${infoList.BD_IDX}">${infoList.BD_TITLE}</a><small
                                           class="ml-2"><i class="fas fa-comment mr-1"></i>${infoList.CM_CNT}</small></td>
                                        <td>${infoList.VIEW_COUNT}</td> 
                                     </tr>
@@ -60,7 +64,7 @@
                                  <c:forEach items="${infoList}" var="infoList" varStatus="status">
                                     <tr>
                                        <td style="text-align:left"><a
-                                          href="/board/${infoList.CATEGORY}/detail?bdIdx=${infoList.BD_IDX}">${infoList.BD_TITLE}</a><small
+                                          href="/board/cat/detail?bdIdx=${infoList.BD_IDX}">${infoList.BD_TITLE}</a><small
                                           class="ml-2"><i class="fas fa-comment mr-1"></i>${infoList.CM_CNT}</small></td>
                                        <td>${infoList.VIEW_COUNT}</td> 
                                     </tr>
@@ -70,7 +74,7 @@
                         </div>
                     </div>
                      <div class="board-in-main">
-                        <h2 class="my-3">다른 게시판</h2>
+                        <h2 class="my-3">정보 게시판</h2>
                          <div class=board-list-in-main>
                         	<table class="table mb-0">
                               <thead class="thead-dark">
@@ -83,7 +87,7 @@
                                  <c:forEach items="${infoList}" var="infoList" varStatus="status">
                                     <tr>
                                        <td style="text-align:left"><a
-                                          href="/board/${infoList.CATEGORY}/detail?bdIdx=${infoList.BD_IDX}">${infoList.BD_TITLE}</a><small
+                                          href="/board/info/detail?bdIdx=${infoList.BD_IDX}">${infoList.BD_TITLE}</a><small
                                           class="ml-2"><i class="fas fa-comment mr-1"></i>${infoList.CM_CNT}</small></td>
                                        <td>${infoList.VIEW_COUNT}</td> 
                                     </tr>
@@ -97,13 +101,17 @@
         </section> 
         <!-- market-items-->
         <section class="page-section" id="market-items">
+        	<div class="container">
+           		<div class="text-center">
+                    <h2 class="section-heading text-uppercase">market-items</h2>
+                    <h3 class="section-subheading text-muted">우리 사이트는 아래와 같은 상품을 제공한다.</h3>
+                </div>
         
         
         
         
         
-        
-        
+     	   </div>
         </section> 
         <!-- Services-->
         <section class="page-section" id="services">
@@ -114,79 +122,23 @@
                 </div>
                 <div class="row text-center">
                     <div class="col-md-4">
-                        <span class="fa-stack fa-4x">
-                            <i class="fas fa-circle fa-stack-2x text-primary" style="color:blue"></i>
-                            <i class="fas fa-shopping-cart fa-stack-1x fa-inverse"></i>
-                        </span>
+                        <span class="serviceImage"><img src="/resources/assets/img/market.png"/></span>
                         <h4 class="my-3">E-Commerce</h4>
                         <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore harum ex magni, dicta impedit.</p>
                     </div>
                     <div class="col-md-4">
-                        <span class="fa-stack fa-4x">
-                            <i class="fas fa-circle fa-stack-2x text-primary" style="color:blue"></i>
-                            <i class="fas fa-hand-holding-heart fa-stack-1x fa-inverse"></i>
-                        </span>
+                        <span class="serviceImage"><img src="/resources/assets/img/petcare.png"/></span>
                         <h4 class="my-3">Pet Care</h4>
                         <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore harum ex magni, dicta impedit.</p>
                     </div>
                     <div class="col-md-4">
-                        <span class="fa-stack fa-4x">
-                            <i class="fas fa-circle fa-stack-2x text-primary" style="color:blue"></i>
-                            <i class="fas fa-comments fa-stack-1x fa-inverse"></i>
-                        </span>
+                       <span class="serviceImage"><img src="/resources/assets/img/comunity.png"/></span>
                         <h4 class="my-3">Community</h4>
                         <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore harum ex magni, dicta impedit.</p>
                     </div>
                 </div>
             </div>
         </section>        
-        <!-- Board -->
-        <section class="page-section" id="board">
-            <div class="container">
-                <div class="row text-center">
-                    <div class="board-in-main">
-                        <h2 class="my-3">강아지 게시판</h2>                      
-                    </div>
-                    <div class="board-in-main">
-                        <h2 class="my-3">고양이 게시판</h2>
-                         <div class=board-list-in-main>
-                        	<table class="table mb-0">
-										<thead class="thead-dark">
-											<tr>
-												
-												<th scope="col" style="width: 70%">제목</th>
-												
-												<th scope="col" style="width: 30%">조회 수</th>
-												
-											</tr>
-										</thead>
-										<tbody class="customtable">
-											<c:forEach items="${infoList}" var="infoList" varStatus="status">
-												<tr>
-													
-													<td style="text-align:left"><a
-														href="/board/${infoList.CATEGORY}/detail?bdIdx=${infoList.BD_IDX}">${infoList.BD_TITLE}</a><small
-														class="ml-2"><i class="fas fa-comment mr-1"></i>${infoList.CM_CNT}</small></td>
-													
-													
-													<td>${infoList.VIEW_COUNT}</td>
-													
-												</tr>
-											</c:forEach>
-
-										</tbody>
-									</table>
-                        </div>
-                    </div>
-                     <div class="board-in-main">
-                        <h2 class="my-3">다른 게시판</h2>
-                         <div class=board-list-in-main>
-                        	게시판 코드 따 올 예정
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section> 
     </body>
    <%@ include file="/WEB-INF/views/include/footer.jsp" %>	
    <%@ include file="/WEB-INF/views/include/mainJs.jsp" %>
