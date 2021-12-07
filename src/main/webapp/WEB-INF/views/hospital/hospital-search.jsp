@@ -285,7 +285,7 @@ margin-bottom: 0px;
 
 
 <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav" style="position: fixed;">
-            <div class="container" style="margin-right:400px;"> 
+            <div class="container" style="margin-right:700px;"> 
                 <a class="navbar-brand" href="/"  style="height:58px; width:281px; margin:0px 120px 0px 0px; padding:5px 0px;"><img src="/resources/assets/img/site-logo-and-name.png" alt="..." style="width:280px;height:48px"/></a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                     Menu
@@ -454,7 +454,7 @@ var mapBounds = null;
       myGEO(new naver.maps.LatLng(position.coords.latitude, position.coords.longitude));
       
 
-  //바운더리값으로 불러오기
+  //바운더리값으로 불러오기 (변환안됬음..)
   naver.maps.Event.addListener(map, 'bounds_changed', function(){
 	  mapBounds = map.getBounds();
   	var southWest = mapBounds.getSW(),
@@ -478,26 +478,24 @@ var mapBounds = null;
   	
   	console.dir('변환 southWest : '+sWPoint);
   	console.dir('변환 northEast : '+nEPoint);
-  });
+   });
 
-
-
-    //좌표변환2
+    //중심좌표으로 불러오기 (몽고DB나 오라콜spital 옵션 사용해야함)
     var myGeoCenter = map.getCenter();
     console.dir('센터 : '+myGeoCenter.toString());
     cent = new Proj4js.Point(myGeoCenter.x,myGeoCenter.y);
     p2 = Proj4js.transform(wgs84,tm,cent);
     serachPoint3 = new naver.maps.LatLng(p2.y, p2.x);
     console.dir('좌푠볗환 :' + serachPoint3);
-      
-      
-      
-    });
- // https://docs.oracle.com/cd/E11882_01/appdev.112/e11830/sdo_objload.htm#SPATL579
+    // https://docs.oracle.com/cd/E11882_01/appdev.112/e11830/sdo_objload.htm#SPATL579
+});
  
 //현재위치
 $(".myGeo").on("click", function(e) {
     e.preventDefault();
+    //체크박스 채워줌
+    $('input[name=facility]').prop('checked',true);
+    $('#optionsRadios1').prop('checked',true);
   	//테이블비우기
 	$('#hosUL > li').remove();
 	$('#pharUL > li').remove();
@@ -513,11 +511,55 @@ $(".myGeo").on("click", function(e) {
       myGEO(new naver.maps.LatLng(position.coords.latitude, position.coords.longitude));
       map.setCenter(new naver.maps.LatLng(position.coords.latitude, position.coords.longitude));
       map.setZoom(17);
-      //체크박스 채워줌
-      $('input[name=facility]').prop('checked',true);
-      $('#optionsRadios1').prop('checked',true);
   });
 });
+
+
+//지역별
+$("#gugun1").on("click", function(e){
+if($("#gugun1").val()!="구/군 선택"){
+  e.preventDefault();
+  //체크박스 채워줌
+  $('input[name=facility]').prop('checked',true);
+  $('#optionsRadios1').prop('checked',true);
+	//테이블비우기
+	$('#hosUL > li').remove();
+	$('#pharUL > li').remove();
+	$('#toyUL > li').remove();
+	//마커지우기
+	for(var i = 0; i < markers.length; i++){
+		markers[i].setMap(null);
+		infoWindows[i].close();
+	}
+	markers =[];
+	infoWindows = [];
+	//시구청 pocus
+  let address =addMap.get($("#sido1").val()+$("#gugun1").val());
+  searchAddressToCoordinate(address);
+  }
+})
+  
+
+
+function searchAddressToCoordinate(address) {
+    naver.maps.Service.geocode({
+      useStyleMap: true,
+     query: address
+      }, function(status, response) {
+          if (status === naver.maps.Service.Status.ERROR) {
+            if (!address) {
+              return alert('Geocode Error, Please check address');
+            }
+            return alert('Geocode Error, address:' + address);
+          }
+          var item = response.v2.addresses[0], //주소 검색결과
+              point = new naver.maps.Point(item.x, item.y); //위도경도
+          myGEO(point);
+          map.setCenter(point); //지도에 position 맞춰줌
+          map.setZoom(16);
+        	
+      });
+  }
 
 
 
@@ -852,51 +894,6 @@ function myGEO(nowGeo){
 
   
   
-
-//지역별
-  function searchAddressToCoordinate(address) {
-      naver.maps.Service.geocode({
-        useStyleMap: true,
-       query: address
-        }, function(status, response) {
-            if (status === naver.maps.Service.Status.ERROR) {
-              if (!address) {
-                return alert('Geocode Error, Please check address');
-              }
-              return alert('Geocode Error, address:' + address);
-            }
-            var item = response.v2.addresses[0], //주소 검색결과
-                point = new naver.maps.Point(item.x, item.y); //위도경도
-            myGEO(point);
-            map.setCenter(point); //지도에 position 맞춰줌
-            map.setZoom(16);
-          	
-        });
-    }
-
-$("#gugun1").on("click", function(e){
-  if($("#gugun1").val()!="구/군 선택"){
-    e.preventDefault();
-    //체크박스 채워줌
-    $('input[name=facility]').prop('checked',true);
-    $('#optionsRadios1').prop('checked',true);
-  	//테이블비우기
-	$('#hosUL > li').remove();
-	$('#pharUL > li').remove();
-	$('#toyUL > li').remove();
-  	//마커지우기
-	for(var i = 0; i < markers.length; i++){
-		markers[i].setMap(null);
-		infoWindows[i].close();
-	}
-  	markers =[];
-  	infoWindows = [];
-  	//시구청 pocus
-    let address =addMap.get($("#sido1").val()+$("#gugun1").val());
-    searchAddressToCoordinate(address);
-    }
-  })
-    
   
 //검색
 $("#searchSubmit").on("click", function(e){
