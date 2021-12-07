@@ -36,11 +36,16 @@
 							<label>비밀번호를 변경해주세요.</label>
 						</div>
 						<div class="form-label-group">
-							<input type="hidden" id="userId" name="userId" value="${userId}">					
-							<input type="password" id="password" name="password" class="form-control" placeholder="password"/>
+							<input type="hidden" id="userId" name="userId" value="${userId}">	
+											
+							<input type="password" name="password" id="password" class="form-control" placeholder="영어,숫자,특수문자 조합의 8글자 이상의 문자열입니다.">
+		                  	 <span class="input_possible" id="password_possible">사용 가능한 비밀번호 입니다.</span>
+		                     <span class="input_impossible" id="password_impossible">영어,숫자,특수문자 조합의 8자 이상의 문자열 입니다.</span>
 						</div><br>					
 						<div class="form-label-group">
-							<input type="password" id="confirmpassword" name="confirmpwd" class="form-control" placeholder="confirmPassword "/>
+							<input type="password" name="password2" id="password2" class="form-control" placeholder="비밀번호를 다시 한번 입력하세요">
+		                  	 <span class="input_possible" id="password_accord" >비밀번호가 일치합니다.</span>
+		                     <span class="input_impossible" id="password_discord">비밀번호가 일치하지않습니다.</span>
 						</div>					
 						<div class="form-label-group">
 							<input class="btn btn-secondary" id="updatePw" type="button" value="비밀번호 저장하기" onclick="updatePassword()">
@@ -51,25 +56,7 @@
          </div>
          <div class="empty"></div>
       </div>
-      
-<script type="text/javascript">
-	function updatePassword(){
-		if(document.findform.password.value==""){
-			alert("비밀번호를 입력해주세요.");
-			document.findform.password.focus();
-		} else if(document.findform.password.value != document.findform.confirmpwd.value){
-			alert("비밀번호가 일치하지 않습니다.");
-			document.findform.confirmpwd.focus();
-		} else {
-			document.findform.action="update-pw";
-			document.findform.submit();
-		}
-	}
-	
-	$('#updatePw').on("click", function() {
-		alert('비밀번호를 수정하였습니다.');
-	});
-</script>
+<script type="text/javascript" src="/resources/js/member/updatePw.js"></script>
 </body>
 <%@ include file="/WEB-INF/views/include/footer.jsp" %>	
 </html>
