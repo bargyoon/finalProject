@@ -245,35 +245,19 @@ url(/fonts/NotoSans-Bold.woff) format('woff');
 <%@ include file="/WEB-INF/views/include/head.jsp" %>
 </head>
 <body>
-<<<<<<< HEAD
-<nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
-            <div class="container" style="padding:1.5rem;">
-                <a class="navbar-brand" href="/"><img src="/resources/assets/img/site-logo-and-name.png" alt="..." style="width:280px;height:48px"/></a>
-=======
-
-
 <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav" style="position: fixed;">
             <div class="container" style="margin-right:700px;"> 
                 <a class="navbar-brand" href="/"  style="height:58px; width:281px; margin:0px 120px 0px 0px; padding:5px 0px;"><img src="/resources/assets/img/site-logo-and-name.png" alt="..." style="width:280px;height:48px"/></a>
->>>>>>> branch 'main' of https://github.com/bargyoon/finalProject.git
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                     Menu
                     <i class="fas fa-bars ms-1"></i>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
-<<<<<<< HEAD
-                    <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0"><hr>
-                       <li class="nav-item"><a class="nav-link" href="#"  style="font-size: 1.5rem;">병원/시설</a>
-	                        	<ul class="navbar-detail" ><hr>
-		                        	<li><a href=#  style="font-size: 1.5rem;">동물병원</a>
-	                        		<li><a href=#  style="font-size: 1.5rem;">편의시설검색</a>
-=======
                     <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0" style="margin-left: 200px !important;"><hr>
                        <li class="nav-item"><a class="nav-link" href="/hospital/info"  style="font-size: 1.5rem;">병원/시설</a>
 	                        	<ul class="navbar-detail" ><hr style="margin: 0px 0px 0px 0px;">
 		                        	<li><a href="/hospital/info"  style="font-size: 1.5rem;">동물병원</a>
 	                        		<li><a href="/hospital/search"  style="font-size: 1.5rem;">편의시설검색</a>
->>>>>>> branch 'main' of https://github.com/bargyoon/finalProject.git
 	                        	</ul>
 	                        </li>	
 	                        <li class="nav-item"><a class="nav-link" href="/disease/index"  style="font-size: 1.5rem;">수술비용</a></li>
