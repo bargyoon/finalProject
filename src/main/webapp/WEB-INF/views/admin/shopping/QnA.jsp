@@ -252,7 +252,7 @@
 													<div class="d-table-cell board_thumb_wrap"
 														style="padding: 10px; width: 63%">
 														<div>
-															<textarea rows="2" cols="" class="form-control"></textarea>
+															<textarea rows="2" cols="" class="form-control" style="width:70%; margin-left:30%"></textarea>
 														</div>
 													</div>
 
