@@ -94,6 +94,9 @@
 	<i class="fas fa-arrow-alt-circle-up"></i>
 </aside>
 
+<%@ include file="/WEB-INF/views/include/footer.jsp"%>
+<%@ include file="/WEB-INF/views/include/mainJs.jsp"%>
+
 <!-- 주소 api -->
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
