@@ -701,3 +701,9 @@ tbody > tr:hover{
 .simple-table .acc-context{
     text-align: left;
 }
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}

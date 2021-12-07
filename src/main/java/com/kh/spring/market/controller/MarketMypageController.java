@@ -11,13 +11,16 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.kh.spring.common.util.FileDTO;
 import com.kh.spring.market.model.dto.Address;
+import com.kh.spring.market.model.dto.Cart;
 import com.kh.spring.market.model.dto.Order;
 import com.kh.spring.market.model.dto.QNA;
 import com.kh.spring.market.model.dto.Review;
@@ -79,28 +82,33 @@ public class MarketMypageController {
 		
 		int member = certifiedUser.getUserIdx();
 		Member memberInfo = marketMypageService.selectMemberInfo(member);
-		List<Map<String, Object>> cartList = marketMypageService.selectCartList(member);
+		List<Map<String, Object>> cartList = marketMypageService.selectCartList(certifiedUser);
 		int couponCnt = marketMypageService.selectCouponCount(member);
-		int cartCnt = marketMypageService.selectCartCnt(member);
+		
+		for (Map<String, Object> map : cartList) {
+			System.out.println(map);
+		}
 		
 		model.addAttribute("cartList", cartList);
-	
-		
-		
 		model.addAttribute("memberInfo", memberInfo);
 		model.addAttribute("couponCnt", couponCnt);
-		model.addAttribute("cartCnt", cartCnt);
-		
-		System.out.println("cartList : " + cartList);
-				
 	}
 	
-	@GetMapping("cart/delete")
-	public String deleteCart(@RequestParam("cartIdx")int cartIdx) {		
+	@PostMapping("cart/check-stock")
+	@ResponseBody
+	public String checkStock(@RequestBody Map<String, Object> checkInfo) {
 		
-		marketMypageService.deleteCart(cartIdx);
+		if(marketMypageService.checkStock(checkInfo)) {
+			return "available";
+		}
+		
+		return "disavailable";
+	}
 	
-		return "redirect:/market/mypage/cart"; 
+	@GetMapping("cart/delete/{cartIdx}")
+	@ResponseBody
+	public void deleteCart(@PathVariable(value = "cartIdx") int cartIdx) {		
+		marketMypageService.deleteCart(cartIdx);
 	}
 	
 	@PostMapping("cart/selectDelete")

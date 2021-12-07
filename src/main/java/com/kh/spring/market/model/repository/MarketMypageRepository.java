@@ -140,7 +140,7 @@ public interface MarketMypageRepository {
 	
 	
 	//장바구니
-	List<Map<String, Object>> selectCartList(int userIdx);
+	List<Map<String, Object>> selectCartList(Member member);
 	
 	@Select("select count(cart_idx) from cart where user_idx=#{userIdx}")
 	int selectCartCnt(int userIdx);
@@ -152,5 +152,12 @@ public interface MarketMypageRepository {
 	
 	@Update("update cart set count = #{count} where cart_idx= #{cartIdx}")
 	void updateCart(int count, int cartIdx);
+
+	@Select("select PO_STOCK from PRD_DETAIL where DT_IDX = #{dtIdx}")
+	int checkStock(Map<String, Object> checkInfo);
+
+	@Update("update cart set count = #{prdCnt} where CART_IDX = #{cartIdx}")
+	void updateCartCnt(Map<String, Object> checkInfo);
+
 	
 }

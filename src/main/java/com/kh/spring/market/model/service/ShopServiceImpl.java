@@ -246,20 +246,15 @@ public class ShopServiceImpl implements ShopService{
 
 	public boolean insertOrder(List<Order> orderInfos) {
 		for (Order order : orderInfos) {
-			if(!shopRepository.insertOrder(order)) {
-				return false;
-			}
-		}
-		if(!shopRepository.insertSmHistory(orderInfos.get(0))||!shopRepository.updateUserMinusSm(orderInfos.get(0))) {
-			return false;
-		}
-		
-		if(orderInfos.get(0).getUcIdx() != 0) {
-			if(!shopRepository.updateUcIsDel(orderInfos.get(0).getUcIdx())) {
+			if(shopRepository.insertOrder(order) != -1) {
 				return false;
 			}
 		}
 
+		if(shopRepository.updateSmAndCp(orderInfos.get(0)) != -1) {
+			return false;
+		}
+		
 		return true;
 	}
 

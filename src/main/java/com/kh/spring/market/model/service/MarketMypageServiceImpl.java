@@ -11,6 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.kh.spring.common.util.FileDTO;
 import com.kh.spring.common.util.FileUtil;
 import com.kh.spring.market.model.dto.Address;
+import com.kh.spring.market.model.dto.Cart;
 import com.kh.spring.market.model.dto.Order;
 import com.kh.spring.market.model.dto.QNA;
 import com.kh.spring.market.model.dto.Review;
@@ -207,14 +208,8 @@ public class MarketMypageServiceImpl implements MarketMypageService{
 		return mypageRepository.selectisLike(rvIdx);
 	}
 
-	@Override
-	public List<Map<String, Object>> selectCartList(int userIdx) {
-		return mypageRepository.selectCartList(userIdx);
-	}
-
-	@Override
-	public int selectCartCnt(int userIdx) {
-		return mypageRepository.selectCartCnt(userIdx);
+	public List<Map<String, Object>> selectCartList(Member member) {
+		return mypageRepository.selectCartList(member);
 	}
 
 	@Override
@@ -229,6 +224,15 @@ public class MarketMypageServiceImpl implements MarketMypageService{
 	@Override
 	public void updateCart(int count, int cartIdx) {
 		mypageRepository.updateCart(count, cartIdx);		
+	}
+
+	public boolean checkStock(Map<String, Object> checkInfo) {
+		if(mypageRepository.checkStock(checkInfo) < (int) checkInfo.get("prdCnt")) {
+			return false;
+		}
+		
+		mypageRepository.updateCartCnt(checkInfo);
+		return true;
 	}
 
 	

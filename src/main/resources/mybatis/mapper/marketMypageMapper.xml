@@ -191,14 +191,11 @@
 	
 	<!-- 장바구니 cart -->
 	<select id="selectCartList" resultType="map">
-	select rownum rnum, r.*
-	from(select cart_idx,USER_IDX,PRD_IDX,c.COUNT,c.REG_DATE,c.DT_IDX,
-			p.name, p.brand, d.PO_NAME,d.PRICE,d.PO_STOCK,
-			d.STATE,d.SALE_PRICE
-	from cart c
-	join product p USING(PRD_IDX)
-	join prd_detail d USING(PRD_IDX)
-	where user_idx=10 and c.dt_idx=d.dt_idx)r
+		select c.user_idx, c.prd_idx, c.count, c.reg_date, c.dt_idx, c.cart_idx, name, brand, coupon_avail, sm_avail, sale_per, po_stock, sale_price, price, po_name, state
+		from cart c
+		join product p on(c.prd_idx = p.prd_idx)
+		join prd_detail pd on(c.dt_idx = pd.dt_idx)
+		where user_idx = #{userIdx}
 	</select>
 	
 	
