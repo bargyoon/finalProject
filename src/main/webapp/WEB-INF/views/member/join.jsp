@@ -11,7 +11,8 @@
 <style type="text/css">
 @media screen and (min-width: 768px){   
     .register-form{
-        margin-bottom: 10%
+        margin-bottom: 20% ;
+        margin-top: 30%;
     }
 }
 </style>
@@ -19,7 +20,7 @@
 <body>
 <%@ include file="/WEB-INF/views/include/navBar.jsp" %>
 <form:form modelAttribute="joinForm"
-   				   action="/member/join" method="post" id="frm_join" >
+   				   action="/member/join" method="post" id="frm_join" name="frm_join" >
       <div class="main">
          <div class="col-md-6 col-sm-12">
             <div class="register-form">
@@ -196,14 +197,14 @@
 
                   <div class="form-group">
                      <label>아이디 </label>
-                     <input type="text" name="userId" id="userId" class="form-control" placeholder="아이디를 입력하세요">
+                     <input type="text" name="userId" id="userId" class="form-control" placeholder="아이디를 입력하세요" required>
                      <span class="input_possible" id="userId_possible">사용 가능한 아이디 입니다.</span>
                      <span class="input_impossible" id="userId_impossible">이미 존재하는 아이디 입니다.</span>
                   </div>
                   
                   <div class="form-group">
                      <label>닉네임 </label>
-                     <input type="text" name="nickName" id="nickName"class="form-control" placeholder="닉네임을 입력하세요">
+                     <input type="text" name="nickName" id="nickName"class="form-control" placeholder="닉네임을 입력하세요" required>
                      <div class="check" id="nickName_check"></div>
                      <span class="input_possible" id="nickName_possible">사용 가능한 닉네임 입니다.</span>
                      <span class="input_impossible" id="nickName_impossible">이미 존재하는 닉네임 입니다.</span>
@@ -211,7 +212,7 @@
                   
                   <div class="form-group">
                      <label>비밀번호 </label>
-                     <input type="password" name="password" id="password" class="form-control" placeholder="영어,숫자,특수문자 조합의 8글자 이상의 문자열입니다.">
+                     <input type="password" name="password" id="password" class="form-control" placeholder="영어,숫자,특수문자 조합의 8글자 이상의 문자열입니다." required>
                   	 <span class="input_possible" id="password_possible">사용 가능한 비밀번호 입니다.</span>
                      <span class="input_impossible" id="password_impossible">영어,숫자,특수문자 조합의 8자 이상의 문자열 입니다.</span>
 
@@ -219,24 +220,24 @@
                   
                   <div class="form-group">
                      <label>비밀번호 확인 </label>
-                     <input type="password" name="password2" id="password2" class="form-control" placeholder="비밀번호를 다시 한번 입력하세요">
+                     <input type="password" name="password2" id="password2" class="form-control" placeholder="비밀번호를 다시 한번 입력하세요" required>
                   	 <span class="input_possible" id="password_accord" >비밀번호가 일치합니다.</span>
                      <span class="input_impossible" id="password_discord">비밀번호가 일치하지않습니다.</span>
                   </div>
                   
                    <div class="form-group">
                      <label>이름 </label>
-                     <input type="text" name="userName" id="userName" class="form-control" placeholder="이름을 입력하세요">
+                     <input type="text" name="userName" id="userName" class="form-control" placeholder="이름을 입력하세요" required>
                   </div>
                   
                   <div class="form-group" id="mail_auth_wrap">
                      	<label>이메일 </label>
                      	<div class="mail_auth">
-                     		<input type="email" type="email" id="email" name="email" class="form-control" placeholder="이메일을 입력하세요">
+                     		<input type="email" type="email" id="email" name="email" class="form-control" placeholder="이메일을 입력하세요" required>
                   		</div>
                   		<div class="form-group" id="mail_auth_ck_wrap">
 	                  		<div class="mail_auth_ck">
-	                     		<input class="form-control" id="email_ck"disabled="disabled" required>
+	                     		<input class="form-control" id="email_ck" name="email_ck" disabled="disabled" required>
 	                  		</div>
 		                  	<div class="btn btn-secondary" id="mail_auth_bnt">
 		                  	 	<span>인증번호 발송</span>
@@ -247,10 +248,10 @@
                   </div>
                    <div class="form-group">
                      <label>주소: </label>
-                     <input type="text" name="address" id="address" class="form-control" id="address" placeholder="주소를 입력하세요">
+                     <input type="text" name="address" id="address" class="form-control" id="address" placeholder="주소를 입력하세요" required>
                      <input type="text" name="addressDetail" id="addressDetail" class="form-control" placeholder="상세주소를 입력하세요">
                   </div><br><hr>                  
-                  <input type="submit" class="btn btn-secondary" id="joinBtn" onclick="check()" style="width: 100%" value="가입하기" />
+                  <input type="submit" class="btn btn-secondary" id="joinBtn" onclick="check()" style="width: 100%" value="가입하기" disabled="disabled"/>
                </form>
             </div>
          </div>

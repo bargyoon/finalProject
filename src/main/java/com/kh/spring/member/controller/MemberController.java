@@ -23,8 +23,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.kh.spring.common.email.Email;
-import com.kh.spring.common.email.EmailSender;
 import com.kh.spring.member.model.dto.Member;
 import com.kh.spring.member.model.service.MemberService;
 
@@ -158,12 +156,12 @@ public class MemberController {
 	
 	@PostMapping("update-pw")
 	public String updatePwImpl(@RequestParam("userId") String userId, Member member) {
-		//System.out.println("넘어온값 : " + userId);
 		String updateUser = userId;
 		String updateUser2 = updateUser.substring(updateUser.lastIndexOf(",")+1);
-		//System.out.println("자른값 : " +updateUser2);
+		
 		member.setUserId(updateUser2);
 		//System.out.println(member);
+		
 		memberService.updatePw(member);
 		return "member/login";
 	}

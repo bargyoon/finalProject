@@ -8,7 +8,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
-<%@ include file="/WEB-INF/views/include/head.jsp" %>
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 
 <script type="text/javascript" src="${contextPath}/resources/js/hospital/jquery.js"></script>
@@ -20,6 +19,8 @@
 <!-- 부가적인 테마 -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
 
+<!-- 합쳐지고 최소화된 최신 자바스크립트 -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/proj4js/1.1.0/proj4js-combined.min.js"></script>
 
 <style type="text/css">
@@ -89,7 +90,7 @@ url(/fonts/NotoSans-Bold.woff) format('woff');
 
 	.name_section{
 	background-color: rgb(240, 234, 213);
-       height: 130px;
+       height: 250px;
 	}
   .main1{
     height: 50px;
@@ -109,7 +110,7 @@ url(/fonts/NotoSans-Bold.woff) format('woff');
   .main2{
     height: 100px;   /* seach높이조절 */
     width: 1000px;
-     position: absolute;
+    position: absolute;
     left:50%;
     transform: translate(-50%,-30%);
     font-family: 'SBAggroL';
@@ -235,80 +236,56 @@ url(/fonts/NotoSans-Bold.woff) format('woff');
 
 
 
-/* 메뉴 하단바 색깔 */
-.navbar-detail > li{
-   list-style: none;
-   background-color: #f0ead5;
-   padding: 10px 0px 5px 0px;
-}
 
-.navbar-detail > li > a{
-   text-decoration: none;
-   color:#333; /* 글씨색 맞추기 */
-}
-#navbarResponsive > ul > li {
-      float:left;
-      position:relative;
-} 
 
-/* 메뉴 하단바 설정 변경  */
-#navbarResponsive > ul > li > ul {
-      display:none;
-      position: absolute;
-      line-height: 30px;
-      color: #21252961;
-      width: 10em;
-     margin-left: -30px;
-}
-#navbarResponsive > ul > li:hover > ul {
-   display:block;
-    	font-family: 'SBAggroL';
-   /* background-color: #21252961; */
-}
-#navbarResponsive > ul > li > ul > li> a:hover {
-   color: black;
-   font-weight : bolder;
-    	font-family: 'SBAggroL';
-   /* background-color: #21252961; */
-   /* transition: ease 1s; */
-}
-
-.navbar{
-margin-bottom: 0px;
-}
 
 
 </style>
 
+<%@ include file="/WEB-INF/views/include/head.jsp" %>
 </head>
 <body>
+<<<<<<< HEAD
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
+            <div class="container" style="padding:1.5rem;">
+                <a class="navbar-brand" href="/"><img src="/resources/assets/img/site-logo-and-name.png" alt="..." style="width:280px;height:48px"/></a>
+=======
 
 
 <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav" style="position: fixed;">
             <div class="container" style="margin-right:700px;"> 
                 <a class="navbar-brand" href="/"  style="height:58px; width:281px; margin:0px 120px 0px 0px; padding:5px 0px;"><img src="/resources/assets/img/site-logo-and-name.png" alt="..." style="width:280px;height:48px"/></a>
+>>>>>>> branch 'main' of https://github.com/bargyoon/finalProject.git
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                     Menu
                     <i class="fas fa-bars ms-1"></i>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
+<<<<<<< HEAD
+                    <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0"><hr>
+                       <li class="nav-item"><a class="nav-link" href="#"  style="font-size: 1.5rem;">병원/시설</a>
+	                        	<ul class="navbar-detail" ><hr>
+		                        	<li><a href=#  style="font-size: 1.5rem;">동물병원</a>
+	                        		<li><a href=#  style="font-size: 1.5rem;">편의시설검색</a>
+=======
                     <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0" style="margin-left: 200px !important;"><hr>
                        <li class="nav-item"><a class="nav-link" href="/hospital/info"  style="font-size: 1.5rem;">병원/시설</a>
 	                        	<ul class="navbar-detail" ><hr style="margin: 0px 0px 0px 0px;">
 		                        	<li><a href="/hospital/info"  style="font-size: 1.5rem;">동물병원</a>
 	                        		<li><a href="/hospital/search"  style="font-size: 1.5rem;">편의시설검색</a>
+>>>>>>> branch 'main' of https://github.com/bargyoon/finalProject.git
 	                        	</ul>
 	                        </li>	
 	                        <li class="nav-item"><a class="nav-link" href="/disease/index"  style="font-size: 1.5rem;">수술비용</a></li>
 	                        <li class="nav-item"><a class="nav-link" href="/petcare/vaccine/dog"  style="font-size: 1.5rem;">펫케어</a>
-	                       		<ul class="navbar-detail"><hr style="margin: 0px 0px 0px 0px;">
+	                       		<ul class="navbar-detail"><hr>
 		                        	<li><a href="/petcare/vaccine/dog"  style="font-size: 1.5rem;">예방접종</a>
 	                        		<li><a href="/petcare/food"  style="font-size: 1.5rem;">금지음식</a>
 	                        		<li><a href="/petcare/action/dog/eyes"  style="font-size: 1.5rem;">행동의미</a>
 	                        	</ul>
 	                        </li>
 	                        <li class="nav-item"><a class="nav-link" href="/board/info"  style="font-size: 1.5rem;">게시판</a>
-	                        	<ul class="navbar-detail"><hr style="margin: 0px 0px 0px 0px;">
+	                        	<ul class="navbar-detail"><hr>
 		                        	<li><a href=#  style="font-size: 1.5rem;">정보게시판</a>
 	                        		<li><a href=#  style="font-size: 1.5rem;">고양이</a>
 	                        		<li><a href=#  style="font-size: 1.5rem;">강아지</a>
@@ -323,7 +300,7 @@ margin-bottom: 0px;
 							</c:if>
 							<c:if test="${not empty authentication}">
 								<li class="nav-item"><a class="nav-link" href="/mypage/my-info"  style="font-size: 1.5rem;">마이페이지</a>
-									<ul class="navbar-detail"><hr style="margin: 0px 0px 0px 0px;">
+									<ul class="navbar-detail"><hr>
 									<li><a href="/mypage/my-info"  style="font-size: 1.5rem;">마이페이지</a>
 		                        	<li><a href="/member/logout"  style="font-size: 1.5rem;">로그아웃</a>
 		                        	</ul>
@@ -332,7 +309,7 @@ margin-bottom: 0px;
 					</ul>
                 </div>
             </div>
-        </nav> 
+        </nav>
   <section style="padding:0px;" >
   
     <div class="name_section" >

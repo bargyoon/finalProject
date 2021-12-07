@@ -8,8 +8,6 @@ import java.util.Map;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
-import com.kh.spring.common.email.Email;
-import com.kh.spring.common.email.EmailSender;
 import com.kh.spring.common.mail.MailSender;
 import com.kh.spring.member.model.dto.Member;
 import com.kh.spring.mypage.model.service.MypageService;

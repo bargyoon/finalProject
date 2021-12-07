@@ -8,9 +8,11 @@ $("#userId").keyup(function() {
                 if(cnt != 1){
                     $('#userId_possible').css("display","inline-block"); 
                     $('#userId_impossible').css("display", "none");
+                  	$("#joinBtn").removeAttr("disabled");  
                 } else {
                     $('#userId_impossible').css("display","inline-block");
                     $('#userId_possible').css("display", "none");
+                    $("#joinBtn").attr("disabled","disabled");
                 }
             },
             error:function(request,status,error){
@@ -31,9 +33,11 @@ $("#userId").keyup(function() {
                 if(cnt != 1){
                     $('#nickName_possible').css("display","inline-block"); 
                     $('#nickName_impossible').css("display", "none");
+                    $("#joinBtn").removeAttr("disabled");
                 } else {
                     $('#nickName_impossible').css("display","inline-block");
                     $('#nickName_possible').css("display", "none");
+                    $("#joinBtn").attr("disabled","disabled");
                 }
             },
             error:function(){
@@ -49,10 +53,12 @@ $("#userId").keyup(function() {
                
         if(false != reg.test(pw)) {
         	$('#password_possible').css("display","inline-block");
-            $('#password_impossible').css("display", "none");          
+            $('#password_impossible').css("display", "none");
+            $("#joinBtn").removeAttr("disabled");        
         }else{
         	$('#password_impossible').css("display","inline-block"); 
-            $('#password_possible').css("display", "none");        	
+            $('#password_possible').css("display", "none");  
+            $("#joinBtn").attr("disabled","disabled");
         }
     });
 
@@ -62,17 +68,20 @@ $("#userId").keyup(function() {
         
             if(pw1 != pw2 ) {
             	$('#password_discord').css("display","inline-block");
-                $('#password_accord').css("display", "none");              
+                $('#password_accord').css("display", "none");    
+                $("#joinBtn").attr("disabled","disabled"); 
             } else{
             	$('#password_accord').css("display","inline-block"); 
-                $('#password_discord').css("display", "none");             
+                $('#password_discord').css("display", "none");    
+           		$("#joinBtn").removeAttr("disabled");   
             }
       });
       
-   function check(){
+  /* function check(){
     if(document.getElementById("email_ck").value==""){
         alert("메일 인증이 필요합니다.");
-        return;
-    }
-}
+    }else{
+		document.frm_join.submit();
+	}   
+}*/
  

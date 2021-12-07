@@ -80,6 +80,9 @@
 	<i class="fas fa-arrow-alt-circle-up"></i>
 </aside>
 
+<%@ include file="/WEB-INF/views/include/footer.jsp"%>
+<%@ include file="/WEB-INF/views/include/mainJs.jsp"%>
+
 <script type="text/javascript">
 	/* 검색기능 */
 	const URLSearch = new URLSearchParams(location.search);
