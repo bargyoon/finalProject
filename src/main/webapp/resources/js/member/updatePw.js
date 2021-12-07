@@ -31,7 +31,7 @@ function updatePassword(){
 		document.findform.submit();
 	}
 }
-	
+	 
 	
 $('#updatePw').on("click", function() {
 	alert('비밀번호를 수정하였습니다.');
