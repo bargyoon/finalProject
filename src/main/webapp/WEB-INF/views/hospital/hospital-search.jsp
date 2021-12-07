@@ -107,7 +107,7 @@ url(/fonts/NotoSans-Bold.woff) format('woff');
     position:relative;
 	}
   .main2{
-    height: 200px;   /* seach높이조절 */
+    height: 100px;   /* seach높이조절 */
     width: 1000px;
      position: absolute;
     left:50%;
@@ -284,15 +284,15 @@ margin-bottom: 0px;
 <body>
 
 
-<nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
-            <div class="container" style="justify-content: space-between !important;"> 
-                <a class="navbar-brand" href="/"  style="height:58px; width:281; margin:0px 16px 0px 0px; padding:5px 0px;"><img src="/resources/assets/img/site-logo-and-name.png" alt="..." style="width:280px;height:48px"/></a>
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav" style="position: fixed;">
+            <div class="container" style="margin-right:400px;"> 
+                <a class="navbar-brand" href="/"  style="height:58px; width:281px; margin:0px 120px 0px 0px; padding:5px 0px;"><img src="/resources/assets/img/site-logo-and-name.png" alt="..." style="width:280px;height:48px"/></a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                     Menu
                     <i class="fas fa-bars ms-1"></i>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
-                    <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0" style="margin-left: 300px;"><hr>
+                    <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0" style="margin-left: 200px !important;"><hr>
                        <li class="nav-item"><a class="nav-link" href="/hospital/info"  style="font-size: 1.5rem;">병원/시설</a>
 	                        	<ul class="navbar-detail" ><hr style="margin: 0px 0px 0px 0px;">
 		                        	<li><a href="/hospital/info"  style="font-size: 1.5rem;">동물병원</a>
@@ -448,7 +448,7 @@ var mapBounds = null;
       map = new naver.maps.Map('main_map', {
         useStyleMap: true,
         center : new naver.maps.LatLng(position.coords.latitude, position.coords.longitude),
-          zoom: 14,
+          zoom: 16,
           zoomControl: true
         });
       myGEO(new naver.maps.LatLng(position.coords.latitude, position.coords.longitude));
@@ -512,7 +512,10 @@ $(".myGeo").on("click", function(e) {
     navigator.geolocation.getCurrentPosition((position) => {
       myGEO(new naver.maps.LatLng(position.coords.latitude, position.coords.longitude));
       map.setCenter(new naver.maps.LatLng(position.coords.latitude, position.coords.longitude));
-      map.setZoom(16);
+      map.setZoom(17);
+      //체크박스 채워줌
+      $('input[name=facility]').prop('checked',true);
+      $('#optionsRadios1').prop('checked',true);
   });
 });
 
@@ -866,7 +869,7 @@ function myGEO(nowGeo){
                 point = new naver.maps.Point(item.x, item.y); //위도경도
             myGEO(point);
             map.setCenter(point); //지도에 position 맞춰줌
-            map.setZoom(14);
+            map.setZoom(16);
           	
         });
     }
@@ -874,6 +877,9 @@ function myGEO(nowGeo){
 $("#gugun1").on("click", function(e){
   if($("#gugun1").val()!="구/군 선택"){
     e.preventDefault();
+    //체크박스 채워줌
+    $('input[name=facility]').prop('checked',true);
+    $('#optionsRadios1').prop('checked',true);
   	//테이블비우기
 	$('#hosUL > li').remove();
 	$('#pharUL > li').remove();
@@ -894,7 +900,11 @@ $("#gugun1").on("click", function(e){
   
 //검색
 $("#searchSubmit").on("click", function(e){
-	
+
+    //체크박스 채워줌
+    $('input[name=facility]').prop('checked',true);
+    $('#optionsRadios1').prop('checked',true);
+    
 	var nameinput = $("input[name='NameInput']").val();
 	
 	if(!nameinput || nameinput.length<2){
