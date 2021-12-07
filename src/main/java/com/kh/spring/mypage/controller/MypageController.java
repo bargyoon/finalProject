@@ -39,7 +39,6 @@ import com.kh.spring.mypage.validator.UpdateMemberForm;
 import com.kh.spring.mypage.validator.UpdateMemberFormValidator;
 
 import lombok.RequiredArgsConstructor;
-import oracle.jdbc.proxy.annotation.Post;
 
 @Controller
 @RequiredArgsConstructor
@@ -139,6 +138,11 @@ public class MypageController {
 		@RequestParam(required = false) String keyword
 			) {
 		int userIdx = certifiedUser.getUserIdx();
+		
+		System.out.println();
+		System.out.println(page);
+		System.out.println(keyword);
+		System.out.println();
 		
 		MypageSearchSet searchSet = new MypageSearchSet();
 		searchSet.setUserIdx(userIdx);

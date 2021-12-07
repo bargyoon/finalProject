@@ -49,7 +49,7 @@
 				  		<td><input type="checkbox" name="cmIdx" id="cmIdx" class="listCheckbox" value="${comment.CM_IDX}"></td>
 				  		<td>${comment.CM_IDX}</td>
 				  		<td><a href="/board/${comment.CATEGORY}/detail?bdIdx=${comment.BD_IDX}">${comment.CM_CONTENT}</a></td>
-				  		<td>${comment.CM_REG_COUNT}</td>
+				  		<td>${comment.CM_REC_COUNT}</td>
 				  		<td><fmt:formatDate value="${comment.REG_DATE}" pattern="yyyy-MM-dd" /></td>
 				  	</tr>
 				  	</c:forEach>

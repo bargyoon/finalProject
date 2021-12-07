@@ -5,7 +5,7 @@
 <head>
 <%@ include file="/WEB-INF/views/include/head.jsp" %>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>똑dog한 집사들</title>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <script type="text/javascript" src="${contextPath}/resources/js/hospital/jquery.js"></script>

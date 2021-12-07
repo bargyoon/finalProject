@@ -20,17 +20,10 @@
   		where user_idx = #{userIdx}
   	</update>
   	
-  	<select id="selectBoardCommentCnt" resultType="int">
-  		select count(*) from board_comment
-  		where user_idx = #{userIdx} and is_del = 0
-  		<if test="keyword != null">
-			and cm_content like '%'||#{keyword}||'%'
-		</if>
-  	</select>
-  	
   	<select id="selectBoardCnt" resultType="int">
   		select count(*) from board
-  		where user_idx = #{userIdx} and is_del = 0
+  		where user_idx = #{userIdx} 
+  		and is_del = 0
   		<if test="keyword != null">
 			and content like '%'||#{keyword}||'%'
 		</if>
@@ -41,7 +34,8 @@
 		from (select BD_IDX, USER_IDX, BD_TITLE, REG_DATE, VIEW_COUNT, REC_COUNT, CONTENT, CATEGORY, NICKNAME, rownum rnum
         from (select BD_IDX, USER_IDX, BD_TITLE, REG_DATE, VIEW_COUNT, REC_COUNT, CONTENT, CATEGORY, NICKNAME
         from board 
-        where user_idx = #{searchSet.userIdx} and is_del = 0
+        where user_idx = #{searchSet.userIdx} 
+        and is_del = 0
 		<if test="searchSet.keyword != null">
 			and content like '%'||#{searchSet.keyword}||'%' 
 		</if>
@@ -50,12 +44,23 @@
   		and ${pageUtil.curPage * pageUtil.cntPerPage}
   	</select>
   	
+  	<select id="selectBoardCommentCnt" resultType="int">
+  		select count(*) from board_comment
+  		where user_idx = #{userIdx} 
+  		and is_del = 0
+  		<if test="keyword != null">
+			and cm_content like '%'||#{keyword}||'%'
+		</if>
+  	</select>
+  	
   	<select id="selectCommentList" resultType="map">
 	    select * 
 	    from (select cm_idx, bd_idx, cm_content, reg_date, cm_rec_count, user_idx, nickname, category, rownum rnum
-		from (select c.cm_idx, c.bd_idx, c.cm_content, c.reg_date, c.cm_rec_count, c.user_idx, c.nickname, b.category
-		from board_comment c join board b on(c.bd_idx = b.bd_idx) 
-		where c.user_idx = #{searchSet.userIdx} and c.is_del = 0
+		from (select c.cm_idx, c.bd_idx, c.cm_content, c.reg_date, c.cm_rec_count, c.user_idx, c.nickname, b.category, nvl(b.is_del, 1)
+		from board_comment c left join board b on(c.bd_idx = b.bd_idx)
+		where c.user_idx = #{searchSet.userIdx} 
+		and c.is_del = 0
+		and b.is_del = 0
 		<if test="searchSet.keyword != null">
 			and c.cm_content like '%'||#{searchSet.keyword}||'%'
 		</if>
@@ -69,7 +74,8 @@
 		from (select pet_age, user_idx, pet_idx, pet_name, species, reg_date, gender, fl_idx, origin_file_name, rename_file_name, save_path, rownum rnum
 		from (select p.pet_age, p.user_idx, p.pet_idx, p.pet_name, p.species, p.reg_date, p.gender, f.fl_idx, f.origin_file_name, f.rename_file_name, f.save_path
 		from pet p join file_info f on (p.pet_idx = f.type_idx)
-		where p.user_idx = #{userIdx} and p.is_del = 0
+		where p.user_idx = #{userIdx} 
+		and p.is_del = 0
 		order by p.pet_idx desc))
 		where rnum between ${((pageUtil.curPage-1) * pageUtil.cntPerPage) + 1} 
 	  	and ${pageUtil.curPage * pageUtil.cntPerPage}

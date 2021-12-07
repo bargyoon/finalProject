@@ -41,6 +41,8 @@ public class Hospital {
 					fromDB.setLindPrcbGbnNm(prcb.replace("생산", "분양"));
 				}else if(prcb.contains("운송")) {
 					fromDB.setLindPrcbGbnNm(prcb.replace("운송", "펫택시"));
+				}else if(prcb.contains("수입")) {
+					fromDB.setLindPrcbGbnNm(prcb.replace("수입", "애견용품"));
 				}
 				
 			}
