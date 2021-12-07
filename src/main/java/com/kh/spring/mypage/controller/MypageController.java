@@ -39,7 +39,6 @@ import com.kh.spring.mypage.validator.UpdateMemberForm;
 import com.kh.spring.mypage.validator.UpdateMemberFormValidator;
 
 import lombok.RequiredArgsConstructor;
-import oracle.jdbc.proxy.annotation.Post;
 
 @Controller
 @RequiredArgsConstructor
