@@ -134,7 +134,7 @@
 							</div>
 
 							<div class="table-responsive">
-								<form method="post">
+								<form>
 									<table class="table mb-0">
 										<thead class="thead-dark">
 											<tr>
@@ -153,7 +153,7 @@
 												varStatus="status">
 												<tr>
 													<td><label class="mt-3"> <input
-															type="checkbox" class="listCheckbox" /> <span
+															type="checkbox" class="listCheckbox" value="${data.PI_IDX}" /> <span
 															class="checkmark"></span>
 													</label></td>
 													<td>${status.index+1}</td>
@@ -164,7 +164,7 @@
 													<c:choose>
 															<c:when test="${data.STATE eq 'N'}">
 																<input type="text" 
-														value="${data.PRICE}" class="input_price"> <span
+														value="${data.PRICE}" class="input_price" > <span
 														class="btn btn-secondary btn-sm ml-4" id="btn_update" onclick="insertPrice(this,${data.PI_IDX},${data.DS_IDX})">수정</span>
 															</c:when>
 															<c:when test="${data.STATE eq 'Y'}"><input type="text" style="border: none;" 
@@ -187,7 +187,7 @@
 									</table>
 									<div class="border-top">
 										<div class="card-body">
-											<button class="btn-secondary ">submit</button>
+											<button class="btn-secondary " onclick="deleteCheckList()">submit</button>
 											<%@ include file="/WEB-INF/views/admin/include/paging.jsp"%>
 										</div>
 									</div>
@@ -244,7 +244,7 @@
 	<script type="text/javascript">
 	
    
-	 const URLSearch = new URLSearchParams(location.search);
+
      let fnImgPop = (url) =>{
                 var img=new Image();
                 img.src=url;
@@ -282,21 +282,9 @@
     		
  	
  	}
-     $(document).ready(function() {
-    		$("#chk_all").click(function() {
-    			if($("#chk_all").is(":checked")) $("input[class=listCheckbox]").prop("checked", true);
-    			else $("input[class=listCheckbox]").prop("checked", false);
-    		});
-
-    		$("input[class=listCheckbox]").click(function() {
-    			var total = $("input[class=listCheckbox]").length;
-    			var checked = $("input[class=listCheckbox]:checked").length;
-
-    			if(total != checked) $("#chk_all").prop("checked", false);
-    			else $("#chk_all").prop("checked", true); 
-    		});
-    	});
-     
+    
+   
+    
      (() =>{
 	     let loadState = URLSearch.get('state')
 	     	document.querySelectorAll('.tab').forEach(e =>{
@@ -305,13 +293,33 @@
 	     		}else if(loadState == e.dataset.tab) e.id = "clickedTab"
 	     	})
 	     	
-	     let pageState = URLSearch.get('page')
-	     document.querySelectorAll('.page-link').forEach(e =>{
-	     		if(pageState == null) {
-	     			document.querySelector(".tab_all").id = "clickedTab"
-	     		}else if(pageState == e.dataset.page) e.class = "active"
-	     	})
+	   
      })();
+     
+ 	
+     let deleteCheckList = () =>{
+     	let checkArr = []
+     	document.querySelectorAll(".listCheckbox").forEach(e =>{
+     		if(e.checked) checkArr.push(e.value);
+     		
+     	})
+      		if(checkArr.length == 0){
+      			alert("선택된 상품이 없습니다.")
+      			return;
+      		}
+         	return fetch('/admin/shopping/delete-priceImg',{
+      			method:"post",
+      			body: JSON.stringify(checkArr),
+      			 headers:{
+      			    'Content-Type': 'application/json'
+      			  }
+         	}).then(res => {
+         		alert('삭제가 완료되었습니다.');
+         		location.replace(location.href);
+         	})
+         		
+      	
+      	}
 	
 	 
 	</script>

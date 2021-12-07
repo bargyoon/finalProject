@@ -109,7 +109,7 @@
 		d.dt_idx
 		,f.save_path, max(f.rename_file_name) RENAME_FILE_NAME from
 		product p join prd_detail d on(p.prd_idx = d.prd_idx)
-		join file_info f on (f.type_idx = p.prd_idx)
+		left join file_info f on (f.type_idx = p.prd_idx)
 
 		<where>
 			<if test="commandMap.state != 'all'">
@@ -240,7 +240,7 @@
 		,f.save_path,
 		max(f.rename_file_name) RENAME_FILE_NAME from product p join
 		prd_detail d on(p.prd_idx = d.prd_idx)
-		join file_info f on (f.type_idx = p.prd_idx)
+		left join file_info f on (f.type_idx = p.prd_idx)
 
 		<where>
 			<if test="state != 'all'">
@@ -279,8 +279,8 @@
 	
 	<select id="selectItemCommentList" resultType="map">
 	select * from 
-	(select rownum rnum , name, prd_idx, order_idx, rv_idx, rating, type, user_idx, user_name, reg_date, recommand, state , rv_content from
-	(select p.name, p.prd_idx, o.order_idx,r.rv_idx, r.rating, r.type,r.user_idx, m.user_name, r.reg_date, r.recommand,r.state,r.rv_content
+	(select rownum rnum , name, prd_idx, order_idx, rv_idx, rating, type, user_idx, user_name, reg_date, recommand, state , rv_content, order_num from
+	(select p.name, p.prd_idx, o.order_idx,r.rv_idx, r.rating, r.type,r.user_idx, m.user_name, r.reg_date, r.recommand,r.state,r.rv_content, o.order_num
 	from review r join "USER" m on(r.user_idx = m.user_idx)
 	join product p on (r.prd_idx = p.prd_idx) 
 	join "ORDER" o on(r.order_idx =  o.order_idx) 
@@ -297,18 +297,32 @@
 	<select id="selectQnAListCnt" resultType="java.lang.Integer">
 	select count(*) from 
 	
-	(select p.name, m.user_name, q.reg_date, q.is_answer, q.context, q.title, q.type, q.tell, q.qna_idx
+	(select p.name, m.user_name, q.reg_date, q.is_answer, q.context, q.title, q.type, q.tell, q.qna_idx,q.aw_context
 	from qna q join "USER" m on(q.user_idx = m.user_idx) join product p on(p.prd_idx = q.prd_idx) left join "ORDER" o on(q.order_idx = o.order_idx) 
-	
+	<where>
+	<if test="state!='all'">
+	is_answer = #{state}
+	</if>
+	<if test="keyword != null">
+	and (m.user_name like '%'||#{keyword}||'%' or p.name like '%'||#{keyword}||'%' or q.context like '%'||#{keyword}||'%' or q.title like '%'||#{keyword}||'%')
+	</if>
+	</where>
 	)
 	</select>
 	
 	<select id="selectQnAList"  resultType="map">
 	select * from 
-	(select rownum rnum, name, user_name, reg_date, is_answer, context, title, type, tell, qna_idx from
-	(select p.name name, m.user_name, q.reg_date, q.is_answer, q.context, q.title, q.type, q.tell, q.qna_idx
+	(select rownum rnum, name, user_name, reg_date, is_answer, context, title, type, tell, qna_idx, aw_context from
+	(select p.name name, m.user_name, q.reg_date, q.is_answer, q.context, q.title, q.type, q.tell, q.qna_idx, q.aw_context
 	from qna q join "USER" m on(q.user_idx = m.user_idx) join product p on(p.prd_idx = q.prd_idx) left join "ORDER" o on(q.order_idx = o.order_idx) 
-	
+	<where>
+	<if test="commandMap.state!='all'">
+	is_answer = #{commandMap.state}
+	</if>
+	<if test="commandMap.keyword != null">
+	and (m.user_name like '%'||#{commandMap.keyword}||'%' or p.name like '%'||#{commandMap.keyword}||'%' or q.context like '%'||#{commandMap.keyword}||'%' or q.title like '%'||#{commandMap.keyword}||'%')
+	</if>
+	</where>
 	)) where rnum between ${((pageUtil.curPage-1) * pageUtil.cntPerPage) + 1} and ${pageUtil.curPage * pageUtil.cntPerPage}
 	</select>
 	

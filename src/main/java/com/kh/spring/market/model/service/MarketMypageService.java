@@ -41,6 +41,7 @@ public interface MarketMypageService {
 	//review 등록
 	void insertReview(List<MultipartFile> mfs, Review review);
 	void updateIsReview(int orderIdx);
+	void updateReserveByReview(Member member);
 	
 	//prdIdx 업데이트
 	void updatePrdIdx(int orderIdx);

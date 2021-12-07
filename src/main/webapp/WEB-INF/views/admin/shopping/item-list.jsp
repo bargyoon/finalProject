@@ -161,11 +161,11 @@
 							</div>
 
 							<div class="table-responsive">
-								<form method="post">
+								<div>
 									<table class="table mb-0">
 										<thead class="thead-dark">
 											<tr>
-												<th><input type="checkbox" id="mainCheckbox" /></th>
+												<th><input type="checkbox" id="mainCheckbox chk_all" /></th>
 												<th scope="col">NO</th>
 												<th scope="col">상품명</th>
 												<th scope="col">판매가</th>
@@ -181,7 +181,7 @@
 												varStatus="status">
 												<tr>
 													<td><label class="mt-3"> <input
-															type="checkbox" class="listCheckbox" /> <span
+															type="checkbox" class="listCheckbox" value="${data.DT_IDX }" /> <span
 															class="checkmark"></span>
 													</label></td>
 													<td>${data.RNUM}</td>
@@ -228,98 +228,23 @@
 
 
 													<td>${data.PO_STOCK }</td>
-													<td>${data.REG_DATE}</td>
+													<td><fmt:formatDate
+															pattern="yyyy-MM-dd hh:mm:ss"
+															value="${data.REG_DATE}" /></td>
 
 												</tr>
 											</c:forEach>
-											<tr>
-												<td><label class="mt-3"> <input type="checkbox"
-														class="listCheckbox" /> <span class="checkmark"></span>
-												</label></td>
-												<td>02</td>
-												<td><a><img
-														src="https://cdn.imweb.me/thumbnail/20180305/5a9cea9e49044.png"></a>
-													<div class="d-inline-block">
-														<a href="#">화장품</a>
-													</div></td>
-												<td>10000원</td>
-												<td>4</td>
-												<td class="nav-item dropdown" href="" data-toggle="dropdown"
-													aria-haspopup="true" aria-expanded="false"><span>반품중</span><i
-													class="m-r-10 mdi mdi-chevron-down ml-2"> </i>
-													<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-														<a class="dropdown-item" href="#">Action</a> <a
-															class="dropdown-item" href="#">Another action</a>
-														<div class="dropdown-divider"></div>
-														<a class="dropdown-item" href="#">Something else here</a>
-													</div></td>
-
-												<td>4</td>
-												<td>4</td>
-
-											</tr>
-											<tr>
-												<td><label class="mt-3"> <input type="checkbox"
-														class="listCheckbox" /> <span class="checkmark"></span>
-												</label></td>
-												<td>03</td>
-												<td><a><img
-														src="https://cdn.imweb.me/thumbnail/20180305/5a9cea9e49044.png"></a>
-													<div class="d-inline-block">
-														<a href="#">화장품</a>
-													</div> <span class="badge badge-danger">SALE</span></td>
-												<td>10000원</td>
-												<td>4</td>
-												<td class="nav-item dropdown" href="" data-toggle="dropdown"
-													aria-haspopup="true" aria-expanded="false"><span>반품중</span><i
-													class="m-r-10 mdi mdi-chevron-down ml-2"> </i>
-													<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-														<a class="dropdown-item" href="#">Action</a> <a
-															class="dropdown-item" href="#">Another action</a>
-														<div class="dropdown-divider"></div>
-														<a class="dropdown-item" href="#">Something else here</a>
-													</div></td>
-
-												<td>4</td>
-												<td>4</td>
-
-											</tr>
-											<tr>
-												<td><label class="mt-3"> <input type="checkbox"
-														class="listCheckbox" /> <span class="checkmark"></span>
-												</label></td>
-												<td>04</td>
-												<td><a><img
-														src="https://cdn.imweb.me/thumbnail/20180305/5a9cea9e49044.png"></a>
-													<div class="d-inline-block">
-														<a href="#">화장품</a>
-													</div></td>
-												<td>10000원</td>
-												<td>4</td>
-												<td class="nav-item dropdown" href="" data-toggle="dropdown"
-													aria-haspopup="true" aria-expanded="false"><span>반품중</span><i
-													class="m-r-10 mdi mdi-chevron-down ml-2"> </i>
-													<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-														<a class="dropdown-item" href="#">Action</a> <a
-															class="dropdown-item" href="#">Another action</a>
-														<div class="dropdown-divider"></div>
-														<a class="dropdown-item" href="#">Something else here</a>
-													</div></td>
-
-												<td>4</td>
-												<td>4</td>
-
-											</tr>
+											
 										</tbody>
 									</table>
 
 									<div class="border-top">
 										<div class="card-body">
-											<button class="btn-secondary ">submit</button>
+											<button class="btn btn-secondary " onclick="deleteCheckList('shopping/delete-prd')">삭제</button>
 											<%@ include file="/WEB-INF/views/admin/include/paging.jsp"%>
 										</div>
 									</div>
-								</form>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -387,7 +312,12 @@
     		
  	
  	}
-		
+	
+	
+	
+	
+	
+
 
 	   
 	</script>

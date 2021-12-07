@@ -30,12 +30,12 @@
 			</div>
 			<div class="px-lg-5 mt-5 mx-5 pt-2" style="display: flex; justify-content: space-between; min-width: 20%">
 				<div class="mt-5" style="display: flex; flex-direction: column;">
-					<i class="fas fa-coins py-2" style="font-size: 1.5rem;"></i>
+					<a href="/market/mypage/acc-money"><i class="fas fa-coins py-2" style="font-size: 1.5rem;"></i></a>
 					<p class="fw-normal mt-2">적립금</p>
 					<p style="font-size: 1.3rem;">${memberInfo.saveMoney}</p>
 				</div>
 				<div class="mt-5" style="display: flex; flex-direction: column;">
-					<i class="fas fa-ticket-alt py-2" style="font-size: 1.5rem"></i>
+					<a href="/market/mypage/coupon-list"><i class="fas fa-ticket-alt py-2" style="font-size: 1.5rem"></i></a>
 					<p class="fw-normal mt-2">쿠폰</p>
 					<p style="font-size: 1.3rem;">${couponCnt}장</p>
 				</div>
@@ -52,8 +52,8 @@
 					<li><a href="/market/mypage">주문 내역 조회</a></li>
 					<li><a href="/market/mypage/review/review-list2" style="color: black">구매후기</a></li>
 					<li><a href="/market/mypage/cart">장바구니</a></li>
-					<li><a href="#!">상품문의</a></li>
 					<li><a href="/market/mypage/address-list">주소록 관리</a></li>
+					<li><a href="/market/mypage/enquiry/enquiry-list">구매상품문의</a></li>
 					<li><a href="/market/mypage/enquiry/faq?type=1">FAQ</a></li>
 				</ul>
 			</div>
@@ -85,7 +85,7 @@
 			</div>
 			
 			<form action="/market/mypage/review/upload/${reviewDetail.ORDER_IDX}" method="post" 
-				enctype="multipart/form-data" onsubmit="return minLengthCheck(this);">
+				enctype="multipart/form-data" onsubmit="return submitCheck(this);">
 				<div class="d-flex pt-2">
 					<p class="label">
 						제품에 대해 나의 별점은 ?<br>
@@ -111,12 +111,13 @@
 						<p class="ft-SBAggroM mb-1">상품 사진 후기 작성 예시</p>
 						<ul class="px-lg-4" style="font-size: 14px;">
 							<li>또렷하게 보이도록 상품 전체를 직접 촬영한 사진을 등록해야 합니다.</li>
-							<li>사진은 최대 5개까지 업로드가 가능합니다.</li>
+							<li>사진은 최대 3개까지 업로드가 가능합니다.</li>
 						</ul>
-						<input id="input_img" type="file" name="files" accept="image/*" multiple required="required">
+						<input id="input_img" type="file" name="files" class="image"
+							accept="image/*" multiple required="required" onchange="check()">
 					</div>
 				</div>
-				<p>업로드 사진 미리보기는 최대 3개만 보여집니다.</p>
+				<p>업로드 사진 미리보기</p>
 				<div class="pb-3" id="preview_imgs"></div> <!-- 업로드한 사진 -->
 				<hr>
 				<p>상품에 대한 평가를 20자 이상 남겨주세요.</p>
@@ -159,7 +160,7 @@
 				}
 			});
 				
-			function minLengthCheck(i) {
+			function submitCheck(i) {
 				
 			    var content = document.getElementById("inputContent");
 			    if(content.value.length < 20) {
@@ -174,8 +175,34 @@
 					alert("필수 체크 요소를 확인해주세요.");
 				     return false;
 				  }
+			    
+			    var file = document.getElementById("input_img");
+			    if(!file){
+			    	alert("사진을 첨부해주세요.");
+			    	return false;
+			    }
 			}
+			
+			//파일 개수 제한
+			function check(){
+				
+				var x = document.getElementById("input_img");
+				var txt = "";
+				if ('files' in x) {
+				    if (x.files.length > 3) {
+				        alert("파일 개수가 초과되었습니다.");
+				        document.getElementById("input_img").value = "";
+				        return;
+				    }
+				}			
+				if( $("#input_img").val() == "" || $("#input_img").val() == null ){
+					$(".image").remove();
+					
+				}
+			}
+		
 	</script>
+
 
 
 </body>

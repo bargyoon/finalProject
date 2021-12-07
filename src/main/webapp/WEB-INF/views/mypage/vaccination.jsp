@@ -134,5 +134,8 @@
     <i class="fas fa-arrow-alt-circle-up"></i>
 </aside>
 
+<%@ include file="/WEB-INF/views/include/footer.jsp"%>
+<%@ include file="/WEB-INF/views/include/mainJs.jsp"%>
+
 </body>
 </html>

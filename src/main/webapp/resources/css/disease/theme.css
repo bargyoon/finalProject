@@ -17394,13 +17394,13 @@ pre, code {
 section {
   position: relative;
   padding-top: 4rem;
-  padding-bottom: 4rem;
+  /* padding-bottom: 4rem; */
 }
 
 @media (min-width: 992px) {
   section {
-    padding-top: 7.5rem;
-    padding-bottom: 7.5rem;
+    padding-top: 2rem;
+    /* padding-bottom: 7.5rem; */
   }
 }
 
@@ -18263,7 +18263,7 @@ ul {
   position: relative;
 
   max-width: 80%;
-  height: 100vh;
+ /*  height: 100vh; */
   -webkit-transform-style: preserve-3d;
   transform-style: preserve-3d;
 
@@ -18272,7 +18272,7 @@ ul {
 .card-3d-wrapper {
   width: 100%;
   height: 100%;
-  position:absolute; 
+  /* position:absolute;  */
  
   top: 0;
   left: 0;  
@@ -18288,7 +18288,7 @@ ul {
   background-position: bottom center;
   background-repeat: no-repeat;
   background-size: 300%;
-  position: absolute;
+  /* position: absolute; */
   border-radius: 6px;
   left: 0;
   top: 0;
@@ -18308,3 +18308,9 @@ ul {
 }
 
 /*# sourceMappingURL=theme.css.map */
+@media (min-width: 768px) {
+  section {
+    padding: 0;
+    padding-top: 150px;
+  }
+}

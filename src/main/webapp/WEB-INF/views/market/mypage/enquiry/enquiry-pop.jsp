@@ -4,7 +4,6 @@
 <head>
 <%@ include file="/WEB-INF/views/include/market/mypage-head.jsp"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-
 <style>
             div#wrapper {
                 width : 1000px;
@@ -12,10 +11,12 @@
                 margin : 0 auto;
                 text-align: center;
             }
+            
 </style>
        
 </head>
 <body>
+
 	<div class="orderList-wrapper">
 		<div class="card-body">
 		<div class="table-responsive mt-2 ">
@@ -28,7 +29,7 @@
 			        <col />
 			    </colgroup>
 				<thead>
-				    <tr>
+				    <tr class="enquiry-order">
 				        <th colspan="1"></th>
 				        <th>주문번호</th>
 				        <th>상품명</th>

@@ -5,7 +5,7 @@
 <head>
 <%@ include file="/WEB-INF/views/include/head.jsp" %>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>똑dog한 집사들</title>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <script type="text/javascript" src="${contextPath}/resources/js/hospital/jquery.js"></script>
@@ -132,7 +132,7 @@ float: left;
 }
 
 .equipTitle{
-margin: 35px 20px 5px 10px;
+margin: 35px 20px 5px 0px;
 color: inherit;
 font-size:22px;
 border:thick;
@@ -161,14 +161,17 @@ target:_blank;
     <div class="body_section">
         <div class="main2">
         
-        <h1>동물병원의 정의</h1>
+        <h1>동물병원 정의</h1>
         <p class="sec" style="font-size: 21px;  display: contents;">
         사람을 제외한 동물의 치료를 목적으로 하는 병원. 보통은 동물병원이라는 명칭을 사용하지만 먼 과거 개업한 점포나 일부 도서지역에서는 ‘가축병원’이라는 이름을 사용하는 경우도 더러 있다.
+        동물의 진료를 목적으로 수의사가 개설한 병원 또는 진료소. 가축병원이라고도 한다. 일반 병원과는 달리 진료과목에 대한 규정을 두지 않고 동물전반에 걸쳐 질병의 진료·수술, 보건위생지도 등을 행한다.  
+		대상이 되는 범위가 동물전반(개,고양이,작은 새,물고기,소,말,돼지,양,염소)일 때는 동물병원이라 하고, 애완동물 특히 개 또는 고양이가 대상 일 때는 애완동물병원, 소,말 또는 돼지와 같은 큰 동물 특히 산업가축이라 불리는 동물을 전문으로 하는 경우는 가축병원이라고 따로 분류한다.
+		애완동물의 진료에는 섬세한 배려가 요구되고 기술적으로도 동물의 개성에 맞는 진료를 하도록 전문화되고 있다. 특히 사람이나 동물에게 치명적인 광견병이나 일반 가축의 법정전염병이 발생하면 수의사나 가축의 주인은 도지사,시장,군수에게 이 사실을 신고하여 가축방역관의 지시에 따라야 한다.
         </p><br><br><br><br>
         
         
         
-          <h1>동물병원의 종류</h1>
+          <h1>동물병원 종류</h1>
           <div style="position:relative;">
 <div class="col"><a href="https://vmth.snu.ac.kr/" ><img src="${contextPath}/resources/img/hospital/co1.jpg" style="width:200px; height:100px; margin-right: 30px;"></a><a href="https://vmth.snu.ac.kr/" class="col1">서울대학교</a></div>
 <div class="col"><a href="http://vmth.kangwon.ac.kr/" ><img src="${contextPath}/resources/img/hospital/co2.jpg" style="width:200px; height:100px; margin-right: 30px;"></a><a href="https://vmth.snu.ac.kr/" class="col1">강원대학교</a></div>
@@ -190,11 +193,11 @@ target:_blank;
 일반적인 감기나 중성화, 예방접종의 경우에는 개인병원에서도 접수가 가능하고 파보장염 같은 치명상을 줄 수 있는 범위내에서는 종합병원을 권장합니다.</p><br><br><br><br>
        
         
-         <h1>동물병원의 검사 장비</h1><br>
+         <h1>동물병원 검사 장비</h1><br>
          <div >
-	          <img src="${contextPath}/resources/img/hospital/xray.jpg" style="width:auto; height:280px; margin-left:30px">
+	          <img src="${contextPath}/resources/img/hospital/xray.jpg" style="width:auto; height:280px; margin-left:0px">
 	          <img src="${contextPath}/resources/img/hospital/xray4.jpg" style="width:auto; height:280px;"><br>
-	           <div class="equipTitle">방사선검사 . Radiography</div><br>
+	           <div class="equipTitle"><h4>방사선검사 . Radiography</h4></div><br>
 	           <div class="equipment">
 	           
 X-ray는 환자의 질병이 무엇인지 Screening 하는데 있어서 아주 간단하고 기본이 되며 비침습적이면서도 많은 정보를 제공해주는 훌륭한 영상장비입니다.
@@ -202,24 +205,24 @@ X-ray는 환자의 질병이 무엇인지 Screening 하는데 있어서 아주 �
 이와 같이, X-ray 촬영만으로도 다양한 질환들에 대해 어느 정도 감별 진단목록을 내릴 수 있다는 장점을 갖고 있으며, 헬릭스는 Digital X-ray장비를 구비하여 이와 같은 진단과정을 진행하고 있습니다.
 	           
 	           </div><br><br><br><br>
-	          <img src="${contextPath}/resources/img/hospital/wave1.png" style="width:auto; height:280px; margin-left:30px">
+	          <img src="${contextPath}/resources/img/hospital/wave1.png" style="width:auto; height:280px; margin-left:0px">
 	          <img src="${contextPath}/resources/img/hospital/wave2.jpg"style="width:auto; height:280px;"><br>
-	          <div class="equipTitle">초음파 . Echocardiography</div><br>
+	          <div class="equipTitle"><h4>초음파 . Echocardiography</h4></div><br>
 	          <div class="equipment">
 최근 반려동물의 수가 급격히 늘어나고 보호자의 환자에 대한 관리수준이 높아지면서, 선천성 심장병 뿐만 아니라 노령성 심질환으로 내원하는 반려동물의 수가 폭발적으로 증가하고 있습니다. 또한 1살령 미만의 어린 환자들에서도 선천성 심장기형 등으로 수술적 치료를 요하는 경우도 있습니다.
 이 모든 경우 심장초음파는 심장내부의 모습과 주변 대혈관 등의 형태학적∙혈액학적 변화양상을 정확하게 보여주는 영상장비로써, 헬릭스는 이를 통해 원활하고 빠른 진단으로 내∙외과적 처치가 이루어질 수 있도록 노력하고 있습니다.
 	          
 	          </div><br><br><br><br>
-	          <img src="${contextPath}/resources/img/hospital/mri1.jpg" style="width:auto; height:280px; margin-left:30px">
+	          <img src="${contextPath}/resources/img/hospital/mri1.jpg" style="width:auto; height:280px; margin-left:0px">
 	          <img src="${contextPath}/resources/img/hospital/mri2.png" style="width:auto; height:280px;"><br>
-	          <div class="equipTitle">MRI . Magnetic Resonance Imaging</div><br>
+	          <div class="equipTitle"><h4>MRI . Magnetic Resonance Imaging</h4></div><br>
 	          <div class="equipment">
 	          MRI는 뇌수두증이나 뇌종양∙육아종성 & 괴사성수막뇌염∙두경접합부 질환 등 두개내 질환, 디스크탈출∙척수질환 및 병변, 척추골절 그리고, 건파열이나 관절문제 등 근골격계 질환의 평가에 있어서 매우 유용한 영상장비입니다. 최근에는 디스크수술이나 오존치료, 고압산소, Diode laser 등 척추질환에 대한 외∙내과적 치료가 활발히 진행되고 있고, 두개내 종양의 Radiation therapy 등의 시도 또한 이루어지는 추세입니다. 따라서 MRI의 적극적인 활용을 통해 조기진단 후, 다양한 치료방법을 모색하는 것은 무엇보다 중요하다고 할 수 있습니다.
 본원에는 국내에서는 최고 사양이라 할 수 있는 1.5Tesla 장비를 보유하고 있으며, 영상자체의 질을 높일 뿐만 아니라 좀 더 세부적인 감별진단을 내려 내∙외과적 치료가 가능할 수 있도록 최선의 노력을 다하고 있습니다.</div><br><br><br>
-	          <img src="${contextPath}/resources/img/hospital/ct1.jpg" style="width:auto; height:300px; margin-left:30px">
+	          <img src="${contextPath}/resources/img/hospital/ct1.jpg" style="width:auto; height:300px; margin-left:0px">
 	          <img src="${contextPath}/resources/img/hospital/ct2.jpg" style="width:auto; height:300px;">
 	          <img src="${contextPath}/resources/img/hospital/ct3.png" style="width:auto; height:300px;">
-	             <div class="equipTitle">CT . Computed Tomography</div><br>
+	             <div class="equipTitle"><h4>CT . Computed Tomography</h4></div><br>
 	          <div class="equipment">
 	          CT는 X-ray에서 보이는 영상을 3차원적으로, 또한 보다 입체적으로 볼 수 있도록 구현해주는 월등한 영상장비로써 매우 짧은 촬영시간에 비해 보다 많은 정보를 제공해주는 장점이 있습니다.
 무엇보다 폐의 전이성 nodule 등 방사선상에 보이지 않는 5mm이하의 매우 작은 구조물도 구현되며, 흉∙복강∙피부 등의 종양절제시 수술범위의 결정, 복강내 혈관기형, 심장내 혈관기형 등의 평가에 유용합니다. 특히 골절, 골종양 등 뼈 관련 질환의 평가에 있어서는 무엇보다 가장 좋은 장비라고 할 수 있습니다.

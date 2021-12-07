@@ -37,11 +37,11 @@ public interface MarketMypageRepository {
 	//Save Money 목록
 	List<Map<String, Object>> selectReserveList(@Param("userIdx")int userIdx, @Param("state")String state);
 	
-	//Save Money 등록 - 구입시
+	//Save Money 등록 - 리뷰작성시
 	@Insert("INSERT INTO SAVE_HISTORY(SH_IDX, USER_IDX, STATE, TYPE, AMOUNT, order_idx) "
-			+ " VALUES(SC_SH_IDX.NEXTVAL, #{userIdx}, #{state}, #{type}, #{amount}, #{orderIdx})")
+			+ " VALUES(SC_SH_IDX.NEXTVAL, #{userIdx}, 0, #{type}, #{amount}, #{orderIdx})")
 	void insertSaveMoney(SaveHistory saveHistory);
-	//적립금 유형 : 주문(0), 일반후기(2), 사진후기(3), 적립금결제(4), 결제취소(5)
+	//적립방법 type : 주문(0), 일반후기(1), 사진후기(2)
 	
 	//Order List
 	List<Map<String, Object>> selectOrderList(@Param("userIdx")int userIdx, @Param("state")String state, @Param("fromDate")String fromDate, @Param("endDate")String endDate);
@@ -51,7 +51,7 @@ public interface MarketMypageRepository {
 	
 	//update state of ORDER
 	@Update("update \"ORDER\""
-			+ " set update_date = sysdate, state = 'orderCompelte'" //구매 후 일주일이 지나면 구매확정(state=4)
+			+ " set update_date = sysdate, state = 'orderCompelte'" //구매 후 일주일이 지나면 구매확정
 			+ " where order_date+7 <= sysdate")
 	void updateDateAndState();
 	
@@ -60,8 +60,12 @@ public interface MarketMypageRepository {
 	
 	//review 등록
 	void insertReview(Review review);
+
 	@Update("update \"ORDER\" set is_review =1 where order_idx=#{orderIdx}")
 	void updateIsReview(int orderIdx);
+	
+	@Update("update \"USER\" set savemoney = savemoney + #{saveMoney} where user_idx = #{userIdx}")
+	void updateReserveByReview(Member member);
 	
 	//review 사진 등록
 	@Insert("insert into file_info(fl_idx, type_idx, origin_file_name, rename_file_name, save_path)"

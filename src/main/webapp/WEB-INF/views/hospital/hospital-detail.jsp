@@ -3,21 +3,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-<%@ include file="/WEB-INF/views/include/head.jsp" %>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>똑dog한 집사들</title>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <script type="text/javascript" src="${contextPath}/resources/js/hospital/jquery.js"></script>
-<!-- 합쳐지고 최소화된 최신 CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-
-<!-- 부가적인 테마 -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
 
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/proj4js/1.1.0/proj4js-combined.min.js"></script>
   
-<link rel='stylesheet' href="${contextPath}/resources/css/all.css">
 <style type="text/css">
 /* 폰트 어그로 */
 @font-face {
@@ -80,37 +73,34 @@ url(/fonts/NotoSans-Bold.woff2) format('woff2'),
 url(/fonts/NotoSans-Bold.woff) format('woff');
 }
 
-
+body{
+    background-color: rgb(240, 234, 213);
+}
 
 	.name_section{
 	background-color: rgb(240, 234, 213);
-    height: 250px;
+    height: 1100px;
     font-family: 'SBAggroL';
 	}
   .main1{
     height: 200px;
-    margin: 0px 0px 0px 0px; 
   }
   .main_name{
     font-size: 35px;
     height:35%;
-    text-align: center;
+        text-align: center;
   }
   .main_group{
     height:35%;
     font-size: 20px;
-    text-align: center;
+    margin-top:15px;
+        text-align: center;
   }
 
-	.body_section{
-	background-color: rgb(240, 234, 213);
-    height: 1000px;
-    font-family: 'SBAggroL';
-	}
   .main2{
     position: absolute;
-    transform: translate(-25%,5%);
-    left:43%;
+    transform: translate(-25%,10%);
+    left:41%; 
     
   }
   #main_map{
@@ -119,12 +109,12 @@ url(/fonts/NotoSans-Bold.woff) format('woff');
     border:2px solid white;
   }
   #main_content{
-    margin:  50px 0px 0px 80px; 
+    margin:  0px 0px 0px 80px; 
     height:300px;
      width:500px;
   }
   #main_content>div{
-    margin:  30px 0px 0px 0px; 
+    margin:  20px 0px 0px 0px; 
     font-size:18px;
     text-align:center;
   }
@@ -133,66 +123,26 @@ url(/fonts/NotoSans-Bold.woff) format('woff');
 
 
 </style>
+<%@ include file="/WEB-INF/views/include/head.jsp" %>
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
-            <div class="container">
-                <a class="navbar-brand" href="/"><img src="/resources/assets/img/site-logo-and-name.png" alt="..." style="width:280px;height:48px"/></a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-                    Menu
-                    <i class="fas fa-bars ms-1"></i>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarResponsive">
-                    <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0"><hr>
-                       <li class="nav-item"><a class="nav-link" href="#"  style="font-size: 1.5rem;">병원/시설</a>
-	                        	<ul class="navbar-detail" ><hr>
-		                        	<li><a href=#  style="font-size: 1.5rem;">동물병원</a>
-	                        		<li><a href=#  style="font-size: 1.5rem;">편의시설검색</a>
-	                        	</ul>
-	                        </li>	
-	                        <li class="nav-item"><a class="nav-link" href="/disease/index"  style="font-size: 1.5rem;">수술비용</a></li>
-	                        <li class="nav-item"><a class="nav-link" href="/petcare/vaccine/dog"  style="font-size: 1.5rem;">펫케어</a>
-	                       		<ul class="navbar-detail"><hr>
-		                        	<li><a href="/petcare/vaccine/dog"  style="font-size: 1.5rem;">예방접종</a>
-	                        		<li><a href="/petcare/food"  style="font-size: 1.5rem;">금지음식</a>
-	                        		<li><a href="/petcare/action/dog/eyes"  style="font-size: 1.5rem;">행동의미</a>
-	                        	</ul>
-	                        </li>
-	                        <li class="nav-item"><a class="nav-link" href="/board/info"  style="font-size: 1.5rem;">게시판</a>
-	                        	<ul class="navbar-detail"><hr>
-		                        	<li><a href=#  style="font-size: 1.5rem;">정보게시판</a>
-	                        		<li><a href=#  style="font-size: 1.5rem;">고양이</a>
-	                        		<li><a href=#  style="font-size: 1.5rem;">강아지</a>
-	                        		<li><a href=#  style="font-size: 1.5rem;">후기</a>
-	                        		<li><a href=#  style="font-size: 1.5rem;">모임게시판</a>
-	                        		<li><a href=#  style="font-size: 1.5rem;">상담게시판</a>
-	                        	</ul>
-							</li>
-	                        <li class="nav-item"><a class="nav-link" href="/market"  style="font-size: 1.5rem;">마켓</a></li>
-	                        <c:if test="${empty authentication}">
-								<li class="nav-item"><a class="nav-link" href="/member/login"  style="font-size: 1.5rem;">로그인</a></li><hr>
-							</c:if>
-							<c:if test="${not empty authentication}">
-								<li class="nav-item"><a class="nav-link" href="/mypage/my-info"  style="font-size: 1.5rem;">마이페이지</a>
-									<ul class="navbar-detail"><hr>
-									<li><a href="/mypage/my-info"  style="font-size: 1.5rem;">마이페이지</a>
-		                        	<li><a href="/member/logout"  style="font-size: 1.5rem;">로그아웃</a>
-		                        	</ul>
-								</li><hr>
-							</c:if> 
-					</ul>
-                </div>
-            </div>
-        </nav>
-        <section style="padding:0px;">
+
+  <%@ include file="/WEB-INF/views/include/navBar.jsp" %>
+
+
+
+    <section style="padding: 0px;">
     <div class="name_section" >
-      <div class="main1">
-        <div class="main_name"><c:out value='${hospital.bplcNm}'/></div>
-        <div class="main_group"><c:out value='${hospital.lindJobGbnNm} ${hospital.lindPrcbGbnNm}'/></div>
-      </div>
-    </div>
-    <div class="body_section">
+      
         <div class="main2">
+        	<div class="main1">
+		      <div class="main_name"><c:out value='${hospital.bplcNm}'/></div>
+		      <div class="main_group"><c:out value='${hospital.lindJobGbnNm}'/>
+		      <c:if test="${hospital.lindPrcbGbnNm =='없음'}"> </c:if>
+		      <c:if test="${hospital.lindPrcbGbnNm !='없음'}">${hospital.lindPrcbGbnNm}</c:if>
+		      </div>
+		    </div>
+        
             <div id="main_map"></div>
             <div id="main_content">
            	  <div ><i style="color:#A4A4A4"class="fas fa-map-marker-alt"></i></div>

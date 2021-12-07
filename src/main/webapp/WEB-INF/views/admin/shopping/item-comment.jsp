@@ -184,7 +184,7 @@
 							<header class=" comments-header ml-3">
 								<div>
 									<label class="no-margin"> <input type="checkbox"
-										class="all-check" style="vertical-align: middle;"> <span
+										class="all-check" id="chk_all" style="vertical-align: middle;"> <span
 										class="ml-2">구매평 <span class="text-primary"
 											id="review_total_count">${totalCnt}</span></span>
 									</label>
@@ -198,42 +198,42 @@
 								<div style="">
 									<div class="card"
 										style="display: table; border-collapse: collapse; width: 100%;">
-										<c:forEach items="${orderList}" var="orderList">
+										<c:forEach items="${commentList}" var="commentList">
 											<div class="border-bottom"
 												style="display: table-row-group; padding: 20px 30px 20px 0;">
 												<div class="d-table-cell pt-3"
 													style="width: 2%; vertical-align: top;">
-													<label><input type="checkbox"></label>
+													<label><input type="checkbox" class="listCheckbox" value="${commentList.RV_IDX}"></label>
 												</div>
 												<div class="d-table-cell pt-3"
 													style="vertical-align: top; width: 25%;">
 													<div>
-														<a href="#">${orderList.NAME }</a>
+														<a href="#">${commentList.NAME }</a>
 													</div>
 													<div class="d-inline-block">
 														<div
 															class="d-flex small text-warning justify-content-center">
 															<c:forEach var="i" begin="0" step="1"
-																end="${orderList.RATING-1}">
+																end="${commentList.RATING-1}">
 																<i class="fas fa-star"></i>
 															</c:forEach>
 
 
 														</div>
 													</div>
-													<span class="d-inline-block">${orderList.USER_NAME}</span>
+													<span class="d-inline-block">${commentList.USER_NAME}</span>
 													<div class="d-inline-block"></div>
 													<span class="d-inline-block ml-2" style="color: gray;"><fmt:formatDate
 															pattern="yyyy-MM-dd hh:mm:ss"
-															value="${orderList.REG_DATE}" /></span>
-													<div class="pt-2" style="cursor: pointer;" onclick="">${orderList.RV_CONTENT}</div>
+															value="${commentList.REG_DATE}" /></span>
+													<div class="pt-2" style="cursor: pointer;" onclick="">${commentList.RV_CONTENT}</div>
 													<div class="pt-2 pb-3" style="cursor: pointer;" onclick="">추천수
-														${orderList.RECOMMAND}</div>
+														${commentList.RECOMMAND}</div>
 												</div>
 												<div class="d-table-cell board_thumb_wrap"
 													style="padding: 10px; cursor: pointer; width: 65%"
 													onclick="">
-													<c:if test="${orderList.TYPE== 1 }">
+													<c:if test="${commentList.TYPE== 1 }">
 														<div>
 															<c:forEach items="${orderList.files}" var="files">
 																<img src="${files.downloadURL }" class="board_thumb">
@@ -245,15 +245,15 @@
 
 												<div class="d-table-cell text-right"
 													style="vertical-align: middle; width: 10%">
-													<span> <c:if test="${orderList.STATE == '1'}">
+													<span> <c:if test="${commentList.STATE == '1'}">
 															승인됨
-														</c:if> <c:if test="${orderList.STATE == '2'}">
+														</c:if> <c:if test="${commentList.STATE == '2'}">
 															승인거부
 														</c:if>
 													</span>
-													<c:if test="${orderList.STATE == '0'}">
+													<c:if test="${commentList.STATE == '0'}">
 														<select name="state" id="state"
-															onchange="changeState(${orderList.RV_IDX}, this.value, ${orderList.TYPE}, ${orderList.USER_IDX},${orderList.ORDER_IDX})">
+															onchange="changeState(${commentList.RV_IDX}, this.value, ${commentList.TYPE}, ${commentList.USER_IDX},${commentList.ORDER_NUM})">
 															<option value="0" selected>승인대기중</option>
 															<option value="1">승인</option>
 															<option value="2">승인거부</option>
@@ -270,7 +270,7 @@
 
 									<div class="border-top">
 										<div class="card-body">
-											<button class="btn-secondary ">submit</button>
+											<button class="btn btn-secondary " onclick="deleteCheckList('shopping/delete-comment')">삭제</button>
 											<%@ include file="/WEB-INF/views/admin/include/paging.jsp"%>
 										</div>
 									</div>
@@ -326,7 +326,7 @@
 	<!--Custom JavaScript -->
 	<script src="/resources/js/admin/custom.min.js"></script>
 	<!--This page JavaScript -->
-<script src="/resources/js/admin/common/paging.js"></script>
+	<script src="/resources/js/admin/common/paging.js"></script>
 	<script src="/resources/js/admin/common/select-tab.js"></script>
 	<script type="text/javascript">
 	(() =>{
@@ -370,11 +370,11 @@
 	    	
 	    }
 	    
-let changeState = (rvIdx, state, type, userIdx,orderIdx) =>{
+let changeState = (rvIdx, state, type, userIdx, orderNum) =>{
  		
     	return fetch('/admin/shopping/update-review-state',{
  			method:"post",
- 			body: JSON.stringify({rvIdx : rvIdx, state : state, type : type, userIdx: userIdx,orderIdx:orderIdx}),
+ 			body: JSON.stringify({rvIdx : rvIdx, state : state, type : type, userIdx: userIdx, orderNum: orderNum}),
  			 headers:{
  			    'Content-Type': 'application/json'
  			  }

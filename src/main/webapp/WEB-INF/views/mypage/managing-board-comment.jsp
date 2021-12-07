@@ -32,11 +32,11 @@
 		</nav>
 		
 		<div style="margin: 0 auto; width: 800px">
-			<form action="/mypage/delete-board-comment">
+			<div>
 				<table class="table table-hover" style="text-align: center;">
 				  <thead>
 				    <tr>
-				      <th style="width: 5%"><input type="checkbox"></th>
+				      <th style="width: 5%"><input type="checkbox" id="chk_all"></th>
 				      <th scope="col" style="width: 10%">댓글번호</th>
 				      <th scope="col" style="width: 60%">내용</th>
 				      <th scope="col" style="width: 10%">추천수</th>
@@ -46,18 +46,18 @@
 				  <tbody>
 				  	<c:forEach var="comment" items="${commentList}">
 				  	<tr>
-				  		<td><input type="checkbox" name="cmIdx" value="${comment.CM_IDX}"></td>
+				  		<td><input type="checkbox" name="cmIdx" id="cmIdx" class="listCheckbox" value="${comment.CM_IDX}"></td>
 				  		<td>${comment.CM_IDX}</td>
 				  		<td><a href="/board/${comment.CATEGORY}/detail?bdIdx=${comment.BD_IDX}">${comment.CM_CONTENT}</a></td>
-				  		<td>${comment.CM_REG_COUNT}</td>
+				  		<td>${comment.CM_REC_COUNT}</td>
 				  		<td><fmt:formatDate value="${comment.REG_DATE}" pattern="yyyy-MM-dd" /></td>
 				  	</tr>
 				  	</c:forEach>
 				  </tbody>
 				</table>
 				
-				<button type="button" class="btn btn-primary">삭제</button>
-			</form>
+				<button type="button" class="btn btn-primary" onclick="deleteComment()">삭제</button>
+			</div>
 			
 			<!-- 페이징기능 -->
 			<div style="display:flex; justify-content:center;">
@@ -99,6 +99,15 @@
 		</div>
 	</div>
 </section>
+
+<aside class="fixed-up-btn btn badge-rank" id="up_btn" type="button" onclick="window.scrollTo(0,0)" style="float: right;">
+    <i class="fas fa-arrow-alt-circle-up"></i>
+</aside>
+	
+<%@ include file="/WEB-INF/views/include/footer.jsp"%>
+<%@ include file="/WEB-INF/views/include/mainJs.jsp"%>
+	
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 
 <script type="text/javascript">
 	/* 검색기능 */
@@ -142,13 +151,58 @@
      	 location.href = location.pathname + '?' + newParam
     }
 	
-</script>
-
-<aside class="fixed-up-btn btn badge-rank" id="up_btn" type="button" onclick="window.scrollTo(0,0)" style="float: right;">
-    <i class="fas fa-arrow-alt-circle-up"></i>
-</aside>
+	let deleteComment = () =>{
+		 let flg = confirm("정말 삭제하시겠습니까?")
+		 if(flg){
+			let cmIdxArr = [];
+			
+			document.querySelectorAll("#cmIdx").forEach(e =>{
+				if(e.checked) cmIdxArr.push(e.value);
+			});
+			
+		 return fetch('/mypage/delete-board-comment',{
+	 			method:"post",
+	 			body: JSON.stringify(cmIdxArr),
+				headers:{
+					'Content-Type': 'application/json'
+				}
+		 }).then(res => {
+	    		alert('삭제되었습니다.');
+	    		location.replace('/mypage/managing-board-comment');
+	    	})
+		}
+	}
 	
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+	/* checkbox 일괄선택 함수 */
+	(() =>{
+		var total = document.querySelectorAll(".listCheckbox").length;
+		var checked = 0;
+		
+		document.querySelector("#chk_all").addEventListener("click" , e =>{
+			if(e.target.checked){
+				checked = total;
+				document.querySelectorAll(".listCheckbox").forEach(t =>{
+					t.checked = true;
+				})
+			}else{
+				checked = 0;
+				document.querySelectorAll(".listCheckbox").forEach(t =>{
+					t.checked = false;
+				})
+			}
+		})
+		
+		document.querySelectorAll(".listCheckbox").forEach(e =>{
+			e.addEventListener("click", t=>{
+				if(e.checked) checked++; else checked--;
+				
+				if(checked != total) document.querySelector("#chk_all").checked= false;
+				else document.querySelector("#chk_all").checked= true;
+			})
+		})
+	})();
+	
+</script>
 
 </body>
 </html>
