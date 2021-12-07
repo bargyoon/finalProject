@@ -22,7 +22,7 @@
             	$('#password_accord').css("display","inline-block"); 
                 $('#password_discord').css("display", "none");             
             }
-      });
+      }); 
       
       
 function updatePassword(){
