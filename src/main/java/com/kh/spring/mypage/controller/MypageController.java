@@ -140,6 +140,11 @@ public class MypageController {
 			) {
 		int userIdx = certifiedUser.getUserIdx();
 		
+		System.out.println();
+		System.out.println(page);
+		System.out.println(keyword);
+		System.out.println();
+		
 		MypageSearchSet searchSet = new MypageSearchSet();
 		searchSet.setUserIdx(userIdx);
 		searchSet.setKeyword(keyword);
