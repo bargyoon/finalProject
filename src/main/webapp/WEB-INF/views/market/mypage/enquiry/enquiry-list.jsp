@@ -32,12 +32,12 @@
 			</div>
 			<div class="px-lg-5 mt-5 mx-5 pt-2" style="display: flex; justify-content: space-between; min-width: 20%">
 				<div class="mt-5" style="display: flex; flex-direction: column;">
-					<i class="fas fa-coins py-2" style="font-size: 1.5rem;"></i>
+					<a href="/market/mypage/acc-money"><i class="fas fa-coins py-2" style="font-size: 1.5rem;"></i></a>
 					<p class="fw-normal mt-2">적립금</p>
 					<p style="font-size: 1.3rem;">${memberInfo.saveMoney}</p>
 				</div>
 				<div class="mt-5" style="display: flex; flex-direction: column;">
-					<i class="fas fa-ticket-alt py-2" style="font-size: 1.5rem"></i>
+					<a href="/market/mypage/coupon-list"><i class="fas fa-ticket-alt py-2" style="font-size: 1.5rem"></i></a>
 					<p class="fw-normal mt-2">쿠폰</p>
 					<p style="font-size: 1.3rem;">${couponCnt}장</p>
 				</div>
@@ -53,9 +53,9 @@
 					<li><hr class="dropdown-divider" /></li>
 					<li><a href="/market/mypage">주문 내역 조회</a></li>
 					<li><a href="/market/mypage/review/review-list2">구매후기</a></li>
-					<li><a href="/market/mypage/cart">장바구니</a></li>
-					<li><a href="#!">상품문의</a></li>
+					<li><a href="/market/mypage/cart">장바구니</a></li>					
 					<li><a href="/market/mypage/address-list">주소록 관리</a></li>
+					<li><a href="/market/mypage/enquiry/enquiry-list" style="color: black;">구매상품문의</a></li>
 					<li><a href="/market/mypage/enquiry/faq?type=1">FAQ</a></li>
 				</ul>
 			</div>
@@ -83,7 +83,8 @@
 							<div class="n-datepicker">
 								<input type="date" id="endDate" name="endDate">
 							</div>
-							<button type="submit" onclick="search();">조회</button>
+							<button class="eq-search" type="submit" onclick="search();">조회</button>
+							<a href="/market/mypage/enquiry/enquiry-form" class="eq-add-btn btn">문의 작성</a>
 					</form>
 				</div>
 			
@@ -91,10 +92,10 @@
 			<table class="n-table table-col">
 				<colgroup>
 					<col style="width: auto">
-					<col style="width: 45%">
-					<col style="width: 10%">
-					<col style="width: 10%">
-					<col style="width: 10%">
+					<col style="width: 36%">
+					<col style="width: 13%">
+					<col style="width: 13%">
+					<col style="width: 13%">
 				</colgroup>
 				<thead>
 					<tr>
@@ -141,28 +142,25 @@
 					</tr>
 					
 					<!-- 문의 내용 -->
-					<tr class="enquiry_context eq-click" id="eq-click-${enquiryList.RNUM}">
-						<td class="text-start" colspan="3">${enquiryList.CONTEXT}</td>
-						<c:if test="${enquiryList.IS_ANSWER eq 0}">
+					<tr style="display: none;" class="enquiry_context eq-click" id="eq-click-${enquiryList.RNUM}">
+						<td class="text-start" colspan="3">${enquiryList.CONTEXT}</td>					
 						<td>&nbsp;</td>
-						</c:if>
-						
-					<!-- 관리자 답변 -->
-						<c:if test="${enquiryList.IS_ANSWER eq 1}">
-						<td>스토어 담당자<br>윤수환</td>
-							<td colspan="3" class="text-start">
-								<p class="enquiry-answer" style="line-height: 2rem;">
-									안녕하세요 똑Dog한 집사들 장터 고객센터 입니다.<br>
-									먼저, 이용에 불편을 끼쳐 드린 점 진심으로 사과드립니다.<br>
-									확인결과 고객님의 상품은 내년에 도착합니다.<br>
-									다른 도움이 필요하시다면 고객센터(1234-4567)로 문의 부탁드립니다.<br>
-									언제나 고객님의 편안한 쇼핑을 위하여 최선을 다하는 똑Dog한 집사들의 장터가 되겠습니다.<br>
-									감사합니다.
-								</p>
-							</td>
-							<td style="font-size: 14px;">${enquiryList.AW_REG_DATE}</td>
-						</c:if>
-					</tr>				
+						<td>&nbsp;</td>												
+					</tr>	
+					
+					<!-- 관리자 답변 -->		
+					<c:if test="${enquiryList.IS_ANSWER eq 1}">
+					<tr style="display: none;" id="eq-answer-${enquiryList.RNUM}">
+							
+						<td>스토어 담당자<br>관리자 이름</td>
+						<td colspan="3" class="text-start">
+							<p class="enquiry-answer" style="line-height: 2rem;">
+								${enquiryList.AW_CONTEXT}
+							</p>
+						</td>
+						<td style="font-size: 14px;">${enquiryList.AW_REG_DATE}</td>					
+					</tr>	
+					</c:if>		
 				</tbody>
 				</c:forEach>
 			</table>

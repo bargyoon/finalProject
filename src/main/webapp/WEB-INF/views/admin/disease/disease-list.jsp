@@ -105,7 +105,7 @@
 									<table class="table mb-0">
 										<thead class="thead-dark">
 											<tr>
-												<th style="width:5%"><input type="checkbox" id="mainCheckbox" /></th>
+												<th style="width:5%"><input type="checkbox" id="chk_all" /></th>
 												<th scope="col" style="width:5%">NO</th>
 												<th scope="col" style="width:10%">사진</th>
 												<th scope="col" style="width:10%">병명</th>

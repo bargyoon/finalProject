@@ -41,10 +41,12 @@
 				<p class="prd-name mb-2" style="font-size: 23px; font-weight: bold;"><c:out value="${prdInfo.name}"/></p>
 				<input type="hidden" id="prd-name" value="${prdInfo.name}">
 				<div class="d-flex small text-warning pb-1">
-					<c:forEach var="i" begin="0" step="1" end="${prdInfo.rating-1}">
-						<i class="fas fa-star"></i>
-					</c:forEach>
-					<button class="review-btn" type="button" onclick="focusReview()"><c:out value="(${reviews.size()})"/></button>
+					<c:if test="${prdInfo.rating ne 0}">
+						<c:forEach var="i" begin="0" step="1" end="${prdInfo.rating-1}">
+							<i class="fas fa-star"></i>
+						</c:forEach>
+						<button class="review-btn" type="button" onclick="focusReview()"><c:out value="(${reviews.size()})"/></button>
+					</c:if>
 				</div>
 				<div class="d-flex justify-content-between mt-2">
 					<p style="font-size: 18px;"><fmt:formatNumber value="${prdInfo.price}"/></p>
@@ -324,7 +326,7 @@
 
 	<%@ include file="/WEB-INF/views/include/market/footer.jsp"%>
 
-        <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.8.js"></script>
+    <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.8.js"></script>
 	<script type="text/javascript" src="${contextPath}/resources/js/market/shop/prd-detail.js"></script>
 	<script type="text/javascript" src="${contextPath}/resources/js/market/slick/slick.js"></script>
 	<script type="text/javascript" src="${contextPath}/resources/js/market/slick/main-slick.js"></script>

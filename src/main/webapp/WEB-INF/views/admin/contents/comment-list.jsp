@@ -144,7 +144,7 @@
 						<div class="card">
 							<div class="card-header">
 								<header>
-									<input type="checkbox" class="all-check"
+									<input type="checkbox" class="all-check" id="chk_all"
 										style="vertical-align: middle;"> <span class="ml-2">전체
 										댓글 <span class="text-primary">${totalCnt}</span>
 									</span> <span class="float-right"> <select class="form-control"
@@ -177,7 +177,7 @@
 											<c:when test="${comment.CM_TYPE == 0 }">
 												<div class="d-flex flex-row comment-row">
 													<div class="p-2">
-														<label><input type="checkbox"></label>
+														<label><input type="checkbox" class="listCheckbox"></label>
 													</div>
 													<div class="comment-text active w-100">
 														<h6 class="font-medium">

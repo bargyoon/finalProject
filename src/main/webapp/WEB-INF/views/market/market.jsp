@@ -13,23 +13,20 @@
 	<%@ include file="/WEB-INF/views/include/market/market-nav.jsp"%>
 	
 	<!-- Header-->
-	<header class="slick_test2 bg-dark py-5" style="margin-top: 3.5rem; min-height: 30rem;">
-		<div class="px-4 px-lg-5 my-5">
+	<header class="slick_test2" style="margin-top: 3.5rem; min-height: 30rem;">
+		<div class="">
 			<div class="text-center text-white">
-				<h1 class="display-4 fw-bolder">기획전 1</h1>
-				<p class="lead fw-normal text-white-50 mb-0">With this shop hompeage template</p>
+				<img src="/resources/img/market/main4.gif" alt="..." style="width: 100%; max-width: 100%; height: auto; margin-top:4.5rem"/>
 			</div>
 		</div>
-		<div class="px-4 px-lg-5 my-5">
+		<div class="">
 			<div class="text-center text-white">
-				<h1 class="display-4 fw-bolder">기획전 2</h1>
-				<p class="lead fw-normal text-white-50 mb-0">With this shop hompeage template</p>
+				<img src="/resources/img/market/main2.png" alt="..." style="width: 100%; max-width: 100%; height: auto; margin-top:4.5rem"/>
 			</div>
 		</div>
-		<div class="px-4 px-lg-5 my-5">
+		<div class="">
 			<div class="text-center text-white">
-				<h1 class="display-4 fw-bolder">기획전 3</h1>
-				<p class="lead fw-normal text-white-50 mb-0">With this shop hompeage template</p>
+				<img src="/resources/img/market/main3.gif" alt="..." style="width: 100%; max-width: 100%; height: auto; margin-top:4.5rem"/>
 			</div>
 		</div>
 	</header>

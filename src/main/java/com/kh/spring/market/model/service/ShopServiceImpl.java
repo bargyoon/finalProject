@@ -124,6 +124,8 @@ public class ShopServiceImpl implements ShopService{
 	
 	public void insertProduct(List<MultipartFile> mainImg, List<MultipartFile> specImg,
 			List<Map<String, Object>> commandList, Product product) {
+		product.setCouponAvail((product.getCouponAvail() == null)? "n" : product.getCouponAvail());
+		product.setSmAvail((product.getSmAvail() == null)? "n" : product.getSmAvail());
 		shopRepository.insertProduct(product);
 		FileUtil fileUtil = new FileUtil();
 		for (MultipartFile multipartFile : mainImg) {
@@ -246,20 +248,15 @@ public class ShopServiceImpl implements ShopService{
 
 	public boolean insertOrder(List<Order> orderInfos) {
 		for (Order order : orderInfos) {
-			if(!shopRepository.insertOrder(order)) {
-				return false;
-			}
-		}
-		if(!shopRepository.insertSmHistory(orderInfos.get(0))||!shopRepository.updateUserMinusSm(orderInfos.get(0))) {
-			return false;
-		}
-		
-		if(orderInfos.get(0).getUcIdx() != 0) {
-			if(!shopRepository.updateUcIsDel(orderInfos.get(0).getUcIdx())) {
+			if(shopRepository.insertOrder(order) != -1) {
 				return false;
 			}
 		}
 
+		if(shopRepository.updateSmAndCp(orderInfos.get(0)) != -1) {
+			return false;
+		}
+		
 		return true;
 	}
 
@@ -331,11 +328,15 @@ public class ShopServiceImpl implements ShopService{
 
 	
 	@Override
-	public List<Map<String, Object>> selectQnAList(Map<String, Object> commandMap, Paging pageUtil) {
+	public Map<String, Object> selectQnAList(Map<String, Object> commandMap, Paging pageUtil) {
+		
 		List<Map<String,Object>> commandList = shopRepository.selectQnAList(commandMap,pageUtil);
 		
+		int totalCnt = shopRepository.selectAllQnaCnt();
+		int answerCnt = shopRepository.selectQnaSpecCnt(1);
+		int noAnswerCnt = shopRepository.selectQnaSpecCnt(0);
 		
-		return commandList;
+		return Map.of("qnaList", commandList, "totalCnt", totalCnt, "answerCnt", answerCnt, "noAnswerCnt", noAnswerCnt);
 	}
 	
 	@Override

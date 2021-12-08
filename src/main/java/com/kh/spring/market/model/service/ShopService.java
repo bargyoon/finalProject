@@ -67,6 +67,6 @@ public interface ShopService {
 	
 	int selectQnAListCnt(Map<String, Object> commandMap);
 
-	List<Map<String, Object>> selectQnAList(Map<String, Object> commandMap, Paging pageUtil);
+	Map<String, Object> selectQnAList(Map<String, Object> commandMap, Paging pageUtil);
 
 }

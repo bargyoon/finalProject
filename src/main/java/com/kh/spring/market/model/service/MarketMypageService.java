@@ -41,6 +41,7 @@ public interface MarketMypageService {
 	//review 등록
 	void insertReview(List<MultipartFile> mfs, Review review);
 	void updateIsReview(int orderIdx);
+	void updateReserveByReview(Member member);
 	
 	//prdIdx 업데이트
 	void updatePrdIdx(int orderIdx);
@@ -76,10 +77,11 @@ public interface MarketMypageService {
 	int selectisLike(int rvIdx);
 	
 	//장바구니
-	List<Map<String, Object>> selectCartList(int userIdx);
-	int selectCartCnt(int userIdx);
+	List<Map<String, Object>> selectCartList(Member member);
 	void deleteCart(int cartIdx);
 	void deleteAllCart(int userIdx);
 	void updateCart(int count, int cartIdx);
+
+	boolean checkStock(Map<String, Object> checkInfo);
 
 }

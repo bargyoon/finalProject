@@ -81,19 +81,12 @@ public interface ShopRepository {
 	@Select("select po_stock from prd_detail where dt_idx = #{dtIdx}")
 	int selectPoStackByDtIdx(int dtIdx);
 	
-	@Insert("insert into \"ORDER\"(ORDER_IDX, DT_IDX, USER_IDX, UC_IDX, PRD_IDX, PAYMENT_AMOUNT, ORDER_CNT, SAVE_MONEY, ORDER_NUM, CP_SAVE_MONEY)"
-			+ " values(SC_ORDER_IDX.nextval, #{dtIdx}, #{userIdx}, #{ucIdx}, #{proIdx}, #{paymentAmount}, #{orderCnt}, #{saveMoney}, #{orderNum}, #{cpSaveMoney})")
-	boolean insertOrder(Order order);
+	@Insert("{call PL_REGIST_ORDER(#{dtIdx, mode=IN}, #{userIdx, mode=IN}, #{ucIdx, mode=IN}, #{proIdx, mode=IN}, #{paymentAmount, mode=IN}, #{orderCnt, mode=IN}, #{saveMoney, mode=IN}"
+			+ ", #{orderNum, mode=IN}, #{cpSaveMoney, mode=IN})}")
+	int insertOrder(Order order);
 
-	@Insert("insert into SAVE_HISTORY(SH_IDX, USER_IDX, STATE, TYPE, AMOUNT, ORDER_IDX)"
-			+ " values(SC_SH_IDX.nextval, #{userIdx}, 0, 0, #{saveMoney}, #{orderIdx})")
-	boolean insertSmHistory(Order order);
-
-	@Update("update user_coupon set is_del = 1 where uc_idx = #{ucIdx}")
-	boolean updateUcIsDel(int ucIdx);
-
-	@Update("update \"USER\" set savemoney = savemoney - #{saveMoney} where user_idx = #{userIdx}")
-	boolean updateUserMinusSm(Order order);
+	@Update("{call PL_UPDATE_SM_CP(#{userIdx, mode=IN}, #{ucIdx, mode=IN}, #{saveMoney, mode=IN}, #{orderNum, mode=IN}, #{cpSaveMoney, mode=IN})}")
+	int updateSmAndCp(Order order);
 
 	@Update("update \"ORDER\" set state = #{state}, update_date = sysdate  where order_num = #{orderNum}")
 	void updateOrderState(Map<String, Object> jsonMap);
@@ -141,8 +134,8 @@ public interface ShopRepository {
 	@Update("update review set state = #{state} where rv_idx = #{rvIdx}")
 	void updateReviewState(Map<String, Object> jsonMap);
 
-	@Insert("insert into save_history(sh_idx, user_idx, state, type, amount, order_idx) values(sc_sh_idx.nextval,#{userIdx},1,#{type},#{price},#{orderIdx})")
-	void insertSaveMoney(@Param("type")int type,@Param("userIdx") int userIdx,@Param("price") int price,@Param("orderIdx") int orderIdx);
+	@Insert("insert into save_history(sh_idx, user_idx, state, type, amount, order_num) values(sc_sh_idx.nextval,#{userIdx},1,#{type},#{price},#{orderNum})")
+	void insertSaveMoney(@Param("type")int type,@Param("userIdx") int userIdx,@Param("price") int price,@Param("orderNum") int orderNum);
 
 	List<Map<String, Object>> selectQnAList(@Param("commandMap") Map<String, Object> commandmap,@Param("pageUtil") Paging pageUtil);
 
@@ -150,5 +143,23 @@ public interface ShopRepository {
 	
 	@Update("update prd_detail set state = #{state} where dt_idx = #{dtIdx}")
 	void updateProductState(Map<String, Object> jsonMap);
+
+	@Delete("delete from prd_detail where dt_idx = #{dtIdx}")
+	void deleteProductDetail(Integer dtIdx);
+
+	@Select("select count(*) from qna")
+	int selectAllQnaCnt();
+
+	@Select("select count(*) from qna where is_answer = #{isAnswer}")
+	int selectQnaSpecCnt(int isAnswer);
+
+	@Update("update qna set aw_context = #{awContext}, is_answer = 1 ,aw_reg_date = sysdate where qna_idx = #{qnaIdx}")
+	void updateQnaAnswer(QNA qna);
+
+	@Delete("delete from qna where qna_idx = #{qnaIdx}")
+	void deleteQna(Integer qnaIdx);
+
+	@Delete("delete from review where rv_idx = #{rvIdx}")
+	void deleteComments(Integer rvIdx);
 
 }
