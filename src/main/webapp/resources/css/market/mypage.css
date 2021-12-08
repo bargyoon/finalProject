@@ -1,3 +1,38 @@
+
+/* 프로필 */
+.my-img{
+	border-radius: 7rem; 
+	height: 15rem; 
+	width: 13rem;"
+}
+
+.px-4{
+	display: flex;
+}
+
+.mt-4{
+	display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.rv-img-div{
+	width: 100%;
+    width: 380px;
+    height: 220px;
+    overflow: hidden;
+    margin-top: 10px;
+    padding-right: 0 !important;
+}
+}
+
+.rv-img{
+	width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* 쿠폰, 적립금 */
 .fa-ticket-alt:before{
 	color: black;
 }
