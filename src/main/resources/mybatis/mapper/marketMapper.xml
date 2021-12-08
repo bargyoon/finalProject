@@ -116,8 +116,7 @@
 				d.state = #{commandMap.state}
 			</if>
 			<if test="commandMap.keyword != null">
-				p.name = #{commandMap.keyword} or d.po_name =
-				#{commandMap.keyword}
+				p.name like '%'||#{commandMap.keyword}||'%' or d.po_name like '%'||#{commandMap.keyword}||'%' 
 			</if>
 		</where>
 		group by p.prd_idx, p.name, p.brand, p.category, p.reg_date,d.po_name,
@@ -218,6 +217,7 @@
 		  <if test="commandMap.state != 'all'">
 		  	state = #{commandMap.state}
 		  </if>
+		 
 		  </where>
 		group by order_num
 		)) where rnum between ${((pageUtil.curPage-1) * pageUtil.cntPerPage) + 1}
@@ -247,7 +247,7 @@
 				d.state = #{state}
 			</if>
 			<if test="keyword != null">
-				p.name = #{keyword} or d.po_name = #{keyword}
+				p.name like '%'||#{keyword}||'%' or d.po_name like '%'||#{keyword}||'%'
 			</if>
 		</where>
 		group by p.prd_idx, p.name, p.brand, p.category, p.reg_date,d.po_name,
@@ -320,7 +320,8 @@
 	is_answer = #{commandMap.state}
 	</if>
 	<if test="commandMap.keyword != null">
-	and (m.user_name like '%'||#{commandMap.keyword}||'%' or p.name like '%'||#{commandMap.keyword}||'%' or q.context like '%'||#{commandMap.keyword}||'%' or q.title like '%'||#{commandMap.keyword}||'%')
+	and (m.user_name like '%'||#{commandMap.keyword}||'%' or p.name like '%'||#{commandMap.keyword}||'%' or q.context like '%'||#{commandMap.keyword}||'%' or q.title like '%'||#{commandMap.keyword}||'%'
+	or q.aw_context like '%'||#{commandMap.keyword}||'%')
 	</if>
 	</where>
 	)) where rnum between ${((pageUtil.curPage-1) * pageUtil.cntPerPage) + 1} and ${pageUtil.curPage * pageUtil.cntPerPage}

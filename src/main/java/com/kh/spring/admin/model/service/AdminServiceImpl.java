@@ -178,7 +178,7 @@ public class AdminServiceImpl implements AdminService {
 		
 	}
 	
-	public void deleteBaord(int bdIdx) {
+	public void deleteOneBaord(int bdIdx) {
 		boardRepository.deleteBoardByIdx(bdIdx);
 		
 	}
@@ -223,4 +223,24 @@ public class AdminServiceImpl implements AdminService {
 		
 	}
 	
+	@Override
+	public void deleteBoardComments(List<Integer> cmIdxs) {
+		for (Integer cmIdx : cmIdxs) {
+			boardRepository.deleteBoardCommentByIdx(cmIdx);
+		}
+	}
+	
+	@Override
+	public void deleteBoards(List<Integer> bdIdxs) {
+		for (Integer bdIdx : bdIdxs) {
+			boardRepository.deleteBoardByIdx(bdIdx);
+		}
+		
+	}
+	
+	@Override
+	public void deleteOneComment(int cmIdx) {
+		boardRepository.deleteBoardCommentByIdx(cmIdx);
+		
+	}
 }

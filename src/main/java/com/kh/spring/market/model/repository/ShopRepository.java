@@ -128,8 +128,8 @@ public interface ShopRepository {
 	@Select("select * from cart where USER_IDX = #{userIdx} and DT_IDX = #{dtIdx}")
 	Cart selectCartforCheck(Cart cart);
 
-	@Select("select * from file_info where type_idx = ${rvIdx}")
-	List<FileDTO> selectFileInfoByIdx(int rvIdx);
+	@Select("select * from file_info where type_idx = ${typeIdx}")
+	List<FileDTO> selectFileInfoByIdx(int typeIdx);
 	
 	@Update("update review set state = #{state} where rv_idx = #{rvIdx}")
 	void updateReviewState(Map<String, Object> jsonMap);

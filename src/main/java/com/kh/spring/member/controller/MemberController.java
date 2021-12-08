@@ -51,7 +51,10 @@ public class MemberController {
 			redirectAttr.addFlashAttribute("message", "아이디나 비밀번호가 틀렸습니다.");
 			return "redirect:/member/login";
 		}
-		
+		if(certifiedUser.getGrade().equals("AD00")) {
+			session.setAttribute("authentication", certifiedUser);
+			return "redirect:/admin/member/member-list";
+		}
 		session.setAttribute("authentication", certifiedUser);
 		return "redirect:/";
 	}

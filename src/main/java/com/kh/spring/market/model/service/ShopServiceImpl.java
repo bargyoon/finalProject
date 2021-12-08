@@ -326,8 +326,6 @@ public class ShopServiceImpl implements ShopService{
 		return true;
 	}
 
-	
-	@Override
 	public Map<String, Object> selectQnAList(Map<String, Object> commandMap, Paging pageUtil) {
 		
 		List<Map<String,Object>> commandList = shopRepository.selectQnAList(commandMap,pageUtil);
@@ -339,9 +337,20 @@ public class ShopServiceImpl implements ShopService{
 		return Map.of("qnaList", commandList, "totalCnt", totalCnt, "answerCnt", answerCnt, "noAnswerCnt", noAnswerCnt);
 	}
 	
-	@Override
 	public int selectQnAListCnt(Map<String, Object> commandMap) {
 		return shopRepository.selectQnAListCnt(commandMap);
 	}
 
+	public Map<String, Object> selectAllByPrd(Product product) {
+	
+		List<FileDTO> files = shopRepository.selectFileInfoByIdx(product.getPrdIdx());
+		List<FileDTO> subFiles = shopRepository.selectFileInfoByIdx(product.getSubImgIdx());
+		List<Product> prdDetails = shopRepository.selectPrdListByIdx(product.getPrdIdx());
+		
+		return Map.of("files", files, "subFiles", subFiles, "prdDetails",prdDetails);
+		
+		
+		
+	}
+	
 }

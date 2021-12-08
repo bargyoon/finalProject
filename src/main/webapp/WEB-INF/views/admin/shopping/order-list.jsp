@@ -154,36 +154,14 @@
 				<!-- ============================================================== -->
 				<!-- Start Page Content -->
 				<!-- ============================================================== -->
-				<div class="row">
-					<div class="col-md-12">
-						<div class="card">
-							<div class="card-body no-padding">
-								<form>
-									<div class="form-group row">
-										<label for="postSearch"><i
-											style="position: absolute; top: 28px;" class="fas fa-search"></i></label>
-										<label><a><i
-												style="position: absolute; top: 28px; right: 26%; z-index: 999;"
-												class="fas fa-times"></i></a></label>
-										<div class="col-sm-9">
-											<input type="text" class="form-control ml-3"
-												placeholder="작성자 내용 검색" name="keyword">
-										</div>
-									</div>
-								</form>
-							</div>
-						</div>
-
-					</div>
-
-				</div>
+			
 				<div class="row">
 
 					<div class="col-12">
 
 						<div class="card">
 							<div class="card-body">
-								<h5 class="card-title m-b-0 d-inline-block">상품목록</h5>
+								<h5 class="card-title m-b-0 d-inline-block">주문목록</h5>
 
 							</div>
 
@@ -708,6 +686,22 @@
     		
  	
  	}
+		
+		let searchKeyword = () =>{
+			
+			var keyword = document.querySelector("#inp").value
+			
+			keyword = keyword.trim()
+
+			URLSearch.set("keyword", String(keyword));
+			if(keyword == ''){
+				alert("검색어를 입력해주세요.")
+				return
+			}
+		 	 const newParam = URLSearch.toString();
+		 	 location.href = location.pathname + '?' + newParam
+			
+		}
 		
 	   
 	</script>

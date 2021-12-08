@@ -129,7 +129,7 @@
 
 						<div class="card">
 							<div class="card-body">
-								<h5 class="card-title m-b-0 d-inline-block">상품목록</h5>
+								<h5 class="card-title m-b-0 d-inline-block">사진목록</h5>
 
 							</div>
 

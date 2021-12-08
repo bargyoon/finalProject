@@ -69,4 +69,6 @@ public interface ShopService {
 
 	Map<String, Object> selectQnAList(Map<String, Object> commandMap, Paging pageUtil);
 
+	Map<String, Object> selectAllByPrd(Product product);
+
 }

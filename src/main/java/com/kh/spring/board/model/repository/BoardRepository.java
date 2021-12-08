@@ -100,6 +100,9 @@ public interface BoardRepository {
 	@Update("update board_comment set is_del = 1 where cm_idx = #{cmIdx}")
 	void updateDeleteBoardComment(BoardComment boardComment);
 
+	@Delete("delete from board_comment where cm_idx = #{cmIdx}")
+	void deleteBoardCommentByIdx(Integer cmIdx);
+
 	
 
 

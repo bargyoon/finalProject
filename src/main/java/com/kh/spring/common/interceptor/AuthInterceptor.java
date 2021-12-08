@@ -19,7 +19,7 @@ public class AuthInterceptor implements HandlerInterceptor {
 			throws Exception {
 		
 		String[] uriArr = request.getRequestURI().split("/");
-
+		Member member = (Member) request.getSession().getAttribute("authentication");
 		if (uriArr.length != 0) {
 
 			switch (uriArr[1]) {
@@ -27,7 +27,10 @@ public class AuthInterceptor implements HandlerInterceptor {
 				memberAuthorize(request, response, uriArr);
 				break;
 			case "admin":
-				adminAuthorize(request, response, uriArr);
+				
+				if(member == null|| !member.getGrade().equals("AD00") ) {
+					throw new HandlableException(ErrorCode.UNAUTHORIZED_PAGE);
+				}
 				break;
 			case "board":
 				boardAuthorize(request, response, uriArr);
@@ -109,7 +112,9 @@ public class AuthInterceptor implements HandlerInterceptor {
 			break;
 		case "modify":
 			System.out.println("찍히나" + request.getSession().getAttribute("modi-bdIdx"));
-			
+			if(member == null) {
+				throw new HandlableException(ErrorCode.UNAUTHORIZED_PAGE);
+			}
 			break;
 		default:
 			break;
@@ -119,10 +124,6 @@ public class AuthInterceptor implements HandlerInterceptor {
 		}
 	}
 
-	private void adminAuthorize(HttpServletRequest httpRequest, HttpServletResponse httpResponse, String[] uriArr)
-			throws IOException, ServletException {
-	
-	}
 
 
 	private void memberAuthorize(HttpServletRequest httpRequest, HttpServletResponse httpResponse, String[] uriArr)
