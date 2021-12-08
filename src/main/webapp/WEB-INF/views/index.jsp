@@ -32,8 +32,8 @@
                                  <c:forEach items="${infoList}" var="infoList" varStatus="status">
                                     <tr>
                                        <td style="text-align:left"><a
-                                          href="/board/dog/detail?bdIdx=${infoList.BD_IDX}">${infoList.BD_TITLE}</a><small
-                                          class="ml-2"><i class="fas fa-comment mr-1"></i>${infoList.CM_CNT}</small></td>
+                                          href="/board/dog/detail?bdIdx=${infoList.BD_IDX}" style="color:black; text-decoration:none;">${infoList.BD_TITLE}</a><small
+                                          class="ml-2"><i class="fas fa-comment mr-1" ></i>${infoList.CM_CNT}</small></td>
                                        <td>${infoList.VIEW_COUNT}</td> 
                                     </tr>
                                  </c:forEach>
@@ -54,7 +54,7 @@
                                  <c:forEach items="${infoList}" var="infoList" varStatus="status">
                                     <tr>
                                        <td style="text-align:left"><a
-                                          href="/board/cat/detail?bdIdx=${infoList.BD_IDX}">${infoList.BD_TITLE}</a><small
+                                          href="/board/cat/detail?bdIdx=${infoList.BD_IDX}" style="color:black; text-decoration:none;">${infoList.BD_TITLE}</a><small
                                           class="ml-2"><i class="fas fa-comment mr-1"></i>${infoList.CM_CNT}</small></td>
                                        <td>${infoList.VIEW_COUNT}</td> 
                                     </tr>
@@ -77,7 +77,7 @@
                                  <c:forEach items="${infoList}" var="infoList" varStatus="status" >
                                     <tr>
                                        <td style="text-align:left"><a
-                                          href="/board/info/detail?bdIdx=${infoList.BD_IDX}">${infoList.BD_TITLE}</a><small
+                                          href="/board/info/detail?bdIdx=${infoList.BD_IDX}" " style="color:black; text-decoration:none;">${infoList.BD_TITLE}</a><small
                                           class="ml-2"><i class="fas fa-comment mr-1"></i>${infoList.CM_CNT}</small></td>
                                        <td>${infoList.VIEW_COUNT}</td> 
                                     </tr>
