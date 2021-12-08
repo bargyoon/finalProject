@@ -105,12 +105,11 @@ public class MarketMypageServiceImpl implements MarketMypageService{
 		List<Map<String, Object>> commandList = mypageRepository.selectMyReviewList(commandMap);
 		
 		for (Map<String, Object> map : commandList) {
-			FileDTO files = new FileDTO();
-			files.setSavePath((String) map.get("SAVE_PATH"));
-			files.setRenameFileName((String) map.get("RENAME_FILE_NAME"));
-			map.put("downloadURL", files.getDownloadURL());
-		}
-		
+			if(Integer.parseInt(map.get("TYPE").toString()) == 1) {
+				List<FileDTO> files = mypageRepository.selectFileInfoByIdx(Integer.parseInt(map.get("RV_IDX").toString()));			
+				map.put("files", files);				
+			}
+		}		
 		return commandList;
 	}
 	

@@ -163,5 +163,7 @@ public interface MarketMypageRepository {
 	@Update("update cart set count = #{prdCnt} where CART_IDX = #{cartIdx}")
 	void updateCartCnt(Map<String, Object> checkInfo);
 
+	@Select("select * from file_info where type_idx = ${rvIdx}")
+	List<FileDTO> selectFileInfoByIdx(int rvIdx);
 	
 }

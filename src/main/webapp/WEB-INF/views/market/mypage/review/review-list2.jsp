@@ -20,9 +20,10 @@
 		</div>
 		<div class="px-lg-5 mx-5" style="display: flex; justify-content: space-between;">
 			<div class="px-lg-5" style="display: flex; min-width: 50%;">
-				<img src="https://dummyimage.com/200x200/dee2e6/6c757d.jpg" style="border-radius: 7rem;" />
+				<img class="my-img" src="https://cdn.hellodd.com/news/photo/202005/71835_craw1.jpg"
+				  />
 				<div class="px-4 px-lg-5 my-3">
-					<div>
+					<div style="display: flex;">
 						<div class="mt-4" style="display: flex; flex-direction: column;">
 							<h1 class="display-4 fw-bolder">${memberInfo.nickName}</h1>
 							<div style="display: flex;">
@@ -127,21 +128,14 @@
 								<!-- 리뷰 사진 -->
 								<c:if test="${myReviewList.TYPE eq '1'}">
 									<div class="slick_test3">
-									<c:forEach var="files" items="${files}">
-										<div class="px-4 px-lg-5 my-5">
-											<img class="container" src="/resources/assets/img/food/생선.png" style="max-height: 20rem; max-width: 20rem;">
-										</div>
-										<div class="px-4 px-lg-5 my-5">
-											<img src="${files.downloadURL}" style="max-height: 20rem; max-width: 20rem;">
-										</div>
-										<div class="px-4 px-lg-5 my-5">
-											<img src="https://dummyimage.com/350x550/dee2e6/6c757d.jpg" style="max-height: 20rem; max-width: 20rem;">
-										</div>
+									<c:forEach var="files" items="${myReviewList.files}">										
+										<div class="px-4 px-lg-5 my-5 rv-img-div">
+											<img src="${files.downloadURL}" style="max-height: 100%; max-width: 100%;" class="rv-img">
+										</div>									
 									</c:forEach>
 									</div>
 								</c:if>
-								
-								<!-- 별점 -->
+							
 								
 								<div class="d-flex small text-warning my-2">
 									<c:forEach begin="1" end="${myReviewList.RATING}">

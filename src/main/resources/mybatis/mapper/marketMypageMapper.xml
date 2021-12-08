@@ -30,7 +30,8 @@
   <insert id="insertReview">
   	insert into REVIEW(RV_IDX,USER_IDX,PRD_IDX,ORDER_IDX,DT_IDX,RATING,RV_CONTENT,TYPE)
 	values(SC_RV_IDX.nextval,  #{userIdx}
-			,(select prd_idx from "ORDER" o join prd_detail d using(prd_idx) where order_idx = #{orderIdx} and o.dt_idx=d.dt_idx)
+			,(select prd_idx from "ORDER" o join prd_detail d using(prd_idx) 
+				where order_idx = #{orderIdx} and o.dt_idx=d.dt_idx)
     		,#{orderIdx}
     		, (select dt_idx from "ORDER" where order_idx=#{orderIdx}) 
     		,#{rating},#{rvContent},#{type})
@@ -62,12 +63,10 @@
   	 <select id="selectMyReviewList" resultType="map">
   	 	select r.RV_IDX, r.USER_IDX, PRD_IDX, r.ORDER_IDX, r.STATE, r.RATING, r.TYPE, r.RECOMMAND, r.REG_DATE, RV_CONTENT
   	 	, p.name, p.brand, d.po_name, d.dt_idx	 	
-  	 	, fl_idx, origin_file_name, rename_file_name, save_path
 		from REVIEW r
 		join product p USING(PRD_IDX)
 		join prd_detail d USING(PRD_IDX)
 		join "ORDER" o USING(PRD_IDX)
-		left OUTER join file_info f on (r.rv_idx = f.type_idx)	
 		<where>
 		r.USER_IDX = #{userIdx} and o.dt_idx = d.dt_idx 
 			<if test="state == null">
