@@ -601,7 +601,7 @@ function myGEO(nowGeo){
 				    });
 			    //주소짜름
 				addSplit = el.siteWhlAddr != null ? el.siteWhlAddr.split(' ',2) : el.rdnWhlAddr.split(' ',2);
-
+ 
 				 //인포창
 			     infoWindow = new naver.maps.InfoWindow({
 			        content:'<div class="iw_inner" style="padding:16px"><div style="font-weight: 1000;font-size: 20px">'+el.bplcNm+'</div><div style="color:#999;font-weight: 500;font-size: 18px">'+el.lindJobGbnNm+'</div><span style="color:#999;font-weight: 500;font-size: 15px">'+addSplit[0]+" "+addSplit[1]+'</span><br><a style="color:#3c83dc;font-weight: 800" href="/hospital/detail?locationIdx='+el.locationIdx+'">자세히</a></div>',
