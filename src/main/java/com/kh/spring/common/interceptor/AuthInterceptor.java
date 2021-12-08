@@ -35,6 +35,9 @@ public class AuthInterceptor implements HandlerInterceptor {
 			case "market":
 				marketAuthorize(request, response, uriArr);
 				break;
+			case "mypage":
+				mypageAuthorize(request);
+				break;
 			default:
 				break;
 			}
@@ -129,6 +132,17 @@ public class AuthInterceptor implements HandlerInterceptor {
 
 
 
+	}
+	
+	private void mypageAuthorize(HttpServletRequest request) 
+			throws IOException, ServletException {
+		
+		Member member = (Member) request.getSession().getAttribute("authentication");
+		
+		if(member == null) {
+			throw new HandlableException(ErrorCode.UNAUTHORIZED_PAGE);
+		}
+		
 	}
 
 }
