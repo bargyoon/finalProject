@@ -63,6 +63,7 @@ public class BoardController {
 	
 	@GetMapping("info/detail")
 	public String infoDetail(Model model, @RequestParam(value = "bdIdx") int bdIdx) {
+		
 		model.addAttribute("title", "정보");
 		model.addAttribute("category", "info");
 		model.addAllAttributes(boardService.selectBoardByIdx(bdIdx));
@@ -304,7 +305,9 @@ public class BoardController {
 	public void boardForm() {}
 	
 	@PostMapping("board-form")
-	public String insertBoard(List<MultipartFile> files, Board board ) {
+	public String insertBoard(List<MultipartFile> files, Board board ,@SessionAttribute(name = "authentication") Member member) {
+		board.setUserIdx(member.getUserIdx());
+		board.setNickname(member.getNickName());
 		boardService.insertBoard(files,board);
 		
 		
@@ -332,9 +335,22 @@ public class BoardController {
 		return "good";
 
 	}
+	
+	@PostMapping("delete-comment")
+	@ResponseBody
+	public String deleteComment(@RequestBody BoardComment boardComment) {
+		
+		boardService.deleteComment(boardComment);
+
+		
+		return "good";
+
+	}
 	@PostMapping("comment-form")
 	@ResponseBody
-	public String insertComment(@RequestBody BoardComment boardComment) {
+	public String insertComment(@RequestBody BoardComment boardComment,@SessionAttribute(name="authentication")Member certifiedUser) {
+		boardComment.setUserIdx(certifiedUser.getUserIdx());
+		boardComment.setNickname(certifiedUser.getNickName());
 		boardService.insertComment(boardComment);
 
 		
@@ -362,6 +378,16 @@ public class BoardController {
 		}else {
 			return "bad";
 		}
+
+	}
+	
+	@PostMapping("update-comment")
+	@ResponseBody
+	public String updateComment(@RequestBody BoardComment boardComment,  @SessionAttribute(name="authentication")Member certifiedUser) {
+		boardService.updateComment(boardComment);
+			
+		return "good";
+		
 
 	}
 	

@@ -7,9 +7,11 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<%@ include file="/WEB-INF/views/include/head.jsp" %>
 <link rel="stylesheet" href="/resources/css/board/board-form.css">
 </head>
 <body>
+<%@ include file="/WEB-INF/views/include/navBar.jsp" %>
 	<form action="/board/board-modify" method="post"
 		enctype="multipart/form-data">
 		<input name="category" value="${category}" type="hidden">

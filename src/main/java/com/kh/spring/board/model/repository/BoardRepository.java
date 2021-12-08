@@ -51,10 +51,10 @@ public interface BoardRepository {
 	
 	void insertComment(BoardComment boardComment);
 	
-	@Select("select * from board_comment where bd_idx = ${bdIdx} and cm_type = 1 order by reg_date desc")
+	@Select("select * from board_comment where bd_idx = ${bdIdx} and cm_type = 1 and is_del = 0 order by reg_date desc")
 	List<BoardComment> selectChildCommentByIdx(int bdIdx);
 	
-	@Select("select * from board_comment where bd_idx = ${bdIdx} and cm_type = 0")
+	@Select("select * from board_comment where bd_idx = ${bdIdx} and cm_type = 0 and is_del = 0")
 	List<BoardComment> selectParentCommentByIdx(int bdIdx);
 
 	@Select("select count(*) from board_comment where bd_idx = ${bdIdx} and cm_type = 0")
@@ -93,6 +93,12 @@ public interface BoardRepository {
 
 	@Delete("delete from board where bd_idx = #{bdIdx}")
 	void deleteBoardByIdx(int bdIdx);
+
+	@Update("update board_comment set cm_content = #{cmContent} where cm_idx= #{cmIdx}")
+	void updateComment(BoardComment boardComment);
+
+	@Update("update board_comment set is_del = 1 where cm_idx = #{cmIdx}")
+	void updateDeleteBoardComment(BoardComment boardComment);
 
 	
 
