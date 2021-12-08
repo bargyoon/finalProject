@@ -22,6 +22,7 @@ public interface MarketMypageService {
 	//Reserve SaveHistory
 	List<Map<String, Object>> selectReserveList(int userIdx, String state);
 	void insertSaveMoney(SaveHistory saveHistory);
+	void updateOrderNum(int orderIdx);
 	
 	//OrderList
 	List<Map<String, Object>> selectOrderList(int userIdx, String state,String fromDate, String endDate);

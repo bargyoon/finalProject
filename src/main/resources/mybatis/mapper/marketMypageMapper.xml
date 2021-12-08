@@ -68,7 +68,7 @@
 		join prd_detail d USING(PRD_IDX)
 		join "ORDER" o USING(PRD_IDX)
 		<where>
-		r.USER_IDX = #{userIdx} and o.dt_idx = d.dt_idx 
+		r.USER_IDX = #{userIdx} and o.dt_idx = d.dt_idx and r.order_idx = o.order_idx
 			<if test="state == null">
 				and r.state is not null
 			</if>	

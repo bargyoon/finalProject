@@ -377,7 +377,7 @@ public class MarketMypageController {
 		
 		review.setUserIdx(user);
 		saveHistory.setUserIdx(user);
-		member.setUserIdx(user);
+		member.setUserIdx(user);		
 		
 		if(files == null) { //일반후기
 			review.setType("0"); 
@@ -390,10 +390,11 @@ public class MarketMypageController {
 			member.setSaveMoney(600);
 			saveHistory.setAmount(600);
 		}
-		
+		System.out.println("saveHistory : " + saveHistory);
 		marketMypageService.insertReview(files, review);
 		marketMypageService.updateIsReview(orderIdx);
 		marketMypageService.insertSaveMoney(saveHistory);
+		marketMypageService.updateOrderNum(orderIdx);
 		marketMypageService.updateReserveByReview(member);
 			
 		//파일첨부 안했을 때 예외처리 (RedirectAttributes)

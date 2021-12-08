@@ -38,10 +38,13 @@ public interface MarketMypageRepository {
 	List<Map<String, Object>> selectReserveList(@Param("userIdx")int userIdx, @Param("state")String state);
 	
 	//Save Money 등록 - 리뷰작성시
-	@Insert("INSERT INTO SAVE_HISTORY(SH_IDX, USER_IDX, STATE, TYPE, AMOUNT, order_idx) "
-			+ " VALUES(SC_SH_IDX.NEXTVAL, #{userIdx}, 0, #{type}, #{amount}, #{orderIdx})")
+	@Insert("INSERT INTO SAVE_HISTORY(SH_IDX, USER_IDX, STATE, TYPE, AMOUNT) "
+			+ " VALUES(SC_SH_IDX.NEXTVAL, #{userIdx}, 0, #{type}, #{amount})")
 	void insertSaveMoney(SaveHistory saveHistory);
 	//적립방법 type : 주문(0), 일반후기(1), 사진후기(2)
+	
+	@Update("update SAVE_HISTORY set order_num = (select order_num from \"ORDER\" where order_idx =#{orderIdx})")
+	void updateOrderNum(int orderIdx);
 	
 	//Order List
 	List<Map<String, Object>> selectOrderList(@Param("userIdx")int userIdx, @Param("state")String state, @Param("fromDate")String fromDate, @Param("endDate")String endDate);

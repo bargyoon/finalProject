@@ -175,6 +175,12 @@ public class MarketMypageServiceImpl implements MarketMypageService{
 		mypageRepository.insertSaveMoney(saveHistory);
 		
 	}
+	
+	@Override
+	public void updateOrderNum(int orderIdx) {
+		mypageRepository.updateOrderNum(orderIdx);
+		
+	}
 
 	@Override
 	public void insertAddress(Address address) {
@@ -240,6 +246,7 @@ public class MarketMypageServiceImpl implements MarketMypageService{
 	}
 
 	
+
 
 	
 }
