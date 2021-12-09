@@ -66,13 +66,13 @@
 					<span style="font-size: 12px;">평일: 9:00~18:00(점심 12:00~13:00)</span>
 				</li>
 				<li>
-					<a href="market/mypage/enquiry/enquiry-list">
+					<a href="/market/mypage/enquiry/enquiry-list">
 						<span class="ft-SBAggroM">1:1 Q&A</span><br>
 						<span style="font-size: 12px;">질문 전 FAQ(자주 묻는 질문)을 먼저 확인하시면 도움이 됩니다.</span>
 					</a>
 				</li>
 				<li>
-					<a href="market/mypage/enquiry/faq">
+					<a href="/market/mypage/enquiry/faq?type=1">
 						<span class="ft-SBAggroM">FAQ</span><br>
 						<span style="font-size: 12px;">자주 묻는 질문</span>
 					</a>
@@ -142,7 +142,7 @@
 								<th>문의내용</th>
 								<td colspan="3">
 									<textarea id="inputContent" name="context" cols="160" rows="10" placeholder="내용을 입력해주세요."></textarea>
-									<p class="limit_text_alert" id="cntLength">(20자 / 0자) </p>
+									<p class="limit_text_alert" id="cntLength">(0자) </p>
 									<span id="contentCheck" class="valid-msg"></span>
 								</td>
 							</tr>
@@ -165,7 +165,7 @@
 		var content = $(this).val();
 		
 		//실시간 글자수 세기
-		$("#cntLength").html("(20자 / " + content.length +"자)"); 
+		$("#cntLength").html("(" + content.length +"자)"); 
 		
 		if(content.length > 200){
 			alert("최대 200자까지 입력 가능합니다.");
