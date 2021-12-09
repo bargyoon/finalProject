@@ -181,6 +181,12 @@ public class MarketMypageServiceImpl implements MarketMypageService{
 	@Override
 	public List<Map<String, Object>> selectEnquiryList(int userIdx, String fromDate, String endDate) {
 		List<Map<String, Object>> selectEnquiryList = mypageRepository.selectEnquiryList(userIdx, fromDate, endDate);
+		for (Map<String, Object> map : selectEnquiryList) {
+			FileDTO files = new FileDTO();
+			files.setSavePath((String) map.get("SAVE_PATH"));
+			files.setRenameFileName((String) map.get("RENAME_FILE_NAME"));
+			map.put("downloadURL", files.getDownloadURL());
+		}
 		return selectEnquiryList;
 	}
 
