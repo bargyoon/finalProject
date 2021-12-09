@@ -28,7 +28,7 @@ public class DiseaseController {
 
 	@GetMapping("index")
 	public void index(Model model, @RequestParam(required = false, defaultValue = "1") int page) {
-		Paging pageUtil = Paging.builder().curPage(page).cntPerPage(16).blockCnt(10)
+		Paging pageUtil = Paging.builder().curPage(page).cntPerPage(40).blockCnt(10)
 				.total(diseaseService.selectDiseaseListCnt()).build();
 
 		List<Map<String, Object>> commandList = diseaseService.selectDiseaseList(pageUtil);

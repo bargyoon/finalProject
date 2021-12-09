@@ -243,4 +243,11 @@ public class AdminServiceImpl implements AdminService {
 		boardRepository.deleteBoardCommentByIdx(cmIdx);
 		
 	}
+	@Override
+	public void deleteDisease(List<Integer> dsIdxs) {
+		for (Integer dsIdx : dsIdxs) {
+			diseaseRepository.deleteDisease(dsIdx);
+		}
+	}
+	
 }
