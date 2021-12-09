@@ -65,13 +65,13 @@
 							<div class="pt-3" style="padding-bottom: 0rem;">
 								<p class="prd-name mb-1 small"><c:out value="${prdList[i].name}"/></p>
 							</div>
-							<div class="d-flex small text-warning justify-content-center pb-1">
-								<c:if test="${prdList[i].rating>0}">
-									<c:forEach var="j" begin="0" step="1" end="${prdList[i].rating-1}">
-										<i class="fas fa-star"></i>
-									</c:forEach>
-								</c:if>
-							</div>
+							<c:if test="${prdList[i].rating>0}">
+								<div class="d-flex small text-warning justify-content-center pb-1">
+										<c:forEach var="j" begin="0" step="1" end="${prdList[i].rating-1}">
+											<i class="fas fa-star"></i>
+										</c:forEach>
+								</div>
+							</c:if>
 							<div class="text-center">
 								<c:if test="${prdList[i].salePer ne 0}">
 									<span style="color: red;"><c:out value="${prdList[i].salePer}%"/></span>
