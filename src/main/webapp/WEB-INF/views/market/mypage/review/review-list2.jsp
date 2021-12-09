@@ -20,8 +20,7 @@
 		</div>
 		<div class="px-lg-5 mx-5" style="display: flex; justify-content: space-between;">
 			<div class="px-lg-5" style="display: flex; min-width: 50%;">
-				<img class="my-img" src="https://cdn.hellodd.com/news/photo/202005/71835_craw1.jpg"
-				  />
+				<img class="my-img" src="https://cdn.hellodd.com/news/photo/202005/71835_craw1.jpg" />
 				<div class="px-4 px-lg-5 my-3">
 					<div style="display: flex;">
 						<div class="mt-4" style="display: flex; flex-direction: column;">

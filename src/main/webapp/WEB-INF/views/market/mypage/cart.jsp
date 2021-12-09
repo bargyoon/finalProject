@@ -17,7 +17,7 @@
 		</div>
 		<div class="px-lg-5 mx-5" style="display: flex; justify-content: space-between;">
 			<div class="px-lg-5" style="display: flex; min-width: 50%;">
-				<img src="https://dummyimage.com/200x200/dee2e6/6c757d.jpg" style="border-radius: 7rem;" />
+				<img class="my-img" src="https://cdn.hellodd.com/news/photo/202005/71835_craw1.jpg" />
 				<div class="px-4 px-lg-5 my-3">
 					<div>
 						<div class="mt-4" style="display: flex; flex-direction: column;">
@@ -52,9 +52,9 @@
 					<li><hr class="dropdown-divider" /></li>
 					<li><a href="/market/mypage">주문 내역 조회</a></li>
 					<li><a href="/market/mypage/review/review-list2">구매후기</a></li>
-					<li><a href="/market/mypage/cart">장바구니</a></li>
-					<li><a href="#!">상품문의</a></li>
+					<li><a href="/market/mypage/cart" style="color: black">장바구니</a></li>
 					<li><a href="/market/mypage/address-list">주소록 관리</a></li>
+					<li><a href="/market/mypage/enquiry/enquiry-list">구매상품문의</a></li>
 					<li><a href="/market/mypage/enquiry/faq?type=1">FAQ</a></li>
 				</ul>
 			</div>
@@ -99,7 +99,7 @@
 						<c:forEach var="cart" items="${cartList}" varStatus="status">
 							<tr>
 								<td>${status.index+1}</td>
-								<td><input type="checkbox" class="checked_cart" name="cartIdx" checked="checked"></td>
+								<td><input type="checkbox" class="checked_cart" name="cartIdx" checked="checked" value="${cart.CART_IDX}"></td>
 								<td>
 									<div class="n-prd-row">
 										<a href="/market/shop/prd-detail?pn=${cart.PRD_IDX}"><img src="${files[status.index].downloadURL}"></a>
@@ -538,6 +538,42 @@
 			})
 		
 		}
+		
+		/* selectbox 상품개별삭제 */
+		function selectDelete() {
+			 var url = "cart/selectDelete";
+			 var selectedArr = new Array();
+			 var cartIdx = document.getElementsByName("cartIdx"); //
+			 console.dir(selectedArr);
+			console.dir(cartIdx);
+			console.dir(cartIdx.value);
+			  for (var i = 0; i < cartIdx.length; i++) {
+			   if (cartIdx[i].checked == true) {
+				   selectedArr.push(cartIdx[i].value);
+				   console.dir(selectedArr);
+			   }
+			  }
+			
+			 if (selectedArr.length == 0) {
+				 alert("삭제하실 항목을 적어도 하나는 체크해 주세요.");
+			 } else {
+			  	$.ajax({
+			  		url : url,
+			  		type : 'POST',
+			  		traditional : true,
+			  		data : {
+			  			selectedArr : selectedArr
+			  		},
+			  		success : function(jdata){
+			  			if(jdata = 1){
+			  				location.replace("cart")
+			  			}else{
+			  				alert("삭제 실패");
+			  			}
+			  		}
+			  	});
+			 }
+			}
 		
 	</script>
     <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.8.js"></script>
