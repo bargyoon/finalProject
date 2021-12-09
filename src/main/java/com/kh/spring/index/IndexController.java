@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import com.kh.spring.board.model.service.BoardService;
 import com.kh.spring.common.util.pagination.Paging;
+import com.kh.spring.market.model.service.ShopService;
 
 import lombok.RequiredArgsConstructor;
 
@@ -18,7 +19,8 @@ import lombok.RequiredArgsConstructor;
 public class IndexController {
 
 	private final BoardService boardService;
-
+	private final ShopService shopService;
+	
 	@GetMapping("/")
 	public String index(Model model) {
 		Map<String,Object> dogMap = new LinkedHashMap<String,Object>();
@@ -35,18 +37,24 @@ public class IndexController {
 				.total(boardService.selectBoardListCnt(dogMap))
 				.build();
 		
-		
+		List<Map<String,Object>> prdList = shopService.selectPrdListMain("RATING", 10);
 		List<Map<String,Object>> dogList = boardService.selectBoard(dogMap,pageUtil);
 		List<Map<String,Object>> catList = boardService.selectBoard(catMap,pageUtil);
 		List<Map<String,Object>> infoList = boardService.selectBoard(infoMap,pageUtil);
 		model.addAttribute("dogList",dogList);
 		model.addAttribute("catList",catList);
 		model.addAttribute("infoList",infoList);
+		model.addAttribute("prdList",prdList);
 		return "index";
 	}
 	
 	@GetMapping("market")
-	public String marketIndex() {
+	public String marketIndex(Model model) {
+
+		List<Map<String,Object>> newPrdList = shopService.selectPrdListMain("REG_DATE", 10);
+		List<Map<String,Object>> bestPrdList = shopService.selectPrdListMain("RATING", 3);
+		model.addAttribute("newPrdList", newPrdList);
+		model.addAttribute("bestPrdList", bestPrdList);
 		return "/market/market";
 	}
 	

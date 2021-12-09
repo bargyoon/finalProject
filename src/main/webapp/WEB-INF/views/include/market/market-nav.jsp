@@ -6,9 +6,6 @@
 <html>
 <body>
 <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light" style="flex-direction: column;">
-	<div class="container banner-area">
-		<a class="banner-link" href="#!" style="background-image: url('${contextPath}/resources/img/market/banner_sample.jpg');"></a>
-	</div>
 	<div class="container px-4 px-lg-5 pt-2">
 		<a class="navbar-brand fw-bolder" href="/market">똑Dog한 집사들의 장터</a>
 		<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
@@ -18,9 +15,8 @@
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
 			<p>${contextPath}</p>
 			<ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
-				<li class="nav-item"><a class="nav-link" href="#!">기획전</a></li>
-				<li class="nav-item"><a class="nav-link" href="#!">랭킹</a></li>
-				<li class="nav-item"><a class="nav-link" href="#!">신상품</a></li>
+				<li class="nav-item"><a class="nav-link" href="/market/shop/prd-list?category=all&option=pop">랭킹</a></li>
+				<li class="nav-item"><a class="nav-link" href="/market/shop/prd-list?category=all&option=new">신상품</a></li>
 				<li class="nav-item dropdown"><a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Shop</a>
 					<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
 						<li><a class="dropdown-item" href="/market/shop/prd-list?category=all">전체</a></li>
@@ -39,11 +35,16 @@
 				</li>
 			</ul>
 			<div class="d-flex">
-				<button class="btn" type="submit">커뮤니티로 이동</button>
-				<a class="btn" href="#!">MY PAGE</a>
-				<button class="btn" type="submit">
-					<i class="bi-cart-fill"></i> 장바구니 <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
-				</button>
+				<a class="btn" href="/" type="submit">커뮤니티로 이동</a>
+				<c:if test="${not empty authentication}">
+					<a class="btn" href="/market/mypage">MY PAGE</a>
+					<a class="btn" href="/market/mypage/cart"><i class="bi-cart-fill"></i> 장바구니</a>
+					<a class="btn" href="/member/logout"><i class="bi-cart-fill"></i> 로그아웃</a>
+				</c:if>
+				<c:if test="${empty authentication}">
+					<a class="btn" href="/member/join">회원가입</a>
+					<a class="btn" href="/member/login"><i class="bi-cart-fill"></i> 로그인</a>
+				</c:if>
 			</div>
 		</div>
 	</div>

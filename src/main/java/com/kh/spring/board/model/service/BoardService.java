@@ -33,4 +33,8 @@ public interface BoardService {
 
 	void deleteBoard(Board board);
 
+	void updateComment(BoardComment boardComment);
+
+	void deleteComment(BoardComment boardComment);
+
 }

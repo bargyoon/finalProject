@@ -19,7 +19,7 @@ public class AuthInterceptor implements HandlerInterceptor {
 			throws Exception {
 		
 		String[] uriArr = request.getRequestURI().split("/");
-
+		Member member = (Member) request.getSession().getAttribute("authentication");
 		if (uriArr.length != 0) {
 
 			switch (uriArr[1]) {
@@ -27,13 +27,19 @@ public class AuthInterceptor implements HandlerInterceptor {
 				memberAuthorize(request, response, uriArr);
 				break;
 			case "admin":
-				adminAuthorize(request, response, uriArr);
+				
+				if(member == null|| !member.getGrade().equals("AD00") ) {
+					throw new HandlableException(ErrorCode.UNAUTHORIZED_PAGE);
+				}
 				break;
 			case "board":
 				boardAuthorize(request, response, uriArr);
 				break;
 			case "market":
 				marketAuthorize(request, response, uriArr);
+				break;
+			case "mypage":
+				mypageAuthorize(request);
 				break;
 			default:
 				break;
@@ -48,49 +54,50 @@ public class AuthInterceptor implements HandlerInterceptor {
 	private void marketAuthorize(HttpServletRequest request, HttpServletResponse response, String[] uriArr) {
 
 		Member member = (Member) request.getSession().getAttribute("authentication");
-		
-		switch (uriArr[2]) {
-		case "mypage":
-			if(member == null) {
-				throw new HandlableException(ErrorCode.UNAUTHORIZED_PAGE);
+		if(uriArr.length >2) {
+			switch (uriArr[2]) {
+			case "mypage":
+				if(member == null) {
+					throw new HandlableException(ErrorCode.UNAUTHORIZED_PAGE);
+				}
+				break;
+			case "shop":
+				shopAuthorize(request, response, uriArr);
+				break;
+			default:
+				break;
 			}
-			break;
-		case "shop":
-			shopAuthorize(request, response, uriArr);
-			break;
-		default:
-			break;
 		}
-		
 	}
 
 	private void shopAuthorize(HttpServletRequest request, HttpServletResponse response, String[] uriArr) {
 
 		Member member = (Member) request.getSession().getAttribute("authentication");
-		
-		switch (uriArr[3]) {
-		case "buy":
-			if(member == null) {
-				throw new HandlableException(ErrorCode.UNAUTHORIZED_PAGE);
+		if(uriArr.length >3) {
+			switch (uriArr[3]) {
+			case "buy":
+				if(member == null) {
+					throw new HandlableException(ErrorCode.UNAUTHORIZED_PAGE);
+				}
+				break;
+			case "cart":
+				if(member == null) {
+					throw new HandlableException(ErrorCode.UNAUTHORIZED_PAGE);
+				}
+				break;
+			case "review":
+				if(member == null) {
+					throw new HandlableException(ErrorCode.UNAUTHORIZED_PAGE);
+				}
+				break;
+			case "qna":
+				if(member == null) {
+					throw new HandlableException(ErrorCode.UNAUTHORIZED_PAGE);
+				}
+				break;
+			default:
+				break;
 			}
-			break;
-		case "cart":
-			if(member == null) {
-				throw new HandlableException(ErrorCode.UNAUTHORIZED_PAGE);
-			}
-			break;
-		case "review":
-			if(member == null) {
-				throw new HandlableException(ErrorCode.UNAUTHORIZED_PAGE);
-			}
-			break;
-		case "qna":
-			if(member == null) {
-				throw new HandlableException(ErrorCode.UNAUTHORIZED_PAGE);
-			}
-			break;
-		default:
-			break;
 		}
 	}
 
@@ -106,7 +113,9 @@ public class AuthInterceptor implements HandlerInterceptor {
 			break;
 		case "modify":
 			System.out.println("찍히나" + request.getSession().getAttribute("modi-bdIdx"));
-			
+			if(member == null) {
+				throw new HandlableException(ErrorCode.UNAUTHORIZED_PAGE);
+			}
 			break;
 		default:
 			break;
@@ -116,10 +125,6 @@ public class AuthInterceptor implements HandlerInterceptor {
 		}
 	}
 
-	private void adminAuthorize(HttpServletRequest httpRequest, HttpServletResponse httpResponse, String[] uriArr)
-			throws IOException, ServletException {
-	
-	}
 
 
 	private void memberAuthorize(HttpServletRequest httpRequest, HttpServletResponse httpResponse, String[] uriArr)
@@ -129,6 +134,17 @@ public class AuthInterceptor implements HandlerInterceptor {
 
 
 
+	}
+	
+	private void mypageAuthorize(HttpServletRequest request) 
+			throws IOException, ServletException {
+		
+		Member member = (Member) request.getSession().getAttribute("authentication");
+		
+		if(member == null) {
+			throw new HandlableException(ErrorCode.UNAUTHORIZED_PAGE);
+		}
+		
 	}
 
 }

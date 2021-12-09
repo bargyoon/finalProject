@@ -19,7 +19,7 @@
 		<where>
 			
 			<if
-				test="commandMap.category != null and commandMap.category != 'all'">and category = #{commandMap.category}</if>
+				test="commandMap.category != null and commandMap.category != 'all'">category = #{commandMap.category}</if>
 			<if
 				test="commandMap.option != null and commandMap.keyword != null">and ${commandMap.option} like '%'||#{commandMap.keyword}||'%'
 			</if>
@@ -45,10 +45,10 @@
 		select nickname, bd_idx, bd_title, reg_date,
 		view_count, rec_count, content
 		,category
-		from (select nickname,
+		from (select b.nickname,
 		user_idx, bd_idx, bd_title, reg_date, view_count,
 		rec_count, content
-		,category from board
+		,category from board b
 		<where>
 			<if
 				test="commandMap.category != null and commandMap.category != 'all'">category = #{commandMap.category}</if>

@@ -1,17 +1,25 @@
 (() => {
 
+testConsole = () => {
+	console.dir(Number(document.getElementById("sm-price").value));
+	
+}
+
 /* checkbox 설정 */
 $(".chk_all").click(function(){
- var chk = $(".chk_all").prop("checked");
- if(chk) {
-  $("input:checkbox[name='cartIdx']").prop("checked", true);
- } else {
-  $("input:checkbox[name='cartIdx']").prop("checked", false);
- }
+	var chk = $(".chk_all").prop("checked");
+	if(chk) {
+		$("input:checkbox[name='cartIdx']").prop("checked", true);
+	} else {
+		$("input:checkbox[name='cartIdx']").prop("checked", false);
+	}
+	calAmount();
 });
+
 $("input:checkbox[name='cartIdx']").click(function(){
-	  $(".chk_all").prop("checked", false);
-	 });
+	$(".chk_all").prop("checked", false);
+	calAmount();
+});
 
 /* selectbox 상품개별삭제 */
 function selectDelete() {
@@ -87,7 +95,7 @@ function selectDelete() {
 	form.submit();
 } */
 
-//상품 개수 증감 버튼 ****작업중
+//상품 개수 증감 버튼
 	changeCnt = (type, cartIdx) => {
 		let cnt = document.getElementById('cnt-' + cartIdx);
 		
@@ -134,43 +142,20 @@ function selectDelete() {
 		})
 	}
 
+	useCoupon = (userIdx) => {
+		if(userIdx == ''){
+			alert("로그인이 필요합니다.");
+			return;
+		}
+		
+		if(document.getElementById("last-price-hidden").value == 0){
+			alert("상품의 옵션을 먼저 선택해주세요.")
+			return;
+		}
 
-    $("#check_module").click(function () {
-        var IMP = window.IMP; // 생략가능
-        IMP.init('imp88593867'); //가맹점 식별코드
+		let res = window.open("/market/shop/choice-coupon?type=2","couponPopup", "width=1300,height=500,left=100,top=0");
+	}
 
-        IMP.request_pay({
-            pg: 'html5_inicis',       
-            pay_method: 'card',           
-            merchant_uid: 'merchant_' + new Date().getTime(),          
-            name: '상품이름(테스트)',//결제창에서 보여질 이름
-            amount: 10,  //가격 
-            buyer_email: 'iamport@siot.do',
-            buyer_name: '구매자이름',
-            buyer_tel: '010-1234-5678',
-            buyer_addr: '서울특별시 강남구 삼성동',
-            buyer_postcode: '123-456',
-            m_redirect_url: 'https://www.yourdomain.com/payments/complete'
-            /*  
-                모바일 결제시,
-                결제가 끝나고 랜딩되는 URL을 지정 
-                (카카오페이, 페이코, 다날의 경우는 필요없음. PC와 마찬가지로 callback함수로 결과가 떨어짐) 
-                */
-        }, function (rsp) { //callback
-            console.log(rsp);
-            if (rsp.success) {
-                var msg = '결제가 완료되었습니다.';
-                msg += '고유ID : ' + rsp.imp_uid;
-                msg += '상점 거래ID : ' + rsp.merchant_uid;
-                msg += '결제 금액 : ' + rsp.paid_amount;
-                msg += '카드 승인번호 : ' + rsp.apply_num;
-            } else {
-                var msg = '결제에 실패하였습니다.';
-                msg += '에러내용 : ' + rsp.error_msg;
-            }
-            alert(msg);
-        });
-    });
 
 })();
     

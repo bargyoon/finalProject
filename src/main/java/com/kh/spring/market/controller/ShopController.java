@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.kh.spring.common.util.FileDTO;
 import com.kh.spring.common.util.pagination.Paging;
 import com.kh.spring.market.model.dto.Cart;
 import com.kh.spring.market.model.dto.Coupon;
@@ -58,6 +59,7 @@ public class ShopController {
 								.build();
 		
 		List<Product> prdList = shopService.selectPrdListBySet(listSet, pageUtil);
+		List<FileDTO> files = shopService.selectFileList(prdList);
 		
 		String categoryWord = shopService.categoryToKor(listSet.getCategory());
 		
@@ -65,6 +67,7 @@ public class ShopController {
 		model.addAttribute("pageUtil", pageUtil);
 		model.addAttribute("categoryWord", categoryWord);
 		model.addAttribute("prdList", prdList);
+		model.addAttribute("files", files);
 	}
 	
 	@GetMapping("event-list")
@@ -78,8 +81,10 @@ public class ShopController {
 								,prdListSet listSet, @RequestParam(required = false, defaultValue = "1") int page
 								,@RequestParam(required = false, defaultValue = "1") int pageQna) {
 		
-		List<Product> prdOptionInfos = shopService.selectPrdListByIdx(pn);
+		List<Product> prdOptionInfos = shopService.selectPrdDetailListByIdx(pn);
 		//prd_idx 유효성 검사
+		System.out.println(pn);
+		
 		if(pn == 0 || prdOptionInfos.size() == 0) {
 			redirectAttr.addFlashAttribute("msg", "해당 상품은 존재하지 않습니다.");
 			redirectAttr.addFlashAttribute("url", "/market/market");
@@ -102,7 +107,12 @@ public class ShopController {
 		
 		
 		Product prdInfo = shopService.selectPrdByIdx(pn);
+		Map<String, FileDTO> prdFileInfo = shopService.selectFileInfoByPrdIdx(prdInfo);
 		List<Review> reviews = shopService.selectReviewByPrdIdxWithPaging(pn, listSet, pageUtil);
+		for (Review review : reviews) {
+			System.out.println(review.toString());
+		}
+		List<List<FileDTO>> reviewFiles = shopService.selectReviewFiles(reviews);
 		Map<String, Object> cntByReviewType = shopService.getCntByType(pn);
 		Map<String, Object> prdInfoMap = Map.of("optionList", prdOptionInfos, "prdInfo", prdInfo);
 		List<QNA> qnaList = shopService.selectQnaListByPrdIdxWithPaging(pn, pageUtilForQna);
@@ -114,6 +124,8 @@ public class ShopController {
 		model.addAttribute("pageUtil", pageUtil);
 		model.addAttribute("qnaList", qnaList);
 		model.addAttribute("pageUtilQna", pageUtilForQna);
+		model.addAttribute("prdFileInfo", prdFileInfo);
+		model.addAttribute("reviewFiles", reviewFiles);
 		
 		return "market/shop/prd-detail";
 	}
@@ -141,10 +153,11 @@ public class ShopController {
 	}
 	
 	@GetMapping("choice-coupon")
-	public void choiceCoupon(@SessionAttribute(name="authentication")Member certifiedUser, Model model) {
+	public void choiceCoupon(@SessionAttribute(name="authentication")Member certifiedUser, String type, Model model) {
 		int userIdx = certifiedUser.getUserIdx();
 		List<Coupon> couponList = shopService.selectCouponByUserIdx(userIdx);
 		model.addAttribute("couponList", couponList);
+		model.addAttribute("type", type);
 	}
 	
 	@GetMapping("iamport-certification/{imp_uid}")
@@ -167,6 +180,7 @@ public class ShopController {
 	@PostMapping("regist-order")
 	@ResponseBody
 	public void registOrder(@RequestBody List<Order> orderInfos, HttpSession session, @SessionAttribute(name="authentication")Member certifiedUser) {
+
 		if(shopService.insertOrder(orderInfos)) {
 			certifiedUser.setSaveMoney(certifiedUser.getSaveMoney()-orderInfos.get(0).getSaveMoney());
 			session.setAttribute("authentication", certifiedUser);

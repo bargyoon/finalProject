@@ -25,8 +25,7 @@ public class BoardServiceImpl implements BoardService {
 	private final MemberRepository memberRepository;
 
 	public void insertBoard(List<MultipartFile> files, Board board) {
-		board.setUserIdx(10);
-		board.setNickname("mynick");
+		
 		boardRepository.insertBoard(board);
 
 		for (MultipartFile multipartFile : files) {
@@ -82,8 +81,7 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	public void insertComment(BoardComment boardComment) {
-		boardComment.setUserIdx(10);
-		boardComment.setNickname("mynick");
+		
 		boardRepository.insertComment(boardComment);
 		if(boardComment.getPrIdx() == 0) {
 			boardRepository.updatePrIdx();
@@ -141,6 +139,18 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public void deleteBoard(Board board) {
 		boardRepository.updateDeleteBoard(board);
+	}
+	
+	@Override
+	public void updateComment(BoardComment boardComment) {
+		boardRepository.updateComment(boardComment);
+		
+	}
+	
+	@Override
+	public void deleteComment(BoardComment boardComment) {
+		boardRepository.updateDeleteBoardComment(boardComment);
+		
 	}
 	
 }

@@ -1,5 +1,6 @@
 package com.kh.spring.market.model.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -17,6 +18,7 @@ import com.kh.spring.market.model.dto.QNA;
 import com.kh.spring.market.model.dto.Review;
 import com.kh.spring.market.model.dto.SaveHistory;
 import com.kh.spring.market.model.repository.MarketMypageRepository;
+import com.kh.spring.market.model.repository.ShopRepository;
 import com.kh.spring.member.model.dto.Member;
 
 import lombok.RequiredArgsConstructor;
@@ -105,12 +107,11 @@ public class MarketMypageServiceImpl implements MarketMypageService{
 		List<Map<String, Object>> commandList = mypageRepository.selectMyReviewList(commandMap);
 		
 		for (Map<String, Object> map : commandList) {
-			FileDTO files = new FileDTO();
-			files.setSavePath((String) map.get("SAVE_PATH"));
-			files.setRenameFileName((String) map.get("RENAME_FILE_NAME"));
-			map.put("downloadURL", files.getDownloadURL());
-		}
-		
+			if(Integer.parseInt(map.get("TYPE").toString()) == 1) {
+				List<FileDTO> files = mypageRepository.selectFileInfoByIdx(Integer.parseInt(map.get("RV_IDX").toString()));			
+				map.put("files", files);				
+			}
+		}		
 		return commandList;
 	}
 	
@@ -174,6 +175,12 @@ public class MarketMypageServiceImpl implements MarketMypageService{
 	@Override
 	public void insertSaveMoney(SaveHistory saveHistory) {
 		mypageRepository.insertSaveMoney(saveHistory);
+		
+	}
+	
+	@Override
+	public void updateOrderNum(int orderIdx) {
+		mypageRepository.updateOrderNum(orderIdx);
 		
 	}
 
@@ -240,7 +247,14 @@ public class MarketMypageServiceImpl implements MarketMypageService{
 		return true;
 	}
 
-	
+	public List<FileDTO> selectFile(List<Map<String, Object>> cartList) {
+		List<FileDTO> files = new ArrayList<FileDTO>();
+		for (Map<String, Object> map : cartList) {
+			files.add(mypageRepository.selectFileByIdx(map.get("PRD_IDX")));
+		}
+		return files;
+	}
+
 
 	
 }

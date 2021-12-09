@@ -4,7 +4,6 @@
 <html>
 <head>
 <%@ include file="/WEB-INF/views/include/market/shop-head.jsp"%>
-
 </head>
 <body onscroll="checkHeight()">
 	<%@ include file="/WEB-INF/views/include/market/market-nav.jsp"%>
@@ -62,7 +61,7 @@
 							<c:if test="${prdList[i].salePer ne 0}">
 								<div class="badge-shop">Sale</div>					
 							</c:if>
-							<img class="prd-img" src="https://dummyimage.com/300x300/dee2e6/6c757d.jpg" alt="..."/>
+							<img class="prd-img" src="${files.downloadURL}" alt="..."/>
 							<div class="pt-3" style="padding-bottom: 0rem;">
 								<p class="prd-name mb-1 small"><c:out value="${prdList[i].name}"/></p>
 							</div>

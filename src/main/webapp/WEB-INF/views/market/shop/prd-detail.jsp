@@ -36,7 +36,7 @@
 
 	<section class="container" style="margin-top: 10rem;">
 		<div class="prd-detail">
-			<img class="prd-detail-img" src="https://dummyimage.com/500x500/dee2e6/6c757d.jpg" alt="..." />
+			<img class="prd-detail-img" src="${prdFileInfo.prdImage.downloadURL}" alt="..." />
 			<div class="prd-detail-info">
 				<p class="prd-name mb-2" style="font-size: 23px; font-weight: bold;"><c:out value="${prdInfo.name}"/></p>
 				<input type="hidden" id="prd-name" value="${prdInfo.name}">
@@ -144,7 +144,7 @@
 		</div>
 		<hr>
 		<div class="prd-description my-5">
-			<img src="../img/description_sample_img.jpg">
+			<img src="${prdFileInfo.subImage.downloadURL}">
 		</div>
 		<div class="prd-review-tab my-5">
 			<p id="prd-review-tit">구매평</p>
@@ -176,18 +176,13 @@
 							<c:if test="${reviews[i].type eq 1}">
 								<div class="extend-img-area"></div>
 								<div class="review-content-imgs my-3">
-									<div onclick="changeImgSize(this)">
-										<img src="https://dummyimage.com/500x500/dee2e6/6c757d.jpg" style="max-width: 200px; max-height: 200px;">
-									</div>
-									<div onclick="changeImgSize(this)">
-										<img src="https://dummyimage.com/500x500/dee2e6/6c757d.jpg" style="max-width: 200px; max-height: 200px;">
-									</div>
-									<div onclick="changeImgSize(this)">
-										<img src="https://dummyimage.com/500x500/dee2e6/6c757d.jpg" style="max-width: 200px; max-height: 200px;">
-									</div>
-									<div onclick="changeImgSize(this)">
-										<img src="https://dummyimage.com/500x500/dee2e6/6c757d.jpg" style="max-width: 200px; max-height: 200px;">
-									</div>
+									<c:forEach var="k" begin="0" step="1" end="${reviewFiles[i].size()}">
+										<c:if test="${reviewFiles[i].size() ne 0}">
+											<div onclick="changeImgSize(this)">
+												<img src="${reviewFiles[i][k].downloadURL}" style="max-width: 200px; max-height: 200px;">
+											</div>
+										</c:if>
+									</c:forEach>
 								</div>
 							</c:if>
 							<div class="mt-3">

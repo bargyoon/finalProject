@@ -166,7 +166,7 @@
 
 							<br>
 							<div class="table-responsive">
-								<form method="post">
+								<form>
 									<table class="table mb-0">
 										<thead class="thead-dark">
 											<tr>
@@ -185,7 +185,7 @@
 											<c:forEach items="${bList}" var="bList" varStatus="status">
 												<tr>
 													<th><label class="customcheckbox"> <input
-															type="checkbox" class="listCheckbox" /> <span
+															type="checkbox" class="listCheckbox" value="${bList.BD_IDX}" /> <span
 															class="checkmark"></span>
 													</label></th>
 													<td><a
@@ -216,7 +216,7 @@
 
 									<div class="border-top">
 										<div class="card-body">
-											<button class="btn-secondary ">submit</button>
+											<button class="btn btn-secondary " onclick="deleteCheckList('contents/delete-board')">삭제</button>
 											<%@ include file="/WEB-INF/views/admin/include/paging.jsp"%>
 										</div>
 									</div>
@@ -334,19 +334,17 @@
     }
     
 let confirmDeleteBoard = (bdIdx) =>{
- 		
-    	return fetch('/admin/contents/delete-board',{
+    	return fetch('/admin/contents/delete-one-board',{
  			method:"post",
  			body: JSON.stringify({bdIdx : bdIdx}),
  			 headers:{
  			    'Content-Type': 'application/json'
  			  }
     	}).then(res => {
-    		alert('상태가 변경되었습니다.');
+    		alert('삭제 되었습니다.');
     		location.reload();
     	})
-    		
- 	
+    	
  	}
     
    

@@ -220,7 +220,7 @@
 			return;
 		}
 		
-		window.open("/market/shop/choice-coupon","couponPopup", "width=1300,height=500,left=100,top=0");
+		window.open("/market/shop/choice-coupon?type=1","couponPopup", "width=1300,height=500,left=100,top=0");
 	}
 	
 	
@@ -284,7 +284,7 @@
 	changeImgSize = (imgDiv) => {
 	    let img = document.createElement("img");
 	    img.src = imgDiv.firstElementChild.src;
-	    if(document.querySelector(".extend-img-area").hasChildNodes){
+	    if(document.querySelector(".extend-img-area").hasChildNodes()){
 	        document.querySelector(".extend-img-area").removeChild(document.querySelector(".extend-img-area").firstChild);
 	    }
 	    document.querySelector(".extend-img-area").append(img);

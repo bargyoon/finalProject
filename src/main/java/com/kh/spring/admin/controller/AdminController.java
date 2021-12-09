@@ -103,9 +103,11 @@ public class AdminController {
 
 	@GetMapping("shopping/order-list")
 	public void orderList(Model model ,@RequestParam(required = false, defaultValue = "1") int page
-			,@RequestParam(value = "state", required = false, defaultValue = "all") String state) {
+			,@RequestParam(value = "state", required = false, defaultValue = "all") String state
+			,@RequestParam(required = false) String keyword) {
 		Map<String, Object> commandMap = new LinkedHashMap<String, Object>();
 		commandMap.put("state", state);
+		commandMap.put("keyword", keyword);
 		Paging pageUtil = Paging.builder()
 				.curPage(page)
 				.cntPerPage(5)
@@ -176,6 +178,8 @@ public class AdminController {
 
 	}
 	
+
+	
 	@GetMapping("shopping/QnA")
 	public void qna(Model model ,@RequestParam(required = false, defaultValue = "1") int page
 			,@RequestParam(value = "state", required = false, defaultValue = "all") String state
@@ -242,15 +246,25 @@ public class AdminController {
 		model.addAttribute("dataMap",commandMap);
 	}
 	
-	@PostMapping("contents/delete-board")
+	@PostMapping("contents/delete-one-board")
 	@ResponseBody
-	public String deleteBoard(@RequestBody Map<String, Object> jsonMap) {
-		adminService.deleteBaord((int)jsonMap.get("bdIdx"));
+	public String deleteOneBoard(@RequestBody Map<String, Object> jsonMap) {
+		adminService.deleteOneBaord((int)jsonMap.get("bdIdx"));
+		
+		return "good";
+
+	}
+	@PostMapping("contents/delete-one-comment")
+	@ResponseBody
+	public String deleteOneComment(@RequestBody Map<String, Object> jsonMap) {
+		adminService.deleteOneComment((int)jsonMap.get("cmIdx"));
 		
 		return "good";
 
 	}
 
+	
+	
 	@GetMapping("contents/comment-list")
 	public void commentList(Model model
 			,@RequestParam(required = false, defaultValue = "1") int page
@@ -374,6 +388,26 @@ public class AdminController {
 		
 		
 		adminService.deleteComments(rvIdxs);
+		return "good";
+
+	}
+
+	@PostMapping("contents/delete-board")
+	@ResponseBody
+	public String deleteBoards(@RequestBody List<Integer> bdIdxs) {
+		
+		
+		adminService.deleteBoards(bdIdxs);
+		return "good";
+
+	}
+
+	@PostMapping("contents/delete-comment")
+	@ResponseBody
+	public String deleteBoardComments(@RequestBody List<Integer> cmIdxs) {
+		
+		
+		adminService.deleteBoardComments(cmIdxs);
 		return "good";
 
 	}

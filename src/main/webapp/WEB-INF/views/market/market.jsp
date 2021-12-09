@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,17 +17,17 @@
 	<header class="slick_test2" style="margin-top: 3.5rem; min-height: 30rem;">
 		<div class="">
 			<div class="text-center text-white">
-				<img src="/resources/img/market/main4.gif" alt="..." style="width: 100%; max-width: 100%; height: auto; margin-top:4.5rem"/>
+				<img src="${contextPath}/resources/img/market/main4.gif" alt="..." style="width: 100%; max-width: 100%; height: auto;"/>
 			</div>
 		</div>
 		<div class="">
 			<div class="text-center text-white">
-				<img src="/resources/img/market/main2.png" alt="..." style="width: 100%; max-width: 100%; height: auto; margin-top:4.5rem"/>
+				<img src="${contextPath}/resources/img/market/main2.png" alt="..." style="width: 100%; max-width: 100%; height: auto;"/>
 			</div>
 		</div>
 		<div class="">
 			<div class="text-center text-white">
-				<img src="/resources/img/market/main3.gif" alt="..." style="width: 100%; max-width: 100%; height: auto; margin-top:4.5rem"/>
+				<img src="${contextPath}/resources/img/market/main3.gif" alt="..." style="width: 100%; max-width: 100%; height: auto;"/>
 			</div>
 		</div>
 	</header>
@@ -41,177 +42,51 @@
 		</div>
 		<div class="container px-4 mt-5">
 			<div class="slick_test">
-				<div class="card h-100">
-					<a class="btn" href="http://localhost:9090">
-						<img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
-						<div class="card-body pt-4" style="padding-bottom: 0rem;">
-							<div class="text-center">
-								<h5 class="fw-bolder"> 더독 닥터소프트 <br>야채&식이섬유 1.2kg</h5>
+				<c:forEach var="newPrd" items="${newPrdList}">
+					<div class="card h-100">
+						<c:if test="${newPrd.SALE_PER ne 0}">
+							<div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.85rem">할인</div>
+						</c:if>
+						<a class="btn" href="/market/shop/prd-detail?pn=${newPrd.PRD_IDX}">
+							<img class="card-img-top" src="${newPrd.downloadURL}" alt="..." />
+							<div class="card-body pt-4" style="padding-bottom: 0rem;">
+								<div class="text-center">
+									<h5 class="fw-bolder">${newPrd.NAME}</h5>
+								</div>
 							</div>
+						</a>
+						<div class="d-flex justify-content-center small text-warning mb-2">
+							<c:forEach var="i" begin="0" step="1" end="${newPrd.RATING-1}">
+	                            <i class="fas fa-star"></i>
+	                    	</c:forEach>
 						</div>
-					</a>
-					<div class="d-flex justify-content-center small text-warning mb-2">
-						<div class="bi-star-fill"></div>
-						<div class="bi-star-fill"></div>
-						<div class="bi-star-fill"></div>
-						<div class="bi-star-fill"></div>
-						<div class="bi-star-fill"></div>
-					</div>
-					<div class="text-center">12,000원</div>
-				</div>
-				<div class="card h-100">
-					<div class="badge bg-dark text-white position-absolute"
-						style="top: 0.5rem; right: 0.85rem">할인</div>
-					<a class="btn" href="http://localhost:9090">
-						<img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
-						<div class="card-body pt-4" style="padding-bottom: 0rem;">
+						<c:if test="${newPrd.SALE_PER ne 0}">
 							<div class="text-center">
-								<h5 class="fw-bolder">펫모닝 펫둥이 올바디 펫티슈 30매</h5>
+									<span style="color: red;">${newPrd.SALE_PER}%</span>
+								<span class="text-muted text-decoration-line-through" style="font-size: smaller;"><fmt:formatNumber value="${newPrd.PRICE}"/>원</span>
 							</div>
+						</c:if>
+						<div class="text-center">
+							<c:if test="${newPrd.SALE_PER eq 0}">
+				            	<fmt:formatNumber value="${newPrd.PRICE}"/>원
+							</c:if>
+							<c:if test="${newPrd.SALE_PER ne 0}">
+				            	<fmt:formatNumber value="${newPrd.PRICE * (1 - (newPrd.SALE_PER/100))}"/>원
+							</c:if>
 						</div>
-					</a>
-					<div class="d-flex justify-content-center small text-warning mb-2">
-						<div class="bi-star-fill"></div>
-						<div class="bi-star-fill"></div>
-						<div class="bi-star-fill"></div>
-						<div class="bi-star-fill"></div>
-						<div class="bi-star-fill"></div>
 					</div>
-					<div class="text-center">
-						<span style="color: red;">35%</span>
-						<span class="text-muted text-decoration-line-through" style="font-size: smaller;">3,000원</span>
-					</div>
-					<div class="prd-price text-center">1,700원</div>
-				</div>
-				<div class="card h-100">
-					<a class="btn" href="http://localhost:9090">
-						<img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
-						<div class="card-body pt-4" style="padding-bottom: 0rem;">
-							<div class="text-center">
-								<h5 class="fw-bolder"> 더독 닥터소프트 <br>야채&식이섬유 1.2kg</h5>
-							</div>
-						</div>
-					</a>
-					<div class="d-flex justify-content-center small text-warning mb-2">
-						<div class="bi-star-fill"></div>
-						<div class="bi-star-fill"></div>
-						<div class="bi-star-fill"></div>
-						<div class="bi-star-fill"></div>
-						<div class="bi-star-fill"></div>
-					</div>
-					<div class="text-center">12,000원</div>
-				</div>
-				<div class="card h-100">
-					<a class="btn" href="http://localhost:9090">
-						<img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
-						<div class="card-body pt-4" style="padding-bottom: 0rem;">
-							<div class="text-center">
-								<h5 class="fw-bolder"> 더독 닥터소프트 <br>야채&식이섬유 1.2kg</h5>
-							</div>
-						</div>
-					</a>
-					<div class="d-flex justify-content-center small text-warning mb-2">
-						<div class="bi-star-fill"></div>
-						<div class="bi-star-fill"></div>
-						<div class="bi-star-fill"></div>
-						<div class="bi-star-fill"></div>
-						<div class="bi-star-fill"></div>
-					</div>
-					<div class="text-center">12,000원</div>
-				</div>
-				<div class="card h-100">
-					<div class="badge bg-dark text-white position-absolute"
-						style="top: 0.5rem; right: 0.85rem">할인</div>
-					<a class="btn" href="http://localhost:9090">
-						<img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
-						<div class="card-body pt-4" style="padding-bottom: 0rem;">
-							<div class="text-center">
-								<h5 class="fw-bolder">펫모닝 펫둥이 올바디 펫티슈 30매</h5>
-							</div>
-						</div>
-					</a>
-					<div class="d-flex justify-content-center small text-warning mb-2">
-						<div class="bi-star-fill"></div>
-						<div class="bi-star-fill"></div>
-						<div class="bi-star-fill"></div>
-						<div class="bi-star-fill"></div>
-						<div class="bi-star-fill"></div>
-					</div>
-					<div class="text-center">
-						<span style="color: red;">35%</span>
-						<span class="text-muted text-decoration-line-through" style="font-size: smaller;">3,000원</span>
-					</div>
-					<div class="prd-price text-center">1,700원</div>
-				</div>
-				<div class="card h-100">
-					<div class="badge bg-dark text-white position-absolute"
-						style="top: 0.5rem; right: 0.85rem">할인</div>
-					<a class="btn" href="http://localhost:9090">
-						<img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
-						<div class="card-body pt-4" style="padding-bottom: 0rem;">
-							<div class="text-center">
-								<h5 class="fw-bolder">펫모닝 펫둥이 올바디 펫티슈 30매</h5>
-							</div>
-						</div>
-					</a>
-					<div class="d-flex justify-content-center small text-warning mb-2">
-						<div class="bi-star-fill"></div>
-						<div class="bi-star-fill"></div>
-						<div class="bi-star-fill"></div>
-						<div class="bi-star-fill"></div>
-						<div class="bi-star-fill"></div>
-					</div>
-					<div class="text-center">
-						<span style="color: red;">35%</span>
-						<span class="text-muted text-decoration-line-through" style="font-size: smaller;">3,000원</span>
-					</div>
-					<div class="prd-price text-center">1,700원</div>
-				</div>
-				<div class="card h-100">
-					<div class="badge bg-dark text-white position-absolute"
-						style="top: 0.5rem; right: 0.85rem">할인</div>
-					<a class="btn" href="http://localhost:9090">
-						<img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
-						<div class="card-body pt-4" style="padding-bottom: 0rem;">
-							<div class="text-center">
-								<h5 class="fw-bolder">펫모닝 펫둥이 올바디 펫티슈 30매</h5>
-							</div>
-						</div>
-					</a>
-					<div class="d-flex justify-content-center small text-warning mb-2">
-						<div class="bi-star-fill"></div>
-						<div class="bi-star-fill"></div>
-						<div class="bi-star-fill"></div>
-						<div class="bi-star-fill"></div>
-						<div class="bi-star-fill"></div>
-					</div>
-					<div class="text-center">
-						<span style="color: red;">35%</span>
-						<span class="text-muted text-decoration-line-through" style="font-size: smaller;">3,000원</span>
-					</div>
-					<div class="prd-price text-center">1,700원</div>
-				</div>
+				</c:forEach>
 			</div>
 		</div>
 	</section>
 
 
-	<section class="py-3 my-5" style="background-color: darkgreen;">
-		<div class="px-4 px-lg-5 my-5">
-			<div class="text-center text-white">
-				<h1 class="display-4 fw-bolder">친환경 제품</h1>
-				<p class="lead fw-normal text-white-50 mb-0">주인님들의 옥체에 해롭지 않은 제품들</p>
-				<div class="card-footer pt-3 border-top-0 bg-transparent">
-					<div class="text-center">
-						<a class="btn btn-outline-dark bg-dark text-white" href="#">상품 보러 가기</a>
-					</div>
-				</div>
-			</div>
-		</div>
+	<section>
+		<a href="#!"><img src="${contextPath}/resources/img/market/main1.png"></a>
 	</section>
 
 
-	<section class="py-5">
+	<section class="py-5 mb-5">
 		<div class="container px-4 mt-5">
 			<div class="text-center gx-4">
 				<h1 class="display-6 fw-bolder" style="color: darkorange;">Best Item</h1>
@@ -220,75 +95,47 @@
 			</div>
 		</div>
 		<div class="px-4 mt-5">
-			<div
-				class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
-				<div class="card h-100">
-					<div class="badge-rank position-absolute" style="top: -0.5rem; left: 1rem; background-color: gold;">1위</div>
-					<a class="btn" href="#!">
-					<img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
-						<div class="card-body pt-4" style="padding-bottom: 0rem;">
-							<div class="text-center">
-								<h5 class="fw-bolder">더독 닥터소프트 <br>야채&식이섬유 1.2kg</h5>
+			<div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+				<c:forEach var="bestPrd" items="${bestPrdList}" varStatus="status">
+					<div class="card h-100">
+						<c:if test="${status.index eq 0}">
+							<div class="badge-rank position-absolute" style="top: -0.5rem; left: 1rem; background-color: gold;">${status.index + 1}위</div>
+						</c:if>
+						<c:if test="${status.index eq 1}">
+							<div class="badge-rank position-absolute" style="top: -0.5rem; left: 1rem; background-color: silver;">${status.index + 1}위</div>
+						</c:if>
+						<c:if test="${status.index eq 2}">
+							<div class="badge-rank position-absolute" style="top: -0.5rem; left: 1rem; background-color: brown;">${status.index + 1}위</div>
+						</c:if>
+						<a class="btn" href="/market/shop/prd-detail?pn=${bestPrd.PRD_IDX}">
+						<img class="card-img-top" src="${bestPrd.downloadURL}" alt="..." />
+							<div class="card-body pt-4" style="padding-bottom: 0rem;">
+								<div class="text-center">
+									<h5 class="fw-bolder">${bestPrd.NAME}</h5>
+								</div>
 							</div>
+						</a>
+						<div class="d-flex justify-content-center small text-warning mb-2">
+							<c:forEach var="i" begin="0" step="1" end="${bestPrd.RATING-1}">
+	                            <i class="fas fa-star"></i>
+	                    	</c:forEach>
 						</div>
-					</a>
-					<!-- Product reviews-->
-					<div class="d-flex justify-content-center small text-warning mb-2">
-						<div class="bi-star-fill"></div>
-						<div class="bi-star-fill"></div>
-						<div class="bi-star-fill"></div>
-						<div class="bi-star-fill"></div>
-						<div class="bi-star-fill"></div>
-					</div>
-					<div class="text-center">12,000원</div>
-				</div>
-				<div class="card h-100">
-					<div class="badge-rank position-absolute"
-						style="top: -0.5rem; left: 1rem; background-color: silver;">2위</div>
-					<a class="btn" href="#!">
-						<img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
-						<div class="card-body pt-4" style="padding-bottom: 0rem;">
+						<c:if test="${bestPrd.SALE_PER ne 0}">
 							<div class="text-center">
-								<h5 class="fw-bolder">펫모닝 펫둥이 올바디 펫티슈 30매</h5>
+									<span style="color: red;">${bestPrd.SALE_PER}%</span>
+								<span class="text-muted text-decoration-line-through" style="font-size: smaller;"><fmt:formatNumber value="${bestPrd.PRICE}"/>원</span>
 							</div>
+						</c:if>
+						<div class="text-center">
+							<c:if test="${bestPrd.SALE_PER eq 0}">
+				            	<fmt:formatNumber value="${bestPrd.PRICE}"/>원
+							</c:if>
+							<c:if test="${bestPrd.SALE_PER ne 0}">
+				            	<fmt:formatNumber value="${bestPrd.PRICE * (1 - (bestPrd.SALE_PER/100))}"/>원
+							</c:if>
 						</div>
-					</a>
-					<div class="d-flex justify-content-center small text-warning mb-2">
-						<div class="bi-star-fill"></div>
-						<div class="bi-star-fill"></div>
-						<div class="bi-star-fill"></div>
-						<div class="bi-star-fill"></div>
-						<div class="bi-star-fill"></div>
 					</div>
-					<div class="text-center">
-						<span style="color: red;">35%</span>
-						<span class="text-muted text-decoration-line-through" style="font-size: smaller;">3,000원</span>
-					</div>
-					<div class="text-center">1,700원</div>
-				</div>
-				<div class="card h-100">
-					<div class="badge-rank position-absolute" style="top: -0.5rem; left: 1rem; background-color: brown;">3위</div>
-					<a class="btn" href="#!">
-						<img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
-						<div class="card-body pt-4" style="padding-bottom: 0rem;">
-							<div class="text-center">
-								<h5 class="fw-bolder">펫모닝 펫둥이 올바디 펫티슈 30매</h5>
-							</div>
-						</div>
-					</a>
-					<div class="d-flex justify-content-center small text-warning mb-2">
-						<div class="bi-star-fill"></div>
-						<div class="bi-star-fill"></div>
-						<div class="bi-star-fill"></div>
-						<div class="bi-star-fill"></div>
-						<div class="bi-star-fill"></div>
-					</div>
-					<div class="text-center">
-						<span style="color: red;">35%</span>
-						<span class="text-muted text-decoration-line-through" style="font-size: smaller;">3,000원</span>
-					</div>
-					<div class="text-center">1,700원</div>
-				</div>
+				</c:forEach>
 			</div>
 		</div>
 	</section>

@@ -10,7 +10,7 @@
 	<div class="dataTables_paginate paging_simple_numbers float-right"
 		id="zero_config_paginate">
 		<ul class="pagination">
-			<li class="paginate_button page-item previous disabled"
+			<li class="paginate_button page-item previous"
 				id="zero_config_previous"><a aria-controls="zero_config"
 				data-dt-idx="0" tabindex="0" class="page-link"
 				onclick="prevBtn(${pageUtil.curPage})">Previous</a></li>

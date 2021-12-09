@@ -29,7 +29,7 @@ public interface AdminService {
 
 	void updateProductState(Map<String, Object> jsonMap);
 
-	void deleteBaord(int bdIdx);
+	void deleteOneBaord(int bdIdx);
 
 	void deletePrd(List<Integer> dtIdxs);
 
@@ -40,6 +40,12 @@ public interface AdminService {
 	void deleteQna(List<Integer> qnaIdxs);
 
 	void deleteComments(List<Integer> rvIdxs);
+
+	void deleteBoards(List<Integer> bdIdxs);
+
+	void deleteBoardComments(List<Integer> cmIdxs);
+
+	void deleteOneComment(int cmIdx);
 
 
 	

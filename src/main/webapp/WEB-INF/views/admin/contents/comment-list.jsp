@@ -167,7 +167,7 @@
 								</header>
 
 							</div>
-							<form action="#" method="post">
+							<form >
 								<div
 									class="comment-widgets scrollable ps-container ps-theme-default"
 									data-ps-id="4d3d0b7d-4667-4dfb-6173-498416fca048">
@@ -177,27 +177,23 @@
 											<c:when test="${comment.CM_TYPE == 0 }">
 												<div class="d-flex flex-row comment-row">
 													<div class="p-2">
-														<label><input type="checkbox" class="listCheckbox"></label>
+														<label><input type="checkbox" class="listCheckbox" value="${comment.CM_IDX }"></label>
 													</div>
 													<div class="comment-text active w-100">
 														<h6 class="font-medium">
 															<a class="text-primary">${comment.NICKNAME}</a> <small><a>[${comment.CATEGORY}]${comment.BD_TITLE}</a></small>
 														</h6>
-														<div class="nav-item dropdown" href=""
-															data-toggle="dropdown" aria-haspopup="true"
-															aria-expanded="false"
-															style="float: right; margin-top: -20px">
-
-															<i class="m-r-10 mdi mdi-menu "> </i>
-															<div class="dropdown-menu"
-																aria-labelledby="navbarDropdown">
-																<a class="dropdown-item" href="#">Action</a> <a
-																	class="dropdown-item" href="#">Another action</a>
-																<div class="dropdown-divider"></div>
-																<a class="dropdown-item" href="#">Something else
-																	here</a>
-															</div>
-														</div>
+														<span style="float: right; margin-top: -20px">
+													<c:choose>
+													
+													<c:when test="${comment.IS_DEL == 1}">
+														삭제요청중<a class="btn btn-warning btn-sm" onclick="confirmDeleteComment(${comment.CM_IDX})">삭제</a>
+													</c:when>
+													<c:otherwise>
+														등록됨
+													</c:otherwise>
+													</c:choose>
+													</span>
 
 														<span class="m-b-15 d-block">${comment.CM_CONTENT}</span>
 
@@ -214,21 +210,17 @@
 														<h6 class="font-medium">
 															<a class="text-primary">${comment.NICKNAME}</a> <small><a>[${comment.CATEGORY}]${comment.BD_TITLE}</a></small>
 														</h6>
-														<div class="nav-item dropdown" href=""
-															data-toggle="dropdown" aria-haspopup="true"
-															aria-expanded="false"
-															style="float: right; margin-top: -20px">
-
-															<i class="m-r-10 mdi mdi-menu "> </i>
-															<div class="dropdown-menu"
-																aria-labelledby="navbarDropdown">
-																<a class="dropdown-item" href="#">Action</a> <a
-																	class="dropdown-item" href="#">Another action</a>
-																<div class="dropdown-divider"></div>
-																<a class="dropdown-item" href="#">Something else
-																	here</a>
-															</div>
-														</div>
+														<span style="float: right; margin-top: -20px">
+													<c:choose>
+													
+													<c:when test="${comment.IS_DEL == 1}">
+														삭제요청중<a class="btn btn-warning btn-sm" onclick="confirmDeleteComment(${comment.CM_IDX})">삭제</a>
+													</c:when>
+													<c:otherwise>
+														등록됨
+													</c:otherwise>
+													</c:choose>
+													</span>
 														<blockquote>
 															<p>
 																<span class="_delete_c20211114d4744b20ab346"
@@ -247,37 +239,7 @@
 									<!-- Comment Row -->
 
 									<!-- Comment Row -->
-									<div class="d-flex flex-row comment-row">
-										<div class="p-2">
-											<label><input type="checkbox"></label>
-										</div>
-										<div class="comment-text active w-100">
-											<h6 class="font-medium">
-												<a class="text-primary">관리자</a> <small><a>게시판 종류</a></small>
-											</h6>
-											<div class="nav-item dropdown" href="" data-toggle="dropdown"
-												aria-haspopup="true" aria-expanded="false"
-												style="float: right; margin-top: -20px">
-
-												<i class="m-r-10 mdi mdi-menu "> </i>
-												<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-													<a class="dropdown-item" href="#">Action</a> <a
-														class="dropdown-item" href="#">Another action</a>
-													<div class="dropdown-divider"></div>
-													<a class="dropdown-item" href="#">Something else here</a>
-												</div>
-											</div>
-											<blockquote>
-												<p>
-													<span class="_delete_c20211114d4744b20ab346"
-														style="font-size: 13px;"> : 원래 게시물 - 관리자</span>
-												</p>
-											</blockquote>
-											<span class="m-b-15 d-block">댓글 내용</span>
-
-
-										</div>
-									</div>
+								
 									<div class="ps-scrollbar-x-rail"
 										style="left: 0px; bottom: 0px;">
 										<div class="ps-scrollbar-x" tabindex="0"
@@ -291,7 +253,7 @@
 
 									<div class="border-top">
 										<div class="card-body">
-											<button class="btn-secondary ">submit</button>
+											<button class="btn btn-secondary " onclick="deleteCheckList('contents/delete-comment')">삭제</button>
 											<%@ include file="/WEB-INF/views/admin/include/paging.jsp"%>
 										</div>
 									</div>
@@ -394,7 +356,19 @@
        		
     	
     }
-    
+    let confirmDeleteComment = (cmIdx) =>{
+    	return fetch('/admin/contents/delete-one-comment',{
+ 			method:"post",
+ 			body: JSON.stringify({cmIdx : cmIdx}),
+ 			 headers:{
+ 			    'Content-Type': 'application/json'
+ 			  }
+    	}).then(res => {
+    		alert('삭제 되었습니다.');
+    		location.reload();
+    	})
+    	
+ 	}
   
     
 </script>

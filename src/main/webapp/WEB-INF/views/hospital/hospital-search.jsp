@@ -236,6 +236,16 @@ url(/fonts/NotoSans-Bold.woff) format('woff');
 
 
 
+/* 메뉴 하단바 설정 변경  */
+#navbarResponsive > ul > li > ul {
+      display:none;
+      position: absolute;
+      line-height: 30px;
+      color: #21252961;
+      width: 11em;
+     margin-left: -16px; 
+}
+
 
 
 
@@ -246,7 +256,7 @@ url(/fonts/NotoSans-Bold.woff) format('woff');
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav" style="position: fixed;">
-            <div class="container" style="margin-right:700px;"> 
+            <div class="container" style="margin-right:400px;"> 
                 <a class="navbar-brand" href="/"  style="height:58px; width:281px; margin:0px 120px 0px 0px; padding:5px 0px;"><img src="/resources/assets/img/site-logo-and-name.png" alt="..." style="width:280px;height:48px"/></a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                     Menu
@@ -255,21 +265,21 @@ url(/fonts/NotoSans-Bold.woff) format('woff');
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0" style="margin-left: 200px !important;"><hr>
                        <li class="nav-item"><a class="nav-link" href="/hospital/info"  style="font-size: 1.5rem;">병원/시설</a>
-	                        	<ul class="navbar-detail" ><hr style="margin: 0px 0px 0px 0px;">
+	                        	<ul class="navbar-detail" style="width: 11em; margin-left: -16px;" ><hr style="margin: 0px 0px 0px 0px;">
 		                        	<li><a href="/hospital/info"  style="font-size: 1.5rem;">동물병원</a>
 	                        		<li><a href="/hospital/search"  style="font-size: 1.5rem;">편의시설검색</a>
 	                        	</ul>
 	                        </li>	
 	                        <li class="nav-item"><a class="nav-link" href="/disease/index"  style="font-size: 1.5rem;">수술비용</a></li>
 	                        <li class="nav-item"><a class="nav-link" href="/petcare/vaccine/dog"  style="font-size: 1.5rem;">펫케어</a>
-	                       		<ul class="navbar-detail"><hr>
+	                       		<ul class="navbar-detail" style="width: 11em; margin-left: -16px;"><hr>
 		                        	<li><a href="/petcare/vaccine/dog"  style="font-size: 1.5rem;">예방접종</a>
 	                        		<li><a href="/petcare/food"  style="font-size: 1.5rem;">금지음식</a>
 	                        		<li><a href="/petcare/action/dog/eyes"  style="font-size: 1.5rem;">행동의미</a>
 	                        	</ul>
 	                        </li>
 	                        <li class="nav-item"><a class="nav-link" href="/board/info"  style="font-size: 1.5rem;">게시판</a>
-	                        	<ul class="navbar-detail"><hr>
+	                        	<ul class="navbar-detail" style="width: 11em; margin-left: -16px;"><hr>
 		                        	<li><a href=#  style="font-size: 1.5rem;">정보게시판</a>
 	                        		<li><a href=#  style="font-size: 1.5rem;">고양이</a>
 	                        		<li><a href=#  style="font-size: 1.5rem;">강아지</a>
@@ -284,7 +294,7 @@ url(/fonts/NotoSans-Bold.woff) format('woff');
 							</c:if>
 							<c:if test="${not empty authentication}">
 								<li class="nav-item"><a class="nav-link" href="/mypage/my-info"  style="font-size: 1.5rem;">마이페이지</a>
-									<ul class="navbar-detail"><hr>
+									<ul class="navbar-detail" style="width: 11em; margin-left: -16px;"><hr>
 									<li><a href="/mypage/my-info"  style="font-size: 1.5rem;">마이페이지</a>
 		                        	<li><a href="/member/logout"  style="font-size: 1.5rem;">로그아웃</a>
 		                        	</ul>
@@ -409,7 +419,7 @@ var mapBounds = null;
       map = new naver.maps.Map('main_map', {
         useStyleMap: true,
         center : new naver.maps.LatLng(position.coords.latitude, position.coords.longitude),
-          zoom: 16,
+          zoom: 15,
           zoomControl: true
         });
       myGEO(new naver.maps.LatLng(position.coords.latitude, position.coords.longitude));
@@ -471,7 +481,7 @@ $(".myGeo").on("click", function(e) {
     navigator.geolocation.getCurrentPosition((position) => {
       myGEO(new naver.maps.LatLng(position.coords.latitude, position.coords.longitude));
       map.setCenter(new naver.maps.LatLng(position.coords.latitude, position.coords.longitude));
-      map.setZoom(17);
+      map.setZoom(15);
   });
 });
 
@@ -591,7 +601,7 @@ function myGEO(nowGeo){
 				    });
 			    //주소짜름
 				addSplit = el.siteWhlAddr != null ? el.siteWhlAddr.split(' ',2) : el.rdnWhlAddr.split(' ',2);
-
+ 
 				 //인포창
 			     infoWindow = new naver.maps.InfoWindow({
 			        content:'<div class="iw_inner" style="padding:16px"><div style="font-weight: 1000;font-size: 20px">'+el.bplcNm+'</div><div style="color:#999;font-weight: 500;font-size: 18px">'+el.lindJobGbnNm+'</div><span style="color:#999;font-weight: 500;font-size: 15px">'+addSplit[0]+" "+addSplit[1]+'</span><br><a style="color:#3c83dc;font-weight: 800" href="/hospital/detail?locationIdx='+el.locationIdx+'">자세히</a></div>',
@@ -604,6 +614,7 @@ function myGEO(nowGeo){
 			    lele= (map.getPrimitiveProjection().getDistance(my,serachPoint2)) * 0.001;
 			    lele = lele.toFixed(2);
 			    
+			    //'없음'을 공백처리
 			    nullPrcb = null;
 			    if(el.lindJobGbnNm=='동물병원'){
 			    	if(el.lindPrcbGbnNm == '전문동물병원'|| el.lindPrcbGbnNm == '대학동물병원'){
@@ -633,17 +644,22 @@ function myGEO(nowGeo){
             	$('.hos').on("click", function(e){
             		for (var i=0, ii=markers.length; i<ii; i++) {
             			if(markers[i].job=='동물병원'){
+            				console.dir(markers[i].prcb);
             				if(markers[i].prcb=='전문동물병원' || markers[i].prcb=='대학동물병원'){
+            					console.dir('전문/대학동물병원');
             					if($('input:radio[id="optionsRadios2"]').is(":checked") == true){ 
 	            					markers[i].setMap(map);
+	            					console.dir('2차동물병원 열기..');
 			               		}else { 
 		            				markers[i].setMap(null);
+		            				console.dir('2차동물병원 닫기..');
 			               		}
             				}else if(markers[i].prcb=='없음'){
             					if($('input:radio[id="optionsRadios1"]').is(":checked") == true){ 
-            						
+	            					console.dir('1차동물병원 열기..');
 	            					markers[i].setMap(map);
 			               		}else { 
+			               			console.dir('1차동물병원 닫기..');
 		            				markers[i].setMap(null);
 			               		}
             				}
@@ -800,10 +816,12 @@ function myGEO(nowGeo){
 			if(marker.prcb=='전문동물병원' || marker.prcb=='대학동물병원'){
 				if($('input:radio[id="optionsRadios2"]').is(":checked") == true){ 
 					marker.setMap(map);
+					console.dir('2차병원 바운더리 open');
            		}
 			}else if(marker.prcb=='없음'){
 				if($('input:radio[id="optionsRadios1"]').is(":checked") == true){ 
-					
+
+					console.dir('1차병원 바운더리 open');
 					marker.setMap(map);
            		}
 			}
@@ -843,10 +861,13 @@ function myGEO(nowGeo){
   			if(marker.prcb=='전문동물병원' || marker.prcb=='대학동물병원'){
   				if($('input:radio[id="optionsRadios2"]').is(":checked") == true){ 
   					marker.setMap(null);
+
+					console.dir('2차병원 바운더리 없애기');
              		}
   			}else if(marker.prcb=='없음'){
   				if($('input:radio[id="optionsRadios1"]').is(":checked") == true){ 
-  					
+
+					console.dir('1차병원 바운더리 없애기');
   					marker.setMap(null);
              		}
   			}

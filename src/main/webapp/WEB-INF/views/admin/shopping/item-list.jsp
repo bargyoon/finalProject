@@ -123,21 +123,38 @@
 				<!-- ============================================================== -->
 				<!-- Start Page Content -->
 				<!-- ============================================================== -->
-				<div class="row">
+					<div class="row">
 					<div class="col-md-12">
 						<div class="card">
 							<div class="card-body no-padding">
 								<form>
 									<div class="form-group row">
-										<label for="postSearch"><i
-											style="position: absolute; top: 28px;" class="fas fa-search"></i></label>
-										<label><a><i
-												style="position: absolute; top: 28px; right: 26%; z-index: 999;"
-												class="fas fa-times"></i></a></label>
+
 										<div class="col-sm-9">
-											<input type="text" class="form-control ml-3"
-												placeholder="작성자 내용 검색" name="keyword"
-												onsubmit="selectTab('keyword','this.value')">
+											<div>
+
+												<div
+													style="display: table; width: 100%; margin-bottom: 5px;">
+													<div style="display: table-row-group;">
+														<div class='d-table-cell' style="width: 15%;">키워드 검색</div>
+														<div class='d-table-cell '>
+															<input type="search" class="form-control"
+																style="width: 50%" placeholder="작성자 내용 검색"
+																name="keyword" aria-label="Search" required id="inp"
+																value="${dataMap.keyword }">
+														</div>
+													</div>
+												</div>
+
+											</div>
+											<div class="border-top">
+												<div class="card-body">
+													<button class="btn-secondary float-right ml-2"
+														onclick="searchKeyword()">검색</button>
+													<button class="btn-primary float-right" type="button"
+														onclick="javascript:location.href=location.pathname">초기화</button>
+												</div>
+											</div>
 										</div>
 									</div>
 								</form>
@@ -229,7 +246,7 @@
 
 													<td>${data.PO_STOCK }</td>
 													<td><fmt:formatDate
-															pattern="yyyy-MM-dd hh:mm:ss"
+															pattern="yyyy-MM-dd"
 															value="${data.REG_DATE}" /></td>
 
 												</tr>
@@ -312,6 +329,22 @@
     		
  	
  	}
+	
+	let searchKeyword = () =>{
+		
+		var keyword = document.querySelector("#inp").value
+		
+		keyword = keyword.trim()
+
+		URLSearch.set("keyword", String(keyword));
+		if(keyword == ''){
+			alert("검색어를 입력해주세요.")
+			return
+		}
+	 	 const newParam = URLSearch.toString();
+	 	 location.href = location.pathname + '?' + newParam
+		
+	}
 	
 	
 	

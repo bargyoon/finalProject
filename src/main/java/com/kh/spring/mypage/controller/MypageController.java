@@ -175,7 +175,7 @@ public class MypageController {
 		
 		Paging pageUtil = Paging.builder()
 				.curPage(page)
-				.cntPerPage(4)
+				.cntPerPage(6)
 				.blockCnt(10)
 				.total(mypageService.selectPetCnt(userIdx))
 				.build();
