@@ -7,10 +7,11 @@
  	 <!-- 구매내역 orderList -->
 	<select id="selectOrderList" resultType="map">
   	 	select ORDER_IDX, UC_IDX, USER_IDX, o.order_date, PRD_IDX, PAYMENT_AMOUNT, o.state
-  	 	, ORDER_CNT, SAVE_MONEY, IS_REVIEW,p.name, p.brand, po_name, d.dt_idx
+  	 	, ORDER_CNT, SAVE_MONEY, IS_REVIEW,p.name, p.brand, po_name, d.dt_idx, f.RENAME_FILE_NAME, f.SAVE_PATH
 		from "ORDER" o
 		inner join product p USING(PRD_IDX)
 		inner join prd_detail d USING(PRD_IDX)
+		inner join file_info f on (f.type_idx = prd_idx)
 		<where>
 		user_idx = #{userIdx} and o.dt_idx=d.dt_idx		
 			<if test="state == null">
@@ -102,10 +103,10 @@
 	
 	<!-- coupon list -->
 	<select id="selectCouponByIdx" resultType="map">
-  	 	select COUPON_IDX, c.NAME, c.SALE_PER, c.IS_DEL, u.USER_IDX, u.reg_date, u.UC_IDX, u.EXP_DATE
+  	 	select COUPON_IDX, c.NAME, c.SALE_PER, c.IS_DEL, u.USER_IDX, u.reg_date, u.UC_IDX, u.EXP_DATE, u.IS_DEL
 		from user_coupon u inner join coupon c
 		USING(COUPON_IDX)
-		where u.user_idx = #{userIdx} and u.exp_date > sysdate
+		where u.user_idx = #{userIdx} and u.exp_date > sysdate and u.is_del=0
 	</select>
 	
 	<!-- enquiry form -->

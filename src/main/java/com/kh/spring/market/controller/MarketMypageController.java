@@ -390,12 +390,11 @@ public class MarketMypageController {
 		System.out.println("saveHistory : " + saveHistory);
 		marketMypageService.insertReview(files, review);
 		marketMypageService.updateIsReview(orderIdx);
-		marketMypageService.insertSaveMoney(saveHistory);
-		marketMypageService.updateOrderNum(orderIdx);
-		marketMypageService.updateReserveByReview(member);
-			
-		//파일첨부 안했을 때 예외처리 (RedirectAttributes)
-		System.out.println("upload review : " + review);
+		//marketMypageService.insertSaveMoney(saveHistory);
+		//marketMypageService.updateOrderNum(orderIdx);
+		System.out.println(" member : " + member);
+		//marketMypageService.updateReserveByReview(member);
+				
 		return "redirect:/market/mypage/review/review-list2"; 
 	}
 
