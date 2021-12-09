@@ -160,7 +160,7 @@ public class AdminServiceImpl implements AdminService {
 	public void updateReviewState(Map<String, Object> jsonMap) {
 		shopRepository.updateReviewState(jsonMap);
 		int userIdx = Integer.parseInt(jsonMap.get("userIdx").toString());
-		int orderNum = Integer.parseInt(jsonMap.get("orderNum").toString());
+		long orderNum = Long.parseLong(jsonMap.get("orderNum").toString());
 		if(jsonMap.get("state").equals("1")) {
 			if(jsonMap.get("type").equals("0")) {
 				memberRepository.updateSaveMoney(userIdx, 300);

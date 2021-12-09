@@ -134,8 +134,8 @@ public interface ShopRepository {
 	@Update("update review set state = #{state} where rv_idx = #{rvIdx}")
 	void updateReviewState(Map<String, Object> jsonMap);
 
-	@Insert("insert into save_history(sh_idx, user_idx, state, type, amount, order_num) values(sc_sh_idx.nextval,#{userIdx},1,#{type},#{price},#{orderNum})")
-	void insertSaveMoney(@Param("type")int type,@Param("userIdx") int userIdx,@Param("price") int price,@Param("orderNum") int orderNum);
+	@Insert("insert into save_history(sh_idx, user_idx, state, type, amount, order_num) values(sc_sh_idx.nextval,#{userIdx},0,#{type},#{price},#{orderNum})")
+	void insertSaveMoney(@Param("type")int type,@Param("userIdx") int userIdx,@Param("price") int price,@Param("orderNum") long orderNum);
 
 	List<Map<String, Object>> selectQnAList(@Param("commandMap") Map<String, Object> commandmap,@Param("pageUtil") Paging pageUtil);
 
