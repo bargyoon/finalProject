@@ -39,10 +39,12 @@
   </insert>
   <!-- 작성가능 review list -->
   	<select id="selectReviewList" resultType="map">
-  	 	select ORDER_IDX, USER_IDX, PRD_IDX, ORDER_DATE, o.STATE, ORDER_CNT, UPDATE_DATE,IS_REVIEW, p.name, p.brand, d.po_name, d.dt_idx, o.order_date
+  	 	select ORDER_IDX, USER_IDX, PRD_IDX, ORDER_DATE, o.STATE, ORDER_CNT, UPDATE_DATE,IS_REVIEW
+  	 	, p.name, p.brand, d.po_name, d.dt_idx, o.order_date, f.RENAME_FILE_NAME, f.SAVE_PATH
 		from "ORDER" o
 		inner join product p USING(PRD_IDX)
 		inner join prd_detail d USING(PRD_IDX)
+		inner join file_info f on (f.type_idx = prd_idx)
 		<where>
 			USER_IDX = #{userIdx} and is_review=0 and o.dt_idx=d.dt_idx 
 			and (o.STATE = 'deliverComplete' or o.STATE =  'orderComplete')
@@ -63,11 +65,12 @@
   	
   	 <select id="selectMyReviewList" resultType="map">
   	 	select r.RV_IDX, r.USER_IDX, PRD_IDX, r.ORDER_IDX, r.STATE, r.RATING, r.TYPE, r.RECOMMAND, r.REG_DATE, RV_CONTENT
-  	 	, p.name, p.brand, d.po_name, d.dt_idx	 	
+  	 	, p.name, p.brand, d.po_name, d.dt_idx, f.RENAME_FILE_NAME, f.SAVE_PATH	 	
 		from REVIEW r
 		join product p USING(PRD_IDX)
 		join prd_detail d USING(PRD_IDX)
-		join "ORDER" o USING(PRD_IDX)
+		join "ORDER" o USING(PRD_IDX)	
+		inner join file_info f on (f.type_idx = prd_idx)	
 		<where>
 		r.USER_IDX = #{userIdx} and o.dt_idx = d.dt_idx and r.order_idx = o.order_idx
 			<if test="state == null">
