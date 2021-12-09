@@ -2,6 +2,9 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ include file="/WEB-INF/views/include/head.jsp" %>
+<link rel="stylesheet" href="${contextPath}/resources/css/market/slick/slick.css">
+<link rel="stylesheet" href="${contextPath}/resources/css/market/slick/slick-theme.css">
+<link rel="stylesheet" href="${contextPath}/resources/css/market/market.css">
     <body id="page-top">
 	<%@ include file="/WEB-INF/views/include/navBar.jsp" %>
 	        <!-- Masthead-->
@@ -9,7 +12,7 @@
 	            <div class="container">	            	
 	                <div class="masthead-subheading">똑dog한 집사들 홈페이지에 오신걸</div>
 	                <div class="masthead-heading text-uppercase"> 환영합니다.</div>
-	                <a class="btn btn-primary btn-xl text-uppercase" href="#services">Tell Me More</a>
+	                <a class="btn btn-primary btn-xl text-uppercase" href="#services" style="background-color: #625C46; border-color: #625C46;">Tell Me More</a>
 	            </div>
 	        </header>
         <!-- Board -->

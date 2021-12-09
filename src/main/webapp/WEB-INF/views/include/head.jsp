@@ -20,10 +20,6 @@
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="/resources/css/styles.css" rel="stylesheet" />
 <link rel="stylesheet"  href="${contextPath}/resources/css/all.css">
-<link rel="stylesheet" href="${contextPath}/resources/css/market/slick/slick.css">
-<link rel="stylesheet" href="${contextPath}/resources/css/market/slick/slick-theme.css">
-<link rel="stylesheet" href="${contextPath}/resources/css/market/market.css">
-<link rel="stylesheet" href="${contextPath}/resources/css/market/shop.css">
 <script type="text/javascript" src="${contextPath}/resources/js/webUtil.js"></script>
 <script type="text/javascript" src="${contextPath}/resources/js/urlEncoder.js"></script>
 </head>

@@ -173,4 +173,10 @@ public interface ShopRepository {
 
 	List<Map<String, Object>> selectPrdListMain(@Param("condition")String condition, @Param("maxNum")int maxNum);
 
+	@Select("select * from \"ORDER\"")
+	List<Order> selectOrderAll();
+
+	@Update("{call PL_UPDATE_SM(#{userIdx, mode=IN}, #{saveMoney, mode=IN}, #{orderNum, mode=IN}, #{cpSaveMoney, mode=IN})}")
+	void updateSM(Order order);
+
 }

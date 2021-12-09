@@ -1,5 +1,6 @@
 package com.kh.spring.market.model.service;
 
+import java.sql.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -79,6 +80,8 @@ public interface ShopService {
 	Map<String, Object> selectAllByPrd(Product product);
 
 	List<Map<String, Object>> selectPrdListMain(String string, int maxNum);
+
+	void updateOrderState(Date afterWeek);
 
 
 }

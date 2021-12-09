@@ -1,5 +1,6 @@
 package com.kh.spring.market.model.service;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -401,6 +402,18 @@ public class ShopServiceImpl implements ShopService{
 		}
 		
 		return prdList;
+	}
+
+
+	public void updateOrderState(Date afterWeek) {
+		List<Order> orderList = shopRepository.selectOrderAll();
+		for (Order order : orderList) {
+			if(order.getOrderDate().toString().equals(afterWeek.toString())) {
+				Map<String, Object> commandMap = Map.of("state", "orderComplete", "orderNum", order.getOrderNum());
+				shopRepository.updateOrderState(commandMap);
+				shopRepository.updateSM(order);
+			}
+		}
 	}
 	
 }
