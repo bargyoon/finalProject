@@ -124,11 +124,13 @@
 	<!-- enquiry list -->
 	<select id="selectEnquiryList" resultType="map">
   	 	select rownum rnum, r.* from
-		(select QNA_IDX, q.USER_IDX, PRD_IDX, q.ORDER_IDX, q.TITLE, q.CONTEXT, q.TYPE, q.REG_DATE, IS_ANSWER, AW_CONTEXT, AW_REG_DATE, p.name, p.brand, d.po_name,o.dt_idx
+		(select QNA_IDX, q.USER_IDX, PRD_IDX, q.ORDER_IDX, q.TITLE, q.CONTEXT, q.TYPE, q.REG_DATE, IS_ANSWER, AW_CONTEXT, AW_REG_DATE,
+		 p.name, p.brand, d.po_name,o.dt_idx, f.RENAME_FILE_NAME, f.SAVE_PATH	 
 		from  QNA q
 		inner join product p USING(PRD_IDX)
 		inner join prd_detail d USING(PRD_IDX)
 		inner join "ORDER" o using(PRD_IDX)
+		inner join file_info f on (f.type_idx = prd_idx)	
 		<where>
 		 q.USER_IDX = #{userIdx} and o.dt_idx=d.dt_idx and q.order_idx = o.order_idx
 			<if test="fromDate != null and endDate != null">
