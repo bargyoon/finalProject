@@ -213,11 +213,12 @@
 													<div class="d-inline-block">
 														<div
 															class="d-flex small text-warning justify-content-center">
+															<c:if test="${commendList.RATING != 0 }">
 															<c:forEach var="i" begin="0" step="1"
 																end="${commentList.RATING-1}">
 																<i class="fas fa-star"></i>
 															</c:forEach>
-
+															</c:if>
 
 														</div>
 													</div>
