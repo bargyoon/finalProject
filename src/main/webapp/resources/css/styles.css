@@ -4186,7 +4186,7 @@ textarea.form-control-lg {
 }
 .navbar-nav {
   display: flex;
-  flex-direction: column;
+/*   flex-direction: column;  세로로 보는 것*/ 
   padding-left: 0;
   margin-bottom: 0;
   list-style: none;
@@ -4254,7 +4254,7 @@ textarea.form-control-lg {
   overflow-y: auto;
 }
 
-@media (min-width: 576px) {
+/* @media (min-width: 576px) {
   .navbar-expand-sm {
     flex-wrap: nowrap;
     justify-content: flex-start;
@@ -4306,8 +4306,8 @@ textarea.form-control-lg {
     padding: 0;
     overflow-y: visible;
   }
-}
-@media (min-width: 768px) {
+} */
+/* @media (min-width: 768px) {
   .navbar-expand-md {
     flex-wrap: nowrap;
     justify-content: flex-start;
@@ -4359,7 +4359,7 @@ textarea.form-control-lg {
     padding: 0;
     overflow-y: visible;
   }
-}
+} */
 @media (min-width: 992px) {
   .navbar-expand-lg {
     flex-wrap: nowrap;
@@ -7622,7 +7622,7 @@ textarea.form-control-lg {
 
 .py-4 {
   padding-top: 1.5rem !important;
-  padding-bottom: 1.5rem !important;
+/*   padding-bottom: 1.5rem !important; */
 }
 
 .py-5 {
@@ -11476,10 +11476,13 @@ p {
 #mainNav {
   padding-top: 1rem;
   padding-bottom: 1rem;
-  background-color: #212529;
-  height: 100px;
-  
+  background-color: #a29f94;
+  color: white;
 }
+#mainNav > ul > li > ul {
+	display:none;
+}
+
 #mainNav .navbar-toggler {
   padding: 0.75rem;
   font-size: 0.75rem;
