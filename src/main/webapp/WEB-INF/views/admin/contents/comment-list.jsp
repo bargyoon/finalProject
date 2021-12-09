@@ -204,7 +204,7 @@
 											<c:otherwise>
 												<div class="d-flex flex-row comment-row">
 													<div class="p-2">
-														<label><input type="checkbox"></label>
+														<label><input type="checkbox" class="listCheckbox" value="${comment.CM_IDX }"></label>
 													</div>
 													<div class="comment-text active w-100">
 														<h6 class="font-medium">

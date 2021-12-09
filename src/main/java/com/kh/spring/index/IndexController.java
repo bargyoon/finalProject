@@ -26,10 +26,15 @@ public class IndexController {
 		Map<String,Object> dogMap = new LinkedHashMap<String,Object>();
 		Map<String,Object> catMap = new LinkedHashMap<String,Object>();
 		Map<String,Object> infoMap = new LinkedHashMap<String,Object>();
-		
 		dogMap.put("category", "dog");
+		dogMap.put("isDel", 1);
+		dogMap.put("sort", "reg_date");
 		catMap.put("category", "cat");
+		catMap.put("isDel", 1);
+		catMap.put("sort", "reg_date");
 		infoMap.put("category", "info");
+		infoMap.put("isDel", 1);
+		infoMap.put("sort", "reg_date");
 		Paging pageUtil = Paging.builder()
 				.curPage(1)
 				.cntPerPage(10)
