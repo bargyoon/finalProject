@@ -102,7 +102,7 @@
 								<td><input type="checkbox" class="checked_cart" name="cartIdx" checked="checked" value="${cart.CART_IDX}"></td>
 								<td>
 									<div class="n-prd-row">
-										<a href="/market/shop/prd-detail?pn=${cart.PRD_IDX}"><img src="${files[status.index].downloadURL}"></a>
+										<a href="/market/shop/prd-detail?pn=${cart.PRD_IDX}"><img src="${files[status.index].downloadURL}" style="width: 100px; height: 100px;"></a>
 										<ul class="cart-info">
 											<li class="name ft-SBAggroM">
 												<a href="#!"style="text-decoration: none; color: black;">
