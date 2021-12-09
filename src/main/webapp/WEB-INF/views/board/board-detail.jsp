@@ -496,7 +496,7 @@
 		 			    'Content-Type': 'application/json'
 		 			  }
 			 }).then(res => {
-		    		alert('삭제되었습니다.');
+		    		alert('삭제되었습니다');
 		    		location.replace('/board/${board.category}');
 		    	})
 		    }
