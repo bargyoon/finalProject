@@ -68,7 +68,7 @@
                         <h2 class="my-3">정보 게시판</h2>
                          <div class=board-list-in-main>
                         	<table class="table mb-0">
-                              <thead class="thead-dark">
+                              <thead class="thead-dark" ;>
                                  <tr> 
                                     <th scope="col" style="width: 70%">제목</th>
                                     <th scope="col" style="width: 30%">조회 수</th> 
@@ -78,7 +78,7 @@
                                  <c:forEach items="${infoList}" var="infoList" varStatus="status" >
                                     <tr>
                                        <td style="text-align:left"><a
-                                          href="/board/info/detail?bdIdx=${infoList.BD_IDX}" style="color:black; text-decoration:none;">${infoList.BD_TITLE}</a><small
+                                          href="/board/info/detail?bdIdx=${infoList.BD_IDX}" " style="color:black; text-decoration:none;">${infoList.BD_TITLE}</a><small
                                           class="ml-2"><i class="fas fa-comment mr-1"></i>${infoList.CM_CNT}</small></td>
                                        <td>${infoList.VIEW_COUNT}</td> 
                                     </tr>
@@ -91,8 +91,14 @@
             </div>
         </section> 
         <!-- market-items-->
-        <section class="py-5 mb-5">
-			<div class="container px-4 mt-5">
+        <section class="page-section" id="market-items">
+        	<div class="container">
+           		<div class="text-center">
+                    <h2 class="section-heading text-uppercase">E-Commerce</h2>
+                    <h3 class="section-subheading text-muted">똑DOG한 집사들의 장터를 방문하세요.</h3>
+                </div>
+        	</div>
+        	<div class="container px-4 mt-5">
 				<div class="slick_test">
 					<c:forEach var="prd" items="${prdList}">
 						<div class="card h-100" style="border: none;">

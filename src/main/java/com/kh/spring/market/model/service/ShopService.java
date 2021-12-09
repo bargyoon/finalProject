@@ -80,4 +80,5 @@ public interface ShopService {
 
 	List<Map<String, Object>> selectPrdListMain(String string, int maxNum);
 
+
 }
