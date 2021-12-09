@@ -31,7 +31,7 @@
 				</div>
 			</div>
 			<div class="px-lg-5 mt-5 mx-5 pt-2" style="display: flex; justify-content: space-between; min-width: 20%">
-				<div class="mt-5" style="display: flex; flex-direction: column;">
+				<div class="mt-5 acc-pic" style="display: flex; flex-direction: column;">
 					<a href="/market/mypage/acc-money"><i class="fas fa-coins py-2" style="font-size: 1.5rem;"></i></a>
 					<p class="fw-normal mt-2">적립금</p>
 					<p style="font-size: 1.3rem;"><fmt:formatNumber value="${memberInfo.saveMoney}"/> 원</p>
