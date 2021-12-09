@@ -6,8 +6,9 @@
 	width: 13rem;"
 }
 
-.px-4{
+.px-4, .pf-div{
 	display: flex;
+	align-items: center !important; 
 }
 
 .mt-4{

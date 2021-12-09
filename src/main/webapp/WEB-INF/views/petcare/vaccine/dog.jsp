@@ -87,7 +87,7 @@
 					
 		</div>
 	</section>
-
+<%@ include file="/WEB-INF/views/include/footer.jsp" %>	
 <script type="text/javascript">
 	let tabBtns = document.querySelector('.petcare-tab-wrap').children;
 	for (var i = 0; i < tabBtns.length; i++) {

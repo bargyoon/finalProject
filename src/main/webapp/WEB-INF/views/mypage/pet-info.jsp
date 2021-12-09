@@ -43,7 +43,15 @@
 					</div>
 				</c:forEach>
 			</div>
+			<c:if test="${pageUtil.total == 0}">
+				<div>
+					<p>등록된 펫이 없습니다.</p>
+				</div>
+			</c:if>
 			
+			
+			<!-- 페이징 -->
+			<c:if test="${pageUtil.total != 0}">
 			<div style="display:flex; justify-content:center; margin-top: 20px;">
 				<nav aria-label="Page navigation example">
 				  <ul class="pagination">
@@ -72,6 +80,7 @@
 				  </ul>
 				</nav>
 			</div>
+			</c:if>
 		</div>
 	</div>
 </section>

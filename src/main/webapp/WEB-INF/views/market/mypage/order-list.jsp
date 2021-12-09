@@ -17,8 +17,8 @@
 		</div>
 		<div class="px-lg-5 mx-5" style="display: flex; justify-content: space-between;">
 			<div class="px-lg-5" style="display: flex; min-width: 50%;">
-				<img src="https://dummyimage.com/200x200/dee2e6/6c757d.jpg" style="border-radius: 7rem;" />
-				<div class="px-4 px-lg-5 my-3">
+				<img class="my-img" src="https://cdn.hellodd.com/news/photo/202005/71835_craw1.jpg" />
+				<div class="px-4 px-lg-5 my-3 pf-div">
 					<div>
 						<div class="mt-4" style="display: flex; flex-direction: column;">
 							<h1 class="display-4 fw-bolder">${memberInfo.nickName}</h1>

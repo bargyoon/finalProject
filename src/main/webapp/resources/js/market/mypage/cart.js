@@ -21,38 +21,6 @@ $("input:checkbox[name='cartIdx']").click(function(){
 	calAmount();
 });
 
-/* selectbox 상품개별삭제 */
-function selectDelete() {
-	 var url = "cart/selectDelete";
-	 var selectedArr = new Array();
-	 var cartIdx = document.getElementsByName("cartIdx"); //
-
-	  for (var i = 0; i < cartIdx.length; i++) {
-	   if (cartIdx[i].checked == true) {
-		   selectedArr.push(cartIdx[i].value);
-	   }
-	  }
-	
-	 if (selectedArr.length == 0) {
-		 alert("삭제하실 항목을 적어도 하나는 체크해 주세요.");
-	 } else {
-	  	$.ajax({
-	  		url : url,
-	  		type : 'POST',
-	  		traditional : true,
-	  		data : {
-	  			selectedArr : selectedArr
-	  		},
-	  		success : function(jdata){
-	  			if(jdata = 1){
-	  				location.replace("cart")
-	  			}else{
-	  				alert("삭제 실패");
-	  			}
-	  		}
-	  	});
-	 }
-	}
 
 	//상품 삭제 버튼
 	deleteCart = (cartIdx) => {
