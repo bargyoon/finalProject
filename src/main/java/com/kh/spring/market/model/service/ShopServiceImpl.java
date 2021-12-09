@@ -351,7 +351,7 @@ public class ShopServiceImpl implements ShopService{
 		for (Product product : prdList) {
 			files.add(shopRepository.selectFileByIdx(product.getPrdIdx()));
 		}
-		return null;
+		return files;
 	}
 
 	public Map<String, FileDTO> selectFileInfoByPrdIdx(Product product) {

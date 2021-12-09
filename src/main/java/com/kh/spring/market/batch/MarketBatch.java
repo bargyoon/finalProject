@@ -21,7 +21,7 @@ public class MarketBatch {
 
 	private final ShopService shopService;
 
-	@Scheduled(cron = "1 * * * * *")
+	@Scheduled(cron = "0 0 24 * * *")
 	public void sendEmail() throws Exception {
 		Calendar cal = Calendar.getInstance();
 		cal.add(Calendar.DAY_OF_MONTH, 7);

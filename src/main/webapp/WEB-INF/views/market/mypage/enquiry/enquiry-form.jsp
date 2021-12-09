@@ -66,13 +66,13 @@
 					<span style="font-size: 12px;">평일: 9:00~18:00(점심 12:00~13:00)</span>
 				</li>
 				<li>
-					<a href="market/mypage/enquiry-list">
+					<a href="market/mypage/enquiry/enquiry-list">
 						<span class="ft-SBAggroM">1:1 Q&A</span><br>
 						<span style="font-size: 12px;">질문 전 FAQ(자주 묻는 질문)을 먼저 확인하시면 도움이 됩니다.</span>
 					</a>
 				</li>
 				<li>
-					<a href="market/mypage/faq">
+					<a href="market/mypage/enquiry/faq">
 						<span class="ft-SBAggroM">FAQ</span><br>
 						<span style="font-size: 12px;">자주 묻는 질문</span>
 					</a>

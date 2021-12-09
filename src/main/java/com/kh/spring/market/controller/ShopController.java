@@ -100,7 +100,7 @@ public class ShopController {
 		
 		Paging pageUtilForQna = Paging.builder()
 				.curPage(pageQna)
-				.cntPerPage(2)
+				.cntPerPage(10)
 				.blockCnt(10)
 				.total(shopService.selectQnaCnt(pn))
 				.build();

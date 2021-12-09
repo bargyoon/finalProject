@@ -33,7 +33,7 @@
 				<div class="mt-5" style="display: flex; flex-direction: column;">
 					<a href="/market/mypage/acc-money"><i class="fas fa-coins py-2" style="font-size: 1.5rem;"></i></a>
 					<p class="fw-normal mt-2">적립금</p>
-					<p style="font-size: 1.3rem;">${memberInfo.saveMoney}</p>
+					<p style="font-size: 1.3rem;"><fmt:formatNumber value="${memberInfo.saveMoney}"/> 원</p>
 				</div>
 				<div class="mt-5" style="display: flex; flex-direction: column;">
 					<a href="/market/mypage/coupon-list"><i class="fas fa-ticket-alt py-2" style="font-size: 1.5rem"></i></a>

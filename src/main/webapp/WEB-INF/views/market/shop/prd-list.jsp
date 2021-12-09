@@ -61,7 +61,7 @@
 							<c:if test="${prdList[i].salePer ne 0}">
 								<div class="badge-shop">Sale</div>					
 							</c:if>
-							<img class="prd-img" src="${files.downloadURL}" alt="..."/>
+							<img class="prd-img" src="${files[i].downloadURL}" alt="..."/>
 							<div class="pt-3" style="padding-bottom: 0rem;">
 								<p class="prd-name mb-1 small"><c:out value="${prdList[i].name}"/></p>
 							</div>

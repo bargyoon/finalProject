@@ -56,9 +56,11 @@
 							</div>
 						</a>
 						<div class="d-flex justify-content-center small text-warning mb-2">
-							<c:forEach var="i" begin="0" step="1" end="${newPrd.RATING-1}">
-	                            <i class="fas fa-star"></i>
-	                    	</c:forEach>
+							<c:if test="${newPrd.RATING ne 0}">
+								<c:forEach var="i" begin="0" step="1" end="${newPrd.RATING-1}">
+		                            <i class="fas fa-star"></i>
+		                    	</c:forEach>
+		                    </c:if>
 						</div>
 						<c:if test="${newPrd.SALE_PER ne 0}">
 							<div class="text-center">
@@ -81,7 +83,7 @@
 	</section>
 
 
-	<section>
+	<section style="text-align: center;">
 		<a href="#!"><img src="${contextPath}/resources/img/market/main1.png"></a>
 	</section>
 
