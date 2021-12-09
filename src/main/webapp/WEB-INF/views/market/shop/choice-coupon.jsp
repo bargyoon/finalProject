@@ -33,7 +33,7 @@
 				</thead>
 				<tbody>
 					<c:forEach var="i" begin="0" step="1" end="${couponList.size()-1}">
-						<tr onclick="selectCoupon('${couponList[i].salePer}', '${couponList[i].couponIdx}')">
+						<tr onclick="selectCoupon('${type}', '${couponList[i].salePer}', '${couponList[i].couponIdx}')">
 							<td><input type="text" readonly="readonly" value="${couponList[i].couponIdx}"></td>
 							<td class="cp-name">
 								<fmt:formatDate pattern="yyyy-MM-dd" value="${couponList[i].ucExpDate}" var="userExpDate"/>

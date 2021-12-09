@@ -1,5 +1,6 @@
 package com.kh.spring.market.model.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -17,6 +18,7 @@ import com.kh.spring.market.model.dto.QNA;
 import com.kh.spring.market.model.dto.Review;
 import com.kh.spring.market.model.dto.SaveHistory;
 import com.kh.spring.market.model.repository.MarketMypageRepository;
+import com.kh.spring.market.model.repository.ShopRepository;
 import com.kh.spring.member.model.dto.Member;
 
 import lombok.RequiredArgsConstructor;
@@ -245,7 +247,14 @@ public class MarketMypageServiceImpl implements MarketMypageService{
 		return true;
 	}
 
-	
+	public List<FileDTO> selectFile(List<Map<String, Object>> cartList) {
+		List<FileDTO> files = new ArrayList<FileDTO>();
+		for (Map<String, Object> map : cartList) {
+			files.add(mypageRepository.selectFileByIdx(map.get("PRD_IDX")));
+		}
+		return files;
+	}
+
 
 
 	

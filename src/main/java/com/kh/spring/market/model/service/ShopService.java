@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import com.kh.spring.common.util.FileDTO;
 import com.kh.spring.common.util.pagination.Paging;
 import com.kh.spring.market.model.dto.Cart;
 import com.kh.spring.market.model.dto.Coupon;
@@ -23,7 +24,7 @@ public interface ShopService {
 
 	int prdListCnt(prdListSet listSet);
 
-	List<Product> selectPrdListByIdx(int prdIdx);
+	List<Product> selectPrdDetailListByIdx(int prdIdx);
 
 	Product selectPrdByIdx(int prdIdx);
 
@@ -69,6 +70,15 @@ public interface ShopService {
 
 	Map<String, Object> selectQnAList(Map<String, Object> commandMap, Paging pageUtil);
 
+	List<FileDTO> selectFileList(List<Product> prdList);
+
+	Map<String, FileDTO> selectFileInfoByPrdIdx(Product prdInfo);
+
+	List<List<FileDTO>> selectReviewFiles(List<Review> reviews);
+
 	Map<String, Object> selectAllByPrd(Product product);
+
+	List<Map<String, Object>> selectPrdListMain(String string, int maxNum);
+
 
 }

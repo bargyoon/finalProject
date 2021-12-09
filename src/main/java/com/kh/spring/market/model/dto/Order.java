@@ -23,5 +23,5 @@ public class Order {
 	private int saveMoney;
 	private int cpSaveMoney;
 	private Date updateDate;
-	
+	private int cartIdx;
 }

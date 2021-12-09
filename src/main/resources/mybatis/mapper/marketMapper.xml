@@ -336,4 +336,14 @@
 		where rnum between ${((pageUtil.curPage-1) * pageUtil.cntPerPage) + 1} and ${pageUtil.curPage * pageUtil.cntPerPage}
 	</select>
 	
+	<select id="selectPrdListMain" resultType="map">
+		select *
+		from(select PRD_IDX, NAME, RATING, CATEGORY, SALE_PER, REG_DATE, ROWNUM rnum, SAVE_PATH, RENAME_FILE_NAME, PRICE
+		    from product p
+		    join file_info f on (f.TYPE_IDX = p.prd_idx)
+		    join prd_detail using(prd_idx)
+		    ORDER BY #{condition} desc)
+		where rnum <![CDATA[<=]]> #{maxNum}
+	</select>
+	
 </mapper>

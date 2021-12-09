@@ -54,49 +54,50 @@ public class AuthInterceptor implements HandlerInterceptor {
 	private void marketAuthorize(HttpServletRequest request, HttpServletResponse response, String[] uriArr) {
 
 		Member member = (Member) request.getSession().getAttribute("authentication");
-		
-		switch (uriArr[2]) {
-		case "mypage":
-			if(member == null) {
-				throw new HandlableException(ErrorCode.UNAUTHORIZED_PAGE);
+		if(uriArr.length >2) {
+			switch (uriArr[2]) {
+			case "mypage":
+				if(member == null) {
+					throw new HandlableException(ErrorCode.UNAUTHORIZED_PAGE);
+				}
+				break;
+			case "shop":
+				shopAuthorize(request, response, uriArr);
+				break;
+			default:
+				break;
 			}
-			break;
-		case "shop":
-			shopAuthorize(request, response, uriArr);
-			break;
-		default:
-			break;
 		}
-		
 	}
 
 	private void shopAuthorize(HttpServletRequest request, HttpServletResponse response, String[] uriArr) {
 
 		Member member = (Member) request.getSession().getAttribute("authentication");
-		
-		switch (uriArr[3]) {
-		case "buy":
-			if(member == null) {
-				throw new HandlableException(ErrorCode.UNAUTHORIZED_PAGE);
+		if(uriArr.length >3) {
+			switch (uriArr[3]) {
+			case "buy":
+				if(member == null) {
+					throw new HandlableException(ErrorCode.UNAUTHORIZED_PAGE);
+				}
+				break;
+			case "cart":
+				if(member == null) {
+					throw new HandlableException(ErrorCode.UNAUTHORIZED_PAGE);
+				}
+				break;
+			case "review":
+				if(member == null) {
+					throw new HandlableException(ErrorCode.UNAUTHORIZED_PAGE);
+				}
+				break;
+			case "qna":
+				if(member == null) {
+					throw new HandlableException(ErrorCode.UNAUTHORIZED_PAGE);
+				}
+				break;
+			default:
+				break;
 			}
-			break;
-		case "cart":
-			if(member == null) {
-				throw new HandlableException(ErrorCode.UNAUTHORIZED_PAGE);
-			}
-			break;
-		case "review":
-			if(member == null) {
-				throw new HandlableException(ErrorCode.UNAUTHORIZED_PAGE);
-			}
-			break;
-		case "qna":
-			if(member == null) {
-				throw new HandlableException(ErrorCode.UNAUTHORIZED_PAGE);
-			}
-			break;
-		default:
-			break;
 		}
 	}
 

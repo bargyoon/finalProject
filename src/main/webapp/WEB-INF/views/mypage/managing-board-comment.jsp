@@ -53,13 +53,21 @@
 				  		<td><fmt:formatDate value="${comment.REG_DATE}" pattern="yyyy-MM-dd" /></td>
 				  	</tr>
 				  	</c:forEach>
+				  	<c:if test="${pageUtil.total == 0}">
+				  	<tr>
+						<td colspan="6">작성된 글이 업습니다.</td>
+					</tr>
+					</c:if>
 				  </tbody>
 				</table>
 				
+				<c:if test="${pageUtil.total != 0}">
 				<button type="button" class="btn btn-primary" onclick="deleteComment()">삭제</button>
+				</c:if>
 			</div>
 			
 			<!-- 페이징기능 -->
+			<c:if test="${pageUtil.total != 0}">
 			<div style="display:flex; justify-content:center;">
 				<nav aria-label="Page navigation example">
 				  <ul class="pagination">
@@ -88,13 +96,14 @@
 				  </ul>
 				</nav>
 			</div>
-			
+			<!-- 검색 -->
 			<form>
 				<div style="display:flex; justify-content:center;">
 					<input name="keyword" id="keyword" value="${searchSet.keyword}" style="width: 300px;" type="search" class="form-control" placeholder="Search..." aria-label="Search" required="required">
 					<button type="button" class="btn btn-primary" onclick="searchKeyword()">검색</button>
 				</div>
 			</form>
+			</c:if>
 			
 		</div>
 	</div>

@@ -43,7 +43,7 @@ public interface ShopRepository {
 	void insertPrdDetail(@Param("map")Map<String, Object> map,@Param("salePrice") int salePrice);
 
 	@Select("select * from product join prd_detail using (prd_idx) where prd_idx = #{prdIdx}")
-	List<Product> selectPrdListByIdx(int prdIdx);
+	List<Product> selectPrdDetailListByIdx(int prdIdx);
 
 	Product selectPrdByIdx(int prdIdx);
 
@@ -161,5 +161,16 @@ public interface ShopRepository {
 
 	@Delete("delete from review where rv_idx = #{rvIdx}")
 	void deleteComments(Integer rvIdx);
+
+	@Delete("delete from cart where cart_idx = #{cartIdx}")
+	void deleteCartByIdx(int cartIdx);
+
+	@Select("select * from file_info where type_idx = #{prdIdx} and is_del = 0")
+	FileDTO selectFileByIdx(int prdIdx);
+
+	@Select("select * from file_info where type_idx = #{rvIdx} and is_del = 0")
+	List<FileDTO> selectReviewFiles(int rvIdx);
+
+	List<Map<String, Object>> selectPrdListMain(@Param("condition")String condition, @Param("maxNum")int maxNum);
 
 }

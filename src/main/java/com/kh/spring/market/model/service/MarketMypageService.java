@@ -85,4 +85,6 @@ public interface MarketMypageService {
 
 	boolean checkStock(Map<String, Object> checkInfo);
 
+	List<FileDTO> selectFile(List<Map<String, Object>> cartList);
+
 }

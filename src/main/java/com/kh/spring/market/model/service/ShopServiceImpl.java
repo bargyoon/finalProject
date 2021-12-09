@@ -1,6 +1,7 @@
 package com.kh.spring.market.model.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -89,8 +90,8 @@ public class ShopServiceImpl implements ShopService{
 	}
 
 
-	public List<Product> selectPrdListByIdx(int prdIdx) {
-		List<Product> prdList = shopRepository.selectPrdListByIdx(prdIdx);
+	public List<Product> selectPrdDetailListByIdx(int prdIdx) {
+		List<Product> prdList = shopRepository.selectPrdDetailListByIdx(prdIdx);
 		
 		return prdList;
 	}
@@ -248,6 +249,9 @@ public class ShopServiceImpl implements ShopService{
 
 	public boolean insertOrder(List<Order> orderInfos) {
 		for (Order order : orderInfos) {
+			if(order.getCartIdx() != 0) {
+				shopRepository.deleteCartByIdx(order.getCartIdx());
+			}
 			if(shopRepository.insertOrder(order) != -1) {
 				return false;
 			}
@@ -341,16 +345,62 @@ public class ShopServiceImpl implements ShopService{
 		return shopRepository.selectQnAListCnt(commandMap);
 	}
 
+	public List<FileDTO> selectFileList(List<Product> prdList) {
+		List<FileDTO> files = new ArrayList<FileDTO>();
+		for (Product product : prdList) {
+			files.add(shopRepository.selectFileByIdx(product.getPrdIdx()));
+		}
+		return null;
+	}
+
+	public Map<String, FileDTO> selectFileInfoByPrdIdx(Product product) {
+		Map<String, FileDTO> commandMap = new HashMap<String, FileDTO>();
+		commandMap.put("prdImage", shopRepository.selectFileByIdx(product.getPrdIdx()));
+		commandMap.put("subImage", shopRepository.selectFileByIdx(product.getSubImgIdx()));
+		System.out.println(shopRepository.selectFileByIdx(product.getPrdIdx()));
+		System.out.println(shopRepository.selectFileByIdx(product.getSubImgIdx()));
+		
+		return commandMap;
+	}
+
+	public List<List<FileDTO>> selectReviewFiles(List<Review> reviews) {
+		List<List<FileDTO>> reviewFiles = new ArrayList<List<FileDTO>>();
+		List<FileDTO> files = new ArrayList<FileDTO>();
+		for (Review review : reviews) {
+			files = shopRepository.selectReviewFiles(review.getRvIdx());
+			reviewFiles.add(files);
+		}
+		return reviewFiles;
+	}
+
 	public Map<String, Object> selectAllByPrd(Product product) {
 	
 		List<FileDTO> files = shopRepository.selectFileInfoByIdx(product.getPrdIdx());
 		List<FileDTO> subFiles = shopRepository.selectFileInfoByIdx(product.getSubImgIdx());
-		List<Product> prdDetails = shopRepository.selectPrdListByIdx(product.getPrdIdx());
 		
-		return Map.of("files", files, "subFiles", subFiles, "prdDetails",prdDetails);
-		
+		return Map.of("files", files, "subFiles", subFiles);
 		
 		
+		
+	}
+
+	public List<Map<String, Object>> selectPrdListMain(String condition, int maxNum) {
+		List<Map<String, Object>> prdList = new ArrayList<Map<String,Object>>();
+		prdList = shopRepository.selectPrdListMain(condition, maxNum);
+		
+		for (Map<String, Object> map : prdList) {
+			FileDTO files = new FileDTO();
+			files.setSavePath((String) map.get("SAVE_PATH"));
+			files.setRenameFileName((String) map.get("RENAME_FILE_NAME"));
+			map.put("downloadURL", files.getDownloadURL());
+		}
+		
+		
+		for (Map<String, Object> map : prdList) {
+			System.out.println(map);
+		}
+		
+		return prdList;
 	}
 	
 }

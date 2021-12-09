@@ -48,7 +48,6 @@
 					  <c:forEach var="board" items="${boardList}">
 					  <tr>
 					  	<td><input type="checkbox" name="bdIdx" id="bdIdx" class="listCheckbox" value="${board.bdIdx}"></td>
-					  	<!-- href 수정 도움필요 -->
 				  		<td>${board.bdIdx}</td>
 				  		<td><a href="/board/${board.category}/detail?bdIdx=${board.bdIdx}">${board.bdTitle}</a></td>
 				  		<td>${board.viewCount}</td>
@@ -56,13 +55,21 @@
 				  		<td>${board.regDate}</td>
 					  </tr>
 					  </c:forEach>
+					  <c:if test="${pageUtil.total == 0}">
+					  <tr>
+					  	<td colspan="6">작성된 글이 없습니다.</td>
+					  </tr>
+					  </c:if>
 				  </tbody>
 				</table>
 				
+				<c:if test="${pageUtil.total != 0}">
 				<button type="button" class="btn btn-primary" onclick="deleteBoard()">삭제</button>
+				</c:if>
 			</div>
 			
 			<!-- 페이징기능 -->
+			<c:if test="${pageUtil.total != 0}">
 			<div style="display:flex; justify-content:center;">
 				<nav aria-label="Page navigation example">
 				  <ul class="pagination">
@@ -99,6 +106,7 @@
 					<button type="button" class="btn btn-primary" onclick="searchKeyword()">검색</button>
 				</div>
 			</form>
+			</c:if>
 		</div>
 	</div>
 </section>

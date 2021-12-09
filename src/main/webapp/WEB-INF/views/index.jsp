@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ include file="/WEB-INF/views/include/head.jsp" %>
     <body id="page-top">
 	<%@ include file="/WEB-INF/views/include/navBar.jsp" %>
@@ -96,11 +97,44 @@
                     <h2 class="section-heading text-uppercase">E-Commerce</h2>
                     <h3 class="section-subheading text-muted">똑DOG한 집사들의 장터를 방문하세요.</h3>
                 </div>
-        
-        
-        
-        
-        
+        	</div>
+        	<div class="container px-4 mt-5">
+				<div class="slick_test">
+					<c:forEach var="prd" items="${prdList}">
+						<div class="card h-100" style="border: none;">
+							<c:if test="${prd.SALE_PER ne 0}">
+		                        <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.85rem">할인</div>
+							</c:if>
+	                        <a class="btn" href="/market/shop/prd-detail?pn=${prd.PRD_IDX}">
+	                            <img class="card-img-top" src="${prd.downloadURL}" alt="..." />
+	                            <div class="card-body pt-4" style="padding-bottom: 0rem;">
+	                                <div class="text-center">
+	                                    <h5 class="fw-bolder">${prd.NAME}</h5>
+	                                </div>
+	                            </div>
+	                        </a>
+	                        <div class="d-flex justify-content-center small text-warning mb-2">
+								<c:forEach var="i" begin="0" step="1" end="${prd.RATING-1}">
+	                            	<i class="fas fa-star"></i>
+	                            </c:forEach>
+	                        </div>
+							<c:if test="${prd.SALE_PER ne 0}">
+								<div class="text-center">
+										<span style="color: red;">${prd.SALE_PER}%</span>
+									<span class="text-muted text-decoration-line-through" style="font-size: smaller;"><fmt:formatNumber value="${prd.PRICE}"/>원</span>
+								</div>
+							</c:if>
+							<div class="text-center">
+								<c:if test="${prd.SALE_PER eq 0}">
+					            	<fmt:formatNumber value="${prd.PRICE}"/>원
+								</c:if>
+								<c:if test="${prd.SALE_PER ne 0}">
+					            	<fmt:formatNumber value="${prd.PRICE * (1 - (prd.SALE_PER/100))}"/>원
+								</c:if>
+							</div>
+	                    </div>
+					</c:forEach>        
+	     	   </div>
      	   </div>
         </section> 
         <!-- Services-->
@@ -135,5 +169,8 @@
     </body>
    <%@ include file="/WEB-INF/views/include/footer.jsp" %>	
    <%@ include file="/WEB-INF/views/include/mainJs.jsp" %>
+	<script src="https://code.jquery.com/jquery-2.2.0.min.js" type="text/javascript"></script>
+	<script type="text/javascript" src="${contextPath}/resources/js/market/slick/slick.js"></script>
+	<script type="text/javascript" src="${contextPath}/resources/js/market/slick/main-slick.js"></script>
    
 </html>

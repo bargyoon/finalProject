@@ -85,15 +85,12 @@ public class MarketMypageController {
 		int member = certifiedUser.getUserIdx();
 		Member memberInfo = marketMypageService.selectMemberInfo(member);
 		List<Map<String, Object>> cartList = marketMypageService.selectCartList(certifiedUser);
+		List<FileDTO> files = marketMypageService.selectFile(cartList);
 		int couponCnt = marketMypageService.selectCouponCount(member);
-		
-		for (Map<String, Object> map : cartList) {
-			System.out.println(map);
-		}
-		
 		model.addAttribute("cartList", cartList);
 		model.addAttribute("memberInfo", memberInfo);
 		model.addAttribute("couponCnt", couponCnt);
+		model.addAttribute("files", files);
 	}
 	
 	@PostMapping("cart/check-stock")
