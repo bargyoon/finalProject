@@ -13,7 +13,7 @@
                     <a class="nav-toggler waves-effect waves-light d-block d-md-none" href="javascript:void(0)"><i
                             class="ti-menu ti-close"></i></a>
                    
-                    <a class="navbar-brand" href="/admin/index">
+                    <a class="navbar-brand" href="/admin/member/member-list">
                       
                         <span class="logo-text" alt="homepage">
                             똑DOG한 집사들 Admin

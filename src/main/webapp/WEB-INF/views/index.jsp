@@ -33,12 +33,12 @@
                                  </tr>
                               </thead>
                               <tbody class="customtable">
-                                 <c:forEach items="${infoList}" var="infoList" varStatus="status">
+                                 <c:forEach items="${dogList}" var="dogList" varStatus="status">
                                     <tr>
                                        <td style="text-align:left"><a
-                                          href="/board/dog/detail?bdIdx=${infoList.BD_IDX}" style="color:black; text-decoration:none;">${infoList.BD_TITLE}</a><small
-                                          class="ml-2"><i class="fas fa-comment mr-1" ></i>${infoList.CM_CNT}</small></td>
-                                       <td>${infoList.VIEW_COUNT}</td> 
+                                          href="/board/dog/detail?bdIdx=${dogList.BD_IDX}" style="color:black; text-decoration:none;">${dogList.BD_TITLE}</a><small
+                                          class="ml-2"><i class="fas fa-comment mr-1" style="margin-left:4px; margin-right:4px"></i>${dogList.CM_CNT}</small></td>
+                                       <td>${dogList.VIEW_COUNT}</td> 
                                     </tr>
                                  </c:forEach>
                               </tbody>
@@ -55,12 +55,12 @@
                                  </tr>
                               </thead>
                               <tbody class="customtable">
-                                 <c:forEach items="${infoList}" var="infoList" varStatus="status">
+                                 <c:forEach items="${catList}" var="catList" varStatus="status">
                                     <tr>
                                        <td style="text-align:left"><a
-                                          href="/board/cat/detail?bdIdx=${infoList.BD_IDX}" style="color:black; text-decoration:none;">${infoList.BD_TITLE}</a><small
-                                          class="ml-2"><i class="fas fa-comment mr-1"></i>${infoList.CM_CNT}</small></td>
-                                       <td>${infoList.VIEW_COUNT}</td> 
+                                          href="/board/cat/detail?bdIdx=${catList.BD_IDX}" style="color:black; text-decoration:none;">${catList.BD_TITLE}</a><small
+                                          class="ml-2"><i class="fas fa-comment mr-1"  style="margin-left:4px; margin-right:4px"></i>${catList.CM_CNT}</small></td>
+                                       <td>${catList.VIEW_COUNT}</td> 
                                     </tr>
                                  </c:forEach>
                               </tbody>
@@ -82,7 +82,7 @@
                                     <tr>
                                        <td style="text-align:left"><a
                                           href="/board/info/detail?bdIdx=${infoList.BD_IDX}" " style="color:black; text-decoration:none;">${infoList.BD_TITLE}</a><small
-                                          class="ml-2"><i class="fas fa-comment mr-1"></i>${infoList.CM_CNT}</small></td>
+                                          class="ml-2"><i class="fas fa-comment mr-1"  style="margin-left:4px; margin-right:4px"></i>${infoList.CM_CNT}</small></td>
                                        <td>${infoList.VIEW_COUNT}</td> 
                                     </tr>
                                  </c:forEach>

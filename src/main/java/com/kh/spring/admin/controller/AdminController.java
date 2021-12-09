@@ -40,13 +40,11 @@ public class AdminController {
 	private final BoardService boardService;
 	private final MemberService memberService;
 	
-	@GetMapping("index")
-	public void index() {
-	};
+	
 
 	@GetMapping("/")
 	public String redIndex() {
-		return "redirect:/admin/index";
+		return "redirect:/admin/member/member-list";
 	}
 
 	@GetMapping("shopping/add-item")

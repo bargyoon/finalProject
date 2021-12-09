@@ -213,7 +213,7 @@
 													<div class="d-inline-block">
 														<div
 															class="d-flex small text-warning justify-content-center">
-															<c:if test="${commendList.RATING != 0 }">
+															<c:if test="${commentList.RATING != 0 }">
 															<c:forEach var="i" begin="0" step="1"
 																end="${commentList.RATING-1}">
 																<i class="fas fa-star"></i>
@@ -236,8 +236,8 @@
 													onclick="">
 													<c:if test="${commentList.TYPE== 1 }">
 														<div>
-															<c:forEach items="${orderList.files}" var="files">
-																<img src="${files.downloadURL }" class="board_thumb">
+															<c:forEach items="${commentList.files}" var="files">
+																<img src="${files.downloadURL }" style="width:200px; height:200px" class="board_thumb">
 
 															</c:forEach>
 														</div>
