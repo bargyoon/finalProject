@@ -139,7 +139,11 @@
 		        btnMinus.type = "button";
 		
 		        let spanTag = document.createElement("span");
-		        spanTag.innerText = data.price + " 원";
+		        if(data.state != 'sale'){
+		        	spanTag.innerText = data.price + " 원";
+		        } else {
+		        	spanTag.innerText = data.salePrice + " 원";
+				}
 		        spanTag.id = optionValue + "-price";
 		
 		        btnPlus.addEventListener("click", (e) => {
