@@ -21,7 +21,7 @@ public class CalendarBatch {
     private final MailSender mainSender;
     private final MypageService mypageService;
 	
-	@Scheduled(cron="0 20 23 * * *")
+	@Scheduled(cron="0 10 12 * * *")
 	public void sendEmail() throws Exception {
 		Date today = new Date(Calendar.getInstance().getTimeInMillis());
 		
