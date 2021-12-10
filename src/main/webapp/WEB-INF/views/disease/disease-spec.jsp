@@ -105,7 +105,7 @@
 	<script src="/resources/js/theme.js"></script>
 	<script>
         let popup = (dsIdx) =>{
-            var url = "http://localhost:9393/disease/price-popup?dsIdx="+dsIdx;
+            var url = "/disease/price-popup?dsIdx="+dsIdx;
             var name = "popup test";
             var option = "width = 500, height = 500, top = 100, left = 200, location = no"
             window.open(url, name, option);

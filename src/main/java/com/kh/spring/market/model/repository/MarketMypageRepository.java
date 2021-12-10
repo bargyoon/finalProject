@@ -31,7 +31,7 @@ public interface MarketMypageRepository {
 	
 	@Select("select count(UC_IDX) "
 			+ " from user_coupon"
-			+ " where user_idx = #{userIdx} and exp_date > sysdate")
+			+ " where user_idx = #{userIdx} and exp_date > sysdate and is_del=0")
 	int selectCouponCount(int userIdx);
 	
 	//Save Money 목록

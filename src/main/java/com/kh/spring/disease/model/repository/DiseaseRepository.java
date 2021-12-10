@@ -73,6 +73,9 @@ public interface DiseaseRepository {
 
 	@Delete("delete from price_img where pi_idx = #{piIdx}")
 	void deletePriceImg(Integer piIdx);
+
+	@Delete("delete from disease where ds_idx = #{dsIdx}")
+	void deleteDisease(Integer dsIdx);
 	
 	
 

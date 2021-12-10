@@ -31,7 +31,7 @@
 				</div>
 			</div>
 			<div class="px-lg-5 mt-5 mx-5 pt-2" style="display: flex; justify-content: space-between; min-width: 20%">
-				<div class="mt-5" style="display: flex; flex-direction: column;">
+				<div class="mt-5 acc-pic" style="display: flex; flex-direction: column;">
 					<a href="/market/mypage/acc-money"><i class="fas fa-coins py-2" style="font-size: 1.5rem;"></i></a>
 					<p class="fw-normal mt-2">적립금</p>
 					<p style="font-size: 1.3rem;">${memberInfo.saveMoney}</p>
@@ -112,7 +112,7 @@
 					<tr>
 						<td>
 							<div class="n-prd-row">
-								<a href="#!"><img src="https://dummyimage.com/100x120/dee2e6/6c757d.jpg"></a>
+								<a href="#!"><img src="${enquiryList.downloadURL}"></a>
 								<ul class="info">
 									<li class="brand">${enquiryList.BRAND}</li>
 									<li class="name ft-SBAggroM"><a href="#!" style="text-decoration: none; color: black;">${enquiryList.NAME}</a></li>

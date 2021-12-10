@@ -101,7 +101,7 @@
 							</div>
 
 							<div class="table-responsive">
-								<form method="post">
+								<form>
 									<table class="table mb-0">
 										<thead class="thead-dark">
 											<tr>
@@ -120,7 +120,7 @@
 											<c:forEach items="${datas}" var="data" varStatus="status">
 												<tr>
 												<td><label class="mt-3"> <input type="checkbox"
-														class="listCheckbox" />
+														class="listCheckbox" value="${datas.DS_IDX}"/>
 												</label></td>
 												<td>${status.index+1}</td>
 												<td><a><img style="height: 60px; widht: 60px;"
@@ -141,7 +141,7 @@
 									</table>
 									<div class="border-top">
 										<div class="card-body">
-											<button class="btn-secondary ">submit</button>
+											<button class="btn-secondary " onclick="deleteCheckList('disease/delete-disease')">삭제</button>
 											<%@ include file="/WEB-INF/views/admin/include/paging.jsp"%>
 										</div>
 									</div>

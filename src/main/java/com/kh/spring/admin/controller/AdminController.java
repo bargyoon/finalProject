@@ -296,7 +296,7 @@ public class AdminController {
 	public void diseaseList(Model model,@RequestParam(required = false, defaultValue = "1") int page) {
 		Paging pageUtil = Paging.builder()
 				.curPage(page)
-				.cntPerPage(10)
+				.cntPerPage(16)
 				.blockCnt(10)
 				.total(diseaseService.selectDiseaseListCnt())
 				.build();
@@ -352,12 +352,21 @@ public class AdminController {
 		return "good";
 
 	}
-	@PostMapping("shopping/delete-priceImg")
+	@PostMapping("disease/delete-priceImg")
 	@ResponseBody
 	public String deletePriceImg(@RequestBody List<Integer> piIdxs) {
 		
 		
 		adminService.deletePriceImg(piIdxs);
+		return "good";
+
+	}
+	@PostMapping("disease/delete-disease")
+	@ResponseBody
+	public String deleteDisease(@RequestBody List<Integer> dsIdxs) {
+		
+		
+		adminService.deleteDisease(dsIdxs);
 		return "good";
 
 	}

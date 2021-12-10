@@ -83,7 +83,6 @@
 					<a onclick="changePage(${i})" class="num">${i}</a>
 				</c:forEach>
 			</c:if>
-
 			<a onclick="nextBtn( ${pageUtil.curPage}, ${pageUtil.blockEnd} )"
 				class="bt">다음 페이지</a> 
 				<a onclick="changePage(${pageUtil.blockEnd})" class="bt">마지막 페이지</a>

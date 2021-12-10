@@ -182,7 +182,7 @@
 									<table class="table mb-0">
 										<thead class="thead-dark">
 											<tr>
-												<th><input type="checkbox" id="mainCheckbox chk_all" /></th>
+												<th><input type="checkbox" id="chk_all" /></th>
 												<th scope="col">NO</th>
 												<th scope="col">상품명</th>
 												<th scope="col">판매가</th>
