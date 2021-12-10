@@ -47,6 +47,8 @@ public interface AdminService {
 
 	void deleteOneComment(int cmIdx);
 
+	void deleteDisease(List<Integer> dsIdxs);
+
 
 	
 

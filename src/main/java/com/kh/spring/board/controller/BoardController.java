@@ -100,7 +100,7 @@ public class BoardController {
 	
 	@GetMapping("cat/form")
 	public String catForm(Model model) {
-		model.addAttribute("title", "정보");
+		model.addAttribute("title", "고양이");
 		model.addAttribute("category", "cat");
 		return "board/board-form";
 
@@ -108,7 +108,7 @@ public class BoardController {
 	
 	@GetMapping("cat/detail")
 	public String catDetail(Model model, @RequestParam(value = "bdIdx") int bdIdx) {
-		model.addAttribute("title", "정보");
+		model.addAttribute("title", "고양이");
 		model.addAttribute("category", "cat");
 		model.addAllAttributes(boardService.selectBoardByIdx(bdIdx));
 		return "board/board-detail";
@@ -116,7 +116,7 @@ public class BoardController {
 	
 	@GetMapping("cat/modify")
 	public String catModify(Model model, @RequestParam(value = "bdIdx") int bdIdx, HttpSession session) {
-		model.addAttribute("title", "정보");
+		model.addAttribute("title", "고양이");
 		model.addAttribute("category", "cat");
 		model.addAllAttributes(boardService.selectBoardByIdx(bdIdx));
 		session.setAttribute("modi-bdIdx", bdIdx);
@@ -144,7 +144,7 @@ public class BoardController {
 	
 	@GetMapping("dog/form")
 	public String dogForm(Model model) {
-		model.addAttribute("title", "정보");
+		model.addAttribute("title", "강아지");
 		model.addAttribute("category", "dog");
 		return "board/board-form";
 
@@ -152,7 +152,7 @@ public class BoardController {
 	
 	@GetMapping("dog/detail")
 	public String dogDetail(Model model, @RequestParam(value = "bdIdx") int bdIdx) {
-		model.addAttribute("title", "정보");
+		model.addAttribute("title", "강아지");
 		model.addAttribute("category", "dog");
 		model.addAllAttributes(boardService.selectBoardByIdx(bdIdx));
 		return "board/board-detail";
@@ -160,7 +160,7 @@ public class BoardController {
 	
 	@GetMapping("dog/modify")
 	public String dogModify(Model model, @RequestParam(value = "bdIdx") int bdIdx, HttpSession session) {
-		model.addAttribute("title", "정보");
+		model.addAttribute("title", "강아지");
 		model.addAttribute("category", "dog");
 		model.addAllAttributes(boardService.selectBoardByIdx(bdIdx));
 		session.setAttribute("modi-bdIdx", bdIdx);
@@ -188,7 +188,7 @@ public class BoardController {
 	
 	@GetMapping("review/form")
 	public String reviewForm(Model model) {
-		model.addAttribute("title", "정보");
+		model.addAttribute("title", "후기");
 		model.addAttribute("category", "review");
 		return "board/board-form";
 
@@ -196,7 +196,7 @@ public class BoardController {
 	
 	@GetMapping("review/detail")
 	public String reviewDetail(Model model, @RequestParam(value = "bdIdx") int bdIdx) {
-		model.addAttribute("title", "정보");
+		model.addAttribute("title", "후기");
 		model.addAttribute("category", "review");
 		model.addAllAttributes(boardService.selectBoardByIdx(bdIdx));
 		return "board/board-detail";
@@ -204,7 +204,7 @@ public class BoardController {
 	
 	@GetMapping("review/modify")
 	public String reviewModify(Model model, @RequestParam(value = "bdIdx") int bdIdx, HttpSession session) {
-		model.addAttribute("title", "정보");
+		model.addAttribute("title", "후기");
 		model.addAttribute("category", "review");
 		model.addAllAttributes(boardService.selectBoardByIdx(bdIdx));
 		session.setAttribute("modi-bdIdx", bdIdx);
@@ -232,7 +232,7 @@ public class BoardController {
 	
 	@GetMapping("meet/form")
 	public String meetForm(Model model) {
-		model.addAttribute("title", "정보");
+		model.addAttribute("title", "모임");
 		model.addAttribute("category", "meet");
 		return "board/board-form";
 
@@ -240,7 +240,7 @@ public class BoardController {
 	
 	@GetMapping("meet/detail")
 	public String meetDetail(Model model, @RequestParam(value = "bdIdx") int bdIdx) {
-		model.addAttribute("title", "정보");
+		model.addAttribute("title", "모임");
 		model.addAttribute("category", "meet");
 		model.addAllAttributes(boardService.selectBoardByIdx(bdIdx));
 		return "board/board-detail";
@@ -248,7 +248,7 @@ public class BoardController {
 	
 	@GetMapping("meet/modify")
 	public String meetModify(Model model, @RequestParam(value = "bdIdx") int bdIdx, HttpSession session) {
-		model.addAttribute("title", "정보");
+		model.addAttribute("title", "모임");
 		model.addAttribute("category", "meet");
 		model.addAllAttributes(boardService.selectBoardByIdx(bdIdx));
 		session.setAttribute("modi-bdIdx", bdIdx);
@@ -277,7 +277,7 @@ public class BoardController {
 	
 	@GetMapping("consulting/form")
 	public String consultingForm(Model model) {
-		model.addAttribute("title", "정보");
+		model.addAttribute("title", "상담");
 		model.addAttribute("category", "consulting");
 		return "board/board-form";
 
@@ -285,7 +285,7 @@ public class BoardController {
 	
 	@GetMapping("consulting/detail")
 	public String consultingDetail(Model model, @RequestParam(value = "bdIdx") int bdIdx) {
-		model.addAttribute("title", "정보");
+		model.addAttribute("title", "상담");
 		model.addAttribute("category", "consulting");
 		model.addAllAttributes(boardService.selectBoardByIdx(bdIdx));
 		return "board/board-detail";
@@ -293,7 +293,7 @@ public class BoardController {
 	
 	@GetMapping("consulting/modify")
 	public String consultingModify(Model model, @RequestParam(value = "bdIdx") int bdIdx, HttpSession session) {
-		model.addAttribute("title", "정보");
+		model.addAttribute("title", "상담");
 		model.addAttribute("category", "consulting");
 		model.addAllAttributes(boardService.selectBoardByIdx(bdIdx));
 		session.setAttribute("modi-bdIdx", bdIdx);

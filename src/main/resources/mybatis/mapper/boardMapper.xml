@@ -36,7 +36,7 @@
 		b.rec_count, b.content ,b.category, b.is_del
 		<if test="commandMap.sort != null">order by ${commandMap.sort} desc</if>
 		))where rnum between ${((pageUtil.curPage-1) * pageUtil.cntPerPage) +
-		1} and ${pageUtil.curPage * pageUtil.cntPerPage}
+		1} and ${pageUtil.curPage * pageUtil.cntPerPage} order by bd_idx asc
 	</select>
 
 	<select id="selectBoardCnt" resultType="java.lang.Integer">

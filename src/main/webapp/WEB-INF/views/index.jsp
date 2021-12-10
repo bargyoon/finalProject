@@ -23,7 +23,7 @@
                     <h3 class="section-subheading text-muted">똑DOG한 집사들에서 다양한 커뮤니티를 이용해보세요.</h3>
                 </div>
                 <div class="row text-center">
-                    <div class="board-in-main" style="width:350px; height: 650px; outline :solid 15px #F0EAD5; border-radius: 10px 10px 10px 10px ">
+                    <div class="board-in-main" style="width:350px; height: 680px; outline :solid 15px #F0EAD5; border-radius: 10px 10px 10px 10px ">
                         <h2 class="my-3">강아지 게시판</h2>     
                         <table class="table mb-0">
                               <thead class="thead-dark">
@@ -44,7 +44,7 @@
                               </tbody>
                          </table>                 
                     </div>
-                    <div class="board-in-main"  style="width:350px;height: 650px; margin:auto;outline :solid 15px #F0EAD5; border-radius: 10px 10px 10px 10px ">
+                    <div class="board-in-main"  style="width:350px;height: 680px; margin:auto;outline :solid 15px #F0EAD5; border-radius: 10px 10px 10px 10px ">
                         <h2 class="my-3" >고양이 게시판</h2>
                          <div class=board-list-in-main>
                         	<table class="table mb-0">
@@ -67,7 +67,7 @@
                          </table>              
                         </div>
                     </div>
-                     <div class="board-in-main"  style="width:350px; height: 650px;outline :solid 15px #F0EAD5; border-radius: 10px 10px 10px 10px ">
+                     <div class="board-in-main"  style="width:350px; height: 680px;outline :solid 15px #F0EAD5; border-radius: 10px 10px 10px 10px ">
                         <h2 class="my-3">정보 게시판</h2>
                          <div class=board-list-in-main>
                         	<table class="table mb-0">
