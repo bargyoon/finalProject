@@ -239,7 +239,8 @@
 	<!--Custom JavaScript -->
 	<script src="/resources/js/admin/custom.min.js"></script>
 	<script src="/resources/js/admin/common/paging.js"></script>
-	<script src="/resources/js/admin/common/select-tab.js"></script>
+   	<script src="/resources/js/admin/common/select-tab.js"></script>
+
 
 	<!--This page JavaScript -->
 	<script type="text/javascript">
@@ -254,9 +255,6 @@
                 OpenWindow.document.write("<style>body{margin:0px;}</style><img src='"+url+"' width='"+600+"'  height='"+900+"' onclick='self.close()'>");
         }
             
-   
-    
-  
      
      let insertPrice = (obj, piIdx, dsIdx) =>{
  		
@@ -273,10 +271,8 @@
     		
  	
  	}
-    
-   
-    
-    
+
+     
  	
     
 	

@@ -78,7 +78,7 @@
 
 body {
   margin: 0;
-  font-family: var(--bs-body-font-family);
+  font-family: 'SBAggroL';
   font-size: var(--bs-body-font-size);
   font-weight: var(--bs-body-font-weight);
   line-height: var(--bs-body-line-height);
@@ -3076,14 +3076,19 @@ textarea.form-control-lg {
 }
 
 .btn-primary {
-  color: #fff;
-  background-color: #0d6efd;
-  border-color: #0d6efd;
+    color: #fff;
+	background-color: #725C46; 
+	border-color: #725C46;
+    width: 200px;
+    height: 60px;
+    line-height: 2.7;
+    font-size: 1em;
+    font-family: 'SBAggroL';
 }
 .btn-primary:hover {
   color: #fff;
-  background-color: #0b5ed7;
-  border-color: #0a58ca;
+  background-color: #625C46; 
+  border-color: #625C46;
 }
 .btn-check:focus + .btn-primary, .btn-primary:focus {
   color: #fff;

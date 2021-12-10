@@ -51,7 +51,7 @@
 							<img class="card-img-top" src="${newPrd.downloadURL}" alt="..." />
 							<div class="card-body pt-4" style="padding-bottom: 0rem;">
 								<div class="text-center">
-									<h5 class="fw-bolder">${newPrd.NAME}</h5>
+									<h6 class="fw-bolder">${newPrd.NAME}</h6>
 								</div>
 							</div>
 						</a>
@@ -62,20 +62,18 @@
 		                    	</c:forEach>
 		                    </c:if>
 						</div>
-						<c:if test="${newPrd.SALE_PER ne 0}">
-							<div class="text-center">
-									<span style="color: red;">${newPrd.SALE_PER}%</span>
-								<span class="text-muted text-decoration-line-through" style="font-size: smaller;"><fmt:formatNumber value="${newPrd.PRICE}"/>원</span>
-							</div>
-						</c:if>
 						<div class="text-center">
-							<c:if test="${newPrd.SALE_PER eq 0}">
-				            	<fmt:formatNumber value="${newPrd.PRICE}"/>원
-							</c:if>
 							<c:if test="${newPrd.SALE_PER ne 0}">
-				            	<fmt:formatNumber value="${newPrd.PRICE * (1 - (newPrd.SALE_PER/100))}"/>원
+								<span style="color: red;">${newPrd.SALE_PER}%</span>
+								<span class="text-muted text-decoration-line-through" style="font-size: smaller;"><fmt:formatNumber value="${newPrd.PRICE}"/>원</span>
 							</c:if>
 						</div>
+						<c:if test="${newPrd.SALE_PER eq 0}">
+				            <div class="text-center"><fmt:formatNumber value="${newPrd.PRICE}"/>원</div>
+						</c:if>
+						<c:if test="${newPrd.SALE_PER ne 0}">
+				            <div class="text-center"><fmt:formatNumber value="${newPrd.SALE_PRICE}"/>원</div>
+						</c:if>
 					</div>
 				</c:forEach>
 			</div>
@@ -133,7 +131,7 @@
 				            	<fmt:formatNumber value="${bestPrd.PRICE}"/>원
 							</c:if>
 							<c:if test="${bestPrd.SALE_PER ne 0}">
-				            	<fmt:formatNumber value="${bestPrd.PRICE * (1 - (bestPrd.SALE_PER/100))}"/>원
+				            	<fmt:formatNumber value="${bestPrd.SALE_PRICE}"/>원
 							</c:if>
 						</div>
 					</div>

@@ -67,6 +67,9 @@ public class ShopController {
 		model.addAttribute("pageUtil", pageUtil);
 		model.addAttribute("categoryWord", categoryWord);
 		model.addAttribute("prdList", prdList);
+		for (Product fileDTO : prdList) {
+			System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>" + fileDTO);
+		}
 		model.addAttribute("files", files);
 	}
 	
@@ -82,9 +85,10 @@ public class ShopController {
 								,@RequestParam(required = false, defaultValue = "1") int pageQna) {
 		
 		List<Product> prdOptionInfos = shopService.selectPrdDetailListByIdx(pn);
+		for (Product product : prdOptionInfos) {
+			System.out.println(product);
+		}
 		//prd_idx 유효성 검사
-		System.out.println(pn);
-		
 		if(pn == 0 || prdOptionInfos.size() == 0) {
 			redirectAttr.addFlashAttribute("msg", "해당 상품은 존재하지 않습니다.");
 			redirectAttr.addFlashAttribute("url", "/market/market");
@@ -109,9 +113,6 @@ public class ShopController {
 		Product prdInfo = shopService.selectPrdByIdx(pn);
 		Map<String, FileDTO> prdFileInfo = shopService.selectFileInfoByPrdIdx(prdInfo);
 		List<Review> reviews = shopService.selectReviewByPrdIdxWithPaging(pn, listSet, pageUtil);
-		for (Review review : reviews) {
-			System.out.println(review.toString());
-		}
 		List<List<FileDTO>> reviewFiles = shopService.selectReviewFiles(reviews);
 		Map<String, Object> cntByReviewType = shopService.getCntByType(pn);
 		Map<String, Object> prdInfoMap = Map.of("optionList", prdOptionInfos, "prdInfo", prdInfo);

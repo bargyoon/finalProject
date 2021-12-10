@@ -338,7 +338,7 @@
 	
 	<select id="selectPrdListMain" resultType="map">
 		select *
-		from(select PRD_IDX, NAME, RATING, CATEGORY, SALE_PER, REG_DATE, ROWNUM rnum, SAVE_PATH, RENAME_FILE_NAME, PRICE
+		from(select PRD_IDX, NAME, RATING, CATEGORY, SALE_PER, REG_DATE, ROWNUM rnum, SAVE_PATH, RENAME_FILE_NAME, PRICE, SALE_PRICE
 		    from product p
 		    join file_info f on (f.TYPE_IDX = p.prd_idx)
 		    join prd_detail using(prd_idx)

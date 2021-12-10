@@ -396,11 +396,6 @@ public class ShopServiceImpl implements ShopService{
 			map.put("downloadURL", files.getDownloadURL());
 		}
 		
-		
-		for (Map<String, Object> map : prdList) {
-			System.out.println(map);
-		}
-		
 		return prdList;
 	}
 
