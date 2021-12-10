@@ -87,7 +87,7 @@
 	
 	<!-- acc-money / save history ********주문,리뷰로 받았을 경우 -->
 	<select id="selectReserveList" resultType="map">
-  	 	select SH_IDX, USER_IDX, s.STATE, s.TYPE, s.AMOUNT, s.REG_DATE, PRD_IDX, p.NAME,o.dt_idx, o.order_idx
+  	 	select SH_IDX, USER_IDX, s.STATE, s.TYPE, s.AMOUNT, s.REG_DATE, PRD_IDX, p.NAME,max(o.dt_idx), o.order_num
 		from SAVE_HISTORY s
 		inner join "ORDER" o USING(USER_IDX)
 		inner join product p using(PRD_IDX)
@@ -101,6 +101,7 @@
 				and s.state=#{state}	
 			</if>			
 		</where>
+		group by  SH_IDX, USER_IDX, s.STATE, s.TYPE, s.AMOUNT, s.REG_DATE, PRD_IDX, p.NAME,o.order_num
 		order by s.reg_date desc
 	</select>
 	
