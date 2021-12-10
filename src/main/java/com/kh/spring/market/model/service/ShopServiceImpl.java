@@ -203,8 +203,8 @@ public class ShopServiceImpl implements ShopService{
 			List<Map<String,Object>> specList = shopRepository.selectOrderSpec(Long.parseLong(map.get("ORDER_NUM").toString()));
 			for (Map<String, Object> map2 : specList) {
 				FileDTO files = new FileDTO();
-				files.setSavePath((String) map.get("SAVE_PATH"));
-				files.setRenameFileName((String) map.get("RENAME_FILE_NAME"));
+				files.setSavePath((String) map2.get("SAVE_PATH"));
+				files.setRenameFileName((String) map2.get("RENAME_FILE_NAME"));
 				map2.put("downloadURL", files.getDownloadURL());
 			}
 			map.put("specList", specList);

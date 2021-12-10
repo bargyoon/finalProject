@@ -164,8 +164,8 @@
 													<c:choose>
 															<c:when test="${data.STATE eq 'N'}">
 																<input type="text" 
-														value="${data.PRICE}" class="input_price" > <span
-														class="btn btn-secondary btn-sm ml-4" id="btn_update" onclick="insertPrice(this,${data.PI_IDX},${data.DS_IDX})">수정</span>
+														value="${data.PRICE}" class="input_price" > <a
+														class="btn btn-secondary btn-sm ml-4" id="btn_update" onclick="insertPrice(this,${data.PI_IDX},${data.DS_IDX})">수정</a>
 															</c:when>
 															<c:when test="${data.STATE eq 'Y'}"><input type="text" style="border: none;" 
 														value="${data.PRICE}" readonly class="input_price"></c:when>
@@ -238,7 +238,8 @@
 	<script src="/resources/js/admin/sidebarmenu.js"></script>
 	<!--Custom JavaScript -->
 	<script src="/resources/js/admin/custom.min.js"></script>
-
+	<script src="/resources/js/admin/common/paging.js"></script>
+	<script src="/resources/js/admin/common/select-tab.js"></script>
 
 	<!--This page JavaScript -->
 	<script type="text/javascript">
@@ -255,17 +256,7 @@
             
    
     
-     let selectTab = (state,res) =>{
-    	 if(location.search.includes(state)){
-    		
-    		 URLSearch.set(state, String(res));
-       	 	 const newParam = URLSearch.toString();
-       	 	 location.href = location.pathname + '?' + newParam
-    	 }else{
-    		location.href = location.pathname+'?'+state+'='+res
-    	}
-    	  
-     }
+  
      
      let insertPrice = (obj, piIdx, dsIdx) =>{
  		
@@ -285,17 +276,7 @@
     
    
     
-     (() =>{
-	     let loadState = URLSearch.get('state')
-	     	document.querySelectorAll('.tab').forEach(e =>{
-	     		if(loadState == null) {
-	     			document.querySelector(".tab_all").id = "clickedTab"
-	     		}else if(loadState == e.dataset.tab) e.id = "clickedTab"
-	     	})
-	     	
-	   
-     })();
-     
+    
  	
     
 	

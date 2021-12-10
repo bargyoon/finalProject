@@ -123,6 +123,7 @@ public class AdminServiceImpl implements AdminService {
 	}
 	
 	public void updatePrice(Map<String, Object> jsonMap) {
+		System.out.println("서비스");
 		diseaseRepository.updatePrice(jsonMap);
 		int dsIdx = (int) jsonMap.get("dsIdx");
 		int newPrice = (int) jsonMap.get("price");

@@ -120,7 +120,7 @@
 											<c:forEach items="${datas}" var="data" varStatus="status">
 												<tr>
 												<td><label class="mt-3"> <input type="checkbox"
-														class="listCheckbox" value="${datas.DS_IDX}"/>
+														class="listCheckbox" value="${data.DS_IDX}"/>
 												</label></td>
 												<td>${status.index+1}</td>
 												<td><a><img style="height: 60px; widht: 60px;"
