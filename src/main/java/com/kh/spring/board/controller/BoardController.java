@@ -394,14 +394,16 @@ public class BoardController {
 	
 	
 	public String makeBoard(Model model, Map<String,Object> commandMap, int page) {
+		int totalCnt = boardService.selectBoardListCnt(commandMap);
 		Paging pageUtil = Paging.builder()
 				.curPage(page)
 				.cntPerPage(15)
 				.blockCnt(10)
-				.total(boardService.selectBoardListCnt(commandMap))
+				.total(totalCnt)
 				.build();
 		List<Map<String,Object>> bList = boardService.selectBoard(commandMap,pageUtil);
 		model.addAttribute("pageUtil",pageUtil);
+		model.addAttribute("totalCnt",totalCnt);
 		model.addAttribute("bList",bList);
 		model.addAttribute("length",bList.size());
 		return "board/board-list";

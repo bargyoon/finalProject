@@ -50,10 +50,10 @@
 			<tbody>
 				<c:forEach items="${bList}" var="bList" varStatus="status">
 					<tr>
-						<td>${bList.RNUM}</td>
+						<td>${totalCnt-bList.RNUM}</td>
 						<td class="tit"><a
 							href="/board/${dataMap.category}/detail?bdIdx=${bList.BD_IDX}">${bList.BD_TITLE}</a><span style="margin-left: 5px"><i
-								class="fas fa-comment" style="margin-right: 5px"></i></span>${bList.CM_CNT }
+								class="fas fa-comment" style="margin-right: 5px"></i></span>${bList.CM_CNT}
 						</td>
 						<td>${bList.NICKNAME}</td>
 						<td><fmt:formatDate value="${bList.REG_DATE}"
