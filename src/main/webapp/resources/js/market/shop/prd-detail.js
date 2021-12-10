@@ -80,7 +80,11 @@
 			.then(data => {
 				let dtIdxArr = document.getElementsByName("dtIdxs");
 				resetDiscount();
-		        addTotalPrice("+", data.price);
+		        if(data.state != 'sale'){
+		        	addTotalPrice("+", data.price);
+		        } else {
+		        	addTotalPrice("+", data.salePrice);
+				}
 		        
 				for (let i = 0; i < dtIdxArr.length; i++) {
 					if(dtIdxArr[i].value == optionValue){
@@ -101,7 +105,12 @@
 		        pTag2.innerHTML = "<i class='fas fa-times'></i>";
 		
 		        pTag2.addEventListener("click", ()=>{
-		            minusTotalPrice(input.defaultValue, data.price);
+			
+		            if(data.state != 'sale'){
+		            	minusTotalPrice(input.defaultValue, data.price);
+		            } else {
+		            	minusTotalPrice(input.defaultValue, data.salePrice);
+					}
 		            resetDiscount();
 		            for (let i = 0; i < dtIdxArr.length; i++) {
 						if(dtIdxArr[i].value == optionValue){
@@ -135,15 +144,25 @@
 		
 		        btnPlus.addEventListener("click", (e) => {
 		            input.defaultValue++;
-		            calPrice(optionValue, input.defaultValue, data.price);
-		            addTotalPrice("+", data.price);
+		            if(data.state != 'sale'){
+		            	calPrice(optionValue, input.defaultValue, data.price);
+		            	addTotalPrice("+", data.price);
+					} else {
+		            	calPrice(optionValue, input.defaultValue, data.salePrice);
+		            	addTotalPrice("+", data.salePrice);
+					}
 		            resetDiscount();
 		        })
 		        btnMinus.addEventListener("click", (e) => {
 		            if(input.defaultValue > 1){
 		                input.defaultValue--;
-		                calPrice(optionValue, input.defaultValue, data.price);
-		                addTotalPrice("-", data.price)
+		            	if(data.state != 'sale'){
+			                calPrice(optionValue, input.defaultValue, data.salePrice);
+			                addTotalPrice("-", data.salePrice)
+			            } else {
+			                calPrice(optionValue, input.defaultValue, data.salePrice);
+			                addTotalPrice("-", data.salePrice)
+						}
 		                resetDiscount();
 		            }
 		        })
@@ -388,8 +407,6 @@
 								.then(response => {
 									if(response.ok){
 										var msg = '결제가 완료되었습니다.';
-									    msg += '\n고유ID : ' + rsp.imp_uid;
-									    msg += '\n상점 거래ID : ' + rsp.merchant_uid;
 									    msg += '\결제 금액 : ' + rsp.paid_amount;
 									    msg += '카드 승인번호 : ' + rsp.apply_num;
 						        		alert(msg);

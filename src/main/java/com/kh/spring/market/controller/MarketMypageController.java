@@ -142,7 +142,9 @@ public class MarketMypageController {
 		int member = certifiedUser.getUserIdx();
 		Member memberInfo = marketMypageService.selectMemberInfo(member);
 		List<Address> addressList = marketMypageService.selectAddressList(member);
-		
+		int couponCnt = marketMypageService.selectCouponCount(member);
+	      
+	    model.addAttribute("couponCnt", couponCnt);
 		model.addAttribute("addressList", addressList);
 		model.addAttribute("memberInfo", memberInfo);
 		

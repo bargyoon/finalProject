@@ -238,6 +238,8 @@
 	<script src="/resources/js/admin/sidebarmenu.js"></script>
 	<!--Custom JavaScript -->
 	<script src="/resources/js/admin/custom.min.js"></script>
+	<script src="/resources/js/admin/common/paging.js"></script>
+   	<script src="/resources/js/admin/common/select-tab.js"></script>
 
 
 	<!--This page JavaScript -->
@@ -253,19 +255,6 @@
                 OpenWindow.document.write("<style>body{margin:0px;}</style><img src='"+url+"' width='"+600+"'  height='"+900+"' onclick='self.close()'>");
         }
             
-   
-    
-     let selectTab = (state,res) =>{
-    	 if(location.search.includes(state)){
-    		
-    		 URLSearch.set(state, String(res));
-       	 	 const newParam = URLSearch.toString();
-       	 	 location.href = location.pathname + '?' + newParam
-    	 }else{
-    		location.href = location.pathname+'?'+state+'='+res
-    	}
-    	  
-     }
      
      let insertPrice = (obj, piIdx, dsIdx) =>{
  		
@@ -282,19 +271,7 @@
     		
  	
  	}
-    
-   
-    
-     (() =>{
-	     let loadState = URLSearch.get('state')
-	     	document.querySelectorAll('.tab').forEach(e =>{
-	     		if(loadState == null) {
-	     			document.querySelector(".tab_all").id = "clickedTab"
-	     		}else if(loadState == e.dataset.tab) e.id = "clickedTab"
-	     	})
-	     	
-	   
-     })();
+
      
  	
     

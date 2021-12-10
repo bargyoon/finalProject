@@ -67,9 +67,9 @@
 							</div>
 							<c:if test="${prdList[i].rating>0}">
 								<div class="d-flex small text-warning justify-content-center pb-1">
-										<c:forEach var="j" begin="0" step="1" end="${prdList[i].rating-1}">
-											<i class="fas fa-star"></i>
-										</c:forEach>
+									<c:forEach var="j" begin="0" step="1" end="${prdList[i].rating-1}">
+										<i class="fas fa-star"></i>
+									</c:forEach>
 								</div>
 							</c:if>
 							<div class="text-center">
@@ -78,11 +78,11 @@
 									<span class="text-muted text-decoration-line-through" style="font-size: smaller;"><fmt:formatNumber value="${prdList[i].price}"/>원</span>
 								</c:if>
 							</div>
-							<c:if test="${prdList[i].salePer ne 0}">
-								<div class="text-center"><fmt:formatNumber value="${prdList[i].price * (1-prdList[i].salePer/100)}"/>원</div>
-							</c:if>
 							<c:if test="${prdList[i].salePer eq 0}">
 								<div class="text-center"><fmt:formatNumber value="${prdList[i].price}"/>원</div>
+							</c:if>
+							<c:if test="${prdList[i].salePer ne 0}">
+								<div class="text-center"><fmt:formatNumber value="${prdList[i].price * (1 - (prdList[i].salePer/100))}"/>원</div>
 							</c:if>
 						</a>
 					</div>

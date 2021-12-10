@@ -49,7 +49,7 @@
 					</c:if>
 				</div>
 				<div class="d-flex justify-content-between mt-2">
-					<p style="font-size: 18px;"><fmt:formatNumber value="${prdInfo.price}"/></p>
+					<p style="font-size: 18px;"><fmt:formatNumber value="${optionInfos[0].salePrice}"/></p>
 					<button class="review-btn" type="button">
 						<i class="fas fa-share-alt"></i>
 					</button>
