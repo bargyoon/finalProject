@@ -398,7 +398,7 @@
 																		<p style="margin-top: 10px;">${specList.USER_NAME}</p>
 																	</td>
 																	<td><a><img
-																			src="${specList.downloadURL}" style="widows: 100px; height: 100px"></a>
+																			src="${specList.downloadURL}" ></a>
 																		<div class="d-inline-block">
 																			<div style="font-size: 10pt; color: gray;">${specList.ORDER_NUM}</div>
 																			<div>
@@ -587,7 +587,7 @@
 																<tr>
 
 																	<td><a><img
-																			src="${specList.downloadURL}"></a>
+																			src="${specList.downloadURL}"  style="width: 100px; height: 100px;"></a>
 																		<div class="d-inline-block">
 																			<div style="font-size: 10pt; color: gray;">${specList.ORDER_NUM}</div>
 																			<div>
