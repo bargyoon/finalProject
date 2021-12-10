@@ -112,7 +112,7 @@
 					<tr>
 						<td>
 							<div class="n-prd-row">
-								<a href="#!"><img src="${enquiryList.downloadURL}"></a>
+								<a href="#!"><img style="width: 100px; height: 100px;" src="${enquiryList.downloadURL}"></a>
 								<ul class="info">
 									<li class="brand">${enquiryList.BRAND}</li>
 									<li class="name ft-SBAggroM"><a href="#!" style="text-decoration: none; color: black;">${enquiryList.NAME}</a></li>
