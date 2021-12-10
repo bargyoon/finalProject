@@ -28,7 +28,7 @@ public class CalendarBatch {
 		List<Map<String, Object>> vaccinationList = mypageService.selectVaccinationForBatch();
 		
 		for (Map<String, Object> map : vaccinationList) {
-			
+			 
 			if(map.get("next_date").equals(today.toString())) {
 				int userIdx = Integer.parseInt(String.valueOf(map.get("user_idx")));
 				Member member = mypageService.selectMember(userIdx);
